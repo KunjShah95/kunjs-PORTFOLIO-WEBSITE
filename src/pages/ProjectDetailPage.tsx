@@ -1,12 +1,28 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Github, Layout, Microscope, Activity, Code2, ArrowRight } from 'lucide-react'
+import { ArrowLeft, Github, Layout, Microscope, Activity, Code2, ArrowRight, ExternalLink } from 'lucide-react'
 import { SEO } from '../components/SEO'
+import { PROJECTS } from '../data/portfolio'
 
-const projectData: Record<string, any> = {
+type ProjectDetail = {
+  title: string
+  category: string
+  desc?: string
+  demo?: string
+  problem: string
+  architecture: string
+  ml_techniques: string[]
+  decisions: string
+  outcomes: string[]
+  tech: string[]
+  github: string
+}
+
+const projectData: Record<string, ProjectDetail> = {
   'cinepulse': {
     title: 'CinePulse',
     category: 'NLP & RECOMMENDATION SYSTEMS',
+    desc: 'Emotion-based movie recommender using NLP classification and embedding-based similarity matching for high-precision discovery.',
     problem: 'Standard movie recommenders rely heavily on collaborative filtering, often failing during the cold-start phase and ignoring the granular emotional state of the user. CinePulse addresses the disconnect between a user\'s current mood and their cinematic preferences.',
     architecture: 'Dual-stream encoder system utilizing BERT for textual emotion extraction and a CLIP-inspired visual encoder for movie aesthetics. Results are indexed in Vald, a high-performance vector search engine, for low-latency retrieval.',
     ml_techniques: [
@@ -27,6 +43,7 @@ const projectData: Record<string, any> = {
   'gap-miner': {
     title: 'GAP Miner',
     category: 'SEMANTIC INTELLIGENCE',
+    desc: 'AI-powered skill gap analyzer leveraging semantic extraction from resumes and JDs to provide actionable learning paths.',
     problem: 'The rapid evolution of tech stacks makes it difficult for students and professionals to identify specific skill gaps between their current resumes and target Job Descriptions (JD). GAP Miner automates this career-critical analysis.',
     architecture: 'A multi-agent agentic workflow. The first agent parses the JD and Resume; the second performs semantic skill extraction; the third computes the delta using embedding-based distance; and the final agent generates a tailored learning roadmap.',
     ml_techniques: [
@@ -47,6 +64,7 @@ const projectData: Record<string, any> = {
   'railway-inspection': {
     title: 'Railway Inspection',
     category: 'COMPUTER VISION',
+    desc: 'Real-time wagon inspection system with multi-camera ingestion, motion deblurring, and low-light enhancement pipelines.',
     problem: 'Manual inspection of railway wagon undercarriages is hazardous and inefficient. Real-time constraints and varying lighting conditions make automated computer vision solutions extremely challenging in field environments.',
     architecture: 'A high-speed vision pipeline consisting of multi-camera synchronized ingestion, real-time motion deblurring, and a YOLOv8-based defect detection engine running on NVIDIA Jetson edge devices.',
     ml_techniques: [
@@ -67,6 +85,7 @@ const projectData: Record<string, any> = {
   'upi-fraud-guard': {
     title: 'UPI Fraud Guard',
     category: 'PREDICTIVE ANALYTICS',
+    desc: 'Advanced transaction fraud detection system handling extreme class imbalance and anomaly detection with precision optimization.',
     problem: 'UPI transactions generate massive volumes of data where fraudulent events are rare (needle in a haystack). Detecting these anomalies in real-time without blocking legitimate users is a critical challenge for fintech stability.',
     architecture: 'A hybrid anomaly detection system combining classic machine learning for known patterns and unsupervised learning for novel fraud vectors. Built with a focus on high-recall feature engineering.',
     ml_techniques: [
@@ -83,12 +102,100 @@ const projectData: Record<string, any> = {
     ],
     tech: ['Scikit-learn', 'XGBoost', 'Pandas', 'Flask', 'PostgreSQL'],
     github: 'https://github.com/KunjShah95/UPI-Fraud-Detection'
+  },
+  'sentinel-cli': {
+    title: 'SENTINEL CLI',
+    category: 'SECURITY & CODE REVIEW',
+    desc: 'Local-first AI-powered code review and security analysis CLI with multi-LLM support and autofix capabilities.',
+    problem: 'Most code quality/security scanners are either fragmented or SaaS-first, creating privacy concerns and forcing teams to combine multiple tools for practical coverage. Sentinel CLI solves this with one local-first security and code review workflow.',
+    architecture: 'Modular analyzer pipeline with 13+ analyzers (security, dependency, accessibility, React, TypeScript, API, Docker/Kubernetes and more), optional AI provider integrations, and multi-format reporting (console/JSON/SARIF/Markdown) for local and CI environments.',
+    ml_techniques: [
+      'LLM-assisted code auditing with bring-your-own-provider support',
+      'Pattern-based security and secret detection',
+      'Rule-driven static analysis across JS/TS/React and config assets',
+      'Autofix workflows for common code-quality issues'
+    ],
+    decisions: 'Designed as local-first and API-key-owned by developers to preserve privacy and eliminate vendor lock-in. Prioritized CLI ergonomics and CI compatibility so the same checks run consistently in local dev and pipelines.',
+    outcomes: [
+      '13+ analyzers unified in a single CLI workflow.',
+      'Supports OpenAI, Groq, Gemini, Anthropic, and OpenRouter providers.',
+      'Outputs SARIF and CI-friendly artifacts for security workflows.'
+    ],
+    tech: ['Node.js', 'JavaScript', 'TypeScript', 'Docker', 'Kubernetes'],
+    demo: 'https://sentinel-cux0dtano-kkshah2005-4679s-projects.vercel.app/',
+    github: 'https://github.com/KunjShah95/SENTINEL-CLI'
+  },
+  'aether-ai': {
+    title: 'AETHER AI',
+    category: 'AGENTIC TERMINAL ASSISTANT',
+    desc: 'Production-ready secure multi-model terminal assistant with local and cloud model support.',
+    problem: 'Developers need one assistant that works across local and cloud LLMs, with practical tools and strong security defaults, instead of juggling fragmented scripts and unsafe terminal helpers.',
+    architecture: 'Python-based terminal assistant with modular command handlers, model switching (Gemini/Groq/Ollama/HF/OpenAI/MCP), safe command allowlists, and pluggable extensions for productivity, coding, and system utilities.',
+    ml_techniques: [
+      'Multi-model orchestration across cloud and local LLM runtimes',
+      'Context-aware command workflows for developer assistance',
+      'Provider fallback strategy for resilient generation',
+      'Prompt-driven automation with tool-use commands'
+    ],
+    decisions: 'Used secure-by-default constraints (sanitization + allowlists + boundary checks) to reduce operational risk. Added Ollama integration to enable private/offline local model workflows when cloud access is unavailable.',
+    outcomes: [
+      'Single CLI entry point for six+ model backends.',
+      'Cross-platform support for Windows, macOS, and Linux.',
+      'Extensible command ecosystem for productivity and code workflows.'
+    ],
+    tech: ['Python', 'Ollama', 'Gemini', 'Groq', 'FastAPI'],
+    github: 'https://github.com/KunjShah95/AETHER-AI'
+  },
+  'minbpe-tokenizer': {
+    title: 'MinBPE Tokenizer',
+    category: 'LLM INFRASTRUCTURE',
+    desc: 'Minimal Byte Pair Encoding tokenizer with basic, regex, and GPT-4 compatible variants.',
+    problem: 'Tokenizer internals are often hidden behind heavy frameworks, making it hard to learn how BPE actually works and why token boundaries affect model behavior and cost.',
+    architecture: 'Lightweight Python package implementing core BPE primitives with layered tokenizer variants: BasicTokenizer, RegexTokenizer, and GPT4Tokenizer compatibility paths, backed by tests and serialization utilities.',
+    ml_techniques: [
+      'Byte Pair Encoding (BPE) merge training',
+      'Regex-aware pre-tokenization for stable segmentation',
+      'Special-token handling and token-ID mapping',
+      'GPT-4 compatible encoding parity checks against tiktoken'
+    ],
+    decisions: 'Kept implementation intentionally minimal and readable for educational clarity while still covering production-relevant concerns like save/load and special tokens.',
+    outcomes: [
+      'Clear, test-backed tokenizer implementation in pure Python.',
+      'Supports basic learning use-cases and GPT-4 compatibility experiments.',
+      'Useful foundation for custom tokenizer research and NLP education.'
+    ],
+    tech: ['Python', 'BPE', 'Regex', 'tiktoken', 'NLP'],
+    github: 'https://github.com/KunjShah95/TOKENIZER-FROM-SCRATCH'
+  },
+  'resumemaster-ai': {
+    title: 'ResumeMasterAI',
+    category: 'CAREER AI PLATFORM',
+    desc: 'AI-powered resume optimization and job-matching platform with ATS scoring and multi-model support.',
+    problem: 'Job seekers struggle to optimize resumes for ATS pipelines and tailor applications quickly across roles. Most tools lack transparency, integrated workflows, or practical career analytics.',
+    architecture: 'Streamlit-based multi-page platform with document parsing, ATS scoring, job matching, rewrite/cover-letter generation, and analytics modules, integrated with multiple LLM providers and vector-backed processing patterns.',
+    ml_techniques: [
+      'LLM-powered resume analysis and rewrite generation',
+      'ATS-style scoring and recommendation heuristics',
+      'Semantic job-resume matching',
+      'Provider fallback across Groq/Gemini/OpenAI/Anthropic'
+    ],
+    decisions: 'Built around modular services and utility layers to support iterative feature growth (resume parsing, scoring, matching, generation) while keeping deployment simple via Streamlit and Docker options.',
+    outcomes: [
+      'Comprehensive end-to-end career tooling in a single application.',
+      'Multi-model support for reliability and cost/performance tradeoffs.',
+      'Production-grade feature set including analytics, versioning, and export workflows.'
+    ],
+    tech: ['Python', 'Streamlit', 'LangChain', 'Gemini', 'ChromaDB'],
+    demo: 'https://resumemasterai.streamlit.app/',
+    github: 'https://github.com/KunjShah01/job-snipper'
   }
 }
 
 export function ProjectDetailPage() {
   const { slug } = useParams()
   const project = projectData[slug || '']
+  const currentIndex = PROJECTS.findIndex((p) => p.slug === slug)
+  const nextProject = currentIndex >= 0 ? PROJECTS[(currentIndex + 1) % PROJECTS.length] : PROJECTS[0]
 
   if (!project) {
     return (
@@ -103,7 +210,7 @@ export function ProjectDetailPage() {
     <div className="min-h-screen pt-32 pb-20">
       <SEO
         title={`${project.title} | Case Study`}
-        description={project.desc}
+        description={project.desc || project.problem}
       />
 
       <div className="container-aligned">
@@ -141,9 +248,16 @@ export function ProjectDetailPage() {
                 </div>
               </div>
               <div className="pt-4 border-t border-border/50">
-                <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-txt text-bg rounded-sm font-bold text-xs uppercase tracking-widest hover:bg-primary transition-colors shadow-lg hover:shadow-primary/20">
-                  <Github className="w-4 h-4" /> View Source
-                </a>
+                <div className="flex flex-col gap-3">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-txt text-bg rounded-sm font-bold text-xs uppercase tracking-widest hover:bg-primary transition-colors shadow-lg hover:shadow-primary/20">
+                    <Github className="w-4 h-4" /> View Source
+                  </a>
+                  {project.demo && (
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 border border-primary/40 bg-primary/10 text-primary rounded-sm font-bold text-xs uppercase tracking-widest hover:bg-primary/20 transition-colors">
+                      <ExternalLink className="w-4 h-4" /> Live Website
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -232,10 +346,10 @@ export function ProjectDetailPage() {
         <div className="mt-20 pt-20 border-t border-border/50 flex flex-col items-center space-y-4">
           <h3 className="text-xs font-bold txt-mono text-muted uppercase tracking-widest">Next Case Study</h3>
           <Link
-            to={slug === 'cinepulse' ? '/projects/gap-miner' : '/projects/cinepulse'}
+            to={`/projects/${nextProject.slug}`}
             className="group flex items-center gap-4 text-3xl sm:text-5xl font-black text-txt uppercase tracking-tight hover:text-primary transition-colors"
           >
-            {slug === 'cinepulse' ? 'GAP Miner' : 'CinePulse'}
+            {nextProject.title}
             <ArrowRight className="w-8 h-8 sm:w-12 sm:h-12 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
           </Link>
         </div>

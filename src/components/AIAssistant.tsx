@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Send, Globe, Sparkles } from 'lucide-react'
-import { IDENTITY, PROJECTS, EXPERIENCE, EDUCATION, SKILL_GROUPS } from '../data/portfolio'
+import { IDENTITY, PROJECTS, EXPERIENCE, EDUCATION, SKILL_GROUPS, BLOGS } from '../data/portfolio'
 
 export function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false)
@@ -30,9 +30,10 @@ export function AIAssistant() {
 
   const fetchExternalIntel = async (query: string) => {
     try {
+      // Using DuckDuckGo Instant Answer API for "web search" simulation
       const response = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_html=1&skip_disambig=1`);
       const data = await response.json();
-      return data.AbstractText || null;
+      return data.AbstractText || data.RelatedTopics?.[0]?.Text || null;
     } catch (error) {
       return null;
     }
@@ -48,44 +49,67 @@ export function AIAssistant() {
     setIsThinking(true)
 
     let response = ''
+    let isWebResult = false
 
-    // Simple Keyword Matching Logic
-    if (query.includes('who') || query.includes('kunj') || query.includes('name')) {
-      response = `${IDENTITY.name} is a ${IDENTITY.persona} based in ${IDENTITY.location}. He specializes in ${IDENTITY.focus.join(", ")}.`;
+    // --- LOCAL KNOWLEDGE BASE (Portfolio Data) ---
+
+    // 1. Specific Project Queries
+    const foundProject = PROJECTS.find(p => query.includes(p.title.toLowerCase()) || query.includes(p.slug.replace('-', ' ')));
+
+    // 2. Identity & Overview
+    if (query.includes('who are you') || query.includes('who is kunj') || (query.includes('about') && query.includes('kunj'))) {
+      response = `Hi! I'm Kunj's virtual assistant. \n\nKunj is an **AI Engineer & Systems Builder** from Ahmedabad, India. He loves building smart software that can "think" and automate tasks. \n\nHe currently focuses on **Autonomous Agents** (AI that controls itself) and **Computer Vision** (teaching computers to see).`;
     }
-    else if (query.includes('experience') || query.includes('work') || query.includes('job') || query.includes('intern')) {
+    // Specific Project Match
+    else if (foundProject) {
+      response = `**${foundProject.title}** is a really cool project!\n\nIt's ${foundProject.desc.toLowerCase()}\n\n**Tech Used:** ${foundProject.tech.join(', ')}.`;
+    }
+    // 3. General Projects / Portfolio
+    else if (query.includes('project') || query.includes('work') || query.includes('portfolio') || query.includes('what have you built')) {
+      const topProjects = PROJECTS.slice(0, 3).map(p => `• **${p.title}**: ${p.desc}`).join('\n\n');
+      response = `Kunj has built some impressive AI systems. Here are a few highlights:\n\n${topProjects}\n\nAsk me about "CinePulse" or "Sentinel CLI" to learn more!`;
+    }
+    // 4. Experience / Job
+    else if (query.includes('experience') || query.includes('job') || query.includes('working') || query.includes('intern')) {
       const exp = EXPERIENCE[0];
-      response = `Kunj is currently an ${exp.role} at ${exp.company} (${exp.period}).\n${exp.description}`;
+      response = `Right now, Kunj is working as an **${exp.role.replace(/_/g, ' ')}** at **${exp.company.replace(/_/g, ' ')}**.\n\nHe's helping them build automated AI workflows that can handle complex business tasks on their own.`;
     }
-    else if (query.includes('project') || query.includes('build') || query.includes('portfolio')) {
-      const items = PROJECTS.map(p => `• ${p.title}: ${p.desc} [${p.tech.join(', ')}]`).join('\n\n');
-      response = `Here are some key projects:\n\n${items}\n\nYou can view more details on the Projects page.`;
+    // 5. Skills / Tech Stack
+    else if (query.includes('skill') || query.includes('tech') || query.includes('code') || query.includes('stack')) {
+      response = `Kunj has a strong technical toolkit:\n\n` +
+        `🧠 **AI & GenAI:** He builds with LangChain, Python, and Large Language Models (LLMs).\n` +
+        `💻 **Web Dev:** He builds fast sites using React and TypeScript.\n` +
+        `🛠️ **Systems:** He knows his way around Linux, Docker, and Cloud deployment.\n\nBasically, if it involves AI or code, he's on it!`;
     }
-    else if (query.includes('skill') || query.includes('tech') || query.includes('stack')) {
-      const skills = SKILL_GROUPS.map(g => `• ${g.category.replace(/_/g, ' ')}: ${g.skills.join(', ')}`).join('\n');
-      response = `Technical Capabilities:\n\n${skills}`;
-    }
-    else if (query.includes('education') || query.includes('degree') || query.includes('college')) {
+    // 6. Education
+    else if (query.includes('study') || query.includes('college') || query.includes('education') || query.includes('degree')) {
       const edu = EDUCATION[0];
-      response = `Kunj is pursuing a ${edu.degree} at ${edu.school} (${edu.period}), specializing in ${edu.specialization}`;
+      response = `Kunj is currently studying for his **${edu.degree}** at ${edu.school}. He is diving deep into AI and Neural Networks.`;
     }
-    else if (query.includes('contact') || query.includes('email') || query.includes('hire')) {
-      response = `You can reach Kunj directly at ${IDENTITY.contact}. He is open to discussing high-stakes AI engineering projects.`;
+    // 7. Blogs / Writing
+    else if (query.includes('blog') || query.includes('article') || query.includes('write') || query.includes('writing') || query.includes('read')) {
+      const topBlogs = BLOGS.slice(0, 3).map(b => `• **${b.title}**`).join('\n');
+      response = `Kunj loves writing about what he builds. He has written simplified guides on:\n\n${topBlogs}\n\nCheck out the Blogs page for the full articles!`;
     }
+    // 8. Contact
+    else if (query.includes('contact') || query.includes('email') || query.includes('reach') || query.includes('hire')) {
+      response = `You can chat with Kunj directly via email at: **${IDENTITY.contact}**\n\nHe's always open to hearing about new ideas or opportunities!`;
+    }
+    // --- FALLBACK: WEB SEARCH ---
     else {
-      // Fallback to External Search
-      const externalInfo = await fetchExternalIntel(userMessage);
+      const externalInfo = await fetchExternalIntel(query);
       if (externalInfo) {
-        response = `${externalInfo}\n\n(Source: Web Search)`;
+        response = `Here is what I found on the web:\n\n"${externalInfo}"\n\n(I simplify things, but this is from a live search!)`;
+        isWebResult = true;
       } else {
-        response = "I couldn't find specific information on that in my knowledge base or via quick search. Would you like to know about Kunj's projects or skills instead?";
+        response = "I'm not exactly sure about that. I mostly know about Kunj's work in AI and Engineering. \n\nFeel free to ask about his **Projects**, **Skills**, or how to **Contact** him!";
       }
     }
 
     setTimeout(() => {
-      setMessages(prev => [...prev, { role: 'assistant', content: response, isLive: response.includes('Source: Web Search') }])
+      setMessages(prev => [...prev, { role: 'assistant', content: response, isLive: isWebResult }])
       setIsThinking(false)
-    }, 600) // Short, natural delay
+    }, 800)
   }
 
   return (
