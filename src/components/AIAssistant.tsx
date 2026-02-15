@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Send, Globe, Sparkles } from 'lucide-react'
-import { IDENTITY, PROJECTS, EXPERIENCE, EDUCATION, SKILL_GROUPS, BLOGS } from '../data/portfolio'
+import { IDENTITY, PROJECTS, EXPERIENCE, EDUCATION, BLOGS } from '../data/portfolio'
 
 export function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false)
