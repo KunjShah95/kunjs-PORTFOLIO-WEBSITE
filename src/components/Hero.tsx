@@ -70,19 +70,7 @@ export function Hero() {
           {/* Left Column: Text Content */}
           <div className="flex flex-col items-start space-y-8 order-2 lg:order-1 w-full">
             {/* Top Badge - Animated Entry */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center gap-3 px-4 py-2 border border-primary/40 bg-primary/5 rounded-full txt-mono text-xs tracking-widest font-bold uppercase"
-            >
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-2 h-2 bg-primary rounded-full"
-              />
-              ENGINEERING_AUTONOMOUS_SYSTEMS
-            </motion.div>
+
 
             {/* Main Title - Cinematic Reveal */}
             <div className="relative overflow-hidden w-full">
