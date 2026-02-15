@@ -1,8 +1,12 @@
 import { motion } from 'framer-motion'
-import { User, Target, Cpu } from 'lucide-react'
+import { useState } from 'react'
+import { User, Target, Cpu, Briefcase, GraduationCap, Zap } from 'lucide-react'
 import { SEO } from '../components/SEO'
+import { IDENTITY, EXPERIENCE, EDUCATION, SKILL_GROUPS } from '../data/portfolio'
 
 export function AboutPage() {
+   const [imageError, setImageError] = useState(false)
+
    return (
       <div className="min-h-screen pt-32 pb-20">
          <SEO
@@ -81,7 +85,16 @@ export function AboutPage() {
                      <div className="p-10 border border-border bg-surface rounded-lg space-y-8">
                         <div className="flex justify-center">
                            <div className="w-32 h-32 rounded-full overflow-hidden bg-surfaceHighlight flex items-center justify-center border border-border">
-                              <User className="w-16 h-16 text-muted" />
+                              {IDENTITY.profile_photo && !imageError ? (
+                                 <img
+                                    src={IDENTITY.profile_photo}
+                                    alt={`${IDENTITY.name} profile photo`}
+                                    className="w-full h-full object-cover object-top"
+                                    onError={() => setImageError(true)}
+                                 />
+                              ) : (
+                                 <User className="w-16 h-16 text-muted" />
+                              )}
                            </div>
                         </div>
 
@@ -103,6 +116,130 @@ export function AboutPage() {
                            </div>
                         </div>
                      </div>
+                  </div>
+               </div>
+            </section>
+
+            {/* Skills Section */}
+            <section className="space-y-12">
+               <div className="border-b border-border/50 pb-8 space-y-4">
+                  <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+                     <Zap className="w-4 h-4" />
+                     Skills Matrix
+                  </div>
+                  <h2 className="text-4xl font-black tracking-tight text-txt uppercase leading-none">
+                     Technological <span className="text-muted font-light">Arsenal</span>
+                  </h2>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {SKILL_GROUPS.map((group) => (
+                     <div
+                        key={group.category}
+                        className="p-6 border border-border bg-surface rounded-lg space-y-4 hover:border-primary/50 transition-colors group"
+                     >
+                        <div className="p-3 bg-surfaceHighlight rounded-md w-fit group-hover:bg-primary/10 transition-colors">
+                           <group.icon className="w-6 h-6 text-primary" />
+                        </div>
+                        <div className="space-y-2">
+                           <h3 className="text-sm font-bold text-txt uppercase tracking-wide">
+                              {group.category.replace(/_/g, ' ')}
+                           </h3>
+                           <p className="text-xs text-muted leading-relaxed">
+                              {group.description}
+                           </p>
+                        </div>
+                        <div className="pt-4 border-t border-border/50">
+                           <div className="flex flex-wrap gap-2">
+                              {group.skills.map((skill) => (
+                                 <span
+                                    key={skill}
+                                    className="px-2 py-1 bg-surfaceHighlight rounded text-[10px] uppercase tracking-wider font-mono text-muted/80"
+                                 >
+                                    {skill}
+                                 </span>
+                              ))}
+                           </div>
+                        </div>
+                     </div>
+                  ))}
+               </div>
+            </section>
+
+            {/* Experience & Education Section */}
+            <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+               {/* Experience */}
+               <div className="space-y-12">
+                  <div className="border-b border-border/50 pb-8 space-y-4">
+                     <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+                        <Briefcase className="w-4 h-4" />
+                        History
+                     </div>
+                     <h2 className="text-3xl font-black tracking-tight text-txt uppercase leading-none">
+                        Operational <span className="text-muted font-light">History</span>
+                     </h2>
+                  </div>
+
+                  <div className="space-y-8">
+                     {EXPERIENCE.map((exp) => (
+                        <div key={exp.id} className="relative pl-8 border-l border-border space-y-2">
+                           <div className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-background" />
+                           <div className="flex justify-between items-start">
+                              <div>
+                                 <h3 className="text-lg font-bold text-txt uppercase">{exp.role}</h3>
+                                 <div className="text-primary font-mono text-xs tracking-wider uppercase mb-2">
+                                    {exp.company}
+                                 </div>
+                              </div>
+                              <span className="text-xs font-mono text-muted border border-border px-2 py-1 rounded bg-surfaceHighlight">
+                                 {exp.period}
+                              </span>
+                           </div>
+                           <p className="text-sm text-muted leading-relaxed max-w-md">{exp.description}</p>
+                           <div className="flex gap-2 pt-2">
+                              {exp.skills.map((s) => (
+                                 <span key={s} className="text-[10px] font-mono text-muted/60 uppercase">
+                                    #{s}
+                                 </span>
+                              ))}
+                           </div>
+                        </div>
+                     ))}
+                  </div>
+               </div>
+
+               {/* Education */}
+               <div className="space-y-12">
+                  <div className="border-b border-border/50 pb-8 space-y-4">
+                     <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+                        <GraduationCap className="w-4 h-4" />
+                        Academic
+                     </div>
+                     <h2 className="text-3xl font-black tracking-tight text-txt uppercase leading-none">
+                        Academic <span className="text-muted font-light">Calibration</span>
+                     </h2>
+                  </div>
+
+                  <div className="space-y-8">
+                     {EDUCATION.map((edu) => (
+                        <div key={edu.id} className="p-6 border border-border bg-surface rounded-lg space-y-4">
+                           <div className="flex justify-between items-start">
+                              <div className="space-y-1">
+                                 <h3 className="text-lg font-bold text-txt uppercase">{edu.school}</h3>
+                                 <div className="text-primary font-mono text-xs tracking-wider uppercase">
+                                    {edu.degree}
+                                 </div>
+                              </div>
+                              <span className="text-xs font-mono text-muted border border-border px-2 py-1 rounded bg-surfaceHighlight">
+                                 {edu.period}
+                              </span>
+                           </div>
+                           <div className="text-sm text-muted">
+                              <span className="text-xs font-mono text-muted/60 uppercase block mb-1">Focus</span>
+                              {edu.specialization}
+                           </div>
+                        </div>
+                     ))}
                   </div>
                </div>
             </section>

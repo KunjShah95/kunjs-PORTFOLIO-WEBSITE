@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Github, Code2, ArrowRight } from 'lucide-react'
+import { Github, Code2, ArrowRight, ExternalLink } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { PROJECTS } from '../data/portfolio'
@@ -105,18 +105,28 @@ export function Projects() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex items-center gap-3 relative z-10">
+                <div className="flex flex-wrap items-center gap-3 relative z-10">
                   <a
                     href={proj.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 px-4 py-3 border border-primary/30 bg-primary/10 hover:border-primary/60 hover:bg-primary/20 text-txt hover:text-primary transition-all text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2"
+                    className="flex-1 min-w-[120px] px-4 py-3 border border-primary/30 bg-primary/10 hover:border-primary/60 hover:bg-primary/20 text-txt hover:text-primary transition-all text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2"
                   >
                     <Github className="w-4 h-4" /> Code
                   </a>
+                  {proj.demo && (
+                    <a
+                      href={proj.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 min-w-[120px] px-4 py-3 border border-primary/30 bg-primary/10 hover:border-primary/60 hover:bg-primary/20 text-txt hover:text-primary transition-all text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2"
+                    >
+                      <ExternalLink className="w-4 h-4" /> Live
+                    </a>
+                  )}
                   <Link
                     to={`/projects/${proj.slug}`}
-                    className="flex-1 px-4 py-3 bg-primary/20 border border-primary/40 hover:border-primary/80 hover:bg-primary/30 text-primary font-bold uppercase tracking-widest flex items-center justify-center gap-2 group/btn transition-all"
+                    className="flex-1 min-w-[120px] px-4 py-3 bg-primary/20 border border-primary/40 hover:border-primary/80 hover:bg-primary/30 text-primary font-bold uppercase tracking-widest flex items-center justify-center gap-2 group/btn transition-all"
                   >
                     Case <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </Link>

@@ -7,7 +7,8 @@ export const IDENTITY: UserIdentity = {
     location: "Ahmedabad, IN",
     contact: "kunjkshah05@gmail.com",
     focus: ["AI Systems", "Autonomous Agents", "MLOps", "Computer Vision"],
-    github_username: "KunjShah95"
+    github_username: "KunjShah95",
+    profile_photo: "/profile.png"
 };
 
 export const PROJECTS: Project[] = [
@@ -50,6 +51,48 @@ export const PROJECTS: Project[] = [
         github: 'https://github.com/KunjShah95/UPI-Fraud-Detection',
         slug: 'upi-fraud-guard',
         impact: 'ALGO_STABLE',
+    },
+    {
+        id: '05',
+        title: 'SENTINEL CLI',
+        category: 'SECURITY & CODE REVIEW',
+        desc: 'Local-first AI-powered code review and security analysis CLI with multi-LLM support, analyzers for security, dependency & accessibility checks, and autofix capabilities.',
+        tech: ['NODE.JS', 'JAVASCRIPT', 'TYPESCRIPT', 'LLM', 'DOCKER'],
+        github: 'https://github.com/KunjShah95/SENTINEL-CLI',
+        demo: 'https://sentinel-cli.vercel.app/',
+        slug: 'sentinel-cli',
+        impact: 'OPEN_SOURCE_PRODUCT',
+    },
+    {
+        id: '06',
+        title: 'AETHER AI',
+        category: 'AGENTIC TERMINAL ASSISTANT',
+        desc: 'Production-ready, secure multi-model terminal assistant with model switching, local Ollama support, developer utilities, and extensible modular architecture.',
+        tech: ['PYTHON', 'OLLAMA', 'GEMINI', 'GROQ', 'FASTAPI'],
+        github: 'https://github.com/KunjShah95/AETHER-AI',
+        slug: 'aether-ai',
+        impact: 'OPEN_SOURCE_FRAMEWORK',
+    },
+    {
+        id: '07',
+        title: 'MinBPE Tokenizer',
+        category: 'LLM INFRASTRUCTURE',
+        desc: 'Minimal Byte Pair Encoding tokenizer implementation with Basic, Regex, and GPT-4 compatible variants for educational and practical NLP workflows.',
+        tech: ['PYTHON', 'BPE', 'TOKENIZERS', 'NLP', 'TIKTOKEN'],
+        github: 'https://github.com/KunjShah95/TOKENIZER-FROM-SCRATCH',
+        slug: 'minbpe-tokenizer',
+        impact: 'RESEARCH_TOOLING',
+    },
+    {
+        id: '08',
+        title: 'ResumeMasterAI',
+        category: 'CAREER AI PLATFORM',
+        desc: 'AI-powered resume optimization and job-matching platform with ATS scoring, multi-model support, analytics, and document intelligence pipelines.',
+        tech: ['PYTHON', 'STREAMLIT', 'LANGCHAIN', 'GEMINI', 'CHROMADB'],
+        github: 'https://github.com/KunjShah01/job-snipper',
+        demo: 'https://resumemasterai.streamlit.app/',
+        slug: 'resumemaster-ai',
+        impact: 'PRODUCT_LIVE',
     }
 ];
 
@@ -58,7 +101,7 @@ export const EXPERIENCE: Experience[] = [
         id: 'XP0',
         company: 'PHAZE_AI',
         role: 'AUTOMATION_INTERN',
-        period: 'DEC 2025 — PRESENT',
+        period: 'DEC 2025 — FEB 2026',
         description: 'Developing automated agentic workflows for enterprise automation. Engineering autonomous scripts and multi-stage pipeline triggers.',
         skills: ['PYTHON', 'AGENTS', 'WORKFLOWS'],
     }

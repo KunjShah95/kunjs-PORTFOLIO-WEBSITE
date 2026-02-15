@@ -5,6 +5,7 @@ export interface Project {
     desc: string;
     tech: string[];
     github: string;
+    demo?: string;
     slug: string;
     impact: string;
 }
@@ -71,4 +72,5 @@ export interface UserIdentity {
     contact: string;
     focus: string[];
     github_username: string;
+    profile_photo?: string;
 }
