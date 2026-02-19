@@ -133,7 +133,17 @@ export function Layout({ children }: LayoutProps) {
          </AnimatePresence>
 
          <main className="min-h-screen pt-20">
-            {children}
+            <AnimatePresence mode="wait">
+               <motion.div
+                  key={location.pathname}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+               >
+                  {children}
+               </motion.div>
+            </AnimatePresence>
          </main>
 
          <AIAssistant />
@@ -144,7 +154,7 @@ export function Layout({ children }: LayoutProps) {
                <svg className="w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="none">
                   <defs>
                      <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
-                        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="currentColor" strokeWidth="0.5" />
                      </pattern>
                   </defs>
                   <rect width="1000" height="1000" fill="url(#grid)" />
@@ -165,30 +175,30 @@ export function Layout({ children }: LayoutProps) {
                         </div>
                      </Link>
                      <p className="text-sm text-muted/60 leading-relaxed max-w-sm font-light">
-                        Architecting autonomous systems at the intersection of neural networks and industrial computation. 
+                        Architecting autonomous systems at the intersection of neural networks and industrial computation.
                         Crafting the next generation of intelligent agents.
                      </p>
                      <div className="flex gap-6 pt-4 border-t border-primary/10">
-                        <a 
-                           href="https://github.com" 
-                           target="_blank" 
-                           rel="noreferrer" 
+                        <a
+                           href="https://github.com"
+                           target="_blank"
+                           rel="noreferrer"
                            className="txt-mono text-xs text-muted/60 hover:text-primary transition-colors font-bold uppercase tracking-wider hover:translate-x-1 duration-300"
                         >
                            Github →
                         </a>
-                        <a 
-                           href="https://twitter.com" 
-                           target="_blank" 
-                           rel="noreferrer" 
+                        <a
+                           href="https://twitter.com"
+                           target="_blank"
+                           rel="noreferrer"
                            className="txt-mono text-xs text-muted/60 hover:text-primary transition-colors font-bold uppercase tracking-wider hover:translate-x-1 duration-300"
                         >
                            Twitter →
                         </a>
-                        <a 
-                           href="https://linkedin.com" 
-                           target="_blank" 
-                           rel="noreferrer" 
+                        <a
+                           href="https://linkedin.com"
+                           target="_blank"
+                           rel="noreferrer"
                            className="txt-mono text-xs text-muted/60 hover:text-primary transition-colors font-bold uppercase tracking-wider hover:translate-x-1 duration-300"
                         >
                            LinkedIn →
