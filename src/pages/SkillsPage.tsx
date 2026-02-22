@@ -20,24 +20,24 @@ export function SkillsPage() {
 
       <div className="container-aligned space-y-16">
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border/50 pb-8 gap-8">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-muted text-sm font-medium">
               <Cpu className="w-4 h-4" />
-              Technical DNA
+              Technical Background
             </div>
-            <h1 className="text-5xl sm:text-7xl font-black tracking-tight text-txt uppercase leading-none">
-              Knowledge <span className="text-muted font-light">Graph</span>
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+              Skills & Tech Stack
             </h1>
           </div>
 
-          <div className="flex gap-8 pb-2">
+          <div className="flex gap-6 pb-2">
             {secondaryStats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center md:items-end">
-                <div className="flex items-center gap-2 text-primary mb-1">
+              <div key={i} className="flex flex-col items-end gap-0.5">
+                <div className="flex items-center gap-1.5 text-muted text-xs">
                   <stat.icon className="w-3 h-3" />
-                  <span className="text-[10px] font-bold txt-mono tracking-widest">{stat.label}</span>
+                  <span>{stat.label}</span>
                 </div>
-                <div className="text-sm font-bold text-txt">{stat.value}</div>
+                <div className="text-sm font-semibold text-txt">{stat.value}</div>
               </div>
             ))}
           </div>
@@ -59,19 +59,19 @@ export function SkillsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-16 border-t border-border/50">
           <div className="space-y-3">
-            <h4 className="text-xs font-bold txt-mono tracking-widest uppercase text-primary">Ethical AI</h4>
+            <h4 className="text-sm font-semibold text-primary">Ethical AI</h4>
             <p className="text-xs text-muted font-light leading-relaxed">
               Commitment to building safe, explainable, and human-aligned autonomous systems. Priority on bias mitigation.
             </p>
           </div>
           <div className="space-y-3">
-            <h4 className="text-xs font-bold txt-mono tracking-widest uppercase text-primary">Open Source</h4>
+            <h4 className="text-sm font-semibold text-primary">Open Source</h4>
             <p className="text-xs text-muted font-light leading-relaxed">
               Active contributor to the agentic ecosystem. Building tools that empower developers to deploy scalable agents.
             </p>
           </div>
           <div className="space-y-3">
-            <h4 className="text-xs font-bold txt-mono tracking-widest uppercase text-primary">Research Sync</h4>
+            <h4 className="text-sm font-semibold text-primary">Research Sync</h4>
             <p className="text-xs text-muted font-light leading-relaxed">
               Constantly indexing the latest research from arXiv and major AI labs to maintain an edge in state-of-the-art architectures.
             </p>

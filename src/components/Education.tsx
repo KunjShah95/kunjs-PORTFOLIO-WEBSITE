@@ -9,13 +9,13 @@ export function Education() {
     <section id="education" className="section-padding relative overflow-hidden">
       <div className="container-aligned space-y-16 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border/50 pb-8 gap-6">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-muted text-sm font-medium">
               <GraduationCap className="w-4 h-4" />
-              ACADEMIC_FLOW
+              Education
             </div>
-            <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-txt uppercase leading-none">
-              Academic <span className="text-muted font-light">Journey</span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+              Academic Background
             </h2>
           </div>
         </div>

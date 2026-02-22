@@ -17,9 +17,9 @@ export function BlogDetailPage() {
     if (!blog) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center space-y-4">
-                <h1 className="text-4xl font-black text-txt uppercase">Intelligence Missing</h1>
-                <p className="text-muted txt-mono text-sm uppercase">The requested data node does not exist.</p>
-                <Link to="/blogs" className="text-primary hover:underline uppercase font-mono tracking-widest text-sm">Return to Archive</Link>
+                <h1 className="text-2xl font-bold text-txt">Article Not Found</h1>
+                <p className="text-muted text-sm">The requested article does not exist.</p>
+                <Link to="/blogs" className="text-primary hover:underline text-sm font-medium">Back to Articles</Link>
             </div>
         )
     }
@@ -44,9 +44,9 @@ export function BlogDetailPage() {
                     animate={{ opacity: 1, x: 0 }}
                     className="mb-12"
                 >
-                    <Link to="/blogs" className="group inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-mono text-xs uppercase tracking-widest font-bold">
+                    <Link to="/blogs" className="group inline-flex items-center gap-2 text-muted hover:text-primary transition-colors text-sm font-medium">
                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        Archive Registry
+                        All Articles
                     </Link>
                 </motion.div>
 
@@ -57,16 +57,16 @@ export function BlogDetailPage() {
                         animate={{ opacity: 1, y: 0 }}
                         className="space-y-4"
                     >
-                        <div className="flex items-center gap-4 text-[10px] txt-mono font-bold tracking-[0.2em] text-primary uppercase">
-                            <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-sm">{blog.category.replace(/_/g, ' ')}</span>
-                            <div className="flex items-center gap-2 text-muted/60">
-                                <Calendar className="w-3 h-3" /> {blog.date}
+                        <div className="flex items-center gap-3 flex-wrap">
+                            <span className="px-3 py-1 rounded-md bg-primary/10 border border-primary/20 text-primary text-xs font-medium">{blog.category.replace(/_/g, ' ')}</span>
+                            <div className="flex items-center gap-1.5 text-sm text-muted">
+                                <Calendar className="w-3.5 h-3.5" /> {blog.date}
                             </div>
-                            <div className="flex items-center gap-2 text-muted/60">
-                                <Clock className="w-3 h-3" /> {blog.readTime} MIN READ
+                            <div className="flex items-center gap-1.5 text-sm text-muted">
+                                <Clock className="w-3.5 h-3.5" /> {blog.readTime} min read
                             </div>
                         </div>
-                        <h1 className="text-4xl sm:text-6xl font-black text-txt tracking-tight uppercase leading-[0.9] lg:text-7xl">
+                        <h1 className="text-3xl sm:text-5xl font-bold text-txt tracking-tight leading-tight">
                             {blog.title}
                         </h1>
                     </motion.div>
@@ -97,7 +97,7 @@ export function BlogDetailPage() {
                                     dangerouslySetInnerHTML={{
                                         __html: `<p class="text-muted leading-relaxed text-lg font-light mb-6">` + blog.content
                                             .replace(/### (.*)/g, '<h3 class="text-xl font-bold uppercase text-primary mt-12 mb-4 tracking-wider">$1</h3>')
-                                            .replace(/## (.*)/g, '<h2 class="text-2xl font-black uppercase text-txt mt-16 mb-6 tracking-tight">$1</h2>')
+                                            .replace(/## (.*)/g, '<h2 class="text-2xl font-bold text-txt mt-16 mb-6 tracking-tight">$1</h2>')
                                             .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary/90 font-bold">$1</strong>')
                                             .replace(/\n\n/g, '</p><p class="text-muted leading-relaxed text-lg font-light mb-6">')
                                             .replace(/# (.*)/g, '') // Remove main h1
@@ -106,7 +106,7 @@ export function BlogDetailPage() {
                                 />
                             ) : (
                                 <div className="py-20 text-center border-2 border-dashed border-border/50 rounded-lg">
-                                    <p className="text-muted txt-mono animate-pulse">TRANSMISSION_INTERRUPTED: CONTENT_NODE_NULL</p>
+                                    <p className="text-muted text-sm animate-pulse">Content coming soon...</p>
                                 </div>
                             )}
                         </motion.article>
@@ -115,7 +115,7 @@ export function BlogDetailPage() {
                         <footer className="mt-20 pt-10 border-t border-border/50 flex flex-wrap items-center justify-between gap-8">
                             <div className="flex flex-wrap gap-2">
                                 {blog.tags.map(tag => (
-                                    <span key={tag} className="flex items-center gap-2 text-[10px] font-bold txt-mono text-muted/60 uppercase tracking-widest px-3 py-1.5 border border-border bg-surface hover:border-primary/40 hover:text-primary transition-colors cursor-default">
+                                    <span key={tag} className="flex items-center gap-1.5 text-xs font-medium text-muted px-2.5 py-1 border border-border bg-surface hover:border-primary/40 hover:text-primary transition-colors cursor-default rounded-md">
                                         <Tag className="w-3 h-3 text-primary/40" /> {tag}
                                     </span>
                                 ))}

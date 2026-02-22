@@ -17,13 +17,13 @@ export function AboutPage() {
 
          <div className="container-aligned space-y-20">
             <section className="space-y-12">
-               <div className="border-b border-border/50 pb-8 space-y-4">
-                  <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+               <div className="border-b border-border/50 pb-8 space-y-2">
+                  <div className="flex items-center gap-2 text-muted text-sm font-medium">
                      <User className="w-4 h-4" />
                      About Me
                   </div>
-                  <h1 className="text-5xl sm:text-7xl font-black tracking-tight text-txt uppercase leading-none">
-                     Architect <span className="text-muted font-light">Persona</span>
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+                     About Kunj Shah
                   </h1>
                </div>
 
@@ -56,10 +56,10 @@ export function AboutPage() {
                                  <Target className="w-6 h-6 text-primary" />
                               </div>
                               <div>
-                                 <h3 className="text-sm font-bold text-txt uppercase tracking-wide mb-2">
-                                    Strategic Objective
+                                 <h3 className="text-sm font-semibold text-txt mb-2">
+                                    Current Focus
                                  </h3>
-                                 <p className="text-xs text-muted font-mono leading-relaxed uppercase tracking-wider">
+                                 <p className="text-xs text-muted leading-relaxed">
                                     Standardizing multi-agent communication protocols for cross-infrastructure task delegation.
                                  </p>
                               </div>
@@ -69,11 +69,11 @@ export function AboutPage() {
                                  <Cpu className="w-6 h-6 text-primary" />
                               </div>
                               <div>
-                                 <h3 className="text-sm font-bold text-txt uppercase tracking-wide mb-2">
-                                    Operational Stack
+                                 <h3 className="text-sm font-semibold text-txt mb-2">
+                                    Core Stack
                                  </h3>
-                                 <p className="text-xs text-muted font-mono leading-relaxed uppercase tracking-wider">
-                                    React // Python // LangChain // Docker // Vector_DBs
+                                 <p className="text-xs text-muted leading-relaxed">
+                                    React · Python · LangChain · Docker · Vector DBs
                                  </p>
                               </div>
                            </div>
@@ -99,19 +99,19 @@ export function AboutPage() {
                         </div>
 
                         <div className="space-y-4">
-                           <div className="text-xs font-bold txt-mono text-muted uppercase tracking-widest border-b border-border/50 pb-2">Details</div>
+                           <div className="text-xs font-medium text-muted border-b border-border/50 pb-2">Details</div>
                            <div className="space-y-3 text-sm">
                               <div className="flex justify-between items-center text-muted">
                                  <span>Status</span>
-                                 <span className="text-green-500 font-bold uppercase tracking-wider">Open for Collab</span>
+                                 <span className="text-green-500 font-medium">Open for Collab</span>
                               </div>
                               <div className="flex justify-between items-center text-muted">
                                  <span>Location</span>
-                                 <span className="text-txt font-bold uppercase tracking-wider">Ahmedabad, India</span>
+                                 <span className="text-txt font-medium">Ahmedabad, India</span>
                               </div>
                               <div className="flex justify-between items-center text-muted">
-                                 <span>TimeZone</span>
-                                 <span className="text-txt font-bold uppercase tracking-wider">GMT+5:30</span>
+                                 <span>Timezone</span>
+                                 <span className="text-txt font-medium">GMT+5:30</span>
                               </div>
                            </div>
                         </div>
@@ -122,13 +122,13 @@ export function AboutPage() {
 
             {/* Skills Section */}
             <section className="space-y-12">
-               <div className="border-b border-border/50 pb-8 space-y-4">
-                  <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+               <div className="border-b border-border/50 pb-8 space-y-2">
+                  <div className="flex items-center gap-2 text-muted text-sm font-medium">
                      <Zap className="w-4 h-4" />
-                     Skills Matrix
+                     Skills
                   </div>
-                  <h2 className="text-4xl font-black tracking-tight text-txt uppercase leading-none">
-                     Technological <span className="text-muted font-light">Arsenal</span>
+                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-txt">
+                     Technical Skills
                   </h2>
                </div>
 
@@ -142,7 +142,7 @@ export function AboutPage() {
                            <group.icon className="w-6 h-6 text-primary" />
                         </div>
                         <div className="space-y-2">
-                           <h3 className="text-sm font-bold text-txt uppercase tracking-wide">
+                           <h3 className="text-sm font-semibold text-txt">
                               {group.category.replace(/_/g, ' ')}
                            </h3>
                            <p className="text-xs text-muted leading-relaxed">
@@ -154,7 +154,7 @@ export function AboutPage() {
                               {group.skills.map((skill) => (
                                  <span
                                     key={skill}
-                                    className="px-2 py-1 bg-surfaceHighlight rounded text-[10px] uppercase tracking-wider font-mono text-muted/80"
+                                    className="px-2 py-1 bg-surfaceHighlight rounded text-[10px] font-medium text-muted/80"
                                  >
                                     {skill}
                                  </span>
@@ -170,13 +170,13 @@ export function AboutPage() {
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
                {/* Experience */}
                <div className="space-y-12">
-                  <div className="border-b border-border/50 pb-8 space-y-4">
-                     <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+                  <div className="border-b border-border/50 pb-8 space-y-2">
+                     <div className="flex items-center gap-2 text-muted text-sm font-medium">
                         <Briefcase className="w-4 h-4" />
-                        History
+                        Work
                      </div>
-                     <h2 className="text-3xl font-black tracking-tight text-txt uppercase leading-none">
-                        Operational <span className="text-muted font-light">History</span>
+                     <h2 className="text-2xl font-bold tracking-tight text-txt">
+                        Experience
                      </h2>
                   </div>
 
@@ -186,8 +186,8 @@ export function AboutPage() {
                            <div className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-background" />
                            <div className="flex justify-between items-start">
                               <div>
-                                 <h3 className="text-lg font-bold text-txt uppercase">{exp.role}</h3>
-                                 <div className="text-primary font-mono text-xs tracking-wider uppercase mb-2">
+                                 <h3 className="text-base font-semibold text-txt">{exp.role}</h3>
+                                 <div className="text-primary text-xs font-medium mb-2">
                                     {exp.company}
                                  </div>
                               </div>
@@ -210,13 +210,13 @@ export function AboutPage() {
 
                {/* Education */}
                <div className="space-y-12">
-                  <div className="border-b border-border/50 pb-8 space-y-4">
-                     <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+                  <div className="border-b border-border/50 pb-8 space-y-2">
+                     <div className="flex items-center gap-2 text-muted text-sm font-medium">
                         <GraduationCap className="w-4 h-4" />
-                        Academic
+                        Studies
                      </div>
-                     <h2 className="text-3xl font-black tracking-tight text-txt uppercase leading-none">
-                        Academic <span className="text-muted font-light">Calibration</span>
+                     <h2 className="text-2xl font-bold tracking-tight text-txt">
+                        Education
                      </h2>
                   </div>
 
@@ -225,8 +225,8 @@ export function AboutPage() {
                         <div key={edu.id} className="p-6 border border-border bg-surface rounded-lg space-y-4">
                            <div className="flex justify-between items-start">
                               <div className="space-y-1">
-                                 <h3 className="text-lg font-bold text-txt uppercase">{edu.school}</h3>
-                                 <div className="text-primary font-mono text-xs tracking-wider uppercase">
+                                 <h3 className="text-base font-semibold text-txt">{edu.school}</h3>
+                                 <div className="text-primary text-xs font-medium">
                                     {edu.degree}
                                  </div>
                               </div>
@@ -235,7 +235,7 @@ export function AboutPage() {
                               </span>
                            </div>
                            <div className="text-sm text-muted">
-                              <span className="text-xs font-mono text-muted/60 uppercase block mb-1">Focus</span>
+                              <span className="text-xs text-muted/60 block mb-1">Specialization</span>
                               {edu.specialization}
                            </div>
                         </div>

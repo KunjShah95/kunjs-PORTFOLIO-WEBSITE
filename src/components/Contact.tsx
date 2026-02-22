@@ -1,28 +1,26 @@
 import { motion } from 'framer-motion'
-import { MessageSquare, Terminal } from 'lucide-react'
-
+import { MessageSquare, Mail } from 'lucide-react'
 import { SOCIALS } from '../data/portfolio'
 
 export function Contact() {
-
   return (
     <section id="contact" className="section-padding bg-bg relative">
       <div className="container-aligned">
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        <div className="grid lg:grid-cols-12 gap-10 items-start">
 
-          {/* Header Area */}
-          <div className="lg:col-span-12 border-b border-primary/30 pb-8 space-y-4">
-            <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
-              <Terminal className="w-4 h-4" />
-              COMMUNICATION_TERMINAL
+          {/* Header */}
+          <div className="lg:col-span-12 border-b border-border pb-8 space-y-2">
+            <div className="flex items-center gap-2 text-muted text-sm font-medium">
+              <Mail className="w-4 h-4" />
+              Contact
             </div>
-            <h2 className="text-4xl sm:text-6xl font-black tracking-tight text-txt uppercase leading-none">
-              Establish <span className="text-muted/50 font-light">Connection</span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+              Let's Connect
             </h2>
           </div>
 
-          {/* Contact Methods */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Contact Links */}
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
             {SOCIALS.map((social, i) => (
               <motion.a
                 key={social.name}
@@ -32,58 +30,50 @@ export function Contact() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="group p-4 border border-primary/30 bg-surface hover:border-primary/60 hover:bg-surface/80 flex items-center justify-between transition-all duration-300 rounded-sm txt-mono text-xs"
+                transition={{ delay: i * 0.08, duration: 0.4 }}
+                className="group flex items-center justify-between p-4 rounded-xl border border-border bg-surface hover:border-primary/30 hover:bg-surfaceHighlight transition-all duration-200"
               >
-                <div className="space-y-1">
-                  <div className="text-[8px] text-muted font-bold uppercase tracking-widest opacity-60">$ {social.label.toLowerCase()}</div>
-                  <div className="font-bold text-txt group-hover:text-primary transition-colors">{social.name}</div>
+                <div className="space-y-0.5">
+                  <div className="text-xs text-muted font-medium">{social.label}</div>
+                  <div className="text-sm font-semibold text-txt group-hover:text-primary transition-colors">{social.name}</div>
                 </div>
-                <div className="w-4 h-4 border-l border-t border-primary/40 group-hover:border-primary/80 transition-colors transform -rotate-45"></div>
+                <div className="w-7 h-7 rounded-lg bg-bg border border-border flex items-center justify-center group-hover:border-primary/30 group-hover:text-primary text-muted transition-all">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+                  </svg>
+                </div>
               </motion.a>
             ))}
           </div>
 
-          {/* Direct Communication Module */}
-          <div className="lg:col-span-4 h-full">
+          {/* Direct Channel */}
+          <div className="lg:col-span-4">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="h-full group p-6 bg-surface border border-primary/30 hover:border-primary/60 flex flex-col justify-between relative overflow-hidden rounded-sm transition-all duration-300"
+              className="rounded-xl border border-border bg-surface p-6 space-y-5"
             >
-              {/* Terminal Status Bar */}
-              <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-r from-primary/20 to-transparent border-b border-primary/30 flex items-center px-4 txt-mono text-[8px] text-primary font-bold tracking-widest">
-                &gt; PRIORITY_CHANNEL
-              </div>
-
-              <div className="space-y-6 relative z-10 mt-8">
-                <div className="inline-flex items-center gap-2 px-2 py-1 bg-primary/10 border border-primary/30 rounded-sm w-fit">
-                  <div className="w-1.5 h-1.5 bg-primary animate-pulse rounded-full"></div>
-                  <span className="text-[10px] txt-mono text-primary tracking-widest font-bold uppercase">READY_FOR_INPUT</span>
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-xs font-medium text-emerald-400">Available now</span>
                 </div>
-
-                <div className="space-y-3">
-                  <h3 className="text-lg font-bold text-txt uppercase tracking-widest txt-mono">
-                    Direct Channel
-                  </h3>
-                  <p className="text-xs text-muted leading-relaxed font-mono">
-                    Open for research partnerships, technical collaborations, and agentic systems discussions.
-                  </p>
-                </div>
+                <h3 className="text-base font-semibold text-txt">Direct Message</h3>
+                <p className="text-sm text-muted leading-relaxed">
+                  Open for partnerships, collaborations, and AI systems discussions.
+                </p>
               </div>
 
-              <div className="pt-8 relative z-10">
-                <a
-                  href="https://wa.me/919106878258"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full p-3 bg-primary/10 border border-primary/40 hover:border-primary hover:bg-primary/20 text-primary font-bold text-xs tracking-widest uppercase transition-all duration-300 rounded-sm flex items-center justify-center gap-2 txt-mono"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  INITIATE_CONTACT
-                </a>
-              </div>
+              <a
+                href="https://wa.me/919106878258"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20"
+              >
+                <MessageSquare className="w-4 h-4" />
+                Send a Message
+              </a>
             </motion.div>
           </div>
         </div>

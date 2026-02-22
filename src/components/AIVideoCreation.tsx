@@ -5,130 +5,118 @@ export function AIVideoCreation() {
   const services = [
     {
       id: '01',
-      title: 'AI AVATAR VIDEOS',
-      category: 'SYNTHETIC_MEDIA',
+      title: 'AI Avatar Videos',
+      category: 'Synthetic Media',
       desc: 'Photorealistic AI avatars that speak your script. Perfect for courses, marketing, and social content.',
-      features: ['CUSTOM_AVATARS', 'MULTI_LANGUAGE', 'LIP_SYNC'],
-      turnaround: '24-48H',
+      features: ['Custom Avatars', 'Multi-Language', 'Lip Sync'],
+      turnaround: '24–48 hrs',
       startingPrice: '$49',
     },
     {
       id: '02',
-      title: 'TEXT TO VIDEO',
-      category: 'GENERATIVE_CONTENT',
+      title: 'Text to Video',
+      category: 'Generative Content',
       desc: 'Transform scripts into stunning visual narratives using cutting-edge AI video generation models.',
-      features: ['SORA', 'RUNWAY', 'PIKA_LABS'],
-      turnaround: '48-72H',
+      features: ['Sora', 'Runway', 'Pika Labs'],
+      turnaround: '48–72 hrs',
       startingPrice: '$79',
     },
     {
       id: '03',
-      title: 'AI SHORTS AUTOMATION',
-      category: 'SOCIAL_SCALE',
+      title: 'AI Shorts Automation',
+      category: 'Social Scale',
       desc: 'Automated short-form content pipeline for TikTok, Reels, and YouTube Shorts. Batch production ready.',
-      features: ['AUTO_CAPTIONS', 'VIRAL_HOOKS', 'BATCH_OPS'],
-      turnaround: '12-24H',
+      features: ['Auto Captions', 'Viral Hooks', 'Batch Ops'],
+      turnaround: '12–24 hrs',
       startingPrice: '$29',
     },
     {
       id: '04',
-      title: 'VOICE CLONING',
-      category: 'AUDIO_SYNTHESIS',
+      title: 'Voice Cloning',
+      category: 'Audio Synthesis',
       desc: 'Clone voices for consistent branding. Maintain your unique tone across all video content.',
-      features: ['ELEVEN_LABS', 'CUSTOM_VOICE', 'EMOTION_CTRL'],
-      turnaround: '24H',
+      features: ['ElevenLabs', 'Custom Voice', 'Emotion Control'],
+      turnaround: '24 hrs',
       startingPrice: '$39',
     },
   ]
 
   const processSteps = [
-    { step: '01', label: 'BRIEF_INTAKE', desc: 'Share your vision and requirements' },
-    { step: '02', label: 'SCRIPT_REFINE', desc: 'AI-enhanced script optimization' },
-    { step: '03', label: 'GENERATION', desc: 'Cutting-edge AI video synthesis' },
-    { step: '04', label: 'DELIVERY', desc: 'Polished output in your format' },
+    { step: '01', label: 'Brief Intake', desc: 'Share your vision and requirements' },
+    { step: '02', label: 'Script Refinement', desc: 'AI-enhanced script optimization' },
+    { step: '03', label: 'Generation', desc: 'Cutting-edge AI video synthesis' },
+    { step: '04', label: 'Delivery', desc: 'Polished output in your format' },
   ]
 
   return (
     <section id="ai-videos" className="section-padding bg-bg relative overflow-hidden">
-      <div className="container-aligned space-y-16 relative z-10">
+      <div className="container-aligned space-y-12 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-primary/30 pb-8 gap-6">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border pb-8 gap-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-muted text-sm font-medium">
               <Video className="w-4 h-4" />
-              CONTENT_GENERATION
+              Services
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-txt uppercase leading-none">
-              AI Video <span className="text-muted/50 font-light">Creation</span>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+              AI Video Creation
             </h2>
           </div>
-          <div className="txt-mono text-xs text-muted uppercase tracking-widest font-bold border border-primary/30 px-4 py-2 rounded-sm">
-            SERVICES: {services.length.toString().padStart(2, '0')}
-          </div>
+          <span className="text-sm text-muted font-medium">{services.length} services</span>
         </div>
 
         {/* Services Grid */}
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 gap-4">
           {services.map((service, i) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.8 }}
-              className="group relative grid grid-cols-1 lg:grid-cols-12 gap-0 border border-primary/20 bg-surface hover:border-primary/60 transition-all duration-500 rounded-sm overflow-hidden"
-              whileHover={{ scale: 1.01, y: -4 }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
+              className="group rounded-xl border border-border bg-surface hover:border-primary/30 hover:bg-surfaceHighlight transition-all duration-200 overflow-hidden"
             >
-              {/* Service ID */}
-              <div className="lg:col-span-1 border-r border-primary/20 bg-primary/5 flex items-center justify-center py-6 lg:py-0">
-                <span className="text-2xl font-bold txt-mono text-primary/40 group-hover:text-primary transition-colors">
-                  {service.id}
-                </span>
-              </div>
-
-              {/* Content */}
-              <div className="lg:col-span-7 p-6 sm:p-8 space-y-4 flex flex-col justify-between">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <h3 className="text-2xl font-bold text-txt group-hover:text-primary transition-colors uppercase tracking-tight">
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-0">
+                {/* Content */}
+                <div className="p-6 space-y-4">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h3 className="text-lg font-semibold text-txt group-hover:text-primary transition-colors">
                       {service.title}
                     </h3>
-                    <span className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold txt-mono uppercase tracking-widest border border-primary/30 rounded-sm">
+                    <span className="px-2.5 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-primary text-xs font-medium">
                       {service.category}
                     </span>
                   </div>
-                  <p className="text-sm text-muted leading-relaxed">
-                    {service.desc}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {service.features.map((feature) => (
-                    <span key={feature} className="text-[10px] font-bold txt-mono text-muted/70 uppercase tracking-wider px-2 py-1 border border-primary/20 rounded-sm bg-primary/5">
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Pricing & Action */}
-              <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-primary/20 bg-primary/5 p-6 sm:p-8 flex flex-col justify-between gap-4">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-muted text-xs txt-mono font-bold uppercase tracking-wider">
-                    <Clock className="w-3 h-3" />
-                    {service.turnaround}
-                  </div>
-                  <div className="flex items-center gap-2 text-primary text-sm font-bold uppercase txt-mono">
-                    <DollarSign className="w-4 h-4" />
-                    From {service.startingPrice}
+                  <p className="text-sm text-muted leading-relaxed">{service.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {service.features.map((feature) => (
+                      <span key={feature} className="text-xs font-medium text-muted bg-bg border border-border px-2.5 py-1 rounded-md">
+                        {feature}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <a
-                  href="#contact"
-                  className="px-4 py-3 border border-primary/40 bg-surface hover:border-primary/60 hover:bg-primary/5 text-txt hover:text-primary transition-all text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 rounded-sm txt-mono"
-                >
-                  Order <ArrowUpRight className="w-3 h-3" />
-                </a>
+
+                {/* Pricing */}
+                <div className="border-t lg:border-t-0 lg:border-l border-border bg-bg/50 p-6 flex flex-row lg:flex-col justify-between lg:justify-center gap-4 lg:gap-3 min-w-[160px]">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-medium text-muted">
+                      <Clock className="w-3.5 h-3.5" />
+                      {service.turnaround}
+                    </div>
+                    <div className="flex items-center gap-1.5 text-sm font-semibold text-primary">
+                      <DollarSign className="w-4 h-4" />
+                      From {service.startingPrice}
+                    </div>
+                  </div>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 text-primary text-sm font-medium transition-all whitespace-nowrap"
+                  >
+                    Order
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -136,19 +124,17 @@ export function AIVideoCreation() {
 
         {/* Process Flow */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="space-y-12 pt-8 border-t border-primary/30 mt-8"
+          className="space-y-8 pt-8 border-t border-border"
         >
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-primary txt-mono text-xs tracking-widest font-bold uppercase">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-muted text-sm font-medium">
               <Wand2 className="w-4 h-4" />
-              WORKFLOW_SEQUENCE
+              Process
             </div>
-            <h3 className="text-3xl sm:text-4xl font-black text-txt uppercase tracking-tight">
-              How It <span className="text-muted/50 font-light">Works</span>
-            </h3>
+            <h3 className="text-2xl font-bold text-txt">How It Works</h3>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -158,17 +144,17 @@ export function AIVideoCreation() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="p-4 border border-primary/20 bg-primary/5 hover:border-primary/60 hover:bg-primary/10 transition-all rounded-sm text-center space-y-3 group"
+                transition={{ delay: i * 0.08, duration: 0.4 }}
+                className="p-5 rounded-xl border border-border bg-surface hover:border-primary/30 hover:bg-surfaceHighlight transition-all text-center space-y-2 group"
               >
-                <div className="text-xl font-bold txt-mono text-primary/50 group-hover:text-primary transition-colors">
+                <div className="text-xl font-bold font-mono text-primary/50 group-hover:text-primary transition-colors">
                   {step.step}
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-txt uppercase tracking-wide group-hover:text-primary transition-colors">
+                  <h4 className="text-sm font-semibold text-txt group-hover:text-primary transition-colors">
                     {step.label}
                   </h4>
-                  <p className="text-[9px] txt-mono text-muted uppercase tracking-wider mt-0.5 opacity-70">
+                  <p className="text-xs text-muted mt-1 leading-relaxed">
                     {step.desc}
                   </p>
                 </div>

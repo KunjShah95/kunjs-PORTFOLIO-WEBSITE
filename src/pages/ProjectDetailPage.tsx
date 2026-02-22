@@ -200,8 +200,8 @@ export function ProjectDetailPage() {
   if (!project) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center space-y-4">
-        <h1 className="text-4xl font-black">Project Not Found</h1>
-        <Link to="/projects" className="text-primary hover:underline uppercase font-mono tracking-widest text-sm">Back to Registry</Link>
+        <h1 className="text-2xl font-bold text-txt">Project Not Found</h1>
+        <Link to="/projects" className="text-primary hover:underline text-sm font-medium">Back to Projects</Link>
       </div>
     )
   }
@@ -219,17 +219,17 @@ export function ProjectDetailPage() {
           animate={{ opacity: 1, x: 0 }}
           className="mb-12"
         >
-          <Link to="/projects" className="group inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-mono text-xs uppercase tracking-widest font-bold">
+          <Link to="/projects" className="group inline-flex items-center gap-2 text-muted hover:text-primary transition-colors text-sm font-medium">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Registry
+            All Projects
           </Link>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start border-b border-border/50 pb-16">
           <div className="lg:col-span-8 space-y-8">
             <div className="space-y-4">
-              <div className="text-xs font-bold txt-mono text-primary uppercase tracking-widest">{project.category}</div>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-txt tracking-tight uppercase leading-none">
+              <div className="text-xs font-medium text-primary">{project.category.replace(/_/g, ' ')}</div>
+              <h1 className="text-4xl sm:text-5xl font-bold text-txt tracking-tight leading-tight">
                 {project.title}
               </h1>
             </div>
@@ -240,21 +240,21 @@ export function ProjectDetailPage() {
           <div className="lg:col-span-4 flex flex-col gap-6">
             <div className="p-6 border border-border bg-surface rounded-lg space-y-6">
               <div className="space-y-2">
-                <div className="text-xs font-bold txt-mono text-muted uppercase tracking-widest">Tech Stack</div>
+                <div className="text-xs font-medium text-muted">Tech Stack</div>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((t: string) => (
-                    <span key={t} className="px-2 py-1 bg-surfaceHighlight rounded-sm text-[10px] font-bold txt-mono text-muted uppercase tracking-wider">{t}</span>
+                    <span key={t} className="px-2 py-1 bg-surfaceHighlight rounded-md text-[10px] font-medium text-muted">{t}</span>
                   ))}
                 </div>
               </div>
               <div className="pt-4 border-t border-border/50">
                 <div className="flex flex-col gap-3">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-txt text-bg rounded-sm font-bold text-xs uppercase tracking-widest hover:bg-primary transition-colors shadow-lg hover:shadow-primary/20">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-txt text-bg rounded-md font-semibold text-sm hover:bg-primary transition-colors">
                     <Github className="w-4 h-4" /> View Source
                   </a>
                   {project.demo && (
-                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 border border-primary/40 bg-primary/10 text-primary rounded-sm font-bold text-xs uppercase tracking-widest hover:bg-primary/20 transition-colors">
-                      <ExternalLink className="w-4 h-4" /> Live Website
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 border border-primary/40 bg-primary/10 text-primary rounded-md font-semibold text-sm hover:bg-primary/20 transition-colors">
+                      <ExternalLink className="w-4 h-4" /> Live Demo
                     </a>
                   )}
                 </div>
@@ -273,7 +273,7 @@ export function ProjectDetailPage() {
           >
             <div className="flex items-center gap-3 text-primary">
               <Layout className="w-6 h-6" />
-              <h2 className="text-2xl font-bold text-txt uppercase tracking-tight">System Architecture</h2>
+              <h2 className="text-2xl font-bold text-txt tracking-tight">Architecture</h2>
             </div>
             <div className="text-muted font-light leading-relaxed border-l-2 border-primary/20 pl-6">
               {project.architecture}
@@ -290,7 +290,7 @@ export function ProjectDetailPage() {
           >
             <div className="flex items-center gap-3 text-primary">
               <Microscope className="w-6 h-6" />
-              <h2 className="text-2xl font-bold text-txt uppercase tracking-tight">AI Techniques</h2>
+              <h2 className="text-2xl font-bold text-txt tracking-tight">AI Techniques</h2>
             </div>
             <ul className="space-y-3">
               {project.ml_techniques.map((tech: string, i: number) => (
@@ -312,7 +312,7 @@ export function ProjectDetailPage() {
           >
             <div className="flex items-center gap-3 text-primary">
               <Code2 className="w-6 h-6" />
-              <h2 className="text-2xl font-bold text-txt uppercase tracking-tight">Engineering Decisions</h2>
+              <h2 className="text-2xl font-bold text-txt tracking-tight">Engineering Decisions</h2>
             </div>
             <div className="text-muted font-light leading-relaxed border-l-2 border-primary/20 pl-6">
               {project.decisions}
@@ -329,12 +329,12 @@ export function ProjectDetailPage() {
           >
             <div className="flex items-center gap-3 text-primary">
               <Activity className="w-6 h-6" />
-              <h2 className="text-2xl font-bold text-txt uppercase tracking-tight">Outcomes & Metrics</h2>
+              <h2 className="text-2xl font-bold text-txt tracking-tight">Outcomes & Metrics</h2>
             </div>
             <ul className="space-y-4">
               {project.outcomes.map((metric: string, i: number) => (
-                <li key={i} className="flex items-start gap-4 p-4 border border-border/50 bg-surface/30 rounded-sm">
-                  <div className="text-primary font-bold txt-mono text-xl">0{i + 1}</div>
+                <li key={i} className="flex items-start gap-4 p-4 border border-border/50 bg-surface/30 rounded-lg">
+                  <div className="text-primary font-bold text-lg">0{i + 1}</div>
                   <div className="text-sm text-muted font-light leading-relaxed">{metric}</div>
                 </li>
               ))}
@@ -344,10 +344,10 @@ export function ProjectDetailPage() {
 
 
         <div className="mt-20 pt-20 border-t border-border/50 flex flex-col items-center space-y-4">
-          <h3 className="text-xs font-bold txt-mono text-muted uppercase tracking-widest">Next Case Study</h3>
+          <h3 className="text-xs font-medium text-muted">Next Project</h3>
           <Link
             to={`/projects/${nextProject.slug}`}
-            className="group flex items-center gap-4 text-3xl sm:text-5xl font-black text-txt uppercase tracking-tight hover:text-primary transition-colors"
+            className="group flex items-center gap-4 text-2xl sm:text-4xl font-bold text-txt tracking-tight hover:text-primary transition-colors"
           >
             {nextProject.title}
             <ArrowRight className="w-8 h-8 sm:w-12 sm:h-12 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />

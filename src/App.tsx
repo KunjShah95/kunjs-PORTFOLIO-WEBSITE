@@ -16,6 +16,7 @@ import { Experience } from './components/Experience'
 import { Writing } from './components/Writing'
 import { AIVideoCreation } from './components/AIVideoCreation'
 import { ResearcherLive } from './components/ResearcherLive'
+import { GitHubProfile } from './components/GitHubProfile'
 import { Contact } from './components/Contact'
 import { SEO } from './components/SEO'
 import { InitialLoader } from './components/InitialLoader'
@@ -28,6 +29,7 @@ const LabsPage = lazy(() => import('./pages/LabsPage').then(module => ({ default
 const EducationPage = lazy(() => import('./pages/EducationPage').then(module => ({ default: module.EducationPage })))
 const ExperiencePage = lazy(() => import('./pages/ExperiencePage').then(module => ({ default: module.ExperiencePage })))
 const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })))
+const HackathonsPage = lazy(() => import('./pages/HackathonsPage').then(module => ({ default: module.HackathonsPage })))
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })))
 const AIVideoPage = lazy(() => import('./pages/AIVideoPage').then(module => ({ default: module.AIVideoPage })))
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage').then(module => ({ default: module.ProjectDetailPage })))
@@ -41,6 +43,7 @@ function Home() {
       <Experience />
       <AIVideoCreation />
       <Projects />
+      <GitHubProfile />
       <ResearcherLive />
       <Skills />
       <ResearchLabs />
@@ -68,6 +71,7 @@ function App() {
                   <Route path="/skills" element={<SkillsPage />} />
                   <Route path="/labs" element={<LabsPage />} />
                   <Route path="/experience" element={<ExperiencePage />} />
+                  <Route path="/hackathons" element={<HackathonsPage />} />
                   <Route path="/blogs" element={<BlogsPage />} />
                   <Route path="/blogs/:slug" element={<BlogDetailPage />} />
                   <Route path="/education" element={<EducationPage />} />

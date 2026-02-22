@@ -4,39 +4,33 @@
 
 @layer base {
   :root {
-    /* Vaporwave Color Palette */
-    --neon-pink: 255 20 147;
-    --neon-purple: 186 85 211;
-    --neon-cyan: 0 255 255;
-    --neon-teal: 0 128 128;
-
-    /* Light Mode - Vaporwave Lite */
-    --bg-main: 250 248 255;
+    /* Light Mode — Clean SaaS */
+    --bg-main: 249 250 251;
     --surface-main: 255 255 255;
-    --surface-highlight: 245 240 255;
-    --border-main: 200 190 220;
+    --surface-highlight: 243 244 246;
+    --border-main: 229 231 235;
 
-    --primary-rgb: var(--neon-pink);
-    --secondary-rgb: var(--neon-purple);
+    --primary-rgb: 99 102 241;
+    --secondary-rgb: 139 92 246;
 
-    --txt-main: 30 20 50;
-    --txt-muted: 120 110 140;
-    --txt-dim: 180 175 200;
+    --txt-main: 17 24 39;
+    --txt-muted: 107 114 128;
+    --txt-dim: 156 163 175;
   }
 
   .dark {
-    /* Dark Mode - VOID / INDUSTRIAL */
-    --bg-main: 5 5 5;
-    --surface-main: 10 10 10;
-    --surface-highlight: 20 20 20;
-    --border-main: 40 40 40;
+    /* Dark Mode — SaaS Dark */
+    --bg-main: 9 9 11;
+    --surface-main: 18 18 23;
+    --surface-highlight: 27 27 34;
+    --border-main: 39 39 50;
 
-    --primary-rgb: 255 79 0;
-    --secondary-rgb: var(--neon-cyan);
+    --primary-rgb: 129 140 248;
+    --secondary-rgb: 167 139 250;
 
-    --txt-main: 240 240 240;
-    --txt-muted: 160 160 160;
-    --txt-dim: 100 100 100;
+    --txt-main: 248 250 252;
+    --txt-muted: 148 163 184;
+    --txt-dim: 100 116 139;
   }
 
   html {
@@ -46,74 +40,21 @@
   body {
     background-color: rgb(var(--bg-main));
     color: rgb(var(--txt-main));
-    @apply font-sans antialiased overflow-x-hidden selection:bg-primary/50 selection:text-white;
-  }
-
-  /* Vaporwave Retro Grid Background */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image:
-      linear-gradient(to right, rgb(var(--primary-rgb) / 0.15) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(var(--primary-rgb) / 0.15) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* Vaporwave Gradient Glow */
-  body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-      radial-gradient(ellipse at 50% 0%, rgb(var(--neon-pink) / 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 100%, rgb(var(--neon-cyan) / 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 0% 50%, rgb(var(--neon-purple) / 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 100% 50%, rgb(var(--neon-teal) / 0.1) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* Scanline Overlay Effect */
-  .dark body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0) 50%,
-        rgba(0, 0, 0, 0.1) 50%
-      );
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 9999;
-    animation: scanline 8s linear infinite;
+    @apply font-sans antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary;
   }
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
     background: rgb(var(--border-main));
-    border-radius: 4px;
+    border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgb(var(--primary-rgb));
+    background: rgb(var(--txt-muted));
   }
 }
 
@@ -122,139 +63,12 @@
     font-family: "JetBrains Mono", monospace;
   }
 
-  /* Vaporwave Glass Panel */
   .glass-panel {
-    @apply bg-surface/40 backdrop-blur-2xl border border-border;
-    box-shadow: 0 0 30px rgb(var(--primary-rgb) / 0.1);
+    @apply bg-surface/80 backdrop-blur-xl border border-border;
   }
 
   .surgical-border {
-    @apply border border-border hover:border-primary/50 transition-all duration-500;
-  }
-
-  /* Neon Glow Text Effect */
-  .neon-glow {
-    text-shadow:
-      0 0 5px rgb(var(--primary-rgb) / 0.8),
-      0 0 10px rgb(var(--primary-rgb) / 0.6),
-      0 0 20px rgb(var(--primary-rgb) / 0.4),
-      0 0 40px rgb(var(--primary-rgb) / 0.2);
-  }
-
-  .neon-glow-cyan {
-    text-shadow:
-      0 0 5px rgb(var(--neon-cyan) / 0.8),
-      0 0 10px rgb(var(--neon-cyan) / 0.6),
-      0 0 20px rgb(var(--neon-cyan) / 0.4),
-      0 0 40px rgb(var(--neon-cyan) / 0.2);
-  }
-
-  /* Vaporwave Scanlines Effect */
-  .vapor-scanlines {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .vapor-scanlines::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0) 50%,
-        rgba(0, 0, 0, 0.05) 50%
-      );
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  /* Retro Grid Effect */
-  .retro-grid {
-    background-image:
-      linear-gradient(to right, rgb(var(--primary-rgb) / 0.3) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(var(--secondary-rgb) / 0.3) 1px, transparent 1px);
-    background-size: 40px 40px;
-    position: relative;
-  }
-
-  /* Glitch Text Effect */
-  .glitch-text {
-    position: relative;
-    animation: glitch-text 3s infinite;
-  }
-
-  .glitch-text::before,
-  .glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .glitch-text::before {
-    color: rgb(var(--neon-cyan));
-    animation: glitch-1 2s infinite linear alternate-reverse;
-    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-    transform: translate(-2px, -2px);
-  }
-
-  .glitch-text::after {
-    color: rgb(var(--neon-pink));
-    animation: glitch-2 3s infinite linear alternate-reverse;
-    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-    transform: translate(2px, 2px);
-  }
-
-  /* Vaporwave Border Glow */
-  .vapor-border {
-    border: 1px solid rgb(var(--primary-rgb) / 0.3);
-    box-shadow:
-      0 0 10px rgb(var(--primary-rgb) / 0.1),
-      inset 0 0 10px rgb(var(--primary-rgb) / 0.05);
-    transition: all 0.3s ease;
-  }
-
-  .vapor-border:hover {
-    border-color: rgb(var(--primary-rgb) / 0.6);
-    box-shadow:
-      0 0 20px rgb(var(--primary-rgb) / 0.3),
-      inset 0 0 20px rgb(var(--primary-rgb) / 0.1);
-  }
-
-  /* Retro Button Style */
-  .retro-btn {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, rgb(var(--primary-rgb)), rgb(var(--secondary-rgb)));
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgb(var(--primary-rgb) / 0.3);
-  }
-
-  .retro-btn::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .retro-btn:hover::before {
-    left: 100%;
-  }
-
-  .retro-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgb(var(--primary-rgb) / 0.5);
+    @apply border border-border hover:border-primary/50 transition-all duration-300;
   }
 
   .container-aligned {
@@ -262,10 +76,9 @@
   }
 
   .section-padding {
-    @apply py-16 sm:py-24 md:py-32 lg:py-48;
+    @apply py-16 sm:py-24 md:py-32;
   }
 
-  /* Mobile utility classes */
   .hide-mobile {
     @apply hidden sm:block;
   }
@@ -274,74 +87,26 @@
     @apply block sm:hidden;
   }
 
-  /* Touch-friendly tap targets */
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
   }
-}
 
-@keyframes scanline {
-  0% {
-    background-position: 0% 0%;
+  /* SaaS gradient shimmer for cards */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
-  100% {
-    background-position: 0% 100%;
-  }
-}
 
-@keyframes glitch-text {
-  0%, 90%, 100% {
-    transform: translate(0);
-    filter: none;
-  }
-  91% {
-    transform: translate(-3px, 1px);
-  }
-  92% {
-    transform: translate(3px, -1px);
-  }
-  93% {
-    transform: translate(-1px, -1px);
-  }
-  94% {
-    transform: translate(1px, 1px);
-  }
-}
-
-@keyframes glitch-1 {
-  0%, 90%, 100% {
-    transform: translate(0);
-    opacity: 1;
-  }
-  91% {
-    transform: translate(-5px, 0);
-    opacity: 0.8;
-  }
-  92% {
-    transform: translate(5px, 0);
-    opacity: 0.8;
-  }
-}
-
-@keyframes glitch-2 {
-  0%, 90%, 100% {
-    transform: translate(0);
-    opacity: 1;
-  }
-  91% {
-    transform: translate(5px, 0);
-    opacity: 0.8;
-  }
-  92% {
-    transform: translate(-5px, 0);
-    opacity: 0.8;
+  /* Subtle dot grid background */
+  .dot-grid {
+    background-image: radial-gradient(rgb(var(--border-main)) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 }
 
 @keyframes reveal-up {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   100% {
     opacity: 1;
@@ -350,27 +115,16 @@
 }
 
 .animate-reveal-up {
-  animation: reveal-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Vaporwave Sun Gradient */
-.vapor-sun {
-  background: linear-gradient(
-    180deg,
-    rgb(var(--neon-pink)) 0%,
-    rgb(var(--neon-purple)) 30%,
-    rgb(var(--neon-cyan)) 70%,
-    rgb(var(--neon-teal)) 100%
-  );
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-/* Retro Floor Grid */
-.retro-floor {
-  background:
-    linear-gradient(to bottom, transparent 50%, rgb(var(--primary-rgb) / 0.1) 50%),
-    linear-gradient(to right, transparent 50%, rgb(var(--primary-rgb) / 0.1) 50%);
-  background-size: 100% 20px, 100px 100%;
-  perspective: 500px;
-  transform: perspective(500px) rotateX(60deg);
-  transform-origin: center top;
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgb(var(--primary-rgb) / 0.08), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
