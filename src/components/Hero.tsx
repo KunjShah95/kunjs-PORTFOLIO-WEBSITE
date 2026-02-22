@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowRight, Sparkles, FileText } from 'lucide-react'
 import { IDENTITY } from '../data/portfolio'
 
 export function Hero() {
@@ -96,6 +96,15 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
             >
               Get in Touch
+            </a>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
+            >
+              <FileText className="w-4 h-4" />
+              Resume
             </a>
           </motion.div>
         </div>

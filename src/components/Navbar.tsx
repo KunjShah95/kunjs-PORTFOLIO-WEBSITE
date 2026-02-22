@@ -1,4 +1,4 @@
-import { Command } from 'lucide-react'
+import { Command, FileText } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 interface NavbarProps {
@@ -28,6 +28,17 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
             <li><a href="#about" className="hover:text-primary transition-colors">About</a></li>
             <li><a href="#projects" className="hover:text-primary transition-colors">Projects</a></li>
             <li><a href="#labs" className="hover:text-primary transition-colors">Labs</a></li>
+            <li>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 hover:text-primary transition-colors"
+              >
+                <FileText className="w-3 h-3" />
+                Resume
+              </a>
+            </li>
           </ul>
 
           {/* Command Palette */}
