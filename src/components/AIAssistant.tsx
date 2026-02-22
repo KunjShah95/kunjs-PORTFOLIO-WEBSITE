@@ -58,7 +58,7 @@ export function AIAssistant() {
 
     // 2. Identity & Overview
     if (query.includes('who are you') || query.includes('who is kunj') || (query.includes('about') && query.includes('kunj'))) {
-      response = `Hi! I'm Kunj's virtual assistant. \n\nKunj is an **AI Engineer & Systems Builder** from Ahmedabad, India. He loves building smart software that can "think" and automate tasks. \n\nHe currently focuses on **Autonomous Agents** (AI that controls itself) and **Computer Vision** (teaching computers to see).`;
+      response = `Hi! I'm Kunj's virtual assistant. \n\nKunj is a **Full Stack AI/ML & Automation Specialist** from Ahmedabad, India. He builds end-to-end intelligent systems that automate complex workflows. \n\nHe currently focuses on **Full Stack AI**, **Autonomous Automation**, and **Agentic Reasoning**.`;
     }
     // Specific Project Match
     else if (foundProject) {

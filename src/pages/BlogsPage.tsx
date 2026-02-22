@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Hash, ArrowUpRight, BookOpen } from 'lucide-react'
 import { SEO } from '../components/SEO'
 import { BLOGS, LOGS } from '../data/portfolio'
@@ -12,7 +13,7 @@ export function BlogsPage() {
   const categories = Array.from(new Set(BLOGS.map(b => b.category)))
 
   // Filter blogs by category
-  const filteredBlogs = selectedCategory 
+  const filteredBlogs = selectedCategory
     ? BLOGS.filter(blog => blog.category === selectedCategory)
     : BLOGS
 
@@ -41,21 +42,19 @@ export function BlogsPage() {
           <div className="flex gap-2 p-1 bg-surface border border-primary/30 rounded-sm">
             <button
               onClick={() => setActiveTab('BLOGS')}
-              className={`px-6 py-2.5 text-xs font-bold txt-mono tracking-widest uppercase transition-all rounded-sm ${
-                activeTab === 'BLOGS'
-                  ? 'bg-primary text-bg'
-                  : 'text-muted hover:text-txt'
-              }`}
+              className={`px-6 py-2.5 text-xs font-bold txt-mono tracking-widest uppercase transition-all rounded-sm ${activeTab === 'BLOGS'
+                ? 'bg-primary text-bg'
+                : 'text-muted hover:text-txt'
+                }`}
             >
               ARTICLES
             </button>
             <button
               onClick={() => setActiveTab('LOGS')}
-              className={`px-6 py-2.5 text-xs font-bold txt-mono tracking-widest uppercase transition-all rounded-sm ${
-                activeTab === 'LOGS'
-                  ? 'bg-primary text-bg'
-                  : 'text-muted hover:text-txt'
-              }`}
+              className={`px-6 py-2.5 text-xs font-bold txt-mono tracking-widest uppercase transition-all rounded-sm ${activeTab === 'LOGS'
+                ? 'bg-primary text-bg'
+                : 'text-muted hover:text-txt'
+                }`}
             >
               LOGS
             </button>
@@ -77,11 +76,10 @@ export function BlogsPage() {
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={() => setSelectedCategory(null)}
-                    className={`px-4 py-2 text-xs font-bold txt-mono tracking-widest uppercase rounded-sm transition-all border ${
-                      selectedCategory === null
-                        ? 'bg-primary text-bg border-primary'
-                        : 'bg-surface border-primary/30 text-muted hover:text-txt'
-                    }`}
+                    className={`px-4 py-2 text-xs font-bold txt-mono tracking-widest uppercase rounded-sm transition-all border ${selectedCategory === null
+                      ? 'bg-primary text-bg border-primary'
+                      : 'bg-surface border-primary/30 text-muted hover:text-txt'
+                      }`}
                   >
                     ALL
                   </button>
@@ -89,11 +87,10 @@ export function BlogsPage() {
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-4 py-2 text-xs font-bold txt-mono tracking-widest uppercase rounded-sm transition-all border ${
-                        selectedCategory === cat
-                          ? 'bg-primary text-bg border-primary'
-                          : 'bg-surface border-primary/30 text-muted hover:text-txt'
-                      }`}
+                      className={`px-4 py-2 text-xs font-bold txt-mono tracking-widest uppercase rounded-sm transition-all border ${selectedCategory === cat
+                        ? 'bg-primary text-bg border-primary'
+                        : 'bg-surface border-primary/30 text-muted hover:text-txt'
+                        }`}
                     >
                       {cat.replace(/_/g, ' ')}
                     </button>
@@ -103,69 +100,64 @@ export function BlogsPage() {
                 {/* Blog Grid */}
                 <div className="space-y-6 pt-8">
                   {filteredBlogs.map((blog, i) => (
-                    <motion.a
+                    <motion.div
                       key={blog.id}
-                      href={`/blogs/${blog.slug}`}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: i * 0.05 }}
-                      className="group relative grid grid-cols-1 lg:grid-cols-12 gap-0 border border-primary/20 bg-surface hover:border-primary/60 transition-all duration-500 rounded-sm overflow-hidden"
-                      whileHover={{ scale: 1.01, y: -4 }}
+                      transition={{ delay: i * 0.05, duration: 0.5 }}
                     >
-                      {/* Meta Column */}
-                      <div className="lg:col-span-2 border-r border-primary/20 bg-primary/5 p-6 flex flex-col justify-between">
-                        <div className="space-y-4">
-                          <span className="text-xs font-bold txt-mono text-primary/60 group-hover:text-primary transition-colors uppercase tracking-widest">
-                            {blog.date}
-                          </span>
-                          <span className="block text-[10px] font-bold txt-mono text-muted/60 uppercase tracking-widest">
-                            {blog.readTime} MIN
-                          </span>
-                        </div>
-                        <span className="text-[9px] font-bold txt-mono text-muted/50 uppercase tracking-widest">
-                          {blog.featured && '★ FEATURED'}
-                        </span>
-                      </div>
-
-                      {/* Content Column */}
-                      <div className="lg:col-span-7 p-6 sm:p-8 space-y-4 flex flex-col justify-between">
-                        <div className="space-y-4">
-                          <h3 className="text-2xl sm:text-3xl font-bold text-txt group-hover:text-primary transition-colors tracking-tight uppercase">
-                            {blog.title}
-                          </h3>
-                          <p className="text-sm text-muted leading-relaxed">
-                            {blog.excerpt}
-                          </p>
-                        </div>
-
-                        <div className="flex flex-wrap gap-2">
-                          {blog.tags.slice(0, 3).map(tag => (
-                            <span 
-                              key={tag} 
-                              className="text-[10px] font-bold txt-mono text-muted/70 uppercase tracking-wider px-2 py-1 border border-primary/20 rounded-sm bg-primary/5"
-                            >
-                              {tag}
+                      <Link
+                        to={`/blogs/${blog.slug}`}
+                        className="group relative grid grid-cols-1 lg:grid-cols-12 gap-0 border border-primary/20 bg-surface hover:border-primary/60 transition-all duration-500 rounded-sm overflow-hidden block"
+                      >
+                        {/* Meta Column */}
+                        <div className="lg:col-span-2 border-r border-primary/20 bg-primary/5 p-6 flex flex-col justify-between">
+                          <div className="space-y-4 text-center lg:text-left">
+                            <span className="text-xs font-bold txt-mono text-primary group-hover:tracking-widest transition-all uppercase tracking-widest">
+                              {blog.date}
                             </span>
-                          ))}
-                          {blog.tags.length > 3 && (
-                            <span className="text-[9px] font-bold txt-mono text-muted/60 uppercase">
-                              +{blog.tags.length - 3}
+                            <span className="block text-[10px] font-bold txt-mono text-muted/60 uppercase tracking-widest">
+                              {blog.readTime} MIN
                             </span>
-                          )}
+                          </div>
+                          <span className="text-[9px] font-bold txt-mono text-muted/30 uppercase tracking-widest hidden lg:block text-center">
+                            {blog.id}
+                          </span>
                         </div>
-                      </div>
 
-                      {/* CTA Column */}
-                      <div className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-primary/20 bg-primary/5 p-6 sm:p-8 flex items-center justify-center">
-                        <a
-                          href={`/blogs/${blog.slug}`}
-                          className="px-4 py-3 border border-primary/40 bg-surface hover:border-primary/60 hover:bg-primary/5 text-txt hover:text-primary transition-all text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 rounded-sm txt-mono w-full"
-                        >
-                          Read <ArrowUpRight className="w-3 h-3" />
-                        </a>
-                      </div>
-                    </motion.a>
+                        {/* Content Column */}
+                        <div className="lg:col-span-7 p-6 sm:p-8 space-y-4 flex flex-col justify-between">
+                          <div className="space-y-4">
+                            <h3 className="text-2xl sm:text-3xl font-black text-txt group-hover:text-primary transition-colors tracking-tight uppercase leading-none">
+                              {blog.title}
+                            </h3>
+                            <p className="text-sm text-muted/70 leading-relaxed font-light mt-2 line-clamp-2">
+                              {blog.excerpt}
+                            </p>
+                          </div>
+
+                          <div className="flex flex-wrap gap-2">
+                            {blog.tags.slice(0, 4).map(tag => (
+                              <span
+                                key={tag}
+                                className="text-[9px] font-bold txt-mono text-muted/50 uppercase tracking-widest px-2 py-1 border border-primary/10 rounded-sm bg-primary/5"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* CTA Column */}
+                        <div className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-primary/20 bg-primary/5 p-6 sm:p-8 flex items-center justify-center relative overflow-hidden">
+                          <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-5 transition-opacity" />
+                          <div className="px-6 py-3 border border-primary/20 bg-surface group-hover:border-primary group-hover:text-primary text-txt transition-all text-[10px] font-bold uppercase tracking-[0.2em] rounded-sm txt-mono flex items-center gap-2">
+                            Analyze <ArrowUpRight className="w-3 h-3" />
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
                   ))}
                 </div>
 

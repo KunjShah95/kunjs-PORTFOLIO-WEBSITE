@@ -18,6 +18,7 @@ import { AIVideoCreation } from './components/AIVideoCreation'
 import { ResearcherLive } from './components/ResearcherLive'
 import { Contact } from './components/Contact'
 import { SEO } from './components/SEO'
+import { InitialLoader } from './components/InitialLoader'
 
 // Lazy load secondary pages
 const BlogsPage = lazy(() => import('./pages/BlogsPage').then(module => ({ default: module.BlogsPage })))
@@ -30,6 +31,7 @@ const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ defau
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })))
 const AIVideoPage = lazy(() => import('./pages/AIVideoPage').then(module => ({ default: module.AIVideoPage })))
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage').then(module => ({ default: module.ProjectDetailPage })))
+const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage').then(module => ({ default: module.BlogDetailPage })))
 
 function Home() {
   return (
@@ -53,6 +55,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <InitialLoader />
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <ErrorBoundary>
             <Layout>
@@ -66,6 +69,7 @@ function App() {
                   <Route path="/labs" element={<LabsPage />} />
                   <Route path="/experience" element={<ExperiencePage />} />
                   <Route path="/blogs" element={<BlogsPage />} />
+                  <Route path="/blogs/:slug" element={<BlogDetailPage />} />
                   <Route path="/education" element={<EducationPage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="/ai-videos" element={<AIVideoPage />} />
