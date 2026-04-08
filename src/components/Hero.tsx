@@ -33,7 +33,7 @@ export function Hero() {
           <motion.div variants={heroVariants.item}>
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-semibold tracking-wide">
               <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
-              Available for new projects
+              Freelancing · AI Engineer · Data / ML Engineer
             </span>
           </motion.div>
 
@@ -134,7 +134,7 @@ export function Hero() {
               className="absolute -bottom-3 -left-2 sm:-left-4 glass-panel rounded-xl px-4 py-3 shadow-lg max-w-[200px]"
             >
               <div className="text-[10px] text-muted font-semibold uppercase tracking-wider mb-0.5">Status</div>
-              <div className="text-sm font-semibold text-txt">Open to work</div>
+              <div className="text-sm font-semibold text-txt">Freelancing &amp; open roles</div>
             </motion.div>
 
             <div

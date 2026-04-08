@@ -59,7 +59,7 @@ export function Contact() {
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs font-medium text-emerald-400">Available now</span>
+                  <span className="text-xs font-medium text-emerald-400">Freelancing &amp; roles</span>
                 </div>
                 <h3 className="text-base font-semibold text-txt">Direct Message</h3>
                 <p className="text-sm text-muted leading-relaxed">

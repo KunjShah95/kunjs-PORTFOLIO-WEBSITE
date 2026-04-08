@@ -13,7 +13,7 @@ export const PORTFOLIO_FAQ = [
   {
     question: 'Is Kunj Shah available for freelance or contract AI work?',
     answer:
-      'Yes. The portfolio is kept up to date with availability for new projects. Use the contact page or email to discuss scope, stack, and timeline.',
+      'Yes. He is open to freelancing and to AI engineer, data engineer, and ML engineer roles. Use the contact page or email to discuss scope, stack, and timeline.',
   },
   {
     question: 'Where can I see Kunj Shah’s projects and code?',

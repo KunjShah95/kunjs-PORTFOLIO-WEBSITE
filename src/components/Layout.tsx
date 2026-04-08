@@ -164,16 +164,6 @@ export function Layout({ children }: LayoutProps) {
                   </button>
                </div>
             </div>
-
-            <div
-               className="hidden lg:block border-t border-border/50 bg-gradient-to-r from-transparent via-surfaceHighlight/30 to-transparent"
-               aria-hidden
-            >
-               <div className="container-aligned py-1.5 flex flex-wrap items-center justify-between gap-x-6 gap-y-1 text-[10px] txt-mono text-muted uppercase tracking-[0.2em]">
-                  <span className="opacity-90">Agents · LLM · RAG · Data pipelines · Evaluation · MLOps</span>
-                  <span className="text-txtDim normal-case tracking-normal">TypeScript · React · Vite</span>
-               </div>
-            </div>
          </header>
 
          <AnimatePresence mode="wait">
@@ -221,13 +211,13 @@ export function Layout({ children }: LayoutProps) {
                      ))}
                   </nav>
                   <p className="text-center text-[10px] txt-mono text-muted uppercase tracking-[0.25em] pt-6 border-t border-border/60">
-                     AI systems · Data engineering · Production ML
+                     Freelancing · AI · Data · ML engineering
                   </p>
                </motion.div>
             )}
          </AnimatePresence>
 
-         <main id="main-content" className="relative z-10 min-h-screen pt-20 lg:pt-[7.25rem]">
+         <main id="main-content" className="relative z-10 min-h-screen pt-20">
             <AnimatePresence mode="wait">
                <motion.div
                   key={location.pathname}
@@ -255,12 +245,7 @@ export function Layout({ children }: LayoutProps) {
                            Kunj Shah
                         </span>
                      </Link>
-                     <p className="text-sm text-muted leading-relaxed max-w-md">
-                        AI systems, autonomous agents, and data / ML engineering — from prototypes to production-shaped
-                        delivery.
-                     </p>
                      <p className="text-[11px] txt-mono text-txtDim uppercase tracking-wider">
-                        Stack · React · TypeScript · Vite · Tailwind CSS
                      </p>
                      <div className="flex flex-wrap gap-x-5 gap-y-2 pt-1">
                         {SOCIALS.map((social) => (
@@ -309,12 +294,11 @@ export function Layout({ children }: LayoutProps) {
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-40" />
                               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                            </span>
-                           <span className="text-sm text-muted">Available for work</span>
+                           <span className="text-sm text-muted">Freelancing · AI / Data / ML engineer roles</span>
                         </div>
-                        <div className="text-sm text-muted space-y-1 txt-mono">
-                           <p className="text-txt font-sans">© {new Date().getFullYear()} Kunj Shah</p>
-                           <p className="text-xs text-txtDim">Built for performance, a11y, and long-term maintainability.</p>
-                        </div>
+                        <p className="text-sm text-muted txt-mono">
+                           © {new Date().getFullYear()} Kunj Shah
+                        </p>
                      </div>
                   </div>
                </div>

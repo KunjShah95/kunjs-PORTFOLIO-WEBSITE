@@ -33,23 +33,35 @@ export function CapabilitiesStrip() {
       role="list"
       aria-label="Core capabilities"
     >
-      <p className="text-[10px] txt-mono uppercase tracking-[0.2em] text-muted mb-3">Capabilities</p>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-        {ITEMS.map(({ icon: Icon, title, caption }) => (
-          <div
-            key={title}
-            role="listitem"
-            className="rounded-lg border border-border/90 bg-surface/60 backdrop-blur-sm px-2.5 py-2.5 sm:px-3 sm:py-3 flex gap-2.5 items-start transition-colors duration-200 hover:border-primary/25 hover:bg-surfaceHighlight/80"
-          >
-            <span className="shrink-0 mt-0.5 flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 text-primary border border-primary/20">
-              <Icon className="h-3.5 w-3.5" aria-hidden />
-            </span>
-            <span className="min-w-0">
-              <span className="block text-xs font-semibold text-txt leading-snug">{title}</span>
-              <span className="block text-[10px] text-muted leading-tight mt-0.5 line-clamp-2">{caption}</span>
-            </span>
-          </div>
-        ))}
+      <div className="glass-panel rounded-2xl px-3 py-3 sm:px-4 sm:py-4 shadow-sm shadow-black/[0.08] dark:shadow-black/30">
+        <div className="flex items-center justify-between gap-4 mb-3">
+          <p className="text-[10px] txt-mono uppercase tracking-[0.24em] text-muted">Capabilities</p>
+          <span className="h-px flex-1 bg-gradient-to-r from-border/80 via-border/40 to-transparent" />
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+          {ITEMS.map(({ icon: Icon, title, caption }) => (
+            <div
+              key={title}
+              role="listitem"
+              className="group rounded-xl border border-border bg-bg/40 hover:bg-surfaceHighlight/70 hover:border-primary/25 transition-[border-color,background-color,transform] duration-300 p-3 sm:p-3.5 flex flex-col gap-2 min-h-[96px]"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                  <Icon className="h-4 w-4" aria-hidden />
+                </span>
+              </div>
+              <div className="min-w-0">
+                <div className="text-[13px] font-semibold text-txt leading-snug tracking-[-0.01em]">
+                  {title}
+                </div>
+                <div className="text-[11px] text-muted leading-snug mt-1 break-words">
+                  {caption}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </motion.div>
   )
