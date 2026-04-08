@@ -3,6 +3,8 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import { ArrowLeft, Calendar, Clock, Share2, Tag } from 'lucide-react'
 import { SEO } from '../components/SEO'
 import { BLOGS } from '../data/portfolio'
+import { SITE_URL } from '../lib/site'
+import { blogDateToIsoDate } from '../lib/seo-dates'
 
 export function BlogDetailPage() {
     const { slug } = useParams()
@@ -24,11 +26,27 @@ export function BlogDetailPage() {
         )
     }
 
+    const canonical = `${SITE_URL}/blogs/${blog.slug}`
+    const isoPublished = blogDateToIsoDate(blog.date)
+
     return (
         <div className="min-h-screen pt-32 pb-20 bg-bg">
             <SEO
                 title={`${blog.title} | Kunj Shah`}
                 description={blog.excerpt}
+                url={canonical}
+                type="article"
+                datePublished={isoPublished}
+                dateModified={isoPublished}
+                articleHeadline={blog.title}
+                articleSection={blog.category.replace(/_/g, ' ')}
+                articleTags={blog.tags}
+                keywords={[blog.title, blog.category.replace(/_/g, ' '), ...blog.tags, 'Kunj Shah', 'AI engineering']}
+                breadcrumbs={[
+                    { name: 'Home', item: SITE_URL },
+                    { name: 'Articles', item: `${SITE_URL}/blogs` },
+                    { name: blog.title, item: canonical },
+                ]}
             />
 
             {/* Reading Progress Bar */}

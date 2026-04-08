@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Github, Layout, Microscope, Activity, Code2, ArrowRight, ExternalLink } from 'lucide-react'
 import { SEO } from '../components/SEO'
 import { PROJECTS } from '../data/portfolio'
+import { SITE_URL } from '../lib/site'
 
 type ProjectDetail = {
   title: string
@@ -206,11 +207,26 @@ export function ProjectDetailPage() {
     )
   }
 
+  const canonical = `${SITE_URL}/projects/${slug}`
+
   return (
     <div className="min-h-screen pt-32 pb-20">
       <SEO
         title={`${project.title} | Case Study`}
         description={project.desc || project.problem}
+        url={canonical}
+        keywords={[
+          project.title,
+          ...(project.tech ?? []),
+          'Kunj Shah',
+          'case study',
+          'portfolio',
+        ]}
+        breadcrumbs={[
+          { name: 'Home', item: SITE_URL },
+          { name: 'Projects', item: `${SITE_URL}/projects` },
+          { name: project.title, item: canonical },
+        ]}
       />
 
       <div className="container-aligned">

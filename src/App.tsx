@@ -1,4 +1,5 @@
 import { Suspense, lazy } from 'react'
+import { MotionConfig } from 'framer-motion'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider } from './components/ThemeProvider'
@@ -20,6 +21,8 @@ import { GitHubProfile } from './components/GitHubProfile'
 import { Contact } from './components/Contact'
 import { SEO } from './components/SEO'
 import { InitialLoader } from './components/InitialLoader'
+import { PortfolioFAQ } from './components/PortfolioFAQ'
+import { PORTFOLIO_FAQ } from './data/seo-faq'
 
 // Lazy load secondary pages
 const BlogsPage = lazy(() => import('./pages/BlogsPage').then(module => ({ default: module.BlogsPage })))
@@ -38,7 +41,11 @@ const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage').then(module =
 function Home() {
   return (
     <div className="space-y-0">
-      <SEO title="Kunj Shah | AI Engineer & Agent Builder" />
+      <SEO
+        title="Kunj Shah | AI Engineer & Agent Builder"
+        description="Kunj Shah is an AI engineer and agent builder in Ahmedabad, India. Portfolio of generative AI systems, autonomous agents, computer vision, and full-stack prototypes—Python, FastAPI, React, LangChain, and MLOps-style delivery."
+        faqItems={PORTFOLIO_FAQ}
+      />
       <Hero />
       <Experience />
       <AIVideoCreation />
@@ -49,6 +56,7 @@ function Home() {
       <ResearchLabs />
       <Writing />
       <Education />
+      <PortfolioFAQ />
       <Contact />
     </div>
   )
@@ -60,27 +68,29 @@ function App() {
       <Router>
         <InitialLoader />
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <ErrorBoundary>
-            <Layout>
-              <Suspense fallback={<LoadingSpinner />}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<AboutPage />} />
-                  <Route path="/projects" element={<ProjectsPage />} />
-                  <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-                  <Route path="/skills" element={<SkillsPage />} />
-                  <Route path="/labs" element={<LabsPage />} />
-                  <Route path="/experience" element={<ExperiencePage />} />
-                  <Route path="/hackathons" element={<HackathonsPage />} />
-                  <Route path="/blogs" element={<BlogsPage />} />
-                  <Route path="/blogs/:slug" element={<BlogDetailPage />} />
-                  <Route path="/education" element={<EducationPage />} />
-                  <Route path="/contact" element={<ContactPage />} />
-                  <Route path="/ai-videos" element={<AIVideoPage />} />
-                </Routes>
-              </Suspense>
-            </Layout>
-          </ErrorBoundary>
+          <MotionConfig reducedMotion="user">
+            <ErrorBoundary>
+              <Layout>
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/projects" element={<ProjectsPage />} />
+                    <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+                    <Route path="/skills" element={<SkillsPage />} />
+                    <Route path="/labs" element={<LabsPage />} />
+                    <Route path="/experience" element={<ExperiencePage />} />
+                    <Route path="/hackathons" element={<HackathonsPage />} />
+                    <Route path="/blogs" element={<BlogsPage />} />
+                    <Route path="/blogs/:slug" element={<BlogDetailPage />} />
+                    <Route path="/education" element={<EducationPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
+                    <Route path="/ai-videos" element={<AIVideoPage />} />
+                  </Routes>
+                </Suspense>
+              </Layout>
+            </ErrorBoundary>
+          </MotionConfig>
         </ThemeProvider>
       </Router>
     </HelmetProvider>

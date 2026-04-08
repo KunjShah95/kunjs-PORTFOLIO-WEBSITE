@@ -439,7 +439,7 @@ export function GitHubProfile() {
               <Activity className="w-4 h-4" />
               Open Source Activity
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               GitHub Profile
             </h2>
             {lastUpdated && (

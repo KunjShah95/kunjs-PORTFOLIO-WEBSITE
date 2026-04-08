@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Cpu } from 'lucide-react'
 import { SKILL_GROUPS } from '../data/portfolio'
+import { staggerContainer, staggerItem, VIEWPORT_SECTION } from '../lib/motion'
 
 export function Skills() {
   return (
@@ -13,7 +14,7 @@ export function Skills() {
               <Cpu className="w-4 h-4" />
               Capabilities
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               Skills & Technologies
             </h2>
           </div>
@@ -24,21 +25,15 @@ export function Skills() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.08 } }
-          }}
+          viewport={VIEWPORT_SECTION}
+          variants={staggerContainer(0.08)}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           {SKILL_GROUPS.map((group) => (
             <motion.div
               key={group.category}
-              variants={{
-                hidden: { opacity: 0, y: 16 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-              }}
-              className="group rounded-xl border border-border bg-surface p-6 hover:border-primary/30 hover:bg-surfaceHighlight transition-all duration-300"
+              variants={staggerItem}
+              className="group rounded-xl border border-border bg-surface p-6 hover:border-primary/30 hover:bg-surfaceHighlight hover:shadow-md hover:shadow-primary/[0.05] transition-[border-color,box-shadow,background-color] duration-300"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">

@@ -22,7 +22,7 @@ export function AboutPage() {
                      <User className="w-4 h-4" />
                      About Me
                   </div>
-                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+                  <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
                      About Kunj Shah
                   </h1>
                </div>

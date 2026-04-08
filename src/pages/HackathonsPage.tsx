@@ -91,7 +91,7 @@ export function HackathonsPage() {
               <Trophy className="w-4 h-4" />
               Competitions
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               Hackathon Record
             </h1>
           </div>

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Github, Code2, ArrowRight, ExternalLink } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PROJECTS } from '../data/portfolio'
+import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
 
 export function Projects() {
   return (
@@ -14,7 +15,7 @@ export function Projects() {
               <Code2 className="w-4 h-4" />
               Featured Work
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               Projects
             </h2>
           </div>
@@ -26,11 +27,11 @@ export function Projects() {
           {PROJECTS.map((proj, i) => (
             <motion.div
               key={proj.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group relative rounded-xl border border-border bg-surface hover:border-primary/30 transition-all duration-300 overflow-hidden"
+              viewport={VIEWPORT_SECTION}
+              transition={cardRevealTransition(i)}
+              className="group relative rounded-xl border border-border bg-surface hover:border-primary/30 hover:shadow-md hover:shadow-primary/[0.06] transition-[border-color,box-shadow,background-color] duration-300 overflow-hidden"
             >
               <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-0">
                 {/* Main Content */}

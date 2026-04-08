@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Microscope, Plus, ArrowUpRight } from 'lucide-react'
+import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
 
 export function ResearchLabs() {
   const experiments = [
@@ -29,7 +30,7 @@ export function ResearchLabs() {
               <Microscope className="w-4 h-4" />
               Research
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               Research Labs
             </h2>
           </div>
@@ -41,11 +42,11 @@ export function ResearchLabs() {
           {experiments.map((exp, i) => (
             <motion.div
               key={exp.id}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group rounded-xl border border-border bg-surface hover:border-primary/30 hover:bg-surfaceHighlight transition-all duration-200 overflow-hidden"
+              viewport={VIEWPORT_SECTION}
+              transition={cardRevealTransition(i)}
+              className="group rounded-xl border border-border bg-surface hover:border-primary/30 hover:bg-surfaceHighlight hover:shadow-md hover:shadow-primary/[0.05] transition-[border-color,box-shadow,background-color] duration-200 overflow-hidden"
             >
               <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-0">
                 <div className="p-6 space-y-4">
@@ -90,10 +91,11 @@ export function ResearchLabs() {
 
         {/* New Experiment Placeholder */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-xl border border-dashed border-border hover:border-primary/30 p-8 flex flex-col items-center justify-center text-center space-y-2 transition-all cursor-pointer group"
+          viewport={VIEWPORT_SECTION}
+          transition={cardRevealTransition(experiments.length)}
+          className="rounded-xl border border-dashed border-border hover:border-primary/30 p-8 flex flex-col items-center justify-center text-center space-y-2 transition-[border-color,box-shadow] duration-200 cursor-pointer group hover:shadow-md hover:shadow-primary/[0.04]"
         >
           <div className="p-2 rounded-full bg-surfaceHighlight group-hover:bg-primary/10 transition-colors">
             <Plus className="w-5 h-5 text-muted group-hover:text-primary transition-colors" />

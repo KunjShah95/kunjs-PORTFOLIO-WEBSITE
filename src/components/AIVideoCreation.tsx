@@ -58,7 +58,7 @@ export function AIVideoCreation() {
               <Video className="w-4 h-4" />
               Services
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               AI Video Creation
             </h2>
           </div>

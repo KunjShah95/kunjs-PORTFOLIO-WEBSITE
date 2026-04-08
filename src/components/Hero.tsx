@@ -1,96 +1,83 @@
 import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { ArrowRight, Sparkles, FileText } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { IDENTITY } from '../data/portfolio'
+import { heroVariants, DURATION, EASE_OUT } from '../lib/motion'
+import { CapabilitiesStrip } from './CapabilitiesStrip'
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [imageError, setImageError] = useState(false)
-  const [isLoaded] = useState(true)
 
   return (
     <section
       ref={containerRef}
       id="about"
-      className="relative min-h-[90vh] flex items-center overflow-hidden bg-bg"
+      className="relative min-h-[92vh] flex items-center overflow-hidden bg-bg"
     >
-      {/* Subtle background gradient */}
+      <div className="absolute inset-0 pointer-events-none dot-grid opacity-[0.45] dark:opacity-[0.35]" />
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
+        <div className="absolute top-1/4 -right-24 w-[min(520px,90vw)] h-[520px] rounded-full bg-primary/[0.07] blur-[100px]" />
+        <div className="absolute bottom-0 -left-32 w-[420px] h-[420px] rounded-full bg-secondary/[0.06] blur-[90px]" />
+        <div className="absolute top-12 left-[12%] h-px w-32 bg-gradient-to-r from-transparent via-primary/40 to-transparent hidden lg:block" />
       </div>
 
-      <div className="relative z-10 container-aligned w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center py-16 lg:py-24">
-        {/* Left: Content */}
-        <div className="flex flex-col space-y-8 order-2 lg:order-1">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium">
-              <Sparkles className="w-3 h-3" />
+      <div className="relative z-10 container-aligned w-full grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center py-20 lg:py-28">
+        <motion.div
+          className="flex flex-col space-y-8 order-2 lg:order-1 lg:pr-4"
+          variants={heroVariants.container}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.div variants={heroVariants.item}>
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-semibold tracking-wide">
+              <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
               Available for new projects
             </span>
           </motion.div>
 
-          {/* Headline */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-3"
-          >
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-txt leading-[1.1]">
-              Kunj Shah
+          <motion.div variants={heroVariants.item} className="space-y-4">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-muted">
+              {IDENTITY.location}
+            </p>
+            <h1 className="font-display text-[clamp(2.75rem,6vw,4.5rem)] font-semibold leading-[1.08] text-txt tracking-[-0.02em]">
+              {IDENTITY.name}
             </h1>
-            <p className="text-xl sm:text-2xl text-primary font-semibold">
-              AI Engineer & Agent Builder
+            <p className="text-xl sm:text-2xl text-primary font-medium font-display italic">
+              AI Engineer &amp; Agent Builder
             </p>
           </motion.div>
 
-          {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg text-muted leading-relaxed max-w-lg"
+            variants={heroVariants.item}
+            className="text-lg text-muted leading-relaxed max-w-xl border-l-2 border-primary/35 pl-5"
           >
-            Building end-to-end AI systems, autonomous agents, and intelligent automation workflows that solve real business problems.
+            Building end-to-end AI systems, autonomous agents, and intelligent automation workflows that solve real
+            business problems.
           </motion.p>
 
-          {/* Tags */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-wrap gap-2"
-          >
-            {['Full Stack AI', 'LLM Agents', 'Automation', 'React & TypeScript'].map((tag) => (
+          <motion.div variants={heroVariants.item} className="flex flex-wrap gap-2">
+            {IDENTITY.focus.slice(0, 4).map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 rounded-md bg-surfaceHighlight border border-border text-sm text-muted font-medium"
+                className="px-3 py-1.5 rounded-md bg-surface border border-border text-sm text-muted font-medium"
               >
                 {tag}
               </span>
             ))}
           </motion.div>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-wrap gap-3 pt-2"
-          >
-            <a
-              href="/projects"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors shadow-sm shadow-primary/30"
+          <CapabilitiesStrip />
+
+          <motion.div variants={heroVariants.item} className="flex flex-wrap gap-3 pt-1">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors shadow-md shadow-primary/25"
             >
               View Projects
-              <ArrowRight className="w-4 h-4" />
-            </a>
+              <ArrowRight className="w-4 h-4" aria-hidden />
+            </Link>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
@@ -103,58 +90,69 @@ export function Hero() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
             >
-              <FileText className="w-4 h-4" />
+              <FileText className="w-4 h-4" aria-hidden />
               Resume
             </a>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Right: Photo */}
         <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={isLoaded ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px]"
+            variants={heroVariants.photo}
+            initial="hidden"
+            animate="show"
+            className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[min(100%,420px)] lg:h-[420px] lg:aspect-square"
           >
-            {/* Card background */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20" />
+            <div
+              className="absolute -inset-3 rounded-[1.35rem] bg-gradient-to-br from-primary/20 via-transparent to-secondary/15 opacity-80 blur-sm"
+              aria-hidden
+            />
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5" />
 
-            {/* Photo */}
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-xl">
+            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-2xl shadow-black/10 dark:shadow-black/40">
               {IDENTITY.profile_photo && !imageError ? (
                 <img
                   src={IDENTITY.profile_photo}
                   alt={IDENTITY.name}
+                  width={420}
+                  height={420}
+                  decoding="async"
+                  fetchPriority="high"
                   className="w-full h-full object-cover"
                   onError={() => setImageError(true)}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-surfaceHighlight text-5xl font-bold text-primary/30">
+                <div className="w-full h-full flex items-center justify-center bg-surfaceHighlight font-display text-6xl font-semibold text-primary/25">
                   KS
                 </div>
               )}
             </div>
 
-            {/* Floating badge */}
             <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -bottom-4 -left-4 bg-surface border border-border rounded-xl px-4 py-3 shadow-lg hidden sm:block"
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -bottom-3 -left-2 sm:-left-4 glass-panel rounded-xl px-4 py-3 shadow-lg max-w-[200px]"
             >
-              <div className="text-[10px] text-muted font-medium mb-0.5">Currently</div>
-              <div className="text-sm font-semibold text-txt">Open to Work</div>
+              <div className="text-[10px] text-muted font-semibold uppercase tracking-wider mb-0.5">Status</div>
+              <div className="text-sm font-semibold text-txt">Open to work</div>
             </motion.div>
+
+            <div
+              className="absolute -top-3 right-4 sm:right-8 px-3 py-1 rounded-md border border-border bg-surface/90 text-[10px] txt-mono text-muted uppercase tracking-widest hidden sm:block"
+              aria-hidden
+            >
+              v.2026
+            </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={isLoaded ? { opacity: 1 } : {}}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.85, duration: DURATION.normal, ease: EASE_OUT }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 max-[380px]:hidden"
+        aria-hidden
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
@@ -167,4 +165,3 @@ export function Hero() {
     </section>
   )
 }
-

@@ -1,0 +1,39 @@
+# Kunj Shah — portfolio (machine-readable overview for AI systems)
+
+> Personal site and portfolio for an AI engineer and agent builder.
+
+## Summary
+
+Kunj Shah builds end-to-end AI systems: generative AI applications, autonomous agents and orchestration, computer vision, and full-stack prototypes. Based in Ahmedabad, Gujarat, India. Primary stacks: Python, FastAPI, React, LangChain/agent frameworks, PyTorch, OpenCV, Docker, and cloud deployment patterns.
+
+## Canonical URL
+
+- https://kunjshah.dev/
+
+## Key pages
+
+- Home / overview: https://kunjshah.dev/
+- About: https://kunjshah.dev/about
+- Projects (index): https://kunjshah.dev/projects
+- Skills: https://kunjshah.dev/skills
+- Experience: https://kunjshah.dev/experience
+- Education: https://kunjshah.dev/education
+- Labs: https://kunjshah.dev/labs
+- Writing / blog index: https://kunjshah.dev/blogs
+- Contact: https://kunjshah.dev/contact
+- AI video work: https://kunjshah.dev/ai-videos
+
+## Profiles (same person)
+
+- GitHub (primary): https://github.com/KunjShah95
+- GitHub (alt): https://github.com/KunjShah01
+- LinkedIn: https://www.linkedin.com/in/kunjshah05
+- X (Twitter): https://x.com/kunjshah_dev
+- Hugging Face: https://huggingface.co/kunjshah01
+
+## Optional
+
+- Sitemap: https://kunjshah.dev/sitemap.xml
+- This file: https://kunjshah.dev/llms.txt
+
+Last updated: 2026-04-08

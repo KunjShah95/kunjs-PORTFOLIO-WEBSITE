@@ -20,6 +20,19 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
+function applyDocumentTheme(theme: Theme) {
+  const root = window.document.documentElement
+  root.classList.remove('light', 'dark')
+
+  if (theme === 'system') {
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    root.classList.add(systemDark ? 'dark' : 'light')
+    return
+  }
+
+  root.classList.add(theme)
+}
+
 export function ThemeProvider({
   children,
   defaultTheme = 'system',
@@ -30,28 +43,22 @@ export function ThemeProvider({
   )
 
   useEffect(() => {
-    const root = window.document.documentElement
+    applyDocumentTheme(theme)
+  }, [theme])
 
-    root.classList.remove('light', 'dark')
-
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light'
-
-      root.classList.add(systemTheme)
-      return
-    }
-
-    root.classList.add(theme)
+  useEffect(() => {
+    if (theme !== 'system') return
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    const onChange = () => applyDocumentTheme('system')
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
   }, [theme])
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
+    setTheme: (next: Theme) => {
+      localStorage.setItem(storageKey, next)
+      setTheme(next)
     },
   }
 

@@ -25,7 +25,7 @@ export function SkillsPage() {
               <Cpu className="w-4 h-4" />
               Technical Background
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               Skills & Tech Stack
             </h1>
           </div>

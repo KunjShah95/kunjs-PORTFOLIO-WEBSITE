@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Briefcase } from 'lucide-react'
 import { EXPERIENCE } from '../data/portfolio'
+import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
 
 export function Experience() {
   return (
@@ -13,7 +14,7 @@ export function Experience() {
               <Briefcase className="w-4 h-4" />
               Work Experience
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               Where I've Worked
             </h2>
           </div>
@@ -30,10 +31,10 @@ export function Experience() {
           {EXPERIENCE.map((exp, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              viewport={VIEWPORT_SECTION}
+              transition={cardRevealTransition(i)}
               className="group relative grid grid-cols-1 md:grid-cols-[44px_1fr] gap-0 md:gap-6"
             >
               {/* Timeline dot */}
@@ -42,7 +43,7 @@ export function Experience() {
               </div>
 
               {/* Card */}
-              <div className="rounded-xl border border-border bg-surface p-6 hover:border-primary/30 hover:bg-surfaceHighlight transition-all duration-300">
+              <div className="rounded-xl border border-border bg-surface p-6 hover:border-primary/30 hover:bg-surfaceHighlight hover:shadow-md hover:shadow-primary/[0.05] transition-[border-color,box-shadow,background-color] duration-300">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
                   <div className="space-y-1">
                     <h3 className="text-lg font-semibold text-txt">{exp.company}</h3>

@@ -4,43 +4,63 @@
 
 @layer base {
   :root {
-    /* Light Mode — Clean SaaS */
-    --bg-main: 249 250 251;
+    /* Light — warm paper, ink, copper accent */
+    --bg-main: 252 250 247;
     --surface-main: 255 255 255;
-    --surface-highlight: 243 244 246;
-    --border-main: 229 231 235;
+    --surface-highlight: 245 242 237;
+    --border-main: 228 221 212;
 
-    --primary-rgb: 99 102 241;
-    --secondary-rgb: 139 92 246;
+    --primary-rgb: 194 65 12;
+    --secondary-rgb: 14 116 144;
 
-    --txt-main: 17 24 39;
-    --txt-muted: 107 114 128;
-    --txt-dim: 156 163 175;
+    --txt-main: 28 25 23;
+    --txt-muted: 120 113 108;
+    --txt-dim: 168 162 158;
+
+    --motion-duration-fast: 180ms;
+    --motion-duration-normal: 320ms;
+    --motion-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .dark {
-    /* Dark Mode — SaaS Dark */
-    --bg-main: 9 9 11;
-    --surface-main: 18 18 23;
-    --surface-highlight: 27 27 34;
-    --border-main: 39 39 50;
+    /* Dark — warm charcoal, ember accent */
+    --bg-main: 12 10 9;
+    --surface-main: 22 19 17;
+    --surface-highlight: 34 30 27;
+    --border-main: 52 46 42;
 
-    --primary-rgb: 129 140 248;
-    --secondary-rgb: 167 139 250;
+    --primary-rgb: 251 146 60;
+    --secondary-rgb: 56 189 248;
 
-    --txt-main: 248 250 252;
-    --txt-muted: 148 163 184;
-    --txt-dim: 100 116 139;
+    --txt-main: 250 248 245;
+    --txt-muted: 168 162 158;
+    --txt-dim: 120 113 108;
   }
 
   html {
+    color-scheme: light dark;
     scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
     background-color: rgb(var(--bg-main));
     color: rgb(var(--txt-main));
-    @apply font-sans antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary;
+    @apply font-sans antialiased overflow-x-hidden selection:bg-primary/25 selection:text-txt;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--primary-rgb) / 0.85);
+    outline-offset: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 
   ::-webkit-scrollbar {
@@ -61,6 +81,10 @@
 @layer utilities {
   .txt-mono {
     font-family: "JetBrains Mono", monospace;
+  }
+
+  .font-display {
+    font-family: "Fraunces", Georgia, serif;
   }
 
   .glass-panel {
@@ -91,15 +115,55 @@
     @apply min-h-[44px] min-w-[44px];
   }
 
-  /* SaaS gradient shimmer for cards */
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
 
-  /* Subtle dot grid background */
   .dot-grid {
     background-image: radial-gradient(rgb(var(--border-main)) 1px, transparent 1px);
     background-size: 24px 24px;
+  }
+
+  /* Subtle film grain over the viewport (static, GPU-friendly) */
+  .grain-overlay {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .dark .grain-overlay {
+    opacity: 0.055;
+  }
+
+  /* Engineering grid — pipeline / blueprint undertone */
+  .tech-grid-layer {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.22;
+    background-size: 48px 48px;
+    background-image:
+      linear-gradient(to right, rgb(var(--border-main) / 0.45) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--border-main) / 0.45) 1px, transparent 1px);
+    mask-image: radial-gradient(ellipse 85% 70% at 50% 0%, black 0%, transparent 72%);
+  }
+
+  .dark .tech-grid-layer {
+    opacity: 0.14;
+    background-image:
+      linear-gradient(to right, rgb(var(--border-main) / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--border-main) / 0.35) 1px, transparent 1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tech-grid-layer {
+      opacity: 0.08;
+    }
   }
 }
 
@@ -118,6 +182,14 @@
   animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-reveal-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
@@ -127,4 +199,16 @@
   background: linear-gradient(90deg, transparent, rgb(var(--primary-rgb) / 0.08), transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-shimmer {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ping {
+    animation: none;
+  }
 }

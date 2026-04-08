@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { MapPin, GraduationCap } from 'lucide-react'
 
 import { EDUCATION } from '../data/portfolio'
+import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
 
 export function Education() {
 
@@ -14,7 +15,7 @@ export function Education() {
               <GraduationCap className="w-4 h-4" />
               Education
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               Academic Background
             </h2>
           </div>
@@ -24,13 +25,13 @@ export function Education() {
           {EDUCATION.map((edu, i) => (
             <motion.div
               key={edu.id}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -14 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.8 }}
+              viewport={VIEWPORT_SECTION}
+              transition={cardRevealTransition(i)}
               className="relative"
             >
-              <div className="group relative grid grid-cols-1 md:grid-cols-12 gap-8 p-6 sm:p-10 border border-border/50 bg-surface/30 hover:bg-surface/80 hover:border-primary/30 transition-all rounded-lg items-center">
+              <div className="group relative grid grid-cols-1 md:grid-cols-12 gap-8 p-6 sm:p-10 border border-border/50 bg-surface/30 hover:bg-surface/80 hover:border-primary/30 hover:shadow-md hover:shadow-primary/[0.05] transition-[border-color,box-shadow,background-color] rounded-lg items-center">
                 <div className="md:col-span-3 space-y-2">
                   <div className="inline-flex items-center px-3 py-1 bg-surfaceHighlight rounded-sm text-primary txt-mono text-[10px] font-bold uppercase tracking-widest border border-primary/10">
                     {edu.period}

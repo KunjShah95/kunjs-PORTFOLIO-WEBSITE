@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { MessageSquare, Mail } from 'lucide-react'
 import { SOCIALS } from '../data/portfolio'
+import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
 
 export function Contact() {
   return (
@@ -14,7 +15,7 @@ export function Contact() {
               <Mail className="w-4 h-4" />
               Contact
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               Let's Connect
             </h2>
           </div>
@@ -23,15 +24,15 @@ export function Contact() {
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
             {SOCIALS.map((social, i) => (
               <motion.a
-                key={social.name}
+                key={social.name + social.url}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.4 }}
-                className="group flex items-center justify-between p-4 rounded-xl border border-border bg-surface hover:border-primary/30 hover:bg-surfaceHighlight transition-all duration-200"
+                viewport={VIEWPORT_SECTION}
+                transition={cardRevealTransition(i)}
+                className="group flex items-center justify-between p-4 rounded-xl border border-border bg-surface hover:border-primary/30 hover:bg-surfaceHighlight hover:shadow-md hover:shadow-primary/[0.05] transition-[border-color,box-shadow,background-color] duration-200"
               >
                 <div className="space-y-0.5">
                   <div className="text-xs text-muted font-medium">{social.label}</div>
@@ -49,10 +50,11 @@ export function Contact() {
           {/* Direct Channel */}
           <div className="lg:col-span-4">
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="rounded-xl border border-border bg-surface p-6 space-y-5"
+              viewport={VIEWPORT_SECTION}
+              transition={cardRevealTransition(SOCIALS.length, 0.06)}
+              className="rounded-xl border border-border bg-surface p-6 space-y-5 hover:shadow-md hover:shadow-primary/[0.05] transition-shadow duration-200"
             >
               <div className="space-y-1">
                 <div className="flex items-center gap-2">

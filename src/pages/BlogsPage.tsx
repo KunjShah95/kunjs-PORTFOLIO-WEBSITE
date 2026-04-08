@@ -33,7 +33,7 @@ export function BlogsPage() {
               <BookOpen className="w-4 h-4" />
               Writing
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-txt">
+            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
               Articles & Research Notes
             </h1>
           </div>
