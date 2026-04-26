@@ -189,6 +189,75 @@ const projectData: Record<string, ProjectDetail> = {
     tech: ['Python', 'Streamlit', 'LangChain', 'Gemini', 'ChromaDB'],
     demo: 'https://resumemasterai.streamlit.app/',
     github: 'https://github.com/KunjShah01/job-snipper'
+  },
+  'learnai': {
+    title: 'LearnAI',
+    category: 'ADAPTIVE LEARNING PLATFORM',
+    desc: 'AI-powered personalized learning platform with adaptive tutoring, smart quizzes, and gamification.',
+    problem: 'Traditional one-size-fits-all education ignores individual learning preferences, pace, and style. Students need personalized experiences that adapt to their unique needs.',
+    architecture: 'Next.js 14 app with Firebase Auth/Firestore, Supabase DB, and multi-LLM integration (Google AI, OpenAI, Groq, Claude). Features adaptive tutoring chat, smart quizzes with difficulty scaling, spaced repetition, and XP-based gamification.',
+    ml_techniques: [
+      'Adaptive explanation generation based on user preferences',
+      'Difficulty-scaled quiz generation using performance metrics',
+      'Spaced repetition scheduling (SM-2 algorithm)',
+      'Multi-model orchestration with provider fallback'
+    ],
+    decisions: 'Used Next.js App Router for modern React patterns. Integrated Clerk for auth with Firebase as backup. Designed Zustand for client state with server sync. Multi-LLM support ensures reliability across providers.',
+    outcomes: [
+      'Personalized tutoring adapts to user explanation preferences.',
+      'Smart quizzes scale difficulty based on performance.',
+      'Gamification with XP, streaks, and achievement system.',
+      'Supports 6+ AI model providers.'
+    ],
+    tech: ['Next.js', 'Firebase', 'Supabase', 'Google AI', 'OpenAI', 'Groq'],
+    demo: 'https://intelligent-learning-assistant.vercel.app',
+    github: 'https://github.com/KunjShah95/intelligent-learning-assistant'
+  },
+  'equitylens': {
+    title: 'EquityLens',
+    category: 'AI FAIRNESS AUDITING',
+    desc: 'Healthcare fairness auditing platform for detecting AI bias and ensuring regulatory compliance.',
+    problem: 'AI systems in healthcare can perpetuate biases that disproportionately affect protected groups. Organizations need tools to audit and ensure fairness for regulatory compliance.',
+    architecture: 'Dual-engine platform with FastAPI backend for bias detection and React frontend for interactive analysis. Implements demographic parity, equal opportunity, and disparate impact (80% rule) metrics.',
+    ml_techniques: [
+      'Demographic parity analysis across protected groups',
+      'Equal opportunity validation (TPR balance)',
+      'Disparate impact auditing (80% rule)',
+      'Intersectional bias matrix for multi-attribute analysis'
+    ],
+    decisions: 'Prioritized EU AI Act Article 10 & 13 and NIST AI RMF compliance. Dual-engine architecture ensures uptime with local browser fallback.',
+    outcomes: [
+      'Automated bias detection with clear fairness reports.',
+      'EU AI Act and NIST AI RMF compliance ready.',
+      'PDF audit report generation.',
+      'Hybrid Intelligence Layer for uptime guarantee.'
+    ],
+    tech: ['React', 'FastAPI', 'PostgreSQL', 'TensorFlow'],
+    demo: 'https://fairness-lens-backend-988207147245.us-central1.run.app/',
+    github: 'https://github.com/KunjShah95/fairness-lens-studio'
+  },
+  'smart-flow-ai': {
+    title: 'Smart Flow AI',
+    category: 'AUTOMATION PLATFORM',
+    desc: 'Modern automation platform with intelligent workflows and AI-powered task orchestration.',
+    problem: 'Teams need to automate repetitive workflows but lack tools that combine ease of use with powerful AI capabilities.',
+    architecture: 'Next.js platform with Firebase/Firestore backend. Features visual workflow builder, AI-powered task suggestions, and automated execution.',
+    ml_techniques: [
+      'AI-powered workflow suggestions',
+      'Task categorization and routing',
+      'Natural language workflow generation',
+      'Automated scheduling and execution'
+    ],
+    decisions: 'Built on modern Next.js stack for performance. Firebase provides real-time sync. Visual workflow builder lowers barrier to entry.',
+    outcomes: [
+      'Visual workflow builder for non-technical users.',
+      'AI suggestions improve over time.',
+      'Real-time execution monitoring.',
+      'Multi-platform deployment ready.'
+    ],
+    tech: ['Next.js', 'Firebase', 'Firestore', 'TypeScript'],
+    demo: 'https://ps-1-eight.vercel.app',
+    github: 'https://github.com/KunjShah95/Smart-flow-ai'
   }
 }
 

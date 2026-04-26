@@ -13,17 +13,6 @@ export const IDENTITY: UserIdentity = {
 
 export const PROJECTS: Project[] = [
     {
-        id: '09',
-        title: 'LearnAI',
-        category: 'ADAPTIVE LEARNING PLATFORM',
-        desc: 'AI-powered personalized learning platform with adaptive tutoring that adjusts explanations to learner preferences, smart quizzes with adaptive difficulty, spaced repetition for optimized retention, and gamification with XP, streaks, and levels.',
-        tech: ['NEXT.JS', 'FIREBASE', 'SUPABASE', 'GOOGLE AI', 'OPENAI', 'GROQ'],
-        github: 'https://github.com/KunjShah95/intelligent-learning-assistant',
-        demo: 'https://intelligent-learning-assistant.vercel.app',
-        slug: 'learnai',
-        impact: 'PRODUCT_LIVE',
-    },
-    {
         id: '01',
         title: 'CinePulse',
         category: 'FULL STACK ML',
@@ -123,6 +112,7 @@ export const PROJECTS: Project[] = [
         desc: 'Healthcare fairness auditing platform for detecting AI bias. Ensures EU AI Act and NIST AI RMF compliance.',
         tech: ['REACT', 'FASTAPI', 'POSTGRESQL', 'TENSORFLOW'],
         github: 'https://github.com/KunjShah95/fairness-lens-studio',
+        demo: 'https://fairness-lens-backend-988207147245.us-central1.run.app/',
         slug: 'equitylens',
         impact: 'PRODUCTION_READY',
     },
