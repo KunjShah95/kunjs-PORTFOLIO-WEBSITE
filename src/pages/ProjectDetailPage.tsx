@@ -237,25 +237,27 @@ const projectData: Record<string, ProjectDetail> = {
     github: 'https://github.com/KunjShah95/fairness-lens-studio'
   },
   'smart-flow-ai': {
-    title: 'Smart Flow AI',
-    category: 'AUTOMATION PLATFORM',
-    desc: 'Modern automation platform with intelligent workflows and AI-powered task orchestration.',
-    problem: 'Teams need to automate repetitive workflows but lack tools that combine ease of use with powerful AI capabilities.',
-    architecture: 'Next.js platform with Firebase/Firestore backend. Features visual workflow builder, AI-powered task suggestions, and automated execution.',
+    title: 'SmartFlow AI',
+    category: 'CROWD INTELLIGENCE PLATFORM',
+    desc: 'Real-time crowd monitoring and management platform for stadiums, transit hubs, and event venues with live heatmaps, wait time prediction, and AI routing recommendations.',
+    problem: 'Venue operators need real-time visibility into crowd density to prevent overcrowding, reduce wait times, and improve visitor safety. Manual monitoring is insufficient at scale.',
+    architecture: 'Next.js 15 app with Firebase/Firestore for real-time data. Features live crowd heatmaps, simulation engine, AI recommendation engine, and alert system. Predefined zones with capacity and service rate modeling.',
     ml_techniques: [
-      'AI-powered workflow suggestions',
-      'Task categorization and routing',
-      'Natural language workflow generation',
-      'Automated scheduling and execution'
+      'Live Crowd Heatmaps with color-coded density visualization',
+      'Wait Time Prediction using queueing theory (count/serviceRate)',
+      'AI Recommendations for least-crowded routing',
+      'Real-Time Alerts for critical capacity situations',
+      'Historical Analytics for trend tracking'
     ],
-    decisions: 'Built on modern Next.js stack for performance. Firebase provides real-time sync. Visual workflow builder lowers barrier to entry.',
+    decisions: 'Used Firebase Firestore for real-time sync across clients. Implemented simulation engine for testing. AI recommendation picks lowest utilization zone with fallback logic. Capped wait times at 30 minutes.',
     outcomes: [
-      'Visual workflow builder for non-technical users.',
-      'AI suggestions improve over time.',
-      'Real-time execution monitoring.',
-      'Multi-platform deployment ready.'
+      'Live heatmaps show zone status with color-coded density.',
+      'Wait time prediction based on current count and service rate.',
+      'AI routing suggestions to least-crowded areas.',
+      'Real-time alerts for critical capacity situations.',
+      'Historical analytics for trend analysis.'
     ],
-    tech: ['Next.js', 'Firebase', 'Firestore', 'TypeScript'],
+    tech: ['Next.js 15', 'TypeScript', 'Firebase', 'Firestore', 'Framer Motion'],
     demo: 'https://ps-1-eight.vercel.app',
     github: 'https://github.com/KunjShah95/Smart-flow-ai'
   }
