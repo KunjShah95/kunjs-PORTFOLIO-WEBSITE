@@ -36,4 +36,21 @@ Kunj Shah builds end-to-end AI systems: generative AI applications, autonomous a
 - Sitemap: https://kunjshah.dev/sitemap.xml
 - This file: https://kunjshah.dev/llms.txt
 
-Last updated: 2026-04-08
+Last updated: 2026-04-26
+
+## Projects (2024-2026)
+
+### Recently Added
+- LearnAI — AI-powered personalized learning platform (Next.js, Firebase, Supabase)
+- EquityLens — Healthcare fairness auditing for EU AI Act compliance (React, FastAPI)
+- Smart Flow AI — Automation platform with AI orchestration (Next.js, Firestore)
+
+### Featured Projects
+- CinePulse — Movie recommender with NLP (Python, PyTorch, React)
+- GAP Miner — Skill gap analyzer (LLAMA-3, LangChain)
+- UPI Fraud Guard — Real-time fraud detection (XGBoost, Scikit-learn)
+- SENTINEL CLI — Security auditor with 13+ analyzers (Node.js, TypeScript)
+- AETHER AI — Multi-model terminal assistant (Python, Ollama)
+- MinBPE Tokenizer — Byte Pair Encoding from scratch (Python)
+- ResumeMasterAI — Career intelligence platform (Streamlit, LangChain)
+- Railway Inspection — YOLOv8 defect detection (C++, OpenCV)
