@@ -4,7 +4,6 @@ import { ArrowRight, Sparkles, FileText } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { IDENTITY } from '../data/portfolio'
 import { heroVariants, DURATION, EASE_OUT } from '../lib/motion'
-import { CapabilitiesStrip } from './CapabilitiesStrip'
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -67,8 +66,6 @@ export function Hero() {
               </span>
             ))}
           </motion.div>
-
-          <CapabilitiesStrip />
 
           <motion.div variants={heroVariants.item} className="flex flex-wrap gap-3 pt-1">
             <Link
