@@ -57,14 +57,14 @@ export function Layout({ children }: LayoutProps) {
       setIsMobileMenuOpen(false)
    }, [location.pathname])
 
-   const navLinks = [
-      { label: 'About', href: '/about' },
-      { label: 'Work', href: '/projects' },
-      { label: 'Hackathons', href: '/hackathons' },
-      { label: 'Labs', href: '/labs' },
-      { label: 'Skills', href: '/skills' },
-      { label: 'Contact', href: '/contact' },
-   ]
+const navLinks = [
+       { label: 'About', href: '/about' },
+       { label: 'Projects', href: '/projects' },
+       { label: 'Hackathons', href: '/hackathons' },
+       { label: 'Labs', href: '/labs' },
+       { label: 'Skills', href: '/skills' },
+       { label: 'Contact', href: '/contact' },
+    ]
 
    const socialLinkLabel = (name: string) => {
       if (name.includes('LINKEDIN')) return 'LinkedIn'
@@ -188,7 +188,7 @@ export function Layout({ children }: LayoutProps) {
                      <X className="w-5 h-5" aria-hidden />
                   </button>
 
-                  <nav className="flex flex-col gap-1 flex-1" aria-label="Mobile primary">
+                  <nav className="flex flex-col gap-1.5 flex-1" aria-label="Mobile primary">
                      {navLinks.map((link, i) => (
                         <motion.div
                            initial={{ opacity: 0, x: -12 }}
@@ -200,17 +200,55 @@ export function Layout({ children }: LayoutProps) {
                               to={link.href}
                               onClick={() => setIsMobileMenuOpen(false)}
                               className={({ isActive }) =>
-                                 `text-xl font-semibold py-3.5 px-4 rounded-xl block transition-colors ${
+                                 `text-xl font-semibold py-4 px-5 rounded-2xl flex items-center justify-between transition-all ${
                                     isActive ? 'text-primary bg-primary/10' : 'text-txt hover:bg-surfaceHighlight'
                                  }`
                               }
                            >
-                              {link.label}
+                              <span>{link.label}</span>
+                              {link.label === 'Projects' && (
+                                 <span className="text-[10px] bg-primary text-white px-2 py-0.5 rounded-full uppercase tracking-tighter font-bold">New</span>
+                              )}
                            </NavLink>
                         </motion.div>
                      ))}
+                     
+                     <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3, duration: 0.4 }}
+                        className="mt-8 pt-8 border-t border-border/50 space-y-6"
+                     >
+                        <div className="flex flex-col gap-4">
+                           <p className="text-[10px] txt-mono text-muted uppercase tracking-widest pl-5">Get in touch</p>
+                           <div className="flex gap-5 pl-5">
+                              {SOCIALS.map((social) => (
+                                 <a 
+                                    key={social.url} 
+                                    href={social.url} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-muted hover:text-primary transition-all hover:scale-110 p-1"
+                                 >
+                                    <span className="sr-only">{social.name}</span>
+                                    <social.icon className="w-5 h-5" />
+                                 </a>
+                              ))}
+                           </div>
+                        </div>
+                        
+                        <a
+                           href="/resume.pdf"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className="mx-5 py-4 rounded-2xl bg-surface border border-border flex items-center justify-center gap-3 text-base font-bold text-txt hover:bg-surfaceHighlight transition-colors"
+                        >
+                           <Command className="w-4 h-4" />
+                           View Resume
+                        </a>
+                     </motion.div>
                   </nav>
-                  <p className="text-center text-[10px] txt-mono text-muted uppercase tracking-[0.25em] pt-6 border-t border-border/60">
+                  <p className="text-center text-[10px] txt-mono text-muted uppercase tracking-[0.25em] pt-6 opacity-60">
                      Freelancing · AI · Data · ML engineering
                   </p>
                </motion.div>

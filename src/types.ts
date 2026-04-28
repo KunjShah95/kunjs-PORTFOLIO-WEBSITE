@@ -74,3 +74,23 @@ export interface UserIdentity {
     github_username: string;
     profile_photo?: string;
 }
+
+export interface Hackathon {
+    id: string;
+    title: string;
+    organizer: string;
+    period: string;
+    achievement: string;
+    description: string;
+    tech: string[];
+    link?: string;
+}
+
+export interface Workshop {
+    id: string;
+    title: string;
+    organizer: string;
+    date: string;
+    topic: string;
+    description: string;
+}

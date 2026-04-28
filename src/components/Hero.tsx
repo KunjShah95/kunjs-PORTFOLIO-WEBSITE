@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { ArrowRight, Sparkles, FileText } from 'lucide-react'
+import { ArrowRight, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { IDENTITY } from '../data/portfolio'
 import { heroVariants, DURATION, EASE_OUT } from '../lib/motion'
@@ -67,29 +67,29 @@ export function Hero() {
             ))}
           </motion.div>
 
-          <motion.div variants={heroVariants.item} className="flex flex-wrap gap-3 pt-1">
+          <motion.div variants={heroVariants.item} className="flex flex-wrap gap-4 pt-4">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors shadow-md shadow-primary/25"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-white font-bold text-base hover:bg-primary/90 transition-all shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]"
             >
-              View Projects
-              <ArrowRight className="w-4 h-4" aria-hidden />
+              View My Projects
+              <ArrowRight className="w-5 h-5" aria-hidden />
             </Link>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
-            >
-              Get in Touch
-            </a>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
-            >
-              <FileText className="w-4 h-4" aria-hidden />
-              Resume
-            </a>
+            <div className="flex gap-3">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
+              >
+                Let's Talk
+              </Link>
+              <Link
+                to="/labs"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors sm:flex"
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+                Labs
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
 

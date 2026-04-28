@@ -1,0 +1,21 @@
+{
+  "short_name": "Kunj Shah",
+  "name": "Kunj Shah | AI Engineer & Agent Builder",
+  "icons": [
+    {
+      "src": "/profile.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/profile.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#09090b",
+  "display": "standalone",
+  "theme_color": "#f97316",
+  "description": "Portfolio of Kunj Shah - AI Engineer and Agent Builder."
+}

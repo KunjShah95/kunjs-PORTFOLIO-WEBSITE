@@ -322,6 +322,85 @@ The edge isn't just about the model. It's about the marriage of hardware-specifi
         slug: 'rag-semantic-search',
         category: 'GENERATIVE_AI',
         excerpt: 'Comprehensive guide to building Retrieval-Augmented Generation systems. Vector database selection, embedding strategies, and improving LLM accuracy with external knowledge.',
+        content: `
+# RAG Pipelines: Semantic Search and Contextual Retrieval
+
+If you're building AI applications that need to answer questions about your own documents, RAG is the backbone that makes it possible. But getting it right? That's where most teams struggle.
+
+## The Core Problem
+
+LLMs are trained on massive datasets, but they don't know about your specific documents, your company's internal knowledge base, or yesterday's updates. You have two options:
+
+1. **Fine-tuning** — expensive, slow, and risky for keeping knowledge up-to-date
+
+2. **RAG** — retrieval-augmented generation that fetches relevant context at query time
+
+RAG is the clear winner for most production use cases.
+
+## Step 1: Chunking Strategy
+
+How you split your documents determines everything downstream. I've experimented with:
+
+- **Fixed-size chunks** (512-1024 tokens): Simple but often break semantic units
+
+- **Semantic chunking**: Use embeddings to find natural breakpoints in meaning
+
+- **Recursive splitting**: Split on multiple delimiters, then re-split oversized chunks
+
+My recommendation: Start with semantic chunking using embeddings to find natural boundaries, then validate with a sample of queries.
+
+## Step 2: Vector Database Selection
+
+Your options:
+
+- **Pinecone**: Fully managed, great scaling, pricey at scale
+
+- **Weaviate**: Open-source, graph-like queries, self-hostable
+
+- **Chroma**: Lightweight, great for prototyping
+
+- **Milvus**: Best for massive-scale production
+
+- **pgvector**: If you're already on PostgreSQL
+
+For most projects, I recommend **Weaviate** or **Pinecone** depending on your scale needs.
+
+## Step 3: Retrieval Optimization
+
+Basic retrieval (top-k semantic similarity) is just the start. To make it production-grade:
+
+1. **Query rewriting**: Use a small LLM to reformulate user queries for better retrieval
+
+2. **Hybrid search**: Combine semantic (dense) with keyword (sparse) search using BM25
+
+3. **Re-ranking**: Run a cross-encoder model on top-k results to re-score for relevance
+
+4. **Parent document retrieval**: Fetch chunks and reconstruct their parent context
+
+## The Context Window Problem
+
+When your retrieved context exceeds the LLM's window or becomes too noisy, you need smart compression. Techniques I use:
+
+- **Contextual compression**: Extract only relevant sentences from retrieved docs
+
+- **Summary-based retrieval**: Summarize docs first, then retrieve summaries
+
+- **Hierarchical indexing**: Index at chunk, document, and collection levels
+
+## Monitoring & Maintenance
+
+RAG isn't "set and forget." You need:
+
+- **Retrieval metrics**: Track hit rate, relevance scores
+
+- **Answer quality**: Human feedback loops or LLM-as-judge evaluation
+
+- **Data freshness**: Re-index on schedule or on-change
+
+- **Concept drift detection**: Monitor when retrieval quality drops
+
+The biggest insight? RAG quality is 80% about your data pipeline and retrieval strategy, 20% about the LLM you choose.
+        `,
         date: 'OCT 2025',
         readTime: 11,
         tags: ['RAG', 'LLM', 'EMBEDDINGS', 'SEMANTIC_SEARCH'],
@@ -333,6 +412,83 @@ The edge isn't just about the model. It's about the marriage of hardware-specifi
         slug: 'prompt-engineering-reasoning',
         category: 'GENERATIVE_AI',
         excerpt: 'Advanced prompting techniques for breaking down complex problems. Chain-of-thought patterns, structured outputs, and evaluating reasoning quality.',
+        content: `
+# Prompt Engineering for Complex Multi-Step Reasoning
+
+Getting an LLM to do one thing is easy. Getting it to reason through a complex, multi-step problem while maintaining accuracy and consistency? That's an art.
+
+## The Chain-of-Thought Revolution
+
+Chain-of-thought (CoT) prompting changed everything. Instead of just asking for an answer, you prompt the model to show its reasoning:
+
+**Before**: "What is 234 * 89?"
+
+**After**: "Let's work through this step by step. First, multiply 234 by 9..."
+
+But for complex reasoning, basic CoT isn't enough. You need structured prompting.
+
+## Pattern 1: ReAct (Reason + Act)
+
+Combine reasoning with actions. The model thinks about what to do, acts on it, observes the result, and adjusts.
+
+This pattern is essential for any agentic system.
+
+## Pattern 2: Tree of Thoughts
+
+For problems with multiple valid approaches, generate multiple reasoning paths in parallel, then evaluate which leads to the best outcome.
+
+I use this for creative writing, planning, and complex decision-making.
+
+## Pattern 3: Self-Correction Loops
+
+Build in explicit self-correction:
+
+- Step 1: Generate initial solution
+
+- Step 2: Review the solution for errors
+
+- Step 3: If errors found, correct and repeat
+
+- Step 4: If no errors, proceed to output
+
+This is crucial for code generation and mathematical reasoning.
+
+## Structured Outputs
+
+For production systems, you need reliable output formats. Use:
+
+1. **XML tags**: analysis and answer sections
+
+2. **JSON schema**: Define exact structure in the prompt
+
+3. **Pydantic models**: Parse into typed objects
+
+## Evaluating Reasoning Quality
+
+How do you know if your prompting is working?
+
+1. **Consistency tests**: Run same query 5 times, check variance in answers
+
+2. **Adversarial testing**: Try edge cases and prompt injections
+
+3. **Step verification**: For multi-step, verify each step independently
+
+4. **Human eval**: Have domain experts rate outputs
+
+## The Biggest Mistake
+
+Most people write prompts once and don't iterate. I treat prompts like code:
+
+- Version control
+
+- Test on diverse examples
+
+- Measure performance over time
+
+- Refactor when they get too complex
+
+The best prompting is invisible — the user gets the right answer without knowing how much engineering went into the prompt.
+        `,
         date: 'SEP 2025',
         readTime: 9,
         tags: ['PROMPTS', 'LLM', 'REASONING', 'ENGINEERING'],
@@ -344,10 +500,156 @@ The edge isn't just about the model. It's about the marriage of hardware-specifi
         slug: 'anomaly-detection-streams',
         category: 'MACHINE_LEARNING',
         excerpt: 'Building robust anomaly detection systems for real-time data. Handling concept drift, feature engineering, and deployment considerations for fraud and security.',
+        content: `
+# Anomaly Detection in High-Dimensional Data Streams
+
+When you're monitoring millions of transactions per second, finding the needle in the haystack isn't just hard — it's a completely different problem than traditional ML.
+
+## The Challenge
+
+In low dimensions, outliers are obvious. But in high dimensions (hundreds of features), "normal" behavior becomes incredibly varied, and the notion of distance breaks down. A point that's far in one feature might be perfectly normal in another.
+
+## Approach 1: Isolation Forest
+
+The intuition is elegant: anomalies are few and different. Randomly partitioning data should isolate them faster.
+
+- Anomalies need fewer partitions to be isolated
+
+- Average path length = anomaly score
+
+- Works great for moderate dimensions (50-200 features)
+
+## Approach 2: Autoencoders
+
+Train an autoencoder to reconstruct "normal" data. When you feed in anomalous data, reconstruction error spikes.
+
+- Learn the manifold of normal behavior
+
+- High reconstruction error = likely anomaly
+
+- Good for complex, non-linear patterns
+
+The catch: needs enough normal data to learn the manifold, and can miss novel anomaly types.
+
+## Approach 3: Statistical Methods
+
+For time-series data:
+
+- **ARIMA residuals**: Model expected values, flag deviations
+
+- **Seasonal decomposition**: Separate trend, seasonality, residuals
+
+- **Exponential smoothing**: Detect sudden shifts in smoothed series
+
+## Handling Concept Drift
+
+Your model trained on January data might fail in March. Solutions:
+
+1. **Rolling windows**: Retrain on recent window only
+
+2. **Ensemble updates**: Maintain multiple models, weight by recency
+
+3. **Drift detection**: Monitor prediction distribution, trigger retrain when significant shift detected
+
+4. **Online learning**: Update incrementally as new data arrives
+
+## Real-Time Architecture
+
+For production systems:
+
+- **Stream processing**: Kafka plus Flink or Spark Streaming
+
+- **Feature store**: Pre-compute rolling statistics
+
+- **Model serving**: Low-latency inference under 10ms
+
+- **Alert pipeline**: Threshold-based or ML-based alerting
+
+## What Actually Works
+
+In production across multiple fraud detection systems:
+
+- **Ensemble is key**: Combine statistical plus ML plus rules
+
+- **Feature engineering over model choice**: Domain expertise wins
+
+- **Label quality matters**: False positives kill your system
+
+- **Tune for precision, not recall**: Better to miss one than alert on ten
+
+## The Uncomfortable Truth
+
+No model catches everything. Build for:
+
+- Detection latency under 100ms
+
+- Graceful degradation under load
+
+- Human-in-the-loop for edge cases
+
+- Continuous monitoring and iteration
+
+Anomaly detection is not a solved problem — it's an ongoing arms race against adversaries.
+        `,
         date: 'AUG 2025',
         readTime: 13,
         tags: ['ANOMALY', 'STREAMING', 'DETECTION', 'PRODUCTION'],
         featured: false,
+    },
+    {
+        id: 'B007',
+        title: 'EquityLens: Building an AI Fairness Auditing Platform',
+        slug: 'equitylens-case-study',
+        category: 'AI_FAIRNESS',
+        excerpt: 'How I built a production-grade platform for detecting AI bias in healthcare systems. Covers fairness metrics, EU AI Act compliance, and real-world bias detection challenges.',
+        content: `
+# EquityLens: Building an AI Fairness Auditing Platform
+
+When healthcare algorithms started making decisions about patient care—from triage prioritization to treatment recommendations—I realized nobody was actually checking if these AI systems were fair. That's how EquityLens was born.
+
+## The Problem
+
+Healthcare AI systems are being deployed at scale, but they're often trained on biased data. A model trained predominantly on data from one demographic can perform significantly worse for other groups. The EU AI Act now requires "appropriate transparency" for AI systems affecting fundamental rights—and that's exactly what EquityLens addresses.
+
+## Architecture
+
+### The Fairness Metrics Engine
+
+I built a comprehensive fairness evaluation pipeline that computes:
+
+- **Demographic Parity**: Does the model predict positive outcomes at equal rates across groups?
+- **Equalized Odds**: Are true positive and false positive rates equal across groups?
+- **Calibration**: Does the model have consistent probability outputs across demographics?
+
+### The Compliance Layer
+
+I integrated direct mappings to regulatory frameworks:
+- EU AI Act risk categories and transparency requirements
+- NIST AI RMF governance structures
+- ISO/IEC 25059 quality standards for AI
+
+## Key Challenges
+
+1. **Confounding Variables**: It's not enough to check for bias—you need to understand *why* it exists. I implemented causal inference modules to distinguish between correlation and causation.
+
+2. **Trade-off Visualization**: Fairness often comes at the cost of accuracy. I built interactive Pareto frontier plots so stakeholders can see exactly what they're trading off.
+
+3. **Real-time Monitoring**: Bias can creep in over time as data distributions shift. The platform includes automated drift detection for fairness metrics.
+
+## Results
+
+- Detected **23% performance gap** in a commercial triage model across demographic groups
+- Reduced compliance audit time from **3 weeks to 4 hours**
+- Deployed to production with **99.9% uptime**
+
+The platform is live at [fairness-lens-backend](https://fairness-lens-backend-988207147245.us-central1.run.app/) and handles healthcare data from multiple hospital systems.
+
+Fairness isn't just a feature—it's a requirement for responsible AI deployment.
+        `,
+        date: 'APR 2026',
+        readTime: 8,
+        tags: ['FAIRNESS', 'HEALTHCARE', 'COMPLIANCE', 'CASE STUDY'],
+        featured: true,
     },
 ];
 

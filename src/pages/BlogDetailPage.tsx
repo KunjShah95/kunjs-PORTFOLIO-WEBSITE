@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion, useScroll, useSpring } from 'framer-motion'
-import { ArrowLeft, Calendar, Clock, Share2, Tag } from 'lucide-react'
+import { ArrowLeft, Calendar, Clock, Tag, Linkedin, Twitter } from 'lucide-react'
 import { SEO } from '../components/SEO'
 import { BLOGS } from '../data/portfolio'
 import { SITE_URL } from '../lib/site'
@@ -15,6 +15,17 @@ export function BlogDetailPage() {
         damping: 30,
         restDelta: 0.001
     })
+
+    const shareToLinkedIn = () => {
+        const url = encodeURIComponent(`${SITE_URL}/blogs/${blog?.slug}`)
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=400')
+    }
+
+    const shareToTwitter = () => {
+        const url = encodeURIComponent(`${SITE_URL}/blogs/${blog?.slug}`)
+        const text = encodeURIComponent(`Check out this article: ${blog?.title}`)
+        window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=600,height=400')
+    }
 
     if (!blog) {
         return (
@@ -138,9 +149,35 @@ export function BlogDetailPage() {
                                     </span>
                                 ))}
                             </div>
-                            <button className="flex items-center gap-2 text-xs font-bold txt-mono text-muted hover:text-primary transition-colors uppercase tracking-widest">
-                                <Share2 className="w-4 h-4" /> Share Article
-                            </button>
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                                <span className="text-xs font-bold txt-mono text-muted uppercase tracking-widest">Share:</span>
+                                <div className="flex gap-2">
+                                    <button 
+                                        onClick={shareToLinkedIn}
+                                        className="flex items-center gap-2 px-3 py-2 text-xs font-bold rounded-lg border border-border bg-surface hover:border-[#0077b5] hover:text-[#0077b5] hover:bg-[#0077b5]/5 transition-all"
+                                    >
+                                        <Linkedin className="w-4 h-4" />
+                                        <span className="hidden sm:inline">Share</span>
+                                    </button>
+                                    <button 
+                                        onClick={shareToTwitter}
+                                        className="flex items-center gap-2 px-3 py-2 text-xs font-bold rounded-lg border border-border bg-surface hover:border-[#1da1f2] hover:text-[#1da1f2] hover:bg-[#1da1f2]/5 transition-all"
+                                    >
+                                        <Twitter className="w-4 h-4" />
+                                        <span className="hidden sm:inline">Tweet</span>
+                                    </button>
+                                    <button 
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(`${SITE_URL}/blogs/${blog.slug}`)
+                                            alert('Link copied to clipboard!')
+                                        }}
+                                        className="flex items-center gap-2 px-3 py-2 text-xs font-bold rounded-lg border border-border bg-surface hover:border-primary hover:text-primary hover:bg-primary/5 transition-all"
+                                    >
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                        <span className="hidden sm:inline">Copy</span>
+                                    </button>
+                                </div>
+                            </div>
                         </footer>
                     </main>
 

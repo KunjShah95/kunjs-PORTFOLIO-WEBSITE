@@ -6,6 +6,7 @@ import { ThemeProvider } from './components/ThemeProvider'
 import { Layout } from './components/Layout'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { LoadingSpinner } from './components/LoadingSpinner'
+import { ScrollToTop } from './components/ScrollToTop'
 
 // Eager load critical components for Home
 import { Hero } from './components/Hero'
@@ -47,9 +48,9 @@ function Home() {
         faqItems={PORTFOLIO_FAQ}
       />
       <Hero />
+      <Projects />
       <Experience />
       <AIVideoCreation />
-      <Projects />
       <GitHubProfile />
       <ResearcherLive />
       <Skills />
@@ -66,6 +67,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         <InitialLoader />
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <MotionConfig reducedMotion="user">

@@ -1,21 +1,38 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Hash, ArrowUpRight, BookOpen } from 'lucide-react'
 import { SEO } from '../components/SEO'
 import { BLOGS, LOGS } from '../data/portfolio'
 
 export function BlogsPage() {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [activeTab, setActiveTab] = useState<'BLOGS' | 'LOGS'>('BLOGS')
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState<string>('')
+
+  useEffect(() => {
+    const category = searchParams.get('category')
+    const search = searchParams.get('search')
+    
+    if (category) setSelectedCategory(category)
+    if (search) setSearchQuery(search.toLowerCase())
+  }, [searchParams])
 
   // Get all unique categories
   const categories = Array.from(new Set(BLOGS.map(b => b.category)))
 
-  // Filter blogs by category
-  const filteredBlogs = selectedCategory
-    ? BLOGS.filter(blog => blog.category === selectedCategory)
-    : BLOGS
+  // Filter blogs by category and search
+  const filteredBlogs = BLOGS.filter(blog => {
+    const matchesCategory = selectedCategory ? blog.category === selectedCategory : true
+    const matchesSearch = searchQuery 
+      ? blog.title.toLowerCase().includes(searchQuery) || 
+        blog.excerpt.toLowerCase().includes(searchQuery) ||
+        blog.tags.some(t => t.toLowerCase().includes(searchQuery)) ||
+        blog.id.toLowerCase().includes(searchQuery)
+      : true
+    return matchesCategory && matchesSearch
+  })
 
   return (
     <div className="min-h-screen pt-32 pb-20 bg-bg">
