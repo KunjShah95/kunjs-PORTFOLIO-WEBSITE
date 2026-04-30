@@ -490,185 +490,138 @@ export function GitHubProfile() {
           </motion.div>
         )}
 
-        {/* ─── Contribution Heatmap ─── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="bg-surface border border-border rounded-lg p-6 sm:p-8 space-y-6"
-        >
-          {/* Heatmap header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-primary/10 rounded-lg border border-primary/15">
-                <Github className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-txt">Contribution Activity</h3>
-                <p className="text-xs text-muted font-light mt-0.5">
-                  {loading ? 'Loading…' : error ? 'Unavailable' : `${totalContribs.toLocaleString()} contributions in ${selectedYear}`}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              {/* Year selector */}
-              <div className="relative">
-                <button
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex items-center gap-2 px-3 py-1.5 bg-surfaceHighlight hover:bg-border/50 transition-all rounded-md text-xs font-medium text-txt border border-border/70"
-                >
-                  <Calendar className="w-3 h-3 text-muted" />
-                  {selectedYear}
-                  <ChevronDown className={`w-3 h-3 text-muted transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {dropdownOpen && (
-                  <div className="absolute top-full right-0 mt-1.5 bg-surface border border-border rounded-lg overflow-hidden z-30 min-w-[90px] shadow-2xl shadow-black/20">
-                    {years.map((y) => (
-                      <button
-                        key={y}
-                        onClick={() => { setSelectedYear(y); setDropdownOpen(false) }}
-                        className={`w-full px-4 py-2 text-left text-xs hover:bg-surfaceHighlight transition-colors ${y === selectedYear ? 'text-primary font-semibold bg-primary/5' : 'text-txt'}`}
-                      >
-                        {y}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Legend */}
-              <div className="hidden sm:flex items-center gap-1.5 ml-2">
-                <span className="text-[10px] text-muted">Less</span>
-                {CELL_STYLES.map((cls, i) => (
-                  <div key={i} className={`w-3 h-3 rounded-[2px] ${cls}`} />
-                ))}
-                <span className="text-[10px] text-muted">More</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Heatmap grid */}
-          <div className="relative overflow-x-auto pb-1">
-            {loading ? (
-              <div className="flex items-center justify-center py-16">
-                <Loader2 className="w-5 h-5 animate-spin text-muted" />
-              </div>
-            ) : error ? (
-              <div className="flex items-center justify-center py-16 text-sm text-muted">{error}</div>
-            ) : (
-              <div className="min-w-max select-none">
-                {/* Month labels */}
-                <div className="flex mb-1.5 relative h-4 ml-[30px]">
-                  {monthLabels.map((label, i) => (
-                    <div
-                      key={i}
-                      style={{ position: 'absolute', left: `${(label.idx / weeks.length) * 100}%` }}
-                      className="text-[10px] font-medium text-muted/70"
-                    >
-                      {label.month}
-                    </div>
-                  ))}
+        {/* ─── Heatmap + Languages (Two Columns) ─── */}
+        <div className="grid md:grid-cols-5 gap-6">
+          {/* Contribution Heatmap - 3 cols */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="md:col-span-3 bg-surface border border-border rounded-lg p-6 sm:p-8 space-y-6"
+          >
+            {/* Heatmap header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-primary/10 rounded-lg border border-primary/15">
+                  <Github className="w-5 h-5 text-primary" />
                 </div>
+                <div>
+                  <h3 className="text-base font-bold text-txt">Contribution Activity</h3>
+                  <p className="text-xs text-muted font-light mt-0.5">
+                    {loading ? 'Loading…' : error ? 'Unavailable' : `${totalContribs.toLocaleString()} contributions in ${selectedYear}`}
+                  </p>
+                </div>
+              </div>
 
-                <div className="flex gap-[3px]">
-                  {/* Day labels */}
-                  <div className="flex flex-col gap-[3px] pr-1.5 text-[8px] font-mono text-muted/50 w-[26px] pt-[13px]">
-                    {['', 'Mon', '', 'Wed', '', 'Fri', ''].map((d, i) => (
-                      <div key={i} className="h-[11px] flex items-center justify-end">{d}</div>
-                    ))}
-                  </div>
-
-                  {/* Cells */}
-                  {weeks.map((week, wi) => (
-                    <div key={wi} className="flex flex-col gap-[3px]">
-                      {week.map((day, di) => (
-                        <div
-                          key={`${wi}-${di}`}
-                          onMouseEnter={(e) => {
-                            if (day.date) {
-                              const rect = (e.target as HTMLElement).getBoundingClientRect()
-                              setTooltip({
-                                text: `${day.count} contribution${day.count !== 1 ? 's' : ''} on ${day.date}`,
-                                x: rect.left + rect.width / 2,
-                                y: rect.top - 8,
-                              })
-                            }
-                          }}
-                          onMouseLeave={() => setTooltip(null)}
-                          className={`w-[11px] h-[11px] rounded-[2px] transition-opacity hover:opacity-80 cursor-default ${
-                            day.level === -1 ? 'bg-transparent' : CELL_STYLES[Math.min(day.level, 4)] ?? CELL_STYLES[0]
-                          }`}
-                        />
+              <div className="flex items-center gap-2">
+                {/* Year selector */}
+                <div className="relative">
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-surfaceHighlight hover:bg-border/50 transition-all rounded-md text-xs font-medium text-txt border border-border/70"
+                  >
+                    <Calendar className="w-3 h-3 text-muted" />
+                    {selectedYear}
+                    <ChevronDown className={`w-3 h-3 text-muted transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute top-full right-0 mt-1.5 bg-surface border border-border rounded-lg overflow-hidden z-30 min-w-[90px] shadow-2xl shadow-black/20">
+                      {years.map((y) => (
+                        <button
+                          key={y}
+                          onClick={() => { setSelectedYear(y); setDropdownOpen(false) }}
+                          className={`w-full px-4 py-2 text-left text-xs hover:bg-surfaceHighlight transition-colors ${y === selectedYear ? 'text-primary font-semibold bg-primary/5' : 'text-txt'}`}
+                        >
+                          {y}
+                        </button>
                       ))}
                     </div>
+                  )}
+                </div>
+
+                {/* Legend */}
+                <div className="hidden sm:flex items-center gap-1.5 ml-2">
+                  <span className="text-[10px] text-muted">Less</span>
+                  {CELL_STYLES.map((cls, i) => (
+                    <div key={i} className={`w-3 h-3 rounded-[2px] ${cls}`} />
                   ))}
+                  <span className="text-[10px] text-muted">More</span>
                 </div>
               </div>
-            )}
-          </div>
-        </motion.div>
+            </div>
 
-        {/* ─── Language Bar + Repos ─── */}
-        <div className="grid lg:grid-cols-2 gap-6">
-          {/* Language distribution */}
-          <LanguageBar repos={allRepos} />
-
-          {/* Streak / quick facts */}
-          {user && (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.25 }}
-              className="bg-surface border border-border rounded-lg p-6 space-y-4"
-            >
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-primary" />
-                <h3 className="text-sm font-semibold text-txt">Quick Facts</h3>
-              </div>
-              <div className="space-y-3">
-                {[
-                  { label: 'Member since', value: new Date(user.created_at).getFullYear().toString(), href: null },
-                  { label: 'Public repos',  value: `${user.public_repos} repositories`,              href: null },
-                  { label: 'Followers',     value: `${user.followers} developers`,                   href: null },
-                  ...(user.location ? [{ label: 'Location', value: user.location,                    href: null }] : []),
-                  ...(user.blog    ? [{ label: 'Website',  value: user.blog.replace(/^https?:\/\//, ''), href: user.blog.startsWith('http') ? user.blog : `https://${user.blog}` }] : []),
-                ].map(({ label, value, href }) => (
-                  <div key={label} className="flex items-center justify-between text-sm gap-3">
-                    <span className="text-muted shrink-0">{label}</span>
-                    {href ? (
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-primary font-medium text-right truncate hover:underline underline-offset-2 max-w-[55%]"
+            {/* Heatmap grid */}
+            <div className="relative overflow-x-auto pb-1">
+              {loading ? (
+                <div className="flex items-center justify-center py-16">
+                  <Loader2 className="w-5 h-5 animate-spin text-muted" />
+                </div>
+              ) : error ? (
+                <div className="flex items-center justify-center py-16 text-sm text-muted">{error}</div>
+              ) : (
+                <div className="min-w-max select-none">
+                  {/* Month labels */}
+                  <div className="flex mb-1.5 relative h-4 ml-[30px]">
+                    {monthLabels.map((label, i) => (
+                      <div
+                        key={i}
+                        style={{ position: 'absolute', left: `${(label.idx / weeks.length) * 100}%` }}
+                        className="text-[10px] font-medium text-muted/70"
                       >
-                        <Globe className="w-3 h-3 flex-shrink-0" />
-                        <span className="truncate">{value}</span>
-                        <ExternalLink className="w-3 h-3 flex-shrink-0" />
-                      </a>
-                    ) : (
-                      <span className="text-txt font-medium text-right truncate max-w-[55%]">{value}</span>
-                    )}
+                        {label.month}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              <div className="pt-2 border-t border-border/50">
-                <a
-                  href={`https://github.com/${GITHUB_USERNAME}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-border bg-surfaceHighlight hover:border-primary/40 hover:text-primary text-sm font-medium text-muted transition-all"
-                >
-                  <Github className="w-4 h-4" />
-                  View full profile
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </motion.div>
-          )}
+
+                  <div className="flex gap-[3px]">
+                    {/* Day labels */}
+                    <div className="flex flex-col gap-[3px] pr-1.5 text-[8px] font-mono text-muted/50 w-[26px] pt-[13px]">
+                      {['', 'Mon', '', 'Wed', '', 'Fri', ''].map((d, i) => (
+                        <div key={i} className="h-[11px] flex items-center justify-end">{d}</div>
+                      ))}
+                    </div>
+
+                    {/* Cells */}
+                    {weeks.map((week, wi) => (
+                      <div key={wi} className="flex flex-col gap-[3px]">
+                        {week.map((day, di) => (
+                          <div
+                            key={`${wi}-${di}`}
+                            onMouseEnter={(e) => {
+                              if (day.date) {
+                                const rect = (e.target as HTMLElement).getBoundingClientRect()
+                                setTooltip({
+                                  text: `${day.count} contribution${day.count !== 1 ? 's' : ''} on ${day.date}`,
+                                  x: rect.left + rect.width / 2,
+                                  y: rect.top - 8,
+                                })
+                              }
+                            }}
+                            onMouseLeave={() => setTooltip(null)}
+                            className={`w-[11px] h-[11px] rounded-[2px] transition-opacity hover:opacity-80 cursor-default ${
+                              day.level === -1 ? 'bg-transparent' : CELL_STYLES[Math.min(day.level, 4)] ?? CELL_STYLES[0]
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Language Distribution - 2 cols */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="md:col-span-2"
+          >
+            <LanguageBar repos={allRepos} />
+          </motion.div>
         </div>
 
         {/* ─── Recent Repositories ─── */}
