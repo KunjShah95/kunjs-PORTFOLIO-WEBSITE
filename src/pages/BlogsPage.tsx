@@ -6,7 +6,7 @@ import { SEO } from '../components/SEO'
 import { BLOGS, LOGS } from '../data/portfolio'
 
 export function BlogsPage() {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const [activeTab, setActiveTab] = useState<'BLOGS' | 'LOGS'>('BLOGS')
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState<string>('')
