@@ -12,11 +12,10 @@ import {
   GitFork,
   Activity,
   Code2,
-  TrendingUp,
   RefreshCw,
   Globe,
 } from 'lucide-react'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { IDENTITY } from '../data/portfolio'
 
 const GITHUB_USERNAME = IDENTITY.github_username
@@ -133,52 +132,27 @@ function useCountUp(target: number, duration = 1.2) {
   return display
 }
 
-function StatCard({
+function StatCardMinimal({
   icon: Icon,
   label,
   value,
-  delay = 0,
 }: {
   icon: React.ElementType
   label: string
   value: number
-  delay?: number
 }) {
-  const [triggered, setTriggered] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-  const animated = useCountUp(triggered ? value : 0)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setTriggered(true) },
-      { threshold: 0.5 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
+  const animated = useCountUp(value)
+  
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay, duration: 0.45 }}
-      className="group flex flex-col gap-2 p-5 bg-surface border border-border rounded-lg hover:border-primary/30 hover:bg-surfaceHighlight/50 transition-all duration-300"
-    >
-      <div className="flex items-center justify-between">
-        <div className="p-2 bg-primary/10 rounded-md border border-primary/15">
-          <Icon className="w-4 h-4 text-primary" />
-        </div>
-        <TrendingUp className="w-3 h-3 text-primary/30 group-hover:text-primary/60 transition-colors" />
+    <div className="flex items-center gap-3 p-3 bg-surfaceHighlight/50 rounded-lg">
+      <div className="p-1.5 bg-primary/10 rounded">
+        <Icon className="w-4 h-4 text-primary" />
       </div>
-      <div className="space-y-0.5">
-        <div className="text-2xl font-bold text-txt font-mono tabular-nums">{animated}</div>
-        <div className="text-[11px] text-muted font-medium uppercase tracking-wide">{label}</div>
+      <div>
+        <div className="text-lg font-bold text-txt font-mono tabular-nums">{animated}</div>
+        <div className="text-[10px] text-muted uppercase tracking-wide">{label}</div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -471,14 +445,49 @@ export function GitHubProfile() {
           </div>
         </div>
 
-        {/* ─── Stats Grid ─── */}
+        {/* ─── Profile Summary Card ─── */}
         {user && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <StatCard icon={BookOpen} label="Repositories" value={user.public_repos} delay={0} />
-            <StatCard icon={Users}    label="Followers"    value={user.followers}     delay={0.07} />
-            <StatCard icon={Star}     label="Total Stars"  value={totalStars}         delay={0.14} />
-            <StatCard icon={GitFork}  label="Following"    value={user.following}     delay={0.21} />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-surface border border-border rounded-lg p-6"
+          >
+            {/* Stats row */}
+            <div className="grid grid-cols-4 gap-4 mb-6">
+              <StatCardMinimal icon={BookOpen} label="Repos" value={user.public_repos} />
+              <StatCardMinimal icon={Users} label="Followers" value={user.followers} />
+              <StatCardMinimal icon={Star} label="Stars" value={totalStars} />
+              <StatCardMinimal icon={GitFork} label="Following" value={user.following} />
+            </div>
+            
+            {/* Quick facts row */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+              <div className="flex items-center gap-2 text-muted">
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Member since {new Date(user.created_at).getFullYear()}</span>
+              </div>
+              {user.location && (
+                <div className="flex items-center gap-2 text-muted">
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>{user.location}</span>
+                </div>
+              )}
+              {user.blog && (
+                <a
+                  href={user.blog.startsWith('http') ? user.blog : `https://${user.blog}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-primary hover:underline"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  <span className="truncate max-w-[200px]">{user.blog.replace(/^https?:\/\//, '')}</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              )}
+            </div>
+          </motion.div>
         )}
 
         {/* ─── Contribution Heatmap ─── */}
