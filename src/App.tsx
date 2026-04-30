@@ -15,9 +15,10 @@ import { Skills } from './components/Skills'
 import { Education } from './components/Education'
 import { ResearchLabs } from './components/ResearchLabs'
 import { Experience } from './components/Experience'
-import { Writing } from './components/Writing'
+
 import { AIVideoCreation } from './components/AIVideoCreation'
 import { ResearcherLive } from './components/ResearcherLive'
+import { Music } from './components/Music'
 import { GitHubProfile } from './components/GitHubProfile'
 import { Contact } from './components/Contact'
 import { SEO } from './components/SEO'
@@ -52,10 +53,10 @@ function Home() {
       <Experience />
       <AIVideoCreation />
       <GitHubProfile />
+      <Music />
       <ResearcherLive />
       <Skills />
       <ResearchLabs />
-      <Writing />
       <Education />
       <PortfolioFAQ />
       <Contact />
