@@ -219,55 +219,6 @@ function LanguageBar({ repos }: { repos: GitHubRepo[] }) {
   )
 }
 
-function RepoCard({ repo, delay = 0 }: { repo: GitHubRepo; delay?: number }) {
-  return (
-    <motion.a
-      href={repo.html_url}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay, duration: 0.45 }}
-      className="group flex flex-col gap-3 p-5 bg-surface border border-border rounded-lg hover:border-primary/30 hover:shadow-md transition-all duration-300"
-    >
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center gap-2 min-w-0">
-          <GitBranch className="w-4 h-4 text-primary flex-shrink-0" />
-          <span className="text-sm font-semibold text-txt group-hover:text-primary transition-colors truncate">
-            {repo.name}
-          </span>
-        </div>
-        <ExternalLink className="w-3.5 h-3.5 text-muted/40 group-hover:text-primary transition-colors flex-shrink-0" />
-      </div>
-
-      {repo.description && (
-        <p className="text-xs text-muted leading-relaxed line-clamp-2">{repo.description}</p>
-      )}
-
-      <div className="flex items-center gap-4 mt-auto pt-1">
-        {repo.language && (
-          <div className="flex items-center gap-1.5">
-            <div
-              className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: LANGUAGE_COLORS[repo.language] ?? '#6b7280' }}
-            />
-            <span className="text-[10px] text-muted">{repo.language}</span>
-          </div>
-        )}
-        <div className="flex items-center gap-1 text-[10px] text-muted">
-          <Star className="w-3 h-3" />
-          {repo.stargazers_count}
-        </div>
-        <div className="flex items-center gap-1 text-[10px] text-muted">
-          <GitFork className="w-3 h-3" />
-          {repo.forks_count}
-        </div>
-      </div>
-    </motion.a>
-  )
-}
-
 async function fetchContributions(username: string, year: number): Promise<ContributionDay[]> {
   try {
     const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=${year}`)
@@ -643,9 +594,53 @@ export function GitHubProfile() {
           </div>
 
           {repos.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="flex gap-4 overflow-x-auto pb-4 -mx-2 px-2 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
               {repos.map((repo, i) => (
-                <RepoCard key={repo.id} repo={repo} delay={i * 0.06} />
+                <motion.a
+                  key={repo.id}
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05, duration: 0.4 }}
+                  className="flex-shrink-0 w-[280px] group flex flex-col gap-3 p-5 bg-surface border border-border rounded-lg hover:border-primary/30 hover:shadow-md transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <GitBranch className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span className="text-sm font-semibold text-txt group-hover:text-primary transition-colors truncate">
+                        {repo.name}
+                      </span>
+                    </div>
+                    <ExternalLink className="w-3.5 h-3.5 text-muted/40 group-hover:text-primary transition-colors flex-shrink-0" />
+                  </div>
+
+                  {repo.description && (
+                    <p className="text-xs text-muted leading-relaxed line-clamp-2">{repo.description}</p>
+                  )}
+
+                  <div className="flex items-center gap-4 mt-auto pt-1">
+                    {repo.language && (
+                      <div className="flex items-center gap-1.5">
+                        <div
+                          className="w-2 h-2 rounded-full"
+                          style={{ backgroundColor: LANGUAGE_COLORS[repo.language] ?? '#6b7280' }}
+                        />
+                        <span className="text-[10px] text-muted">{repo.language}</span>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-1 text-[10px] text-muted">
+                      <Star className="w-3 h-3" />
+                      {repo.stargazers_count}
+                    </div>
+                    <div className="flex items-center gap-1 text-[10px] text-muted">
+                      <GitFork className="w-3 h-3" />
+                      {repo.forks_count}
+                    </div>
+                  </div>
+                </motion.a>
               ))}
             </div>
           ) : (
