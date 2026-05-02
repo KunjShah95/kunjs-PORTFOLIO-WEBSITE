@@ -15,10 +15,7 @@ import { Skills } from './components/Skills'
 import { Education } from './components/Education'
 import { ResearchLabs } from './components/ResearchLabs'
 import { Experience } from './components/Experience'
-
-import { AIVideoCreation } from './components/AIVideoCreation'
 import { ResearcherLive } from './components/ResearcherLive'
-import { Music } from './components/Music'
 import { GitHubProfile } from './components/GitHubProfile'
 import { Contact } from './components/Contact'
 import { SEO } from './components/SEO'
@@ -36,7 +33,6 @@ const ExperiencePage = lazy(() => import('./pages/ExperiencePage').then(module =
 const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })))
 const HackathonsPage = lazy(() => import('./pages/HackathonsPage').then(module => ({ default: module.HackathonsPage })))
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })))
-const AIVideoPage = lazy(() => import('./pages/AIVideoPage').then(module => ({ default: module.AIVideoPage })))
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage').then(module => ({ default: module.ProjectDetailPage })))
 const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage').then(module => ({ default: module.BlogDetailPage })))
 
@@ -51,9 +47,7 @@ function Home() {
       <Hero />
       <Projects />
       <Experience />
-      <AIVideoCreation />
       <GitHubProfile />
-      <Music />
       <ResearcherLive />
       <Skills />
       <ResearchLabs />
@@ -88,7 +82,6 @@ function App() {
                     <Route path="/blogs/:slug" element={<BlogDetailPage />} />
                     <Route path="/education" element={<EducationPage />} />
                     <Route path="/contact" element={<ContactPage />} />
-                    <Route path="/ai-videos" element={<AIVideoPage />} />
                   </Routes>
                 </Suspense>
               </Layout>

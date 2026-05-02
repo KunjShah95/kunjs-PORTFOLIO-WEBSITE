@@ -8,6 +8,9 @@ export interface Project {
     demo?: string;
     slug: string;
     impact: string;
+    problem?: string;
+    outcome?: string;
+    featured?: boolean;
 }
 
 export interface Blog {
