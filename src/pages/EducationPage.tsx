@@ -8,7 +8,7 @@ export function EducationPage() {
       <SEO 
         title="Education"
         description="Kunj Shah's academic background and educational achievements in Computer Science and Engineering."
-        url="https://kunjshah.dev/education"
+        url="https://kunjshah.vercel.app/education"
       />
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

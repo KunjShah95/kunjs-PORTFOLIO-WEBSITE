@@ -39,7 +39,7 @@ export function BlogsPage() {
       <SEO
         title="Technical Articles & Research Logs"
         description="Read Kunj Shah's in-depth technical articles on AI systems, MLOps, computer vision, and autonomous agents."
-        url="https://kunjshah.dev/blogs"
+        url="https://kunjshah.vercel.app/blogs"
       />
 
       <div className="container-aligned space-y-16">

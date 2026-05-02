@@ -8,7 +8,7 @@ export function LabsPage() {
       <SEO 
         title="Research Labs"
         description="Explore Kunj Shah's experimental research labs and cutting-edge AI prototypes."
-        url="https://kunjshah.dev/labs"
+        url="https://kunjshah.vercel.app/labs"
       />
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

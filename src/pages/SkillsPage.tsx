@@ -15,7 +15,7 @@ export function SkillsPage() {
       <SEO
         title="Skills & Tech Stack"
         description="A comprehensive map of Kunj Shah's AI Systems Engineering capabilities and technology stack."
-        url="https://kunjshah.dev/skills"
+        url="https://kunjshah.vercel.app/skills"
       />
 
       <div className="container-aligned space-y-16">

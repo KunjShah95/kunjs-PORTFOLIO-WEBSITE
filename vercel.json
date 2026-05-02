@@ -1,15 +1,15 @@
 {
   "rewrites": [
     {
-      "source": "/.well-known/api-catalog.json",
+      "source": "/.well-known/api-catalog",
       "destination": "/.well-known/api-catalog.json"
     },
     {
-      "source": "/.well-known/openid-configuration.json",
+      "source": "/.well-known/openid-configuration",
       "destination": "/.well-known/openid-configuration.json"
     },
     {
-      "source": "/.well-known/oauth-protected-resource.json",
+      "source": "/.well-known/oauth-protected-resource",
       "destination": "/.well-known/oauth-protected-resource.json"
     },
     {
@@ -42,7 +42,7 @@
   ],
   "headers": [
     {
-      "source": "/.well-known/api-catalog.json",
+      "source": "/.well-known/api-catalog",
       "headers": [
         {
           "key": "Content-Type",
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "source": "/.well-known/openid-configuration.json",
+      "source": "/.well-known/openid-configuration",
       "headers": [
         {
           "key": "Content-Type",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "source": "/.well-known/oauth-protected-resource.json",
+      "source": "/.well-known/oauth-protected-resource",
       "headers": [
         {
           "key": "Content-Type",
@@ -91,7 +91,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog.json>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\", <https://kunjshah.dev/api/llms>; rel=\"llms-full-text\", <https://kunjshah.dev/llms.txt>; rel=\"alternate\", <https://kunjshah.dev/sitemap.xml>; rel=\"sitemap\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\", <https://kunjshah.dev/api/llms>; rel=\"llms-full-text\", <https://kunjshah.dev/llms.txt>; rel=\"alternate\", <https://kunjshah.dev/sitemap.xml>; rel=\"sitemap\""
         }
       ]
     }

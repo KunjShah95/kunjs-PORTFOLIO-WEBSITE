@@ -19,7 +19,7 @@ export function AboutPage() {
          <SEO
             title="About"
             description="Learn about Kunj Shah, an AI/ML Engineer specializing in autonomous systems, agentic workflows, and LLM orchestration."
-            url="https://kunjshah.dev/about"
+            url="https://kunjshah.vercel.app/about"
          />
 
          <div className="container-aligned space-y-20">

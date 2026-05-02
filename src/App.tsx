@@ -7,6 +7,7 @@ import { Layout } from './components/Layout'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { LoadingSpinner } from './components/LoadingSpinner'
 import { ScrollToTop } from './components/ScrollToTop'
+import { useWebMCP } from './hooks/useWebMCP'
 
 // Eager load critical components for Home
 import { Hero } from './components/Hero'
@@ -56,6 +57,8 @@ function Home() {
 }
 
 function App() {
+  useWebMCP();
+
   return (
     <HelmetProvider>
       <Router>

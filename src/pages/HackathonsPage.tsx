@@ -81,7 +81,7 @@ export function HackathonsPage() {
       <SEO
         title="Hackathons"
         description="Hackathon achievements and awards won by Kunj Shah. Competitive programming and rapid prototyping."
-        url="https://kunjshah.dev/hackathons"
+        url="https://kunjshah.vercel.app/hackathons"
       />
 
       <div className="container-aligned space-y-16">

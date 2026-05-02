@@ -8,20 +8,20 @@ Kunj Shah builds end-to-end AI systems: generative AI applications, autonomous a
 
 ## Canonical URL
 
-- https://kunjshah.dev/
+- https://kunjshah.vercel.app/
 
 ## Key pages
 
-- Home / overview: https://kunjshah.dev/
-- About: https://kunjshah.dev/about
-- Projects (index): https://kunjshah.dev/projects
-- Skills: https://kunjshah.dev/skills
-- Experience: https://kunjshah.dev/experience
-- Education: https://kunjshah.dev/education
-- Labs: https://kunjshah.dev/labs
-- Writing / blog index: https://kunjshah.dev/blogs
-- Contact: https://kunjshah.dev/contact
-- AI video work: https://kunjshah.dev/ai-videos
+- Home / overview: https://kunjshah.vercel.app/
+- About: https://kunjshah.vercel.app/about
+- Projects (index): https://kunjshah.vercel.app/projects
+- Skills: https://kunjshah.vercel.app/skills
+- Experience: https://kunjshah.vercel.app/experience
+- Education: https://kunjshah.vercel.app/education
+- Labs: https://kunjshah.vercel.app/labs
+- Writing / blog index: https://kunjshah.vercel.app/blogs
+- Contact: https://kunjshah.vercel.app/contact
+- AI video work: https://kunjshah.vercel.app/ai-videos
 
 ## Profiles (same person)
 
@@ -33,9 +33,9 @@ Kunj Shah builds end-to-end AI systems: generative AI applications, autonomous a
 
 ## Optional
 
-- Sitemap: https://kunjshah.dev/sitemap.xml
-- This file: https://kunjshah.dev/llms.txt
-- JSON API (all data): https://kunjshah.dev/api/portfolio.json
+- Sitemap: https://kunjshah.vercel.app/sitemap.xml
+- This file: https://kunjshah.vercel.app/llms.txt
+- JSON API (all data): https://kunjshah.vercel.app/api/portfolio.json
 
 Last updated: 2026-05-02
 

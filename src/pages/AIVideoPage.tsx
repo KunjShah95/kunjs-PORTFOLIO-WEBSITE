@@ -7,7 +7,7 @@ export function AIVideoPage() {
       <SEO 
         title="AI Video Creation"
         description="AI-powered video creation services by Kunj Shah. Leveraging generative AI for stunning visual content."
-        url="https://kunjshah.dev/ai-videos"
+        url="https://kunjshah.vercel.app/ai-videos"
       />
       <AIVideoCreation />
     </div>

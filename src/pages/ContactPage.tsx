@@ -8,7 +8,7 @@ export function ContactPage() {
       <SEO 
         title="Hire & Consult | AI Systems Engineering"
         description="Initiate contact for high-stakes AI engineering projects, autonomous agent development, and technical consulting with Kunj Shah."
-        url="https://kunjshah.dev/contact"
+        url="https://kunjshah.vercel.app/contact"
       />
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

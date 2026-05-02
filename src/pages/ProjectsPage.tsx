@@ -36,7 +36,7 @@ export function ProjectsPage() {
       <SEO 
         title="AI Engineering Projects & Case Studies"
         description="Deep dive into production-grade AI systems, autonomous agents, and computer vision pipelines engineered by Kunj Shah. View source code and architecture."
-        url="https://kunjshah.dev/projects"
+        url="https://kunjshah.vercel.app/projects"
       />
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
