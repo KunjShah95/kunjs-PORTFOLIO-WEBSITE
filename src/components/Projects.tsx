@@ -155,6 +155,21 @@ export function Projects() {
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
+
+        <div className="fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-md border-t border-border p-4 md:hidden flex justify-around gap-4 z-50">
+          <Link
+            to="/projects"
+            className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-white font-bold text-base"
+          >
+            View Projects
+          </Link>
+          <Link
+            to="/contact"
+            className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-bold text-base"
+          >
+            Let's Talk
+          </Link>
+        </div>
       </div>
     </section>
   )
