@@ -138,3 +138,9 @@ dist-ssr
 *.local
 .worktrees
 docs/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
