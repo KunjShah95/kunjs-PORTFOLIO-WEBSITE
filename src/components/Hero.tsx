@@ -15,12 +15,7 @@ export function Hero() {
       id="about"
       className="relative min-h-[92vh] flex items-center overflow-hidden bg-bg"
     >
-      <div className="absolute inset-0 pointer-events-none dot-grid opacity-[0.45] dark:opacity-[0.35]" />
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -right-24 w-[min(520px,90vw)] h-[520px] rounded-full bg-primary/[0.07] blur-[100px]" />
-        <div className="absolute bottom-0 -left-32 w-[420px] h-[420px] rounded-full bg-secondary/[0.06] blur-[90px]" />
-        <div className="absolute top-12 left-[12%] h-px w-32 bg-gradient-to-r from-transparent via-primary/40 to-transparent hidden lg:block" />
-      </div>
+      <div className="absolute inset-0 pointer-events-none dot-grid opacity-[0.35] dark:opacity-[0.25]" />
 
       <div className="relative z-10 container-aligned w-full grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center py-20 lg:py-28">
         <motion.div
@@ -32,7 +27,7 @@ export function Hero() {
           <motion.div variants={heroVariants.item}>
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-semibold tracking-wide">
               <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
-              Freelancing · AI Engineer · Data / ML Engineer
+              Freelancing · AI Engineer · Agent Builder
             </span>
           </motion.div>
 
@@ -43,18 +38,10 @@ export function Hero() {
             <h1 className="font-display text-[clamp(2.75rem,6vw,4.5rem)] font-semibold leading-[1.08] text-txt tracking-[-0.02em]">
               {IDENTITY.name}
             </h1>
-            <p className="text-xl sm:text-2xl text-primary font-medium font-display italic">
-              AI Engineer &amp; Agent Builder
+            <p className="text-xl sm:text-2xl text-primary font-medium font-display">
+              Building autonomous AI systems that deliver measurable business outcomes
             </p>
           </motion.div>
-
-          <motion.p
-            variants={heroVariants.item}
-            className="text-lg text-muted leading-relaxed max-w-xl border-l-2 border-primary/35 pl-5"
-          >
-            Building end-to-end AI systems, autonomous agents, and intelligent automation workflows that solve real
-            business problems.
-          </motion.p>
 
           <motion.div variants={heroVariants.item} className="flex flex-wrap gap-2">
             {IDENTITY.focus.slice(0, 4).map((tag) => (
@@ -70,26 +57,25 @@ export function Hero() {
           <motion.div variants={heroVariants.item} className="flex flex-wrap gap-4 pt-4">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-white font-bold text-base hover:bg-primary/90 transition-all shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-white font-bold text-base hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              View My Projects
+              View Projects
               <ArrowRight className="w-5 h-5" aria-hidden />
             </Link>
-            <div className="flex gap-3">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
-              >
-                Let's Talk
-              </Link>
-              <Link
-                to="/labs"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors sm:flex"
-              >
-                <Sparkles className="w-4 h-4 text-primary" />
-                Labs
-              </Link>
-            </div>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
+            >
+              Let's Talk
+            </Link>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-txt font-semibold text-sm hover:text-primary transition-colors"
+            >
+              Resume
+            </a>
           </motion.div>
         </motion.div>
 
@@ -100,13 +86,9 @@ export function Hero() {
             animate="show"
             className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[min(100%,420px)] lg:h-[420px] lg:aspect-square"
           >
-            <div
-              className="absolute -inset-3 rounded-[1.35rem] bg-gradient-to-br from-primary/20 via-transparent to-secondary/15 opacity-80 blur-sm"
-              aria-hidden
-            />
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5" />
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-border bg-surface" />
 
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-2xl shadow-black/10 dark:shadow-black/40">
+            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-xl">
               {IDENTITY.profile_photo && !imageError ? (
                 <img
                   src={IDENTITY.profile_photo}
@@ -128,18 +110,11 @@ export function Hero() {
             <motion.div
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -bottom-3 -left-2 sm:-left-4 glass-panel rounded-xl px-4 py-3 shadow-lg max-w-[200px]"
+              className="absolute -bottom-3 -left-2 sm:-left-4 glass-panel rounded-xl px-4 py-3 shadow-lg"
             >
               <div className="text-[10px] text-muted font-semibold uppercase tracking-wider mb-0.5">Status</div>
               <div className="text-sm font-semibold text-txt">Freelancing &amp; open roles</div>
             </motion.div>
-
-            <div
-              className="absolute -top-3 right-4 sm:right-8 px-3 py-1 rounded-md border border-border bg-surface/90 text-[10px] txt-mono text-muted uppercase tracking-widest hidden sm:block"
-              aria-hidden
-            >
-              v.2026
-            </div>
           </motion.div>
         </div>
       </div>
