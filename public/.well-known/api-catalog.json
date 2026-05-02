@@ -1,0 +1,16 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://kunjshah.vercel.app/api",
+      "service-desc": [
+        {"href": "https://kunjshah.vercel.app/openapi.json", "type": "application/openapi+json"}
+      ],
+      "service-doc": [
+        {"href": "https://kunjshah.vercel.app/docs/api", "type": "text/html"}
+      ],
+      "status": [
+        {"href": "https://kunjshah.vercel.app/api/health", "type": "application/json"}
+      ]
+    }
+  ]
+}

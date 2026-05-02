@@ -1,0 +1,15 @@
+{
+  "$schema": "https://modelcontextprotocol.github.io/schema/server-card.json",
+  "serverInfo": {
+    "name": "portfolio-mcp",
+    "version": "1.0.0"
+  },
+  "transport": {
+    "type": "sse",
+    "url": "https://kunjshah.vercel.app/mcp/sse"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": true
+  }
+}

@@ -1,8 +1,95 @@
 {
+  "headers": [
+    {
+      "source": "/.well-known/api-catalog(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/linkset+json"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/openid-configuration(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/oauth-protected-resource(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/mcp/server-card.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "source": "/.well-known/agent-skills/index.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</.well-known/api-catalog.json>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\", <https://kunjshah.vercel.app/api/llms>; rel=\"llms-full-text\", <https://kunjshah.vercel.app/llms.txt>; rel=\"alternate\", <https://kunjshah.vercel.app/sitemap.xml>; rel=\"sitemap\""
+        }
+      ]
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/.well-known/api-catalog.json",
+      "destination": "/.well-known/api-catalog.json"
+    },
+    {
+      "source": "/.well-known/openid-configuration.json",
+      "destination": "/.well-known/openid-configuration.json"
+    },
+    {
+      "source": "/.well-known/oauth-protected-resource.json",
+      "destination": "/.well-known/oauth-protected-resource.json"
+    },
+    {
+      "source": "/.well-known/mcp/server-card.json",
+      "destination": "/.well-known/mcp/server-card.json"
+    },
+    {
+      "source": "/.well-known/agent-skills/index.json",
+      "destination": "/.well-known/agent-skills/index.json"
+    },
     {
       "source": "/api/(.*)",
       "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "Accept",
+          "value": "(.*)text/markdown(.*)"
+        }
+      ],
+      "destination": "/api/llms"
     },
     {
       "source": "/(.*)",
