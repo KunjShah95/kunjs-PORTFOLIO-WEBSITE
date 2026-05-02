@@ -25,3 +25,6 @@ User-agent: Bingbot
 Allow: /
 
 Sitemap: https://kunjshah.dev/sitemap.xml
+
+# AI Agents: Machine-readable JSON endpoint
+Allow: /api/portfolio.json

@@ -35,8 +35,9 @@ Kunj Shah builds end-to-end AI systems: generative AI applications, autonomous a
 
 - Sitemap: https://kunjshah.dev/sitemap.xml
 - This file: https://kunjshah.dev/llms.txt
+- JSON API (all data): https://kunjshah.dev/api/portfolio.json
 
-Last updated: 2026-04-28
+Last updated: 2026-05-02
 
 ## Projects (2024-2026)
 

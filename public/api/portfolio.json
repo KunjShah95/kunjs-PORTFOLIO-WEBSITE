@@ -1,0 +1,250 @@
+{
+  "identity": {
+    "name": "Kunj Shah",
+    "title": "AI Engineer & Agent Builder",
+    "location": "Ahmedabad, Gujarat, India",
+    "email": "kunjkshah05@gmail.com",
+    "website": "https://kunjshah.dev",
+    "profiles": {
+      "github": ["https://github.com/KunjShah95", "https://github.com/KunjShah01"],
+      "linkedin": "https://www.linkedin.com/in/kunjshah05",
+      "twitter": "https://x.com/kunjshah_dev",
+      "huggingface": "https://huggingface.co/kunjshah01"
+    }
+  },
+  "about": {
+    "summary": "Building end-to-end AI systems: generative AI applications, autonomous agents and orchestration, computer vision, and full-stack prototypes. Primary stacks: Python, FastAPI, React, LangChain/agent frameworks, PyTorch, OpenCV, Docker.",
+    "focus_areas": ["Full Stack AI", "Autonomous Automation", "Neural Intelligence", "Workflow Engineering"]
+  },
+  "experience": [
+    {
+      "company": "PHAZE_AI",
+      "role": "Automation Intern",
+      "period": "Dec 2025 — Feb 2026",
+      "description": "Automating high-scale enterprise workflows using multi-agent systems and agentic reasoning. Integrating AI models into full-stack production pipelines.",
+      "skills": ["Python", "Agents", "Full Stack", "Automation"]
+    }
+  ],
+  "education": {
+    "institution": "Indus University",
+    "degree": "B.Tech Computer Science [3rd Year]",
+    "period": "2023 - 2027",
+    "specialization": "AI/ML Integration and Automation",
+    "location": "Ahmedabad, IN",
+    "summary": "Focusing on the intersection of Full Stack Dev and AI. Developing automated systems that utilize distributed intelligence at scale."
+  },
+  "skills": {
+    "full_stack_ai": {
+      "description": "Developing end-to-end intelligent applications with integrated ML backends and responsive frontends.",
+      "skills": ["React / Next.js", "FastAPI / Python", "PostgreSQL / Vald", "API Architecture"]
+    },
+    "applied_ml_automation": {
+      "description": "Automating complex reasoning tasks using modern LLM frameworks and autonomous agentic patterns.",
+      "skills": ["LangChain / CrewAI", "Agentic Workflows", "RAG Pipelines", "Automated Scraping"]
+    },
+    "core_intelligence": {
+      "description": "Engineering the neural core of applications through vision, NLP, and advanced predictive modeling.",
+      "skills": ["PyTorch / CUDA", "YOLOv8 / OpenCV", "Transformers / NLP", "Scikit-Learn"]
+    },
+    "infrastructure_dev": {
+      "description": "Building the foundation for automation through robust CI/CD, containers, and secure shell workflows.",
+      "skills": ["Docker / Kubernetes", "Git / GitHub", "Linux Shell", "Cloud Deployment"]
+    }
+  },
+  "projects": [
+    {
+      "id": "01",
+      "title": "EquityLens",
+      "category": "AI Fairness Auditing",
+      "description": "Healthcare fairness auditing platform for detecting AI bias. Ensures EU AI Act and NIST AI RMF compliance.",
+      "tech": ["React", "FastAPI", "PostgreSQL", "TensorFlow"],
+      "github": "https://github.com/KunjShah95/fairness-lens-studio",
+      "demo": "https://fairness-lens-backend-988207147245.us-central1.run.app/",
+      "slug": "equitylens",
+      "impact": "Production Ready"
+    },
+    {
+      "id": "02",
+      "title": "LearnAI",
+      "category": "Education AI",
+      "description": "AI-powered personalized learning platform with adaptive tutoring, smart quizzes, and gamification.",
+      "tech": ["Next.js", "Firebase", "Supabase", "Gemini"],
+      "github": "https://github.com/KunjShah95/intelligent-learning-assistant",
+      "demo": "https://intelligent-learning-assistant.vercel.app",
+      "slug": "learnai",
+      "impact": "Product Live"
+    },
+    {
+      "id": "03",
+      "title": "SmartFlow AI",
+      "category": "Crowd Intelligence",
+      "description": "Real-time crowd monitoring platform with live heatmaps, wait time prediction, and AI routing recommendations.",
+      "tech": ["Next.js 15", "TypeScript", "Firebase", "Firestore"],
+      "github": "https://github.com/KunjShah95/Smart-flow-ai",
+      "demo": "https://ps-1-eight.vercel.app",
+      "slug": "smart-flow-ai",
+      "impact": "Beta Live"
+    },
+    {
+      "id": "04",
+      "title": "CinePulse",
+      "category": "Full Stack ML",
+      "description": "End-to-end movie recommender system with NLP classification backend.",
+      "tech": ["Python", "PyTorch", "React", "FastAPI"],
+      "github": "https://github.com/KunjShah95/CinePulse",
+      "slug": "cinepulse",
+      "impact": "Production Ready"
+    },
+    {
+      "id": "05",
+      "title": "GAP Miner",
+      "category": "Automated Intelligence",
+      "description": "Full-stack skill gap analyzer using semantic extraction for career roadmaps.",
+      "tech": ["LLAMA-3", "LangChain", "FastAPI", "React"],
+      "github": "https://github.com/KunjShah95/GAP-Miner",
+      "slug": "gap-miner",
+      "impact": "Beta Live"
+    },
+    {
+      "id": "06",
+      "title": "Railway Inspection",
+      "category": "Computer Vision",
+      "description": "Automated defect detection using YOLOv8 for railway safety.",
+      "tech": ["C++", "OpenCV", "YOLOv8", "CUDA"],
+      "github": "https://github.com/KunjShah95/Railway-Inspection",
+      "slug": "railway-inspection",
+      "impact": "Field Tested"
+    },
+    {
+      "id": "07",
+      "title": "UPI Fraud Guard",
+      "category": "Predictive Automation",
+      "description": "Real-time fraud detection engine for anomalous transaction vectors.",
+      "tech": ["Scikit-learn", "XGBoost", "Pandas", "Flask"],
+      "github": "https://github.com/KunjShah95/UPI-Fraud-Detection",
+      "slug": "upi-fraud-guard",
+      "impact": "Algo Stable"
+    },
+    {
+      "id": "08",
+      "title": "SENTINEL CLI",
+      "category": "Security Automation",
+      "description": "Automated security auditor unifying 13+ analyzers into CLI workflow.",
+      "tech": ["Node.js", "TypeScript", "LLM", "Docker"],
+      "github": "https://github.com/KunjShah95/SENTINEL-CLI",
+      "demo": "https://sentinel-cli.vercel.app/",
+      "slug": "sentinel-cli",
+      "impact": "Open Source Product"
+    },
+    {
+      "id": "09",
+      "title": "AETHER AI",
+      "category": "Agentic Automation",
+      "description": "Multi-model terminal assistant with local inference.",
+      "tech": ["Python", "Ollama", "Gemini", "Groq"],
+      "github": "https://github.com/KunjShah95/AETHER-AI",
+      "slug": "aether-ai",
+      "impact": "Open Source Framework"
+    },
+    {
+      "id": "10",
+      "title": "MinBPE Tokenizer",
+      "category": "LLM Core Architecture",
+      "description": "Byte Pair Encoding implementation from scratch.",
+      "tech": ["Python", "NLP", "Tiktoken", "Algorithms"],
+      "github": "https://github.com/KunjShah95/TOKENIZER-FROM-SCRATCH",
+      "slug": "minbpe-tokenizer",
+      "impact": "Research Tooling"
+    },
+    {
+      "id": "11",
+      "title": "ResumeMasterAI",
+      "category": "Full Stack AI Platform",
+      "description": "Career intelligence platform for resume optimization.",
+      "tech": ["Python", "Streamlit", "LangChain", "ChromaDB"],
+      "github": "https://github.com/KunjShah01/job-snipper",
+      "demo": "https://resumemasterai.streamlit.app/",
+      "slug": "resumemaster-ai",
+      "impact": "Product Live"
+    }
+  ],
+  "blogs": [
+    {
+      "title": "Building Production-Grade Agentic Systems",
+      "slug": "agentic-systems-production",
+      "category": "Systems Architecture",
+      "excerpt": "Deep dive into designing autonomous agents that are reliable, scalable, and production-ready.",
+      "date": "Jan 2026",
+      "readTime": 12,
+      "tags": ["Agents", "Systems", "Production", "Architecture"]
+    },
+    {
+      "title": "MLOps at Scale: Lessons from High-Frequency Model Deployments",
+      "slug": "mlops-scale-deployments",
+      "category": "DevOps Infrastructure",
+      "excerpt": "Practical guide to managing continuous model updates in production.",
+      "date": "Dec 2025",
+      "readTime": 10,
+      "tags": ["MLOps", "Deployment", "Infrastructure", "Monitoring"]
+    },
+    {
+      "title": "Computer Vision at Edge: Optimizing YOLOv8",
+      "slug": "cv-edge-optimization",
+      "category": "Computer Vision",
+      "excerpt": "Techniques for deploying vision models on edge devices with sub-100ms latency.",
+      "date": "Nov 2025",
+      "readTime": 14,
+      "tags": ["Vision", "Edge", "Optimization", "Inference"]
+    },
+    {
+      "title": "EquityLens: Building an AI Fairness Auditing Platform",
+      "slug": "equitylens-case-study",
+      "category": "AI Fairness",
+      "excerpt": "How I built a production-grade platform for detecting AI bias in healthcare systems.",
+      "date": "Apr 2026",
+      "readTime": 8,
+      "tags": ["Fairness", "Healthcare", "Compliance", "Case Study"]
+    },
+    {
+      "title": "RAG Pipelines: Semantic Search and Contextual Retrieval",
+      "slug": "rag-semantic-search",
+      "category": "Generative AI",
+      "excerpt": "Comprehensive guide to building Retrieval-Augmented Generation systems.",
+      "date": "Oct 2025",
+      "readTime": 11,
+      "tags": ["RAG", "LLM", "Embeddings", "Semantic Search"]
+    },
+    {
+      "title": "Prompt Engineering for Complex Multi-Step Reasoning",
+      "slug": "prompt-engineering-reasoning",
+      "category": "Generative AI",
+      "excerpt": "Advanced prompting techniques for breaking down complex problems.",
+      "date": "Sep 2025",
+      "readTime": 9,
+      "tags": ["Prompts", "LLM", "Reasoning", "Engineering"]
+    },
+    {
+      "title": "Anomaly Detection in High-Dimensional Data Streams",
+      "slug": "anomaly-detection-streams",
+      "category": "Machine Learning",
+      "excerpt": "Building robust anomaly detection systems for real-time data.",
+      "date": "Aug 2025",
+      "readTime": 13,
+      "tags": ["Anomaly", "Streaming", "Detection", "Production"]
+    }
+  ],
+  "pages": [
+    {"path": "/", "name": "Home", "priority": 1.0},
+    {"path": "/about", "name": "About", "priority": 0.85},
+    {"path": "/projects", "name": "Projects", "priority": 0.95},
+    {"path": "/skills", "name": "Skills", "priority": 0.85},
+    {"path": "/experience", "name": "Experience", "priority": 0.8},
+    {"path": "/education", "name": "Education", "priority": 0.65},
+    {"path": "/contact", "name": "Contact", "priority": 0.75},
+    {"path": "/blogs", "name": "Blogs", "priority": 0.85},
+    {"path": "/labs", "name": "Labs", "priority": 0.75},
+    {"path": "/hackathons", "name": "Hackathons", "priority": 0.7},
+    {"path": "/ai-videos", "name": "AI Videos", "priority": 0.65}
+  ],
+  "last_updated": "2026-05-02"
+}
