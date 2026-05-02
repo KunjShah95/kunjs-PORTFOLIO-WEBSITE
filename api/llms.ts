@@ -113,11 +113,16 @@ export async function GET(request: Request) {
   if (isMarkdownRequest) {
     const content = await getContent()
     
+    // Approximate token count (1 token ≈ 4 characters)
+    const tokenCount = Math.ceil(content.length / 4).toString()
+    
     return new Response(content, {
       headers: {
         'Content-Type': 'text/markdown; charset=utf-8',
         'Cache-Control': 'public, max-age=3600, s-maxage=86400',
         'X-Content-Type-Options': 'nosniff',
+        'x-markdown-tokens': tokenCount,
+        'Content-Signal': 'ai-train=yes, search=yes, ai-input=yes',
       },
     })
   }
