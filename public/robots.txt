@@ -24,4 +24,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://kunjshah.dev/sitemap.xml
+Sitemap: https://kunjshah.vercel.app/sitemap.xml

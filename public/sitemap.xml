@@ -1,175 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://kunjshah.dev/</loc>
+    <loc>https://kunjshah.vercel.app/</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/about</loc>
+    <loc>https://kunjshah.vercel.app/about</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects</loc>
+    <loc>https://kunjshah.vercel.app/projects</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/cinepulse</loc>
+    <loc>https://kunjshah.vercel.app/projects/cinepulse</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/gap-miner</loc>
+    <loc>https://kunjshah.vercel.app/projects/gap-miner</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/railway-inspection</loc>
+    <loc>https://kunjshah.vercel.app/projects/railway-inspection</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/upi-fraud-guard</loc>
+    <loc>https://kunjshah.vercel.app/projects/upi-fraud-guard</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/sentinel-cli</loc>
+    <loc>https://kunjshah.vercel.app/projects/sentinel-cli</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/aether-ai</loc>
+    <loc>https://kunjshah.vercel.app/projects/aether-ai</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/minbpe-tokenizer</loc>
+    <loc>https://kunjshah.vercel.app/projects/minbpe-tokenizer</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/resumemaster-ai</loc>
+    <loc>https://kunjshah.vercel.app/projects/resumemaster-ai</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/skills</loc>
+    <loc>https://kunjshah.vercel.app/skills</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/labs</loc>
+    <loc>https://kunjshah.vercel.app/labs</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/experience</loc>
+    <loc>https://kunjshah.vercel.app/experience</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/education</loc>
+    <loc>https://kunjshah.vercel.app/education</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/hackathons</loc>
+    <loc>https://kunjshah.vercel.app/hackathons</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/blogs</loc>
+    <loc>https://kunjshah.vercel.app/blogs</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/blogs/agentic-systems-production</loc>
+    <loc>https://kunjshah.vercel.app/blogs/agentic-systems-production</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/blogs/mlops-scale-deployments</loc>
+    <loc>https://kunjshah.vercel.app/blogs/mlops-scale-deployments</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/blogs/cv-edge-optimization</loc>
+    <loc>https://kunjshah.vercel.app/blogs/cv-edge-optimization</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/blogs/rag-semantic-search</loc>
+    <loc>https://kunjshah.vercel.app/blogs/rag-semantic-search</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/blogs/prompt-engineering-reasoning</loc>
+    <loc>https://kunjshah.vercel.app/blogs/prompt-engineering-reasoning</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/blogs/anomaly-detection-streams</loc>
+    <loc>https://kunjshah.vercel.app/blogs/anomaly-detection-streams</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/learnai</loc>
+    <loc>https://kunjshah.vercel.app/projects/learnai</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/equitylens</loc>
+    <loc>https://kunjshah.vercel.app/projects/equitylens</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/projects/smart-flow-ai</loc>
+    <loc>https://kunjshah.vercel.app/projects/smart-flow-ai</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/blogs/equitylens-case-study</loc>
+    <loc>https://kunjshah.vercel.app/blogs/equitylens-case-study</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/contact</loc>
+    <loc>https://kunjshah.vercel.app/contact</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://kunjshah.dev/ai-videos</loc>
+    <loc>https://kunjshah.vercel.app/ai-videos</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>

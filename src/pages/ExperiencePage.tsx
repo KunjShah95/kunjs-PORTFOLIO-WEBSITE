@@ -8,7 +8,7 @@ export function ExperiencePage() {
       <SEO 
         title="Experience"
         description="Kunj Shah's professional experience in AI/ML engineering, software development, and research roles."
-        url="https://kunjshah.dev/experience"
+        url="https://kunjshah.vercel.app/experience"
       />
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
