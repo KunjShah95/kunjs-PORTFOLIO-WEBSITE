@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles, Cpu, Globe, Shield, Gauge, Terminal, Box } from 'lucide-react'
+import { ArrowRight, Cpu, Globe, Shield, Gauge, Terminal, Box } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PROJECTS } from '../data/portfolio'
 
@@ -86,8 +86,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-txt leading-tight tracking-tight mb-6"
             >
-              AI Engineer building <br />
-              <span className="text-primary">autonomous agent systems</span> & <br /> real-world LLM applications
+              <span className="text-primary">AI Engineer</span> building autonomous agent systems & real-world LLM applications
             </motion.h1>
 
             <motion.p
@@ -113,11 +112,10 @@ export function Hero() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                to="/labs"
+                to="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm"
               >
-                <Sparkles className="w-4 h-4 text-primary" />
-                Try Live Demos
+                Contact
               </Link>
             </motion.div>
           </div>

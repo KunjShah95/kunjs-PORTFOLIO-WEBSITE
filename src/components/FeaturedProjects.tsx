@@ -15,9 +15,15 @@ function ProjectFeatureCard({ project, index }: { project: typeof FEATURED_PROJE
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
       <div className="relative p-6 sm:p-8 flex flex-col h-full">
-        <h3 className="text-2xl font-display font-bold text-txt mb-6 group-hover:text-primary transition-colors">
+        <h3 className="text-2xl font-display font-bold text-txt mb-4 group-hover:text-primary transition-colors">
           {project.title}
         </h3>
+
+        <div className="mb-4 p-3 rounded-lg bg-bg border border-border">
+          <div className="flex items-center justify-center h-20 text-muted text-sm">
+            <span className="text-center">📊 Visual proof: screenshots, dashboards,<br/>or architecture diagrams</span>
+          </div>
+        </div>
 
         <div className="space-y-4 mb-6 flex-1">
           <div className="flex flex-col gap-1.5">
@@ -106,9 +112,23 @@ export function FeaturedProjects() {
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-txt mb-4">
             Real-World <span className="text-primary">Implementations</span>
           </h2>
-          <p className="text-lg text-muted max-w-2xl">
+          <p className="text-lg text-muted max-w-2xl mb-6">
             A selection of production-grade AI systems built to solve complex business problems.
           </p>
+          <div className="flex flex-wrap gap-6 text-sm">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-bold text-primary">11</span>
+              <span className="text-muted">Projects Deployed</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-bold text-primary">1.2M+</span>
+              <span className="text-muted">API Calls</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-bold text-primary">99.9%</span>
+              <span className="text-muted">Uptime</span>
+            </div>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">

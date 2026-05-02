@@ -6,6 +6,7 @@ import { TechStack } from '../components/TechStack'
 import { CurrentlyBuilding } from '../components/CurrentlyBuilding'
 import { AboutShort } from '../components/AboutShort'
 import { FinalCTA } from '../components/FinalCTA'
+import { WhyMe } from '../components/WhyMe'
 import { motion } from 'framer-motion'
 
 export function Home() {
@@ -17,6 +18,7 @@ export function Home() {
     >
       <Hero />
       <FeaturedProjects />
+      <WhyMe />
       <HowIBuild />
       <MetricsDashboard />
       <TechStack />
