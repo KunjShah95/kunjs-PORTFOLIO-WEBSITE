@@ -13,6 +13,7 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
   const navLinks = [
     { label: 'Projects', href: '/projects' },
     { label: 'Labs', href: '/labs' },
+    { label: 'AI Videos', href: '/ai-videos' },
     { label: 'Skills', href: '/skills' },
     { label: 'Hackathons', href: '/hackathons' },
   ]

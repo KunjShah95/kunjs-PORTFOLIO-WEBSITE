@@ -94,7 +94,7 @@
   }
 
   .surgical-border {
-    @apply border border-border hover:border-primary/50 transition-all duration-300;
+    @apply border border-hover:border-primary/50 transition-all duration-300;
   }
 
   .container-aligned {
@@ -115,6 +115,10 @@
 
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
+  }
+
+  .safe-area-bottom {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
   }
 
   .card-hover {

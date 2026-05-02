@@ -3,8 +3,14 @@ import { Github, Code2, ArrowRight, ExternalLink, Zap, Activity } from 'lucide-r
 import { Link } from 'react-router-dom'
 import { PROJECTS } from '../data/portfolio'
 import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
+import { Project } from '../types'
 
-function ProjectCard({ project, isFlagship = false }: { project: any, isFlagship?: boolean }) {
+interface ProjectCardProps {
+  project: Project
+  isFlagship?: boolean
+}
+
+function ProjectCard({ project, isFlagship = false }: ProjectCardProps) {
   const hasProblem = project.problem && project.outcome
   
   return (
@@ -13,7 +19,7 @@ function ProjectCard({ project, isFlagship = false }: { project: any, isFlagship
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={VIEWPORT_SECTION}
-      transition={cardRevealTransition(parseInt(project.id) - 1)}
+      transition={cardRevealTransition(parseInt(project.id, 10) - 1)}
       className={`group relative rounded-xl border border-border bg-surface hover:border-primary/30 hover:shadow-md hover:shadow-primary/[0.06] transition-[border-color,box-shadow,background-color] duration-300 overflow-hidden ${isFlagship ? 'lg:col-span-2 ring-2 ring-primary/20' : ''}`}
     >
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-0">
@@ -61,7 +67,7 @@ function ProjectCard({ project, isFlagship = false }: { project: any, isFlagship
           )}
 
           <div className="flex flex-wrap gap-2 pt-2">
-            {project.tech.map((t: string) => (
+            {project.tech?.map((t: string) => (
               <span
                 key={t}
                 className="px-2.5 py-1 text-xs font-medium text-muted bg-bg border border-border rounded-md"
@@ -106,9 +112,15 @@ function ProjectCard({ project, isFlagship = false }: { project: any, isFlagship
   )
 }
 
-export function Projects() {
+interface ProjectsProps {
+  variant?: 'home' | 'page'
+}
+
+export function Projects({ variant = 'home' }: ProjectsProps) {
   const flagshipProject = PROJECTS.find(p => p.title === 'EquityLens')
-  const otherProjects = PROJECTS.filter(p => p.title !== 'EquityLens').slice(0, 4)
+  const otherProjects = variant === 'page' 
+    ? PROJECTS.filter(p => p.title !== 'EquityLens')
+    : PROJECTS.filter(p => p.title !== 'EquityLens').slice(0, 4)
   
   return (
     <section id="projects" className="section-padding bg-bg relative">
@@ -146,30 +158,37 @@ export function Projects() {
           ))}
         </div>
 
-        <div className="flex justify-center pt-8">
-          <Link
-            to="/projects"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-surface border border-border text-txt font-bold text-base hover:border-primary/40 transition-all shadow-sm hover:shadow-md hover:shadow-primary/[0.05]"
-          >
-            Explore All Projects
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
+        {variant === 'home' && (
+          <div className="flex justify-center pt-8">
+            <Link
+              to="/projects"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-surface border border-border text-txt font-bold text-base hover:border-primary/40 transition-all shadow-sm hover:shadow-md hover:shadow-primary/[0.05]"
+            >
+              Explore All Projects
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        )}
 
-        <div className="fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-md border-t border-border p-4 md:hidden flex justify-around gap-4 z-50">
-          <Link
-            to="/projects"
-            className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-white font-bold text-base"
-          >
-            View Projects
-          </Link>
-          <Link
-            to="/contact"
-            className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-bold text-base"
-          >
-            Let's Talk
-          </Link>
-        </div>
+{variant === 'home' && (
+          <>
+            <div className="fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-md border-t border-border p-4 md:hidden flex justify-around gap-4 z-50 safe-area-bottom">
+              <Link
+                to="/projects"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-white font-bold text-base"
+              >
+                View Projects
+              </Link>
+              <Link
+                to="/contact"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-bold text-base"
+              >
+                Let's Talk
+              </Link>
+            </div>
+            <div className="h-20 md:hidden" aria-hidden="true" />
+          </>
+        )}
       </div>
     </section>
   )

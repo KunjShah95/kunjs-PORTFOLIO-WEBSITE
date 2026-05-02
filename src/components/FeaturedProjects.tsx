@@ -80,9 +80,11 @@ export function FeaturedProjects() {
                       {project.title}
                     </h3>
                   </div>
-                  <span className="shrink-0 px-2.5 py-1 rounded-md bg-primary/10 border border-primary/20 txt-mono text-[10px] text-primary uppercase tracking-wide mt-1">
-                    {project.impact.replace(/_/g, ' ')}
-                  </span>
+{project.impact ? (
+                    <span className="shrink-0 px-2.5 py-1 rounded-md bg-primary/10 border border-primary/20 txt-mono text-[10px] text-primary uppercase tracking-wide mt-1">
+                      {project.impact.replace(/_/g, ' ')}
+                    </span>
+                  ) : null}
                 </div>
 
                 {/* Problem statement */}
@@ -111,7 +113,7 @@ export function FeaturedProjects() {
 
                 {/* Tech pills */}
                 <div className="relative px-6 pt-4 flex flex-wrap gap-1.5">
-                  {project.tech.map((t) => (
+                  {project.tech?.map((t) => (
                     <span
                       key={t}
                       className="px-2.5 py-1 rounded-md bg-bg border border-border txt-mono text-[10px] text-muted uppercase tracking-wide"
