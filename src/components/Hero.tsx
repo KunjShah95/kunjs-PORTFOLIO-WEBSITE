@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Cpu, Globe, Shield, Gauge, Terminal, Box } from 'lucide-react'
+import { ArrowRight, Cpu, Globe, Shield, Gauge, Terminal, Box, FileText, Download } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PROJECTS } from '../data/portfolio'
 
@@ -117,6 +117,16 @@ export function Hero() {
               >
                 Contact
               </Link>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm"
+              >
+                <FileText className="w-4 h-4" />
+                AI/ML Resume
+                <Download className="w-3 h-3" />
+              </a>
             </motion.div>
           </div>
 
