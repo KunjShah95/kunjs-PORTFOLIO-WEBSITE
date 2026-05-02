@@ -1,80 +1,92 @@
 import { motion } from 'framer-motion'
-import { MessageSquare, Mail } from 'lucide-react'
+import { MessageSquare, Send, ExternalLink } from 'lucide-react'
 import { SOCIALS } from '../data/portfolio'
 import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
+
+function SocialCard({ social, index }: { social: typeof SOCIALS[0], index: number }) {
+  return (
+    <motion.a
+      key={social.name + social.url}
+      href={social.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEWPORT_SECTION}
+      transition={cardRevealTransition(index)}
+      className="group flex items-center justify-between p-4 rounded-xl bg-surface/60 border border-border hover:border-primary/40 transition-all duration-300"
+    >
+      <div className="flex items-center gap-3">
+        <div className="p-2 rounded-lg bg-primary/10">
+          <social.icon className="w-4 h-4 text-primary" />
+        </div>
+        <div>
+          <div className="text-xs text-muted font-mono">{social.label}</div>
+          <div className="text-sm font-semibold text-txt">{social.name}</div>
+        </div>
+      </div>
+      <ExternalLink className="w-4 h-4 text-muted group-hover:text-primary transition-colors" />
+    </motion.a>
+  )
+}
 
 export function Contact() {
   return (
     <section id="contact" className="section-padding bg-bg relative">
-      <div className="container-aligned">
-        <div className="grid lg:grid-cols-12 gap-10 items-start">
-
-          {/* Header */}
-          <div className="lg:col-span-12 border-b border-border pb-8 space-y-2">
-            <div className="flex items-center gap-2 text-muted text-sm font-medium">
-              <Mail className="w-4 h-4" />
-              Contact
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
-              Let's Connect
-            </h2>
+      <div className="absolute inset-0 tech-grid-layer opacity-30" />
+      
+      <div className="container-aligned relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_SECTION}
+          className="mb-8"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Send className="w-4 h-4 text-primary" />
+            <span className="text-xs font-mono text-muted uppercase tracking-wider">Connect</span>
           </div>
+          <h2 className="text-3xl font-bold text-txt mb-2">
+            Get In <span className="text-primary">Touch</span>
+          </h2>
+          <p className="text-muted max-w-lg">
+            Building something together? Let's talk about your AI systems.
+          </p>
+        </motion.div>
 
-          {/* Contact Links */}
+        <div className="grid lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
             {SOCIALS.map((social, i) => (
-              <motion.a
-                key={social.name + social.url}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={VIEWPORT_SECTION}
-                transition={cardRevealTransition(i)}
-                className="group flex items-center justify-between p-4 rounded-xl border border-border bg-surface hover:border-primary/30 hover:bg-surfaceHighlight hover:shadow-md hover:shadow-primary/[0.05] transition-[border-color,box-shadow,background-color] duration-200"
-              >
-                <div className="space-y-0.5">
-                  <div className="text-xs text-muted font-medium">{social.label}</div>
-                  <div className="text-sm font-semibold text-txt group-hover:text-primary transition-colors">{social.name}</div>
-                </div>
-                <div className="w-7 h-7 rounded-lg bg-bg border border-border flex items-center justify-center group-hover:border-primary/30 group-hover:text-primary text-muted transition-all">
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </div>
-              </motion.a>
+              <SocialCard key={social.name} social={social} index={i} />
             ))}
           </div>
 
-          {/* Direct Channel */}
           <div className="lg:col-span-4">
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_SECTION}
               transition={cardRevealTransition(SOCIALS.length, 0.06)}
-              className="rounded-xl border border-border bg-surface p-6 space-y-5 hover:shadow-md hover:shadow-primary/[0.05] transition-shadow duration-200"
+              className="p-6 rounded-xl bg-gradient-to-br from-primary/10 via-surface/60 to-cyan-500/10 border border-primary/20"
             >
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs font-medium text-emerald-400">Freelancing &amp; roles</span>
-                </div>
-                <h3 className="text-base font-semibold text-txt">Direct Message</h3>
-                <p className="text-sm text-muted leading-relaxed">
-                  Open for partnerships, collaborations, and AI systems discussions.
-                </p>
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-xs font-mono text-green-400">Available</span>
               </div>
+              
+              <h3 className="text-lg font-bold text-txt mb-2">Direct Contact</h3>
+              <p className="text-sm text-muted mb-4">
+                Open for AI projects, consulting, and collaborations.
+              </p>
 
               <a
                 href="https://wa.me/919106878258"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20"
+                className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
-                Send a Message
+                Send Message
               </a>
             </motion.div>
           </div>

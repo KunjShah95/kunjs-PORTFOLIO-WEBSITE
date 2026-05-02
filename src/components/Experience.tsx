@@ -1,81 +1,107 @@
 import { motion } from 'framer-motion'
-import { Briefcase, ArrowRight } from 'lucide-react'
+import { Briefcase, ArrowRight, Server, Clock } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { EXPERIENCE } from '../data/portfolio'
 import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
 
+function TimelineItem({ exp, index }: { exp: typeof EXPERIENCE[0], index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEWPORT_SECTION}
+      transition={cardRevealTransition(index)}
+      className="relative p-5 rounded-xl bg-surface/60 border border-border hover:border-primary/40 transition-all duration-300 group"
+    >
+      <div className="absolute top-0 left-0 w-1 h-full rounded-l-xl bg-primary/0 group-hover:bg-primary/60 transition-colors duration-300" />
+      
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-lg bg-primary/10">
+            <Briefcase className="w-4 h-4 text-primary" />
+          </div>
+          <div>
+            <h3 className="text-base font-bold text-txt">{exp.company}</h3>
+            <p className="text-sm text-primary font-medium">{exp.role}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-green-500/10 border border-green-500/20">
+          <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+          <span className="text-xs font-mono text-green-400">Active</span>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-4 mb-3 text-xs text-muted font-mono">
+        <div className="flex items-center gap-1">
+          <Clock className="w-3 h-3" />
+          {exp.period}
+        </div>
+        <div className="flex items-center gap-1">
+          <Server className="w-3 h-3" />
+          {exp.skills.length} technologies
+        </div>
+      </div>
+
+      <p className="text-sm text-muted mb-4">{exp.description}</p>
+
+      <div className="flex flex-wrap gap-1.5">
+        {exp.skills.map((skill) => (
+          <span
+            key={skill}
+            className="px-2 py-0.5 text-[10px] font-mono text-muted bg-bg border border-border rounded"
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  )
+}
+
 export function Experience() {
   return (
-    <section id="experience" className="section-padding relative overflow-hidden">
-      <div className="container-aligned space-y-12 relative z-10">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border pb-8 gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-muted text-sm font-medium">
-              <Briefcase className="w-4 h-4" />
-              Work Experience
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
-              Where I've Worked
-            </h2>
+    <section id="experience" className="section-padding bg-bg relative">
+      <div className="absolute inset-0 tech-grid-layer opacity-30" />
+      
+      <div className="container-aligned relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_SECTION}
+          className="mb-8"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Server className="w-4 h-4 text-primary" />
+            <span className="text-xs font-mono text-muted uppercase tracking-wider">Career</span>
           </div>
-          <span className="text-sm text-muted font-medium">
-            {EXPERIENCE.length} position{EXPERIENCE.length !== 1 ? 's' : ''}
-          </span>
-        </div>
+          <h2 className="text-3xl font-bold text-txt mb-2">
+            Work <span className="text-primary">History</span>
+          </h2>
+          <p className="text-muted max-w-lg">
+            Roles where I've built production-grade AI systems and led automation initiatives.
+          </p>
+        </motion.div>
 
-        {/* Timeline */}
-        <div className="relative space-y-6">
-          {/* Vertical line */}
-          <div className="absolute left-5 top-2 bottom-2 w-px bg-border hidden md:block" />
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {EXPERIENCE.map((exp, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEWPORT_SECTION}
-              transition={cardRevealTransition(i)}
-              className="group relative grid grid-cols-1 md:grid-cols-[44px_1fr] gap-0 md:gap-6"
-            >
-              {/* Timeline dot */}
-              <div className="hidden md:flex justify-center pt-6">
-                <div className="w-2.5 h-2.5 rounded-full bg-primary/60 ring-4 ring-bg group-hover:bg-primary transition-colors duration-300 mt-px" />
-              </div>
-
-              {/* Card */}
-              <div className="rounded-xl border border-border bg-surface p-6 hover:border-primary/30 hover:bg-surfaceHighlight hover:shadow-md hover:shadow-primary/[0.05] transition-[border-color,box-shadow,background-color] duration-300">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
-                  <div className="space-y-1">
-                    <h3 className="text-lg font-semibold text-txt">{exp.company}</h3>
-                    <p className="text-sm font-medium text-primary">{exp.role}</p>
-                    <p className="text-xs text-muted">{exp.period}</p>
-                  </div>
-                </div>
-
-                <p className="text-sm text-muted mb-4">{exp.description}</p>
-
-                <div className="flex flex-wrap gap-2">
-                  {exp.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-2.5 py-1 text-xs font-medium text-muted bg-bg border border-border rounded-md"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+            <TimelineItem key={i} exp={exp} index={i} />
           ))}
         </div>
 
-        {/* Explore CTA */}
-        <div className="flex justify-center pt-4">
-          <Link to="/experience" className="text-sm text-muted hover:text-primary transition-colors inline-flex items-center gap-1">
-            See my full journey → <ArrowRight className="w-4 h-4" />
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={VIEWPORT_SECTION}
+          className="mt-8 flex justify-center"
+        >
+          <Link 
+            to="/experience" 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border text-txt font-medium text-sm hover:bg-surfaceHighlight transition-colors"
+          >
+            Full Timeline
+            <ArrowRight className="w-4 h-4" />
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

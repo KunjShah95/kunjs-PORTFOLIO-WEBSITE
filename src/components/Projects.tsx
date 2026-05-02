@@ -114,13 +114,15 @@ function ProjectCard({ project, isFlagship = false }: ProjectCardProps) {
 
 interface ProjectsProps {
   variant?: 'home' | 'page'
+  projects?: Project[]
 }
 
-export function Projects({ variant = 'home' }: ProjectsProps) {
-  const flagshipProject = PROJECTS.find(p => p.title === 'EquityLens')
-  const otherProjects = variant === 'page' 
-    ? PROJECTS.filter(p => p.title !== 'EquityLens')
-    : PROJECTS.filter(p => p.title !== 'EquityLens').slice(0, 4)
+export function Projects({ variant = 'home', projects }: ProjectsProps) {
+  const allProjects = projects || PROJECTS
+  const flagshipProject = allProjects.find(p => p.title === 'EquityLens')
+  const otherProjects = variant === 'page' && !projects
+    ? allProjects.filter(p => p.title !== 'EquityLens')
+    : allProjects.filter(p => p.title !== 'EquityLens').slice(0, 4)
   
   return (
     <section id="projects" className="section-padding bg-bg relative">

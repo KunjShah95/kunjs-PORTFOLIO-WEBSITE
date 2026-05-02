@@ -1,65 +1,84 @@
 import { motion } from 'framer-motion'
-import { Cpu } from 'lucide-react'
+import { Layers } from 'lucide-react'
 import { SKILL_GROUPS } from '../data/portfolio'
 import { staggerContainer, staggerItem, VIEWPORT_SECTION } from '../lib/motion'
 
-export function Skills() {
+function SkillCard({ group }: { group: typeof SKILL_GROUPS[0] }) {
+  const IconComponent = group.icon
+  
   return (
-    <section id="skills" className="section-padding bg-bg overflow-hidden relative">
-      <div className="container-aligned relative z-10 space-y-12">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border pb-8 gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-muted text-sm font-medium">
-              <Cpu className="w-4 h-4" />
-              Capabilities
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
-              Skills & Technologies
-            </h2>
+    <motion.div
+      variants={staggerItem}
+      className="group relative p-5 rounded-xl bg-surface/60 border border-border hover:border-primary/40 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
+    >
+      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="relative">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
+            <IconComponent className="w-4 h-4 text-primary" />
           </div>
-          <span className="text-sm text-muted font-medium">{SKILL_GROUPS.length} categories</span>
+          <div className="flex-1">
+            <span className="text-[10px] font-mono text-muted uppercase tracking-wider">Module</span>
+            <h3 className="text-base font-bold text-txt group-hover:text-primary transition-colors">
+              {group.category.replace(/_/g, ' ')}
+            </h3>
+          </div>
+          <div className="px-2 py-0.5 rounded bg-green-500/10">
+            <span className="text-[10px] font-mono text-green-400">Active</span>
+          </div>
         </div>
 
-        {/* Skills Grid */}
+        <p className="text-sm text-muted mb-4">{group.description}</p>
+
+        <div className="flex flex-wrap gap-1.5">
+          {group.skills.map((skill) => (
+            <span
+              key={skill}
+              className="px-2 py-1 text-[10px] font-mono text-muted bg-bg border border-border rounded hover:border-primary/30 hover:text-txt transition-colors"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+export function Skills() {
+  return (
+    <section id="skills" className="section-padding bg-bg relative">
+      <div className="absolute inset-0 tech-grid-layer opacity-30" />
+      
+      <div className="container-aligned relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_SECTION}
+          className="mb-8"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Layers className="w-4 h-4 text-primary" />
+            <span className="text-xs font-mono text-muted uppercase tracking-wider">Capabilities</span>
+          </div>
+          <h2 className="text-3xl font-bold text-txt mb-2">
+            Technical <span className="text-primary">Stack</span>
+          </h2>
+          <p className="text-muted max-w-lg">
+            Production-ready technologies for building scalable AI systems.
+          </p>
+        </motion.div>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT_SECTION}
           variants={staggerContainer(0.08)}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {SKILL_GROUPS.map((group) => (
-            <motion.div
-              key={group.category}
-              variants={staggerItem}
-              className="group rounded-xl border border-border bg-surface p-6 hover:border-primary/30 hover:bg-surfaceHighlight hover:shadow-md hover:shadow-primary/[0.05] transition-[border-color,box-shadow,background-color] duration-300"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                  <group.icon className="w-4 h-4" />
-                </div>
-              </div>
-
-              <div className="space-y-2 mb-5">
-                <h3 className="text-base font-semibold text-txt group-hover:text-primary transition-colors duration-200">
-                  {group.category.replace(/_/g, ' ')}
-                </h3>
-                <p className="text-xs text-muted leading-relaxed">{group.description}</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-y-1.5 gap-x-2 pt-4 border-t border-border">
-                {group.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="text-xs text-muted flex items-center gap-1.5"
-                  >
-                    <span className="w-1 h-1 rounded-full bg-primary/40 flex-shrink-0" />
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
+            <SkillCard key={group.category} group={group} />
           ))}
         </motion.div>
       </div>

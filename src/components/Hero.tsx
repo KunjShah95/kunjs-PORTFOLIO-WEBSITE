@@ -1,161 +1,202 @@
 import { motion } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { ArrowRight, Sparkles, Activity, Zap, TrendingUp } from 'lucide-react'
+import { ArrowRight, Sparkles, Cpu, Globe, Shield, Gauge, Terminal, Box } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { IDENTITY, PROJECTS } from '../data/portfolio'
-import { heroVariants, DURATION, EASE_OUT } from '../lib/motion'
+import { PROJECTS } from '../data/portfolio'
 
-function MetricBadge({ icon: Icon, value, label }: { icon: any, value: string, label: string }) {
+function MetricCard({ icon: Icon, label, value, trend, color }: { icon: any, label: string, value: string, trend?: string, color: string }) {
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-bg border border-border">
-      <Icon className="w-4 h-4 text-primary" />
-      <div>
-        <span className="text-sm font-bold text-txt">{value}</span>
-        <span className="text-xs text-muted ml-1">{label}</span>
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="group relative p-4 rounded-xl bg-surface border border-border hover:border-primary/40 transition-all duration-300 shadow-sm"
+    >
+      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="relative flex items-center gap-3">
+        <div className={`p-2 rounded-lg ${color}`}>
+          <Icon className="w-4 h-4" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-xs text-muted font-medium uppercase tracking-wider">{label}</p>
+          <div className="flex items-baseline gap-2">
+            <span className="text-xl font-bold text-txt">{value}</span>
+            {trend && <span className="text-xs text-green-400 font-mono">{trend}</span>}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+function LiveIndicator() {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="relative flex h-2 w-2">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+      </span>
+      <span className="text-xs text-green-400 font-mono">LIVE</span>
+    </div>
+  )
+}
+
+function SystemStatus({ label, status }: { label: string, status: 'online' | 'active' | 'ready' }) {
+  const colors = {
+    online: 'bg-green-500',
+    active: 'bg-cyan-500', 
+    ready: 'bg-blue-500'
+  }
+  return (
+    <div className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
+      <span className="text-sm text-muted font-mono">{label}</span>
+      <div className="flex items-center gap-2">
+        <span className={`w-1.5 h-1.5 rounded-full ${colors[status]}`} />
+        <span className="text-xs font-mono text-txt uppercase">{status}</span>
       </div>
     </div>
   )
 }
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [imageError, setImageError] = useState(false)
-
   const projectCount = PROJECTS.length
 
   return (
-    <section
-      ref={containerRef}
-      id="about"
-      className="relative min-h-[92vh] flex items-center overflow-hidden bg-bg"
-    >
-      <div className="absolute inset-0 pointer-events-none dot-grid opacity-[0.35] dark:opacity-[0.25]" />
-
-      <div className="relative z-10 container-aligned w-full grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center py-20 lg:py-28">
-        <motion.div
-          className="flex flex-col space-y-8 order-2 lg:order-1 lg:pr-4"
-          variants={heroVariants.container}
-          initial="hidden"
-          animate="show"
-        >
-          <motion.div variants={heroVariants.item}>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-semibold tracking-wide">
-              <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
-              Freelancing · AI Engineer · Agent Builder
-            </span>
-          </motion.div>
-
-          <motion.div variants={heroVariants.item} className="space-y-4">
-            <p className="text-sm font-medium tracking-[0.2em] uppercase text-muted">
-              {IDENTITY.location}
-            </p>
-            <h1 className="font-display text-[clamp(2.75rem,6vw,4.5rem)] font-semibold leading-[1.08] text-txt tracking-[-0.02em]">
-              {IDENTITY.name}
-            </h1>
-            <p className="text-xl sm:text-2xl text-primary font-medium font-display">
-              I don't just build AI. I build AI that actually works in the real world.
-            </p>
-          </motion.div>
-
-          <motion.p
-            variants={heroVariants.item}
-            className="text-base text-muted leading-relaxed max-w-xl"
-          >
-            Most AI systems fail in production. I've spent the last 3 years building ones that don't — from bias detection in healthcare AI to real-time crowd analytics. Every project solves a real problem.
-          </motion.p>
-
-          <motion.div variants={heroVariants.item} className="flex flex-wrap gap-3">
-            <MetricBadge icon={Activity} value="11" label="projects" />
-            <MetricBadge icon={Zap} value="23%" label="bias detected" />
-            <MetricBadge icon={TrendingUp} value="99.9%" label="uptime" />
-          </motion.div>
-
-          <motion.div variants={heroVariants.item} className="flex flex-wrap gap-4 pt-4">
-            <Link
-              to="/projects"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-white font-bold text-base hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-[0.98]"
+    <section className="relative min-h-[94vh] bg-bg overflow-hidden flex items-center">
+      <div className="absolute inset-0 tech-grid-layer" />
+      <div className="absolute inset-0 grain-overlay" />
+      
+      <div className="relative z-10 container-aligned w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 py-12 lg:py-20">
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-6"
             >
-              See My Work
-              <ArrowRight className="w-5 h-5" aria-hidden />
-            </Link>
-            <Link
-              to="/labs"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-surface border border-border backdrop-blur-sm shadow-sm">
+                <Terminal className="w-4 h-4 text-primary" />
+                <span className="text-sm font-mono text-muted">Built AI tools | Multi-agent systems | Deployed apps</span>
+                <LiveIndicator />
+              </div>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-txt leading-tight tracking-tight mb-6"
             >
-              <Sparkles className="w-4 h-4 text-primary" />
-              Try Live Demos
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
+              AI Engineer building <br />
+              <span className="text-primary">autonomous agent systems</span> & <br /> real-world LLM applications
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-lg text-muted max-w-xl mb-8"
             >
-              Let's Talk
-            </Link>
-          </motion.div>
+              I design, build, and deploy intelligent systems, complex workflows, and automation tools that solve actual business problems.
+            </motion.p>
 
-          <motion.div variants={heroVariants.item} className="pt-4">
-            <Link to="/projects" className="text-sm text-muted hover:text-primary transition-colors inline-flex items-center gap-1">
-              Explore all {projectCount} projects → <ArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-wrap gap-4 mb-10"
+            >
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)]"
+              >
+                View Projects
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/labs"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm"
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+                Try Live Demos
+              </Link>
+            </motion.div>
+          </div>
 
-        <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
-          <motion.div
-            variants={heroVariants.photo}
-            initial="hidden"
-            animate="show"
-            className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[min(100%,420px)] lg:h-[420px] lg:aspect-square"
-          >
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-border bg-surface" />
-
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-xl">
-              {IDENTITY.profile_photo && !imageError ? (
-                <img
-                  src={IDENTITY.profile_photo}
-                  alt={IDENTITY.name}
-                  width={420}
-                  height={420}
-                  decoding="async"
-                  fetchPriority="high"
-                  className="w-full h-full object-cover"
-                  onError={() => setImageError(true)}
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-surfaceHighlight font-display text-6xl font-semibold text-primary/25">
-                  KS
-                </div>
-              )}
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <div className="grid grid-cols-2 gap-4">
+              <MetricCard 
+                icon={Box} 
+                label="Projects" 
+                value={String(projectCount)} 
+                trend="+2"
+                color="bg-primary/20 text-primary"
+              />
+              <MetricCard 
+                icon={Gauge} 
+                label="Uptime" 
+                value="99.9%" 
+                trend="+0.1%"
+                color="bg-green-500/20 text-green-400"
+              />
+              <MetricCard 
+                icon={Cpu} 
+                label="Models" 
+                value="8" 
+                trend="+3"
+                color="bg-cyan-500/20 text-cyan-400"
+              />
+              <MetricCard 
+                icon={Globe} 
+                label="API Calls" 
+                value="1.2M" 
+                trend="+23%"
+                color="bg-purple-500/20 text-purple-400"
+              />
             </div>
 
             <motion.div
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -bottom-3 -left-2 sm:-left-4 glass-panel rounded-xl px-4 py-3 shadow-lg"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="mt-4 p-5 rounded-xl bg-surface border border-border shadow-sm"
             >
-              <div className="text-[10px] text-muted font-semibold uppercase tracking-wider mb-0.5">Status</div>
-              <div className="text-sm font-semibold text-txt">Freelancing &amp; open roles</div>
+              <div className="flex items-center gap-2 mb-4">
+                <Shield className="w-4 h-4 text-primary" />
+                <span className="text-sm font-semibold text-txt">System Status</span>
+              </div>
+              <SystemStatus label="ML Pipeline" status="active" />
+              <SystemStatus label="Agent Framework" status="ready" />
+              <SystemStatus label="API Gateway" status="online" />
+              <SystemStatus label="Vector Store" status="ready" />
             </motion.div>
-          </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-4 p-5 rounded-xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 shadow-sm"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-txt">Production Ready</span>
+                <span className="px-2 py-0.5 rounded text-xs font-mono bg-green-500/20 text-green-400">v2.4.1</span>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-muted">API Latency</span>
+                  <span className="font-mono text-txt">23ms</span>
+                </div>
+                <div className="w-full h-1.5 rounded-full bg-surfaceHighlight">
+                  <div className="h-full w-[92%] rounded-full bg-primary" />
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-muted">Error Rate</span>
+                  <span className="font-mono text-green-400">0.08%</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.85, duration: DURATION.normal, ease: EASE_OUT }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        aria-hidden
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-5 h-8 rounded-full border-2 border-border flex items-center justify-center"
-        >
-          <div className="w-1 h-2 bg-muted rounded-full" />
-        </motion.div>
-        <span className="text-xs text-muted">See what I built ↓</span>
-      </motion.div>
     </section>
   )
 }

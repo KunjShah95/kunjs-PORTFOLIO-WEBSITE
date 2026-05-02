@@ -1,176 +1,135 @@
-import { motion, useInView } from 'framer-motion'
-import { ArrowRight, ExternalLink, Github, TrendingUp, Zap } from 'lucide-react'
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowRight, ExternalLink, Github, ArrowUpRight, Activity, AlertCircle, CheckCircle2, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { PROJECTS } from '../data/portfolio'
+import { FEATURED_PROJECTS } from '../data/portfolio'
 
-const featured = PROJECTS.filter((p) => p.featured).slice(0, 2)
+function ProjectFeatureCard({ project, index }: { project: typeof FEATURED_PROJECTS[0], index: number }) {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      className="group relative rounded-xl bg-surface border border-border overflow-hidden hover:border-primary/40 transition-all duration-300 shadow-sm hover:shadow-md"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="relative p-6 sm:p-8 flex flex-col h-full">
+        <h3 className="text-2xl font-display font-bold text-txt mb-6 group-hover:text-primary transition-colors">
+          {project.title}
+        </h3>
 
-const ACCENT_PAIRS = [
-  { from: 'from-primary/20', via: 'via-primary/5', to: 'to-transparent', glow: 'bg-primary/10' },
-  { from: 'from-secondary/20', via: 'via-secondary/5', to: 'to-transparent', glow: 'bg-secondary/10' },
-]
+        <div className="space-y-4 mb-6 flex-1">
+          <div className="flex flex-col gap-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-mono font-semibold text-orange-400 uppercase tracking-wider">
+              <AlertCircle className="w-3.5 h-3.5" /> Problem
+            </span>
+            <p className="text-sm text-muted">{project.problem}</p>
+          </div>
+          
+          <div className="flex flex-col gap-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-mono font-semibold text-primary uppercase tracking-wider">
+              <CheckCircle2 className="w-3.5 h-3.5" /> Solution
+            </span>
+            <p className="text-sm text-muted">{project.solution}</p>
+          </div>
 
-const containerVariants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.18 } },
-}
+          <div className="flex flex-col gap-1.5">
+            <span className="flex items-center gap-1.5 text-xs font-mono font-semibold text-green-400 uppercase tracking-wider">
+              <Zap className="w-3.5 h-3.5" /> Impact
+            </span>
+            <p className="text-sm font-medium text-txt">{project.result}</p>
+          </div>
+        </div>
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+        <div className="mb-6 flex flex-wrap gap-2">
+          {project.techStack.map((t) => (
+            <span
+              key={t}
+              className="px-2.5 py-1 rounded bg-bg border border-border text-[11px] font-mono text-txtDim uppercase"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-3 pt-5 border-t border-border/50 mt-auto">
+          {project.demoUrl && (
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors shadow-sm"
+            >
+              <ExternalLink className="w-4 h-4" />
+              Live Demo
+            </a>
+          )}
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-bg border border-border text-txt text-sm font-medium hover:bg-surfaceHighlight transition-colors shadow-sm"
+            >
+              <Github className="w-4 h-4" />
+              GitHub
+            </a>
+          )}
+        </div>
+      </div>
+
+      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-surfaceHighlight flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <ArrowUpRight className="w-4 h-4 text-primary" />
+      </div>
+    </motion.article>
+  )
 }
 
 export function FeaturedProjects() {
-  const ref = useRef<HTMLElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  if (featured.length === 0) return null
-
   return (
-    <section ref={ref} id="featured-projects" aria-label="Featured projects" className="section-padding bg-bg">
-      <div className="container-aligned">
-        {/* ── Section header ── */}
+    <section id="featured-projects" aria-label="Featured projects" className="section-padding bg-bg relative">
+      <div className="absolute inset-0 tech-grid-layer opacity-30" />
+      
+      <div className="container-aligned relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-12 flex flex-col gap-3"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
         >
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-primary/60" aria-hidden />
-            <span className="txt-mono text-xs text-muted uppercase tracking-[0.2em]">02 — Featured Work</span>
+          <div className="flex items-center gap-3 mb-4">
+            <Activity className="w-5 h-5 text-primary" />
+            <span className="text-sm font-mono text-muted uppercase tracking-[0.2em] font-semibold">Featured Work</span>
           </div>
-          <h2 className="font-display text-[clamp(1.9rem,4vw,2.75rem)] font-semibold text-txt tracking-[-0.02em] leading-[1.12]">
-            Two projects. Real outcomes.
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-txt mb-4">
+            Real-World <span className="text-primary">Implementations</span>
           </h2>
-          <p className="text-muted text-lg max-w-xl leading-relaxed">
-            Shipped products with measurable impact — from bias detection in healthcare AI to real-time crowd intelligence.
+          <p className="text-lg text-muted max-w-2xl">
+            A selection of production-grade AI systems built to solve complex business problems.
           </p>
         </motion.div>
 
-        {/* ── Card grid ── */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'show' : 'hidden'}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
-        >
-          {featured.map((project, i) => {
-            const accent = ACCENT_PAIRS[i % ACCENT_PAIRS.length]
-            return (
-              <motion.article
-                key={project.id}
-                variants={cardVariants}
-                className="group relative flex flex-col rounded-2xl bg-surface border border-border overflow-hidden hover:border-primary/40 transition-colors duration-300"
-              >
-                {/* Glow stripe */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${accent.from} ${accent.via} ${accent.to} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
-                  aria-hidden
-                />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+          {FEATURED_PROJECTS.map((project, i) => (
+            <ProjectFeatureCard key={project.id} project={project} index={i} />
+          ))}
+        </div>
 
-                {/* Top bar */}
-                <div className="relative px-6 pt-6 pb-0 flex items-start justify-between gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <span className="txt-mono text-[10px] text-muted uppercase tracking-[0.18em]">
-                      {project.category}
-                    </span>
-                    <h3 className="font-display text-2xl font-semibold text-txt leading-tight">
-                      {project.title}
-                    </h3>
-                  </div>
-{project.impact ? (
-                    <span className="shrink-0 px-2.5 py-1 rounded-md bg-primary/10 border border-primary/20 txt-mono text-[10px] text-primary uppercase tracking-wide mt-1">
-                      {project.impact.replace(/_/g, ' ')}
-                    </span>
-                  ) : null}
-                </div>
-
-                {/* Problem statement */}
-                {project.problem && (
-                  <div className="relative px-6 pt-5 flex items-start gap-3">
-                    <Zap className="w-4 h-4 text-primary mt-0.5 shrink-0" aria-hidden />
-                    <p className="text-muted text-sm leading-relaxed">
-                      <span className="text-txt font-medium">Problem: </span>
-                      {project.problem}
-                    </p>
-                  </div>
-                )}
-
-                {/* Description */}
-                <p className="relative px-6 pt-3 text-muted text-sm leading-relaxed">
-                  {project.desc}
-                </p>
-
-                {/* Outcome metric */}
-                {project.outcome && (
-                  <div className="relative mx-6 mt-5 flex items-center gap-3 px-4 py-3 rounded-xl bg-surfaceHighlight border border-border">
-                    <TrendingUp className="w-4 h-4 text-primary shrink-0" aria-hidden />
-                    <p className="text-sm text-txt font-medium leading-snug">{project.outcome}</p>
-                  </div>
-                )}
-
-                {/* Tech pills */}
-                <div className="relative px-6 pt-4 flex flex-wrap gap-1.5">
-                  {project.tech?.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 rounded-md bg-bg border border-border txt-mono text-[10px] text-muted uppercase tracking-wide"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                {/* CTAs */}
-                <div className="relative px-6 pt-5 pb-6 mt-auto flex flex-wrap items-center gap-3">
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-all shadow-md shadow-primary/25 hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      Live Demo
-                      <ExternalLink className="w-3.5 h-3.5" aria-hidden />
-                    </a>
-                  )}
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface border border-border text-txt font-medium text-sm hover:bg-surfaceHighlight transition-colors"
-                  >
-                    <Github className="w-4 h-4" aria-hidden />
-                    Source
-                  </a>
-                  <Link
-                    to={`/projects/${project.slug}`}
-                    className="ml-auto inline-flex items-center gap-1.5 text-sm text-muted hover:text-primary transition-colors group/link"
-                  >
-                    Case study
-                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" aria-hidden />
-                  </Link>
-                </div>
-              </motion.article>
-            )
-          })}
-        </motion.div>
-
-        {/* ── "See all" footer ── */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5, duration: 0.45 }}
-          className="mt-10 flex justify-center"
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="flex justify-center"
         >
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors group/all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-surface border border-border text-txt font-semibold hover:bg-surfaceHighlight transition-colors shadow-sm"
           >
-            <span>See all {PROJECTS.length} projects</span>
-            <ArrowRight className="w-4 h-4 group-hover/all:translate-x-0.5 transition-transform" aria-hidden />
+            View All Projects
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
       </div>

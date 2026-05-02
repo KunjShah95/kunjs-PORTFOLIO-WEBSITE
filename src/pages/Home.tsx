@@ -1,4 +1,11 @@
 import { Hero } from '../components/Hero'
+import { FeaturedProjects } from '../components/FeaturedProjects'
+import { HowIBuild } from '../components/HowIBuild'
+import { MetricsDashboard } from '../components/MetricsDashboard'
+import { TechStack } from '../components/TechStack'
+import { CurrentlyBuilding } from '../components/CurrentlyBuilding'
+import { AboutShort } from '../components/AboutShort'
+import { FinalCTA } from '../components/FinalCTA'
 import { motion } from 'framer-motion'
 
 export function Home() {
@@ -9,8 +16,13 @@ export function Home() {
       className="space-y-24 sm:space-y-32 md:space-y-40"
     >
       <Hero />
-      {/* You can add a preview of projects or other sections here if desired, 
-          but the user asked for separate pages. */}
+      <FeaturedProjects />
+      <HowIBuild />
+      <MetricsDashboard />
+      <TechStack />
+      <CurrentlyBuilding />
+      <AboutShort />
+      <FinalCTA />
     </motion.div>
   )
 }

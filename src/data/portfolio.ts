@@ -695,3 +695,36 @@ export const LOGS: LogEntry[] = [
         details: 'Completed VOID/INDUSTRIAL aesthetic redesign. Implemented kinetic scroll-linked animations and 3D perspective grid.',
     },
 ];
+
+export const FEATURED_PROJECTS = [
+    {
+        id: 'equity-lens',
+        title: 'EquityLens',
+        problem: 'Healthcare AI deployed with zero bias auditing — EU AI Act violation with no transparency into model fairness across demographics',
+        solution: 'Built comprehensive fairness evaluation pipeline integrating EU AI Act, NIST AI RMF, and ISO/IEC 25059 compliance with real-time drift detection',
+        techStack: ['Python', 'FastAPI', 'LangChain', 'PostgreSQL'],
+        result: '23% bias detected, audit time reduced 99% (3 weeks → 4 hours), 99.9% uptime',
+        demoUrl: 'https://fairness-lens-backend-988207147245.us-central1.run.app/',
+        githubUrl: 'https://github.com/KunjShah95/fairness-lens-studio',
+    },
+    {
+        id: 'gap-miner',
+        title: 'GAP Miner',
+        problem: 'Roadmap generation taking weeks due to manual market analysis',
+        solution: 'AI-powered market analysis with automated competitor tracking and gap identification',
+        techStack: ['GPT-4', 'Python', 'React', 'Vector DB'],
+        result: '3× faster roadmap generation',
+        demoUrl: '',
+        githubUrl: 'https://github.com/KunjShah95/GAP-Miner',
+    },
+    {
+        id: 'railway-inspection',
+        title: 'Railway Inspection AI',
+        problem: 'Manual inspection of rail infrastructure prone to human error',
+        solution: 'Computer vision system for automated track defect detection',
+        techStack: ['Python', 'OpenCV', 'TensorFlow', 'AWS'],
+        result: '98.7% accuracy, sub-100ms latency',
+        demoUrl: '',
+        githubUrl: 'https://github.com/KunjShah95/Railway-Inspection',
+    },
+];

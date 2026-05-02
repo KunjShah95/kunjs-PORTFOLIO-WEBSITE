@@ -11,16 +11,14 @@ import { ScrollToTop } from './components/ScrollToTop'
 // Eager load critical components for Home
 import { Hero } from './components/Hero'
 import { FeaturedProjects } from './components/FeaturedProjects'
-import { Skills } from './components/Skills'
-import { Education } from './components/Education'
-import { ResearchLabs } from './components/ResearchLabs'
-import { Experience } from './components/Experience'
-import { ResearcherLive } from './components/ResearcherLive'
-import { GitHubProfile } from './components/GitHubProfile'
-import { Contact } from './components/Contact'
+import { HowIBuild } from './components/HowIBuild'
+import { MetricsSection } from './components/MetricsSection'
+import { TechStack } from './components/TechStack'
+import { CurrentlyBuilding } from './components/CurrentlyBuilding'
+import { AboutShort } from './components/AboutShort'
+import { FinalCTA } from './components/FinalCTA'
 import { SEO } from './components/SEO'
 import { InitialLoader } from './components/InitialLoader'
-import { PortfolioFAQ } from './components/PortfolioFAQ'
 import { PORTFOLIO_FAQ } from './data/seo-faq'
 
 // Lazy load secondary pages
@@ -47,14 +45,12 @@ function Home() {
       />
       <Hero />
       <FeaturedProjects />
-      <Experience />
-      <GitHubProfile />
-      <ResearcherLive />
-      <Skills />
-      <ResearchLabs />
-      <Education />
-      <PortfolioFAQ />
-      <Contact />
+      <HowIBuild />
+      <MetricsSection />
+      <TechStack />
+      <CurrentlyBuilding />
+      <AboutShort />
+      <FinalCTA />
     </div>
   )
 }

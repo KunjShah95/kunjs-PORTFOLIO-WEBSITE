@@ -2,7 +2,14 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { User, Target, Cpu, Briefcase, GraduationCap, Zap } from 'lucide-react'
 import { SEO } from '../components/SEO'
+import { AnimatedCounter } from '../components/AnimatedCounter'
 import { IDENTITY, EXPERIENCE, EDUCATION, SKILL_GROUPS } from '../data/portfolio'
+
+const stats = [
+  { value: 11, label: 'Projects', suffix: '+' },
+  { value: 1500, label: 'Hours Coded', suffix: '+' },
+  { value: 8, label: 'Tech Stack', suffix: '' },
+]
 
 export function AboutPage() {
    const [imageError, setImageError] = useState(false)
@@ -11,11 +18,12 @@ export function AboutPage() {
       <div className="min-h-screen pt-32 pb-20">
          <SEO
             title="About"
-            description="Learn about Kunj Shah, an AI/ML Engineer specializing in autonomous systems, agentic workflows, and LLM orchestration. 3rd Year CS student exploring MLOps."
+            description="Learn about Kunj Shah, an AI/ML Engineer specializing in autonomous systems, agentic workflows, and LLM orchestration."
             url="https://kunjshah.dev/about"
          />
 
          <div className="container-aligned space-y-20">
+            {/* Header with Stats */}
             <section className="space-y-12">
                <div className="border-b border-border/50 pb-8 space-y-2">
                   <div className="flex items-center gap-2 text-muted text-sm font-medium">
@@ -27,7 +35,33 @@ export function AboutPage() {
                   </h1>
                </div>
 
+               {/* Animated Stats */}
+               <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="grid grid-cols-3 gap-4 max-w-xl"
+               >
+                  {stats.map((stat, i) => (
+                     <motion.div
+                        key={stat.label}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="p-6 bg-surface border border-border rounded-xl text-center hover:border-primary/30 transition-colors"
+                     >
+                        <p className="text-3xl font-bold text-txt">
+                           <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                        </p>
+                        <p className="text-xs text-muted mt-1">{stat.label}</p>
+                     </motion.div>
+                  ))}
+               </motion.div>
+            </section>
+
+            {/* Story Section */}
+            <section className="space-y-12">
                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+                  {/* Left: Story Content */}
                   <div className="lg:col-span-8 space-y-12">
                      <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -50,39 +84,62 @@ export function AboutPage() {
                            </p>
                         </div>
 
+                        {/* Story Cards with Dashboard Style */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8">
-                           <div className="p-8 border border-border bg-surface rounded-lg space-y-4 group">
-                              <div className="p-3 bg-surfaceHighlight rounded-md w-fit">
-                                 <Target className="w-6 h-6 text-primary" />
+                           <motion.div
+                              whileHover={{ y: -4 }}
+                              className="p-8 border border-border bg-surface rounded-xl space-y-4 group hover:border-primary/30 transition-all"
+                           >
+                              <div className="flex items-center gap-3">
+                                 <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                                    <Target className="w-5 h-5 text-primary" />
+                                 </div>
+                                 <div>
+                                    <h3 className="text-sm font-semibold text-txt">Current Focus</h3>
+                                    <p className="text-[10px] text-muted">2026</p>
+                                 </div>
                               </div>
-                              <div>
-                                 <h3 className="text-sm font-semibold text-txt mb-2">
-                                    Current Focus
-                                 </h3>
-                                 <p className="text-xs text-muted leading-relaxed">
-                                    Standardizing multi-agent communication protocols for cross-infrastructure task delegation.
-                                 </p>
+                              <p className="text-xs text-muted leading-relaxed">
+                                 Standardizing multi-agent communication protocols for cross-infrastructure task delegation.
+                              </p>
+                              <div className="flex gap-2 pt-2">
+                                 <span className="text-[10px] px-2 py-1 bg-primary/10 text-primary rounded">Agents</span>
+                                 <span className="text-[10px] px-2 py-1 bg-primary/10 text-primary rounded">LLM Orchestration</span>
                               </div>
-                           </div>
-                           <div className="p-8 border border-border bg-surface rounded-lg space-y-4 group">
-                              <div className="p-3 bg-surfaceHighlight rounded-md w-fit">
-                                 <Cpu className="w-6 h-6 text-primary" />
+                           </motion.div>
+
+                           <motion.div
+                              whileHover={{ y: -4 }}
+                              className="p-8 border border-border bg-surface rounded-xl space-y-4 group hover:border-primary/30 transition-all"
+                           >
+                              <div className="flex items-center gap-3">
+                                 <div className="p-2 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors">
+                                    <Cpu className="w-5 h-5 text-blue-400" />
+                                 </div>
+                                 <div>
+                                    <h3 className="text-sm font-semibold text-txt">Core Stack</h3>
+                                    <p className="text-[10px] text-muted">Primary</p>
+                                 </div>
                               </div>
-                              <div>
-                                 <h3 className="text-sm font-semibold text-txt mb-2">
-                                    Core Stack
-                                 </h3>
-                                 <p className="text-xs text-muted leading-relaxed">
-                                    React · Python · LangChain · Docker · Vector DBs
-                                 </p>
+                              <div className="flex flex-wrap gap-2">
+                                 {['React', 'Python', 'LangChain', 'Docker', 'Vector DB'].map((tech) => (
+                                    <span key={tech} className="text-xs px-2 py-1 bg-bg border border-border rounded text-muted">
+                                       {tech}
+                                    </span>
+                                 ))}
                               </div>
-                           </div>
+                           </motion.div>
                         </div>
                      </motion.div>
                   </div>
 
+                  {/* Right: Profile Card */}
                   <div className="lg:col-span-4 space-y-12">
-                     <div className="p-10 border border-border bg-surface rounded-lg space-y-8">
+                     <motion.div 
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="p-10 border border-border bg-surface rounded-lg space-y-8"
+                     >
                         <div className="flex justify-center">
                            <div className="w-32 h-32 rounded-full overflow-hidden bg-surfaceHighlight flex items-center justify-center border border-border">
                               {IDENTITY.profile_photo && !imageError ? (
@@ -115,12 +172,12 @@ export function AboutPage() {
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </motion.div>
                   </div>
                </div>
             </section>
 
-            {/* Skills Section */}
+            {/* Skills Section with Animations */}
             <section className="space-y-12">
                <div className="border-b border-border/50 pb-8 space-y-2">
                   <div className="flex items-center gap-2 text-muted text-sm font-medium">
@@ -133,10 +190,15 @@ export function AboutPage() {
                </div>
 
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {SKILL_GROUPS.map((group) => (
-                     <div
+                  {SKILL_GROUPS.map((group, index) => (
+                     <motion.div
                         key={group.category}
-                        className="p-6 border border-border bg-surface rounded-lg space-y-4 hover:border-primary/50 transition-colors group"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        whileHover={{ y: -4 }}
+                        className="p-6 border border-border bg-surface rounded-lg space-y-4 hover:border-primary/50 transition-all cursor-pointer"
                      >
                         <div className="p-3 bg-surfaceHighlight rounded-md w-fit group-hover:bg-primary/10 transition-colors">
                            <group.icon className="w-6 h-6 text-primary" />
@@ -161,7 +223,7 @@ export function AboutPage() {
                               ))}
                            </div>
                         </div>
-                     </div>
+                     </motion.div>
                   ))}
                </div>
             </section>
@@ -181,9 +243,20 @@ export function AboutPage() {
                   </div>
 
                   <div className="space-y-8">
-                     {EXPERIENCE.map((exp) => (
-                        <div key={exp.id} className="relative pl-8 border-l border-border space-y-2">
-                           <div className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-background" />
+                     {EXPERIENCE.map((exp, index) => (
+                        <motion.div
+                           key={exp.id}
+                           initial={{ opacity: 0, x: -20 }}
+                           whileInView={{ opacity: 1, x: 0 }}
+                           viewport={{ once: true }}
+                           transition={{ duration: 0.4, delay: index * 0.1 }}
+                           className="relative pl-8 border-l border-border space-y-2"
+                        >
+                           <motion.div
+                              whileInView={{ scale: [0, 1] }}
+                              viewport={{ once: true }}
+                              className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-background"
+                           />
                            <div className="flex justify-between items-start">
                               <div>
                                  <h3 className="text-base font-semibold text-txt">{exp.role}</h3>
@@ -203,7 +276,7 @@ export function AboutPage() {
                                  </span>
                               ))}
                            </div>
-                        </div>
+                        </motion.div>
                      ))}
                   </div>
                </div>
@@ -221,8 +294,15 @@ export function AboutPage() {
                   </div>
 
                   <div className="space-y-8">
-                     {EDUCATION.map((edu) => (
-                        <div key={edu.id} className="p-6 border border-border bg-surface rounded-lg space-y-4">
+                     {EDUCATION.map((edu, index) => (
+                        <motion.div
+                           key={edu.id}
+                           initial={{ opacity: 0, y: 20 }}
+                           whileInView={{ opacity: 1, y: 0 }}
+                           viewport={{ once: true }}
+                           transition={{ delay: index * 0.1 }}
+                           className="p-6 border border-border bg-surface rounded-lg space-y-4 hover:border-primary/30 transition-colors"
+                        >
                            <div className="flex justify-between items-start">
                               <div className="space-y-1">
                                  <h3 className="text-base font-semibold text-txt">{edu.school}</h3>
@@ -238,7 +318,7 @@ export function AboutPage() {
                               <span className="text-xs text-muted/60 block mb-1">Specialization</span>
                               {edu.specialization}
                            </div>
-                        </div>
+                        </motion.div>
                      ))}
                   </div>
                </div>
