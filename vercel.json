@@ -33,7 +33,11 @@
           "value": "(.*)text/markdown(.*)"
         }
       ],
-      "destination": "/api/llms"
+      "destination": "/api/markdown"
+    },
+    {
+      "source": "/api/llms",
+      "destination": "/api/markdown"
     },
     {
       "source": "/(.*)",
@@ -42,11 +46,15 @@
   ],
   "headers": [
     {
-      "source": "/.well-known/api-catalog",
+      "source": "/llms.txt",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/linkset+json"
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
         }
       ]
     },

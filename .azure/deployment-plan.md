@@ -1,16 +1,30 @@
 # Deployment Plan: Portfolio Website
-## Status: READY FOR REVIEW
+
+## Status: PLANNED
 
 ## Overview
+
 | Field | Value |
 |-------|-------|
 | **Name** | Kunj Shah Portfolio |
 | **Type** | Static React + Vite SPA |
 | **Current Host** | Vercel |
-| **Target** | Azure Static Web Apps |
-| **Recipe** | AZD (Azure Developer CLI) |
+| **Target** | Cloudflare Pages |
+| **Recipe** | Cloudflare Pages + Markdown for Agents |
+
+## Goal
+
+Enable **Markdown for Agents** — AI agents requesting with `Accept: text/markdown` header receive Markdown instead of HTML.
+
+## Why Cloudflare Pages?
+
+- Markdown for Agents available on Pro/Business plans
+- Built-in CDN + SSL
+- SPA routing support
+- Easy migration from Vercel
 
 ## Technology Stack
+
 - React 18
 - TypeScript
 - Vite 5
@@ -20,38 +34,76 @@
 - SPA routing (rewrites all paths to index.html)
 
 ## Deployment Configuration
+
 - **Build command**: `npm run build`
 - **Output directory**: `dist`
 - **SPA routing**: All routes rewrite to /index.html (matches current vercel.json)
 - **Static assets**: public/ (images, PDF, manifest, robots.txt, sitemap.xml)
 
 ## Architecture
+
 ```
-Browser → Azure Static Web Apps → CDN edge → Static files from dist/
+Browser → Cloudflare → Cloudflare Pages → Static files from dist/
 ```
 
-## Why Azure Static Web Apps?
-- Free tier available (F1)
-- Built-in CDN + SSL
-- SPA routing support
-- GitHub Actions integration
-- Easy to manage alongside Vercel
+## Implementation Steps
 
-## Phase 1 Execution
-- [x] Step 1: Analyze Workspace — COMPLETE
-- [x] Step 2: Gather Requirements — COMPLETE
-- [x] Step 3: Scan Codebase — COMPLETE
-- [x] Step 4: Select Recipe — COMPLETE (AZD)
-- [x] Step 5: Plan Architecture — COMPLETE
-- [x] Step 6: Finalize Plan — COMPLETE
+### Step 1: Deploy to Cloudflare Pages
+- [ ] Connect repo to Cloudflare Pages
+- [ ] Configure build: `npm run build` → `dist/`
+- [ ] Add `_headers` for SPA routing (or use `_workerRoutes`)
 
-## Artifacts to Generate
-1. `azure.yaml` — AZD configuration
-2. `infra/app.bicep` — Static Web App resource
-3. `infra/main.bicep` — Orchestrator with rg + swa
-4. `src/<component>/Dockerfile` (optional — Static Web Apps supports no-Docker deploy)
+### Step 2: Configure Domain
+- [ ] Add custom domain in Cloudflare dashboard
+- [ ] Update DNS to point to Cloudflare
+
+### Step 3: Enable Markdown for Agents
+- [ ] Upgrade to Pro/Business plan (required)
+- [ ] Enable "Markdown for Agents" in dashboard → AI Crawl Control
+- [ ] Or use API:
+```bash
+curl -X PATCH 'https://api.cloudflare.com/client/v4/zones/{zone_tag}/settings/content_converter' \
+  --header 'Content-Type: application/json' \
+  --header "Authorization: Bearer {api_token}" \
+  --data '{"value": "on"}'
+```
+
+### Step 4: Verify
+- [ ] Test: `curl -H "Accept: text/markdown" https://yoursite.com`
+- [ ] Verify `content-type: text/markdown`
+- [ ] Check `x-markdown-tokens` header
 
 ## Rollback Plan
-No destructive changes. Keep Vercel deployment active during migration.
+
+Keep Vercel deployment active during migration.
 
 ---
+
+## Cloudflare Pages SPA Config
+
+Create `public/_headers`:
+
+```
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+```
+
+Create `public/_routes.json` for SPA routing:
+
+```json
+{
+  "version": 1,
+  "index": "index.html",
+  "error_pages": {
+    "404": "index.html"
+  },
+  "routes": [
+    { "pattern": "/", "frontend": {} },
+    { "pattern": "/*", "frontend": {} }
+  ]
+}
+```
+
+Or use Cloudflare dashboard → Pages → Custom CRLs.

@@ -1,50 +1,43 @@
 export const prerender = false
 
+export function getConfig() {
+  return {
+    runtime: 'edge',
+  }
+}
+
 export async function GET(request: Request) {
+  const url = new URL(request.url)
+  
+  // Check if requesting markdown
   const acceptHeader = request.headers.get('accept') || ''
   const userAgent = request.headers.get('user-agent') || ''
   
-  const isMarkdownRequest = 
+  const wantsMarkdown = 
     acceptHeader.includes('text/markdown') ||
     acceptHeader.includes('text/plain') ||
-    userAgent.includes('Claude-User') ||
+    userAgent.includes('Claude') ||
     userAgent.includes('OpenAI') ||
     userAgent.includes('GPT') ||
     userAgent.includes('Google-Extended') ||
     userAgent.includes('Applebot') ||
     userAgent.includes('Anthropic') ||
-    userAgent.includes('ClaudeBot') ||
-    userAgent.includes('Bytespider') ||
-    userAgent.includes('AI2Bot') ||
-    userAgent.includes('anthropic') ||
-    userAgent.includes('ChatGPT') ||
-    userAgent.includes('Perplexity') ||
-    userAgent.includes('You.com')
+    userAgent.includes('Perplexity')
 
-  const content = `# Kunj Shah — AI Engineer & Agent Builder
+  if (wantsMarkdown || url.pathname === '/api/llms') {
+    const content = `# Kunj Shah
 
-> Personal portfolio website for Kunj Shah, an AI engineer building autonomous agents and generative AI applications.
+AI Engineer & Agent Builder
+
+> https://kunjshah.dev
 
 ## Summary
 
-Kunj Shah is an AI engineer and agent builder based in Ahmedabad, IN. Specializes in:
-- Full Stack AI
-- Autonomous Automation
-- Neural Intelligence
-- Workflow Engineering
+Full Stack AI/ML & Automation Specialist based in Ahmedabad, IN.
 
-## Canonical URL
-- https://kunjshah.dev/
+Focus: Full Stack AI, Autonomous Automation, Neural Intelligence, Workflow Engineering
 
-## Core Stack
-
-### Languages & Frameworks
-- Python, TypeScript, React, FastAPI, LangChain, PyTorch, OpenCV, Docker
-
-### Cloud & Infrastructure
-- Vercel, Cloudflare, Firebase, Supabase
-
-## Key Pages
+## Pages
 
 - Home: https://kunjshah.dev/
 - About: https://kunjshah.dev/about
@@ -56,12 +49,14 @@ Kunj Shah is an AI engineer and agent builder based in Ahmedabad, IN. Specialize
 - AI Videos: https://kunjshah.dev/ai-videos
 - Contact: https://kunjshah.dev/contact
 
+## Tech Stack
+
+Python, TypeScript, React, FastAPI, LangChain, PyTorch, OpenCV, Docker, Vercel, Cloudflare, Firebase, Supabase
+
 ---
 
-*This file is generated for AI crawlers. Last updated: 2026-05-02*
+*Generated for AI agents. Last updated: 2026-05-02*
 `
-
-  if (isMarkdownRequest) {
     const tokenCount = Math.ceil(content.length / 4).toString()
     
     return new Response(content, {
@@ -75,5 +70,11 @@ Kunj Shah is an AI engineer and agent builder based in Ahmedabad, IN. Specialize
     })
   }
 
-  return new Response('Not Found', { status: 404 })
+  // For regular requests, redirect to home page
+  return new Response('Redirecting to home...', {
+    status: 302,
+    headers: {
+      'Location': '/',
+    },
+  })
 }
