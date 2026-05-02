@@ -12,6 +12,7 @@ import { useWebMCP } from './hooks/useWebMCP'
 // Eager load critical components for Home
 import { Hero } from './components/Hero'
 import { FeaturedProjects } from './components/FeaturedProjects'
+import { WhyMe } from './components/WhyMe'
 import { HowIBuild } from './components/HowIBuild'
 import { MetricsSection } from './components/MetricsSection'
 import { TechStack } from './components/TechStack'
@@ -46,6 +47,7 @@ function Home() {
       />
       <Hero />
       <FeaturedProjects />
+      <WhyMe />
       <HowIBuild />
       <MetricsSection />
       <TechStack />
