@@ -1,13 +1,27 @@
 import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowRight, Sparkles, Activity, Zap, TrendingUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { IDENTITY } from '../data/portfolio'
+import { IDENTITY, PROJECTS } from '../data/portfolio'
 import { heroVariants, DURATION, EASE_OUT } from '../lib/motion'
+
+function MetricBadge({ icon: Icon, value, label }: { icon: any, value: string, label: string }) {
+  return (
+    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-bg border border-border">
+      <Icon className="w-4 h-4 text-primary" />
+      <div>
+        <span className="text-sm font-bold text-txt">{value}</span>
+        <span className="text-xs text-muted ml-1">{label}</span>
+      </div>
+    </div>
+  )
+}
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [imageError, setImageError] = useState(false)
+
+  const projectCount = PROJECTS.length
 
   return (
     <section
@@ -39,19 +53,21 @@ export function Hero() {
               {IDENTITY.name}
             </h1>
             <p className="text-xl sm:text-2xl text-primary font-medium font-display">
-              Building autonomous AI systems that deliver measurable business outcomes
+              I don't just build AI. I build AI that actually works in the real world.
             </p>
           </motion.div>
 
-          <motion.div variants={heroVariants.item} className="flex flex-wrap gap-2">
-            {IDENTITY.focus.slice(0, 4).map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1.5 rounded-md bg-surface border border-border text-sm text-muted font-medium"
-              >
-                {tag}
-              </span>
-            ))}
+          <motion.p
+            variants={heroVariants.item}
+            className="text-base text-muted leading-relaxed max-w-xl"
+          >
+            Most AI systems fail in production. I've spent the last 3 years building ones that don't — from bias detection in healthcare AI to real-time crowd analytics. Every project solves a real problem.
+          </motion.p>
+
+          <motion.div variants={heroVariants.item} className="flex flex-wrap gap-3">
+            <MetricBadge icon={Activity} value="11" label="projects" />
+            <MetricBadge icon={Zap} value="23%" label="bias detected" />
+            <MetricBadge icon={TrendingUp} value="99.9%" label="uptime" />
           </motion.div>
 
           <motion.div variants={heroVariants.item} className="flex flex-wrap gap-4 pt-4">
@@ -59,8 +75,15 @@ export function Hero() {
               to="/projects"
               className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-white font-bold text-base hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              View Projects
+              See My Work
               <ArrowRight className="w-5 h-5" aria-hidden />
+            </Link>
+            <Link
+              to="/labs"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors"
+            >
+              <Sparkles className="w-4 h-4 text-primary" />
+              Try Live Demos
             </Link>
             <Link
               to="/contact"
@@ -68,14 +91,12 @@ export function Hero() {
             >
               Let's Talk
             </Link>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-txt font-semibold text-sm hover:text-primary transition-colors"
-            >
-              Resume
-            </a>
+          </motion.div>
+
+          <motion.div variants={heroVariants.item} className="pt-4">
+            <Link to="/projects" className="text-sm text-muted hover:text-primary transition-colors inline-flex items-center gap-1">
+              Explore all {projectCount} projects → <ArrowRight className="w-4 h-4" />
+            </Link>
           </motion.div>
         </motion.div>
 
@@ -123,7 +144,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.85, duration: DURATION.normal, ease: EASE_OUT }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 max-[380px]:hidden"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         aria-hidden
       >
         <motion.div
@@ -133,6 +154,7 @@ export function Hero() {
         >
           <div className="w-1 h-2 bg-muted rounded-full" />
         </motion.div>
+        <span className="text-xs text-muted">See what I built ↓</span>
       </motion.div>
     </section>
   )

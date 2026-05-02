@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { Briefcase } from 'lucide-react'
+import { Briefcase, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { EXPERIENCE } from '../data/portfolio'
 import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
 
@@ -48,13 +49,11 @@ export function Experience() {
                   <div className="space-y-1">
                     <h3 className="text-lg font-semibold text-txt">{exp.company}</h3>
                     <p className="text-sm font-medium text-primary">{exp.role}</p>
+                    <p className="text-xs text-muted">{exp.period}</p>
                   </div>
-                  <span className="text-xs font-medium text-muted bg-surfaceHighlight px-3 py-1 rounded-full border border-border whitespace-nowrap self-start">
-                    {exp.period}
-                  </span>
                 </div>
 
-                <p className="text-sm text-muted leading-relaxed mb-4">{exp.description}</p>
+                <p className="text-sm text-muted mb-4">{exp.description}</p>
 
                 <div className="flex flex-wrap gap-2">
                   {exp.skills.map((skill) => (
@@ -69,6 +68,13 @@ export function Experience() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Explore CTA */}
+        <div className="flex justify-center pt-4">
+          <Link to="/experience" className="text-sm text-muted hover:text-primary transition-colors inline-flex items-center gap-1">
+            See my full journey → <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>

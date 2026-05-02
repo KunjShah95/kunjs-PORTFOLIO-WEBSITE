@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Microscope, Plus, ArrowUpRight, Activity, Zap } from 'lucide-react'
+import { Microscope, Plus, ArrowUpRight, Activity, Zap, ArrowRight } from 'lucide-react'
 import { cardRevealTransition, VIEWPORT_SECTION } from '../lib/motion'
 import { LOGS } from '../data/portfolio'
 
@@ -219,6 +219,13 @@ export function ResearchLabs() {
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* Explore CTA */}
+          <div className="flex justify-center pt-4">
+            <Link to="/labs" className="text-sm text-muted hover:text-primary transition-colors inline-flex items-center gap-1">
+              Try live demos → <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </div>
