@@ -1,26 +1,27 @@
 import { motion } from 'framer-motion'
 import { Target, Zap, Code2, TrendingUp } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const DIFFERENTIATORS = [
   {
     icon: Target,
-    title: "End-to-End Ownership",
-    description: "I don't just build models — I own the entire pipeline from data to deployment. Every project here is production-ready, not just a demo."
+    title: "I Build to Ship",
+    description: "I don't just create isolated scripts. I take ideas from messy data to clean, deployed products that users can actually interact with."
   },
   {
     icon: Zap,
-    title: "Agentic Systems Specialist",
-    description: "Multi-agent orchestration, autonomous workflows, and real-time decision systems. Notprompt engineering — actual agent architecture."
+    title: "Beyond the Wrapper",
+    description: "Building true AI products takes more than a prompt. I focus on agentic reasoning, memory, and orchestration to solve complex, multi-step problems."
   },
   {
     icon: Code2,
-    title: "Full-Stack AI Fluency",
-    description: "From PyTorch to React, FastAPI to Docker. I build complete systems, not isolated ML scripts."
+    title: "Engineering First",
+    description: "Great AI needs a solid foundation. I write clean React interfaces, robust Python backends, and maintainable systems that scale."
   },
   {
     icon: TrendingUp,
-    title: "Production Metrics",
-    description: "99.9% uptime, sub-100ms latency, 1.2M+ API calls. My systems are built to run at scale."
+    title: "Focus on Impact",
+    description: "Tech is just a tool. My real goal is solving real-world friction, optimizing workflows, and delivering measurable value."
   }
 ]
 
@@ -40,7 +41,7 @@ export function WhyMe() {
             Why <span className="text-primary">Me</span>?
           </h2>
           <p className="text-lg text-muted max-w-2xl mx-auto">
-            Here's what separates a typical ML engineer from someone who actually ships AI products.
+            Why choose to work with me? Here's my approach to building intelligent software.
           </p>
         </motion.div>
 
@@ -72,15 +73,15 @@ export function WhyMe() {
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-center md:text-left">
-              <h3 className="text-lg font-semibold text-txt mb-1">Ready to build something real?</h3>
-              <p className="text-sm text-muted">Let's discuss your AI project</p>
+              <h3 className="text-lg font-semibold text-txt mb-1">Let's turn your idea into a working product.</h3>
+              <p className="text-sm text-muted">Let's discuss your next big project</p>
             </div>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-colors shadow-sm"
             >
               Get In Touch
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

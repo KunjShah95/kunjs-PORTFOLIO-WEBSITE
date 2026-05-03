@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Cpu, Globe, Shield, Gauge, Terminal, Box, FileText, Download } from 'lucide-react'
+import { ArrowRight, Cpu, Globe, Shield, Gauge, Terminal, Box, FileText } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PROJECTS } from '../data/portfolio'
 
@@ -70,7 +70,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.35 }}
               className="mb-6"
             >
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-surface border border-border backdrop-blur-sm shadow-sm">
@@ -83,39 +83,39 @@ export function Hero() {
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.35, delay: 0.05 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-txt leading-tight tracking-tight mb-6"
             >
-              <span className="text-primary">AI Engineer</span> building autonomous agent systems & real-world LLM applications
+              I build autonomous <span className="text-primary">AI agents</span> that replace manual workflows & scale products.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.35, delay: 0.1 }}
               className="text-lg text-muted max-w-xl mb-8"
             >
-              I design, build, and deploy intelligent systems, complex workflows, and automation tools that solve actual business problems.
+              Stop paying for simple wrappers. I engineer production-grade agentic systems that save 40+ hours a week and deliver measurable ROI.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.35, delay: 0.15 }}
               className="flex flex-wrap gap-4 mb-10"
             >
               <Link
-                to="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)]"
+                to="/contact"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)]"
               >
-                View Projects
+                Hire Me
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                to="/contact"
+                to="/projects"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm"
               >
-                Contact
+                View Projects
               </Link>
               <a
                 href="/resume.pdf"
@@ -124,9 +124,31 @@ export function Hero() {
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm"
               >
                 <FileText className="w-4 h-4" />
-                AI/ML Resume
-                <Download className="w-3 h-3" />
+                Resume
               </a>
+            </motion.div>
+
+            {/* Social Proof Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex items-center gap-6 pt-6 border-t border-border/50"
+            >
+              <div className="flex flex-col gap-1">
+                <span className="text-2xl font-bold text-txt">1.2M+</span>
+                <span className="text-xs font-mono text-muted uppercase tracking-wider">API Calls</span>
+              </div>
+              <div className="w-px h-8 bg-border"></div>
+              <div className="flex flex-col gap-1">
+                <span className="text-2xl font-bold text-txt">40+</span>
+                <span className="text-xs font-mono text-muted uppercase tracking-wider">Hours Saved/Wk</span>
+              </div>
+              <div className="w-px h-8 bg-border"></div>
+              <div className="flex flex-col gap-1">
+                <span className="text-2xl font-bold text-txt">3+</span>
+                <span className="text-xs font-mono text-muted uppercase tracking-wider">Hackathon Wins</span>
+              </div>
             </motion.div>
           </div>
 

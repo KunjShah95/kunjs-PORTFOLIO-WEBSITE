@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Send, Globe, Sparkles } from 'lucide-react'
 import { IDENTITY, PROJECTS, EXPERIENCE, EDUCATION, BLOGS } from '../data/portfolio'
@@ -9,12 +9,36 @@ export function AIAssistant() {
   const [input, setInput] = useState('')
   const [isThinking, setIsThinking] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const closeAssistant = useCallback(() => {
+    setIsOpen(false)
+  }, [])
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
   }, [messages, isOpen])
+
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      setTimeout(() => inputRef.current?.focus(), 100)
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    if (!isOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeAssistant()
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [isOpen, closeAssistant])
 
   const openAssistant = () => {
     setIsOpen(true)
@@ -124,23 +148,31 @@ export function AIAssistant() {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="fixed bottom-4 right-4 sm:bottom-24 sm:right-8 z-[110] w-[calc(100vw-32px)] sm:w-[400px] h-[500px] sm:h-[600px] max-h-[80vh] bg-bg/95 backdrop-blur-xl border border-border shadow-2xl flex flex-col overflow-hidden rounded-2xl"
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-surface/50">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                <span className="text-xs font-bold tracking-wider uppercase text-txt">Kunj's Assistant</span>
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+onClick={closeAssistant}
+              className="fixed inset-0 z-[105]"
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="fixed bottom-4 right-4 sm:bottom-24 sm:right-8 z-[110] w-[calc(100vw-32px)] sm:w-[400px] h-[500px] sm:h-[600px] max-h-[80vh] bg-bg border border-border shadow-2xl flex flex-col overflow-hidden rounded-2xl"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-surface/50">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                  <span className="text-xs font-bold tracking-wider uppercase text-txt">Kunj's Assistant</span>
+                </div>
+                <button onClick={closeAssistant} className="p-2 hover:bg-surface rounded-full transition-colors">
+                  <X className="w-4 h-4 text-muted" />
+                </button>
               </div>
-              <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-surface rounded-full transition-colors">
-                <X className="w-4 h-4 text-muted" />
-              </button>
-            </div>
 
             {/* Chat Area */}
             <div ref={scrollRef} className="flex-1 p-4 overflow-y-auto space-y-4">
@@ -174,8 +206,8 @@ export function AIAssistant() {
             <div className="p-3 bg-surface/50 border-t border-border">
               <div className="relative flex items-center">
                 <input
+                  ref={inputRef}
                   type="text"
-                  autoFocus
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
@@ -191,7 +223,8 @@ export function AIAssistant() {
                 </button>
               </div>
             </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

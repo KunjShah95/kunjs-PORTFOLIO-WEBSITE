@@ -6,9 +6,9 @@ export const EASE_OUT = [0.23, 1, 0.32, 1] as const
 export const EASE_SOFT = [0.16, 1, 0.3, 1] as const
 
 export const DURATION = {
-  fast: 0.18,
-  normal: 0.32,
-  slow: 0.52,
+  fast: 0.12,
+  normal: 0.25,
+  slow: 0.4,
 } as const
 
 /** Default viewport for scroll-driven section cards */

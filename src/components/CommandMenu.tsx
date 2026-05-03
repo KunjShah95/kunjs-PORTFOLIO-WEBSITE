@@ -1,6 +1,6 @@
 
 import { useEffect, useState, Dispatch, SetStateAction } from 'react'
-import { Search, User, Briefcase, Activity, Hash, Cpu, Command, Trophy } from 'lucide-react'
+import { Search, User, Briefcase, Activity, Hash, Cpu, Command, Trophy, GraduationCap, Mail } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
@@ -19,19 +19,24 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
         e.preventDefault()
         setOpen((open) => !open)
       }
+      if (e.key === 'Escape' && open) {
+        setOpen(false)
+      }
     }
     document.addEventListener('keydown', down)
     return () => document.removeEventListener('keydown', down)
-  }, [setOpen])
+  }, [setOpen, open])
 
   const commands = [
-    { icon: User, label: 'Home', description: 'Back to main page', shortcut: 'P', path: '/' },
-    { icon: User, label: 'About', description: 'About profile and background', shortcut: 'O', path: '/about' },
-    { icon: Briefcase, label: 'Projects', description: 'View all projects', shortcut: 'D', path: '/projects' },
-    { icon: Trophy, label: 'Hackathons', description: 'Competition highlights and achievements', shortcut: 'H', path: '/hackathons' },
+    { icon: User, label: 'Home', description: 'Back to main page', shortcut: 'H', path: '/' },
+    { icon: User, label: 'About', description: 'About profile and background', shortcut: 'A', path: '/about' },
+    { icon: Briefcase, label: 'Projects', description: 'View all projects', shortcut: 'P', path: '/projects' },
+    { icon: Trophy, label: 'Hackathons', description: 'Competition highlights', shortcut: 'K', path: '/hackathons' },
     { icon: Cpu, label: 'Skills', description: 'Technical capabilities', shortcut: 'S', path: '/skills' },
-    { icon: Hash, label: 'Writing', description: 'Articles and blog posts', shortcut: 'A', path: '/blogs' },
-    { icon: Activity, label: 'Labs', description: 'Research and experiments', shortcut: 'R', path: '/labs' },
+    { icon: Hash, label: 'Writing', description: 'Articles and blog posts', shortcut: 'W', path: '/blogs' },
+    { icon: Activity, label: 'Labs', description: 'Research and experiments', shortcut: 'L', path: '/labs' },
+    { icon: GraduationCap, label: 'Education', description: 'Academic background', shortcut: 'E', path: '/education' },
+    { icon: Mail, label: 'Contact', description: 'Get in touch', shortcut: 'C', path: '/contact' },
   ]
 
   const filteredCommands = commands.filter(cmd =>
@@ -110,7 +115,9 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
             {/* Footer */}
             <div className="px-4 py-2.5 border-t border-border bg-surfaceHighlight/50 flex items-center gap-3 text-[10px] text-muted">
               <Command className="w-3 h-3" />
-              <span>Command palette</span>
+              <span>to open</span>
+              <span className="mx-1">·</span>
+              <span>Esc to close</span>
             </div>
           </motion.div>
         </div>

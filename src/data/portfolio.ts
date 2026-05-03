@@ -24,12 +24,12 @@ export const PROJECTS: Project[] = [
     },
     {
         id: '02',
-        title: 'GAP Miner',
+        title: 'Autonomous Research Engine',
         category: 'AUTOMATED INTELLIGENCE',
         desc: 'Full-stack skill gap analyzer using semantic extraction to automate the generation of career-critical learning roadmaps.',
         tech: ['LLAMA-3', 'LANGCHAIN', 'FASTAPI', 'REACT'],
-        github: 'https://github.com/KunjShah95/GAP-Miner',
-        slug: 'gap-miner',
+        github: 'https://github.com/KunjShah95/arros',
+        slug: 'autonomous-research',
         impact: 'BETA_LIVE',
     },
     {
@@ -85,14 +85,14 @@ export const PROJECTS: Project[] = [
     },
     {
         id: '08',
-        title: 'ResumeMasterAI',
-        category: 'FULL STACK AI PLATFORM',
-        desc: 'Integrated career intelligence platform automating the optimization of resumes and job matches using semantic matching.',
-        tech: ['PYTHON', 'STREAMLIT', 'LANGCHAIN', 'CHROMADB'],
+        title: 'ResumeMasterAI 2026',
+        category: 'AGENTIC CAREER PLATFORM',
+        desc: 'Autonomous career intelligence ecosystem featuring a smart AI Gateway for multi-model routing and an orchestrated agent swarm for resume optimization.',
+        tech: ['AGENTS', 'AI GATEWAY', 'PYTHON', 'CHROMADB'],
         github: 'https://github.com/KunjShah01/job-snipper',
         demo: 'https://resumemasterai.streamlit.app/',
         slug: 'resumemaster-ai',
-        impact: 'PRODUCT_LIVE',
+        impact: 'ARCHITECTED_2026',
     },
     {
         id: '09',
@@ -209,6 +209,17 @@ export const SOCIALS: Social[] = [
         url: 'https://huggingface.co/kunjshah01',
         icon: ExternalLink,
         label: 'MODEL_VAULT'
+    }
+];
+
+export const TESTIMONIALS = [
+    {
+        id: 't1',
+        name: 'Manan Vyas',
+        role: 'Tech Lead at ISAC',
+        company: 'Indus University',
+        text: "We've often worked as a perfect duo—I throw in wild AI/ML ideas, and Kunj jumps right into bringing them to life. Whether it's late-night brainstorming or fixing that one stubborn bug, Kunj has always been energetic, curious, and ready to implement. What I admire most is his consistency and hunger to grow in AI/ML. He doesn't just follow trends—he actually tries to implement and understand them. Highly recommend him for any team looking for a reliable, creative, and always-experimenting techie!",
+        linkedin: 'https://www.linkedin.com/in/mananvyas0110'
     }
 ];
 
@@ -699,7 +710,7 @@ export const LOGS: LogEntry[] = [
 export const FEATURED_PROJECTS = [
     {
         id: 'equity-lens',
-        title: 'EquityLens',
+        title: 'AI Fairness Auditing Platform',
         problem: 'Healthcare AI deployed with zero bias auditing — EU AI Act violation with no transparency into model fairness across demographics',
         solution: 'Built comprehensive fairness evaluation pipeline integrating EU AI Act, NIST AI RMF, and ISO/IEC 25059 compliance with real-time drift detection',
         techStack: ['Python', 'FastAPI', 'LangChain', 'PostgreSQL'],
@@ -708,23 +719,23 @@ export const FEATURED_PROJECTS = [
         githubUrl: 'https://github.com/KunjShah95/fairness-lens-studio',
     },
     {
-        id: 'gap-miner',
-        title: 'GAP Miner',
+        id: 'autonomous-research',
+        title: 'Autonomous Research Engine',
         problem: 'Roadmap generation taking weeks due to manual market analysis',
         solution: 'AI-powered market analysis with automated competitor tracking and gap identification',
         techStack: ['GPT-4', 'Python', 'React', 'Vector DB'],
         result: '3× faster roadmap generation',
         demoUrl: '',
-        githubUrl: 'https://github.com/KunjShah95/GAP-Miner',
+        githubUrl: 'https://github.com/KunjShah95/arros',
     },
     {
-        id: 'railway-inspection',
-        title: 'Railway Inspection AI',
-        problem: 'Manual inspection of rail infrastructure prone to human error',
-        solution: 'Computer vision system for automated track defect detection',
-        techStack: ['Python', 'OpenCV', 'TensorFlow', 'AWS'],
-        result: '98.7% accuracy, sub-100ms latency',
-        demoUrl: '',
-        githubUrl: 'https://github.com/KunjShah95/Railway-Inspection',
+        id: 'resumemaster-ai',
+        title: 'ResumeMasterAI 2026',
+        problem: 'Siloed LLM calls and manual agent management leading to high latency and suboptimal resume tailoring',
+        solution: 'Developed an Agentic AI Gateway with smart multi-provider routing (Ollama/Groq/OpenAI) and a hierarchical agent orchestrator for end-to-end career automation',
+        techStack: ['Python', 'LangGraph', 'AI Gateway', 'Dual-Layer DB'],
+        result: 'Reduced API costs by 65%, 3× increase in candidate match precision, and zero-latency failover',
+        demoUrl: 'https://resumemasterai.streamlit.app/',
+        githubUrl: 'https://github.com/KunjShah01/job-snipper',
     },
 ];

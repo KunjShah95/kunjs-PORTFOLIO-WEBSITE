@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { Video, Clock, DollarSign, ArrowUpRight, Wand2 } from 'lucide-react'
 
 export function AIVideoCreation() {
@@ -109,13 +110,13 @@ export function AIVideoCreation() {
                       From {service.startingPrice}
                     </div>
                   </div>
-                  <a
-                    href="#contact"
+                  <Link
+                    to="/contact"
                     className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 text-primary text-sm font-medium transition-all whitespace-nowrap"
                   >
                     Order
                     <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

@@ -19,6 +19,7 @@ import { TechStack } from './components/TechStack'
 import { CurrentlyBuilding } from './components/CurrentlyBuilding'
 import { AboutShort } from './components/AboutShort'
 import { FinalCTA } from './components/FinalCTA'
+import { Testimonials } from './components/Testimonials'
 import { SEO } from './components/SEO'
 import { InitialLoader } from './components/InitialLoader'
 import { PORTFOLIO_FAQ } from './data/seo-faq'
@@ -35,7 +36,6 @@ const HackathonsPage = lazy(() => import('./pages/HackathonsPage').then(module =
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })))
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage').then(module => ({ default: module.ProjectDetailPage })))
 const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage').then(module => ({ default: module.BlogDetailPage })))
-const AIVideoPage = lazy(() => import('./pages/AIVideoPage').then(module => ({ default: module.AIVideoPage })))
 
 function Home() {
   return (
@@ -47,6 +47,7 @@ function Home() {
       />
       <Hero />
       <FeaturedProjects />
+      <Testimonials />
       <WhyMe />
       <HowIBuild />
       <MetricsSection />
@@ -82,7 +83,6 @@ function App() {
                     <Route path="/hackathons" element={<HackathonsPage />} />
                     <Route path="/blogs" element={<BlogsPage />} />
                     <Route path="/blogs/:slug" element={<BlogDetailPage />} />
-                    <Route path="/ai-videos" element={<AIVideoPage />} />
                     <Route path="/education" element={<EducationPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                   </Routes>

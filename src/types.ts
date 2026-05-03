@@ -97,3 +97,12 @@ export interface Workshop {
     topic: string;
     description: string;
 }
+
+export interface Testimonial {
+    id: string;
+    name: string;
+    role: string;
+    company: string;
+    text: string;
+    linkedin: string;
+}
