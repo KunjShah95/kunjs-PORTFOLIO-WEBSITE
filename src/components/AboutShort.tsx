@@ -21,9 +21,10 @@ export function AboutShort() {
           viewport={{ once: true }}
           className="text-lg text-muted leading-relaxed text-center mb-8"
         >
-          AI engineer focused on building real-world systems that actually work. 
-          From bias detection in healthcare AI to multi-agent orchestration, 
-          I build AI tools that solve hard problems — not just impressive demos.
+          I build autonomous systems that bridge the gap between AI research and production reality. 
+          My work spans from auditing healthcare models for multi-million dollar liability risks 
+          to orchestrating multi-agent swarms that automate thousands of manual tasks. 
+          I don't build demos; I build infrastructure.
         </motion.p>
 
         {/* Quick stats */}

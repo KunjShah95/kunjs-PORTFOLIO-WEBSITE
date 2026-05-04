@@ -7,7 +7,7 @@ const techCategories = [
     icon: BrainCircuit,
     color: "text-purple-400",
     bg: "bg-purple-500/10",
-    skills: ["PyTorch", "TensorFlow", "LangChain", "OpenAI APIs", "Hugging Face", "Pinecone", "ChromaDB", "LLaMA-3", "Scikit-Learn"]
+    skills: ["PyTorch", "LangChain", "CrewAI", "Agentic Reasoning", "OpenAI APIs", "LLaMA-3", "Hugging Face", "Pinecone", "ChromaDB"]
   },
   {
     title: "Backend",

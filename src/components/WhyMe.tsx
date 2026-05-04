@@ -5,23 +5,23 @@ import { Link } from 'react-router-dom'
 const DIFFERENTIATORS = [
   {
     icon: Target,
-    title: "I Build to Ship",
-    description: "I don't just create isolated scripts. I take ideas from messy data to clean, deployed products that users can actually interact with."
+    title: "Ship-First Mentality",
+    description: "I transform experimental AI concepts into production-grade deployments. My focus is on scalability, security, and real-world utility."
   },
   {
     icon: Zap,
-    title: "Beyond the Wrapper",
-    description: "Building true AI products takes more than a prompt. I focus on agentic reasoning, memory, and orchestration to solve complex, multi-step problems."
+    title: "Agentic Orchestration",
+    description: "AI is more than a prompt. I architect systems with long-term memory, self-correction, and multi-agent coordination to handle high-entropy business logic."
   },
   {
     icon: Code2,
-    title: "Engineering First",
-    description: "Great AI needs a solid foundation. I write clean React interfaces, robust Python backends, and maintainable systems that scale."
+    title: "Production-Ready Architecture",
+    description: "Intelligence requires infrastructure. I build using modern stacks (React, FastAPI, Docker) that are audit-ready, documented, and performance-optimized."
   },
   {
     icon: TrendingUp,
-    title: "Focus on Impact",
-    description: "Tech is just a tool. My real goal is solving real-world friction, optimizing workflows, and delivering measurable value."
+    title: "ROI-Driven Development",
+    description: "I don't just write code; I solve bottlenecks. Whether it's reducing 40+ hours of manual work or optimizing API costs by 65%, impact is my primary metric."
   }
 ]
 

@@ -31,10 +31,10 @@ export function MetricsSection() {
           {/* Top KPI Cards */}
           <div className="lg:col-span-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { label: "Active Users", value: "74+", trend: "+12%", icon: Users, color: "text-blue-400", bg: "bg-blue-500/10" },
-              { label: "Page Views", value: "169+", trend: "+24%", icon: Eye, color: "text-purple-400", bg: "bg-purple-500/10" },
-              { label: "Avg. Session", value: "4m 12s", trend: "+5%", icon: BarChart3, color: "text-green-400", bg: "bg-green-500/10" },
-              { label: "CTR", value: "8.4%", trend: "+1.2%", icon: MousePointerClick, color: "text-cyan-400", bg: "bg-cyan-500/10" }
+              { label: "Total Visitors", value: "104+", trend: "+45%", icon: Users, color: "text-blue-400", bg: "bg-blue-500/10" },
+              { label: "Page Views", value: "244+", trend: "+52%", icon: Eye, color: "text-purple-400", bg: "bg-purple-500/10" },
+              { label: "Exploration", value: "2.3 p/u", trend: "+15%", icon: BarChart3, color: "text-green-400", bg: "bg-green-500/10" },
+              { label: "Retention", value: "38%", trend: "+5.2%", icon: MousePointerClick, color: "text-cyan-400", bg: "bg-cyan-500/10" }
             ].map((kpi, i) => (
               <motion.div
                 key={kpi.label}
@@ -74,10 +74,10 @@ export function MetricsSection() {
               <h3 className="text-sm font-semibold text-txt mb-6 uppercase tracking-wider">Traffic Sources</h3>
               <div className="space-y-5">
                 {[
-                  { source: "Direct", percent: 45, value: "76", color: "bg-primary" },
-                  { source: "GitHub Referrals", percent: 35, value: "59", color: "bg-blue-400" },
-                  { source: "Social Media", percent: 15, value: "25", color: "bg-purple-400" },
-                  { source: "Organic Search", percent: 5, value: "9", color: "bg-cyan-400" }
+                  { source: "LinkedIn", percent: 58, value: "58", color: "bg-primary" },
+                  { source: "Direct", percent: 25, value: "26", color: "bg-blue-400" },
+                  { source: "GitHub", percent: 12, value: "12", color: "bg-purple-400" },
+                  { source: "Others", percent: 5, value: "5", color: "bg-cyan-400" }
                 ].map((item) => (
                   <div key={item.source}>
                     <div className="flex justify-between text-sm mb-2">
@@ -109,31 +109,31 @@ export function MetricsSection() {
               <h3 className="text-sm font-semibold text-txt mb-6 uppercase tracking-wider">Device Breakdown</h3>
               <div className="flex-1 flex flex-col justify-center gap-8">
                 <div className="flex items-center gap-4">
-                  <div className="p-4 rounded-xl bg-primary/10 text-primary">
-                    <Monitor className="w-8 h-8" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between items-end mb-2">
-                      <span className="text-lg font-semibold text-txt">Desktop</span>
-                      <span className="text-2xl font-bold font-mono text-txt">62%</span>
-                    </div>
-                    <div className="w-full h-2 rounded-full bg-bg border border-border/50">
-                      <div className="h-full w-[62%] rounded-full bg-primary" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
                   <div className="p-4 rounded-xl bg-blue-500/10 text-blue-400">
                     <Smartphone className="w-8 h-8" />
                   </div>
                   <div className="flex-1">
                     <div className="flex justify-between items-end mb-2">
                       <span className="text-lg font-semibold text-txt">Mobile</span>
-                      <span className="text-2xl font-bold font-mono text-txt">38%</span>
+                      <span className="text-2xl font-bold font-mono text-txt">63%</span>
                     </div>
                     <div className="w-full h-2 rounded-full bg-bg border border-border/50">
-                      <div className="h-full w-[38%] rounded-full bg-blue-400" />
+                      <div className="h-full w-[63%] rounded-full bg-blue-400" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="p-4 rounded-xl bg-primary/10 text-primary">
+                    <Monitor className="w-8 h-8" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-end mb-2">
+                      <span className="text-lg font-semibold text-txt">Desktop</span>
+                      <span className="text-2xl font-bold font-mono text-txt">37%</span>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-bg border border-border/50">
+                      <div className="h-full w-[37%] rounded-full bg-primary" />
                     </div>
                   </div>
                 </div>

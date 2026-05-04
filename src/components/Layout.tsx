@@ -8,6 +8,7 @@ import { AIAssistant } from './AIAssistant'
 import { Helmet } from 'react-helmet-async'
 import { SOCIALS } from '../data/portfolio'
 import { pageVariants, navSpring } from '../lib/motion'
+import { StickyCTA } from './StickyCTA'
 
 interface LayoutProps {
    children: React.ReactNode
@@ -270,6 +271,7 @@ const navLinks = [
          </main>
 
          <AIAssistant />
+         <StickyCTA />
 
          <footer className="relative z-10 border-t border-border bg-surface/50">
             <div className="container-aligned py-12">

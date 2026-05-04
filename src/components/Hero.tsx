@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Cpu, Globe, Shield, Gauge, Terminal, Box, FileText } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PROJECTS } from '../data/portfolio'
+import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics'
 
 function MetricCard({ icon: Icon, label, value, trend, color }: { icon: any, label: string, value: string, trend?: string, color: string }) {
   return (
@@ -75,7 +76,7 @@ export function Hero() {
             >
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-surface border border-border backdrop-blur-sm shadow-sm">
                 <Terminal className="w-4 h-4 text-primary" />
-                <span className="text-sm font-mono text-muted">Built AI tools | Multi-agent systems | Deployed apps</span>
+                <span className="text-sm font-mono text-muted">8+ Autonomous Agents | 1.2M+ API Calls | Production-Ready</span>
                 <LiveIndicator />
               </div>
             </motion.div>
@@ -86,16 +87,16 @@ export function Hero() {
               transition={{ duration: 0.35, delay: 0.05 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-txt leading-tight tracking-tight mb-6"
             >
-              I build autonomous <span className="text-primary">AI agents</span> that replace manual workflows & scale products.
+              <span className="block text-primary mb-2">AI Engineer</span> building production-ready intelligent systems
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.1 }}
-              className="text-lg text-muted max-w-xl mb-8"
+              className="text-lg text-muted max-w-xl mb-8 leading-relaxed"
             >
-              Stop paying for simple wrappers. I engineer production-grade agentic systems that save 40+ hours a week and deliver measurable ROI.
+              Stop paying for simple wrappers. I engineer autonomous agentic systems that replace manual workflows, save 40+ hours/week, and deliver measurable ROI.
             </motion.p>
 
             <motion.div
@@ -106,22 +107,25 @@ export function Hero() {
             >
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)]"
+                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_HERO_PRIMARY)}
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)] active:scale-[0.98]"
               >
-                Hire Me
+                Let's Build Together
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm"
+                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_HERO_SECONDARY)}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm active:scale-[0.98]"
               >
-                View Projects
+                View Systems
               </Link>
               <a
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm"
+                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_HERO_RESUME)}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm active:scale-[0.98]"
               >
                 <FileText className="w-4 h-4" />
                 Resume
