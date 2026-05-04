@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, ExternalLink, Github, ArrowUpRight, Activity, AlertCircle, CheckCircle2, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { FEATURED_PROJECTS } from '../data/portfolio'
+import { FEATURED_PROJECTS, PROJECTS } from '../data/portfolio'
 
 function ProjectFeatureCard({ project, index }: { project: typeof FEATURED_PROJECTS[0], index: number }) {
   return (
@@ -117,7 +117,7 @@ export function FeaturedProjects() {
           </p>
           <div className="flex flex-wrap gap-6 text-sm">
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-primary">11</span>
+              <span className="text-2xl font-bold text-primary">{PROJECTS.length}</span>
               <span className="text-muted">Projects Deployed</span>
             </div>
             <div className="flex items-center gap-2">

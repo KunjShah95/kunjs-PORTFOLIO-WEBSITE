@@ -15,6 +15,7 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
     { label: 'Labs', href: '/labs' },
     { label: 'Skills', href: '/skills' },
     { label: 'Hackathons', href: '/hackathons' },
+    { label: 'Writings', href: '/blogs' },
   ]
 
   return (

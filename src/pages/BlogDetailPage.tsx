@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { ArrowLeft, Calendar, Clock, Tag, Linkedin, Twitter } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { SEO } from '../components/SEO'
 import { BLOGS } from '../data/portfolio'
 import { SITE_URL } from '../lib/site'
@@ -120,24 +122,64 @@ export function BlogDetailPage() {
                             transition={{ delay: 0.3 }}
                             className="max-w-none"
                         >
-                            {blog.content ? (
-                                <div
-                                    className="article-content"
-                                    dangerouslySetInnerHTML={{
-                                        __html: `<p class="text-muted leading-relaxed text-lg font-light mb-6">` + blog.content
-                                            .replace(/### (.*)/g, '<h3 class="text-xl font-bold uppercase text-primary mt-12 mb-4 tracking-wider">$1</h3>')
-                                            .replace(/## (.*)/g, '<h2 class="text-2xl font-bold text-txt mt-16 mb-6 tracking-tight">$1</h2>')
-                                            .replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary/90 font-bold">$1</strong>')
-                                            .replace(/\n\n/g, '</p><p class="text-muted leading-relaxed text-lg font-light mb-6">')
-                                            .replace(/# (.*)/g, '') // Remove main h1
-                                            + `</p>`
+                            <div className="prose prose-invert max-w-none">
+                                <ReactMarkdown 
+                                    remarkPlugins={[remarkGfm]}
+                                    components={{
+                                        h1: ({ children }) => <h1 className="text-3xl sm:text-4xl font-bold text-txt mb-8 tracking-tight font-display border-b border-border pb-4">{children}</h1>,
+                                        h2: ({ children }) => <h2 className="text-2xl font-bold text-txt mt-16 mb-6 tracking-tight flex items-center gap-3">
+                                            <span className="w-1.5 h-6 bg-primary rounded-full" />
+                                            {children}
+                                        </h2>,
+                                        h3: ({ children }) => <h3 className="text-xl font-bold uppercase text-primary mt-12 mb-4 tracking-wider">{children}</h3>,
+                                        p: ({ children }) => <p className="text-muted leading-relaxed text-lg font-light mb-6">{children}</p>,
+                                        ul: ({ children }) => <ul className="space-y-4 mb-8 pl-4">{children}</ul>,
+                                        li: ({ children }) => (
+                                            <li className="flex gap-3 text-muted text-lg font-light">
+                                                <span className="text-primary mt-1.5 flex-shrink-0">
+                                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <rect x="2" y="2" width="8" height="8" stroke="currentColor" strokeWidth="2" />
+                                                    </svg>
+                                                </span>
+                                                <span>{children}</span>
+                                            </li>
+                                        ),
+                                        code: ({ node, inline, className, children, ...props }: any) => {
+                                            return inline ? (
+                                                <code className="bg-surfaceHighlight border border-border text-primary px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+                                                    {children}
+                                                </code>
+                                            ) : (
+                                                <div className="my-8 relative group">
+                                                    <div className="absolute -inset-2 bg-primary/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                    <pre className="relative bg-surface border border-border p-6 rounded-sm font-mono text-sm overflow-x-auto text-txt-dim leading-relaxed">
+                                                        <div className="flex justify-end items-center mb-4 border-b border-border pb-2 opacity-40">
+                                                            <div className="flex gap-1.5">
+                                                                <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                                                                <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                                                                <div className="w-2 h-2 rounded-full bg-green-500/50" />
+                                                            </div>
+                                                        </div>
+                                                        <code>{children}</code>
+                                                    </pre>
+                                                </div>
+                                            )
+                                        },
+                                        a: ({ children, href }) => (
+                                            <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline decoration-primary/30 underline-offset-4 transition-colors">
+                                                {children}
+                                            </a>
+                                        ),
+                                        blockquote: ({ children }) => (
+                                            <blockquote className="border-l-4 border-primary bg-primary/5 p-8 my-10 italic text-txt-dim text-xl font-light">
+                                                {children}
+                                            </blockquote>
+                                        ),
                                     }}
-                                />
-                            ) : (
-                                <div className="py-20 text-center border-2 border-dashed border-border/50 rounded-lg">
-                                    <p className="text-muted text-sm animate-pulse">Content coming soon...</p>
-                                </div>
-                            )}
+                                >
+                                    {blog.content}
+                                </ReactMarkdown>
+                            </div>
                         </motion.article>
 
                         {/* Tags & Interaction */}
@@ -186,12 +228,12 @@ export function BlogDetailPage() {
                         <div className="sticky top-32 space-y-8">
                             {/* Author Card */}
                             <div className="p-6 border border-border bg-surface/50 rounded-sm space-y-4">
-                                <div className="text-[10px] font-bold txt-mono text-muted uppercase tracking-widest">Dispatcher</div>
+                                <div className="text-[10px] font-bold txt-mono text-muted uppercase tracking-widest">Author</div>
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 bg-primary rounded-sm flex items-center justify-center text-white font-black text-xl">K</div>
                                     <div>
                                         <h4 className="font-bold text-txt uppercase text-sm">Kunj Shah</h4>
-                                        <p className="text-[10px] txt-mono text-muted uppercase">Systems Specialist</p>
+                                        <p className="text-[10px] txt-mono text-muted uppercase">AI Engineer</p>
                                     </div>
                                 </div>
                             </div>
@@ -200,14 +242,12 @@ export function BlogDetailPage() {
                             <div className="p-6 border border-primary/20 bg-primary/5 rounded-sm space-y-4">
                                 <h4 className="font-bold text-txt uppercase text-sm">Stay Updated</h4>
                                 <p className="text-xs text-muted leading-relaxed">Join the signal stream for more research into autonomous intelligence and distributed systems.</p>
-                                <button className="w-full py-3 bg-primary text-white font-bold text-[10px] txt-mono uppercase tracking-[0.2em] hover:shadow-[0_0_20px_rgba(255,79,0,0.3)] transition-all">Connect_Stream</button>
+                                <button className="w-full py-3 bg-primary text-white font-bold text-[10px] txt-mono uppercase tracking-[0.2em] hover:shadow-[0_0_20px_rgba(255,79,0,0.3)] transition-all">Subscribe</button>
                             </div>
 
                             {/* System Note */}
                             <div className="txt-mono text-[9px] text-muted/40 uppercase leading-loose border-t border-border/50 pt-6">
-                                ARCHIVE_REF: {blog.id}<br />
-                                ENCRYPTION: AES_256_STABLE<br />
-                                LOG_TYPE: TECHNICAL_RESEARCH
+                                Published in {blog.category.replace(/_/g, ' ')}
                             </div>
                         </div>
                     </aside>

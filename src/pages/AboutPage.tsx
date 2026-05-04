@@ -3,10 +3,10 @@ import { useState } from 'react'
 import { User, Target, Cpu, Briefcase, GraduationCap, Zap } from 'lucide-react'
 import { SEO } from '../components/SEO'
 import { AnimatedCounter } from '../components/AnimatedCounter'
-import { IDENTITY, EXPERIENCE, EDUCATION, SKILL_GROUPS } from '../data/portfolio'
+import { IDENTITY, EXPERIENCE, EDUCATION, SKILL_GROUPS, PROJECTS } from '../data/portfolio'
 
 const stats = [
-  { value: 11, label: 'Projects', suffix: '+' },
+  { value: PROJECTS.length, label: 'Projects', suffix: '+' },
   { value: 1500, label: 'Hours Coded', suffix: '+' },
   { value: 8, label: 'Tech Stack', suffix: '' },
 ]

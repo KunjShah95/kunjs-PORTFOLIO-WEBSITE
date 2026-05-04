@@ -17,139 +17,139 @@ export const PROJECTS: Project[] = [
     {
         id: '01',
         title: 'CinePulse',
-        category: 'FULL STACK ML',
+        category: 'Full Stack ML',
         desc: 'End-to-end movie recommender system with an NLP classification backend and a responsive user interface for real-time mood-based discovery.',
         tech: ['PYTHON', 'PYTORCH', 'REACT', 'FASTAPI'],
         github: 'https://github.com/KunjShah95/CinePulse',
         slug: 'cinepulse',
-        impact: 'PRODUCTION_READY',
+        impact: 'Production',
         problem: 'Movie discovery is often limited to static genre filters that fail to capture current user intent or mood.',
         outcome: 'Achieved 92% recommendation accuracy in user testing with sub-50ms inference latency.',
     },
     {
         id: '02',
         title: 'GAP Miner',
-        category: 'AUTOMATED INTELLIGENCE',
-        desc: 'Full-stack skill gap analyzer using semantic extraction to automate the generation of career-critical learning roadmaps.',
+        category: 'AI Research',
+        desc: 'Full-stack skill gap analyzer using semantic extraction to automate the generation of tailored career learning roadmaps.',
         tech: ['LLAMA-3', 'LANGCHAIN', 'FASTAPI', 'REACT'],
         github: 'https://github.com/KunjShah95/arros',
         slug: 'autonomous-research',
-        impact: 'BETA_LIVE',
+        impact: 'Beta',
         problem: 'Market research and skill gap analysis take weeks of manual work for aspiring engineers.',
         outcome: 'Reduces roadmap generation time from 10 days to 15 seconds with 95% market alignment.',
     },
     {
         id: '03',
         title: 'Railway Inspection',
-        category: 'COMPUTER VISION AUTOMATION',
+        category: 'Computer Vision',
         desc: 'Automated defect detection system using high-speed vision pipelines and YOLOv8 to replace hazardous manual inspections.',
         tech: ['C++', 'OPENCV', 'YOLOv8', 'CUDA'],
         github: 'https://github.com/KunjShah95/Railway-Inspection',
         slug: 'railway-inspection',
-        impact: 'FIELD_TESTED',
+        impact: 'Deployed',
         problem: 'Manual railway inspections are slow, hazardous, and prone to human error in defect detection.',
         outcome: 'Automated detection with 98.7% accuracy and 4.2x speedup over traditional methods.',
     },
     {
         id: '04',
         title: 'UPI Fraud Guard',
-        category: 'PREDICTIVE AUTOMATION',
-        desc: 'Automated fraud detection engine designed to identify anomalous transaction vectors with high-precision real-time response.',
+        category: 'Machine Learning',
+        desc: 'Fraud detection engine designed to identify anomalous transaction patterns with high-precision real-time response.',
         tech: ['SCIKIT-LEARN', 'XGBOOST', 'PANDAS', 'FLASK'],
         github: 'https://github.com/KunjShah95/UPI-Fraud-Detection',
         slug: 'upi-fraud-guard',
-        impact: 'ALGO_STABLE',
+        impact: 'Stable',
         problem: 'Real-time UPI transactions are vulnerable to sophisticated fraud patterns that static rules miss.',
         outcome: 'Detected 88% of anomalous transactions with a false positive rate under 0.1%.',
     },
     {
         id: '05',
         title: 'SENTINEL CLI',
-        category: 'SECURITY AUTOMATION',
-        desc: 'Automated security auditor and review tool that unifies 13+ analyzers into one powerful AI-driven CLI workflow.',
+        category: 'Cybersecurity',
+        desc: 'Security auditing tool that unifies multiple analyzers into a single, efficient command-line workflow.',
         tech: ['NODE.JS', 'TYPESCRIPT', 'LLM', 'DOCKER'],
         github: 'https://github.com/KunjShah95/SENTINEL-CLI',
         demo: 'https://sentinel-cli.vercel.app/',
         slug: 'sentinel-cli',
-        impact: 'OPEN_SOURCE_PRODUCT',
+        impact: 'Open Source',
         problem: 'Security auditing involves juggling multiple disconnected tools and manual report correlation.',
-        outcome: 'Consolidated 13+ security tools into a single AI-driven command, reducing audit overhead by 70%.',
+        outcome: 'Consolidated 13+ security tools into a single command, reducing audit overhead by 70%.',
     },
     {
         id: '06',
         title: 'AETHER AI',
-        category: 'AGENTIC AUTOMATION',
-        desc: 'Multi-model automation assistant designed for terminal workflows, featuring local inference and secure command execution.',
+        category: 'AI Systems',
+        desc: 'Personal automation assistant designed for terminal workflows, featuring local inference and secure command execution.',
         tech: ['PYTHON', 'OLLAMA', 'GEMINI', 'GROQ'],
         github: 'https://github.com/KunjShah95/AETHER-AI',
         slug: 'aether-ai',
-        impact: 'OPEN_SOURCE_FRAMEWORK',
-        problem: 'Cloud-dependent AI assistants introduce latency and privacy concerns for sensitive terminal-based development workflows.',
-        outcome: 'Engineered a local-first agent capable of executing complex shell commands with zero data leakage and sub-1s response time.',
+        impact: 'Framework',
+        problem: 'Cloud-dependent AI assistants introduce latency and privacy concerns for sensitive development workflows.',
+        outcome: 'Engineered a local-first assistant capable of executing complex shell commands with zero data leakage.',
     },
     {
         id: '07',
         title: 'MinBPE Tokenizer',
-        category: 'LLM CORE ARCHITECTURE',
-        desc: 'Low-level Byte Pair Encoding implementation, automating the tokenization logic for custom transformer models.',
+        category: 'Core AI',
+        desc: 'Low-level Byte Pair Encoding implementation for understanding and optimizing tokenization logic in transformer models.',
         tech: ['PYTHON', 'NLP', 'TIKTOKEN', 'ALGORITHMS'],
         github: 'https://github.com/KunjShah95/TOKENIZER-FROM-SCRATCH',
         slug: 'minbpe-tokenizer',
-        impact: 'RESEARCH_TOOLING',
-        problem: 'Standard tokenizers are black boxes that can lead to inefficient context window usage in domain-specific LLM training.',
-        outcome: 'Built a from-scratch BPE implementation that reduced token overhead by 15% for technical documentation datasets.',
+        impact: 'Research',
+        problem: 'Standard tokenizers are black boxes that can lead to inefficient context usage in domain-specific training.',
+        outcome: 'Built a from-scratch BPE implementation that reduced token overhead by 15% for technical datasets.',
     },
     {
         id: '08',
         title: 'ResumeMasterAI 2026',
-        category: 'AGENTIC CAREER PLATFORM',
-        desc: 'Autonomous career intelligence ecosystem featuring a smart AI Gateway for multi-model routing and an orchestrated agent swarm for resume optimization.',
-        tech: ['AGENTS', 'AI GATEWAY', 'PYTHON', 'CHROMADB'],
+        category: 'AI Career Platform',
+        desc: 'Comprehensive career intelligence system with smart model routing and automated resume optimization.',
+        tech: ['PYTHON', 'LANGGRAPH', 'AI GATEWAY', 'CHROMADB'],
         github: 'https://github.com/KunjShah01/job-snipper',
         demo: 'https://resumemasterai.streamlit.app/',
         slug: 'resumemaster-ai',
-        impact: 'ARCHITECTED_2026',
-        problem: 'Siloed LLM calls and manual agent management lead to high latency and suboptimal resume tailoring.',
-        outcome: 'Reduced API costs by 65% and increased candidate match precision by 3x using an orchestrated agent swarm.',
+        impact: 'Architecture',
+        problem: 'Disconnected LLM calls and manual management lead to high latency and inconsistent resume tailoring.',
+        outcome: 'Reduced API costs by 65% and increased match precision by 3x using orchestrated routing.',
     },
     {
         id: '09',
         title: 'LearnAI',
-        category: 'EDUCATION AI',
-        desc: 'AI-powered personalized learning platform with adaptive tutoring, smart quizzes, and gamification. Supports multiple AI model providers.',
+        category: 'EdTech AI',
+        desc: 'Personalized learning platform with adaptive tutoring, smart quizzes, and progress tracking across multiple model providers.',
         tech: ['NEXT.JS', 'FIREBASE', 'SUPABASE', 'GEMINI'],
         github: 'https://github.com/KunjShah95/intelligent-learning-assistant',
         demo: 'https://intelligent-learning-assistant.vercel.app',
         slug: 'learnai',
-        impact: 'PRODUCT_LIVE',
-        problem: 'Traditional e-learning platforms provide a one-size-fits-all experience, failing to adapt to individual student learning speeds.',
-        outcome: 'Increased quiz completion rates by 45% through adaptive difficulty adjustment and gamified feedback loops.',
+        impact: 'Live',
+        problem: 'Traditional e-learning platforms provide a one-size-fits-all experience, failing to adapt to student learning speeds.',
+        outcome: 'Increased quiz completion rates by 45% through adaptive difficulty adjustment.',
     },
     {
         id: '10',
         title: 'EquityLens',
-        category: 'AI FAIRNESS AUDITING',
-        desc: 'Healthcare fairness auditing platform for detecting AI bias. Ensures EU AI Act and NIST AI RMF compliance.',
+        category: 'AI Ethics',
+        desc: 'Fairness auditing platform for detecting bias in healthcare AI, ensuring compliance with international standards.',
         tech: ['REACT', 'FASTAPI', 'POSTGRESQL', 'TENSORFLOW'],
         github: 'https://github.com/KunjShah95/fairness-lens-studio',
         demo: 'https://fairness-lens-backend-988207147245.us-central1.run.app/',
         slug: 'equitylens',
-        impact: 'PRODUCTION_READY',
+        impact: 'Production',
         problem: 'Healthcare AI models often contain hidden biases that lead to unequal patient treatment recommendations.',
-        outcome: 'Detected a 23% performance gap in commercial triage models and reduced audit overhead from weeks to hours.',
+        outcome: 'Detected a 23% performance gap in commercial triage models and reduced audit overhead significantly.',
     },
     {
         id: '11',
         title: 'SmartFlow AI',
-        category: 'CROWD INTELLIGENCE',
-        desc: 'Real-time crowd monitoring platform for stadiums and transit hubs with live heatmaps, wait time prediction, and AI routing recommendations.',
+        category: 'Smart Infrastructure',
+        desc: 'Real-time crowd monitoring platform for transit hubs with live heatmaps and wait time prediction.',
         tech: ['NEXT.JS 15', 'TYPESCRIPT', 'FIREBASE', 'FIRESTORE'],
         github: 'https://github.com/KunjShah95/Smart-flow-ai',
         demo: 'https://ps-1-eight.vercel.app',
         slug: 'smart-flow-ai',
-        impact: 'BETA_LIVE',
-        problem: 'Crowd management in transit hubs is reactive, leading to severe bottlenecks during peak hours and events.',
-        outcome: 'Wait-time prediction accuracy reached 94%, enabling proactive staff deployment and 25% faster crowd dissipation.',
+        impact: 'Beta',
+        problem: 'Crowd management in transit hubs is often reactive, leading to bottlenecks during peak hours.',
+        outcome: 'Wait-time prediction accuracy reached 94%, enabling proactive staff deployment.',
     }
 ];
 
@@ -178,25 +178,25 @@ export const EDUCATION: Education[] = [
 
 export const SKILL_GROUPS: SkillGroup[] = [
     {
-        category: 'Full_Stack_AI',
+        category: 'Full Stack AI',
         icon: Brain,
         description: 'Developing end-to-end intelligent applications with integrated ML backends and responsive frontends.',
         skills: ['React / Next.js', 'FastAPI / Python', 'PostgreSQL / Vald', 'API Architecture']
     },
     {
-        category: 'Applied_ML_Automation',
+        category: 'AI Automation',
         icon: Workflow,
         description: 'Automating complex reasoning tasks using modern LLM frameworks and autonomous agentic patterns.',
         skills: ['LangChain / CrewAI', 'Agentic Workflows', 'RAG Pipelines', 'Automated Scraping']
     },
     {
-        category: 'Core_Intelligence',
+        category: 'Core AI/ML',
         icon: Terminal,
         description: 'Engineering the neural core of applications through vision, NLP, and advanced predictive modeling.',
         skills: ['PyTorch / CUDA', 'YOLOv8 / OpenCV', 'Transformers / NLP', 'Scikit-Learn']
     },
     {
-        category: 'Infrastructure_&_Dev',
+        category: 'DevOps & Infra',
         icon: Database,
         description: 'Building the foundation for automation through robust CI/CD, containers, and secure shell workflows.',
         skills: ['Docker / Kubernetes', 'Git / GitHub', 'Linux Shell', 'Cloud Deployment']
@@ -208,31 +208,31 @@ export const SOCIALS: Social[] = [
         name: 'LINKEDIN',
         url: 'https://www.linkedin.com/in/kunjshah05',
         icon: Linkedin,
-        label: 'PROFESSIONAL_SYNC'
+        label: 'LinkedIn'
     },
     {
         name: 'X_TWITTER',
         url: 'https://x.com/kunjshah_dev',
         icon: Twitter,
-        label: 'SIGNAL_STREAM'
+        label: 'Twitter / X'
     },
     {
         name: 'GITHUB_V1',
         url: 'https://github.com/KunjShah95',
         icon: Github,
-        label: 'CORE_REPOSITORY'
+        label: 'GitHub'
     },
     {
         name: 'GITHUB_V2',
         url: 'https://github.com/KunjShah01',
         icon: Github,
-        label: 'RESEARCH_LABS'
+        label: 'Side Projects'
     },
     {
         name: 'HUGGING_FACE',
         url: 'https://huggingface.co/kunjshah01',
         icon: ExternalLink,
-        label: 'MODEL_VAULT'
+        label: 'Hugging Face'
     }
 ];
 
@@ -250,10 +250,10 @@ export const TESTIMONIALS = [
 export const BLOGS: Blog[] = [
     {
         id: 'B001',
-        title: 'Building Production-Grade Agentic Systems',
+        title: 'Building Production-Grade AI Systems',
         slug: 'agentic-systems-production',
-        category: 'SYSTEMS_ARCHITECTURE',
-        excerpt: 'Deep dive into designing autonomous agents that are reliable, scalable, and production-ready. Covering orchestration frameworks, error handling, and distributed reasoning.',
+        category: 'Systems Architecture',
+        excerpt: 'Deep dive into designing AI systems that are reliable, scalable, and ready for real-world deployment. Covering orchestration, error handling, and reasoning.',
         content: `
 # Building Production-Grade Agentic Systems
 
@@ -281,15 +281,15 @@ Building agents isn't just about AI; it's about systems engineering. It's about 
         `,
         date: 'JAN 2026',
         readTime: 12,
-        tags: ['AGENTS', 'SYSTEMS', 'PRODUCTION', 'ARCHITECTURE'],
+        tags: ['AI SYSTEMS', 'ARCHITECTURE', 'PRODUCTION', 'SCALABILITY'],
         featured: true,
     },
     {
         id: 'B002',
         title: 'MLOps at Scale: Lessons from High-Frequency Model Deployments',
         slug: 'mlops-scale-deployments',
-        category: 'DEVOPS_INFRASTRUCTURE',
-        excerpt: 'Practical guide to managing continuous model updates in production. Best practices for versioning, monitoring, rollback strategies, and cost optimization.',
+        category: 'Infrastructure',
+        excerpt: 'A practical guide to managing continuous model updates in production. Best practices for versioning, monitoring, and cost optimization.',
         content: `
 # MLOps at Scale: Beyond the Jupyter Notebook
 
@@ -320,8 +320,8 @@ MLOps is about reducing the "fear of deployment." When your monitoring is robust
         id: 'B003',
         title: 'Computer Vision at Edge: Optimizing YOLOv8 for Real-Time Inference',
         slug: 'cv-edge-optimization',
-        category: 'COMPUTER_VISION',
-        excerpt: 'Techniques for deploying vision models on edge devices. Motion deblurring, quantization strategies, and achieving sub-100ms latency on industrial hardware.',
+        category: 'Computer Vision',
+        excerpt: 'Techniques for deploying vision models on edge devices, focusing on quantization and low-latency performance on industrial hardware.',
         content: `
 # Computer Vision at the Edge: The Fight for Every Millisecond
 
@@ -348,15 +348,15 @@ The edge isn't just about the model. It's about the marriage of hardware-specifi
         `,
         date: 'NOV 2025',
         readTime: 14,
-        tags: ['VISION', 'EDGE', 'OPTIMIZATION', 'INFERENCE'],
+        tags: ['VISION', 'EDGE', 'OPTIMIZATION', 'HARDWARE'],
         featured: true,
     },
     {
         id: 'B004',
         title: 'RAG Pipelines: Semantic Search and Contextual Retrieval',
         slug: 'rag-semantic-search',
-        category: 'GENERATIVE_AI',
-        excerpt: 'Comprehensive guide to building Retrieval-Augmented Generation systems. Vector database selection, embedding strategies, and improving LLM accuracy with external knowledge.',
+        category: 'Generative AI',
+        excerpt: 'Comprehensive guide to building Retrieval-Augmented Generation systems, covering vector databases and embedding strategies.',
         content: `
 # RAG Pipelines: Semantic Search and Contextual Retrieval
 
@@ -438,15 +438,15 @@ The biggest insight? RAG quality is 80% about your data pipeline and retrieval s
         `,
         date: 'OCT 2025',
         readTime: 11,
-        tags: ['RAG', 'LLM', 'EMBEDDINGS', 'SEMANTIC_SEARCH'],
+        tags: ['RAG', 'AI', 'EMBEDDINGS', 'SEARCH'],
         featured: false,
     },
     {
         id: 'B005',
         title: 'Prompt Engineering for Complex Multi-Step Reasoning',
         slug: 'prompt-engineering-reasoning',
-        category: 'GENERATIVE_AI',
-        excerpt: 'Advanced prompting techniques for breaking down complex problems. Chain-of-thought patterns, structured outputs, and evaluating reasoning quality.',
+        category: 'Generative AI',
+        excerpt: 'Advanced prompting techniques for breaking down complex problems and evaluating the quality of AI reasoning.',
         content: `
 # Prompt Engineering for Complex Multi-Step Reasoning
 
@@ -526,15 +526,15 @@ The best prompting is invisible — the user gets the right answer without knowi
         `,
         date: 'SEP 2025',
         readTime: 9,
-        tags: ['PROMPTS', 'LLM', 'REASONING', 'ENGINEERING'],
+        tags: ['PROMPTS', 'AI', 'REASONING', 'ENGINEERING'],
         featured: false,
     },
     {
         id: 'B006',
         title: 'Anomaly Detection in High-Dimensional Data Streams',
         slug: 'anomaly-detection-streams',
-        category: 'MACHINE_LEARNING',
-        excerpt: 'Building robust anomaly detection systems for real-time data. Handling concept drift, feature engineering, and deployment considerations for fraud and security.',
+        category: 'Machine Learning',
+        excerpt: 'Building robust anomaly detection systems for real-time data, focusing on feature engineering and deployment for fraud and security.',
         content: `
 # Anomaly Detection in High-Dimensional Data Streams
 
@@ -628,15 +628,15 @@ Anomaly detection is not a solved problem — it's an ongoing arms race against 
         `,
         date: 'AUG 2025',
         readTime: 13,
-        tags: ['ANOMALY', 'STREAMING', 'DETECTION', 'PRODUCTION'],
+        tags: ['ANOMALY', 'STREAMING', 'ML', 'SECURITY'],
         featured: false,
     },
     {
         id: 'B007',
         title: 'EquityLens: Building an AI Fairness Auditing Platform',
         slug: 'equitylens-case-study',
-        category: 'AI_FAIRNESS',
-        excerpt: 'How I built a production-grade platform for detecting AI bias in healthcare systems. Covers fairness metrics, EU AI Act compliance, and real-world bias detection challenges.',
+        category: 'AI Ethics',
+        excerpt: 'How I built a platform for detecting AI bias in healthcare, covering fairness metrics and international compliance standards.',
         content: `
 # EquityLens: Building an AI Fairness Auditing Platform
 
@@ -683,8 +683,158 @@ Fairness isn't just a feature—it's a requirement for responsible AI deployment
         `,
         date: 'APR 2026',
         readTime: 8,
-        tags: ['FAIRNESS', 'HEALTHCARE', 'COMPLIANCE', 'CASE STUDY'],
+        tags: ['ETHICS', 'HEALTHCARE', 'COMPLIANCE', 'CASE STUDY'],
         featured: true,
+    },
+    {
+        id: 'B008',
+        title: 'Orchestrating Complex AI Workflows',
+        slug: 'agentic-workflow-orchestration',
+        category: 'AI Systems',
+        excerpt: 'Deep dive into building resilient multi-agent systems, exploring task delegation and error recovery in complex automation pipelines.',
+        content: `
+# Agentic Workflow Orchestration: Moving Beyond Single-Prompt Agents
+
+The transition from single-prompt interactions to complex agentic workflows represents a paradigm shift in AI engineering. While a single prompt can solve isolated tasks, "workflows" allow for persistent reasoning, tool use, and self-correction.
+
+## The Limits of Single-Prompt Agents
+Single-prompt agents are often "fire and forget." They lack the ability to:
+- **Handle multi-step dependencies**: Where the output of step A dictates the tool selection for step B.
+- **Recover from errors**: If a tool call fails, the agent usually terminates or hallucinates a fix.
+- **Maintain long-term context**: State is lost between independent runs.
+
+## Enter Orchestration Frameworks
+In my recent projects, I’ve moved toward **CrewAI** and **LangGraph** for more robust orchestration.
+
+### 1. CrewAI: Role-Based Collaboration
+CrewAI allows you to define specialized agents with distinct personas (e.g., Researcher, Writer, Analyst).
+- **Task Delegation**: A "Manager" agent can assign sub-tasks based on expertise.
+- **Memory Systems**: Short-term and long-term memory allow agents to "remember" previous tool outputs.
+
+### 2. LangGraph: Cyclical Reasoning
+LangGraph enables cyclical graphs, which are essential for self-correction loops. If an agent's code execution fails a test, the graph can route the control back to the "Coder" agent to fix the bug.
+
+## Designing for Resilience
+In production, we must design for the "failure case."
+- **Fallback Models**: If GPT-4 hits a rate limit, the orchestrator should automatically switch to a local Llama-3 instance via Ollama.
+- **Human-in-the-Loop**: Critical actions (like deleting data or making payments) should trigger a "pause" in the graph for human approval.
+
+Orchestration is what turns a chatbot into a reliable digital employee.
+        `,
+        date: 'MAY 2024',
+        readTime: 12,
+        tags: ['AI SYSTEMS', 'ORCHESTRATION', 'WORKFLOWS'],
+        featured: false,
+    },
+    {
+        id: 'B009',
+        title: 'Scaling AI Inference: Optimization Strategies for Production',
+        slug: 'scaling-llm-inference',
+        category: 'Infrastructure',
+        excerpt: 'How to reduce latency and cost in high-throughput AI applications without sacrificing accuracy, from quantization to decoding strategies.',
+        content: `
+# Scaling LLM Inference: Optimization Strategies for Production
+
+As we move AI from prototypes to enterprise-grade applications, the bottleneck shifts from model capability to **inference efficiency**. Scaling a model to handle thousands of concurrent requests requires a deep understanding of the hardware-software interface.
+
+## The Latency-Cost Trade-off
+The primary goal of inference optimization is to minimize Time-To-First-Token (TTFT) and maximize tokens per second, while keeping VRAM usage low.
+
+### 1. Quantization: The 80/20 Rule
+Quantizing a model from FP16 to INT4 or INT8 can reduce VRAM requirements by up to 75% with minimal impact on perplexity.
+- **GGUF**: Best for CPU/GPU hybrid inference (local LLMs).
+- **AWQ/GPTQ**: Optimized for high-throughput GPU serving.
+
+### 2. Speculative Decoding
+Speculative decoding uses a smaller "draft" model (e.g., Llama-7B) to predict the next few tokens, which are then validated in parallel by the "target" model (e.g., Llama-70B). This can result in a 2-3x speedup for sequence generation without losing quality.
+
+### 3. KV-Cache Management
+In long-context RAG applications, the KV-cache can consume massive amounts of VRAM. Techniques like **PagedAttention** (used in vLLM) allow for dynamic memory allocation, preventing fragmentation and enabling much higher batch sizes.
+
+## Choosing the Right Backend
+In my production pipelines, I’ve found that:
+- **vLLM** is the gold standard for high-throughput serving on NVIDIA GPUs.
+- **Ollama** is unbeatable for local development and private edge deployments.
+- **Groq** (LPU architecture) is the current leader for raw inference speed (sub-50ms TTFT).
+
+Efficiency isn't just about saving money; it's about enabling the "instant" UX that users expect from modern AI.
+        `,
+        date: 'APR 2024',
+        readTime: 10,
+        tags: ['MLOPS', 'INFERENCE', 'OPTIMIZATION', 'SCALABILITY'],
+        featured: false,
+    },
+    {
+        id: 'B010',
+        title: 'Next.js 15: Engineering High-Performance AI Interfaces',
+        slug: 'nextjs-15-performance',
+        category: 'Frontend',
+        excerpt: 'Leveraging modern web features to build fast, streaming AI interfaces that provide an instant user experience.',
+        content: `
+# Next.js 15: Engineering High-Performance AI Interfaces
+
+Building AI interfaces is different from building standard CRUD apps. You're dealing with long-running requests, token streaming, and complex UI states. Next.js 15, paired with React 19, introduces several patterns that are specifically beneficial for AI applications.
+
+## Streaming as a First-Class Citizen
+AI responses are slow. Waiting 10 seconds for a full response is a UX killer. Next.js 15 makes it easier to implement partial hydration and streaming.
+- **Loading UI (Suspense)**: Instantly show the interface while the AI backend generates the initial tokens.
+- **Server Actions**: Securely handle model routing and tool execution on the server, keeping API keys away from the client.
+
+## React 19 Hooks for AI
+The new \`useActionState\` and \`useOptimistic\` hooks are game-changers for AI chatbots.
+- **useOptimistic**: Instantly show the user's message and a "typing..." indicator before the server even receives the request.
+- **useActionState**: Simplifies handling of the streaming state, error handling, and form submission logic.
+
+## Partial Prerendering (PPR)
+PPR allows you to combine static content (like the chatbot sidebar and previous history) with dynamic streaming content (the current response) in a single request. This reduces the number of round-trips and makes the app feel significantly faster.
+
+## The "Zero-Latency" Goal
+In my portfolio redesign, I’ve focused on "Industrial Aesthetics" which prioritize functional speed. By using CSS-only animations and minimizing client-side JS, we ensure that the interface remains responsive even while the heavy lifting happens in the LLM background.
+
+Performance is the foundation of trust in AI.
+        `,
+        date: 'MAR 2024',
+        readTime: 8,
+        tags: ['NEXTJS', 'FRONTEND', 'PERFORMANCE', 'UX'],
+        featured: false,
+    },
+    {
+        id: 'B011',
+        title: 'Secure CI/CD for AI Models: Protecting the Development Lifecycle',
+        slug: 'secure-cicd-ai-models',
+        category: 'Cybersecurity',
+        excerpt: 'Implementing robust security checks in AI development, from scanning for vulnerabilities to ensuring data integrity in automated pipelines.',
+        content: `
+# Secure CI/CD for AI Models: Protecting the Neural Supply Chain
+
+In the rush to deploy AI, security is often an afterthought. However, AI introduces a new attack surface: the **neural supply chain**. From poisoned training data to prompt injection, the vulnerabilities are unique and dangerous.
+
+## The New Attack Vectors
+1. **Prompt Injection**: Malicious input designed to bypass system instructions or leak sensitive system prompts.
+2. **Data Leakage**: LLMs "remembering" sensitive training data or PII and revealing it to unauthorized users.
+3. **Weight Tampering**: If an attacker gains access to your model weights (e.g., in Hugging Face or S3), they can subtly alter model behavior without changing a line of code.
+
+## Implementing a Security-First Pipeline
+A modern AI CI/CD pipeline should include:
+
+### 1. Automated Red-Teaming
+Use a smaller LLM to "attack" your main model during the CI phase. We use frameworks like **Giskard** or custom scripts to test for bias, toxicity, and prompt injection resilience.
+
+### 2. PII Scrubbing
+Before data hits your fine-tuning pipeline or vector database, it must pass through a scrubbing layer. We use **Presidio** to identify and mask names, emails, and financial information.
+
+### 3. Model Integrity Checks
+Implement SHA-256 hashing for model weights. Before loading a model into production, the inference server should verify the hash against a known good value stored in a secure secret manager.
+
+### 4. Output Filtering
+Never return raw LLM output directly. Implement a "Guardrail" layer that checks the generated text against a list of restricted topics or PII patterns before it reaches the end user.
+
+Security isn't a checkbox; it's a continuous process that starts in the development environment.
+        `,
+        date: 'FEB 2024',
+        readTime: 9,
+        tags: ['SECURITY', 'CICD', 'AI SAFETY', 'DEVOPS'],
+        featured: false,
     },
 ];
 
@@ -693,41 +843,41 @@ export const LOGS: LogEntry[] = [
         id: 'LOG001',
         date: '2026-01-27',
         hash: 'A3F7C2',
-        module: 'AGENT_ORCHESTRATION',
-        action: 'DEPLOY_CREW_FRAMEWORK_v1',
-        details: 'Deployed hierarchical multi-agent system with task delegation and autonomous problem-solving capabilities. 99.2% uptime achieved.',
+        module: 'AI Systems',
+        action: 'Deployed Automation Framework',
+        details: 'Implemented a multi-model orchestration layer for handling complex task sequences with improved error recovery.',
     },
     {
         id: 'LOG002',
         date: '2026-01-25',
         hash: 'B9E5F1',
-        module: 'MLOPS_PIPELINE',
-        action: 'INTEGRATE_MONITORING_SUITE',
-        details: 'Added comprehensive ML monitoring with prometheus, grafana dashboards, and automated drift detection triggers.',
+        module: 'MLOps',
+        action: 'Integrated Monitoring Suite',
+        details: 'Configured comprehensive system monitoring with automated drift detection and real-time performance alerts.',
     },
     {
         id: 'LOG003',
         date: '2026-01-23',
         hash: 'C4D2A8',
-        module: 'DATA_SYSTEMS',
-        action: 'OPTIMIZE_VECTOR_INDEX',
-        details: 'Implemented HNSW indexing for semantic search. Reduced query latency from 450ms to 32ms at scale.',
+        module: 'Database',
+        action: 'Optimized Vector Indexing',
+        details: 'Implemented HNSW indexing for semantic search, reducing query latency significantly for large datasets.',
     },
     {
         id: 'LOG004',
         date: '2026-01-20',
         hash: 'D7B1E6',
-        module: 'INFERENCE_ENGINE',
-        action: 'QUANTIZE_VISION_MODEL',
-        details: 'Converted YOLOv8 to INT8 with 4.2x speedup. Maintained 98.7% accuracy on validation set.',
+        module: 'Machine Learning',
+        action: 'Quantized Vision Model',
+        details: 'Converted YOLOv8 to INT8 precision, achieving a 4x inference speedup while maintaining high accuracy.',
     },
     {
         id: 'LOG005',
         date: '2026-01-18',
         hash: 'E2F9C3',
-        module: 'FRONTEND_SYSTEMS',
-        action: 'REDESIGN_TO_INDUSTRIAL_THEME',
-        details: 'Completed VOID/INDUSTRIAL aesthetic redesign. Implemented kinetic scroll-linked animations and 3D perspective grid.',
+        module: 'Frontend',
+        action: 'Redesigned Project Theme',
+        details: 'Finalized the industrial aesthetic update with enhanced scroll animations and refined grid layouts.',
     },
 ];
 
@@ -735,30 +885,30 @@ export const FEATURED_PROJECTS = [
     {
         id: 'equity-lens',
         title: 'AI Fairness Auditing Platform',
-        problem: 'Healthcare AI deployed with zero bias auditing — EU AI Act violation with no transparency into model fairness across demographics',
-        solution: 'Built comprehensive fairness evaluation pipeline integrating EU AI Act, NIST AI RMF, and ISO/IEC 25059 compliance with real-time drift detection',
+        problem: 'Healthcare AI models often contain hidden biases that lead to unequal patient treatment recommendations without transparency.',
+        solution: 'Built a comprehensive fairness evaluation pipeline that automates bias detection and ensures compliance with international standards.',
         techStack: ['Python', 'FastAPI', 'LangChain', 'PostgreSQL'],
-        result: '23% bias detected, audit time reduced 99% (3 weeks → 4 hours), 99.9% uptime',
+        result: 'Identified significant performance gaps and reduced audit time from weeks to hours with high reliability.',
         demoUrl: 'https://fairness-lens-backend-988207147245.us-central1.run.app/',
         githubUrl: 'https://github.com/KunjShah95/fairness-lens-studio',
     },
     {
         id: 'autonomous-research',
         title: 'GAP Miner',
-        problem: 'Roadmap generation taking weeks due to manual market analysis',
-        solution: 'AI-powered market analysis with automated competitor tracking and gap identification',
+        problem: 'Developing career roadmaps typically requires weeks of manual market research and analysis.',
+        solution: 'Developed an AI-powered system that automates market analysis and identifies skill gaps in seconds.',
         techStack: ['GPT-4', 'Python', 'React', 'Vector DB'],
-        result: '3× faster roadmap generation',
+        result: 'Achieved 3× faster roadmap generation with high market alignment.',
         demoUrl: '',
         githubUrl: 'https://github.com/KunjShah95/arros',
     },
     {
         id: 'resumemaster-ai',
         title: 'ResumeMasterAI 2026',
-        problem: 'Siloed LLM calls and manual agent management leading to high latency and suboptimal resume tailoring',
-        solution: 'Developed an Agentic AI Gateway with smart multi-provider routing (Ollama/Groq/OpenAI) and a hierarchical agent orchestrator for end-to-end career automation',
-        techStack: ['Python', 'LangGraph', 'AI Gateway', 'Dual-Layer DB'],
-        result: 'Reduced API costs by 65%, 3× increase in candidate match precision, and zero-latency failover',
+        problem: 'Manual management of multiple AI models lead to high costs, latency, and inconsistent resume quality.',
+        solution: 'Engineered a smart AI Gateway for optimized model routing and a hierarchical system for end-to-end career automation.',
+        techStack: ['Python', 'LangGraph', 'AI Gateway', 'PostgreSQL'],
+        result: 'Reduced API costs by 65% while significantly increasing candidate match precision.',
         demoUrl: 'https://resumemasterai.streamlit.app/',
         githubUrl: 'https://github.com/KunjShah01/job-snipper',
     },

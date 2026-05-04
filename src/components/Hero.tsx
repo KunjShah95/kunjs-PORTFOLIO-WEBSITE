@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Cpu, Globe, Shield, Gauge, Terminal, Box, FileText } from 'lucide-react'
+import { ArrowRight, Cpu, Globe, Gauge, Terminal, Box, FileText } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PROJECTS } from '../data/portfolio'
 import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics'
@@ -40,23 +40,6 @@ function LiveIndicator() {
   )
 }
 
-function SystemStatus({ label, status }: { label: string, status: 'online' | 'active' | 'ready' }) {
-  const colors = {
-    online: 'bg-green-500',
-    active: 'bg-cyan-500', 
-    ready: 'bg-blue-500'
-  }
-  return (
-    <div className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
-      <span className="text-sm text-muted font-mono">{label}</span>
-      <div className="flex items-center gap-2">
-        <span className={`w-1.5 h-1.5 rounded-full ${colors[status]}`} />
-        <span className="text-xs font-mono text-txt uppercase">{status}</span>
-      </div>
-    </div>
-  )
-}
-
 export function Hero() {
   const projectCount = PROJECTS.length
 
@@ -76,7 +59,7 @@ export function Hero() {
             >
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-surface border border-border backdrop-blur-sm shadow-sm">
                 <Terminal className="w-4 h-4 text-primary" />
-                <span className="text-sm font-mono text-muted">8+ Autonomous Agents | 1.2M+ API Calls | Production-Ready</span>
+                <span className="text-sm font-mono text-muted">Building Production-Ready Intelligent Systems</span>
                 <LiveIndicator />
               </div>
             </motion.div>
@@ -141,7 +124,7 @@ export function Hero() {
             >
               <div className="flex flex-col gap-1">
                 <span className="text-2xl font-bold text-txt">1.2M+</span>
-                <span className="text-xs font-mono text-muted uppercase tracking-wider">API Calls</span>
+                <span className="text-xs font-mono text-muted uppercase tracking-wider">Requests Handled</span>
               </div>
               <div className="w-px h-8 bg-border"></div>
               <div className="flex flex-col gap-1">
@@ -189,43 +172,20 @@ export function Hero() {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="mt-4 p-5 rounded-xl bg-surface border border-border shadow-sm"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="mt-8 relative aspect-square max-w-[400px] mx-auto lg:mx-0 group"
             >
-              <div className="flex items-center gap-2 mb-4">
-                <Shield className="w-4 h-4 text-primary" />
-                <span className="text-sm font-semibold text-txt">System Status</span>
-              </div>
-              <SystemStatus label="ML Pipeline" status="active" />
-              <SystemStatus label="Agent Framework" status="ready" />
-              <SystemStatus label="API Gateway" status="online" />
-              <SystemStatus label="Vector Store" status="ready" />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-4 p-5 rounded-xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 shadow-sm"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-semibold text-txt">Production Ready</span>
-                <span className="px-2 py-0.5 rounded text-xs font-mono bg-green-500/20 text-green-400">v2.4.1</span>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-muted">API Latency</span>
-                  <span className="font-mono text-txt">23ms</span>
-                </div>
-                <div className="w-full h-1.5 rounded-full bg-surfaceHighlight">
-                  <div className="h-full w-[92%] rounded-full bg-primary" />
-                </div>
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-muted">Error Rate</span>
-                  <span className="font-mono text-green-400">0.08%</span>
-                </div>
+              <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full opacity-20 group-hover:opacity-30 transition-opacity" />
+              <div className="relative h-full w-full rounded-2xl bg-surface border border-border flex items-center justify-center p-8 overflow-hidden shadow-2xl">
+                 <div className="flex flex-col items-center text-center space-y-4">
+                    <div className="p-4 rounded-2xl bg-primary/10 text-primary">
+                        <Cpu className="w-12 h-12" />
+                    </div>
+                    <h3 className="text-xl font-bold text-txt">Engineering Excellence</h3>
+                    <p className="text-sm text-muted">Focusing on scalability, reliability, and measurable business impact through AI integration.</p>
+                 </div>
               </div>
             </motion.div>
           </div>
