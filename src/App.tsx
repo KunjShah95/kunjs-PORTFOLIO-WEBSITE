@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react'
 import { MotionConfig } from 'framer-motion'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider } from './components/ThemeProvider'
 import { Layout } from './components/Layout'
@@ -12,12 +12,6 @@ import { useWebMCP } from './hooks/useWebMCP'
 // Eager load critical components for Home
 import { Hero } from './components/Hero'
 import { FeaturedProjects } from './components/FeaturedProjects'
-import { WhyMe } from './components/WhyMe'
-import { HowIBuild } from './components/HowIBuild'
-import { MetricsSection } from './components/MetricsSection'
-import { TechStack } from './components/TechStack'
-import { CurrentlyBuilding } from './components/CurrentlyBuilding'
-import { AboutShort } from './components/AboutShort'
 import { FinalCTA } from './components/FinalCTA'
 import { Testimonials } from './components/Testimonials'
 import { SEO } from './components/SEO'
@@ -27,10 +21,7 @@ import { PORTFOLIO_FAQ } from './data/seo-faq'
 // Lazy load secondary pages
 const BlogsPage = lazy(() => import('./pages/BlogsPage').then(module => ({ default: module.BlogsPage })))
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage').then(module => ({ default: module.ProjectsPage })))
-const SkillsPage = lazy(() => import('./pages/SkillsPage').then(module => ({ default: module.SkillsPage })))
 const LabsPage = lazy(() => import('./pages/LabsPage').then(module => ({ default: module.LabsPage })))
-const EducationPage = lazy(() => import('./pages/EducationPage').then(module => ({ default: module.EducationPage })))
-const ExperiencePage = lazy(() => import('./pages/ExperiencePage').then(module => ({ default: module.ExperiencePage })))
 const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })))
 const HackathonsPage = lazy(() => import('./pages/HackathonsPage').then(module => ({ default: module.HackathonsPage })))
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })))
@@ -48,12 +39,6 @@ function Home() {
       <Hero />
       <FeaturedProjects />
       <Testimonials />
-      <WhyMe />
-      <HowIBuild />
-      <MetricsSection />
-      <TechStack />
-      <CurrentlyBuilding />
-      <AboutShort />
       <FinalCTA />
     </div>
   )
@@ -77,13 +62,11 @@ function App() {
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/projects" element={<ProjectsPage />} />
                     <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-                    <Route path="/skills" element={<SkillsPage />} />
+                    <Route path="/skills" element={<Navigate to="/" replace />} />
                     <Route path="/labs" element={<LabsPage />} />
-                    <Route path="/experience" element={<ExperiencePage />} />
                     <Route path="/hackathons" element={<HackathonsPage />} />
                     <Route path="/blogs" element={<BlogsPage />} />
                     <Route path="/blogs/:slug" element={<BlogDetailPage />} />
-                    <Route path="/education" element={<EducationPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                   </Routes>
                 </Suspense>

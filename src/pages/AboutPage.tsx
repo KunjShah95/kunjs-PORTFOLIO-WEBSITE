@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { User, Target, Cpu, Briefcase, GraduationCap, Zap } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { User, Target, Cpu, Briefcase, GraduationCap, Zap, ArrowRight } from 'lucide-react'
 import { SEO } from '../components/SEO'
 import { AnimatedCounter } from '../components/AnimatedCounter'
 import { IDENTITY, EXPERIENCE, EDUCATION, SKILL_GROUPS, PROJECTS } from '../data/portfolio'
@@ -323,7 +324,19 @@ export function AboutPage() {
                   </div>
                </div>
             </section>
-         </div>
-      </div>
-   )
+
+            {/* Page Navigation */}
+            <nav className="flex items-center justify-between pt-16 border-t border-border/50">
+               <div />
+               <Link
+                  to="/projects"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-surface border border-border text-txt text-sm font-semibold hover:bg-surfaceHighlight hover:border-primary/40 transition-all group"
+               >
+                  View Projects
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+               </Link>
+            </nav>
+          </div>
+       </div>
+    )
 }

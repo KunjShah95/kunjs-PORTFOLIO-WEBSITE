@@ -59,14 +59,11 @@ export function Layout({ children }: LayoutProps) {
    }, [location.pathname])
 
 const navLinks = [
-       { label: 'About', href: '/about' },
-       { label: 'Projects', href: '/projects' },
-       { label: 'Writings', href: '/blogs' },
-       { label: 'Hackathons', href: '/hackathons' },
-       { label: 'Labs', href: '/labs' },
-       { label: 'Skills', href: '/skills' },
-       { label: 'Contact', href: '/contact' },
-    ]
+        { label: 'About', href: '/about' },
+        { label: 'Projects', href: '/projects' },
+        { label: 'Writings', href: '/blogs' },
+        { label: 'Contact', href: '/contact' },
+     ]
 
    const socialLinkLabel = (name: string) => {
       if (name.includes('LINKEDIN')) return 'LinkedIn'
@@ -312,17 +309,11 @@ const navLinks = [
                         <Link to="/projects" className="text-sm text-muted hover:text-txt transition-colors">
                            Projects
                         </Link>
-                        <Link to="/hackathons" className="text-sm text-muted hover:text-txt transition-colors">
-                           Hackathons
-                        </Link>
-                        <Link to="/skills" className="text-sm text-muted hover:text-txt transition-colors">
-                           Skills
-                        </Link>
-                        <Link to="/labs" className="text-sm text-muted hover:text-txt transition-colors">
-                           Research Labs
-                        </Link>
                         <Link to="/blogs" className="text-sm text-muted hover:text-txt transition-colors">
                            Writing
+                        </Link>
+                        <Link to="/contact" className="text-sm text-muted hover:text-txt transition-colors">
+                           Contact
                         </Link>
                      </div>
                   </div>
