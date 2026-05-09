@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { User, Target, Cpu, Briefcase, GraduationCap, Zap, ArrowRight } from 'lucide-react'
 import { SEO } from '../components/SEO'
 import { AnimatedCounter } from '../components/AnimatedCounter'
-import { IDENTITY, EXPERIENCE, EDUCATION, SKILL_GROUPS, PROJECTS } from '../data/portfolio'
+import { IDENTITY, EXPERIENCE, EDUCATION, SKILL_GROUPS } from '../data/portfolio'
 
 const stats = [
-  { value: PROJECTS.length, label: 'Projects', suffix: '+' },
+  { value: 11, label: 'Projects', suffix: '+' },
   { value: 1500, label: 'Hours Coded', suffix: '+' },
   { value: 8, label: 'Tech Stack', suffix: '' },
 ]
@@ -36,11 +36,11 @@ export function AboutPage() {
                   </h1>
                </div>
 
-               {/* Animated Stats */}
+               {/* Animated Stats - Mobile responsive */}
                <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="grid grid-cols-3 gap-4 max-w-xl"
+                  className="grid grid-cols-3 gap-2 sm:gap-4 max-w-xl"
                >
                   {stats.map((stat, i) => (
                      <motion.div
@@ -48,12 +48,12 @@ export function AboutPage() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: i * 0.1 }}
-                        className="p-6 bg-surface border border-border rounded-xl text-center hover:border-primary/30 transition-colors"
+                        className="p-3 sm:p-6 bg-surface border border-border rounded-xl text-center hover:border-primary/30 transition-colors"
                      >
-                        <p className="text-3xl font-bold text-txt">
+                        <p className="text-xl sm:text-3xl font-bold text-txt">
                            <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                         </p>
-                        <p className="text-xs text-muted mt-1">{stat.label}</p>
+                        <p className="text-[10px] sm:text-xs text-muted mt-0.5 sm:mt-1">{stat.label}</p>
                      </motion.div>
                   ))}
                </motion.div>
@@ -86,10 +86,10 @@ export function AboutPage() {
                         </div>
 
                         {/* Story Cards with Dashboard Style */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pt-8">
                            <motion.div
                               whileHover={{ y: -4 }}
-                              className="p-8 border border-border bg-surface rounded-xl space-y-4 group hover:border-primary/30 transition-all"
+                              className="p-5 sm:p-8 border border-border bg-surface rounded-xl space-y-4 group hover:border-primary/30 transition-all"
                            >
                               <div className="flex items-center gap-3">
                                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
@@ -111,7 +111,7 @@ export function AboutPage() {
 
                            <motion.div
                               whileHover={{ y: -4 }}
-                              className="p-8 border border-border bg-surface rounded-xl space-y-4 group hover:border-primary/30 transition-all"
+                              className="p-5 sm:p-8 border border-border bg-surface rounded-xl space-y-4 group hover:border-primary/30 transition-all"
                            >
                               <div className="flex items-center gap-3">
                                  <div className="p-2 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors">
@@ -139,7 +139,7 @@ export function AboutPage() {
                      <motion.div 
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="p-10 border border-border bg-surface rounded-lg space-y-8"
+                        className="p-6 sm:p-10 border border-border bg-surface rounded-lg space-y-6 sm:space-y-8"
                      >
                         <div className="flex justify-center">
                            <div className="w-32 h-32 rounded-full overflow-hidden bg-surfaceHighlight flex items-center justify-center border border-border">
@@ -258,14 +258,14 @@ export function AboutPage() {
                               viewport={{ once: true }}
                               className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-background"
                            />
-                           <div className="flex justify-between items-start">
+                           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-0">
                               <div>
-                                 <h3 className="text-base font-semibold text-txt">{exp.role}</h3>
+                                 <h3 className="text-sm sm:text-base font-semibold text-txt">{exp.role}</h3>
                                  <div className="text-primary text-xs font-medium mb-2">
                                     {exp.company}
                                  </div>
                               </div>
-                              <span className="text-xs font-mono text-muted border border-border px-2 py-1 rounded bg-surfaceHighlight">
+                              <span className="text-[10px] sm:text-xs font-mono text-muted border border-border px-2 py-1 rounded bg-surfaceHighlight w-fit">
                                  {exp.period}
                               </span>
                            </div>
@@ -304,14 +304,14 @@ export function AboutPage() {
                            transition={{ delay: index * 0.1 }}
                            className="p-6 border border-border bg-surface rounded-lg space-y-4 hover:border-primary/30 transition-colors"
                         >
-                           <div className="flex justify-between items-start">
+                           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-0">
                               <div className="space-y-1">
-                                 <h3 className="text-base font-semibold text-txt">{edu.school}</h3>
+                                 <h3 className="text-sm sm:text-base font-semibold text-txt">{edu.school}</h3>
                                  <div className="text-primary text-xs font-medium">
                                     {edu.degree}
                                  </div>
                               </div>
-                              <span className="text-xs font-mono text-muted border border-border px-2 py-1 rounded bg-surfaceHighlight">
+                              <span className="text-[10px] sm:text-xs font-mono text-muted border border-border px-2 py-1 rounded bg-surfaceHighlight w-fit">
                                  {edu.period}
                               </span>
                            </div>

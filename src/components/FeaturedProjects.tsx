@@ -19,9 +19,17 @@ function ProjectFeatureCard({ project, index }: { project: typeof FEATURED_PROJE
           {project.title}
         </h3>
 
-        <div className="mb-4 p-3 rounded-lg bg-bg border border-border">
-          <div className="flex items-center justify-center h-20 text-muted text-sm">
-            <span className="text-center">📊 Visual proof: screenshots, dashboards,<br/>or architecture diagrams</span>
+        <div className="mb-4 p-3 rounded-lg bg-gradient-to-br from-primary/5 to-purple-500/5 border border-primary/10">
+          <div className="flex items-center justify-center h-20 sm:h-24 text-muted">
+            <div className="grid grid-cols-3 gap-1.5 w-full h-full">
+              <div className="rounded-md bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/10" />
+              <div className="rounded-md bg-gradient-to-br from-purple-500/20 to-purple-500/5 border border-purple-500/10" />
+              <div className="rounded-md bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 border border-cyan-500/10" />
+              <div className="rounded-md bg-gradient-to-br from-orange-500/20 to-orange-500/5 border border-orange-500/10 col-span-2" />
+              <div className="rounded-md bg-gradient-to-br from-green-500/20 to-green-500/5 border border-green-500/10" />
+              <div className="rounded-md bg-gradient-to-br from-blue-500/20 to-blue-500/5 border border-blue-500/10 col-span-2" />
+              <div className="rounded-md bg-gradient-to-br from-pink-500/20 to-pink-500/5 border border-pink-500/10" />
+            </div>
           </div>
         </div>
 

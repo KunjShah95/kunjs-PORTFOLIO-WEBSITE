@@ -9,14 +9,14 @@ interface AnimatedCounterProps {
 
 export function AnimatedCounter({ value, suffix = '', prefix = '' }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [count, setCount] = useState(0)
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
+  const [count, setCount] = useState(value)
 
   useEffect(() => {
     if (!isInView) return
     
-    const duration = 2000
-    const steps = 60
+    const duration = 1500
+    const steps = 45
     const increment = value / steps
     let current = 0
     
