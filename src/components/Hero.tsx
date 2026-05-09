@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, ExternalLink, Github, FileText } from 'lucide-react'
+import { ArrowRight, FileText } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { PROJECTS } from '../data/portfolio'
 import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics'
 
 const TECH_TAGS = [
@@ -10,9 +9,6 @@ const TECH_TAGS = [
 ]
 
 export function Hero() {
-  // Top 3 projects for the fold
-  const topProjects = PROJECTS.slice(0, 3)
-
   return (
     <section className="relative min-h-[94vh] bg-bg overflow-hidden flex items-center pt-8">
       <div className="absolute inset-0 tech-grid-layer" />
@@ -106,75 +102,20 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT: 3 Project Cards visible without scrolling */}
-          <div className="w-full lg:w-[480px] shrink-0 space-y-3">
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-[10px] font-mono text-muted uppercase tracking-widest mb-1"
-            >
-              Featured Projects
-            </motion.p>
-            {topProjects.map((project, i) => (
-              <motion.a
-                key={project.id}
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 + i * 0.08, duration: 0.35 }}
-                className="group block p-4 rounded-xl bg-surface border border-border hover:border-primary/40 hover:bg-surfaceHighlight transition-all cursor-pointer"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-sm font-bold text-txt group-hover:text-primary transition-colors truncate">
-                        {project.title}
-                      </h3>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-bg border border-border text-muted font-mono shrink-0">
-                        {project.category}
-                      </span>
-                    </div>
-                    <p className="text-xs text-muted line-clamp-2 leading-relaxed">
-                      {project.desc}
-                    </p>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {project.tech.slice(0, 4).map((t) => (
-                        <span
-                          key={t}
-                          className="px-1.5 py-0.5 bg-bg border border-border rounded text-[9px] font-mono text-muted"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    {project.outcome && (
-                      <p className="text-[11px] text-green-400 font-medium mt-2 flex items-center gap-1">
-                        <span className="w-1 h-1 rounded-full bg-green-400" />
-                        {project.outcome}
-                      </p>
-                    )}
-                  </div>
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                    <Github className="w-4 h-4 text-primary" />
-                  </div>
-                </div>
-              </motion.a>
-            ))}
+          {/* RIGHT: Profile Image */}
+          <div className="w-full lg:w-[400px] shrink-0">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.45 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="relative"
             >
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-primary transition-colors font-medium mt-1"
-              >
-                View all projects
-                <ArrowRight className="w-3 h-3" />
-              </Link>
+              <div className="absolute -inset-4 bg-primary/20 rounded-2xl blur-xl opacity-60" />
+              <img
+                src="/image.png"
+                alt="Kunj Shah"
+                className="relative w-full h-auto rounded-xl border border-border/50 shadow-2xl"
+              />
             </motion.div>
           </div>
         </div>

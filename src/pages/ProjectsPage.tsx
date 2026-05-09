@@ -5,7 +5,7 @@ import { PROJECTS } from '../data/portfolio'
 import { SEO } from '../components/SEO'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, Cpu, Trophy, ExternalLink } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Cpu, Trophy } from 'lucide-react'
 
 export function ProjectsPage() {
   const [filter, setFilter] = useState('all')
