@@ -17,6 +17,7 @@ import { FeaturedProjects } from './components/FeaturedProjects'
 import { FeaturedHackathon } from './components/FeaturedHackathon'
 import { GitHubProfile } from './components/GitHubProfile'
 import { TechStack } from './components/TechStack'
+import { CurrentlyBuilding } from './components/CurrentlyBuilding'
 import { Testimonials } from './components/Testimonials'
 import { FinalCTA } from './components/FinalCTA'
 import { SEO } from './components/SEO'
@@ -52,6 +53,7 @@ function Home() {
       <div id="tech">
         <TechStack />
       </div>
+      <CurrentlyBuilding />
       <FeaturedProjects />
       <FeaturedHackathon />
       

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { BrainCircuit, Server, Layout, Wrench } from 'lucide-react'
+import { BrainCircuit, Server, Layout, Wrench, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const techCategories = [
   {
@@ -42,9 +43,17 @@ export function TechStack() {
           viewport={{ once: true, margin: '-50px' }}
           className="mb-12 text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-display font-bold text-txt mb-4">
-            Tech <span className="text-primary">Stack</span>
-          </h2>
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-txt">
+              Tech <span className="text-primary">Stack</span>
+            </h2>
+            <Link 
+              to="/skills"
+              className="inline-flex items-center gap-1 text-sm text-muted hover:text-primary transition-colors"
+            >
+              View All <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
           <p className="text-lg text-muted max-w-2xl mx-auto">
             The tools and frameworks I use to build scalable, intelligent systems.
           </p>
