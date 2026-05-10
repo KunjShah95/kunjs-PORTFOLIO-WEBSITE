@@ -5,10 +5,10 @@ import { Brain, Database, Terminal, Workflow, ExternalLink, Github, Twitter, Lin
 
 export const IDENTITY: UserIdentity = {
     name: "Kunj Shah",
-    persona: "Full Stack AI/ML & Automation Specialist",
+    persona: "AI Engineer & Agentic Systems Builder",
     location: "Ahmedabad, IN",
     contact: "kunjkshah05@gmail.com",
-    focus: ["Full Stack AI", "Autonomous Automation", "Neural Intelligence", "Workflow Engineering"],
+    focus: ["Autonomous Agents", "LLM Orchestration", "Agentic Workflows", "AI Infrastructure"],
     github_username: "KunjShah95",
     profile_photo: "/profile.png"
 };

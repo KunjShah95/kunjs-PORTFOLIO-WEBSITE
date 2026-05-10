@@ -71,8 +71,7 @@ export function Hero() {
               transition={{ duration: 0.35, delay: 0.1 }}
               className="text-base text-muted max-w-xl mb-5 leading-relaxed"
             >
-              I build production-grade AI agents and intelligent systems that replace manual workflows and deliver measurable ROI.
-              Python, LangChain, FastAPI, and agentic reasoning are my stack.
+              I build autonomous AI systems that <span className="text-txt font-semibold">automate repetitive workflows</span> and <span className="text-txt font-semibold">deliver measurable business outcomes</span>. Currently building multi-agent orchestration frameworks for enterprise automation.
             </motion.p>
 
             <motion.div
@@ -114,6 +113,13 @@ export function Hero() {
                 >
                   <ArrowRight className="w-4 h-4" />
                 </motion.span>
+              </Link>
+              <Link
+                to="/projects"
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm active:scale-[0.98]"
+              >
+                View Projects
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="/resume.pdf"

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Bot, Globe, Shield } from 'lucide-react'
+import { ArrowRight, Globe, Code2, Trophy } from 'lucide-react'
 
 export function AboutShort() {
   return (
@@ -12,8 +12,18 @@ export function AboutShort() {
           viewport={{ once: true }}
           className="text-3xl font-display font-semibold text-txt mb-6 text-center"
         >
-          About
+          About Me
         </motion.h2>
+        
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-lg text-muted leading-relaxed text-center mb-4"
+        >
+          I'm a self-taught AI engineer who fell in love with the idea of machines that can think. 
+          What started as curiosity about ChatGPT turned into a deep dive into LangChain, CrewAI, and building autonomous systems.
+        </motion.p>
         
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -21,10 +31,7 @@ export function AboutShort() {
           viewport={{ once: true }}
           className="text-lg text-muted leading-relaxed text-center mb-8"
         >
-          I build autonomous systems that bridge the gap between AI research and production reality. 
-          My work spans from auditing healthcare models for multi-million dollar liability risks 
-          to orchestrating multi-agent swarms that automate thousands of manual tasks. 
-          I don't build demos; I build infrastructure.
+          I don't build demos—I build production systems that actually work. Currently learning multi-agent orchestration and obsessed with making AI useful for real businesses.
         </motion.p>
 
         {/* Quick stats */}
@@ -35,9 +42,9 @@ export function AboutShort() {
           className="grid grid-cols-3 gap-4"
         >
           {[
-            { icon: Bot, label: 'AI Systems' },
+            { icon: Code2, label: '15+ Projects' },
+            { icon: Trophy, label: '2x Hackathon' },
             { icon: Globe, label: 'Production' },
-            { icon: Shield, label: 'Reliable' },
           ].map((item) => (
             <motion.div 
               key={item.label}

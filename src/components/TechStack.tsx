@@ -50,7 +50,7 @@ export function TechStack() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {techCategories.map((cat, i) => (
             <motion.div
               key={cat.title}
@@ -58,20 +58,20 @@ export function TechStack() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ delay: i * 0.1 }}
-              className="p-6 rounded-xl bg-surface border border-border shadow-sm flex flex-col h-full hover:border-primary/30 transition-colors group"
+              className="p-6 rounded-xl bg-surface/50 border border-border/50 shadow-sm flex flex-col h-full hover:border-primary/40 hover:bg-surface/80 transition-all duration-300 group"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className={`p-2.5 rounded-lg ${cat.bg}`}>
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`p-3 rounded-xl ${cat.bg} group-hover:scale-110 transition-transform duration-300 shadow-inner`}>
                   <cat.icon className={`w-5 h-5 ${cat.color}`} />
                 </div>
-                <h3 className="text-lg font-bold text-txt">{cat.title}</h3>
+                <h3 className="text-lg font-bold text-txt group-hover:text-primary transition-colors">{cat.title}</h3>
               </div>
               
-              <div className="flex flex-wrap gap-2 mt-auto">
+              <div className="flex flex-wrap gap-2 content-start flex-1">
                 {cat.skills.map(skill => (
                   <span
                     key={skill}
-                    className="px-2.5 py-1.5 rounded-md bg-bg border border-border text-xs font-medium text-muted group-hover:text-txt transition-colors"
+                    className="px-2.5 py-1.5 rounded-md bg-bg/50 border border-border text-[11px] font-mono text-muted group-hover:border-primary/20 group-hover:text-txt transition-all hover:bg-primary/5 hover:border-primary/40 cursor-default"
                   >
                     {skill}
                   </span>

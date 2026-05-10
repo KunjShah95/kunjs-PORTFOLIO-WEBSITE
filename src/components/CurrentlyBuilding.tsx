@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Rocket, Bot, Sparkles, Workflow } from 'lucide-react'
+import { Rocket, Bot, Sparkles, Workflow, Briefcase } from 'lucide-react'
 
 const currentFocus = [
   {
@@ -42,6 +42,11 @@ export function CurrentlyBuilding() {
             <p className="text-lg text-muted mb-8">
               I am constantly experimenting and pushing the boundaries of what is possible with applied AI. Right now, my core focus is on moving from single-prompt interactions to fully autonomous systems.
             </p>
+            
+            <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-green-500/10 border border-green-500/20">
+              <Briefcase className="w-4 h-4 text-green-400" />
+              <span className="text-sm text-green-400 font-medium">Open to full-time AI roles</span>
+            </div>
           </motion.div>
 
           <div className="lg:col-span-7 grid gap-4">

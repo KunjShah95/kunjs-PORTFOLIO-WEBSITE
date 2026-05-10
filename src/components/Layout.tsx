@@ -61,6 +61,7 @@ export function Layout({ children }: LayoutProps) {
 const navLinks = [
         { label: 'About', href: '/about' },
         { label: 'Projects', href: '/projects' },
+        { label: 'Tech Stack', href: '/#tech' },
         { label: 'Writings', href: '/blogs' },
         { label: 'Contact', href: '/contact' },
      ]

@@ -13,9 +13,9 @@ export function Navbar({ onOpenCommand }: NavbarProps) {
   const navLinks = [
     { label: 'Projects', href: '/projects' },
     { label: 'Labs', href: '/labs' },
-    { label: 'Skills', href: '/skills' },
     { label: 'Hackathons', href: '/hackathons' },
     { label: 'Writings', href: '/blogs' },
+    { label: 'Contact', href: '/contact' },
   ]
 
   return (
