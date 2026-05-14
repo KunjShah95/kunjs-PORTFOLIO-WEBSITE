@@ -89,9 +89,14 @@ function ProjectCard({ project, isFlagship = false, index }: ProjectCardProps) {
 export function Projects({ variant = 'section', projects }: { variant?: 'section' | 'page'; projects?: Project[] }) {
   const allProjects = projects || PROJECTS
   const flagshipProject = allProjects.find(p => p.title === 'EquityLens')
-  const otherProjects = variant === 'page'
+  const otherProjects = (variant === 'page'
     ? allProjects.filter(p => p.title !== 'EquityLens')
     : allProjects.filter(p => p.title !== 'EquityLens').slice(0, 4)
+  ).sort((a, b) => {
+    if (a.demo && !b.demo) return -1
+    if (!a.demo && b.demo) return 1
+    return 0
+  })
 
   return (
     <section id="projects" className={`${variant === 'page' ? 'pt-32 pb-20' : 'py-32'} bg-bg relative overflow-hidden`}>

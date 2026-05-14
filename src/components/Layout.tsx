@@ -58,10 +58,22 @@ export function Layout({ children }: LayoutProps) {
       setIsMobileMenuOpen(false)
    }, [location.pathname])
 
+   const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      if (href.startsWith('/#')) {
+         const hash = href.substring(1);
+         const element = document.querySelector(hash);
+         if (element) {
+            e.preventDefault();
+            element.scrollIntoView({ behavior: 'smooth' });
+         }
+      }
+      setIsMobileMenuOpen(false);
+   }
+
 const navLinks = [
         { label: 'About', href: '/about' },
         { label: 'Projects', href: '/projects' },
-        { label: 'Tech Stack', href: '/#tech' },
+        { label: 'Skills', href: '/skills' },
         { label: 'Writings', href: '/blogs' },
         { label: 'Contact', href: '/contact' },
      ]
@@ -119,6 +131,7 @@ const navLinks = [
                      <NavLink
                         key={link.label}
                         to={link.href}
+                        onClick={(e) => handleNavLinkClick(e, link.href)}
                         className={({ isActive }) =>
                            `px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 relative overflow-hidden ${
                               isActive ? 'text-primary' : 'text-muted hover:text-txt'
@@ -198,7 +211,7 @@ const navLinks = [
                         >
                            <NavLink
                               to={link.href}
-                              onClick={() => setIsMobileMenuOpen(false)}
+                              onClick={(e) => handleNavLinkClick(e, link.href)}
                               className={({ isActive }) =>
                                  `text-xl font-semibold py-4 px-5 rounded-2xl flex items-center justify-between transition-all ${
                                     isActive ? 'text-primary bg-primary/10' : 'text-txt hover:bg-surfaceHighlight'

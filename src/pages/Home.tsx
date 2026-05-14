@@ -2,7 +2,6 @@ import { Hero } from '../components/Hero'
 import { FeaturedProjects } from '../components/FeaturedProjects'
 import { HowIBuild } from '../components/HowIBuild'
 import { MetricsDashboard } from '../components/MetricsDashboard'
-import { TechStack } from '../components/TechStack'
 import { CurrentlyBuilding } from '../components/CurrentlyBuilding'
 import { AboutShort } from '../components/AboutShort'
 import { FinalCTA } from '../components/FinalCTA'
@@ -21,7 +20,6 @@ export function Home() {
       <WhyMe />
       <HowIBuild />
       <MetricsDashboard />
-      <TechStack />
       <CurrentlyBuilding />
       <AboutShort />
       <FinalCTA />
