@@ -144,12 +144,14 @@ export function AboutPage() {
                         <div className="flex justify-center">
                            <div className="w-32 h-32 rounded-full overflow-hidden bg-surfaceHighlight flex items-center justify-center border border-border">
                               {IDENTITY.profile_photo && !imageError ? (
-                                 <img
-                                    src={IDENTITY.profile_photo}
-                                    alt={`${IDENTITY.name} profile photo`}
-                                    className="w-full h-full object-cover object-top"
-                                    onError={() => setImageError(true)}
-                                 />
+                                  <img
+                                     src={IDENTITY.profile_photo}
+                                     alt={`${IDENTITY.name} profile photo`}
+                                     loading="lazy"
+                                     decoding="async"
+                                     className="w-full h-full object-cover object-top"
+                                     onError={() => setImageError(true)}
+                                  />
                               ) : (
                                  <User className="w-16 h-16 text-muted" />
                               )}

@@ -44,6 +44,7 @@ export function BlogsPage() {
         description="Read Kunj Shah's in-depth technical articles on AI systems, MLOps, computer vision, and autonomous agents."
         url="https://kunjshah.vercel.app/blogs"
       />
+      <h1 className="sr-only">Technical Articles & Research Logs by Kunj Shah</h1>
 
       <div className="container-aligned space-y-20">
         {/* Header */}

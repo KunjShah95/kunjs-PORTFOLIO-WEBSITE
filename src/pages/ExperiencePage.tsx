@@ -10,6 +10,7 @@ export function ExperiencePage() {
         description="Kunj Shah's professional experience in AI/ML engineering, software development, and research roles."
         url="https://kunjshah.vercel.app/experience"
       />
+      <h1 className="sr-only">Professional Experience — Kunj Shah</h1>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

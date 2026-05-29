@@ -147,7 +147,8 @@ export function Hero() {
               />
               <motion.img
                 src="/image.png"
-                alt="Kunj Shah"
+                alt="Kunj Shah — AI Engineer & Agent Builder"
+                loading="eager"
                 className="relative w-full h-auto max-h-[320px] object-cover rounded-xl border border-border/50 shadow-2xl"
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}

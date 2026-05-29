@@ -10,6 +10,7 @@ export function LabsPage() {
         description="Explore Kunj Shah's experimental research labs and cutting-edge AI prototypes."
         url="https://kunjshah.vercel.app/labs"
       />
+      <h1 className="sr-only">Research Labs — Kunj Shah</h1>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -34,6 +34,8 @@ const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ d
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage').then(module => ({ default: module.ProjectDetailPage })))
 const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage').then(module => ({ default: module.BlogDetailPage })))
 const SkillsPage = lazy(() => import('./pages/SkillsPage').then(module => ({ default: module.SkillsPage })))
+const ExperiencePage = lazy(() => import('./pages/ExperiencePage').then(module => ({ default: module.ExperiencePage })))
+const EducationPage = lazy(() => import('./pages/EducationPage').then(module => ({ default: module.EducationPage })))
 
 function Home() {
   const latestBlogs = BLOGS.slice(0, 3);
@@ -124,6 +126,16 @@ function Home() {
   )
 }
 
+function NotFound() {
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center space-y-4 pt-20">
+      <h1 className="text-6xl font-bold text-txt font-display">404</h1>
+      <p className="text-muted text-lg">Page not found</p>
+      <Link to="/" className="text-primary hover:underline text-sm font-medium">Return home</Link>
+    </div>
+  )
+}
+
 function App() {
   useWebMCP();
 
@@ -148,6 +160,9 @@ function App() {
                     <Route path="/blogs" element={<BlogsPage />} />
                     <Route path="/blogs/:slug" element={<BlogDetailPage />} />
                     <Route path="/contact" element={<ContactPage />} />
+                    <Route path="/experience" element={<ExperiencePage />} />
+                    <Route path="/education" element={<EducationPage />} />
+                    <Route path="*" element={<NotFound />} />
                   </Routes>
                 </Suspense>
               </Layout>

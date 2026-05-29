@@ -5,7 +5,6 @@ import { Menu, X, Command } from 'lucide-react'
 import { CommandMenu } from './CommandMenu'
 import { ThemeToggle } from './ThemeToggle'
 import { AIAssistant } from './AIAssistant'
-import { Helmet } from 'react-helmet-async'
 import { SOCIALS } from '../data/portfolio'
 import { pageVariants, navSpring } from '../lib/motion'
 import { StickyCTA } from './StickyCTA'
@@ -90,12 +89,7 @@ const navLinks = [
       <div className="min-h-screen bg-bg text-txt selection:bg-primary/25 selection:text-txt transition-colors duration-300 relative">
          <div className="grain-overlay" aria-hidden />
          <div className="tech-grid-layer" aria-hidden />
-         <Helmet>
-            <title>Kunj Shah | AI Engineer & Agent Builder</title>
-            <meta name="description" content="Portfolio of Kunj Shah — AI systems, agents, and data / ML engineering." />
-         </Helmet>
-
-         <CommandMenu open={isCommandOpen} setOpen={setIsCommandOpen} />
+          <CommandMenu open={isCommandOpen} setOpen={setIsCommandOpen} />
 
          <a
             href="#main-content"

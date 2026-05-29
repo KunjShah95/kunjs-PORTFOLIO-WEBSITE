@@ -18,6 +18,7 @@ export function ContactPage() {
         transition={{ duration: 0.5 }}
         className="space-y-12"
       >
+        <h1 className="sr-only">Contact Kunj Shah — AI Engineering & Consulting</h1>
         <Contact />
 
         {/* Page Navigation */}

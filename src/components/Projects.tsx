@@ -42,13 +42,13 @@ function ProjectCard({ project, isFlagship = false, index }: ProjectCardProps) {
         </div>
         <div className="flex items-center gap-2">
           {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-sm bg-bg border border-border hover:border-primary/50 text-muted hover:text-primary transition-all">
-              <Github className="w-4 h-4" />
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-3 rounded-sm bg-bg border border-border hover:border-primary/50 text-muted hover:text-primary transition-all" aria-label={`View ${project.title} source code on GitHub`}>
+              <Github className="w-4 h-4" aria-hidden />
             </a>
           )}
           {project.demo && (
-            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="p-3 rounded-sm bg-bg border border-border hover:border-primary/50 text-muted hover:text-primary transition-all">
-              <ExternalLink className="w-4 h-4" />
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="p-3 rounded-sm bg-bg border border-border hover:border-primary/50 text-muted hover:text-primary transition-all" aria-label={`View ${project.title} live demo`}>
+              <ExternalLink className="w-4 h-4" aria-hidden />
             </a>
           )}
         </div>

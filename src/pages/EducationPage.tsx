@@ -10,6 +10,7 @@ export function EducationPage() {
         description="Kunj Shah's academic background and educational achievements in Computer Science and Engineering."
         url="https://kunjshah.vercel.app/education"
       />
+      <h1 className="sr-only">Education — Kunj Shah</h1>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
