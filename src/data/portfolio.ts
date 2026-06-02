@@ -927,3 +927,96 @@ export const LIVE_STATUS = {
   available: true,
   lastUpdated: '2026-06-02T00:00:00Z',
 } as const;
+
+export const HACKATHONS: Array<{
+  title: string;
+  event?: string;
+  name?: string;
+  description?: string;
+  summary?: string;
+  year: number;
+  placement?: string;
+  team?: string;
+  prize?: string;
+}> = [
+  {
+    title: 'Autonomous Hacks',
+    event: 'Autonomous Hacks',
+    description: 'Selected out of 2000+ teams in the online round, and from 300+ teams in the offline final round. Built an autonomous AI system end-to-end in 48 hours.',
+    year: 2026,
+    placement: 'Finalist',
+    team: 'Solo',
+  },
+  {
+    title: 'Odoo Adani Hackathon',
+    event: 'Odoo x Adani',
+    description: 'Selected for the final round out of 100+ teams in the Odoo Adani Hackathon.',
+    year: 2026,
+    placement: 'Finalist',
+    team: '4',
+  },
+  {
+    title: 'AIDTM Hackathon',
+    event: 'AIDTM',
+    description: 'Participated in AIDTM Hackathon organized by Adani.',
+    year: 2026,
+    placement: 'Participant',
+    team: '3',
+  },
+  {
+    title: 'AMD Slingshot',
+    event: 'AMD Slingshot',
+    description: 'Participated in AMD Slingshot hackathon challenge.',
+    year: 2026,
+    placement: 'Participant',
+    team: '2',
+  },
+  {
+    title: 'Odoo Gandhinagar',
+    event: 'Odoo Gandhinagar',
+    description: 'Selected for the final round out of 350+ teams at Odoo Gandhinagar.',
+    year: 2025,
+    placement: 'Finalist',
+    team: '3',
+  },
+  {
+    title: 'SIH Hackathon (College Level)',
+    event: 'Smart India Hackathon',
+    description: 'Qualified as finalist at college-level SIH hackathon.',
+    year: 2025,
+    placement: 'Finalist',
+    team: '6',
+  },
+  {
+    title: 'Walmart Hackathon',
+    event: 'Walmart',
+    description: 'Participated in Walmart innovation hackathon challenge.',
+    year: 2025,
+    placement: 'Participant',
+    team: '3',
+  },
+  {
+    title: 'Google Agentic AI Hackathon',
+    event: 'Google',
+    description: 'Participated in Google Agentic AI Hackathon.',
+    year: 2025,
+    placement: 'Participant',
+    team: '2',
+  },
+  {
+    title: 'Yorkie Hackathon',
+    event: 'Yorkie',
+    description: 'Participated in Yorkie Hackathon 2025.',
+    year: 2025,
+    placement: 'Participant',
+    team: '2',
+  },
+  {
+    title: 'Open Source Workshop',
+    event: 'Community',
+    description: 'Participated in open source workshop and collaborative sessions.',
+    year: 2025,
+    placement: 'Participant',
+    team: 'Community',
+  },
+];

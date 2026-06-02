@@ -140,9 +140,9 @@ export function AIAssistant() {
     <>
       <button
         onClick={openAssistant}
-        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[110] w-12 h-12 sm:w-14 sm:h-14 bg-txt text-bg hover:bg-primary transition-all duration-300 shadow-2xl flex items-center justify-center group rounded-full border border-primary/20"
+        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[110] w-12 h-12 sm:w-14 sm:h-14 bg-txt text-bg hover:bg-accent transition-all duration-300 flex items-center justify-center group rounded-full border border-accent/20"
       >
-        <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform text-primary" />
+        <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform text-accent" />
         <span className="sr-only">AI Assistant</span>
       </button>
 
@@ -161,13 +161,13 @@ onClick={closeAssistant}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="fixed bottom-4 right-4 sm:bottom-24 sm:right-8 z-[110] w-[calc(100vw-32px)] sm:w-[400px] h-[500px] sm:h-[600px] max-h-[80vh] bg-bg border border-border shadow-2xl flex flex-col overflow-hidden rounded-2xl"
+              className="fixed bottom-4 right-4 sm:bottom-24 sm:right-8 z-[110] w-[calc(100vw-32px)] sm:w-[400px] h-[500px] sm:h-[600px] max-h-[80vh] bg-paper border border-rule/12 flex flex-col overflow-hidden rounded-md"
             >
               {/* Header */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-surface/50">
+              <div className="flex items-center justify-between px-4 py-3 border-b border-rule/12 bg-surface/50">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                  <span className="text-xs font-bold tracking-wider uppercase text-txt">Kunj's Assistant</span>
+                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                  <span className="text-xs font-bold tracking-wider uppercase text-ink-primary">Kunj's Assistant</span>
                 </div>
                 <button onClick={closeAssistant} className="p-2 hover:bg-surface rounded-full transition-colors">
                   <X className="w-4 h-4 text-muted" />
@@ -178,12 +178,12 @@ onClick={closeAssistant}
             <div ref={scrollRef} className="flex-1 p-4 overflow-y-auto space-y-4">
               {messages.map((m, i) => (
                 <div key={i} className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}`}>
-                  <div className={`max-w-[85%] p-3 sm:p-4 rounded-2xl text-xs sm:text-sm font-medium leading-relaxed ${m.role === 'user'
+                  <div className={`max-w-[85%] p-3 sm:p-4 rounded-md text-xs sm:text-sm font-medium leading-relaxed ${m.role === 'user'
                     ? 'bg-txt text-bg rounded-br-none'
-                    : 'bg-surface border border-border text-txt rounded-bl-none'
+                    : 'bg-surface border border-rule/12 text-ink-primary rounded-bl-none'
                     }`}>
                     {m.isLive && (
-                      <div className="flex items-center gap-1.5 text-[10px] text-primary mb-2 font-bold uppercase tracking-wider">
+                      <div className="flex items-center gap-1.5 text-[10px] text-accent mb-2 font-bold uppercase tracking-wider">
                         <Globe className="w-3 h-3" /> Web Search Result
                       </div>
                     )}
@@ -193,7 +193,7 @@ onClick={closeAssistant}
               ))}
               {isThinking && (
                 <div className="flex items-start">
-                  <div className="bg-surface border border-border text-txt rounded-2xl rounded-bl-none p-4 flex items-center gap-2">
+                  <div className="bg-surface border border-rule/12 text-ink-primary rounded-md rounded-bl-none p-4 flex items-center gap-2">
                     <div className="w-1.5 h-1.5 bg-muted/50 rounded-full animate-bounce"></div>
                     <div className="w-1.5 h-1.5 bg-muted/50 rounded-full animate-bounce [animation-delay:0.2s]"></div>
                     <div className="w-1.5 h-1.5 bg-muted/50 rounded-full animate-bounce [animation-delay:0.4s]"></div>
@@ -203,7 +203,7 @@ onClick={closeAssistant}
             </div>
 
             {/* Input Area */}
-            <div className="p-3 bg-surface/50 border-t border-border">
+            <div className="p-3 bg-surface/50 border-t border-rule/12">
               <div className="relative flex items-center">
                 <input
                   ref={inputRef}
@@ -212,12 +212,12 @@ onClick={closeAssistant}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask about projects, skills, or search web..."
-                  className="w-full bg-bg border border-border rounded-full pl-4 pr-12 py-3 text-xs sm:text-sm focus:outline-none focus:border-primary transition-colors text-txt placeholder:text-muted"
+                  className="w-full bg-paper border border-rule/12 rounded-full pl-4 pr-12 py-3 text-xs sm:text-sm focus:outline-none focus:border-accent transition-colors text-ink-primary placeholder:text-muted"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isThinking}
-                  className="absolute right-1.5 p-2 bg-txt text-bg rounded-full hover:bg-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="absolute right-1.5 p-2 bg-txt text-bg rounded-full hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="w-3.5 h-3.5" />
                 </button>

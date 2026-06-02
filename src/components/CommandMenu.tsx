@@ -59,26 +59,26 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setOpen(false)}
-            className="fixed inset-0 bg-bg/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-paper/60"
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.97, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: -8 }}
             transition={{ duration: 0.15 }}
-            className="relative w-full max-w-md bg-surface rounded-xl border border-border shadow-2xl overflow-hidden"
+            className="relative w-full max-w-md bg-surface rounded-md border border-rule/12 overflow-hidden"
           >
             {/* Search Input */}
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-rule/12">
               <Search className="h-4 w-4 text-muted shrink-0" />
               <input
                 autoFocus
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="flex-1 h-6 bg-transparent text-sm text-txt outline-none placeholder:text-muted"
+                className="flex-1 h-6 bg-transparent text-sm text-ink-primary outline-none placeholder:text-muted"
                 placeholder="Search pages..."
               />
-              <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded border border-border bg-surfaceHighlight text-[10px] text-muted font-mono">
+              <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded border border-rule/12 bg-surfaceHighlight text-[10px] text-muted font-mono">
                 ESC
               </kbd>
             </div>
@@ -92,13 +92,13 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
                     <button
                       key={cmd.label}
                       onClick={() => handleAction(cmd.path)}
-                      className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-sm group hover:bg-surfaceHighlight transition-colors"
+                      className="flex w-full items-center gap-3 px-3 py-2.5 rounded-md text-sm group hover:bg-surfaceHighlight transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-md bg-surfaceHighlight group-hover:bg-primary/10 group-hover:text-primary flex items-center justify-center transition-colors shrink-0">
-                        <cmd.icon className="h-4 w-4 text-muted group-hover:text-primary transition-colors" />
+                      <div className="w-8 h-8 rounded-md bg-surfaceHighlight group-hover:bg-accent/10 group-hover:text-accent flex items-center justify-center transition-colors shrink-0">
+                        <cmd.icon className="h-4 w-4 text-muted group-hover:text-accent transition-colors" />
                       </div>
                       <div className="flex-1 text-left">
-                        <div className="font-medium text-txt text-sm">{cmd.label}</div>
+                        <div className="font-medium text-ink-primary text-sm">{cmd.label}</div>
                         <div className="text-[11px] text-muted">{cmd.description}</div>
                       </div>
                       <span className="text-[10px] text-muted/60 font-mono">{cmd.shortcut}</span>
@@ -113,7 +113,7 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
             </div>
 
             {/* Footer */}
-            <div className="px-4 py-2.5 border-t border-border bg-surfaceHighlight/50 flex items-center gap-3 text-[10px] text-muted">
+            <div className="px-4 py-2.5 border-t border-rule/12 bg-surfaceHighlight/50 flex items-center gap-3 text-[10px] text-muted">
               <Command className="w-3 h-3" />
               <span>to open</span>
               <span className="mx-1">·</span>
