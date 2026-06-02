@@ -17,8 +17,8 @@ const COLOPHON: Array<{ label: string; items: { to?: string; href?: string; labe
     items: [
       { href: 'https://github.com/KunjShah95', label: 'GitHub · KunjShah95' },
       { href: 'https://github.com/KunjShah01', label: 'GitHub · KunjShah01' },
-      { href: 'https://linkedin.com/in/kshah00', label: 'LinkedIn' },
-      { href: 'https://twitter.com/kshah00', label: 'Twitter' },
+      { href: 'https://linkedin.com/in/kunjshah05', label: 'LinkedIn' },
+      { href: 'https://twitter.com/kunjshah_dev', label: 'Twitter' },
       { href: 'mailto:hello@kunjshah.dev', label: 'Email' },
       { href: '/rss.xml', label: 'RSS' },
     ],
@@ -86,10 +86,10 @@ export function Footer() {
             <a href="https://github.com/KunjShah95" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2 text-ink-secondary hover:text-ink-primary">
               <Github className="w-4 h-4" />
             </a>
-            <a href="https://linkedin.com/in/kshah00" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 text-ink-secondary hover:text-ink-primary">
+            <a href="https://linkedin.com/in/kunjshah05" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 text-ink-secondary hover:text-ink-primary">
               <Linkedin className="w-4 h-4" />
             </a>
-            <a href="https://twitter.com/kshah00" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-2 text-ink-secondary hover:text-ink-primary">
+            <a href="https://twitter.com/kunjshah_dev" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="p-2 text-ink-secondary hover:text-ink-primary">
               <Twitter className="w-4 h-4" />
             </a>
             <a href="mailto:hello@kunjshah.dev" aria-label="Email" className="p-2 text-ink-secondary hover:text-ink-primary">

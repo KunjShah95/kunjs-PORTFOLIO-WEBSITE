@@ -142,7 +142,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
                 <a href="https://github.com/KunjShah95" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2 border border-rule/12 rounded-md">
                   <Github className="w-4 h-4" />
                 </a>
-                <a href="https://linkedin.com/in/kshah00" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 border border-rule/12 rounded-md">
+                <a href="https://linkedin.com/in/kunjshah05" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 border border-rule/12 rounded-md">
                   <Linkedin className="w-4 h-4" />
                 </a>
                 <a href="mailto:hello@kunjshah.dev" aria-label="Email" className="p-2 border border-rule/12 rounded-md">
