@@ -1,63 +1,33 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, FileText } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics'
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 
 export function StickyCTA() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [show, setShow] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Show after scrolling 300px
-      if (window.scrollY > 300) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
-    }
+    const onScroll = () => setShow(window.scrollY > 600);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  if (pathname === '/contact') return null;
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-6 left-4 right-4 z-50 lg:hidden"
-        >
-          <div className="bg-surface/90 backdrop-blur-xl border border-primary/20 rounded-2xl p-3 shadow-2xl flex items-center gap-3">
-            <Link
-              to="/contact"
-              onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_STICKY_CONTACT)}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 active:scale-95 transition-transform relative overflow-hidden"
-            >
-              <motion.span
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="flex items-center gap-2"
-              >
-                Let's Build
-                <ArrowRight className="w-4 h-4" />
-              </motion.span>
-            </Link>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_STICKY_RESUME)}
-              className="inline-flex items-center justify-center p-3 rounded-xl bg-surfaceHighlight border border-border text-txt active:scale-95 transition-transform"
-              aria-label="View Resume"
-            >
-              <FileText className="w-4 h-4" />
-            </a>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  )
+    <div
+      className={`fixed bottom-6 right-6 z-30 hidden md:block transition-all duration-base ease-out-soft ${
+        show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
+      }`}
+    >
+      <Link
+        to="/contact"
+        className="group inline-flex items-center gap-2 px-5 h-11 rounded-md bg-inverse text-ink-inverse font-body text-sm font-medium hover:bg-accent transition-colors duration-base ease-out-soft shadow-[0_8px_24px_-8px_rgb(0_0_0_/0.25)]"
+      >
+        Work with me
+        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+      </Link>
+    </div>
+  );
 }
