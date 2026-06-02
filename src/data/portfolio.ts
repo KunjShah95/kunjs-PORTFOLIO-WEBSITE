@@ -913,3 +913,17 @@ export const FEATURED_PROJECTS = [
         githubUrl: 'https://github.com/KunjShah01/job-snipper',
     },
 ];
+
+/**
+ * Live system status — what Kunj is currently doing.
+ * Hardcoded for v1. In v2, replace with a fetch from a small Cloudflare Worker
+ * or read from a JSON file in /public/.
+ */
+export const LIVE_STATUS = {
+  building: 'Multi-agent research workflow',
+  shipped: '12 things in 2026',
+  reading: 'Designing Data-Intensive Applications',
+  location: 'Ahmedabad, IN',
+  available: true,
+  lastUpdated: '2026-06-02T00:00:00Z',
+} as const;
