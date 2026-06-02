@@ -1,136 +1,82 @@
-import { motion } from 'framer-motion'
-import { Trophy, Medal, Users, Calendar } from 'lucide-react'
-import { Link } from 'react-router-dom'
-
-const featuredHackathon = {
-  title: "AMD Slingshot",
-  subtitle: "Hardware + AI Innovation Challenge",
-  role: "Finalist",
-  description: "Selected as a finalist in the AMD Slingshot hackathon focusing on hardware-accelerated AI solutions and innovative tech challenges.",
-  date: "Feb 2026",
-  teamSize: 3,
-  tech: ["AI/ML", "Hardware Integration", "Python", "Innovation"],
-  features: [
-    "Hardware-accelerated AI",
-    "Innovation Challenge",
-    "Advanced Tech Solutions"
-  ],
-  participants: "500+",
-  teams: "150+"
-}
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import { HACKATHONS } from '../data/portfolio';
+import { SectionLabel } from './ui/SectionLabel';
 
 export function FeaturedHackathon() {
-  return (
-    <section className="section-padding bg-bg relative">
-      <div className="absolute inset-0 tech-grid-layer opacity-30" />
-      
-      <div className="container-aligned relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <Trophy className="w-4 h-4 text-yellow-500" />
-            <span className="text-xs font-mono text-muted uppercase tracking-wider">Featured Achievement</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-display font-bold text-txt mb-4">
-            Latest <span className="text-primary">Hackathon Win</span>
-          </h2>
-        </motion.div>
+  const featured = HACKATHONS[0];
+  if (!featured) return null;
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="relative rounded-2xl bg-surface border border-border overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-primary/5" />
-          
-          <div className="relative p-8 md:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/30">
-                    <Medal className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm font-bold text-blue-400">Finalist</span>
-                  </div>
-                  <span className="text-sm text-muted flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {featuredHackathon.date}
-                  </span>
-                </div>
-                
-                <h3 className="text-2xl md:text-3xl font-display font-bold text-txt mb-2">
-                  {featuredHackathon.title}
-                </h3>
-                <p className="text-lg text-primary font-medium mb-4">
-                  {featuredHackathon.subtitle}
-                </p>
-                <p className="text-muted mb-6">
-                  {featuredHackathon.description}
-                </p>
-                
-                <div className="flex items-center gap-4 mb-6 text-sm text-muted">
-                  <span className="flex items-center gap-1.5">
-                    <Users className="w-4 h-4" />
-                    {featuredHackathon.teamSize} members
-                  </span>
-                  <span>{featuredHackathon.participants} participants</span>
-                  <span>{featuredHackathon.teams} teams</span>
-                </div>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {featuredHackathon.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 rounded bg-bg border border-border text-[11px] font-mono text-txtDim uppercase"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                
-                <ul className="space-y-2 mb-6">
-                  {featuredHackathon.features.slice(0, 2).map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-muted">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="hidden lg:block">
-                <div className="p-8 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 text-center">
-                  <div className="text-6xl mb-4">🎯</div>
-                  <div className="text-2xl font-bold text-txt mb-2">Finalist</div>
-                  <div className="text-muted">out of {featuredHackathon.teams} teams</div>
-                  <div className="text-sm text-muted mt-2">{featuredHackathon.subtitle}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="flex justify-center mt-8"
-        >
-          <Link
-            to="/hackathons"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-surface border border-border text-txt font-semibold hover:bg-surfaceHighlight transition-colors shadow-sm"
+  const name = featured.title ?? featured.name;
+  const summary = featured.description ?? featured.summary;
+  const eventLabel = featured.event ?? featured.name;
+
+  return (
+    <section id="hackathons" className="py-24 md:py-32 border-b border-rule/12 bg-elevated">
+      <div className="max-w-manifest mx-auto px-6">
+        <SectionLabel number="02" label="Hackathons" />
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="md:col-span-7"
           >
-            View All Hackathons
-            <Trophy className="w-4 h-4" />
-          </Link>
-        </motion.div>
+            <div className="kicker">{eventLabel} · {featured.year}</div>
+            <h2 className="display text-4xl md:text-5xl mt-3 leading-tight">
+              <Link to="/hackathons" className="hover:text-accent transition-colors">
+                {name}
+              </Link>
+            </h2>
+            <p className="mt-6 text-ink-secondary text-lg leading-relaxed max-w-prose">
+              {summary}
+            </p>
+            <dl className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-3 pt-6 border-t border-rule/12">
+              {featured.placement && (
+                <div>
+                  <dt className="kicker">Placement</dt>
+                  <dd className="font-mono text-sm text-ink-primary mt-1">{featured.placement}</dd>
+                </div>
+              )}
+              {featured.team && (
+                <div>
+                  <dt className="kicker">Team</dt>
+                  <dd className="font-mono text-sm text-ink-primary mt-1">{featured.team}</dd>
+                </div>
+              )}
+              {featured.prize && (
+                <div>
+                  <dt className="kicker">Prize</dt>
+                  <dd className="font-mono text-sm text-ink-primary mt-1">{featured.prize}</dd>
+                </div>
+              )}
+              <div>
+                <dt className="kicker">View all</dt>
+                <dd className="font-mono text-sm mt-1">
+                  <Link to="/hackathons" className="text-accent hover:underline">&rarr; {HACKATHONS.length} entries</Link>
+                </dd>
+              </div>
+            </dl>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="md:col-span-5"
+          >
+            <Link to="/hackathons" className="block aspect-[4/3] rounded-md border border-rule/12 bg-paper p-8 hover:border-accent transition-colors">
+              <div className="kicker">Featured</div>
+              <div className="display text-2xl mt-3">{name}</div>
+              <div className="mt-6 flex items-center gap-2 text-sm text-ink-secondary">
+                Open case study <ArrowUpRight className="w-4 h-4" />
+              </div>
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </section>
-  )
+  );
 }
