@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
 const METHODS = [
-  { label: 'Email', value: 'hello@kunjshah.dev', href: 'mailto:hello@kunjshah.dev', primary: true },
+  { label: 'Email', value: 'kkshah20050@gmail.com', href: 'mailto:kkshah20050@gmail.com', primary: true },
   { label: 'GitHub', value: '@KunjShah95', href: 'https://github.com/KunjShah95' },
   { label: 'LinkedIn', value: 'in/kunjshah05', href: 'https://linkedin.com/in/kunjshah05' },
   { label: 'Twitter', value: '@kunjshah_dev', href: 'https://twitter.com/kunjshah_dev' },
@@ -20,7 +20,7 @@ export function ContactPage() {
           <div className="kicker text-accent">Get in touch</div>
           <h1 className="display text-5xl md:text-7xl mt-4 leading-[0.95] tracking-tightest max-w-4xl">
             The fastest way to reach me is{' '}
-            <a href="mailto:hello@kunjshah.dev" className="text-accent hover:underline">email</a>.
+            <a href="mailto:kkshah20050@gmail.com" className="text-accent hover:underline">email</a>.
           </h1>
           <p className="mt-8 text-lg text-ink-secondary max-w-prose leading-relaxed">
             I&rsquo;m currently available for short-term projects, contract work, and full-time roles. I respond to most emails within 24 hours. For longer briefs, please include scope, timeline, and what success looks like.

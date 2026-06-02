@@ -145,7 +145,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
                 <a href="https://linkedin.com/in/kunjshah05" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 border border-rule/12 rounded-md">
                   <Linkedin className="w-4 h-4" />
                 </a>
-                <a href="mailto:hello@kunjshah.dev" aria-label="Email" className="p-2 border border-rule/12 rounded-md">
+                <a href="mailto:kkshah20050@gmail.com" aria-label="Email" className="p-2 border border-rule/12 rounded-md">
                   <Mail className="w-4 h-4" />
                 </a>
               </div>

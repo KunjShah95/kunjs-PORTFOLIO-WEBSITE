@@ -45,11 +45,11 @@ export function FinalCTA() {
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
               <a
-                href="mailto:hello@kunjshah.dev"
+                href="mailto:kkshah20050@gmail.com"
                 className="group inline-flex items-center gap-2 px-6 h-12 rounded-md border border-paper/20 text-paper font-body text-sm font-medium hover:border-paper hover:bg-paper/5 transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                hello@kunjshah.dev
+                kkshah20050@gmail.com
               </a>
             </div>
           </div>

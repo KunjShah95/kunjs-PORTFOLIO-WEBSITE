@@ -5,7 +5,7 @@ const ELSEWHERE: Array<{ href: string; label: string; external?: boolean }> = [
   { href: 'https://github.com/KunjShah01',       label: 'KunjShah01',             external: true },
   { href: 'https://linkedin.com/in/kunjshah05',  label: 'linkedin',               external: true },
   { href: 'https://twitter.com/kunjshah_dev',    label: '@kunjshah_dev',          external: true },
-  { href: 'mailto:hello@kunjshah.dev',           label: 'email' },
+  { href: 'mailto:kkshah20050@gmail.com',           label: 'email' },
   { href: '/rss.xml',                            label: 'rss' },
 ];
 
@@ -29,7 +29,7 @@ export function Footer() {
               <p className="mt-10 text-ink-secondary max-w-prose text-lg leading-relaxed">
                 Built by hand in Ahmedabad. No CMS, no analytics on you, no cookie banner. If something here is wrong,{' '}
                 <a
-                  href="mailto:hello@kunjshah.dev"
+                  href="mailto:kkshah20050@gmail.com"
                   className="text-ink-primary underline decoration-accent decoration-2 underline-offset-4 hover:text-accent transition-colors"
                 >
                   tell me
@@ -37,7 +37,7 @@ export function Footer() {
                 {' '}&mdash; I read every message.
               </p>
               <a
-                href="mailto:hello@kunjshah.dev"
+                href="mailto:kkshah20050@gmail.com"
                 className="group mt-10 inline-flex items-center gap-3 px-6 h-12 rounded-md bg-ink-primary text-ink-inverse font-body text-sm font-medium hover:bg-accent transition-colors duration-base ease-out-soft"
               >
                 <Mail className="w-4 h-4" />
