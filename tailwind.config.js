@@ -1,79 +1,73 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: 'class',
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
-    ],
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['"Inter"', 'system-ui', 'sans-serif'],
-                display: ['"Cal Sans"', 'Inter', 'system-ui', 'sans-serif'],
-                mono: ['"JetBrains Mono"', 'monospace'],
-            },
-            borderRadius: {
-                'none': '0',
-                'sm': '2px',
-                'DEFAULT': '4px',
-                'md': '6px',
-                'lg': '8px',
-                'xl': '12px',
-                '2xl': '16px',
-                'full': '9999px',
-            },
-            colors: {
-                bg: "rgb(var(--bg-main) / <alpha-value>)",
-                surface: "rgb(var(--surface-main) / <alpha-value>)",
-                surfaceHighlight: "rgb(var(--surface-highlight) / <alpha-value>)",
-                border: "rgb(var(--border-main) / <alpha-value>)",
-                primary: "rgb(var(--primary-rgb) / <alpha-value>)",
-                secondary: "rgb(var(--secondary-rgb) / <alpha-value>)",
-                accent: "rgb(var(--accent-rgb) / <alpha-value>)",
-                muted: "rgb(var(--txt-muted) / <alpha-value>)",
-                txt: "rgb(var(--txt-main) / <alpha-value>)",
-                txtDim: "rgb(var(--txt-dim) / <alpha-value>)",
-            },
-            backgroundImage: {
-                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'subtle-grid': 'linear-gradient(to right, rgb(var(--border-main) / 0.5) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--border-main) / 0.5) 1px, transparent 1px)',
-                'academic-dots': 'radial-gradient(rgb(var(--border-main)) 1px, transparent 1px)',
-            },
-            boxShadow: {
-                'glow': '0 0 20px rgb(var(--primary-rgb) / 0.15), 0 0 40px rgb(var(--primary-rgb) / 0.05)',
-                'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-            },
-            animation: {
-                'reveal': 'reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                'fade-in': 'fadeIn 1s ease-out forwards',
-                'beam': 'beam 5s ease-in-out infinite',
-                'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                'float': 'float 10s ease-in-out infinite',
-                'border-spin': 'border-spin 4s linear infinite',
-            },
-            keyframes: {
-                reveal: {
-                    '0%': { opacity: '0', transform: 'translateY(20px)' },
-                    '100%': { opacity: '1', transform: 'translateY(0)' },
-                },
-                fadeIn: {
-                    '0%': { opacity: '0' },
-                    '100%': { opacity: '1' },
-                },
-                beam: {
-                    '0%': { transform: 'translateX(-100%)' },
-                    '50%': { transform: 'translateX(100%)' },
-                    '100%': { transform: 'translateX(-100%)' }
-                },
-                float: {
-                    '0%, 100%': { transform: 'translateY(0)' },
-                    '50%': { transform: 'translateY(-10px)' }
-                },
-                'border-spin': {
-                    '100%': { transform: 'rotate(360deg)' },
-                }
-            }
+  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        paper:     'rgb(var(--bg-paper) / <alpha-value>)',
+        elevated:  'rgb(var(--bg-elevated) / <alpha-value>)',
+        sunken:    'rgb(var(--bg-sunken) / <alpha-value>)',
+        inverse:   'rgb(var(--bg-inverse) / <alpha-value>)',
+
+        ink: {
+          DEFAULT: 'rgb(var(--ink-primary) / <alpha-value>)',
+          primary: 'rgb(var(--ink-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--ink-secondary) / <alpha-value>)',
+          tertiary: 'rgb(var(--ink-tertiary) / <alpha-value>)',
+          quaternary: 'rgb(var(--ink-quaternary) / <alpha-value>)',
+          inverse: 'rgb(var(--ink-inverse) / <alpha-value>)',
         },
+
+        accent: {
+          DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+          hover: 'rgb(var(--accent-hover) / <alpha-value>)',
+          soft: 'rgb(var(--accent-soft) / <alpha-value>)',
+          ink: 'rgb(var(--accent-ink) / <alpha-value>)',
+        },
+
+        success: 'rgb(var(--success) / <alpha-value>)',
+        warning: 'rgb(var(--warning) / <alpha-value>)',
+        danger:  'rgb(var(--danger) / <alpha-value>)',
+        live:    'rgb(var(--live) / <alpha-value>)',
+
+        rule:        'rgb(var(--rule) / <alpha-value>)',
+        'rule-strong': 'rgb(var(--rule-strong) / <alpha-value>)',
+      },
+      fontFamily: {
+        display: ['"Instrument Serif"', '"Times New Roman"', 'serif'],
+        body:    ['"DM Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        mono:    ['"JetBrains Mono"', '"SF Mono"', 'Menlo', 'monospace'],
+        sans:    ['"DM Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        serif:   ['"Instrument Serif"', '"Times New Roman"', 'serif'],
+      },
+      borderRadius: {
+        sm: '4px',
+        md: '12px',
+        lg: '12px',
+        xl: '12px',
+        '2xl': '12px',
+        '3xl': '12px',
+        full: '9999px',
+      },
+      maxWidth: {
+        prose: '68ch',
+        manifest: '1440px',
+      },
+      letterSpacing: {
+        kicker: '0.12em',
+        tightest: '-0.04em',
+      },
+      transitionTimingFunction: {
+        'out-soft': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'in-out-soft': 'cubic-bezier(0.65, 0, 0.35, 1)',
+      },
+      transitionDuration: {
+        fast: '180ms',
+        base: '320ms',
+        slow: '600ms',
+      },
     },
-    plugins: [],
+  },
+  plugins: [],
 }
