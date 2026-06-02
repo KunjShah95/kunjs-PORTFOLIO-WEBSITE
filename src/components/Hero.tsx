@@ -1,163 +1,106 @@
-import { motion } from 'framer-motion'
-import { ArrowRight, FileText } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics'
-
-const TECH_TAGS = [
-  'Python', 'TypeScript', 'React', 'LangChain', 'PyTorch', 'FastAPI',
-  'PostgreSQL', 'Docker', 'LLM', 'Node.js', 'CrewAI', 'OpenCV'
-]
-
-const tagContainerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.04 } },
-}
-
-const tagVariants = {
-  hidden: { opacity: 0, y: 10, scale: 0.9 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.3, ease: 'easeOut' } },
-}
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowRight, ArrowUpRight, MapPin } from 'lucide-react';
+import { LIVE_STATUS } from '../data/portfolio';
 
 export function Hero() {
   return (
-    <section className="relative min-h-[94vh] bg-bg overflow-hidden flex items-center pt-8">
-      <div className="absolute inset-0 tech-grid-layer" />
-      <div className="absolute inset-0 grain-overlay" />
+    <section className="relative pt-20 pb-24 md:pt-32 md:pb-32 border-b border-rule/12">
+      <div className="max-w-manifest mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="mb-12 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs text-ink-tertiary"
+        >
+          <span className="inline-flex items-center gap-2">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-live opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-live" />
+            </span>
+            <span className="uppercase tracking-kicker">Available {LIVE_STATUS.available ? 'for hire' : '— booked'}</span>
+          </span>
+          <span className="hidden md:inline text-ink-quaternary">·</span>
+          <span className="inline-flex items-center gap-1.5">
+            <MapPin className="w-3 h-3" />
+            {LIVE_STATUS.location}
+          </span>
+          <span className="hidden md:inline text-ink-quaternary">·</span>
+          <span>Last deploy {LIVE_STATUS.lastUpdated.slice(0, 10)}</span>
+        </motion.div>
 
-      <div className="relative z-10 container-aligned w-full">
-        <div className="flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-16">
-          <div className="flex-1 min-w-0">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
-              className="mb-6"
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface border border-border shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-xs font-mono text-muted">Available for hire</span>
-              </div>
-            </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <motion.h1
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="md:col-span-9 display text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] leading-[0.95] tracking-tightest"
+          >
+            I build agents
+            <br />
+            that <em className="italic text-accent">actually ship</em>.
+          </motion.h1>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.05 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-txt leading-tight tracking-tight mb-3"
-            >
-              <span className="relative inline-block">
-                Kunj Shah
-                <motion.span
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent -skew-y-3"
-                  initial={{ x: '-100%' }}
-                  animate={{ x: '200%' }}
-                  transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 4, ease: 'easeInOut' }}
-                />
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.08 }}
-              className="text-lg sm:text-xl text-primary font-semibold mb-3"
-            >
-              AI Engineer · Autonomous Systems
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.1 }}
-              className="text-base text-muted max-w-xl mb-5 leading-relaxed"
-            >
-              I build autonomous AI systems that <span className="text-txt font-semibold">automate repetitive workflows</span> and <span className="text-txt font-semibold">deliver measurable business outcomes</span>. Currently building multi-agent orchestration frameworks for enterprise automation.
-            </motion.p>
-
-            <motion.div
-              variants={tagContainerVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex flex-wrap gap-1.5 mb-6"
-            >
-              {TECH_TAGS.map((tag) => (
-                <motion.span
-                  key={tag}
-                  variants={tagVariants}
-                  whileHover={{ scale: 1.12, y: -2, borderColor: 'rgba(79,70,229,0.5)' }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-2.5 py-1 bg-surface border border-border rounded text-[11px] font-mono text-muted cursor-default transition-colors"
-                >
-                  {tag}
-                </motion.span>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.15 }}
-              className="flex flex-wrap gap-3 mb-8"
-            >
-              <Link
-                to="/contact"
-                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_HERO_PRIMARY)}
-                className="group inline-flex items-center gap-2 px-7 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)] active:scale-[0.98]"
-              >
-                Hire Me
-                <motion.span
-                  className="inline-flex"
-                  initial={{ x: 0 }}
-                  whileHover={{ x: 4 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-                >
-                  <ArrowRight className="w-4 h-4" />
-                </motion.span>
-              </Link>
-              <Link
-                to="/projects"
-                className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm active:scale-[0.98]"
-              >
-                View Projects
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-surface border border-border text-txt font-semibold text-sm hover:bg-surfaceHighlight transition-colors shadow-sm active:scale-[0.98]"
-              >
-                <FileText className="w-4 h-4" />
-                Resume
-              </a>
-            </motion.div>
-          </div>
-
-          <div className="w-full lg:w-[280px] shrink-0">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative"
-            >
-              <motion.div
-                className="absolute -inset-4 bg-primary/20 rounded-2xl blur-xl opacity-60"
-                animate={{ scale: [1, 1.05, 1], opacity: [0.6, 0.8, 0.6] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              <motion.img
-                src="/image.png"
-                alt="Kunj Shah — AI Engineer & Agent Builder"
-                loading="eager"
-                className="relative w-full h-auto max-h-[320px] object-cover rounded-xl border border-border/50 shadow-2xl"
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                whileHover={{ scale: 1.03, rotate: 1 }}
-              />
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="md:col-span-3 md:pl-6 md:border-l border-rule/12 flex flex-col justify-end"
+          >
+            <p className="text-ink-secondary leading-relaxed text-base max-w-xs">
+              Kunj Shah &mdash; AI engineer based in Ahmedabad. I design, build, and deploy production-grade agentic systems.
+            </p>
+            <div className="mt-6 kicker">Currently building</div>
+            <div className="mt-1 font-mono text-sm text-ink-primary">{LIVE_STATUS.building}</div>
+          </motion.div>
         </div>
+
+        <motion.dl
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 pt-8 border-t border-rule/12"
+        >
+          <div>
+            <dt className="kicker">Shipped in 2026</dt>
+            <dd className="mt-1 font-mono text-2xl text-ink-primary tabular-nums">{LIVE_STATUS.shipped}</dd>
+          </div>
+          <div>
+            <dt className="kicker">Reading</dt>
+            <dd className="mt-1 font-mono text-sm text-ink-primary truncate">{LIVE_STATUS.reading}</dd>
+          </div>
+          <div>
+            <dt className="kicker">Latest essay</dt>
+            <dd className="mt-1 font-mono text-sm text-ink-primary">&rarr; <Link to="/blogs" className="hover:text-accent underline decoration-rule/32 underline-offset-4">View all</Link></dd>
+          </div>
+          <div>
+            <dt className="kicker">Working with</dt>
+            <dd className="mt-1 font-mono text-sm text-ink-primary">Founders · Teams</dd>
+          </div>
+        </motion.dl>
+
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-12 flex flex-wrap items-center gap-3"
+        >
+          <Link
+            to="/projects"
+            className="group inline-flex items-center gap-2 px-6 h-12 rounded-md bg-inverse text-ink-inverse font-body text-sm font-medium hover:bg-accent transition-colors duration-base ease-out-soft"
+          >
+            See what I&rsquo;ve built
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+          <Link
+            to="/contact"
+            className="group inline-flex items-center gap-2 px-6 h-12 rounded-md border border-ink-primary/20 text-ink-primary font-body text-sm font-medium hover:border-ink-primary transition-colors"
+          >
+            Start a conversation
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+        </motion.div>
       </div>
     </section>
-  )
+  );
 }
