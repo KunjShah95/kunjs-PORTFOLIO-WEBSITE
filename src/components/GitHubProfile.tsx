@@ -1,17 +1,10 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { useMotionValue, useSpring } from 'framer-motion'
 import {
-  Github,
-  ExternalLink,
-  Calendar,
-  GitBranch,
   Star,
-  Users,
-  BookOpen,
-  ChevronDown,
-  Loader2,
   GitFork,
-  RefreshCw,
+  Loader2,
   ArrowUpRight,
+  Clock,
 } from 'lucide-react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { IDENTITY } from '../data/portfolio'
@@ -20,13 +13,16 @@ const GITHUB_USERNAME = IDENTITY.github_username
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-// GitHub contribution colors (dark theme)
+// Light-mode cell palette for cream paper (#FAF6EE) background.
+// Level 0 uses the sunken token (#ECE6D8) so empty days are clearly outlined.
+// Levels 1-4 step through burnt-orange accent at increasing opacities, capped
+// by full accent. All values are visible on the cream surface.
 const CELL_STYLES = [
-  'bg-[#161b22]',        // level 0 — no contributions
-  'bg-[#0e4429]',        // level 1 — low
-  'bg-[#006d32]',        // level 2 — medium
-  'bg-[#26a641]',        // level 3 — high
-  'bg-[#39d353]',        // level 4 — peak
+  'bg-sunken',        // level 0 — empty day (visibly outlined)
+  'bg-accent/25',     // level 1 — quiet
+  'bg-accent/55',     // level 2 — building
+  'bg-accent/85',     // level 3 — strong
+  'bg-accent',        // level 4 — peak
 ]
 
 const LANGUAGE_COLORS: Record<string, string> = {
@@ -115,183 +111,26 @@ interface ContributionDay {
   level: number
 }
 
-function useCountUp(target: number, duration = 1.2) {
+function useCountUp(target: number, duration = 1.2, enabled = true) {
   const count = useMotionValue(0)
   const spring = useSpring(count, { duration: duration * 1000, bounce: 0 })
   const [display, setDisplay] = useState(0)
 
   useEffect(() => {
-    count.set(target)
+    count.set(enabled ? target : 0)
     const unsub = spring.on('change', (v) => setDisplay(Math.round(v)))
     return unsub
-  }, [target, count, spring])
+  }, [target, count, spring, enabled])
 
   return display
 }
 
-function StatCard({
-  icon: Icon,
-  label,
-  value,
-  delay = 0,
-}: {
-  icon: React.ElementType
-  label: string
-  value: number
-  delay?: number
-}) {
-  const [triggered, setTriggered] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-  const animated = useCountUp(triggered ? value : 0)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setTriggered(true) },
-      { threshold: 0.5 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="relative group"
-    >
-      <div className="relative p-6 bg-surface border border-rule/12 rounded-md hover:border-accent/30 transition-all duration-300">
-        <div className="flex items-center justify-between mb-4">
-          <div className="p-2.5 bg-accent/10 rounded-md border border-accent/10">
-            <Icon className="w-5 h-5 text-accent" />
-          </div>
-        </div>
-        <div className="space-y-1">
-          <div className="text-3xl font-bold text-ink-primary font-mono tabular-nums tracking-tight">{animated}</div>
-          <div className="text-xs text-muted font-medium uppercase tracking-wider">{label}</div>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-function LanguageBar({ repos }: { repos: GitHubRepo[] }) {
-  const langMap: Record<string, number> = {}
-  repos.forEach((r) => {
-    if (r.language) langMap[r.language] = (langMap[r.language] || 0) + 1
-  })
-
-  const total = Object.values(langMap).reduce((s, v) => s + v, 0)
-  if (total === 0) return null
-
-  const sorted = Object.entries(langMap)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 10)
-    .map(([lang, cnt]) => ({ lang, pct: (cnt / total) * 100 }))
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.2, duration: 0.5 }}
-      className="p-6 bg-surface border border-rule/12 rounded-md"
-    >
-      <div className="flex items-center gap-2 mb-5">
-        <div className="p-2 bg-accent/10 rounded-md">
-          <svg className="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-        </div>
-        <h3 className="text-sm font-semibold text-ink-primary">Top Languages</h3>
-      </div>
-
-      <div className="flex h-3 rounded-full overflow-hidden gap-px mb-4">
-        {sorted.map(({ lang, pct }) => (
-          <motion.div
-            key={lang}
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              width: `${pct}%`,
-              backgroundColor: LANGUAGE_COLORS[lang] ?? '#6b7280',
-              transformOrigin: 'left',
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="flex flex-wrap gap-3">
-        {sorted.map(({ lang, pct }) => (
-          <div key={lang} className="flex items-center gap-1.5">
-            <div
-              className="w-2.5 h-2.5 rounded-full"
-              style={{ backgroundColor: LANGUAGE_COLORS[lang] ?? '#6b7280' }}
-            />
-            <span className="text-xs text-muted font-medium">{lang}</span>
-            <span className="text-xs text-muted/50">{pct.toFixed(0)}%</span>
-          </div>
-        ))}
-      </div>
-    </motion.div>
-  )
-}
-
-function RepoCard({ repo, delay = 0 }: { repo: GitHubRepo; delay?: number }) {
-  return (
-    <motion.a
-      href={repo.html_url}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay, duration: 0.4 }}
-      className="group block p-5 bg-surface border border-rule/12 rounded-md hover:border-accent/40 transition-all duration-300"
-    >
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="p-1.5 bg-surfaceHighlight rounded-md">
-            <GitBranch className="w-3.5 h-3.5 text-accent" />
-          </div>
-          <span className="text-sm font-semibold text-ink-primary group-hover:text-accent transition-colors truncate">
-            {repo.name}
-          </span>
-        </div>
-        <ExternalLink className="w-3.5 h-3.5 text-muted/40 group-hover:text-accent transition-colors flex-shrink-0" />
-      </div>
-
-      {repo.description && (
-        <p className="text-xs text-muted leading-relaxed line-clamp-2 mb-4">{repo.description}</p>
-      )}
-
-      <div className="flex items-center gap-4 mt-auto">
-        {repo.language && (
-          <div className="flex items-center gap-1.5">
-            <div
-              className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: LANGUAGE_COLORS[repo.language] ?? '#6b7280' }}
-            />
-            <span className="text-[10px] text-muted">{repo.language}</span>
-          </div>
-        )}
-        <div className="flex items-center gap-1 text-[10px] text-muted">
-          <Star className="w-3 h-3" />
-          {repo.stargazers_count}
-        </div>
-        <div className="flex items-center gap-1 text-[10px] text-muted">
-          <GitFork className="w-3 h-3" />
-          {repo.forks_count}
-        </div>
-      </div>
-    </motion.a>
-  )
+function formatPushedDate(iso: string) {
+  const d = new Date(iso)
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}.${m}.${day}`
 }
 
 async function fetchContributions(username: string, year: number): Promise<ContributionDay[]> {
@@ -313,10 +152,9 @@ function buildGrid(contributions: ContributionDay[]) {
   const weeks: ContributionDay[][] = []
   let week: ContributionDay[] = []
 
-  // API returns days starting from Jan 1st - pad beginning to align with actual day of week
   if (contributions.length > 0) {
     const firstDate = new Date(contributions[0].date)
-    const dayOfWeek = firstDate.getDay() // 0 = Sunday
+    const dayOfWeek = firstDate.getDay()
     for (let i = 0; i < dayOfWeek; i++) {
       week.push({ date: '', count: 0, level: -1 })
     }
@@ -330,7 +168,6 @@ function buildGrid(contributions: ContributionDay[]) {
     }
   })
 
-  // Pad end if incomplete
   if (week.length > 0) {
     while (week.length < 7) {
       week.push({ date: '', count: 0, level: -1 })
@@ -343,7 +180,6 @@ function buildGrid(contributions: ContributionDay[]) {
 
 function buildMonthLabels(year: number) {
   const labels: { month: string; startWeek: number }[] = []
-
   MONTHS.forEach((month, idx) => {
     const firstDayOfMonth = new Date(year, idx, 1)
     const firstDayOfYear = new Date(year, 0, 1)
@@ -351,7 +187,6 @@ function buildMonthLabels(year: number) {
     const startWeek = Math.floor((dayOfYear + firstDayOfYear.getDay()) / 7)
     labels.push({ month, startWeek })
   })
-
   return labels
 }
 
@@ -360,7 +195,6 @@ const REFRESH_INTERVAL_MS = 5 * 60 * 1000
 export function GitHubProfile() {
   const currentYear = new Date().getFullYear()
   const [selectedYear, setSelectedYear] = useState(currentYear)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
   const [user, setUser] = useState<GitHubUser | null>(null)
   const [repos, setRepos] = useState<GitHubRepo[]>([])
   const [allRepos, setAllRepos] = useState<GitHubRepo[]>([])
@@ -372,8 +206,11 @@ export function GitHubProfile() {
   const [refreshing, setRefreshing] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
 
   const years = Array.from({ length: 5 }, (_, i) => currentYear - i)
+  const weeks = buildGrid(contributions)
+  const monthLabels = buildMonthLabels(selectedYear)
 
   const loadStatic = useCallback(async (isManual = false) => {
     if (isManual) setRefreshing(true)
@@ -396,7 +233,7 @@ export function GitHubProfile() {
         setTotalStars(stars)
         const sorted = fetched.sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
         setAllRepos(sorted)
-        setRepos(sorted.slice(0, 8))
+        setRepos(sorted.slice(0, 6))
       }
       setLastUpdated(new Date())
     } catch (e) {
@@ -414,186 +251,223 @@ export function GitHubProfile() {
   }, [loadStatic])
 
   useEffect(() => {
+    let cancelled = false
     async function loadContribs() {
       setLoading(true)
       setError(null)
       try {
         const data = await fetchContributions(GITHUB_USERNAME, selectedYear)
+        if (cancelled) return
         setContributions(data)
         setTotalContribs(data.reduce((s, d) => s + d.count, 0))
       } catch {
-        setError('Failed to load contribution data')
+        if (!cancelled) setError('Failed to load contribution data')
       } finally {
-        setLoading(false)
+        if (!cancelled) setLoading(false)
       }
     }
     loadContribs()
+    return () => { cancelled = true }
   }, [selectedYear])
 
-  const weeks = buildGrid(contributions)
-  const monthLabels = buildMonthLabels(selectedYear)
+  // Intersection-driven count-up. Stats only animate once they enter the viewport.
+  const [statsInView, setStatsInView] = useState(false)
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStatsInView(true) },
+      { threshold: 0.2 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  const contribAnim = useCountUp(totalContribs, 1.4, statsInView)
+  const reposAnim = useCountUp(user?.public_repos ?? 0, 1.2, statsInView)
+  const starsAnim = useCountUp(totalStars, 1.2, statsInView)
+  const followersAnim = useCountUp(user?.followers ?? 0, 1.2, statsInView)
 
   const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null)
 
+  // Language list aggregation
+  const langStats = (() => {
+    const map: Record<string, number> = {}
+    allRepos.forEach((r) => {
+      if (r.language) map[r.language] = (map[r.language] || 0) + 1
+    })
+    const total = Object.values(map).reduce((s, v) => s + v, 0)
+    if (total === 0) return [] as { lang: string; pct: number }[]
+    return Object.entries(map)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 8)
+      .map(([lang, cnt]) => ({ lang, pct: (cnt / total) * 100 }))
+  })()
+
   return (
-    <section id="github" className="py-48 md:py-64 px-4 sm:px-6 relative overflow-hidden bg-paper">
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
-        >
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/10 rounded-full border border-accent/20">
-              <svg className="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span className="text-xs font-semibold text-accent uppercase tracking-wider">Open Source</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-ink-primary">
-              GitHub Profile
-            </h2>
+    <section ref={sectionRef} id="github" className="py-32 md:py-48 px-4 sm:px-6 bg-paper text-ink-primary">
+      <div className="max-w-manifest mx-auto">
+        {/* Section header — editorial, no card, no pill badge */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-20">
+          <div className="md:col-span-2 flex flex-col gap-2">
+            <div className="kicker">06 / Open source</div>
             {lastUpdated && (
-              <p className="text-xs text-muted/60">
-                Live data · Updated {lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              </p>
+              <div className="font-mono text-xs text-ink-tertiary tabular-nums inline-flex items-center gap-1.5">
+                <Clock className="w-3 h-3" />
+                {lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              </div>
             )}
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => loadStatic(true)}
-              title="Refresh live data"
-              className="p-2.5 rounded-md border border-rule/12 bg-surface hover:border-accent/40 hover:text-accent text-muted transition-all"
-            >
-              <RefreshCw className={`w-4 h-4 transition-transform duration-700 ${refreshing ? 'animate-spin' : ''}`} />
-            </button>
-            {user && (
+          <div className="md:col-span-10">
+            <h2 className="font-display text-5xl md:text-7xl tracking-tightest leading-[0.95]">
+              What I&rsquo;m
+              <br />
+              shipping in public.
+            </h2>
+            <p className="mt-8 text-ink-secondary text-lg max-w-prose leading-relaxed">
+              A live read of{' '}
               <a
-                href={user.html_url}
+                href={`https://github.com/${GITHUB_USERNAME}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-rule/12 bg-surface hover:border-accent/40 hover:text-accent text-sm font-medium text-muted transition-all"
+                className="text-ink-primary underline decoration-accent decoration-2 underline-offset-4 hover:text-accent transition-colors"
               >
-                <Github className="w-4 h-4" />
-                @{user.login}
-                <ExternalLink className="w-3.5 h-3.5" />
+                github.com/{GITHUB_USERNAME}
               </a>
-            )}
-          </div>
-        </motion.div>
-
-        {/* Stats Grid */}
-        {user && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
-          >
-            <StatCard icon={BookOpen} label="Repositories" value={user.public_repos} delay={0} />
-            <StatCard icon={Users}    label="Followers"    value={user.followers}     delay={0.07} />
-            <StatCard icon={Star}     label="Total Stars"  value={totalStars}         delay={0.14} />
-            <StatCard icon={GitFork}  label="Following"    value={user.following}     delay={0.21} />
-          </motion.div>
-        )}
-
-        {/* Contribution Heatmap */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-10"
-        >
-          <div className="bg-surface border border-rule/12 rounded-md p-6 md:p-8">
-            {/* Heatmap header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-accent/10 rounded-md border border-accent/10">
-                  <Github className="w-5 h-5 text-accent" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-ink-primary">Contribution Activity</h3>
-                  <p className="text-sm text-muted mt-0.5">
-                    {loading ? 'Loading contributions...' : error ? 'Unable to load' : `${totalContribs.toLocaleString()} contributions in ${selectedYear}`}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                {/* Year selector */}
-                <div className="relative">
-                  <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center gap-2 px-3 py-2 bg-surfaceHighlight hover:bg-border/50 transition-all rounded-md text-sm font-medium text-ink-primary border border-rule/32"
-                  >
-                    <Calendar className="w-4 h-4 text-muted" />
-                    {selectedYear}
-                    <ChevronDown className={`w-4 h-4 text-muted transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {dropdownOpen && (
-                    <div className="absolute top-full right-0 mt-2 bg-surface border border-rule/12 rounded-md overflow-hidden z-30 min-w-[100px]">
-                      {years.map((y) => (
-                        <button
-                          key={y}
-                          onClick={() => { setSelectedYear(y); setDropdownOpen(false) }}
-                          className={`w-full px-4 py-2.5 text-left text-sm hover:bg-surfaceHighlight transition-colors ${y === selectedYear ? 'text-accent font-semibold bg-accent/5' : 'text-ink-primary'}`}
-                        >
-                          {y}
-                        </button>
-                      ))}
-                    </div>
+              {' '}&mdash; contributions, repos, language split. The page reads itself every five minutes.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs text-ink-tertiary">
+              {user && (
+                <>
+                  <span>joined {new Date(user.created_at).getFullYear()}</span>
+                  <span className="text-ink-quaternary">/</span>
+                  {user.location && (
+                    <>
+                      <span>{user.location}</span>
+                      <span className="text-ink-quaternary">/</span>
+                    </>
                   )}
-                </div>
+                  <button
+                    onClick={() => loadStatic(true)}
+                    disabled={refreshing}
+                    className="inline-flex items-center gap-1.5 hover:text-ink-primary transition-colors disabled:opacity-50"
+                  >
+                    {refreshing && <Loader2 className="w-3 h-3 animate-spin" />}
+                    {refreshing ? 'refreshing' : 'refresh data'}
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
 
-                {/* Legend */}
-                <div className="hidden sm:flex items-center gap-1.5">
-                  <span className="text-[10px] text-muted mr-1">Less</span>
-                  {CELL_STYLES.map((cls, i) => (
-                    <div key={i} className={`w-3.5 h-3.5 rounded-sm ${cls}`} />
-                  ))}
-                  <span className="text-[10px] text-muted ml-1">More</span>
-                </div>
+        {/* Stats — single hairline-bordered row, display font numbers */}
+        {user && (
+          <div className="grid grid-cols-2 md:grid-cols-4 border-y border-rule/12 divide-x divide-rule/12">
+            <div className="py-10 md:py-14 px-2 md:px-6 first:pl-0">
+              <div className="kicker mb-3">Contributions in {selectedYear}</div>
+              <div className="font-display text-5xl md:text-7xl tracking-tightest leading-none tabular-nums">
+                {contribAnim.toLocaleString()}
               </div>
             </div>
+            <div className="py-10 md:py-14 px-2 md:px-6">
+              <div className="kicker mb-3">Public repos</div>
+              <div className="font-display text-5xl md:text-7xl tracking-tightest leading-none tabular-nums">
+                {reposAnim.toLocaleString()}
+              </div>
+            </div>
+            <div className="py-10 md:py-14 px-2 md:px-6">
+              <div className="kicker mb-3">Total stars</div>
+              <div className="font-display text-5xl md:text-7xl tracking-tightest leading-none tabular-nums">
+                {starsAnim.toLocaleString()}
+              </div>
+            </div>
+            <div className="py-10 md:py-14 px-2 md:px-6 last:pr-0">
+              <div className="kicker mb-3">Followers</div>
+              <div className="font-display text-5xl md:text-7xl tracking-tightest leading-none tabular-nums">
+                {followersAnim.toLocaleString()}
+              </div>
+            </div>
+          </div>
+        )}
 
-            {/* Heatmap grid */}
-            <div className="relative overflow-x-auto">
-              {loading ? (
-                <div className="flex items-center justify-center py-12">
-                  <Loader2 className="w-6 h-6 animate-spin text-muted" />
+        {/* Heatmap */}
+        <div className="py-20 md:py-24">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <div className="kicker mb-3">Activity</div>
+              <h3 className="font-display text-3xl md:text-4xl tracking-tightest leading-tight">
+                {loading
+                  ? 'Loading contribution graph…'
+                  : error
+                    ? 'Couldn&rsquo;t load the graph'
+                    : (
+                      <>
+                        {totalContribs.toLocaleString()} contributions
+                        <span className="text-ink-tertiary"> in {selectedYear}</span>
+                      </>
+                    )}
+              </h3>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-xs">
+              {/* Year selector — inline, no dropdown */}
+              <div className="flex items-center gap-3">
+                {years.map((y) => (
+                  <button
+                    key={y}
+                    onClick={() => setSelectedYear(y)}
+                    className={`pb-1 transition-colors ${
+                      y === selectedYear
+                        ? 'text-ink-primary border-b-2 border-accent'
+                        : 'text-ink-tertiary hover:text-ink-primary'
+                    }`}
+                  >
+                    {y}
+                  </button>
+                ))}
+              </div>
+              {/* Legend */}
+              <div className="flex items-center gap-1.5">
+                <span className="text-ink-tertiary">less</span>
+                {CELL_STYLES.map((cls, i) => (
+                  <div key={i} className={`w-3 h-3 rounded-sm ${cls}`} />
+                ))}
+                <span className="text-ink-tertiary">more</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative overflow-x-auto">
+            {loading ? (
+              <div className="flex items-center justify-center py-20">
+                <Loader2 className="w-6 h-6 animate-spin text-ink-tertiary" />
+              </div>
+            ) : error ? (
+              <div className="flex items-center justify-center py-20 text-sm text-ink-tertiary">
+                {error}
+              </div>
+            ) : (
+              <div className="min-w-[760px]">
+                {/* Month labels */}
+                <div className="flex mb-2 h-5 ml-10 relative">
+                  {monthLabels.map((label) => (
+                    <div
+                      key={label.month}
+                      className="text-[10px] font-mono text-ink-tertiary absolute"
+                      style={{ left: `${(label.startWeek / Math.max(weeks.length, 1)) * 100}%` }}
+                    >
+                      {label.month}
+                    </div>
+                  ))}
                 </div>
-              ) : error ? (
-                <div className="flex items-center justify-center py-12 text-sm text-muted">{error}</div>
-              ) : (
-                <div className="min-w-[750px]">
-                  {/* Month labels row */}
-                  <div className="flex mb-2 h-5 ml-10 relative">
-                    {monthLabels.map((label) => (
-                      <div
-                        key={label.month}
-                        className="text-[11px] font-medium text-muted/70 absolute"
-                        style={{ left: `${(label.startWeek / weeks.length) * 100}%` }}
-                      >
-                        {label.month}
-                      </div>
+                {/* Grid */}
+                <div className="flex gap-2">
+                  <div className="flex flex-col gap-[3px] pr-3 text-[10px] font-mono text-ink-tertiary w-7 pt-1">
+                    {['', 'Mon', '', 'Wed', '', 'Fri', ''].map((d, i) => (
+                      <div key={i} className="h-[13px] flex items-center justify-end">{d}</div>
                     ))}
                   </div>
-
-                  {/* Heatmap grid with day labels */}
-                  <div className="flex gap-1">
-                    {/* Day labels */}
-                    <div className="flex flex-col gap-[3px] pr-2 text-[9px] font-mono text-muted/50 w-8 pt-1">
-                      {['', 'Mon', '', 'Wed', '', 'Fri', ''].map((d, i) => (
-                        <div key={i} className="h-[13px] flex items-center justify-end">{d}</div>
-                      ))}
-                    </div>
-
-                    {/* Week columns */}
+                  <div className="flex gap-[3px]">
                     {weeks.map((week, wi) => (
                       <div key={wi} className="flex flex-col gap-[3px]">
                         {week.map((day, di) => (
@@ -610,7 +484,7 @@ export function GitHubProfile() {
                               }
                             }}
                             onMouseLeave={() => setTooltip(null)}
-                            className={`w-[13px] h-[13px] rounded-sm transition-all duration-200 hover:ring-2 hover:ring-accent/50 hover:ring-offset-1 hover:ring-offset-paper cursor-default ${
+                            className={`w-[13px] h-[13px] rounded-sm transition-all duration-150 hover:ring-2 hover:ring-ink-primary hover:ring-offset-1 hover:ring-offset-paper cursor-default ${
                               day.level === -1 ? 'bg-transparent' : CELL_STYLES[Math.min(day.level, 4)] ?? CELL_STYLES[0]
                             }`}
                           />
@@ -619,107 +493,119 @@ export function GitHubProfile() {
                     ))}
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
-        </motion.div>
-
-        {/* Language + Quick Facts */}
-        <div className="grid lg:grid-cols-2 gap-6 mb-10">
-          <LanguageBar repos={allRepos} />
-
-          {user && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.25, duration: 0.5 }}
-              className="p-6 bg-surface border border-rule/12 rounded-md"
-            >
-              <div className="flex items-center gap-2 mb-5">
-                <div className="p-2 bg-accent/10 rounded-md">
-                  <Users className="w-4 h-4 text-accent" />
-                </div>
-                <h3 className="text-sm font-semibold text-ink-primary">Profile Details</h3>
-              </div>
-              <div className="space-y-3">
-                {[
-                  { label: 'Member since', value: new Date(user.created_at).getFullYear().toString() },
-                  { label: 'Public repos', value: `${user.public_repos}` },
-                  { label: 'Followers', value: `${user.followers}` },
-                  ...(user.location ? [{ label: 'Location', value: user.location }] : []),
-                  ...(user.blog ? [{ label: 'Website', value: user.blog.replace(/^https?:\/\//, '') }] : []),
-                ].map(({ label, value }) => (
-                  <div key={label} className="flex items-center justify-between text-sm py-2 border-b border-rule/32 last:border-0">
-                    <span className="text-muted">{label}</span>
-                    <span className="text-ink-primary font-medium">{value}</span>
-                  </div>
-                ))}
-              </div>
-              <a
-                href={`https://github.com/${GITHUB_USERNAME}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 flex items-center justify-center gap-2 w-full py-3 rounded-md border border-rule/12 bg-surfaceHighlight hover:border-accent/40 hover:text-accent text-sm font-medium text-muted transition-all group"
-              >
-                <Github className="w-4 h-4" />
-                View Full Profile
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-            </motion.div>
-          )}
         </div>
 
-        {/* Recent Repositories */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="space-y-5"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-accent/10 rounded-md">
-                <GitBranch className="w-4 h-4 text-accent" />
+        {/* Languages — inline mono list, no card, no bar */}
+        {langStats.length > 0 && (
+          <div className="py-16 border-t border-rule/12">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
+              <div className="md:col-span-2">
+                <div className="kicker">Languages</div>
               </div>
-              <h3 className="text-lg font-bold text-ink-primary">Recent Repositories</h3>
+              <div className="md:col-span-10">
+                <h3 className="font-display text-3xl md:text-4xl tracking-tightest leading-tight">
+                  {langStats.length} languages, ranked.
+                </h3>
+              </div>
             </div>
-            <a
-              href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-muted hover:text-accent transition-colors flex items-center gap-1.5"
-            >
-              View all
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+            <div className="flex flex-wrap items-baseline gap-x-6 gap-y-3 font-mono text-sm">
+              {langStats.map((s, i) => (
+                <span key={s.lang} className="inline-flex items-baseline gap-2">
+                  <span className="inline-block w-2 h-2 rounded-full flex-shrink-0 translate-y-[-2px]" style={{ backgroundColor: LANGUAGE_COLORS[s.lang] ?? '#888' }} />
+                  <span className="text-ink-primary">{s.lang}</span>
+                  <span className="text-ink-tertiary tabular-nums">{s.pct.toFixed(0)}%</span>
+                  {i < langStats.length - 1 && <span className="text-ink-quaternary/60 ml-4">/</span>}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Recent repos — 3-col grid, no outer card, minimal inner cards */}
+        <div className="py-16 border-t border-rule/12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-10">
+            <div className="md:col-span-2">
+              <div className="kicker">Recent work</div>
+            </div>
+            <div className="md:col-span-10 flex items-end justify-between flex-wrap gap-4">
+              <h3 className="font-display text-3xl md:text-4xl tracking-tightest leading-tight">
+                Latest six repositories.
+              </h3>
+              <a
+                href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-ink-tertiary hover:text-ink-primary transition-colors inline-flex items-center gap-1.5"
+              >
+                all {user?.public_repos ?? '&mdash;'} on github
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
           </div>
 
           {repos.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {repos.slice(0, 8).map((repo, i) => (
-                <RepoCard key={`repo-${repo.id}`} repo={repo} delay={i * 0.05} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-rule/12">
+              {repos.slice(0, 6).map((repo) => (
+                <a
+                  key={repo.id}
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block bg-paper p-6 md:p-8 transition-colors duration-base ease-out-soft hover:bg-elevated"
+                >
+                  <div className="font-mono text-[10px] text-ink-tertiary uppercase tracking-kicker mb-3">
+                    pushed {formatPushedDate(repo.pushed_at)}
+                  </div>
+                  <div className="font-mono text-base text-ink-primary group-hover:text-accent transition-colors break-all mb-3">
+                    {repo.name}
+                  </div>
+                  {repo.description && (
+                    <p className="text-sm text-ink-secondary leading-relaxed line-clamp-3 mb-6 min-h-[3.75rem]">
+                      {repo.description}
+                    </p>
+                  )}
+                  <div className="flex items-center gap-4 font-mono text-xs text-ink-tertiary mt-auto">
+                    {repo.language && (
+                      <span className="inline-flex items-center gap-1.5">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ backgroundColor: LANGUAGE_COLORS[repo.language] ?? '#888' }} />
+                        {repo.language}
+                      </span>
+                    )}
+                    <span className="inline-flex items-center gap-1">
+                      <Star className="w-3 h-3" />
+                      {repo.stargazers_count}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <GitFork className="w-3 h-3" />
+                      {repo.forks_count}
+                    </span>
+                    <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </a>
               ))}
             </div>
           ) : repoLoading ? (
-            <div className="flex items-center justify-center py-16 text-sm text-muted bg-surface border border-rule/12 rounded-md">
-              <Loader2 className="w-5 h-5 animate-spin mr-2" />
-              Loading repositories...
+            <div className="flex items-center justify-center py-20 text-sm text-ink-tertiary font-mono">
+              <Loader2 className="w-4 h-4 animate-spin mr-2" />
+              loading repositories&hellip;
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-16 text-sm text-muted bg-surface border border-rule/12 rounded-md gap-3">
-              <GitBranch className="w-8 h-8 text-muted/40" />
-              <p>No repositories found</p>
+            <div className="flex items-center justify-center py-20 text-sm text-ink-tertiary font-mono">
+              no repositories found
             </div>
           )}
-        </motion.div>
+        </div>
       </div>
 
-      {/* Floating tooltip */}
+      {/* Floating tooltip — paper-on-ink */}
       {tooltip && (
         <div
-          className="fixed z-50 pointer-events-none px-3 py-2 bg-txt text-bg text-xs font-medium rounded-md -translate-x-1/2 -translate-y-full"
+          className="fixed z-50 pointer-events-none px-3 py-2 bg-ink-primary text-paper text-xs font-mono rounded-md -translate-x-1/2 -translate-y-full shadow-lg"
           style={{ left: tooltip.x, top: tooltip.y }}
         >
           {tooltip.text}
@@ -728,3 +614,5 @@ export function GitHubProfile() {
     </section>
   )
 }
+
+export type { GitHubUser, GitHubRepo, ContributionDay }
