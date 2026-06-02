@@ -46,11 +46,7 @@ function Home() {
       <FeaturedProjects />
       <FeaturedHackathon />
 
-      <section className="border-y border-rule/12">
-        <div className="max-w-manifest mx-auto px-6 py-24">
-          <GitHubProfile />
-        </div>
-      </section>
+      <GitHubProfile />
 
       <section id="writing" className="py-24 md:py-32">
         <div className="max-w-manifest mx-auto px-6">
