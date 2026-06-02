@@ -1,7 +1,6 @@
 import { PageHeader } from '../components/ui/PageHeader';
-import { MetaRow } from '../components/ui/MetaRow';
 import { Rule } from '../components/ui/Rule';
-import { EXPERIENCE } from '../data/portfolio';
+import { SKILL_GROUPS, EXPERIENCE } from '../data/portfolio';
 
 export function AboutPage() {
   return (
@@ -74,14 +73,59 @@ export function AboutPage() {
             <Rule label="Stack" />
             <section id="stack">
               <h2 className="display text-3xl mb-6">What I work with</h2>
-              <MetaRow
-                items={[
-                  { label: 'Languages', value: 'TypeScript · Python · Go' },
-                  { label: 'AI/Agents', value: 'LangGraph · CrewAI · Vapi' },
-                  { label: 'Infra', value: 'Cloudflare · Vercel · Postgres' },
-                  { label: 'Tools', value: 'Framer Motion · Tailwind · Vite' },
-                ]}
-              />
+              <p className="text-ink-secondary leading-relaxed mb-10 max-w-prose">
+                The tools I reach for when shipping a system end-to-end — from the first prompt to the production deploy.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-rule/12 border border-rule/12 -mx-1">
+                {SKILL_GROUPS.map((group, i) => {
+                  const Icon = group.icon;
+                  return (
+                    <article
+                      key={group.category}
+                      className="group relative bg-paper p-7 transition-colors duration-base ease-out-soft hover:bg-elevated"
+                    >
+                      <div className="flex items-start justify-between mb-5">
+                        <span className="kicker">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        {Icon && (
+                          <Icon
+                            className="w-5 h-5 text-ink-tertiary group-hover:text-accent transition-colors duration-base ease-out-soft"
+                            strokeWidth={1.5}
+                            aria-hidden
+                          />
+                        )}
+                      </div>
+
+                      <h3 className="display text-2xl leading-tight">
+                        {group.category}
+                      </h3>
+                      <p className="mt-3 text-sm text-ink-secondary leading-relaxed">
+                        {group.description}
+                      </p>
+
+                      <div className="mt-6 pt-5 border-t border-rule/12">
+                        <div className="kicker mb-3">Stack</div>
+                        <ul className="flex flex-wrap gap-1.5">
+                          {group.skills.map((skill) => (
+                            <li
+                              key={skill}
+                              className="font-mono text-xs text-ink-primary px-2.5 py-1 border border-rule/12 rounded-pill bg-elevated/50 group-hover:border-rule/32 transition-colors"
+                            >
+                              {skill}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <span
+                        aria-hidden
+                        className="absolute top-0 left-0 h-px w-0 bg-accent group-hover:w-full transition-all duration-slow ease-out-soft"
+                      />
+                    </article>
+                  );
+                })}
+              </div>
             </section>
 
             <Rule label="CV" />
