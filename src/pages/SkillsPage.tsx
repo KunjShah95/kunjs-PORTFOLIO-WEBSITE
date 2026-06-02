@@ -1,84 +1,44 @@
-import { Skills } from '../components/Skills'
-import { motion } from 'framer-motion'
-import { SEO } from '../components/SEO'
-import { Cpu, Terminal, Shield } from 'lucide-react'
+import { motion } from 'framer-motion';
+import { SKILL_GROUPS } from '../data/portfolio';
+import { PageHeader } from '../components/ui/PageHeader';
+import { Kicker } from '../components/ui/Kicker';
 
 export function SkillsPage() {
-  const secondaryStats = [
-    { label: 'RUNTIME', value: 'LINUX', icon: Terminal },
-    { label: 'CORE', value: 'PYTHON', icon: Cpu },
-    { label: 'OPS', value: 'DEVOPS', icon: Shield },
-  ]
+  const groups: Array<{ name: string; items: string[] }> = SKILL_GROUPS.map((g) => ({
+    name: g.category,
+    items: g.skills,
+  }));
 
   return (
-    <div className="min-h-screen pt-32 pb-20">
-      <SEO
-        title="Skills & Tech Stack"
-        description="A comprehensive map of Kunj Shah's AI Systems Engineering capabilities and technology stack."
-        url="https://kunjshah.vercel.app/skills"
+    <>
+      <PageHeader
+        kicker="Skills"
+        title="Tools I reach for, grouped by what they do."
+        lede="Not a comprehensive list — just the things I use often enough to have opinions about."
       />
-
-      <div className="container-aligned space-y-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border/50 pb-8 gap-8">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-muted text-sm font-medium">
-              <Cpu className="w-4 h-4" />
-              Technical Background
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-txt font-display">
-              Skills & Tech Stack
-            </h1>
-          </div>
-
-          <div className="flex gap-6 pb-2">
-            {secondaryStats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-end gap-0.5">
-                <div className="flex items-center gap-1.5 text-muted text-xs">
-                  <stat.icon className="w-3 h-3" />
-                  <span>{stat.label}</span>
-                </div>
-                <div className="text-sm font-semibold text-txt">{stat.value}</div>
-              </div>
-            ))}
-          </div>
+      <section className="max-w-manifest mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule/12">
+          {groups.map((g, i) => (
+            <motion.div
+              key={g.name}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+              className="bg-paper p-8"
+            >
+              <Kicker>{g.name}</Kicker>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {g.items.map((s) => (
+                  <li key={s} className="px-3 h-7 inline-flex items-center rounded-full bg-elevated border border-rule/12 text-sm font-mono text-ink-primary">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
-
-        <div className="max-w-3xl">
-          <p className="text-lg text-muted font-light leading-relaxed">
-            Specialized in the construction of autonomous agentic flows and full-stack AI applications. My stack is curated for rapid prototyping and scale.
-          </p>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 1 }}
-        >
-          <Skills />
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-16 border-t border-border/50">
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-primary">Ethical AI</h4>
-            <p className="text-xs text-muted font-light leading-relaxed">
-              Commitment to building safe, explainable, and human-aligned autonomous systems. Priority on bias mitigation.
-            </p>
-          </div>
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-primary">Open Source</h4>
-            <p className="text-xs text-muted font-light leading-relaxed">
-              Active contributor to the agentic ecosystem. Building tools that empower developers to deploy scalable agents.
-            </p>
-          </div>
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-primary">Research Sync</h4>
-            <p className="text-xs text-muted font-light leading-relaxed">
-              Constantly indexing the latest research from arXiv and major AI labs to maintain an edge in state-of-the-art architectures.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+      </section>
+    </>
+  );
 }
-
