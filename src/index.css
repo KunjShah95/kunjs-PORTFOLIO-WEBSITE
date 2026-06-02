@@ -5,7 +5,8 @@
 /* ===================================================================
    Design Tokens — Editorial Print-Forward
    Single source of truth. tailwind.config.js references these.
-   Light mode is default. Dark mode is optional secondary via .dark.
+   Light mode only. The inverse block (--bg-inverse) is used for
+   editorial dark-ink panels within an otherwise cream site.
    =================================================================== */
 
 @layer base {
@@ -76,24 +77,6 @@
     --font-display: "Instrument Serif", "Times New Roman", serif;
     --font-body: "DM Sans", system-ui, -apple-system, sans-serif;
     --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
-  }
-
-  .dark {
-    --bg-paper:        13 13 13;
-    --bg-elevated:     23 23 23;
-    --bg-sunken:       32 32 32;
-    --bg-inverse:      250 246 238;
-
-    --ink-primary:     245 244 240;
-    --ink-secondary:   180 178 172;
-    --ink-tertiary:    130 128 122;
-    --ink-quaternary:  82 80 76;
-    --ink-inverse:     26 26 26;
-
-    --rule:            245 244 240;
-    --rule-strong:     245 244 240;
-
-    --accent-soft:     217 78 32;
   }
 }
 

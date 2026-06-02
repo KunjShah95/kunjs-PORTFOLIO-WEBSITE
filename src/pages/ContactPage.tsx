@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const METHODS = [
   { label: 'Email', value: 'hello@kunjshah.dev', href: 'mailto:hello@kunjshah.dev', primary: true },
-  { label: 'GitHub', value: '@kshah00', href: 'https://github.com/kshah00' },
+  { label: 'GitHub', value: '@KunjShah95', href: 'https://github.com/KunjShah95' },
   { label: 'LinkedIn', value: 'in/kshah00', href: 'https://linkedin.com/in/kshah00' },
   { label: 'Twitter', value: '@kshah00', href: 'https://twitter.com/kshah00' },
 ];

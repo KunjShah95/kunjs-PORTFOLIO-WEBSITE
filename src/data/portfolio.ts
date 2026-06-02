@@ -236,16 +236,7 @@ export const SOCIALS: Social[] = [
     }
 ];
 
-export const TESTIMONIALS = [
-    {
-        id: 't1',
-        name: 'Manan Vyas',
-        role: 'Tech Lead at ISAC',
-        company: 'Indus University',
-        text: "We've often worked as a perfect duo—I throw in wild AI/ML ideas, and Kunj jumps right into bringing them to life. Whether it's late-night brainstorming or fixing that one stubborn bug, Kunj has always been energetic, curious, and ready to implement. What I admire most is his consistency and hunger to grow in AI/ML. He doesn't just follow trends—he actually tries to implement and understand them. Highly recommend him for any team looking for a reliable, creative, and always-experimenting techie!",
-        linkedin: 'https://www.linkedin.com/in/mananvyas0110'
-    }
-];
+export const TESTIMONIALS: never[] = [];
 
 export const BLOGS: Blog[] = [
     {

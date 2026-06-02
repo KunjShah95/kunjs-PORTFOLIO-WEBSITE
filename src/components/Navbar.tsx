@@ -3,7 +3,6 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 import { clsx } from 'clsx';
-import { ThemeToggle } from './ThemeToggle';
 
 const NAV = [
   { to: '/projects', label: 'Projects' },
@@ -82,8 +81,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
               <Search className="w-3.5 h-3.5" />
               <span className="kicker">&#8984;K</span>
             </button>
-            <ThemeToggle />
-            <a href="https://github.com/kshah00" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hidden sm:inline-flex p-2 text-ink-secondary hover:text-ink-primary">
+            <a href="https://github.com/KunjShah95" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hidden sm:inline-flex p-2 text-ink-secondary hover:text-ink-primary">
               <Github className="w-4 h-4" />
             </a>
             <button
@@ -141,7 +139,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
                 ))}
               </nav>
               <div className="mt-8 flex items-center gap-3">
-                <a href="https://github.com/kshah00" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2 border border-rule/12 rounded-md">
+                <a href="https://github.com/KunjShah95" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2 border border-rule/12 rounded-md">
                   <Github className="w-4 h-4" />
                 </a>
                 <a href="https://linkedin.com/in/kshah00" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 border border-rule/12 rounded-md">

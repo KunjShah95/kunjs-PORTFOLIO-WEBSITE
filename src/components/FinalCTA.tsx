@@ -38,7 +38,7 @@ export function FinalCTA() {
           </div>
           <div className="md:col-span-3 md:pl-6 md:border-l border-ink-inverse/12 flex flex-col justify-end gap-3">
             <div className="kicker" style={{ color: 'rgb(var(--accent-ink) / 0.6)' }}>Elsewhere</div>
-            <a href="https://github.com/kshah00" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">GitHub &nearr;</a>
+            <a href="https://github.com/KunjShah95" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">GitHub &nearr;</a>
             <a href="https://linkedin.com/in/kshah00" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">LinkedIn &nearr;</a>
             <a href="https://twitter.com/kshah00" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">Twitter &nearr;</a>
           </div>

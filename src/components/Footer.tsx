@@ -15,7 +15,8 @@ const COLOPHON: Array<{ label: string; items: { to?: string; href?: string; labe
   {
     label: 'Elsewhere',
     items: [
-      { href: 'https://github.com/kshah00', label: 'GitHub' },
+      { href: 'https://github.com/KunjShah95', label: 'GitHub · KunjShah95' },
+      { href: 'https://github.com/KunjShah01', label: 'GitHub · KunjShah01' },
       { href: 'https://linkedin.com/in/kshah00', label: 'LinkedIn' },
       { href: 'https://twitter.com/kshah00', label: 'Twitter' },
       { href: 'mailto:hello@kunjshah.dev', label: 'Email' },
@@ -82,7 +83,7 @@ export function Footer() {
         <div className="mt-16 pt-8 border-t border-rule/12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="kicker">&copy; {year} Kunj Shah &mdash; All rights reserved</div>
           <div className="flex items-center gap-3">
-            <a href="https://github.com/kshah00" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2 text-ink-secondary hover:text-ink-primary">
+            <a href="https://github.com/KunjShah95" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2 text-ink-secondary hover:text-ink-primary">
               <Github className="w-4 h-4" />
             </a>
             <a href="https://linkedin.com/in/kshah00" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 text-ink-secondary hover:text-ink-primary">

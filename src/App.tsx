@@ -2,7 +2,6 @@ import { Suspense, lazy } from 'react'
 import { motion, MotionConfig } from 'framer-motion'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
-import { ThemeProvider } from './components/ThemeProvider'
 import { Layout } from './components/Layout'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { LoadingSpinner } from './components/LoadingSpinner'
@@ -14,11 +13,10 @@ import { Hero } from './components/Hero'
 import { FeaturedProjects } from './components/FeaturedProjects'
 import { FeaturedHackathon } from './components/FeaturedHackathon'
 import { GitHubProfile } from './components/GitHubProfile'
-import { Testimonials } from './components/Testimonials'
 import { FinalCTA } from './components/FinalCTA'
 import { SEO } from './components/SEO'
 import { InitialLoader } from './components/InitialLoader'
-import { BLOGS, TESTIMONIALS } from './data/portfolio'
+import { BLOGS } from './data/portfolio'
 import { PORTFOLIO_FAQ } from './data/seo-faq'
 
 // Lazy load secondary pages
@@ -36,11 +34,6 @@ const EducationPage = lazy(() => import('./pages/EducationPage').then(module => 
 
 function Home() {
   const latestBlogs = BLOGS.slice(0, 3);
-  const testimonials = (TESTIMONIALS ?? []).map((t) => ({
-    quote: t.text,
-    author: t.name,
-    role: t.role,
-  }));
 
   return (
     <div className="space-y-0">
@@ -105,7 +98,6 @@ function Home() {
         </div>
       </section>
 
-      <Testimonials items={testimonials} />
       <FinalCTA />
     </div>
   )
@@ -129,31 +121,29 @@ function App() {
       <Router>
         <ScrollToTop />
         <InitialLoader />
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <MotionConfig reducedMotion="user">
-            <ErrorBoundary>
-              <Layout>
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/projects" element={<ProjectsPage />} />
-                    <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-                    <Route path="/skills" element={<SkillsPage />} />
-                    <Route path="/labs" element={<LabsPage />} />
-                    <Route path="/hackathons" element={<HackathonsPage />} />
-                    <Route path="/blogs" element={<BlogsPage />} />
-                    <Route path="/blogs/:slug" element={<BlogDetailPage />} />
-                    <Route path="/contact" element={<ContactPage />} />
-                    <Route path="/experience" element={<ExperiencePage />} />
-                    <Route path="/education" element={<EducationPage />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </Suspense>
-              </Layout>
-            </ErrorBoundary>
-          </MotionConfig>
-        </ThemeProvider>
+        <MotionConfig reducedMotion="user">
+          <ErrorBoundary>
+            <Layout>
+              <Suspense fallback={<LoadingSpinner />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/projects" element={<ProjectsPage />} />
+                  <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+                  <Route path="/skills" element={<SkillsPage />} />
+                  <Route path="/labs" element={<LabsPage />} />
+                  <Route path="/hackathons" element={<HackathonsPage />} />
+                  <Route path="/blogs" element={<BlogsPage />} />
+                  <Route path="/blogs/:slug" element={<BlogDetailPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/experience" element={<ExperiencePage />} />
+                  <Route path="/education" element={<EducationPage />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </Layout>
+          </ErrorBoundary>
+        </MotionConfig>
       </Router>
     </HelmetProvider>
   )

@@ -26,31 +26,6 @@ export function useWebMCP() {
               window.location.href = path;
               return { success: true, path };
             }
-          },
-          changeTheme: {
-            description: "Change the site theme to light or dark",
-            parameters: {
-              type: "object",
-              properties: {
-                theme: {
-                  type: "string",
-                  enum: ["light", "dark"]
-                }
-              },
-              required: ["theme"]
-            },
-            execute: async ({ theme }: { theme: string }) => {
-              // This relies on next-themes / local storage which this project seems to use
-              localStorage.setItem('vite-ui-theme', theme);
-              window.dispatchEvent(new Event('storage'));
-              // Also add to classList directly for immediate effect
-              if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-              } else {
-                document.documentElement.classList.remove('dark');
-              }
-              return { success: true, theme };
-            }
           }
         }
       });
