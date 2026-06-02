@@ -1,132 +1,160 @@
-import { Command, FileText, Menu, X } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { clsx } from 'clsx';
+import { ThemeToggle } from './ThemeToggle';
 
-interface NavbarProps {
-  onOpenCommand: () => void
-}
+const NAV = [
+  { to: '/projects', label: 'Projects' },
+  { to: '/about', label: 'About' },
+  { to: '/blogs', label: 'Writing' },
+  { to: '/experience', label: 'Experience' },
+  { to: '/contact', label: 'Contact' },
+];
 
-export function Navbar({ onOpenCommand }: NavbarProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
-  const navLinks = [
-    { label: 'Projects', href: '/projects' },
-    { label: 'Skills', href: '/skills' },
-    { label: 'Labs', href: '/labs' },
-    { label: 'Hackathons', href: '/hackathons' },
-    { label: 'Blogs', href: '/blogs' },
-    { label: 'Contact', href: '/contact' },
-  ]
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md border-b border-primary/20"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16 flex items-center justify-between py-4">
-        {/* Logo */}
-        <Link 
-          to="/" 
-          className="text-sm font-bold tracking-widest txt-mono text-txt hover:text-primary transition-colors uppercase"
-        >
-          KUNJ_SHAH
-        </Link>
+    <>
+      <header
+        className={clsx(
+          'fixed top-0 inset-x-0 z-40 transition-all duration-base ease-out-soft',
+          scrolled
+            ? 'bg-paper/85 backdrop-blur-md border-b border-rule/12'
+            : 'bg-paper/0 border-b border-transparent'
+        )}
+      >
+        <div className="max-w-manifest mx-auto px-6 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2 group">
+            <span className="font-display text-2xl tracking-tightest">Kunj Shah</span>
+            <span className="hidden md:inline kicker text-ink-tertiary group-hover:text-accent transition-colors">
+              / AI engineer
+            </span>
+          </Link>
 
-        {/* Desktop Nav Links */}
-        <div className="hidden sm:flex items-center gap-6">
-          <ul className="items-center gap-6 text-xs font-bold txt-mono uppercase text-muted/70 hover:text-muted transition-colors flex">
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <Link to={link.href} className="hover:text-primary transition-colors py-2">
-                  {link.label}
-                </Link>
-              </li>
+          <nav className="hidden md:flex items-center gap-8" aria-label="Primary">
+            {NAV.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  clsx(
+                    'relative font-body text-sm transition-colors',
+                    isActive ? 'text-ink-primary' : 'text-ink-secondary hover:text-ink-primary'
+                  )
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {item.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-underline"
+                        className="absolute -bottom-1.5 left-0 right-0 h-px bg-accent"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </>
+                )}
+              </NavLink>
             ))}
-            <li>
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 hover:text-primary transition-colors"
-              >
-                <FileText className="w-3 h-3" />
-                Resume
-              </a>
-            </li>
-          </ul>
+          </nav>
 
-          {/* Command Palette */}
-          <button 
-            onClick={onOpenCommand}
-            className="group flex items-center gap-2 px-3 py-1.5 border border-primary/30 bg-primary/5 hover:border-primary/60 hover:bg-primary/10 text-xs text-muted hover:text-primary font-bold txt-mono uppercase transition-all rounded-sm"
-          >
-            <Command className="w-3 h-3" />
-            <span className="hidden sm:inline">Search</span>
-            <kbd className="hidden rounded bg-primary/10 px-1.5 font-sans text-[9px] text-muted sm:inline-block border border-primary/30 group-hover:border-primary/60 group-hover:text-primary transition-colors">⌘K</kbd>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onOpenCommand}
+              className="hidden sm:inline-flex items-center gap-2 px-3 h-8 rounded-md border border-rule/12 text-ink-secondary hover:text-ink-primary hover:border-rule/32 transition-colors text-sm"
+              aria-label="Open command menu"
+            >
+              <Search className="w-3.5 h-3.5" />
+              <span className="kicker">&#8984;K</span>
+            </button>
+            <ThemeToggle />
+            <a href="https://github.com/kshah00" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hidden sm:inline-flex p-2 text-ink-secondary hover:text-ink-primary">
+              <Github className="w-4 h-4" />
+            </a>
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="md:hidden p-2 text-ink-secondary hover:text-ink-primary"
+              aria-label="Open menu"
+              aria-expanded={mobileOpen}
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
         </div>
+      </header>
 
-        {/* Mobile Menu Button */}
-        <button 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="sm:hidden p-2 text-muted hover:text-primary transition-colors"
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="sm:hidden bg-bg/95 backdrop-blur-md border-b border-primary/20 overflow-hidden"
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 md:hidden"
           >
-            <ul className="px-4 py-4 space-y-3 text-sm font-bold txt-mono uppercase">
-              {navLinks.map((link) => (
-                <li key={link.label}>
-                  <Link 
-                    to={link.href} 
-                    className="block py-3 px-4 -mx-4 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block py-3 px-4 -mx-4 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors flex items-center gap-2"
-                >
-                  <FileText className="w-4 h-4" />
-                  Resume
-                </a>
-              </li>
-            </ul>
-            <div className="px-4 pb-4">
-              <button 
-                onClick={() => {
-                  onOpenCommand()
-                  setMobileMenuOpen(false)
-                }}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-primary/30 bg-primary/5 hover:border-primary/60 text-xs text-muted hover:text-primary font-bold txt-mono uppercase transition-all rounded-lg"
+            <div className="absolute inset-0 bg-ink-primary/20" onClick={() => setMobileOpen(false)} aria-hidden />
+            <motion.div
+              initial={{ y: -16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -16, opacity: 0 }}
+              transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+              className="relative bg-paper border-b border-rule/12 px-6 pt-20 pb-8"
+              role="dialog"
+              aria-label="Mobile navigation"
+            >
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="absolute top-5 right-6 p-2 text-ink-secondary"
+                aria-label="Close menu"
               >
-                <Command className="w-4 h-4" />
-                Search
+                <X className="w-5 h-5" />
               </button>
-            </div>
+              <nav className="flex flex-col gap-1" aria-label="Mobile primary">
+                {NAV.map((item) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    className={({ isActive }) =>
+                      clsx(
+                        'py-3 font-display text-3xl border-b border-rule/12',
+                        isActive ? 'text-accent' : 'text-ink-primary'
+                      )
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </nav>
+              <div className="mt-8 flex items-center gap-3">
+                <a href="https://github.com/kshah00" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2 border border-rule/12 rounded-md">
+                  <Github className="w-4 h-4" />
+                </a>
+                <a href="https://linkedin.com/in/kshah00" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 border border-rule/12 rounded-md">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a href="mailto:hello@kunjshah.dev" aria-label="Email" className="p-2 border border-rule/12 rounded-md">
+                  <Mail className="w-4 h-4" />
+                </a>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
-  )
+    </>
+  );
 }
