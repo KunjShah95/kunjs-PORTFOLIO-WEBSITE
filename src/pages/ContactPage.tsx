@@ -2,7 +2,8 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
 const METHODS = [
-  { label: 'Email', value: 'kkshah20050@gmail.com', href: 'mailto:kkshah20050@gmail.com', primary: true },
+  { label: 'Email', value: 'kkshah2005@gmail.com', href: 'mailto:kkshah2005@gmail.com', primary: true },
+  { label: 'YouTube', value: '@kunjshah4158', href: 'https://www.youtube.com/@kunjshah4158' },
   { label: 'GitHub', value: '@KunjShah95', href: 'https://github.com/KunjShah95' },
   { label: 'LinkedIn', value: 'in/kunjshah05', href: 'https://linkedin.com/in/kunjshah05' },
   { label: 'Twitter', value: '@kunjshah_dev', href: 'https://twitter.com/kunjshah_dev' },
@@ -21,7 +22,7 @@ export function ContactPage() {
           <div className="kicker">Get in touch</div>
           <h1 className="display text-5xl md:text-7xl mt-4 leading-[0.95] tracking-tightest max-w-3xl">
             The fastest way to reach me is{' '}
-            <a href="mailto:kkshah20050@gmail.com" className="text-ink-primary underline decoration-ink-primary/30 decoration-2 underline-offset-8 hover:decoration-ink-primary/60 transition-colors">email</a>.
+            <a href="mailto:kkshah2005@gmail.com" className="text-ink-primary underline decoration-ink-primary/30 decoration-2 underline-offset-8 hover:decoration-ink-primary/60 transition-colors">email</a>.
           </h1>
           <p className="mt-8 text-lg text-ink-secondary max-w-2xl leading-relaxed">
             If you&rsquo;re working on something and want an extra set of hands, write to me. I usually reply within a day. For longer briefs, it helps to include the scope, the timeline, and what success would look like &mdash; even a rough sketch is enough.

@@ -32,11 +32,11 @@ export function FinalCTA() {
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
               <a
-                href="mailto:kkshah20050@gmail.com"
+                href="mailto:kkshah2005@gmail.com"
                 className="group inline-flex items-center gap-2 px-6 h-12 rounded-md border border-paper/20 text-paper font-body text-sm font-medium hover:border-paper hover:bg-paper/5 transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                kkshah20050@gmail.com
+                kkshah2005@gmail.com
               </a>
             </div>
           </div>
@@ -82,7 +82,7 @@ export function FinalCTA() {
               </a>
             </div>
             <a
-              href="mailto:kkshah20050@gmail.com"
+              href="mailto:kkshah2005@gmail.com"
               className="group inline-flex items-center justify-center gap-2 p-3 rounded-md border border-paper/15 hover:border-paper/40 hover:bg-paper/5 transition-all duration-base"
             >
               <Mail className="w-4 h-4 text-paper/70 group-hover:text-paper transition-colors" />

@@ -10,6 +10,7 @@ import { useWebMCP } from './hooks/useWebMCP'
 
 // Eager load critical components for Home
 import { Hero } from './components/Hero'
+import { Receipts } from './components/Receipts'
 import { FeaturedProjects } from './components/FeaturedProjects'
 import { GitHubProfile } from './components/GitHubProfile'
 import { FinalCTA } from './components/FinalCTA'
@@ -25,6 +26,7 @@ const LabsPage = lazy(() => import('./pages/LabsPage').then(module => ({ default
 const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })))
 const HackathonsPage = lazy(() => import('./pages/HackathonsPage').then(module => ({ default: module.HackathonsPage })))
 const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })))
+const VideosPage = lazy(() => import('./pages/VideosPage').then(module => ({ default: module.VideosPage })))
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage').then(module => ({ default: module.ProjectDetailPage })))
 const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage').then(module => ({ default: module.BlogDetailPage })))
 const SkillsPage = lazy(() => import('./pages/SkillsPage').then(module => ({ default: module.SkillsPage })))
@@ -42,6 +44,7 @@ function Home() {
         faqItems={PORTFOLIO_FAQ}
       />
       <Hero />
+      <Receipts />
       <FeaturedProjects />
 
       <GitHubProfile />
@@ -174,6 +177,7 @@ function App() {
                   <Route path="/blogs" element={<BlogsPage />} />
                   <Route path="/blogs/:slug" element={<BlogDetailPage />} />
                   <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/videos" element={<VideosPage />} />
                   <Route path="/experience" element={<ExperiencePage />} />
                   <Route path="/education" element={<EducationPage />} />
                   <Route path="*" element={<NotFound />} />

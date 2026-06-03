@@ -7,7 +7,7 @@ export const IDENTITY: UserIdentity = {
     name: "Kunj Shah",
     persona: "AI Engineer & Agentic Systems Builder",
     location: "Ahmedabad, IN",
-    contact: "kunjkshah05@gmail.com",
+    contact: "kkshah2005@gmail.com",
     focus: ["Autonomous Agents", "LLM Orchestration", "Agentic Workflows", "AI Infrastructure"],
     github_username: "KunjShah95",
     profile_photo: "/profile.png"

@@ -5,7 +5,7 @@ const ELSEWHERE: Array<{ href: string; label: string; icon?: typeof Github; exte
   { href: 'https://github.com/KunjShah01',       label: 'KunjShah01',            icon: Github, external: true },
   { href: 'https://linkedin.com/in/kunjshah05',  label: 'linkedin/in/kunjshah05', icon: Linkedin, external: true },
   { href: 'https://twitter.com/kunjshah_dev',    label: '@kunjshah_dev',         icon: Twitter, external: true },
-  { href: 'mailto:kkshah20050@gmail.com',           label: 'kkshah20050@gmail.com', icon: Mail },
+  { href: 'mailto:kkshah2005@gmail.com',           label: 'kkshah2005@gmail.com', icon: Mail },
 ];
 
 export function Footer() {
@@ -59,7 +59,7 @@ export function Footer() {
               </p>
 
               <a
-                href="mailto:kkshah20050@gmail.com"
+                href="mailto:kkshah2005@gmail.com"
                 className="group mt-10 inline-flex items-center gap-3 px-6 h-12 rounded-md bg-ink-primary text-ink-inverse font-body text-sm font-medium hover:bg-accent transition-colors duration-base ease-out-soft"
               >
                 <Mail className="w-4 h-4" />

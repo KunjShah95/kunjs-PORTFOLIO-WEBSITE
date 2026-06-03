@@ -89,20 +89,10 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
-          className="mt-10 flex items-center gap-4"
-        >
-          <span className="h-px w-12 bg-ink-primary/30" />
-          <span className="kicker">the thesis &mdash; 2026</span>
-        </motion.div>
-
-        <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.75 }}
-          className="mt-6 flex flex-wrap items-center gap-3"
+          transition={{ duration: 0.6, delay: 0.65 }}
+          className="mt-10 flex flex-wrap items-center gap-3"
         >
           <Link
             to="/projects"
@@ -119,6 +109,15 @@ export function Hero() {
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.85 }}
+          className="mt-8 text-sm text-ink-tertiary max-w-2xl"
+        >
+          For founders, small teams, and the rare weekend project. Whiteboard to production in weeks, not quarters — agents, retrieval, and the backend to hold them up.
+        </motion.p>
       </div>
     </section>
   );
