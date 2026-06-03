@@ -3,12 +3,12 @@ export const PORTFOLIO_FAQ = [
   {
     question: 'Who is Kunj Shah?',
     answer:
-      'Kunj Shah is an AI engineer and agent builder based in Ahmedabad, India. He designs and ships end-to-end AI systems—LLM applications, autonomous agents, computer vision pipelines, and full-stack prototypes—for real production use cases.',
+      'Kunj Shah is an AI engineer based in Ahmedabad, India. He builds and ships production AI systems: LLM applications, autonomous agents, RAG pipelines, and the backend services that make them production-ready.',
   },
   {
     question: 'What does Kunj Shah specialize in?',
     answer:
-      'He focuses on applied generative AI, agentic workflows (orchestration, tool use, reliability), RAG and semantic search, MLOps-style delivery, and full-stack integration with Python (FastAPI) and modern front ends (React).',
+      'Agentic workflows (orchestration, tool use, reliability), RAG and semantic search, the backend services around them, and shipping the whole stack to production. Python (FastAPI) for systems, React for the surface.',
   },
   {
     question: 'Is Kunj Shah available for freelance or contract AI work?',

@@ -25,7 +25,7 @@ export function StickyCTA() {
         to="/contact"
         className="group inline-flex items-center gap-2 px-5 h-11 rounded-md bg-inverse text-ink-inverse font-body text-sm font-medium hover:bg-accent transition-colors duration-base ease-out-soft shadow-[0_8px_24px_-8px_rgb(0_0_0_/0.25)]"
       >
-        Work with me
+        Have an agent to ship?
         <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
       </Link>
     </div>

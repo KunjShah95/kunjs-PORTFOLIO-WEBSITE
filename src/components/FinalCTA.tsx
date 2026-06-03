@@ -21,7 +21,7 @@ export function FinalCTA() {
               to ship? <em className="italic text-accent">Let&rsquo;s talk.</em>
             </h2>
             <p className="mt-8 text-paper/85 text-lg leading-relaxed max-w-xl">
-              I work with founders and small teams. Whiteboard to production in weeks, not quarters. Real systems, real users, real load.
+              12 things shipped in 2026. I work with founders and small teams — whiteboard to production in weeks, not quarters. Real systems, real users, real load.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link

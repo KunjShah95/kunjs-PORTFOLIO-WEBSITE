@@ -35,7 +35,7 @@ interface SEOProps {
 const defaultMeta = {
   title: 'Kunj Shah | AI Engineer & Agent Builder',
   description:
-    'Kunj Shah is an AI engineer and agent builder in Ahmedabad, India. Portfolio of generative AI systems, autonomous agents, computer vision, and full-stack prototypes—Python, FastAPI, React, LangChain, and MLOps-style delivery.',
+    'Kunj Shah is an AI engineer in Ahmedabad building production AI systems — agents, retrieval pipelines, and the backend to hold them up. Shipped work, hackathon finals, and open-source contributions.',
   image: `${SITE_URL}/og-image.png`,
   siteUrl: SITE_URL,
   twitterHandle: '@kunjshah_dev',

@@ -74,7 +74,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-10 md:mt-12 text-ink-secondary leading-relaxed text-lg md:text-xl max-w-2xl"
         >
-          I&rsquo;m 21, fourth-year CS in Ahmedabad. I build agents in the hours I should be studying, and I write about the parts that broke.
+          I&rsquo;m 21, fourth-year CS in Ahmedabad. I build production agents — retrieval, orchestration, and the backend underneath — and I write about the parts that broke.
         </motion.p>
 
         <motion.div

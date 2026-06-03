@@ -5,11 +5,11 @@ export async function getContent(): Promise<string> {
 
   lines.push('# Kunj Shah — AI Engineer & Agent Builder')
   lines.push('')
-  lines.push('> Personal portfolio website for Kunj Shah, an AI engineer building autonomous agents and generative AI applications.')
+  lines.push('> Personal portfolio website for Kunj Shah, an AI engineer in Ahmedabad building production AI systems: autonomous agents, RAG pipelines, and the backend services that ship them.')
   lines.push('')
   lines.push('## Summary')
   lines.push('')
-  lines.push(`Kunj Shah is an AI engineer and agent builder based in ${IDENTITY.location}. Specializes in:`)
+  lines.push(`Kunj Shah is an AI engineer and agent builder based in ${IDENTITY.location}. He builds and ships end-to-end AI systems for real production use. Specializes in:`)
   IDENTITY.focus.forEach(f => lines.push(`- ${f}`))
   lines.push('')
   lines.push('## Canonical URL')
