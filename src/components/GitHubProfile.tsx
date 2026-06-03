@@ -315,7 +315,7 @@ export function GitHubProfile() {
   return (
     <section ref={sectionRef} id="github" className="border-y border-rule/12">
       <div className="max-w-manifest mx-auto px-6 py-24 md:py-32">
-        <SectionLabel number="03" label="Open source" />
+        <SectionLabel number="02" label="Open source" />
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
           <h2 className="md:col-span-8 display text-4xl md:text-5xl">

@@ -40,23 +40,29 @@ export function Footer() {
 
             {/* Main content */}
             <div className="md:col-span-9">
-              <h2 className="font-display text-5xl md:text-7xl tracking-tightest leading-[0.95] max-w-4xl">
-                That&rsquo;s the
-                <br />
-                whole site.
+              <h2 className="font-display text-5xl md:text-6xl tracking-tightest leading-[0.95] max-w-5xl whitespace-nowrap">
+                That&rsquo;s the whole site.
               </h2>
 
-              {/* Pull quote — the intentional editorial moment. From B001, the lead essay. */}
-              <blockquote className="mt-12 md:mt-16 pl-6 border-l-2 border-ink-primary/40 max-w-3xl">
-                <p className="font-display italic text-2xl md:text-4xl leading-[1.15] text-ink-primary">
-                  &ldquo;Autonomy is easy.
-                  <br />
-                  Reliability is hard.&rdquo;
-                </p>
-                <footer className="mt-6 font-mono text-xs text-ink-tertiary uppercase tracking-kicker">
-                  &mdash; on shipping production agents, JAN 2026
-                </footer>
-              </blockquote>
+              {/* Pull quote — the loudest moment in the Footer. From B001, the lead essay. */}
+              <div className="mt-16 md:mt-24 max-w-4xl">
+                <div className="h-px bg-rule/32 mb-12 md:mb-16" />
+                <blockquote>
+                  <p className="font-display italic text-4xl md:text-7xl leading-[0.98] tracking-tightest text-ink-primary">
+                    &ldquo;Autonomy is easy.
+                    <br />
+                    Reliability is hard.&rdquo;
+                  </p>
+                </blockquote>
+                <div className="mt-10 md:mt-12 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                  <footer className="font-mono text-xs text-ink-tertiary uppercase tracking-kicker">
+                    &mdash; on shipping production agents
+                  </footer>
+                  <span className="font-mono text-xs text-ink-quaternary">/</span>
+                  <span className="font-mono text-xs text-ink-tertiary uppercase tracking-kicker">JAN 2026</span>
+                </div>
+                <div className="h-px bg-rule/32 mt-12 md:mt-16" />
+              </div>
 
               <p className="mt-12 text-ink-secondary max-w-prose text-lg leading-relaxed">
                 Built by hand in Ahmedabad. No CMS, no analytics on you, no cookie banner. If something here is wrong,{' '}

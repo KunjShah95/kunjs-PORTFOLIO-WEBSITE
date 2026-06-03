@@ -11,7 +11,6 @@ import { useWebMCP } from './hooks/useWebMCP'
 // Eager load critical components for Home
 import { Hero } from './components/Hero'
 import { FeaturedProjects } from './components/FeaturedProjects'
-import { FeaturedHackathon } from './components/FeaturedHackathon'
 import { GitHubProfile } from './components/GitHubProfile'
 import { FinalCTA } from './components/FinalCTA'
 import { SEO } from './components/SEO'
@@ -44,7 +43,6 @@ function Home() {
       />
       <Hero />
       <FeaturedProjects />
-      <FeaturedHackathon />
 
       <GitHubProfile />
 
@@ -52,7 +50,7 @@ function Home() {
         <div className="max-w-manifest mx-auto px-6">
           <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
-              <div className="kicker">04 · Writing</div>
+              <div className="kicker">03 · Writing</div>
               <h2 className="display text-4xl md:text-5xl mt-3 max-w-2xl">Long-form notes from shipping.</h2>
             </div>
             <Link

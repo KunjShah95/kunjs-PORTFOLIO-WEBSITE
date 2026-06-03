@@ -36,7 +36,11 @@ export function Hero() {
           >
             I build agents
             <br />
-            that <em className="italic text-accent">actually ship</em>.
+            that{' '}
+            <em className="italic text-accent underline decoration-accent decoration-[1.5px] underline-offset-[10px]">
+              actually ship
+            </em>
+            .
           </motion.h1>
 
           <motion.div
@@ -54,10 +58,20 @@ export function Hero() {
         </div>
 
         <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="mt-10 flex items-center gap-4"
+        >
+          <span className="h-px w-12 bg-ink-primary/30" />
+          <span className="kicker">the thesis &mdash; 2026</span>
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-12 flex flex-wrap items-center gap-3"
+          transition={{ duration: 0.6, delay: 0.65 }}
+          className="mt-6 flex flex-wrap items-center gap-3"
         >
           <Link
             to="/projects"

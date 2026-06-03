@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { PROJECTS } from '../data/portfolio';
+import { PROJECTS, HACKATHONS } from '../data/portfolio';
 import { SectionLabel } from './ui/SectionLabel';
 import { Kicker } from './ui/Kicker';
 
@@ -118,6 +118,22 @@ export function FeaturedProjects() {
               </div>
             </motion.article>
           ))}
+        </div>
+
+        {/* Hackathons kicker — replaces the separate FeaturedHackathon section. */}
+        <div className="mt-12 pt-8 border-t border-rule/12 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="font-mono text-xs text-ink-tertiary uppercase tracking-kicker">
+            <span className="text-ink-primary">{HACKATHONS.filter(h => h.placement === 'Finalist').length} hackathon finals</span>
+            <span className="mx-2 text-ink-quaternary">/</span>
+            <span>Autonomous Hacks · Odoo Adani · Odoo Gandhinagar · SIH</span>
+          </div>
+          <Link
+            to="/hackathons"
+            className="group inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-ink-primary self-start md:self-auto"
+          >
+            All hackathons
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
         </div>
       </div>
     </section>
