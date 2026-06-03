@@ -10,7 +10,10 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { IDENTITY } from '../data/portfolio'
 import { SectionLabel } from './ui/SectionLabel'
 import { Kicker } from './ui/Kicker'
+<<<<<<< HEAD
 import { motion } from 'framer-motion'
+=======
+>>>>>>> redesign/editorial-2026-06-02
 
 const GITHUB_USERNAME = IDENTITY.github_username
 
@@ -218,11 +221,32 @@ export function GitHubProfile() {
     if (isManual) setRefreshing(true)
     setRepoLoading(true)
     try {
+<<<<<<< HEAD
       const res = await fetch('/api/github', { cache: 'no-store' })
 
       if (!res.ok) {
         console.warn('GitHub proxy returned', res.status)
         return
+=======
+      const [uRes, rRes1, rRes2, rRes3] = await Promise.all([
+        fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, { cache: 'no-store' }),
+        fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=100&page=1&type=all`, { cache: 'no-store' }),
+        fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=100&page=2&type=all`, { cache: 'no-store' }),
+        fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=100&page=3&type=all`, { cache: 'no-store' }),
+      ])
+      if (uRes.ok) setUser(await uRes.json())
+      const fetched: GitHubRepo[] = [
+        ...(rRes1.ok ? await rRes1.json() : []),
+        ...(rRes2.ok ? await rRes2.json() : []),
+        ...(rRes3.ok ? await rRes3.json() : []),
+      ]
+      if (fetched.length > 0) {
+        const stars = fetched.reduce((s, r) => s + r.stargazers_count, 0)
+        setTotalStars(stars)
+        const sorted = fetched.sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
+        setAllRepos(sorted)
+        setRepos(sorted.slice(0, 6))
+>>>>>>> redesign/editorial-2026-06-02
       }
 
       const data = await res.json()
@@ -266,23 +290,37 @@ export function GitHubProfile() {
     return () => { cancelled = true }
   }, [selectedYear])
 
+<<<<<<< HEAD
   // Intersection-driven count-up. Stats only animate once they enter the viewport.
   const [statsInView, setStatsInView] = useState(false)
+=======
+  // Intersection-driven count-up for the single display number.
+  const [heroInView, setHeroInView] = useState(false)
+>>>>>>> redesign/editorial-2026-06-02
   useEffect(() => {
     const el = sectionRef.current
     if (!el) return
     const observer = new IntersectionObserver(
+<<<<<<< HEAD
       ([entry]) => { if (entry.isIntersecting) setStatsInView(true) },
       { threshold: 0.2 }
+=======
+      ([entry]) => { if (entry.isIntersecting) setHeroInView(true) },
+      { threshold: 0.15 }
+>>>>>>> redesign/editorial-2026-06-02
     )
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
 
+<<<<<<< HEAD
   const contribAnim = useCountUp(totalContribs, 1.4, statsInView)
   const reposAnim = useCountUp(user?.public_repos ?? 0, 1.2, statsInView)
   const starsAnim = useCountUp(totalStars, 1.2, statsInView)
   const followersAnim = useCountUp(user?.followers ?? 0, 1.2, statsInView)
+=======
+  const heroCount = useCountUp(totalContribs, 1.6, heroInView)
+>>>>>>> redesign/editorial-2026-06-02
 
   const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null)
 
@@ -299,6 +337,7 @@ export function GitHubProfile() {
       .map(([lang, cnt]) => ({ lang, pct: (cnt / total) * 100 }))
   })()
 
+<<<<<<< HEAD
   return (
     <section ref={sectionRef} id="github" className="border-y border-rule/12">
       <div className="max-w-manifest mx-auto px-6 py-24 md:py-32">
@@ -309,6 +348,29 @@ export function GitHubProfile() {
             What I&rsquo;m shipping in public.
           </h2>
           <div className="mt-6 max-w-xl mx-auto">
+=======
+  // Single hero stat line: replaces the 4-col grid with a kicker+number strip
+  // so the heatmap is the only visual focus on this page.
+  const metaLine = user
+    ? [
+        `${user.public_repos} public repos`,
+        `${totalStars} total stars`,
+        `${user.followers} followers`,
+        user.location,
+      ].filter(Boolean)
+    : []
+
+  return (
+    <section ref={sectionRef} id="github" className="border-y border-rule/12">
+      <div className="max-w-manifest mx-auto px-6 py-24 md:py-32">
+        <SectionLabel number="06" label="Open source" />
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+          <h2 className="md:col-span-8 display text-4xl md:text-5xl">
+            What I&rsquo;m shipping in public.
+          </h2>
+          <div className="md:col-span-4 flex flex-col justify-end gap-4">
+>>>>>>> redesign/editorial-2026-06-02
             <p className="text-ink-secondary leading-relaxed">
               A live read of{' '}
               <a
@@ -321,17 +383,24 @@ export function GitHubProfile() {
               </a>
               . Refreshes every five minutes.
             </p>
+<<<<<<< HEAD
             <div className="mt-4 flex flex-wrap justify-center items-center gap-x-3 gap-y-2 font-mono text-xs text-ink-tertiary">
+=======
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs text-ink-tertiary">
+>>>>>>> redesign/editorial-2026-06-02
               {user && (
                 <>
                   <span>joined {new Date(user.created_at).getFullYear()}</span>
                   <span className="text-ink-quaternary">/</span>
+<<<<<<< HEAD
                   {user.location && (
                     <>
                       <span>{user.location}</span>
                       <span className="text-ink-quaternary">/</span>
                     </>
                   )}
+=======
+>>>>>>> redesign/editorial-2026-06-02
                   <button
                     onClick={() => loadStatic(true)}
                     disabled={refreshing}
@@ -355,6 +424,7 @@ export function GitHubProfile() {
           </div>
         </div>
 
+<<<<<<< HEAD
         {/* Stats grid — 4-col with shared border, kicker + display numbers */}
         {user && (
           <motion.div
@@ -411,32 +481,77 @@ export function GitHubProfile() {
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-xs">
               <div className="flex items-center gap-3">
+=======
+        {/* Single-line meta strip — replaces the 4-col stats grid */}
+        {metaLine.length > 0 && (
+          <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 pb-8 mb-12 border-b border-rule/12 font-mono text-sm text-ink-secondary">
+            {metaLine.map((m, i) => (
+              <span key={m} className="inline-flex items-baseline gap-2">
+                <span className="text-ink-primary">{m}</span>
+                {i < metaLine.length - 1 && <span className="text-ink-quaternary">/</span>}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Heatmap — the hero. Full-width, larger 16px cells, single display number above. */}
+        <div className="mb-20">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <Kicker accent>Activity</Kicker>
+              <div className="display text-7xl md:text-8xl mt-4 leading-[0.9] tracking-tightest tabular-nums">
+                {loading ? '…' : error ? '—' : heroCount.toLocaleString()}
+              </div>
+              <Kicker className="block mt-3">
+                contributions in {selectedYear}
+              </Kicker>
+            </div>
+            <div className="flex flex-col items-start md:items-end gap-4">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 font-mono text-xs">
+>>>>>>> redesign/editorial-2026-06-02
                 {years.map((y) => (
                   <button
                     key={y}
                     onClick={() => setSelectedYear(y)}
+<<<<<<< HEAD
                     className={`pb-1 transition-colors ${
                       y === selectedYear
                         ? 'text-ink-primary border-b-2 border-accent'
                         : 'text-ink-tertiary hover:text-ink-primary'
+=======
+                    className={`px-3 py-1.5 rounded-sm transition-colors ${
+                      y === selectedYear
+                        ? 'bg-ink-primary text-paper'
+                        : 'text-ink-tertiary hover:text-ink-primary border border-rule/12'
+>>>>>>> redesign/editorial-2026-06-02
                     }`}
                   >
                     {y}
                   </button>
                 ))}
               </div>
+<<<<<<< HEAD
               <div className="flex items-center gap-1.5">
                 <span className="text-ink-tertiary">less</span>
                 {CELL_STYLES.map((cls, i) => (
                   <div key={i} className={`w-3 h-3 rounded-sm ${cls}`} />
                 ))}
                 <span className="text-ink-tertiary">more</span>
+=======
+              <div className="flex items-center gap-1.5 font-mono text-xs text-ink-tertiary">
+                <span>less</span>
+                {CELL_STYLES.map((cls, i) => (
+                  <div key={i} className={`w-3 h-3 rounded-sm ${cls}`} />
+                ))}
+                <span>more</span>
+>>>>>>> redesign/editorial-2026-06-02
               </div>
             </div>
           </div>
 
           <div className="relative overflow-x-auto">
             {loading ? (
+<<<<<<< HEAD
               <div className="flex items-center justify-center py-20">
                 <Loader2 className="w-6 h-6 animate-spin text-ink-tertiary" />
               </div>
@@ -471,8 +586,37 @@ export function GitHubProfile() {
                     ))}
                   </div>
                   <div className="flex gap-[3px]">
+=======
+              <div className="flex items-center justify-center py-32">
+                <Loader2 className="w-6 h-6 animate-spin text-ink-tertiary" />
+              </div>
+            ) : error ? (
+              <div className="flex items-center justify-center py-32 text-sm text-ink-tertiary">
+                {error}
+              </div>
+            ) : (
+              <div>
+                <div className="flex mb-3 h-5 ml-12 relative">
+                  {monthLabels.map((label) => (
+                    <div
+                      key={label.month}
+                      className="text-[11px] font-mono text-ink-tertiary absolute"
+                      style={{ left: `${(label.startWeek / Math.max(weeks.length, 1)) * 100}%` }}
+                    >
+                      {label.month}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex gap-3">
+                  <div className="flex flex-col gap-[4px] pr-3 text-[10px] font-mono text-ink-tertiary w-8 pt-1">
+                    {['', 'Mon', '', 'Wed', '', 'Fri', ''].map((d, i) => (
+                      <div key={i} className="h-[16px] flex items-center justify-end">{d}</div>
+                    ))}
+                  </div>
+                  <div className="flex gap-[4px]">
+>>>>>>> redesign/editorial-2026-06-02
                     {weeks.map((week, wi) => (
-                      <div key={wi} className="flex flex-col gap-[3px]">
+                      <div key={wi} className="flex flex-col gap-[4px]">
                         {week.map((day, di) => (
                           <div
                             key={`${wi}-${di}`}
@@ -487,7 +631,11 @@ export function GitHubProfile() {
                               }
                             }}
                             onMouseLeave={() => setTooltip(null)}
+<<<<<<< HEAD
                             className={`w-[13px] h-[13px] rounded-sm transition-all duration-150 hover:ring-2 hover:ring-ink-primary hover:ring-offset-1 hover:ring-offset-paper cursor-default ${
+=======
+                            className={`w-4 h-4 rounded-sm transition-all duration-150 hover:ring-2 hover:ring-ink-primary hover:ring-offset-1 hover:ring-offset-paper cursor-default ${
+>>>>>>> redesign/editorial-2026-06-02
                               day.level === -1 ? 'bg-transparent' : CELL_STYLES[Math.min(day.level, 4)] ?? CELL_STYLES[0]
                             }`}
                           />
@@ -503,12 +651,20 @@ export function GitHubProfile() {
 
         {/* Languages */}
         {langStats.length > 0 && (
+<<<<<<< HEAD
           <div className="mb-20 text-center">
+=======
+          <div className="mb-20">
+>>>>>>> redesign/editorial-2026-06-02
             <Kicker accent>Languages</Kicker>
             <h3 className="display text-3xl md:text-4xl mt-3 mb-8">
               {langStats.length} languages, ranked.
             </h3>
+<<<<<<< HEAD
             <div className="flex flex-wrap justify-center items-baseline gap-x-6 gap-y-3 font-mono text-sm border-t border-rule/12 pt-6">
+=======
+            <div className="flex flex-wrap items-baseline gap-x-6 gap-y-3 font-mono text-sm border-t border-rule/12 pt-6">
+>>>>>>> redesign/editorial-2026-06-02
               {langStats.map((s, i) => (
                 <span key={s.lang} className="inline-flex items-baseline gap-2">
                   <span
@@ -526,6 +682,7 @@ export function GitHubProfile() {
 
         {/* Recent repos */}
         <div>
+<<<<<<< HEAD
           <div className="text-center mb-8">
             <Kicker accent>Recent work</Kicker>
             <h3 className="display text-3xl md:text-4xl mt-3">
@@ -543,6 +700,25 @@ export function GitHubProfile() {
                   <ArrowUpRight className="w-3 h-3" />
                 </a>
               </div>
+=======
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
+            <div>
+              <Kicker accent>Recent work</Kicker>
+              <h3 className="display text-3xl md:text-4xl mt-3">
+                Latest six repositories.
+              </h3>
+            </div>
+            {user && (
+              <a
+                href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-ink-tertiary hover:text-ink-primary transition-colors inline-flex items-center gap-1.5"
+              >
+                all {user.public_repos} on github
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
+>>>>>>> redesign/editorial-2026-06-02
             )}
           </div>
 
