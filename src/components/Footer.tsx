@@ -1,8 +1,8 @@
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 const ELSEWHERE: Array<{ href: string; label: string; icon?: typeof Github; external?: boolean }> = [
-  { href: 'https://github.com/KunjShah95',       label: 'github.com/KunjShah95', icon: Github, external: true },
-  { href: 'https://github.com/KunjShah01',       label: 'KunjShah01',            icon: Github, external: true },
+  { href: 'https://github.com/KunjShah95',       label: 'KunjShah95 — main',     icon: Github, external: true },
+  { href: 'https://github.com/KunjShah01',       label: 'KunjShah01 — side',     icon: Github, external: true },
   { href: 'https://linkedin.com/in/kunjshah05',  label: 'linkedin/in/kunjshah05', icon: Linkedin, external: true },
   { href: 'https://twitter.com/kunjshah_dev',    label: '@kunjshah_dev',         icon: Twitter, external: true },
   { href: 'mailto:kkshah2005@gmail.com',           label: 'kkshah2005@gmail.com', icon: Mail },

@@ -51,7 +51,7 @@ export function FinalCTA() {
                 className="group flex flex-col items-center justify-center gap-2 p-4 rounded-md border border-paper/15 hover:border-paper/40 hover:bg-paper/5 transition-all duration-base"
               >
                 <Github className="w-5 h-5 text-paper/70 group-hover:text-paper transition-colors" />
-                <span className="font-mono text-[11px] text-paper/60 group-hover:text-paper/90 transition-colors">GitHub</span>
+                <span className="font-mono text-[11px] text-paper/60 group-hover:text-paper/90 transition-colors">Main</span>
               </a>
               <a
                 href="https://github.com/KunjShah01"
@@ -60,7 +60,7 @@ export function FinalCTA() {
                 className="group flex flex-col items-center justify-center gap-2 p-4 rounded-md border border-paper/15 hover:border-paper/40 hover:bg-paper/5 transition-all duration-base"
               >
                 <Github className="w-5 h-5 text-paper/70 group-hover:text-paper transition-colors" />
-                <span className="font-mono text-[11px] text-paper/60 group-hover:text-paper/90 transition-colors">Alt</span>
+                <span className="font-mono text-[11px] text-paper/60 group-hover:text-paper/90 transition-colors">Side</span>
               </a>
               <a
                 href="https://linkedin.com/in/kunjshah05"
