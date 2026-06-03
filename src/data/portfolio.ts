@@ -236,16 +236,7 @@ export const SOCIALS: Social[] = [
     }
 ];
 
-export const TESTIMONIALS = [
-    {
-        id: 't1',
-        name: 'Manan Vyas',
-        role: 'Tech Lead at ISAC',
-        company: 'Indus University',
-        text: "We've often worked as a perfect duo—I throw in wild AI/ML ideas, and Kunj jumps right into bringing them to life. Whether it's late-night brainstorming or fixing that one stubborn bug, Kunj has always been energetic, curious, and ready to implement. What I admire most is his consistency and hunger to grow in AI/ML. He doesn't just follow trends—he actually tries to implement and understand them. Highly recommend him for any team looking for a reliable, creative, and always-experimenting techie!",
-        linkedin: 'https://www.linkedin.com/in/mananvyas0110'
-    }
-];
+export const TESTIMONIALS: never[] = [];
 
 export const BLOGS: Blog[] = [
     {
@@ -912,4 +903,111 @@ export const FEATURED_PROJECTS = [
         demoUrl: 'https://resumemasterai.streamlit.app/',
         githubUrl: 'https://github.com/KunjShah01/job-snipper',
     },
+];
+
+/**
+ * Live system status — what Kunj is currently doing.
+ * Hardcoded for v1. In v2, replace with a fetch from a small Cloudflare Worker
+ * or read from a JSON file in /public/.
+ */
+export const LIVE_STATUS = {
+  building: 'Multi-agent research workflow',
+  shipped: '12 things in 2026',
+  reading: 'Designing Data-Intensive Applications',
+  location: 'Ahmedabad, IN',
+  available: true,
+  lastUpdated: '2026-06-02T00:00:00Z',
+} as const;
+
+export const HACKATHONS: Array<{
+  title: string;
+  event?: string;
+  name?: string;
+  description?: string;
+  summary?: string;
+  year: number;
+  placement?: string;
+  team?: string;
+  prize?: string;
+}> = [
+  {
+    title: 'Autonomous Hacks',
+    event: 'Autonomous Hacks',
+    description: 'Selected out of 2000+ teams in the online round, and from 300+ teams in the offline final round. Built an autonomous AI system end-to-end in 48 hours.',
+    year: 2026,
+    placement: 'Finalist',
+    team: 'Solo',
+  },
+  {
+    title: 'Odoo Adani Hackathon',
+    event: 'Odoo x Adani',
+    description: 'Selected for the final round out of 100+ teams in the Odoo Adani Hackathon.',
+    year: 2026,
+    placement: 'Finalist',
+    team: '4',
+  },
+  {
+    title: 'AIDTM Hackathon',
+    event: 'AIDTM',
+    description: 'Participated in AIDTM Hackathon organized by Adani.',
+    year: 2026,
+    placement: 'Participant',
+    team: '3',
+  },
+  {
+    title: 'AMD Slingshot',
+    event: 'AMD Slingshot',
+    description: 'Participated in AMD Slingshot hackathon challenge.',
+    year: 2026,
+    placement: 'Participant',
+    team: '2',
+  },
+  {
+    title: 'Odoo Gandhinagar',
+    event: 'Odoo Gandhinagar',
+    description: 'Selected for the final round out of 350+ teams at Odoo Gandhinagar.',
+    year: 2025,
+    placement: 'Finalist',
+    team: '3',
+  },
+  {
+    title: 'SIH Hackathon (College Level)',
+    event: 'Smart India Hackathon',
+    description: 'Qualified as finalist at college-level SIH hackathon.',
+    year: 2025,
+    placement: 'Finalist',
+    team: '6',
+  },
+  {
+    title: 'Walmart Hackathon',
+    event: 'Walmart',
+    description: 'Participated in Walmart innovation hackathon challenge.',
+    year: 2025,
+    placement: 'Participant',
+    team: '3',
+  },
+  {
+    title: 'Google Agentic AI Hackathon',
+    event: 'Google',
+    description: 'Participated in Google Agentic AI Hackathon.',
+    year: 2025,
+    placement: 'Participant',
+    team: '2',
+  },
+  {
+    title: 'Yorkie Hackathon',
+    event: 'Yorkie',
+    description: 'Participated in Yorkie Hackathon 2025.',
+    year: 2025,
+    placement: 'Participant',
+    team: '2',
+  },
+  {
+    title: 'Open Source Workshop',
+    event: 'Community',
+    description: 'Participated in open source workshop and collaborative sessions.',
+    year: 2025,
+    placement: 'Participant',
+    team: 'Community',
+  },
 ];

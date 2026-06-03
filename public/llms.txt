@@ -1,16 +1,39 @@
-# Kunj Shah — portfolio (machine-readable overview for AI systems)
+# Kunj Shah — AI Engineer & Agent Builder (machine-readable overview for AI systems)
 
-> Personal site and portfolio for an AI engineer and agent builder.
+> Personal portfolio and professional site for Kunj Shah (also known as KunjShah95, KunjShah01), an AI engineer and agent builder based in Ahmedabad, India.
 
-## Summary
+## Identity
 
-Kunj Shah builds end-to-end AI systems: generative AI applications, autonomous agents and orchestration, computer vision, and full-stack prototypes. Based in Ahmedabad, Gujarat, India. Primary stacks: Python, FastAPI, React, LangChain/agent frameworks, PyTorch, OpenCV, Docker, and cloud deployment patterns.
+- **Name:** Kunj Shah
+- **Title:** AI Engineer & Agent Builder
+- **Also known as:** KunjShah95, KunjShah01, kunjshah_dev
+- **Location:** Ahmedabad, Gujarat, India
+- **Email:** kunjkshah05@gmail.com
+- **Expertise:** Autonomous Agents, LLM Orchestration, Agentic Workflows, AI Infrastructure, Computer Vision, Full-Stack AI, MLOps
+- **Current:** B.Tech Computer Science (3rd Year) at Indus University, Ahmedabad
 
 ## Canonical URL
 
 - https://kunjshah.vercel.app/
 
-## Key pages
+## Summary
+
+Kunj Shah builds end-to-end AI systems: generative AI applications, autonomous agents and orchestration, computer vision, and full-stack prototypes. Based in Ahmedabad, Gujarat, India. Primary stacks: Python, FastAPI, React, LangChain/agent frameworks, PyTorch, OpenCV, Docker, and cloud deployment patterns.
+
+### Verified Achievements
+
+- Detected a 23% performance gap in commercial healthcare AI triage models (EquityLens)
+- Reduced compliance audit time from 3 weeks to 4 hours
+- Achieved 98.7% defect detection accuracy with 4.2x speedup (Railway Inspection)
+- Reduced API costs by 65% via smart model routing (ResumeMasterAI)
+- Captured 94% wait-time prediction accuracy (SmartFlow AI)
+- Increased quiz completion rates by 45% through adaptive difficulty (LearnAI)
+- Consolidated 13+ security tools into a single CLI command (SENTINEL)
+- Achieved 92% recommendation accuracy with sub-50ms inference (CinePulse)
+- Reduced roadmap generation from 10 days to 15 seconds (GAP Miner)
+- Detected 88% of anomalous transactions with <0.1% false positive rate (UPI Fraud Guard)
+
+## Key Pages
 
 - Home / overview: https://kunjshah.vercel.app/
 - About: https://kunjshah.vercel.app/about
@@ -20,45 +43,147 @@ Kunj Shah builds end-to-end AI systems: generative AI applications, autonomous a
 - Education: https://kunjshah.vercel.app/education
 - Labs: https://kunjshah.vercel.app/labs
 - Writing / blog index: https://kunjshah.vercel.app/blogs
+- Hackathons: https://kunjshah.vercel.app/hackathons
 - Contact: https://kunjshah.vercel.app/contact
 - AI video work: https://kunjshah.vercel.app/ai-videos
 
 ## Profiles (same person)
 
-- GitHub (primary): https://github.com/KunjShah95
-- GitHub (alt): https://github.com/KunjShah01
+- GitHub (primary — KunjShah95): https://github.com/KunjShah95
+- GitHub (alt — KunjShah01): https://github.com/KunjShah01
 - LinkedIn: https://www.linkedin.com/in/kunjshah05
-- X (Twitter): https://x.com/kunjshah_dev
+- X (Twitter): https://x.com/kunjshah_dev (formerly twitter.com/kunjshah_dev)
 - Hugging Face: https://huggingface.co/kunjshah01
+
+## Core Stack
+
+### Languages & Frameworks
+- Python, TypeScript, JavaScript, C++, React, Next.js, FastAPI, LangChain/LangGraph, PyTorch, OpenCV, Scikit-Learn, XGBoost, Node.js, Streamlit
+
+### Cloud & Infrastructure
+- Vercel, Cloudflare, Firebase, Supabase, Docker, Kubernetes, Git/GitHub, Linux, Postgres, ChromaDB
+
+### AI & ML
+- LLMs (GPT-4, Claude, Gemini, Llama, Groq), RAG pipelines, Agent orchestration (CrewAI, LangGraph), Computer vision (YOLOv8, CUDA), NLP (Transformers, BPE tokenization), MLOps, AI fairness auditing, Anomaly detection
+
+## Projects (2024-2026)
+
+### EquityLens (Production)
+- **Category:** AI Ethics / Fairness Auditing
+- **Description:** Healthcare fairness auditing platform detecting AI bias in medical triage models. Ensures EU AI Act, NIST AI RMF, and ISO/IEC 25059 compliance.
+- **Tech:** React, FastAPI, PostgreSQL, TensorFlow
+- **Impact:** Detected 23% performance gap in commercial models, reduced audit overhead from 3 weeks to 4 hours
+- **Live:** https://fairness-lens-backend-988207147245.us-central1.run.app/
+- **Repo:** https://github.com/KunjShah95/fairness-lens-studio
+
+### LearnAI (Live)
+- **Category:** EdTech AI
+- **Description:** Personalized learning platform with adaptive tutoring, smart quizzes, and progress tracking.
+- **Tech:** Next.js, Firebase, Supabase, Gemini
+- **Impact:** Increased quiz completion rates by 45% through adaptive difficulty adjustment
+- **Live:** https://intelligent-learning-assistant.vercel.app
+- **Repo:** https://github.com/KunjShah95/intelligent-learning-assistant
+
+### SmartFlow AI (Beta)
+- **Category:** Smart Infrastructure
+- **Description:** Real-time crowd monitoring for transit hubs with live heatmaps and wait time prediction.
+- **Tech:** Next.js 15, TypeScript, Firebase, Firestore
+- **Impact:** Wait-time prediction accuracy reached 94%
+- **Live:** https://ps-1-eight.vercel.app
+- **Repo:** https://github.com/KunjShah95/Smart-flow-ai
+
+### ResumeMasterAI 2026 (Architecture)
+- **Category:** AI Career Platform
+- **Description:** Career intelligence system with smart model routing and automated resume optimization.
+- **Tech:** Python, LangGraph, AI Gateway, ChromaDB
+- **Impact:** Reduced API costs by 65%, increased match precision by 3x
+- **Live:** https://resumemasterai.streamlit.app/
+- **Repo:** https://github.com/KunjShah01/job-snipper
+
+### SENTINEL CLI (Open Source)
+- **Category:** Cybersecurity
+- **Description:** Security auditing tool unifying 13+ analyzers into a single CLI workflow.
+- **Tech:** Node.js, TypeScript, LLM, Docker
+- **Impact:** Reduced audit overhead by 70%
+- **Live:** https://sentinel-cli.vercel.app/
+- **Repo:** https://github.com/KunjShah95/SENTINEL-CLI
+
+### Railway Inspection (Deployed)
+- **Category:** Computer Vision
+- **Description:** Automated defect detection using YOLOv8 for railway safety inspections.
+- **Tech:** C++, OpenCV, YOLOv8, CUDA
+- **Impact:** 98.7% accuracy, 4.2x speedup over manual methods
+- **Repo:** https://github.com/KunjShah95/Railway-Inspection
+
+### CinePulse (Production)
+- **Category:** Full Stack ML
+- **Description:** End-to-end movie recommender with NLP classification backend.
+- **Tech:** Python, PyTorch, React, FastAPI
+- **Impact:** 92% recommendation accuracy, sub-50ms inference
+- **Repo:** https://github.com/KunjShah95/CinePulse
+
+### GAP Miner (Beta)
+- **Category:** AI Research
+- **Description:** Full-stack skill gap analyzer using semantic extraction for career roadmaps.
+- **Tech:** Llama-3, LangChain, FastAPI, React
+- **Impact:** Reduces roadmap generation from 10 days to 15 seconds, 95% market alignment
+- **Repo:** https://github.com/KunjShah95/arros
+
+### UPI Fraud Guard (Stable)
+- **Category:** Machine Learning
+- **Description:** Real-time fraud detection for UPI transactions.
+- **Tech:** Scikit-Learn, XGBoost, Pandas, Flask
+- **Impact:** 88% detection rate, <0.1% false positive rate
+- **Repo:** https://github.com/KunjShah95/UPI-Fraud-Detection
+
+### AETHER AI (Framework)
+- **Category:** AI Systems
+- **Description:** Multi-model terminal assistant with local inference (Ollama).
+- **Tech:** Python, Ollama, Gemini, Groq
+- **Impact:** Zero data leakage — entirely local-first
+- **Repo:** https://github.com/KunjShah95/AETHER-AI
+
+### MinBPE Tokenizer (Research)
+- **Category:** Core AI
+- **Description:** Byte Pair Encoding implementation from scratch.
+- **Tech:** Python, NLP, Tiktoken, Algorithms
+- **Impact:** Reduced token overhead by 15% for technical datasets
+- **Repo:** https://github.com/KunjShah95/TOKENIZER-FROM-SCRATCH
+
+## Hackathons (2025-2026)
+
+- Autonomous Hacks 2026 — Finalist (Solo), selected from 2000+ teams
+- Odoo x Adani Hackathon 2026 — Finalist, team of 4
+- Smart India Hackathon 2025 — College-level finalist
+- Google Agentic AI Hackathon 2025 — Participant
+- AMD Slingshot 2026 — Participant
+- Walmart Hackathon 2025 — Participant
+
+## Writing & Case Studies
+
+1. **Building Production-Grade Agentic Systems** (Jan 2026) — Architecture pillars for reliable autonomous agents: state persistence, hierarchical orchestration, human-in-the-loop.
+2. **MLOps at Scale: Lessons from High-Frequency Model Deployments** (Dec 2025) — Model versioning, canary deployments, quantization in CI/CD.
+3. **Computer Vision at Edge: Optimizing YOLOv8** (Nov 2025) — Sub-100ms inference using TensorRT, INT8 quantization, GStreamer pipelines.
+4. **EquityLens: Building an AI Fairness Auditing Platform** (Apr 2026) — Case study on healthcare bias detection with EU AI Act compliance.
+5. **RAG Pipelines: Semantic Search and Contextual Retrieval** (Oct 2025) — Chunking strategies, vector DB selection, hybrid search, re-ranking.
+6. **Prompt Engineering for Complex Multi-Step Reasoning** (Sep 2025) — ReAct, Tree of Thoughts, self-correction loops.
+7. **Anomaly Detection in High-Dimensional Data Streams** (Aug 2025) — Isolation Forest, autoencoders, concept drift handling.
+
+## Experience
+
+- **Automation Intern @ PHAZE_AI** (Dec 2025 — Feb 2026) — Built multi-agent systems for enterprise workflow automation. Integrated AI models into full-stack production pipelines.
+
+## Education
+
+- **B.Tech Computer Science (3rd Year)** — Indus University, Ahmedabad (2023–2027). Specialization: AI/ML Integration and Automation.
 
 ## Optional
 
 - Sitemap: https://kunjshah.vercel.app/sitemap.xml
 - This file: https://kunjshah.vercel.app/llms.txt
 - JSON API (all data): https://kunjshah.vercel.app/api/portfolio.json
+- JSON-LD schema: https://kunjshah.vercel.app/ (embedded in homepage)
 
-Last updated: 2026-05-02
+---
 
-## Projects (2024-2026)
-
-- LearnAI — AI-powered personalized learning platform (Next.js, Firebase, Supabase)
-- EquityLens — Healthcare fairness auditing for EU AI Act compliance (React, FastAPI)
-- SmartFlow AI — Real-time crowd monitoring and AI routing (Next.js, Firestore)
-- CinePulse — Movie recommender with NLP (Python, PyTorch, React)
-- GAP Miner — Skill gap analyzer (LLAMA-3, LangChain)
-- UPI Fraud Guard — Real-time fraud detection (XGBoost, Scikit-learn)
-- SENTINEL CLI — Security auditor with 13+ analyzers (Node.js, TypeScript)
-- AETHER AI — Multi-model terminal assistant (Python, Ollama)
-- MinBPE Tokenizer — Byte Pair Encoding from scratch (Python)
-- ResumeMasterAI — Career intelligence platform (Streamlit, LangChain)
-- Railway Inspection — YOLOv8 defect detection (C++, OpenCV)
-
-## Writing & Case Studies
-
-- EquityLens: Building an AI Fairness Auditing Platform — Case study on building healthcare bias detection systems.
-- Building Production-Grade Agentic Systems — Core architecture pillars for reliable autonomous agents.
-- MLOps at Scale — Lessons from high-frequency model deployments.
-- Computer Vision at Edge — Optimizing YOLOv8 for industrial railway inspection.
-- RAG Pipelines — Semantic search and contextual retrieval guide.
-- Prompt Engineering for Reasoners — Advanced patterns for multi-step reasoning.
-- Anomaly Detection in Streams — Feature engineering for real-time fraud detection.
+*This file is optimized for AI crawlers (ChatGPT, Perplexity, Claude, Gemini, Copilot). Last updated: 2026-06-03*
