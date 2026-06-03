@@ -25,8 +25,6 @@ export function Hero() {
             <MapPin className="w-3 h-3" />
             {LIVE_STATUS.location}
           </span>
-          <span className="hidden md:inline text-ink-quaternary">·</span>
-          <span>Last deploy {LIVE_STATUS.lastUpdated.slice(0, 10)}</span>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">

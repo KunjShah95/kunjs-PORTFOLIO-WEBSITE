@@ -20,6 +20,7 @@ export function ProjectsPage() {
         kicker="Projects"
         title={`${PROJECTS.length} things I've built, broken down by year.`}
         lede="Production systems, prototypes, and the occasional weekend experiment. Click any project for the full case study."
+        center
       />
 
       <section className="max-w-manifest mx-auto px-6 py-16">

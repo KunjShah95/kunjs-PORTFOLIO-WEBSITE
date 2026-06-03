@@ -15,14 +15,16 @@ export function BlogDetailPage() {
     <article>
       <header className="py-16 md:py-24 border-b border-rule/12">
         <div className="max-w-manifest mx-auto px-6">
-          <Link to="/blogs" className="inline-flex items-center gap-1.5 text-sm text-ink-secondary hover:text-ink-primary">
-            <ArrowLeft className="w-3.5 h-3.5" /> All essays
-          </Link>
-          <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mt-8 max-w-3xl">
+          <div className="flex justify-center mb-8">
+            <Link to="/blogs" className="inline-flex items-center gap-1.5 text-sm text-ink-secondary hover:text-ink-primary">
+              <ArrowLeft className="w-3.5 h-3.5" /> All essays
+            </Link>
+          </div>
+          <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mx-auto max-w-3xl text-center">
             <Kicker accent>{blog.category} &middot; {blog.date}</Kicker>
             <h1 className="display text-4xl md:text-5xl mt-4 leading-tight tracking-tightest">{blog.title}</h1>
             <p className="mt-6 text-xl text-ink-secondary leading-relaxed font-display italic">{blog.excerpt}</p>
-            <div className="mt-8 pt-6 border-t border-rule/12 flex items-center gap-4">
+            <div className="mt-8 pt-6 border-t border-rule/12 flex items-center justify-center gap-4">
               <div className="kicker">By Kunj Shah</div>
               <div className="kicker">{blog.readTime ?? '5 min read'}</div>
             </div>

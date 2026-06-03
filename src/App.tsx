@@ -50,17 +50,17 @@ function Home() {
 
       <section id="writing" className="py-24 md:py-32">
         <div className="max-w-manifest mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div>
-              <div className="kicker">04 · Writing</div>
-              <h2 className="display text-4xl md:text-5xl mt-3">Latest essays</h2>
-              <p className="mt-4 text-ink-secondary max-w-xl">
-                Long-form notes on AI architecture, agentic systems, and what I&rsquo;m learning by shipping.
-              </p>
+          <div className="text-center mb-12">
+            <div className="kicker">04 · Writing</div>
+            <h2 className="display text-4xl md:text-5xl mt-3 max-w-2xl mx-auto">Latest essays</h2>
+            <p className="mt-4 text-ink-secondary max-w-xl mx-auto">
+              Long-form notes on AI architecture, agentic systems, and what I&rsquo;m learning by shipping.
+            </p>
+            <div className="mt-6">
+              <Link to="/blogs" className="group inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-ink-primary">
+                All essays &rarr;
+              </Link>
             </div>
-            <Link to="/blogs" className="group inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-ink-primary">
-              All essays &rarr;
-            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule/12">
             {latestBlogs.map((blog, i) => (

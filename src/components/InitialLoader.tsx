@@ -25,7 +25,7 @@ export function InitialLoader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[100] bg-paper flex items-center justify-center"
+          className="fixed inset-0 z-[120] bg-paper flex items-center justify-center"
           aria-hidden
         >
           <motion.div

@@ -16,6 +16,7 @@ export function ProjectDetailPage() {
         kicker={project.category ?? 'Project'}
         title={project.title}
         lede={project.desc}
+        center
       >
         <div className="mt-6 flex items-center gap-3 flex-wrap">
           <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm text-ink-secondary hover:text-ink-primary">
@@ -35,8 +36,8 @@ export function ProjectDetailPage() {
       </PageHeader>
 
       <article className="max-w-manifest mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div className="md:col-span-3">
+        <div className="max-w-prose mx-auto">
+          <div className="mb-10">
             <MetaRow
               items={[
                 { label: 'Role', value: 'Lead engineer' },
@@ -45,18 +46,16 @@ export function ProjectDetailPage() {
               ]}
             />
           </div>
-          <div className="md:col-span-9 max-w-prose">
-            <h2 className="display text-3xl mb-4">Overview</h2>
-            <p className="text-lg leading-relaxed">{project.problem ?? project.desc}</p>
+          <h2 className="display text-3xl mb-4">Overview</h2>
+          <p className="text-lg leading-relaxed">{project.problem ?? project.desc}</p>
 
-            {project.outcome && (
-              <>
-                <Rule label="Outcome" />
-                <h2 className="display text-3xl mb-4">Outcome</h2>
-                <p className="text-lg leading-relaxed">{project.outcome}</p>
-              </>
-            )}
-          </div>
+          {project.outcome && (
+            <>
+              <Rule label="Outcome" />
+              <h2 className="display text-3xl mb-4">Outcome</h2>
+              <p className="text-lg leading-relaxed">{project.outcome}</p>
+            </>
+          )}
         </div>
       </article>
     </>

@@ -32,6 +32,7 @@ export function LabsPage() {
         kicker="Labs"
         title="Experiments, prototypes, and abandoned ideas."
         lede="Things I'm tinkering with outside of production work. Most of these will never ship. That's the point."
+        center
       />
       <section className="max-w-manifest mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule/12">

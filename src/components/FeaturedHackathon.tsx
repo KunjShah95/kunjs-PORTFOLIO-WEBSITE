@@ -15,14 +15,13 @@ export function FeaturedHackathon() {
   return (
     <section id="hackathons" className="py-24 md:py-32 border-b border-rule/12 bg-elevated">
       <div className="max-w-manifest mx-auto px-6">
-        <SectionLabel number="02" label="Hackathons" />
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <SectionLabel number="02" label="Hackathons" className="justify-center" />
+        <div className="max-w-2xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="md:col-span-7"
           >
             <div className="kicker">{eventLabel} · {featured.year}</div>
             <h2 className="display text-4xl md:text-5xl mt-3 leading-tight">
@@ -30,7 +29,7 @@ export function FeaturedHackathon() {
                 {name}
               </Link>
             </h2>
-            <p className="mt-6 text-ink-secondary text-lg leading-relaxed max-w-prose">
+            <p className="mt-6 text-ink-secondary text-lg leading-relaxed">
               {summary}
             </p>
             <dl className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-3 pt-6 border-t border-rule/12">
@@ -60,19 +59,17 @@ export function FeaturedHackathon() {
               </div>
             </dl>
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="md:col-span-5"
+            className="mt-10"
           >
-            <Link to="/hackathons" className="block aspect-[4/3] rounded-md border border-rule/12 bg-paper p-8 hover:border-accent transition-colors">
-              <div className="kicker">Featured</div>
-              <div className="display text-2xl mt-3">{name}</div>
-              <div className="mt-6 flex items-center gap-2 text-sm text-ink-secondary">
-                Open case study <ArrowUpRight className="w-4 h-4" />
-              </div>
+            <Link to="/hackathons" className="group inline-flex items-center gap-2 px-6 h-12 rounded-md border border-rule/12 bg-paper hover:border-accent transition-colors">
+              <span className="font-mono text-sm text-ink-secondary group-hover:text-accent transition-colors">Open case study</span>
+              <ArrowUpRight className="w-4 h-4 text-ink-tertiary group-hover:text-accent transition-colors" />
             </Link>
           </motion.div>
         </div>

@@ -29,7 +29,7 @@ export async function GET(request: Request) {
 
 AI Engineer & Agent Builder
 
-> https://kunjshah.dev
+> https://kunjshah.vercel.app/
 
 ## Summary
 
@@ -39,23 +39,32 @@ Focus: Full Stack AI, Autonomous Automation, Neural Intelligence, Workflow Engin
 
 ## Pages
 
-- Home: https://kunjshah.dev/
-- About: https://kunjshah.dev/about
-- Projects: https://kunjshah.dev/projects
-- Skills: https://kunjshah.dev/skills
-- Experience: https://kunjshah.dev/experience
-- Education: https://kunjshah.dev/education
-- Labs: https://kunjshah.dev/labs
-- AI Videos: https://kunjshah.dev/ai-videos
-- Contact: https://kunjshah.dev/contact
+- Home: https://kunjshah.vercel.app/
+- About: https://kunjshah.vercel.app/about
+- Projects: https://kunjshah.vercel.app/projects
+- Skills: https://kunjshah.vercel.app/skills
+- Experience: https://kunjshah.vercel.app/experience
+- Education: https://kunjshah.vercel.app/education
+- Labs: https://kunjshah.vercel.app/labs
+- AI Videos: https://kunjshah.vercel.app/ai-videos
+- Contact: https://kunjshah.vercel.app/contact
+- Writing: https://kunjshah.vercel.app/blogs
+- Hackathons: https://kunjshah.vercel.app/hackathons
+
+## Profiles (same person)
+
+- GitHub (primary): https://github.com/KunjShah95
+- GitHub (alt): https://github.com/KunjShah01
+- LinkedIn: https://www.linkedin.com/in/kunjshah05
+- X (Twitter): https://x.com/kunjshah_dev
 
 ## Tech Stack
 
-Python, TypeScript, React, FastAPI, LangChain, PyTorch, OpenCV, Docker, Vercel, Cloudflare, Firebase, Supabase
+Python, TypeScript, React, FastAPI, LangChain/LangGraph, PyTorch, OpenCV, Docker, Vercel, Cloudflare, Firebase, Supabase
 
 ---
 
-*Generated for AI agents. Last updated: 2026-05-02*
+*Generated for AI agents. Last updated: 2026-06-03*
 `
     const tokenCount = Math.ceil(content.length / 4).toString()
     

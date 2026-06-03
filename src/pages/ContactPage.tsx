@@ -16,18 +16,19 @@ export function ContactPage() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          className="flex flex-col items-center text-center"
         >
           <div className="kicker text-accent">Get in touch</div>
-          <h1 className="display text-5xl md:text-7xl mt-4 leading-[0.95] tracking-tightest max-w-4xl">
+          <h1 className="display text-5xl md:text-7xl mt-4 leading-[0.95] tracking-tightest max-w-3xl">
             The fastest way to reach me is{' '}
             <a href="mailto:kkshah20050@gmail.com" className="text-accent hover:underline">email</a>.
           </h1>
-          <p className="mt-8 text-lg text-ink-secondary max-w-prose leading-relaxed">
+          <p className="mt-8 text-lg text-ink-secondary max-w-2xl leading-relaxed">
             I&rsquo;m currently available for short-term projects, contract work, and full-time roles. I respond to most emails within 24 hours. For longer briefs, please include scope, timeline, and what success looks like.
           </p>
         </motion.div>
 
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-px bg-rule/12">
+        <div className="mt-24 max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-rule/12">
           {METHODS.map((m) => (
             <a
               key={m.label}
@@ -47,9 +48,9 @@ export function ContactPage() {
           ))}
         </div>
 
-        <div className="mt-24 pt-12 border-t border-rule/12">
+        <div className="mt-24 max-w-2xl mx-auto pt-12 border-t border-rule/12 text-center">
           <div className="kicker">Currently</div>
-          <p className="mt-3 text-ink-secondary max-w-prose leading-relaxed">
+          <p className="mt-3 text-ink-secondary leading-relaxed">
             Building multi-agent research workflows in Ahmedabad, IN. Reading <em>Designing Data-Intensive Applications</em>. Available for new work.
           </p>
         </div>

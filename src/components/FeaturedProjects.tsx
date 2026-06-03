@@ -11,12 +11,12 @@ export function FeaturedProjects() {
   return (
     <section id="work" className="py-24 md:py-32 border-b border-rule/12">
       <div className="max-w-manifest mx-auto px-6">
-        <SectionLabel number="01" label="Selected work" />
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
-          <h2 className="md:col-span-8 display text-4xl md:text-5xl">
+        <SectionLabel number="01" label="Selected work" className="justify-center" />
+        <div className="text-center mb-12">
+          <h2 className="display text-4xl md:text-5xl max-w-2xl mx-auto">
             Three things I built that I&rsquo;m proud of.
           </h2>
-          <div className="md:col-span-4 flex md:justify-end items-end">
+          <div className="mt-6">
             <Link to="/projects" className="group inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-ink-primary">
               All projects ({PROJECTS.length})
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

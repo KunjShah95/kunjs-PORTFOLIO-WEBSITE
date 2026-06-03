@@ -9,22 +9,11 @@ export function AboutPage() {
         kicker="About"
         title="A short biography, written in first person."
         lede="I'm Kunj — an AI engineer working on agentic systems, retrieval pipelines, and the messy boundary where models meet production."
+        center
       />
 
       <article className="max-w-manifest mx-auto px-6 py-24">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <aside className="md:col-span-3">
-            <nav className="sticky top-24 flex flex-col gap-2 text-sm" aria-label="Page sections">
-              <div className="kicker mb-2">Index</div>
-              <a href="#bio" className="text-ink-secondary hover:text-ink-primary">Bio</a>
-              <a href="#principles" className="text-ink-secondary hover:text-ink-primary">Principles</a>
-              <a href="#now" className="text-ink-secondary hover:text-ink-primary">Now</a>
-              <a href="#stack" className="text-ink-secondary hover:text-ink-primary">Stack</a>
-              <a href="#cv" className="text-ink-secondary hover:text-ink-primary">CV</a>
-            </nav>
-          </aside>
-
-          <div className="md:col-span-9 max-w-prose">
+        <div className="max-w-prose mx-auto">
             <section id="bio">
               <h2 className="display text-3xl mb-6">Bio</h2>
               <p className="text-lg leading-relaxed text-ink-primary">
@@ -146,7 +135,6 @@ export function AboutPage() {
                 ))}
               </div>
             </section>
-          </div>
         </div>
       </article>
     </>

@@ -15,6 +15,7 @@ export function SkillsPage() {
         kicker="Skills"
         title="Tools I reach for, grouped by what they do."
         lede="Not a comprehensive list — just the things I use often enough to have opinions about."
+        center
       />
       <section className="max-w-manifest mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule/12">
