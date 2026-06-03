@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, MapPin } from 'lucide-react';
-import { LIVE_STATUS } from '../data/portfolio';
+import { LIVE_STATUS, IDENTITY } from '../data/portfolio';
 
 export function Hero() {
   return (
@@ -27,7 +27,7 @@ export function Hero() {
           </span>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
           <motion.h1
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -43,24 +43,55 @@ export function Hero() {
             .
           </motion.h1>
 
-          <motion.div
+          {/* Portrait — DevFest Baroda, the 21-year-old behind the h1 */}
+          <motion.figure
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="md:col-span-3 md:pl-6 md:border-l border-rule/12 flex flex-col justify-end"
+            className="md:col-span-3 flex flex-col items-stretch"
           >
-            <p className="text-ink-secondary leading-relaxed text-base max-w-xs">
-              I'm 21, fourth-year CS in Ahmedabad. I build agents in the hours I should be studying, and I write about the parts that broke.
-            </p>
-            <div className="mt-6 kicker">Currently building</div>
-            <div className="mt-1 font-mono text-sm text-ink-primary">{LIVE_STATUS.building}</div>
-          </motion.div>
+            <div className="relative aspect-[4/5] overflow-hidden bg-sunken">
+              <img
+                src={IDENTITY.profile_photo}
+                alt="Kunj Shah at DevFest Baroda 2025"
+                className="w-full h-full object-cover object-[center_25%]"
+                loading="eager"
+                decoding="async"
+                width="600"
+                height="750"
+              />
+            </div>
+            <figcaption className="mt-3 font-mono text-xs text-ink-tertiary text-right">
+              DevFest Baroda, 2025
+            </figcaption>
+          </motion.figure>
         </div>
+
+        {/* Sub-headline — the lede, now wider since the photo has the 3-col */}
+        <motion.p
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-10 md:mt-12 text-ink-secondary leading-relaxed text-lg md:text-xl max-w-2xl"
+        >
+          I&rsquo;m 21, fourth-year CS in Ahmedabad. I build agents in the hours I should be studying, and I write about the parts that broke.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
+          className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1"
+        >
+          <div className="kicker">Currently building</div>
+          <span className="font-mono text-xs text-ink-quaternary">/</span>
+          <div className="font-mono text-sm text-ink-primary">{LIVE_STATUS.building}</div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
+          transition={{ duration: 0.6, delay: 0.65 }}
           className="mt-10 flex items-center gap-4"
         >
           <span className="h-px w-12 bg-ink-primary/30" />
@@ -70,7 +101,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
+          transition={{ duration: 0.6, delay: 0.75 }}
           className="mt-6 flex flex-wrap items-center gap-3"
         >
           <Link
