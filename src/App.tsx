@@ -38,7 +38,7 @@ function Home() {
     <div className="space-y-0">
       <SEO
         title="Kunj Shah | AI Engineer & Agent Builder"
-        description="Kunj Shah is an AI engineer and agent builder specializing in autonomous systems, agentic workflows, and LLM orchestration. See my portfolio of production-grade AI implementations."
+        description="Kunj Shah is a 21-year-old AI engineer in Ahmedabad who builds agents in the hours he should be studying. Portfolio, essays, and a list of things that broke in production."
         faqItems={PORTFOLIO_FAQ}
       />
       <Hero />

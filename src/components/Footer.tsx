@@ -1,5 +1,4 @@
-import { Github, Linkedin, Twitter, Mail, ArrowUpRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 const ELSEWHERE: Array<{ href: string; label: string; icon?: typeof Github; external?: boolean }> = [
   { href: 'https://github.com/KunjShah95',       label: 'github.com/KunjShah95', icon: Github, external: true },
@@ -7,15 +6,6 @@ const ELSEWHERE: Array<{ href: string; label: string; icon?: typeof Github; exte
   { href: 'https://linkedin.com/in/kunjshah05',  label: 'linkedin/in/kunjshah05', icon: Linkedin, external: true },
   { href: 'https://twitter.com/kunjshah_dev',    label: '@kunjshah_dev',         icon: Twitter, external: true },
   { href: 'mailto:kkshah20050@gmail.com',           label: 'kkshah20050@gmail.com', icon: Mail },
-];
-
-const SITE_LINKS = [
-  { to: '/projects', label: 'Projects' },
-  { to: '/about', label: 'About' },
-  { to: '/blogs', label: 'Writing' },
-  { to: '/experience', label: 'Experience' },
-  { to: '/hackathons', label: 'Hackathons' },
-  { to: '/contact', label: 'Contact' },
 ];
 
 export function Footer() {
@@ -26,77 +16,54 @@ export function Footer() {
         {/* Main editorial section */}
         <div className="py-24 md:py-32 border-b border-rule/12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-            {/* Endnote column */}
-            <div className="md:col-span-3">
-              <div className="kicker">Endnote</div>
-              <div className="mt-2 font-mono text-xs text-ink-tertiary tabular-nums">
-                v.2026 &middot; 06 / 06
-              </div>
-              <div className="mt-6 h-px w-8 bg-rule/32" />
+            {/* Personal note — left column */}
+            <div className="md:col-span-4">
+              <div className="kicker">A note</div>
               <p className="mt-6 text-sm text-ink-secondary leading-relaxed max-w-xs">
-                AI engineer building autonomous systems in Ahmedabad, IN. Available for projects, contract work, and full-time roles.
+                I'm 21, third-year CS at Indus University in Ahmedabad. I build agents in the hours I should be studying, and I write about the parts that broke.
+              </p>
+              <div className="mt-8 h-px w-8 bg-rule/32" />
+              <p className="mt-6 font-mono text-xs text-ink-tertiary">
+                if you write, I write back.
               </p>
             </div>
 
             {/* Main content */}
-            <div className="md:col-span-9">
+            <div className="md:col-span-8">
               <h2 className="font-display text-5xl md:text-6xl tracking-tightest leading-[0.95] max-w-5xl whitespace-nowrap">
                 That&rsquo;s the whole site.
               </h2>
 
-              {/* Pull quote — the loudest moment in the Footer. From B001, the lead essay. */}
+              {/* Pull quote — the loudest moment. A real 3 a.m. moment, not a magazine tagline. */}
               <div className="mt-16 md:mt-24 max-w-4xl">
                 <div className="h-px bg-rule/32 mb-12 md:mb-16" />
                 <blockquote>
-                  <p className="font-display italic text-4xl md:text-7xl leading-[0.98] tracking-tightest text-ink-primary">
-                    &ldquo;Autonomy is easy.
+                  <p className="font-display italic text-4xl md:text-7xl leading-[1.02] tracking-tightest text-ink-primary">
+                    &ldquo;Every project I&rsquo;ve shipped,
                     <br />
-                    Reliability is hard.&rdquo;
+                    I broke it twice first.
+                    <br />
+                    <span className="text-ink-secondary">I think that&rsquo;s the actual workflow.</span>&rdquo;
                   </p>
                 </blockquote>
                 <div className="mt-10 md:mt-12 flex flex-wrap items-baseline gap-x-4 gap-y-2">
                   <footer className="font-mono text-xs text-ink-tertiary uppercase tracking-kicker">
-                    &mdash; on shipping production agents
+                    &mdash; 3 a.m., probably 2025
                   </footer>
-                  <span className="font-mono text-xs text-ink-quaternary">/</span>
-                  <span className="font-mono text-xs text-ink-tertiary uppercase tracking-kicker">JAN 2026</span>
                 </div>
                 <div className="h-px bg-rule/32 mt-12 md:mt-16" />
               </div>
 
               <p className="mt-12 text-ink-secondary max-w-prose text-lg leading-relaxed">
-                Built by hand in Ahmedabad. No CMS, no analytics on you, no cookie banner. If something here is wrong,{' '}
-                <a
-                  href="mailto:kkshah20050@gmail.com"
-                  className="text-ink-primary underline decoration-ink-primary/30 decoration-2 underline-offset-4 hover:decoration-ink-primary/60 transition-colors"
-                >
-                  tell me
-                </a>
-                {' '}&mdash; I read every message.
+                I read every message. The reply is short when I don&rsquo;t know, longer when I do. If we end up working together, expect chai references in the PR descriptions.
               </p>
-
-              {/* Quick links grid */}
-              <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-3 max-w-xl">
-                {SITE_LINKS.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="group inline-flex items-center justify-between px-4 py-3 rounded-md border border-rule/12 hover:border-rule/32 hover:bg-elevated/50 transition-all duration-base"
-                  >
-                    <span className="text-sm text-ink-secondary group-hover:text-ink-primary transition-colors">
-                      {link.label}
-                    </span>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-ink-quaternary group-hover:text-ink-primary transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
-                ))}
-              </div>
 
               <a
                 href="mailto:kkshah20050@gmail.com"
                 className="group mt-10 inline-flex items-center gap-3 px-6 h-12 rounded-md bg-ink-primary text-ink-inverse font-body text-sm font-medium hover:bg-accent transition-colors duration-base ease-out-soft"
               >
                 <Mail className="w-4 h-4" />
-                Start a conversation
+                Say hello
                 <span className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
               </a>
             </div>

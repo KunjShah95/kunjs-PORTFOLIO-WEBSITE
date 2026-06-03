@@ -8,7 +8,7 @@ export function AboutPage() {
       <PageHeader
         kicker="About"
         title="A short biography, written in first person."
-        lede="I'm Kunj — an AI engineer working on agentic systems, retrieval pipelines, and the messy boundary where models meet production."
+        lede="I'm Kunj. I build agents in Ahmedabad between exams, and I write about the parts that broke."
         center
       />
 
@@ -17,10 +17,13 @@ export function AboutPage() {
             <section id="bio">
               <h2 className="display text-3xl mb-6">Bio</h2>
               <p className="text-lg leading-relaxed text-ink-primary">
-                I build agents that ship to real users. My work spans autonomous research workflows, voice-driven operating systems, retrieval-augmented generation at scale, and the operational scaffolding that keeps these things reliable in production.
+                I'm 21, third-year CS at Indus University in Ahmedabad. I build agents in the hours I should be studying, and the rest of the time I write about the parts that broke.
               </p>
               <p className="mt-6 text-lg leading-relaxed text-ink-secondary">
-                I'm based in Ahmedabad, IN. I work with founders and small teams who need an AI engineer who can take a system from whiteboard to production in weeks, not quarters.
+                My work has covered research workflows, voice interfaces, and the parts of retrieval that break when you push past the demo. I&rsquo;ve shipped four hackathon finals, two production systems, and one chatbot I&rsquo;m still embarrassed about.
+              </p>
+              <p className="mt-6 text-lg leading-relaxed text-ink-secondary">
+                If you write to me, I write back. Most weeks I'm working with founders and small teams who need someone to take a system from whiteboard to production in a few weeks, not a few quarters.
               </p>
             </section>
 
@@ -55,7 +58,7 @@ export function AboutPage() {
             <section id="now">
               <h2 className="display text-3xl mb-6">What I&rsquo;m doing now</h2>
               <p className="text-lg leading-relaxed text-ink-primary">
-                Building multi-agent research workflows. Writing essays about what breaks in production. Reading <em>Designing Data-Intensive Applications</em> for the third time.
+                Building a multi-agent research workflow that I keep rewriting. Writing essays about the parts that broke. Reading <em>Designing Data-Intensive Applications</em> for the third time, and finally understanding chapters I skimmed twice.
               </p>
             </section>
 

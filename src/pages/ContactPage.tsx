@@ -24,7 +24,7 @@ export function ContactPage() {
             <a href="mailto:kkshah20050@gmail.com" className="text-ink-primary underline decoration-ink-primary/30 decoration-2 underline-offset-8 hover:decoration-ink-primary/60 transition-colors">email</a>.
           </h1>
           <p className="mt-8 text-lg text-ink-secondary max-w-2xl leading-relaxed">
-            I&rsquo;m currently available for short-term projects, contract work, and full-time roles. I respond to most emails within 24 hours. For longer briefs, please include scope, timeline, and what success looks like.
+            If you&rsquo;re working on something and want an extra set of hands, write to me. I usually reply within a day. For longer briefs, it helps to include the scope, the timeline, and what success would look like &mdash; even a rough sketch is enough.
           </p>
         </motion.div>
 
@@ -51,7 +51,7 @@ export function ContactPage() {
         <div className="mt-24 max-w-2xl mx-auto pt-12 border-t border-rule/12 text-center">
           <div className="kicker">Currently</div>
           <p className="mt-3 text-ink-secondary leading-relaxed">
-            Building multi-agent research workflows in Ahmedabad, IN. Reading <em>Designing Data-Intensive Applications</em>. Available for new work.
+            Rewriting a research agent for the third time. Reading <em>Designing Data-Intensive Applications</em> again. Usually up for new work &mdash; if you have something, write to me.
           </p>
         </div>
       </div>

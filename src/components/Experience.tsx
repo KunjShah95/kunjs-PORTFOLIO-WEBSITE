@@ -78,7 +78,7 @@ export function Experience() {
             Work <span className="text-primary">History</span>
           </h2>
           <p className="text-muted max-w-lg">
-            Roles where I've built production-grade AI systems and led automation initiatives.
+            The places I&rsquo;ve actually shipped something, in chronological order.
           </p>
         </motion.div>
 
