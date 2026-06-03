@@ -168,7 +168,7 @@ export const EDUCATION: Education[] = [
     {
         id: "ED01",
         school: "Indus University",
-        degree: "B.Tech Computer Science [3rd Year]",
+        degree: "B.Tech Computer Science [4th Year]",
         period: "2023 - 2027",
         specialization: "AI/ML Integration and Automation.",
         location: "Ahmedabad, IN",

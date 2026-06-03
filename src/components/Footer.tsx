@@ -20,7 +20,7 @@ export function Footer() {
             <div className="md:col-span-4">
               <div className="kicker">A note</div>
               <p className="mt-6 text-sm text-ink-secondary leading-relaxed max-w-xs">
-                I'm 21, third-year CS at Indus University in Ahmedabad. I build agents in the hours I should be studying, and I write about the parts that broke.
+                I'm 21, fourth-year CS at Indus University in Ahmedabad. I build agents in the hours I should be studying, and I write about the parts that broke.
               </p>
               <div className="mt-8 h-px w-8 bg-rule/32" />
               <p className="mt-6 font-mono text-xs text-ink-tertiary">

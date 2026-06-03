@@ -50,7 +50,7 @@ export function Hero() {
             className="md:col-span-3 md:pl-6 md:border-l border-rule/12 flex flex-col justify-end"
           >
             <p className="text-ink-secondary leading-relaxed text-base max-w-xs">
-              I'm 21, third-year CS in Ahmedabad. I build agents in the hours I should be studying, and I write about the parts that broke.
+              I'm 21, fourth-year CS in Ahmedabad. I build agents in the hours I should be studying, and I write about the parts that broke.
             </p>
             <div className="mt-6 kicker">Currently building</div>
             <div className="mt-1 font-mono text-sm text-ink-primary">{LIVE_STATUS.building}</div>

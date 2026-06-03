@@ -17,7 +17,7 @@ export function AboutPage() {
             <section id="bio">
               <h2 className="display text-3xl mb-6">Bio</h2>
               <p className="text-lg leading-relaxed text-ink-primary">
-                I'm 21, third-year CS at Indus University in Ahmedabad. I build agents in the hours I should be studying, and the rest of the time I write about the parts that broke.
+                I'm 21, fourth-year CS at Indus University in Ahmedabad. I build agents in the hours I should be studying, and the rest of the time I write about the parts that broke.
               </p>
               <p className="mt-6 text-lg leading-relaxed text-ink-secondary">
                 My work has covered research workflows, voice interfaces, and the parts of retrieval that break when you push past the demo. I&rsquo;ve shipped four hackathon finals, two production systems, and one chatbot I&rsquo;m still embarrassed about.
