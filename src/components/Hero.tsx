@@ -53,34 +53,10 @@ export function Hero() {
           </motion.div>
         </div>
 
-        <motion.dl
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 pt-8 border-t border-rule/12"
-        >
-          <div>
-            <dt className="kicker">Shipped in 2026</dt>
-            <dd className="mt-1 font-mono text-2xl text-ink-primary tabular-nums">{LIVE_STATUS.shipped}</dd>
-          </div>
-          <div>
-            <dt className="kicker">Reading</dt>
-            <dd className="mt-1 font-mono text-sm text-ink-primary truncate">{LIVE_STATUS.reading}</dd>
-          </div>
-          <div>
-            <dt className="kicker">Latest essay</dt>
-            <dd className="mt-1 font-mono text-sm text-ink-primary">&rarr; <Link to="/blogs" className="hover:text-accent underline decoration-rule/32 underline-offset-4">View all</Link></dd>
-          </div>
-          <div>
-            <dt className="kicker">Working with</dt>
-            <dd className="mt-1 font-mono text-sm text-ink-primary">Founders · Teams</dd>
-          </div>
-        </motion.dl>
-
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-12 flex flex-wrap items-center gap-3"
         >
           <Link

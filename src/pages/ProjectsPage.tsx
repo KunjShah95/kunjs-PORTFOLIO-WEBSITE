@@ -53,14 +53,14 @@ export function ProjectsPage() {
             >
               <Kicker>{p.category}</Kicker>
               <h3 className="display text-xl mt-3 leading-tight flex-1">
-                <Link to={`/projects/${p.slug}`} className="group-hover:text-accent transition-colors">
+                <Link to={`/projects/${p.slug}`} className="group-hover:underline decoration-ink-primary/40 underline-offset-4">
                   {p.title}
                 </Link>
               </h3>
               <p className="mt-3 text-sm text-ink-secondary line-clamp-3">{p.desc}</p>
               <div className="mt-6 pt-4 border-t border-rule/12 flex items-center justify-between">
                 <div className="kicker">{p.impact}</div>
-                <Link to={`/projects/${p.slug}`} className="inline-flex items-center gap-1 text-xs group-hover:text-accent transition-colors">
+                <Link to={`/projects/${p.slug}`} className="inline-flex items-center gap-1 text-xs">
                   Case study <ArrowUpRight className="w-3 h-3" />
                 </Link>
               </div>

@@ -45,11 +45,24 @@ export function Footer() {
                 <br />
                 whole site.
               </h2>
-              <p className="mt-8 text-ink-secondary max-w-prose text-lg leading-relaxed">
+
+              {/* Pull quote — the intentional editorial moment. From B001, the lead essay. */}
+              <blockquote className="mt-12 md:mt-16 pl-6 border-l-2 border-ink-primary/40 max-w-3xl">
+                <p className="font-display italic text-2xl md:text-4xl leading-[1.15] text-ink-primary">
+                  &ldquo;Autonomy is easy.
+                  <br />
+                  Reliability is hard.&rdquo;
+                </p>
+                <footer className="mt-6 font-mono text-xs text-ink-tertiary uppercase tracking-kicker">
+                  &mdash; on shipping production agents, JAN 2026
+                </footer>
+              </blockquote>
+
+              <p className="mt-12 text-ink-secondary max-w-prose text-lg leading-relaxed">
                 Built by hand in Ahmedabad. No CMS, no analytics on you, no cookie banner. If something here is wrong,{' '}
                 <a
                   href="mailto:kkshah20050@gmail.com"
-                  className="text-ink-primary underline decoration-accent decoration-2 underline-offset-4 hover:text-accent transition-colors"
+                  className="text-ink-primary underline decoration-ink-primary/30 decoration-2 underline-offset-4 hover:decoration-ink-primary/60 transition-colors"
                 >
                   tell me
                 </a>
@@ -99,7 +112,7 @@ export function Footer() {
                 rel={link.external ? 'noopener noreferrer' : undefined}
                 className="group inline-flex items-center gap-2 px-3 py-2 rounded-md border border-rule/12 hover:border-rule/32 hover:bg-elevated/50 transition-all duration-base"
               >
-                {link.icon && <link.icon className="w-3.5 h-3.5 text-ink-tertiary group-hover:text-accent transition-colors" />}
+                {link.icon && <link.icon className="w-3.5 h-3.5 text-ink-tertiary group-hover:text-ink-primary transition-colors" />}
                 <span className="font-mono text-xs text-ink-tertiary group-hover:text-ink-primary transition-colors">
                   {link.label}
                 </span>

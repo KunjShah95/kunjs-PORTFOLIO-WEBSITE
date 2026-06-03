@@ -41,7 +41,7 @@ export function LabsPage() {
               <Kicker>{l.status ?? 'Experiment'}</Kicker>
               <h3 className="display text-xl mt-3 leading-tight flex-1">
                 {'url' in l && l.url ? (
-                  <a href={l.url as string} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                  <a href={l.url as string} target="_blank" rel="noopener noreferrer" className="hover:underline decoration-ink-primary/40 underline-offset-4">
                     {l.title}
                   </a>
                 ) : (

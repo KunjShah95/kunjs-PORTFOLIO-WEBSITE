@@ -18,10 +18,10 @@ export function ContactPage() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center"
         >
-          <div className="kicker text-accent">Get in touch</div>
+          <div className="kicker">Get in touch</div>
           <h1 className="display text-5xl md:text-7xl mt-4 leading-[0.95] tracking-tightest max-w-3xl">
             The fastest way to reach me is{' '}
-            <a href="mailto:kkshah20050@gmail.com" className="text-accent hover:underline">email</a>.
+            <a href="mailto:kkshah20050@gmail.com" className="text-ink-primary underline decoration-ink-primary/30 decoration-2 underline-offset-8 hover:decoration-ink-primary/60 transition-colors">email</a>.
           </h1>
           <p className="mt-8 text-lg text-ink-secondary max-w-2xl leading-relaxed">
             I&rsquo;m currently available for short-term projects, contract work, and full-time roles. I respond to most emails within 24 hours. For longer briefs, please include scope, timeline, and what success looks like.
@@ -39,11 +39,11 @@ export function ContactPage() {
             >
               <div>
                 <div className="kicker">{m.label}</div>
-                <div className={`font-mono text-lg mt-2 ${m.primary ? 'text-accent' : 'text-ink-primary'}`}>
+                <div className={`font-mono text-lg mt-2 ${m.primary ? 'text-ink-primary font-medium' : 'text-ink-secondary'}`}>
                   {m.value}
                 </div>
               </div>
-              <ArrowUpRight className="w-5 h-5 text-ink-tertiary group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              <ArrowUpRight className="w-5 h-5 text-ink-tertiary group-hover:text-ink-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
             </a>
           ))}
         </div>

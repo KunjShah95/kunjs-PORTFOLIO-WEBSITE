@@ -79,7 +79,7 @@ export function AboutPage() {
                         </span>
                         {Icon && (
                           <Icon
-                            className="w-5 h-5 text-ink-tertiary group-hover:text-accent transition-colors duration-base ease-out-soft"
+                            className="w-5 h-5 text-ink-tertiary group-hover:text-ink-primary transition-colors duration-base ease-out-soft"
                             strokeWidth={1.5}
                             aria-hidden
                           />
@@ -109,7 +109,7 @@ export function AboutPage() {
 
                       <span
                         aria-hidden
-                        className="absolute top-0 left-0 h-px w-0 bg-accent group-hover:w-full transition-all duration-slow ease-out-soft"
+                        className="absolute top-0 left-0 h-px w-0 bg-ink-primary group-hover:w-full transition-all duration-slow ease-out-soft"
                       />
                     </article>
                   );

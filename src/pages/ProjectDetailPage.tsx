@@ -23,7 +23,7 @@ export function ProjectDetailPage() {
             <ArrowLeft className="w-3.5 h-3.5" /> All projects
           </Link>
           {project.demo && (
-            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-accent hover:underline">
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-primary underline decoration-ink-primary/30 underline-offset-4 hover:decoration-ink-primary/60">
               Live <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           )}

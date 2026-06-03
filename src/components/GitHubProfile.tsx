@@ -315,7 +315,7 @@ export function GitHubProfile() {
   return (
     <section ref={sectionRef} id="github" className="border-y border-rule/12">
       <div className="max-w-manifest mx-auto px-6 py-24 md:py-32">
-        <SectionLabel number="06" label="Open source" />
+        <SectionLabel number="03" label="Open source" />
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
           <h2 className="md:col-span-8 display text-4xl md:text-5xl">
@@ -328,7 +328,7 @@ export function GitHubProfile() {
                 href={`https://github.com/${GITHUB_USERNAME}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ink-primary underline decoration-accent decoration-2 underline-offset-4 hover:text-accent transition-colors"
+                className="text-ink-primary underline decoration-ink-primary/30 decoration-2 underline-offset-4 hover:decoration-ink-primary/60 transition-colors"
               >
                 github.com/{GITHUB_USERNAME}
               </a>
@@ -529,7 +529,7 @@ export function GitHubProfile() {
                   <Kicker className="block mb-3">
                     pushed {formatPushedDate(repo.pushed_at)}
                   </Kicker>
-                  <div className="font-mono text-base text-ink-primary group-hover:text-accent transition-colors break-all mb-3">
+                  <div className="font-mono text-base text-ink-primary group-hover:underline decoration-ink-primary/40 underline-offset-4 break-all mb-3 transition-colors">
                     {repo.name}
                   </div>
                   {repo.description && (
@@ -561,7 +561,7 @@ export function GitHubProfile() {
                   </div>
                   <span
                     aria-hidden
-                    className="absolute top-0 left-0 h-px w-0 bg-accent group-hover:w-full transition-all duration-slow ease-out-soft"
+                    className="absolute top-0 left-0 h-px w-0 bg-ink-primary group-hover:w-full transition-all duration-slow ease-out-soft"
                   />
                 </a>
               ))}

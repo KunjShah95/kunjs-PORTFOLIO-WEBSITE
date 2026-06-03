@@ -49,7 +49,7 @@ export function FeaturedProjects() {
                 )}
               </div>
               <h3 className="display text-3xl md:text-4xl lg:text-5xl leading-[1.05] max-w-xl">
-                <Link to={`/projects/${hero.slug}`} className="hover:text-accent transition-colors">
+                <Link to={`/projects/${hero.slug}`} className="hover:underline decoration-ink-primary/30 underline-offset-8 decoration-1">
                   {hero.title}
                 </Link>
               </h3>
@@ -73,7 +73,7 @@ export function FeaturedProjects() {
               )}
               <Link
                 to={`/projects/${hero.slug}`}
-                className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink-primary group-hover:text-accent transition-colors"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink-primary self-start"
               >
                 Read case study
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -95,7 +95,7 @@ export function FeaturedProjects() {
                 {String(i + 2).padStart(2, '0')} &middot; {p.category ?? 'Project'}
               </Kicker>
               <h3 className="display text-xl md:text-2xl leading-tight flex-1">
-                <Link to={`/projects/${p.slug}`} className="hover:text-accent transition-colors">
+                <Link to={`/projects/${p.slug}`} className="hover:underline decoration-ink-primary/30 underline-offset-4 decoration-1">
                   {p.title}
                 </Link>
               </h3>
@@ -110,7 +110,7 @@ export function FeaturedProjects() {
                 )}
                 <Link
                   to={`/projects/${p.slug}`}
-                  className="inline-flex items-center gap-1 text-xs text-ink-primary group-hover:text-accent transition-colors ml-auto"
+                  className="inline-flex items-center gap-1 text-xs text-ink-primary ml-auto"
                 >
                   Read
                   <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

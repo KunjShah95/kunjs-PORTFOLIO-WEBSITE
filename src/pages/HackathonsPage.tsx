@@ -20,7 +20,7 @@ export function HackathonsPage() {
                 {h.event && <span className="font-mono text-xs text-ink-tertiary">{h.event ?? h.name}</span>}
               </div>
               <h3 className="display text-2xl mt-2">{h.title ?? h.name}</h3>
-              <div className="mt-2 flex flex-wrap items-center gap-3 font-mono text-sm text-accent">
+              <div className="mt-2 flex flex-wrap items-center gap-3 font-mono text-sm text-ink-primary">
                 {h.placement && <span>{h.placement}</span>}
                 {h.team && (
                   <>

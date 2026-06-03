@@ -47,7 +47,7 @@ export function BlogsPage() {
                         <div className="font-mono text-xs text-ink-tertiary mt-1">{blog.date}</div>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="display text-2xl group-hover:text-accent transition-colors leading-tight">{blog.title}</h3>
+                        <h3 className="display text-2xl group-hover:underline decoration-ink-primary/40 underline-offset-4 leading-tight">{blog.title}</h3>
                         <p className="mt-2 text-sm text-ink-secondary line-clamp-2">{blog.excerpt}</p>
                       </div>
                       <div className="md:w-16 shrink-0 flex md:justify-end items-start">

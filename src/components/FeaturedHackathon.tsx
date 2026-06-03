@@ -25,7 +25,7 @@ export function FeaturedHackathon() {
           >
             <div className="kicker">{eventLabel} · {featured.year}</div>
             <h2 className="display text-4xl md:text-5xl mt-3 leading-tight">
-              <Link to="/hackathons" className="hover:text-accent transition-colors">
+              <Link to="/hackathons" className="hover:underline decoration-ink-primary/30 underline-offset-8 decoration-1">
                 {name}
               </Link>
             </h2>
@@ -54,7 +54,7 @@ export function FeaturedHackathon() {
               <div>
                 <dt className="kicker">View all</dt>
                 <dd className="font-mono text-sm mt-1">
-                  <Link to="/hackathons" className="text-accent hover:underline">&rarr; {HACKATHONS.length} entries</Link>
+                  <Link to="/hackathons" className="text-ink-primary hover:underline">&rarr; {HACKATHONS.length} entries</Link>
                 </dd>
               </div>
             </dl>
@@ -67,9 +67,9 @@ export function FeaturedHackathon() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-10"
           >
-            <Link to="/hackathons" className="group inline-flex items-center gap-2 px-6 h-12 rounded-md border border-rule/12 bg-paper hover:border-accent transition-colors">
-              <span className="font-mono text-sm text-ink-secondary group-hover:text-accent transition-colors">Open case study</span>
-              <ArrowUpRight className="w-4 h-4 text-ink-tertiary group-hover:text-accent transition-colors" />
+            <Link to="/hackathons" className="group inline-flex items-center gap-2 px-6 h-12 rounded-md border border-rule/12 bg-paper hover:border-ink-primary/40 transition-colors">
+              <span className="font-mono text-sm text-ink-secondary group-hover:text-ink-primary transition-colors">Open case study</span>
+              <ArrowUpRight className="w-4 h-4 text-ink-tertiary group-hover:text-ink-primary transition-colors" />
             </Link>
           </motion.div>
         </div>

@@ -38,7 +38,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
       >
         <div className="max-w-manifest mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group cursor-pointer">
-            <span className="font-display text-2xl tracking-tightest group-hover:text-accent transition-colors duration-base">Kunj Shah</span>
+            <span className="font-display text-2xl tracking-tightest transition-colors duration-base">Kunj Shah</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8" aria-label="Primary">
@@ -59,7 +59,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
                     {isActive && (
                       <motion.span
                         layoutId="nav-underline"
-                        className="absolute -bottom-1.5 left-0 right-0 h-px bg-accent"
+                        className="absolute -bottom-1.5 left-0 right-0 h-px bg-ink-primary"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -127,7 +127,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
                     className={({ isActive }) =>
                       clsx(
                         'py-3 font-display text-3xl border-b border-rule/12',
-                        isActive ? 'text-accent' : 'text-ink-primary'
+                        isActive ? 'text-ink-primary' : 'text-ink-secondary'
                       )
                     }
                   >

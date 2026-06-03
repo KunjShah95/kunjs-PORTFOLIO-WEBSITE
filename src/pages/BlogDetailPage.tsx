@@ -43,7 +43,7 @@ export function BlogDetailPage() {
       <footer className="border-t border-rule/12 py-16">
         <div className="max-w-prose mx-auto px-6">
           <div className="kicker">Continue reading</div>
-          <Link to="/blogs" className="display text-2xl mt-3 inline-block hover:text-accent transition-colors">
+          <Link to="/blogs" className="display text-2xl mt-3 inline-block hover:underline decoration-ink-primary/40 underline-offset-4">
             More essays &rarr;
           </Link>
         </div>
