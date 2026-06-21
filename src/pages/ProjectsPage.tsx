@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { PROJECTS } from '../data/portfolio';
 import { PageHeader } from '../components/ui/PageHeader';
 import { Kicker } from '../components/ui/Kicker';
+import { BentoGrid, BentoCard } from '../components/bento';
+import { useReveal } from '../hooks/useReveal';
 
 const FILTERS = ['All', 'AI Agents', 'RAG', 'Voice', 'Infra', 'Open Source'];
 
@@ -13,6 +14,7 @@ export function ProjectsPage() {
   const filtered = active === 'All'
     ? PROJECTS
     : PROJECTS.filter((p) => p.category === active);
+  const { ref, isVisible } = useReveal({ threshold: 0.1 });
 
   return (
     <>
@@ -23,7 +25,7 @@ export function ProjectsPage() {
         center
       />
 
-      <section className="max-w-manifest mx-auto px-6 py-16">
+      <section ref={ref} className="max-w-manifest mx-auto px-6 py-16">
         <div className="flex flex-wrap gap-2 mb-12 pb-8 border-b border-rule/12 items-center">
           {FILTERS.map((f) => (
             <button
@@ -41,32 +43,27 @@ export function ProjectsPage() {
           <div className="ml-auto kicker self-center">{filtered.length} of {PROJECTS.length}</div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule/12">
-          {filtered.map((p, i) => (
-            <motion.article
-              key={p.slug}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: (i % 3) * 0.06 }}
-              className="bg-paper p-6 flex flex-col group"
-            >
-              <Kicker>{p.category}</Kicker>
-              <h3 className="display text-xl mt-3 leading-tight flex-1">
-                <Link to={`/projects/${p.slug}`} className="group-hover:underline decoration-ink-primary/40 underline-offset-4">
-                  {p.title}
-                </Link>
-              </h3>
-              <p className="mt-3 text-sm text-ink-secondary line-clamp-3">{p.desc}</p>
-              <div className="mt-6 pt-4 border-t border-rule/12 flex items-center justify-between">
-                <div className="kicker">{p.impact}</div>
-                <Link to={`/projects/${p.slug}`} className="inline-flex items-center gap-1 text-xs">
-                  Case study <ArrowUpRight className="w-3 h-3" />
-                </Link>
-              </div>
-            </motion.article>
-          ))}
-        </div>
+        {isVisible && (
+          <BentoGrid cols={3} gap="sm" className="border border-rule/12">
+            {filtered.map((p) => (
+              <BentoCard key={p.slug} variant="flat" hover="translate" className="p-6 flex flex-col group">
+                <Kicker>{p.category}</Kicker>
+                <h3 className="display text-xl mt-3 leading-tight flex-1">
+                  <Link to={`/projects/${p.slug}`} className="group-hover:underline decoration-ink-primary/40 underline-offset-4">
+                    {p.title}
+                  </Link>
+                </h3>
+                <p className="mt-3 text-sm text-ink-secondary line-clamp-3">{p.desc}</p>
+                <div className="mt-6 pt-4 border-t border-rule/12 flex items-center justify-between">
+                  <div className="kicker">{p.impact}</div>
+                  <Link to={`/projects/${p.slug}`} className="inline-flex items-center gap-1 text-xs">
+                    Case study <ArrowUpRight className="w-3 h-3" />
+                  </Link>
+                </div>
+              </BentoCard>
+            ))}
+          </BentoGrid>
+        )}
       </section>
     </>
   );

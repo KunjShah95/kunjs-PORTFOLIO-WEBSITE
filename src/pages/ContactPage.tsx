@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { BackgroundBeams } from '../components/effects/BackgroundBeams';
+import { GradientOrb } from '../components/effects/GradientOrb';
+import { BentoGrid, BentoCard } from '../components/bento';
 
 const METHODS = [
   { label: 'Email', value: 'kkshah2005@gmail.com', href: 'mailto:kkshah2005@gmail.com', primary: true },
@@ -11,8 +14,10 @@ const METHODS = [
 
 export function ContactPage() {
   return (
-    <section className="py-24 md:py-32">
-      <div className="max-w-manifest mx-auto px-6">
+    <section className="relative py-24 md:py-32 overflow-hidden">
+      <BackgroundBeams count={2} />
+      <GradientOrb size={350} className="top-[-80px] right-[-60px]" />
+      <div className="relative max-w-manifest mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -29,24 +34,28 @@ export function ContactPage() {
           </p>
         </motion.div>
 
-        <div className="mt-24 max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-rule/12">
-          {METHODS.map((m) => (
-            <a
-              key={m.label}
-              href={m.href}
-              target={m.href.startsWith('http') ? '_blank' : undefined}
-              rel="noopener noreferrer"
-              className="group bg-paper p-8 flex items-center justify-between hover:bg-elevated transition-colors"
-            >
-              <div>
-                <div className="kicker">{m.label}</div>
-                <div className={`font-mono text-lg mt-2 ${m.primary ? 'text-ink-primary font-medium' : 'text-ink-secondary'}`}>
-                  {m.value}
-                </div>
-              </div>
-              <ArrowUpRight className="w-5 h-5 text-ink-tertiary group-hover:text-ink-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-            </a>
-          ))}
+        <div className="mt-24 max-w-2xl mx-auto">
+          <BentoGrid cols={2} gap="sm" className="border border-rule/12">
+            {METHODS.map((m) => (
+              <a
+                key={m.label}
+                href={m.href}
+                target={m.href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <BentoCard variant="flat" hover="translate" className="p-8 flex items-center justify-between">
+                  <div>
+                    <div className="kicker">{m.label}</div>
+                    <div className={`font-mono text-lg mt-2 ${m.primary ? 'text-ink-primary font-medium' : 'text-ink-secondary'}`}>
+                      {m.value}
+                    </div>
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-ink-tertiary group-hover:text-ink-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </BentoCard>
+              </a>
+            ))}
+          </BentoGrid>
         </div>
 
         <div className="mt-24 max-w-2xl mx-auto pt-12 border-t border-rule/12 text-center">

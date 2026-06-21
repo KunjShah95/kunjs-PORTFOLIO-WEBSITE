@@ -4,6 +4,7 @@ import { Footer } from './Footer'
 import { StickyCTA } from './StickyCTA'
 import { CommandMenu } from './CommandMenu'
 import { AIAssistant } from './AIAssistant'
+import { FloatingDock } from './FloatingDock'
 
 interface LayoutProps {
    children: React.ReactNode
@@ -32,6 +33,7 @@ export function Layout({ children }: LayoutProps) {
 
          <CommandMenu open={isCommandOpen} setOpen={setIsCommandOpen} />
          <AIAssistant />
+         <FloatingDock />
       </div>
    )
 }
