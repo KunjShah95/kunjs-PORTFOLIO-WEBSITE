@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { BackgroundBeams } from './effects/BackgroundBeams';
+import { GradientOrb } from './effects/GradientOrb';
 
 export function FinalCTA() {
   return (
     <section className="relative bg-ink-primary text-paper overflow-hidden">
+      <BackgroundBeams count={3} className="opacity-30" />
+      <GradientOrb size={500} color="rgba(217,78,32,0.08)" className="bottom-[-120px] left-[-100px]" />
       <div className="relative max-w-manifest mx-auto px-6 py-32 md:py-48">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -81,17 +85,11 @@ export function FinalCTA() {
                 <span className="font-mono text-[11px] text-paper/60 group-hover:text-paper/90 transition-colors">Twitter</span>
               </a>
             </div>
-            <a
-              href="mailto:kkshah2005@gmail.com"
-              className="group inline-flex items-center justify-center gap-2 p-3 rounded-md border border-paper/15 hover:border-paper/40 hover:bg-paper/5 transition-all duration-base"
-            >
-              <Mail className="w-4 h-4 text-paper/70 group-hover:text-paper transition-colors" />
-              <span className="font-mono text-xs text-paper/60 group-hover:text-paper/90 transition-colors">Email</span>
-            </a>
           </div>
         </motion.div>
 
-        {/* Bottom colophon line */}          <div className="mt-20 pt-8 border-t border-paper/15 flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono text-xs text-paper/70">
+        {/* Bottom colophon line */}
+        <div className="mt-20 pt-8 border-t border-paper/15 flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono text-xs text-paper/70">
           <div>&copy; 2026 Kunj Shah &middot; Built in Ahmedabad</div>
           <div>Designed &amp; shipped by hand &middot; v.2026</div>
         </div>

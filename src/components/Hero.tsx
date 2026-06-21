@@ -2,10 +2,18 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, MapPin } from 'lucide-react';
 import { LIVE_STATUS, IDENTITY } from '../data/portfolio';
+import { BackgroundBeams } from './effects/BackgroundBeams'
+import { GradientOrb } from './effects/GradientOrb'
+import { TextReveal } from './effects/TextReveal'
+import { useParallax } from '../hooks/useParallax'
 
 export function Hero() {
+  const { ref: parallaxRef, y: parallaxY } = useParallax({ offset: 0.1 })
+
   return (
-    <section className="relative pt-20 pb-24 md:pt-32 md:pb-32 border-b border-rule/12">
+    <section className="relative pt-20 pb-24 md:pt-32 md:pb-32 border-b border-rule/12 overflow-hidden">
+      <BackgroundBeams count={2} />
+      <GradientOrb size={400} className="top-[-120px] right-[-80px]" />
       <div className="max-w-manifest mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: -4 }}
@@ -28,23 +36,17 @@ export function Hero() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          <TextReveal
+            text="I build agents that actually ship."
+            as="h1"
             className="md:col-span-9 display text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] leading-[0.95] tracking-tightest"
-          >
-            I build agents
-            <br />
-            that{' '}
-            <em className="italic text-accent underline decoration-accent decoration-[1.5px] underline-offset-[10px]">
-              actually ship
-            </em>
-            .
-          </motion.h1>
+            delay={0.3}
+          />
 
           {/* Portrait — DevFest Baroda, the 21-year-old behind the h1 */}
           <motion.figure
+            ref={parallaxRef as React.Ref<HTMLElement>}
+            style={{ y: parallaxY }}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -68,14 +70,12 @@ export function Hero() {
         </div>
 
         {/* Sub-headline — the lede, now wider since the photo has the 3-col */}
-        <motion.p
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+        <TextReveal
+          text="I'm 21, fourth-year CS in Ahmedabad. I build production agents — retrieval, orchestration, and the backend underneath — and I write about the parts that broke."
+          as="p"
           className="mt-10 md:mt-12 text-ink-secondary leading-relaxed text-lg md:text-xl max-w-2xl"
-        >
-          I&rsquo;m 21, fourth-year CS in Ahmedabad. I build production agents — retrieval, orchestration, and the backend underneath — and I write about the parts that broke.
-        </motion.p>
+          delay={0.5}
+        />
 
         <motion.div
           initial={{ opacity: 0, y: 6 }}

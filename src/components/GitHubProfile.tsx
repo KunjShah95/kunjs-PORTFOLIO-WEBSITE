@@ -10,6 +10,8 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { IDENTITY } from '../data/portfolio'
 import { SectionLabel } from './ui/SectionLabel'
 import { Kicker } from './ui/Kicker'
+import { useReveal } from '../hooks/useReveal'
+import { BentoGrid, BentoCard } from './bento'
 
 const GITHUB_USERNAME = IDENTITY.github_username
 
@@ -198,7 +200,6 @@ export function GitHubProfile() {
   const [selectedYear, setSelectedYear] = useState(currentYear)
   const [user, setUser] = useState<GitHubUser | null>(null)
   const [repos, setRepos] = useState<GitHubRepo[]>([])
-  const [allRepos, setAllRepos] = useState<GitHubRepo[]>([])
   const [contributions, setContributions] = useState<ContributionDay[]>([])
   const [totalContribs, setTotalContribs] = useState(0)
   const [totalStars, setTotalStars] = useState(0)
@@ -233,7 +234,6 @@ export function GitHubProfile() {
         const stars = fetched.reduce((s, r) => s + r.stargazers_count, 0)
         setTotalStars(stars)
         const sorted = fetched.sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
-        setAllRepos(sorted)
         setRepos(sorted.slice(0, 6))
       }
       setLastUpdated(new Date())
@@ -287,19 +287,6 @@ export function GitHubProfile() {
   const heroCount = useCountUp(totalContribs, 1.6, heroInView)
 
   const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null)
-
-  const langStats = (() => {
-    const map: Record<string, number> = {}
-    allRepos.forEach((r) => {
-      if (r.language) map[r.language] = (map[r.language] || 0) + 1
-    })
-    const total = Object.values(map).reduce((s, v) => s + v, 0)
-    if (total === 0) return [] as { lang: string; pct: number }[]
-    return Object.entries(map)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 8)
-      .map(([lang, cnt]) => ({ lang, pct: (cnt / total) * 100 }))
-  })()
 
   // Single hero stat line: replaces the 4-col grid with a kicker+number strip
   // so the heatmap is the only visual focus on this page.
@@ -471,29 +458,6 @@ export function GitHubProfile() {
           </div>
         </div>
 
-        {/* Languages */}
-        {langStats.length > 0 && (
-          <div className="mb-20">
-            <Kicker accent>Languages</Kicker>
-            <h3 className="display text-3xl md:text-4xl mt-3 mb-8">
-              {langStats.length} languages, ranked.
-            </h3>
-            <div className="flex flex-wrap items-baseline gap-x-6 gap-y-3 font-mono text-sm border-t border-rule/12 pt-6">
-              {langStats.map((s, i) => (
-                <span key={s.lang} className="inline-flex items-baseline gap-2">
-                  <span
-                    className="inline-block w-2 h-2 rounded-full flex-shrink-0 translate-y-[-2px]"
-                    style={{ backgroundColor: LANGUAGE_COLORS[s.lang] ?? '#888' }}
-                  />
-                  <span className="text-ink-primary">{s.lang}</span>
-                  <span className="text-ink-tertiary tabular-nums">{s.pct.toFixed(0)}%</span>
-                  {i < langStats.length - 1 && <span className="text-ink-quaternary/60 ml-4">/</span>}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* Recent repos */}
         <div>
           <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
@@ -517,55 +481,57 @@ export function GitHubProfile() {
           </div>
 
           {repos.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-rule/12 border border-rule/12">
+            <BentoGrid cols={3} gap="sm" className="border border-rule/12">
               {repos.slice(0, 6).map((repo) => (
                 <a
                   key={repo.id}
                   href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative block bg-paper p-6 md:p-8 transition-colors duration-base ease-out-soft hover:bg-elevated"
+                  className="group relative block"
                 >
-                  <Kicker className="block mb-3">
-                    pushed {formatPushedDate(repo.pushed_at)}
-                  </Kicker>
-                  <div className="font-mono text-base text-ink-primary group-hover:underline decoration-ink-primary/40 underline-offset-4 break-all mb-3 transition-colors">
-                    {repo.name}
-                  </div>
-                  {repo.description && (
-                    <p className="text-sm text-ink-secondary leading-relaxed line-clamp-3 mb-6 min-h-[3.75rem]">
-                      {repo.description}
-                    </p>
-                  )}
-                  <div className="flex items-center gap-4 font-mono text-xs text-ink-tertiary">
-                    {repo.language && (
-                      <span className="inline-flex items-center gap-1.5">
-                        <span
-                          className="inline-block w-1.5 h-1.5 rounded-full"
-                          style={{ backgroundColor: LANGUAGE_COLORS[repo.language] ?? '#888' }}
-                        />
-                        {repo.language}
-                      </span>
+                  <BentoCard variant="flat" hover="translate" className="p-6 md:p-8 flex flex-col h-full">
+                    <Kicker className="block mb-3">
+                      pushed {formatPushedDate(repo.pushed_at)}
+                    </Kicker>
+                    <div className="font-mono text-base text-ink-primary group-hover:underline decoration-ink-primary/40 underline-offset-4 break-all mb-3 transition-colors">
+                      {repo.name}
+                    </div>
+                    {repo.description && (
+                      <p className="text-sm text-ink-secondary leading-relaxed line-clamp-3 mb-6 min-h-[3.75rem]">
+                        {repo.description}
+                      </p>
                     )}
-                    <span className="inline-flex items-center gap-1">
-                      <Star className="w-3 h-3" />
-                      {repo.stargazers_count}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <GitFork className="w-3 h-3" />
-                      {repo.forks_count}
-                    </span>
-                    <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                  <span
-                    aria-hidden
-                    className="absolute top-0 left-0 h-px w-0 bg-ink-primary group-hover:w-full transition-all duration-slow ease-out-soft"
-                  />
+                    <div className="flex items-center gap-4 font-mono text-xs text-ink-tertiary mt-auto">
+                      {repo.language && (
+                        <span className="inline-flex items-center gap-1.5">
+                          <span
+                            className="inline-block w-1.5 h-1.5 rounded-full"
+                            style={{ backgroundColor: LANGUAGE_COLORS[repo.language] ?? '#888' }}
+                          />
+                          {repo.language}
+                        </span>
+                      )}
+                      <span className="inline-flex items-center gap-1">
+                        <Star className="w-3 h-3" />
+                        {repo.stargazers_count}
+                      </span>
+                      <span className="inline-flex items-center gap-1">
+                        <GitFork className="w-3 h-3" />
+                        {repo.forks_count}
+                      </span>
+                      <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                    <span
+                      aria-hidden
+                      className="absolute top-0 left-0 h-px w-0 bg-ink-primary group-hover:w-full transition-all duration-slow ease-out-soft"
+                    />
+                  </BentoCard>
                 </a>
               ))}
-            </div>
+            </BentoGrid>
           ) : repoLoading ? (
             <div className="flex items-center justify-center py-20 text-sm text-ink-tertiary font-mono">
               <Loader2 className="w-4 h-4 animate-spin mr-2" />
