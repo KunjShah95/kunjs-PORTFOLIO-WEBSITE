@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { PROJECTS, HACKATHONS } from '../data/portfolio';
 import { SectionLabel } from './ui/SectionLabel';
@@ -10,7 +9,7 @@ import { BentoGrid, BentoCard } from './bento';
 export function FeaturedProjects() {
   const list = PROJECTS.slice(0, 3);
   const [hero, ...supporting] = list;
-  const { ref, isVisible } = useReveal({ threshold: 0.1 });
+  const { ref, inView } = useReveal({ amount: 0.1 });
 
   return (
     <section ref={ref} id="work" className="py-24 md:py-32 border-b border-rule/12">
@@ -29,11 +28,11 @@ export function FeaturedProjects() {
           </div>
         </div>
 
-        {isVisible && (
-          <BentoGrid cols={3} gap="sm" className="border border-rule/12">
+        {inView && (
+          <BentoGrid cols={3} className="border border-rule/12">
             {/* HERO — bento card spanning 2 cols */}
             {hero && (
-              <BentoCard variant="flat" hover="translate" className="p-8 md:p-10 flex flex-col md:col-span-2 md:row-span-2 min-h-[360px] md:min-h-[480px]">
+              <BentoCard variant="default" className="p-8 md:p-10 flex flex-col md:col-span-2 md:row-span-2 min-h-[360px] md:min-h-[480px]">
                 <div className="flex items-center justify-between mb-6">
                   <Kicker accent>
                     {String(1).padStart(2, '0')} &middot; {hero.category ?? 'Project'}
@@ -79,7 +78,7 @@ export function FeaturedProjects() {
 
             {/* SUPPORTING — two compact sidebar cards */}
             {supporting.map((p, i) => (
-              <BentoCard key={p.slug} variant="flat" hover="translate" className="p-6 md:p-7 flex flex-col">
+              <BentoCard key={p.slug} variant="default" className="p-6 md:p-7 flex flex-col">
                 <Kicker className="mb-3">
                   {String(i + 2).padStart(2, '0')} &middot; {p.category ?? 'Project'}
                 </Kicker>

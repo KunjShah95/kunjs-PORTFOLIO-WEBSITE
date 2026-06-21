@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { ArrowUpRight, Github, Trophy, Rocket, MessageSquareWarning } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useReveal } from '../hooks/useReveal'
@@ -12,7 +11,7 @@ const STATS = [
 ]
 
 export function Receipts() {
-  const { ref, isVisible } = useReveal({ threshold: 0.15 })
+  const { ref, inView } = useReveal({ amount: 0.15 })
 
   return (
     <section ref={ref} className="border-y border-rule/12 bg-elevated/30">
@@ -25,12 +24,12 @@ export function Receipts() {
             </p>
           </div>
         </div>
-        {isVisible && (
-          <BentoGrid cols={4} gap="sm">
-            {STATS.map((s, i) => {
+        {inView && (
+          <BentoGrid cols={4}>
+            {STATS.map((s) => {
               const Icon = s.icon
               const inner = (
-                <BentoCard variant="outlined" hover="translate" className="p-6 flex flex-col gap-3 h-full">
+                <BentoCard variant="inset" className="p-6 flex flex-col gap-3 h-full">
                   <div className="flex items-center justify-between">
                     <Icon className="w-4 h-4 text-ink-tertiary group-hover:text-ink-primary transition-colors" />
                     <ArrowUpRight className="w-3.5 h-3.5 text-ink-quaternary group-hover:text-ink-primary transition-colors" />

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { clsx } from 'clsx'
 import {
-  LayoutDashboard, FolderOpen, User, BookOpen, Video, Cpu,
+  LayoutDashboard, FolderOpen, User, BookOpen, Cpu,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -18,7 +18,6 @@ const DOCK_ITEMS: DockItem[] = [
   { icon: FolderOpen, label: 'Projects', to: '/projects' },
   { icon: User, label: 'About', to: '/about' },
   { icon: BookOpen, label: 'Writing', to: '/blogs' },
-  { icon: Video, label: 'Videos', to: '/videos' },
   { icon: Cpu, label: 'Labs', to: '/labs' },
 ]
 

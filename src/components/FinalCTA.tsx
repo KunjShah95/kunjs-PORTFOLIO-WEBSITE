@@ -8,7 +8,7 @@ export function FinalCTA() {
   return (
     <section className="relative bg-ink-primary text-paper overflow-hidden">
       <BackgroundBeams count={3} className="opacity-30" />
-      <GradientOrb size={500} color="rgba(217,78,32,0.08)" className="bottom-[-120px] left-[-100px]" />
+      <GradientOrb size={500} className="bottom-[-120px] left-[-100px]" />
       <div className="relative max-w-manifest mx-auto px-6 py-32 md:py-48">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
