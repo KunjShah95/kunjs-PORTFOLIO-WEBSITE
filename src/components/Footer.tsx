@@ -1,4 +1,5 @@
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { BentoGrid, BentoCard } from './bento';
 
 const ELSEWHERE: Array<{ href: string; label: string; icon?: typeof Github; external?: boolean }> = [
   { href: 'https://github.com/KunjShah95',       label: 'KunjShah95 — main',     icon: Github, external: true },
@@ -71,27 +72,27 @@ export function Footer() {
         </div>
 
         {/* Bottom bar — copyright + social links */}
-        <div className="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="font-mono text-xs text-ink-tertiary">
-            &copy; {year} Kunj Shah
-          </div>
-
-          <nav aria-label="Social links" className="flex flex-wrap gap-2">
+        <div className="py-10 flex flex-col items-center gap-8">
+          <BentoGrid cols={3} className="w-auto">
             {ELSEWHERE.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
-                className="group inline-flex items-center gap-2 px-3 py-2 rounded-md border border-rule/12 hover:border-rule/32 hover:bg-elevated/50 transition-all duration-base"
               >
-                {link.icon && <link.icon className="w-3.5 h-3.5 text-ink-tertiary group-hover:text-ink-primary transition-colors" />}
-                <span className="font-mono text-xs text-ink-tertiary group-hover:text-ink-primary transition-colors">
-                  {link.label}
-                </span>
+                <BentoCard variant="inset" className="px-4 py-3 flex items-center gap-2">
+                  {link.icon && <link.icon className="w-3.5 h-3.5 text-ink-tertiary group-hover:text-ink-primary transition-colors" />}
+                  <span className="font-mono text-xs text-ink-tertiary group-hover:text-ink-primary transition-colors">
+                    {link.label}
+                  </span>
+                </BentoCard>
               </a>
             ))}
-          </nav>
+          </BentoGrid>
+          <div className="font-mono text-xs text-ink-tertiary">
+            &copy; {year} Kunj Shah
+          </div>
         </div>
       </div>
     </footer>
