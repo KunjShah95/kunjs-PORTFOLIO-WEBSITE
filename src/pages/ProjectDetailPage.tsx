@@ -41,26 +41,15 @@ export function ProjectDetailPage() {
             const u = new URL(project.videoUrl)
             const id = u.searchParams.get('v')
             return id ? (
-              <a
-                href={project.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group mb-12 block aspect-video overflow-hidden rounded-md border border-rule/12 bg-sunken relative"
-              >
-                <img
-                  src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
-                  alt={`${project.title} demo video`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+              <div className="mb-12 aspect-video overflow-hidden rounded-md border border-rule/12 bg-sunken">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`}
+                  title={`${project.title} demo video`}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
                 />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                  <div className="w-16 h-16 rounded-full bg-accent flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                    <svg viewBox="0 0 24 24" className="w-7 h-7 text-paper fill-current ml-0.5">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </div>
-              </a>
+              </div>
             ) : null
           })()}
           <div className="mb-10">
