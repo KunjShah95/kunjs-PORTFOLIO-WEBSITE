@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 import { clsx } from 'clsx';
 
 const NAV = [
@@ -69,7 +70,8 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
             <button
               onClick={onOpenCommand}
               className="hidden sm:inline-flex items-center gap-2 px-3 h-8 rounded-md border border-rule/12 text-ink-secondary hover:text-ink-primary hover:border-rule/32 transition-colors text-sm"

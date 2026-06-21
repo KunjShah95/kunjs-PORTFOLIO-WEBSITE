@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { PROJECTS, HACKATHONS } from '../data/portfolio';
+import { PROJECTS, HACKATHONS, IDENTITY } from '../data/portfolio';
 import { SectionLabel } from './ui/SectionLabel';
 import { Kicker } from './ui/Kicker';
 import { useReveal } from '../hooks/useReveal';
@@ -16,9 +16,9 @@ export function FeaturedProjects() {
       <div className="max-w-manifest mx-auto px-6">
         <SectionLabel number="01" label="Selected work" />
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-6">
           <h2 className="md:col-span-8 display text-4xl md:text-5xl">
-            Three things I built that I&rsquo;m proud of.
+            Things I&rsquo;ve shipped.
           </h2>
           <div className="md:col-span-4 flex md:justify-end items-end">
             <Link to="/projects" className="group inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-ink-primary">
@@ -26,6 +26,20 @@ export function FeaturedProjects() {
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
           </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-6 md:gap-10 pb-8 mb-8 border-b border-rule/12 font-mono text-sm">
+          <span className="inline-flex items-center gap-2 text-ink-secondary">
+            <span className="text-ink-primary font-medium">{PROJECTS.length}</span> things shipped
+          </span>
+          <span className="text-ink-quaternary">/</span>
+          <span className="inline-flex items-center gap-2 text-ink-secondary">
+            <span className="text-ink-primary font-medium">{HACKATHONS.filter(h => h.placement === 'Finalist').length}</span> hackathon finals
+          </span>
+          <span className="text-ink-quaternary">/</span>
+          <span className="inline-flex items-center gap-2 text-ink-secondary">
+            Open source on <a href={`https://github.com/${IDENTITY.github_username}`} target="_blank" rel="noopener noreferrer" className="text-ink-primary underline decoration-ink-primary/30 underline-offset-4 hover:decoration-ink-primary/60">GitHub</a>
+          </span>
         </div>
 
         {inView && (

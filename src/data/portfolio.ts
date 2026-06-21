@@ -15,6 +15,19 @@ export const IDENTITY: UserIdentity = {
 
 export const PROJECTS: Project[] = [
     {
+        id: '12',
+        title: 'OfferGuard AI',
+        category: 'AI Career Platform',
+        desc: 'AI-powered job offer analysis. Paste a job description, offer letter, or recruiter chat and get instant insights on toxicity, burnout risk, salary fairness, ghost hiring, and negotiation strategy.',
+        tech: ['TANSTACK START', 'REACT 19', 'TAILWIND', 'GROQ', 'FIREBASE'],
+        github: 'https://github.com/KunjShah95/reverseinterview',
+        demo: 'https://offerchecker-pi.vercel.app/',
+        slug: 'offerguard-ai',
+        impact: 'Live',
+        problem: 'Job seekers receive opaque offer letters and recruiter messages that hide red flags around pay, culture, and ghost hiring risks.',
+        outcome: 'Reduced offer evaluation time from hours to seconds with multi-provider AI analysis and automated negotiation strategy generation.',
+    },
+    {
         id: '10',
         title: 'EquityLens',
         category: 'AI Ethics',

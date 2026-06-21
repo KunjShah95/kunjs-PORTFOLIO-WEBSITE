@@ -4,17 +4,13 @@ import { ArrowRight, ArrowUpRight, MapPin } from 'lucide-react';
 import { LIVE_STATUS, IDENTITY } from '../data/portfolio';
 import { BackgroundBeams } from './effects/BackgroundBeams'
 import { GradientOrb } from './effects/GradientOrb'
-import { TextReveal } from './effects/TextReveal'
-import { useParallax } from '../hooks/useParallax'
 
 export function Hero() {
-  const { ref: parallaxRef, y: parallaxY } = useParallax({ offset: 0.1 })
-
   return (
-    <section className="relative pt-20 pb-24 md:pt-32 md:pb-32 border-b border-rule/12 overflow-hidden">
-      <BackgroundBeams count={2} />
-      <GradientOrb size={400} className="top-[-120px] right-[-80px]" />
-      <div className="max-w-manifest mx-auto px-6">
+    <section className="relative min-h-screen flex items-center border-b border-rule/12 overflow-hidden">
+      <BackgroundBeams count={3} />
+      <GradientOrb size={500} className="top-[-150px] right-[-100px]" />
+      <div className="relative w-full max-w-manifest mx-auto px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
@@ -35,24 +31,56 @@ export function Hero() {
           </span>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
-          <TextReveal
-            text="I build agents that actually ship."
-            as="h1"
-            className="md:col-span-9 display text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] leading-[0.95] tracking-tightest"
-            delay={0.3}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+          <div className="md:col-span-8 flex flex-col justify-center">
+            <motion.h1
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="display text-[3.5rem] sm:text-[4.5rem] md:text-[6rem] leading-[0.95] tracking-tightest"
+            >
+              I ship the things
+              <br />
+              you need built.
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-8 text-ink-secondary leading-relaxed text-lg md:text-xl max-w-2xl"
+            >
+              AI agents, web apps, APIs, prototypes — you describe it, I build it. Whiteboard to production in weeks, not quarters.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="mt-10 flex flex-wrap items-center gap-3"
+            >
+              <Link
+                to="/projects"
+                className="group inline-flex items-center gap-2 px-6 h-12 rounded-md bg-accent text-accent-ink font-body text-sm font-medium hover:bg-accent-hover transition-colors duration-base ease-out-soft"
+              >
+                See what I&rsquo;ve built
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-2 px-6 h-12 rounded-md border border-rule text-ink-secondary font-body text-sm font-medium hover:border-accent hover:text-accent transition-colors"
+              >
+                Start a conversation
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+            </motion.div>
+          </div>
 
-          {/* Portrait — DevFest Baroda, the 21-year-old behind the h1 */}
           <motion.figure
-            ref={parallaxRef as React.Ref<HTMLElement>}
-            style={{ y: parallaxY }}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="md:col-span-3 md:row-span-2 flex flex-col items-stretch"
+            className="md:col-span-4 flex flex-col items-stretch"
           >
-            <div className="relative aspect-[4/5] overflow-hidden bg-sunken">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-sunken">
               <img
                 src={IDENTITY.profile_photo}
                 alt="Kunj Shah at DevFest Baroda 2025"
@@ -67,58 +95,7 @@ export function Hero() {
               DevFest Baroda, 2025
             </figcaption>
           </motion.figure>
-
-          {/* Sub-headline + building — sits next to the portrait */}
-          <div className="md:col-span-9 flex flex-col justify-end">
-            <TextReveal
-              text="I'm 21, fourth-year CS in Ahmedabad. I build production agents — retrieval, orchestration, and the backend underneath — and I write about the parts that broke."
-              as="p"
-              className="text-ink-secondary leading-relaxed text-lg md:text-xl max-w-2xl"
-              delay={0.5}
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1"
-            >
-              <div className="kicker">Currently building</div>
-              <span className="font-mono text-xs text-ink-quaternary">/</span>
-              <div className="font-mono text-sm text-ink-primary">{LIVE_STATUS.building}</div>
-            </motion.div>
-          </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
-          className="mt-10 flex flex-wrap items-center gap-3"
-        >
-          <Link
-            to="/projects"
-            className="group inline-flex items-center gap-2 px-6 h-12 rounded-md bg-inverse text-ink-inverse font-body text-sm font-medium hover:bg-accent transition-colors duration-base ease-out-soft"
-          >
-            See what I&rsquo;ve built
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-          <Link
-            to="/contact"
-            className="group inline-flex items-center gap-2 px-6 h-12 rounded-md border border-ink-primary/20 text-ink-primary font-body text-sm font-medium hover:border-ink-primary transition-colors"
-          >
-            Start a conversation
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.85 }}
-          className="mt-8 text-sm text-ink-tertiary max-w-2xl"
-        >
-          For founders, small teams, and the rare weekend project. Whiteboard to production in weeks, not quarters — agents, retrieval, and the backend to hold them up.
-        </motion.p>
       </div>
     </section>
   );

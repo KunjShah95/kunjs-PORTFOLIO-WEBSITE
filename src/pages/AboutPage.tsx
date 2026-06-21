@@ -11,7 +11,7 @@ export function AboutPage() {
       <PageHeader
         kicker="About"
         title="A short biography, written in first person."
-        lede="I build in the open and ship to small audiences. The short version: agents, retrieval, and the backend to make them real."
+        lede="I build things that ship, break, get fixed, and ship again. The short version: AI agents, web apps, APIs — and the backend to make them real."
         center
       />
 
@@ -20,19 +20,19 @@ export function AboutPage() {
             <section id="bio">
               <h2 className="display text-3xl mb-6">Bio</h2>
               <TextReveal
-                text="I'm 21, fourth-year CS at Indus University in Ahmedabad. Four hackathon finals, two production systems, one chatbot I still apologize for. I build agents in the hours I should be studying and write about the parts that broke."
+                text="I'm 22, fourth-year CS at Indus University in Ahmedabad. I ship things for founders and small teams — AI agents, web apps, APIs, prototypes. You describe it, I build it. Whiteboard to production in weeks, not quarters."
                 as="p"
                 className="text-lg leading-relaxed text-ink-primary"
                 delay={0.1}
               />
               <TextReveal
-                text="My work has covered research workflows, voice interfaces, and the parts of retrieval that break when you push past the demo. I've shipped four hackathon finals, two production systems, and one chatbot I'm still embarrassed about."
+                text="Four hackathon finals, two production systems, one chatbot I still apologize for. I build agents in the hours I should be studying and write about the parts that broke. My work has covered research workflows, voice interfaces, and the parts of retrieval that break when you push past the demo."
                 as="p"
                 className="mt-6 text-lg leading-relaxed text-ink-secondary"
                 delay={0.25}
               />
               <TextReveal
-                text="If you write to me, I write back. Most weeks I'm working with founders and small teams who need someone to take a system from whiteboard to production in a few weeks, not a few quarters."
+                text="If you write to me, I write back. Most weeks I'm working with founders and small teams who need someone to take a system from whiteboard to production in a few weeks. The best conversations start with 'I have an idea' — the rest we figure out along the way."
                 as="p"
                 className="mt-6 text-lg leading-relaxed text-ink-secondary"
                 delay={0.4}

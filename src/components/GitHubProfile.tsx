@@ -1,4 +1,3 @@
-import { useMotionValue, useSpring } from 'framer-motion'
 import {
   Star,
   GitFork,
@@ -6,26 +5,13 @@ import {
   ArrowUpRight,
   Clock,
 } from 'lucide-react'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { IDENTITY } from '../data/portfolio'
 import { SectionLabel } from './ui/SectionLabel'
 import { Kicker } from './ui/Kicker'
 import { BentoGrid, BentoCard } from './bento'
 
 const GITHUB_USERNAME = IDENTITY.github_username
-
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-// Light-mode cell palette for cream paper (#FAF6EE). Level 0 uses the sunken
-// token so empty days read as outlined cells; 1-4 step through burnt-orange
-// accent at increasing opacities. All values are visible on the cream surface.
-const CELL_STYLES = [
-  'bg-sunken',        // level 0 — empty day (visibly outlined)
-  'bg-accent/25',     // level 1 — quiet
-  'bg-accent/55',     // level 2 — building
-  'bg-accent/85',     // level 3 — strong
-  'bg-accent',        // level 4 — peak
-]
 
 const LANGUAGE_COLORS: Record<string, string> = {
   Python:               '#3572A5',
@@ -107,26 +93,6 @@ interface GitHubRepo {
   topics: string[]
 }
 
-interface ContributionDay {
-  date: string
-  count: number
-  level: number
-}
-
-function useCountUp(target: number, duration = 1.2, enabled = true) {
-  const count = useMotionValue(0)
-  const spring = useSpring(count, { duration: duration * 1000, bounce: 0 })
-  const [display, setDisplay] = useState(0)
-
-  useEffect(() => {
-    count.set(enabled ? target : 0)
-    const unsub = spring.on('change', (v) => setDisplay(Math.round(v)))
-    return unsub
-  }, [target, count, spring, enabled])
-
-  return display
-}
-
 function formatPushedDate(iso: string) {
   const d = new Date(iso)
   const y = d.getFullYear()
@@ -135,87 +101,15 @@ function formatPushedDate(iso: string) {
   return `${y}.${m}.${day}`
 }
 
-async function fetchContributions(username: string, year: number): Promise<ContributionDay[]> {
-  try {
-    const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=${year}`)
-    if (!res.ok) throw new Error('fetch failed')
-    const data = await res.json()
-    return data.contributions.map((d: { date: string; count: number; level: number }) => ({
-      date: d.date,
-      count: d.count,
-      level: d.level,
-    }))
-  } catch {
-    return []
-  }
-}
-
-function buildGrid(contributions: ContributionDay[]) {
-  const weeks: ContributionDay[][] = []
-  let week: ContributionDay[] = []
-
-  if (contributions.length > 0) {
-    const firstDate = new Date(contributions[0].date)
-    const dayOfWeek = firstDate.getDay()
-    for (let i = 0; i < dayOfWeek; i++) {
-      week.push({ date: '', count: 0, level: -1 })
-    }
-  }
-
-  contributions.forEach((day) => {
-    week.push(day)
-    if (week.length === 7) {
-      weeks.push(week)
-      week = []
-    }
-  })
-
-  if (week.length > 0) {
-    while (week.length < 7) {
-      week.push({ date: '', count: 0, level: -1 })
-    }
-    weeks.push(week)
-  }
-
-  return weeks
-}
-
-function buildMonthLabels(year: number, gridStartDate: Date | null) {
-  if (!gridStartDate) return []
-  const labels: { month: string; col: number }[] = []
-  const gridStart = gridStartDate.getTime()
-  MONTHS.forEach((month, idx) => {
-    const firstOfMonth = new Date(year, idx, 1).getTime()
-    if (firstOfMonth >= gridStart) {
-      const daysDiff = Math.floor((firstOfMonth - gridStart) / (24 * 60 * 60 * 1000))
-      const col = Math.floor(daysDiff / 7)
-      labels.push({ month, col })
-    }
-  })
-  return labels
-}
-
 const REFRESH_INTERVAL_MS = 5 * 60 * 1000
 
 export function GitHubProfile() {
-  const currentYear = new Date().getFullYear()
-  const [selectedYear, setSelectedYear] = useState(currentYear)
   const [user, setUser] = useState<GitHubUser | null>(null)
   const [repos, setRepos] = useState<GitHubRepo[]>([])
-  const [contributions, setContributions] = useState<ContributionDay[]>([])
-  const [totalContribs, setTotalContribs] = useState(0)
   const [totalStars, setTotalStars] = useState(0)
-  const [loading, setLoading] = useState(true)
   const [repoLoading, setRepoLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
-  const [error, setError] = useState<string | null>(null)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
-  const sectionRef = useRef<HTMLElement>(null)
-
-  const years = Array.from({ length: 5 }, (_, i) => currentYear - i)
-  const weeks = buildGrid(contributions)
-  const gridStart = contributions.length > 0 ? new Date(contributions[0].date) : null
-  const monthLabels = buildMonthLabels(selectedYear, gridStart)
 
   const loadStatic = useCallback(async (isManual = false) => {
     if (isManual) setRefreshing(true)
@@ -254,45 +148,6 @@ export function GitHubProfile() {
     return () => clearInterval(interval)
   }, [loadStatic])
 
-  useEffect(() => {
-    let cancelled = false
-    async function loadContribs() {
-      setLoading(true)
-      setError(null)
-      try {
-        const data = await fetchContributions(GITHUB_USERNAME, selectedYear)
-        if (cancelled) return
-        setContributions(data)
-        setTotalContribs(data.reduce((s, d) => s + d.count, 0))
-      } catch {
-        if (!cancelled) setError('Failed to load contribution data')
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    }
-    loadContribs()
-    return () => { cancelled = true }
-  }, [selectedYear])
-
-  // Intersection-driven count-up for the single display number.
-  const [heroInView, setHeroInView] = useState(false)
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setHeroInView(true) },
-      { threshold: 0.15 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  const heroCount = useCountUp(totalContribs, 1.6, heroInView)
-
-  const [tooltip, setTooltip] = useState<{ text: string; x: number; y: number } | null>(null)
-
-  // Single hero stat line: replaces the 4-col grid with a kicker+number strip
-  // so the heatmap is the only visual focus on this page.
   const metaLine = user
     ? [
         `${user.public_repos} public repos`,
@@ -303,7 +158,7 @@ export function GitHubProfile() {
     : []
 
   return (
-    <section ref={sectionRef} id="github" className="border-y border-rule/12">
+    <section id="github" className="border-y border-rule/12">
       <div className="max-w-manifest mx-auto px-6 py-24 md:py-32">
         <SectionLabel number="02" label="Open source" />
 
@@ -352,7 +207,7 @@ export function GitHubProfile() {
           </div>
         </div>
 
-        {/* Single-line meta strip — replaces the 4-col stats grid */}
+        {/* Single-line meta strip */}
         {metaLine.length > 0 && (
           <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 pb-8 mb-12 border-b border-rule/12 font-mono text-sm text-ink-secondary">
             {metaLine.map((m, i) => (
@@ -363,103 +218,6 @@ export function GitHubProfile() {
             ))}
           </div>
         )}
-
-        {/* Heatmap — the hero. Full-width, larger 16px cells, single display number above. */}
-        <div className="mb-20">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-            <div>
-              <Kicker accent>Activity</Kicker>
-              <div className="display text-7xl md:text-8xl mt-4 leading-[0.9] tracking-tightest tabular-nums">
-                {loading ? '…' : error ? '—' : heroCount.toLocaleString()}
-              </div>
-              <Kicker className="block mt-3">
-                contributions in {selectedYear}
-              </Kicker>
-            </div>
-            <div className="flex flex-col items-start md:items-end gap-4">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-2 font-mono text-xs">
-                {years.map((y) => (
-                  <button
-                    key={y}
-                    onClick={() => setSelectedYear(y)}
-                    className={`px-3 py-1.5 rounded-sm transition-colors ${
-                      y === selectedYear
-                        ? 'bg-ink-primary text-paper'
-                        : 'text-ink-tertiary hover:text-ink-primary border border-rule/12'
-                    }`}
-                  >
-                    {y}
-                  </button>
-                ))}
-              </div>
-              <div className="flex items-center gap-1.5 font-mono text-xs text-ink-tertiary">
-                <span>less</span>
-                {CELL_STYLES.map((cls, i) => (
-                  <div key={i} className={`w-3 h-3 rounded-sm ${cls}`} />
-                ))}
-                <span>more</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative overflow-x-auto">
-            {loading ? (
-              <div className="flex items-center justify-center py-32">
-                <Loader2 className="w-6 h-6 animate-spin text-ink-tertiary" />
-              </div>
-            ) : error ? (
-              <div className="flex items-center justify-center py-32 text-sm text-ink-tertiary">
-                {error}
-              </div>
-            ) : (
-              <div>
-                <div className="flex mb-3 h-5 ml-12 relative">
-                  {monthLabels.map((label) => (
-                    <div
-                      key={label.month}
-                      className="text-[11px] font-mono text-ink-tertiary absolute"
-                      style={{ left: `${(label.col / Math.max(weeks.length, 1)) * 100}%` }}
-                    >
-                      {label.month}
-                    </div>
-                  ))}
-                </div>
-                <div className="flex gap-3">
-                  <div className="flex flex-col gap-[4px] pr-3 text-[10px] font-mono text-ink-tertiary w-8 pt-1">
-                    {['', 'Mon', '', 'Wed', '', 'Fri', ''].map((d, i) => (
-                      <div key={i} className="h-[16px] flex items-center justify-end">{d}</div>
-                    ))}
-                  </div>
-                  <div className="flex gap-[4px]">
-                    {weeks.map((week, wi) => (
-                      <div key={wi} className="flex flex-col gap-[4px]">
-                        {week.map((day, di) => (
-                          <div
-                            key={`${wi}-${di}`}
-                            onMouseEnter={(e) => {
-                              if (day.date) {
-                                const rect = (e.target as HTMLElement).getBoundingClientRect()
-                                setTooltip({
-                                  text: `${day.count} contribution${day.count !== 1 ? 's' : ''} on ${day.date}`,
-                                  x: rect.left + rect.width / 2,
-                                  y: rect.top - 8,
-                                })
-                              }
-                            }}
-                            onMouseLeave={() => setTooltip(null)}
-                            className={`w-4 h-4 rounded-sm transition-all duration-150 hover:ring-2 hover:ring-ink-primary hover:ring-offset-1 hover:ring-offset-paper cursor-default ${
-                              day.level === -1 ? 'bg-transparent' : CELL_STYLES[Math.min(day.level, 4)] ?? CELL_STYLES[0]
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
 
         {/* Recent repos */}
         <div>
@@ -547,18 +305,8 @@ export function GitHubProfile() {
           )}
         </div>
       </div>
-
-      {/* Floating tooltip — paper-on-ink */}
-      {tooltip && (
-        <div
-          className="fixed z-50 pointer-events-none px-3 py-2 bg-ink-primary text-paper text-xs font-mono rounded-md -translate-x-1/2 -translate-y-full shadow-lg"
-          style={{ left: tooltip.x, top: tooltip.y }}
-        >
-          {tooltip.text}
-        </div>
-      )}
     </section>
   )
 }
 
-export type { GitHubUser, GitHubRepo, ContributionDay }
+export type { GitHubUser, GitHubRepo }

@@ -10,7 +10,9 @@ import { useWebMCP } from './hooks/useWebMCP'
 
 // Eager load critical components for Home
 import { Hero } from './components/Hero'
-import { Receipts } from './components/Receipts'
+import { ServicesSection } from './components/ServicesSection'
+import { ProcessSection } from './components/ProcessSection'
+import { ProofBar } from './components/ProofBar'
 import { FeaturedProjects } from './components/FeaturedProjects'
 import { GitHubProfile } from './components/GitHubProfile'
 import { FinalCTA } from './components/FinalCTA'
@@ -38,12 +40,14 @@ function Home() {
   return (
     <div className="space-y-0">
       <SEO
-        title="Kunj Shah | AI Engineer & Agent Builder"
-        description="Kunj Shah is a 21-year-old AI engineer in Ahmedabad who builds agents in the hours he should be studying. Portfolio, essays, and a list of things that broke in production."
+        title="Kunj Shah | Freelancer — AI Agents, Web Apps & APIs"
+        description="Kunj Shah is a 22-year-old freelancer in Ahmedabad who ships AI agents, web apps, and APIs for founders and small teams. Portfolio, essays, and a list of things that broke in production."
         faqItems={PORTFOLIO_FAQ}
       />
       <Hero />
-      <Receipts />
+      <ServicesSection />
+      <ProcessSection />
+      <ProofBar />
       <FeaturedProjects />
 
       <GitHubProfile />

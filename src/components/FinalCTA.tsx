@@ -20,12 +20,12 @@ export function FinalCTA() {
           <div className="md:col-span-8">
             <div className="kicker text-paper/80">Get in touch</div>
             <h2 className="display text-5xl md:text-7xl mt-4 leading-[0.95] tracking-tightest max-w-4xl text-paper">
-              Have an agent
+              Have something
               <br />
-              to ship? <em className="italic text-accent">Let&rsquo;s talk.</em>
+              to ship? <em className="italic text-accent">Let&rsquo;s build it.</em>
             </h2>
             <p className="mt-8 text-paper/85 text-lg leading-relaxed max-w-xl">
-              12 things shipped in 2026. I work with founders and small teams — whiteboard to production in weeks, not quarters. Real systems, real users, real load.
+              You describe it, I build it. AI agents, web apps, APIs, prototypes — whiteboard to production in weeks, not quarters. Real systems, real users, real load.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
