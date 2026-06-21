@@ -50,7 +50,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="md:col-span-3 flex flex-col items-stretch"
+            className="md:col-span-3 md:row-span-2 flex flex-col items-stretch"
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-sunken">
               <img
@@ -67,26 +67,27 @@ export function Hero() {
               DevFest Baroda, 2025
             </figcaption>
           </motion.figure>
+
+          {/* Sub-headline + building — sits next to the portrait */}
+          <div className="md:col-span-9 flex flex-col justify-end">
+            <TextReveal
+              text="I'm 21, fourth-year CS in Ahmedabad. I build production agents — retrieval, orchestration, and the backend underneath — and I write about the parts that broke."
+              as="p"
+              className="text-ink-secondary leading-relaxed text-lg md:text-xl max-w-2xl"
+              delay={0.5}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+              className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1"
+            >
+              <div className="kicker">Currently building</div>
+              <span className="font-mono text-xs text-ink-quaternary">/</span>
+              <div className="font-mono text-sm text-ink-primary">{LIVE_STATUS.building}</div>
+            </motion.div>
+          </div>
         </div>
-
-        {/* Sub-headline — the lede, now wider since the photo has the 3-col */}
-        <TextReveal
-          text="I'm 21, fourth-year CS in Ahmedabad. I build production agents — retrieval, orchestration, and the backend underneath — and I write about the parts that broke."
-          as="p"
-          className="mt-10 md:mt-12 text-ink-secondary leading-relaxed text-lg md:text-xl max-w-2xl"
-          delay={0.5}
-        />
-
-        <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.55 }}
-          className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1"
-        >
-          <div className="kicker">Currently building</div>
-          <span className="font-mono text-xs text-ink-quaternary">/</span>
-          <div className="font-mono text-sm text-ink-primary">{LIVE_STATUS.building}</div>
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 8 }}

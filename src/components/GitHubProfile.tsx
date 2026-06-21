@@ -181,18 +181,15 @@ function buildGrid(contributions: ContributionDay[]) {
 }
 
 function buildMonthLabels(year: number, gridStartDate: Date | null) {
-  const labels: { month: string; startWeek: number }[] = []
-  const firstDayOfYear = new Date(year, 0, 1)
-  const gridWeekOffset = gridStartDate
-    ? Math.floor(((gridStartDate.getTime() - firstDayOfYear.getTime()) / (24 * 60 * 60 * 1000) + firstDayOfYear.getDay()) / 7)
-    : 0
-
+  if (!gridStartDate) return []
+  const labels: { month: string; col: number }[] = []
+  const gridStart = gridStartDate.getTime()
   MONTHS.forEach((month, idx) => {
-    const firstDayOfMonth = new Date(year, idx, 1)
-    const dayOfYear = Math.floor((firstDayOfMonth.getTime() - firstDayOfYear.getTime()) / (24 * 60 * 60 * 1000))
-    const startWeek = Math.floor((dayOfYear + firstDayOfYear.getDay()) / 7) - gridWeekOffset
-    if (startWeek >= 0) {
-      labels.push({ month, startWeek })
+    const firstOfMonth = new Date(year, idx, 1).getTime()
+    if (firstOfMonth >= gridStart) {
+      const daysDiff = Math.floor((firstOfMonth - gridStart) / (24 * 60 * 60 * 1000))
+      const col = Math.floor(daysDiff / 7)
+      labels.push({ month, col })
     }
   })
   return labels
@@ -421,7 +418,7 @@ export function GitHubProfile() {
                     <div
                       key={label.month}
                       className="text-[11px] font-mono text-ink-tertiary absolute"
-                      style={{ left: `${(label.startWeek / Math.max(weeks.length, 1)) * 100}%` }}
+                      style={{ left: `${(label.col / Math.max(weeks.length, 1)) * 100}%` }}
                     >
                       {label.month}
                     </div>
