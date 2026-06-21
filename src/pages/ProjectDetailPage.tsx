@@ -37,6 +37,17 @@ export function ProjectDetailPage() {
 
       <article className="max-w-manifest mx-auto px-6 py-16">
         <div className="max-w-prose mx-auto">
+          {project.videoUrl && (
+            <div className="mb-12 aspect-video overflow-hidden rounded-md border border-rule/12 bg-sunken">
+              <iframe
+                src={project.videoUrl.replace('watch?v=', 'embed/').split('&')[0]}
+                title={`${project.title} demo video`}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          )}
           <div className="mb-10">
             <MetaRow
               items={[
