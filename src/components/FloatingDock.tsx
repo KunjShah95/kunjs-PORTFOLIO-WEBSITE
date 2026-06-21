@@ -27,14 +27,12 @@ export function FloatingDock() {
   const [hovered, setHovered] = useState<string | null>(null)
 
   return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 1.5, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden md:block"
-    >
-      <nav
-        className="flex items-center gap-1.5 px-3 py-2 rounded-full border border-rule/12 bg-paper/85 backdrop-blur-lg shadow-lg"
+    <div className="fixed bottom-6 left-0 right-0 z-40 hidden md:flex justify-center pointer-events-none">
+      <motion.nav
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="pointer-events-auto flex items-center gap-1.5 px-3 py-2 rounded-full border border-rule/12 bg-paper/85 backdrop-blur-lg shadow-lg"
         aria-label="Quick navigation"
       >
         {DOCK_ITEMS.map(({ icon: Icon, label, to }) => {
@@ -69,7 +67,7 @@ export function FloatingDock() {
             </button>
           )
         })}
-      </nav>
-    </motion.div>
+      </motion.nav>
+    </div>
   )
 }
