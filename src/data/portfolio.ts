@@ -23,7 +23,6 @@ export const PROJECTS: Project[] = [
         github: 'https://github.com/KunjShah95/fairness-lens-studio',
         demo: 'https://fairness-lens-backend-988207147245.us-central1.run.app/',
         slug: 'equitylens',
-        videoUrl: 'https://www.youtube.com/watch?v=GTw5kZbiJ08',
         impact: 'Production',
         problem: 'Healthcare AI models often contain hidden biases that lead to unequal patient treatment recommendations.',
         outcome: 'Detected a 23% performance gap in commercial triage models and reduced audit overhead significantly.',
@@ -75,7 +74,6 @@ export const PROJECTS: Project[] = [
         tech: ['NODE.JS', 'TYPESCRIPT', 'LLM', 'DOCKER'],
         github: 'https://github.com/KunjShah95/SENTINEL-CLI',
         demo: 'https://sentinel-cli.vercel.app/',
-        videoUrl: 'https://www.youtube.com/watch?v=zQlrN-F-1F8',
         slug: 'sentinel-cli',
         impact: 'Open Source',
         problem: 'Security auditing involves juggling multiple disconnected tools and manual report correlation.',
@@ -931,13 +929,11 @@ export const HACKATHONS: Array<{
   placement?: string;
   team?: string;
   prize?: string;
-  videoUrl?: string;
 }> = [
   {
     title: 'Autonomous Hacks',
     event: 'Autonomous Hacks',
     description: 'Selected out of 2000+ teams in the online round, and from 300+ teams in the offline final round. Built an autonomous AI system end-to-end in 48 hours.',
-    videoUrl: 'https://www.youtube.com/watch?v=jU-6LGZxbb0',
     year: 2026,
     placement: 'Finalist',
     team: 'Solo',
@@ -993,8 +989,7 @@ export const HACKATHONS: Array<{
   {
     title: 'Google Agentic AI Hackathon',
     event: 'Google',
-    description: 'Participated in Google Agentic AI Hackathon. Built RelayBuild — an AI-assisted orchestration tool.',
-    videoUrl: 'https://www.youtube.com/watch?v=jAmNP1frGuQ',
+    description: 'Participated in Google Agentic AI Hackathon.',
     year: 2025,
     placement: 'Participant',
     team: '2',

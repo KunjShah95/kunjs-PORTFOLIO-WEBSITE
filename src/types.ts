@@ -6,7 +6,6 @@ export interface Project {
     tech: string[];
     github: string;
     demo?: string;
-    videoUrl?: string;
     slug: string;
     impact: string;
     problem?: string;

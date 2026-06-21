@@ -37,21 +37,7 @@ export function ProjectDetailPage() {
 
       <article className="max-w-manifest mx-auto px-6 py-16">
         <div className="max-w-prose mx-auto">
-          {project.videoUrl && (() => {
-            const u = new URL(project.videoUrl)
-            const id = u.searchParams.get('v')
-            return id ? (
-              <div className="mb-12 aspect-video overflow-hidden rounded-md border border-rule/12 bg-sunken">
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`}
-                  title={`${project.title} demo video`}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            ) : null
-          })()}
+
           <div className="mb-10">
             <MetaRow
               items={[
