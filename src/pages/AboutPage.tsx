@@ -80,11 +80,11 @@ export function AboutPage() {
               <p className="text-ink-secondary leading-relaxed mb-10 max-w-prose">
                 The tools I reach for when shipping a system end-to-end — from the first prompt to the production deploy.
               </p>
-              <BentoGrid cols={2} gap="sm" className="border border-rule/12 -mx-1">
+              <BentoGrid cols={2} className="border border-rule/12 -mx-1">
                 {SKILL_GROUPS.map((group, i) => {
                   const Icon = group.icon;
                   return (
-                    <BentoCard key={group.category} variant="flat" hover="translate" className="p-7">
+                    <BentoCard key={group.category} variant="default" className="p-7">
                       <div className="flex items-start justify-between mb-5">
                         <span className="kicker">
                           {String(i + 1).padStart(2, '0')}

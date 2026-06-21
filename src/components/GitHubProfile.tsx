@@ -10,7 +10,6 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { IDENTITY } from '../data/portfolio'
 import { SectionLabel } from './ui/SectionLabel'
 import { Kicker } from './ui/Kicker'
-import { useReveal } from '../hooks/useReveal'
 import { BentoGrid, BentoCard } from './bento'
 
 const GITHUB_USERNAME = IDENTITY.github_username
@@ -181,14 +180,20 @@ function buildGrid(contributions: ContributionDay[]) {
   return weeks
 }
 
-function buildMonthLabels(year: number) {
+function buildMonthLabels(year: number, gridStartDate: Date | null) {
   const labels: { month: string; startWeek: number }[] = []
+  const firstDayOfYear = new Date(year, 0, 1)
+  const gridWeekOffset = gridStartDate
+    ? Math.floor(((gridStartDate.getTime() - firstDayOfYear.getTime()) / (24 * 60 * 60 * 1000) + firstDayOfYear.getDay()) / 7)
+    : 0
+
   MONTHS.forEach((month, idx) => {
     const firstDayOfMonth = new Date(year, idx, 1)
-    const firstDayOfYear = new Date(year, 0, 1)
     const dayOfYear = Math.floor((firstDayOfMonth.getTime() - firstDayOfYear.getTime()) / (24 * 60 * 60 * 1000))
-    const startWeek = Math.floor((dayOfYear + firstDayOfYear.getDay()) / 7)
-    labels.push({ month, startWeek })
+    const startWeek = Math.floor((dayOfYear + firstDayOfYear.getDay()) / 7) - gridWeekOffset
+    if (startWeek >= 0) {
+      labels.push({ month, startWeek })
+    }
   })
   return labels
 }
@@ -212,7 +217,8 @@ export function GitHubProfile() {
 
   const years = Array.from({ length: 5 }, (_, i) => currentYear - i)
   const weeks = buildGrid(contributions)
-  const monthLabels = buildMonthLabels(selectedYear)
+  const gridStart = contributions.length > 0 ? new Date(contributions[0].date) : null
+  const monthLabels = buildMonthLabels(selectedYear, gridStart)
 
   const loadStatic = useCallback(async (isManual = false) => {
     if (isManual) setRefreshing(true)
@@ -481,7 +487,7 @@ export function GitHubProfile() {
           </div>
 
           {repos.length > 0 ? (
-            <BentoGrid cols={3} gap="sm" className="border border-rule/12">
+            <BentoGrid cols={3} className="border border-rule/12">
               {repos.slice(0, 6).map((repo) => (
                 <a
                   key={repo.id}
@@ -490,7 +496,7 @@ export function GitHubProfile() {
                   rel="noopener noreferrer"
                   className="group relative block"
                 >
-                  <BentoCard variant="flat" hover="translate" className="p-6 md:p-8 flex flex-col h-full">
+                  <BentoCard variant="default" className="p-6 md:p-8 flex flex-col h-full">
                     <Kicker className="block mb-3">
                       pushed {formatPushedDate(repo.pushed_at)}
                     </Kicker>

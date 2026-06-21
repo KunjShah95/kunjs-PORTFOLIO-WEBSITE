@@ -10,7 +10,7 @@ export function SkillsPage() {
     items: g.skills,
   }));
 
-  const { ref, isVisible } = useReveal({ threshold: 0.1 });
+  const { ref, inView } = useReveal({ amount: 0.1 });
 
   return (
     <>
@@ -21,10 +21,10 @@ export function SkillsPage() {
         center
       />
       <section ref={ref} className="max-w-manifest mx-auto px-6 py-16">
-        {isVisible && (
-          <BentoGrid cols={2} gap="sm" className="border border-rule/12">
+        {inView && (
+          <BentoGrid cols={2} className="border border-rule/12">
             {groups.map((g) => (
-              <BentoCard key={g.name} variant="outlined" hover="translate" className="p-8">
+              <BentoCard key={g.name} variant="inset" className="p-8">
                 <Kicker>{g.name}</Kicker>
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {g.items.map((s) => (

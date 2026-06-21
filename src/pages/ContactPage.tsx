@@ -35,7 +35,7 @@ export function ContactPage() {
         </motion.div>
 
         <div className="mt-24 max-w-2xl mx-auto">
-          <BentoGrid cols={2} gap="sm" className="border border-rule/12">
+          <BentoGrid cols={2} className="border border-rule/12">
             {METHODS.map((m) => (
               <a
                 key={m.label}
@@ -44,7 +44,7 @@ export function ContactPage() {
                 rel="noopener noreferrer"
                 className="group"
               >
-                <BentoCard variant="flat" hover="translate" className="p-8 flex items-center justify-between">
+                <BentoCard variant="default" className="p-8 flex items-center justify-between">
                   <div>
                     <div className="kicker">{m.label}</div>
                     <div className={`font-mono text-lg mt-2 ${m.primary ? 'text-ink-primary font-medium' : 'text-ink-secondary'}`}>

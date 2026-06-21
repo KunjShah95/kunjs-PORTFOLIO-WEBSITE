@@ -14,7 +14,7 @@ export function ProjectsPage() {
   const filtered = active === 'All'
     ? PROJECTS
     : PROJECTS.filter((p) => p.category === active);
-  const { ref, isVisible } = useReveal({ threshold: 0.1 });
+  const { ref, inView } = useReveal({ amount: 0.1 });
 
   return (
     <>
@@ -43,10 +43,10 @@ export function ProjectsPage() {
           <div className="ml-auto kicker self-center">{filtered.length} of {PROJECTS.length}</div>
         </div>
 
-        {isVisible && (
-          <BentoGrid cols={3} gap="sm" className="border border-rule/12">
+        {inView && (
+          <BentoGrid cols={3} className="border border-rule/12">
             {filtered.map((p) => (
-              <BentoCard key={p.slug} variant="flat" hover="translate" className="p-6 flex flex-col group">
+              <BentoCard key={p.slug} variant="default" className="p-6 flex flex-col group">
                 <Kicker>{p.category}</Kicker>
                 <h3 className="display text-xl mt-3 leading-tight flex-1">
                   <Link to={`/projects/${p.slug}`} className="group-hover:underline decoration-ink-primary/40 underline-offset-4">

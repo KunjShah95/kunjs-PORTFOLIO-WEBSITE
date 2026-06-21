@@ -13,7 +13,7 @@ export function BlogsPage() {
   }, {} as Record<string, typeof BLOGS>);
 
   const years = Object.keys(byYear).sort((a, b) => b.localeCompare(a));
-  const { ref, isVisible } = useReveal({ threshold: 0.1 });
+  const { ref, inView } = useReveal({ amount: 0.1 });
 
   return (
     <>
@@ -31,10 +31,10 @@ export function BlogsPage() {
                 <div className="kicker">{year}</div>
                 <div className="font-mono text-3xl text-ink-primary">{byYear[year].length}</div>
               </div>
-              {isVisible && (
-                <BentoGrid cols={1} gap="sm">
+              {inView && (
+                <BentoGrid cols={1}>
                   {byYear[year].map((blog) => (
-                    <BentoCard key={blog.id} variant="flat" hover="translate" className="py-6">
+                    <BentoCard key={blog.id} variant="default" className="py-6">
                       <Link
                         to={`/blogs/${blog.slug}`}
                         className="group flex flex-col md:flex-row gap-4 px-4"
