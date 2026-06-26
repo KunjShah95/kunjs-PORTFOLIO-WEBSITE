@@ -34,7 +34,6 @@ export const PROJECTS: Project[] = [
         desc: 'Fairness auditing platform for detecting bias in healthcare AI, ensuring compliance with international standards.',
         tech: ['REACT', 'FASTAPI', 'POSTGRESQL', 'TENSORFLOW'],
         github: 'https://github.com/KunjShah95/fairness-lens-studio',
-        demo: 'https://fairness-lens-backend-988207147245.us-central1.run.app/',
         slug: 'equitylens',
         impact: 'Production',
         problem: 'Healthcare AI models often contain hidden biases that lead to unequal patient treatment recommendations.',
@@ -174,6 +173,14 @@ export const EXPERIENCE: Experience[] = [
         period: 'DEC 2025 — FEB 2026',
         description: 'Automating high-scale enterprise workflows using multi-agent systems and agentic reasoning. Integrating AI models into full-stack production pipelines.',
         skills: ['PYTHON', 'AGENTS', 'FULL_STACK', 'AUTOMATION'],
+    },
+    {
+        id: 'XP1',
+        company: 'Open Source',
+        role: 'OPEN_SOURCE_CONTRIBUTOR',
+        period: '2025 — PRESENT',
+        description: '44 merged pull requests across 13+ external projects — including OWASP (agent-security regression harness), Microsoft (AI-Engineering-Coach), and Ollama. Shipped CI gates, security scenarios, feature work, and docs. 45 issues opened.',
+        skills: ['OWASP', 'CI/CD', 'AI SECURITY', 'OPEN SOURCE'],
     }
 ];
 
@@ -457,7 +464,7 @@ I integrated direct mappings to regulatory frameworks:
 - Cut a manual fairness review from days to under an hour
 - Packaged as a reproducible audit report with an interactive dashboard
 
-The platform is live at [fairness-lens-backend](https://fairness-lens-backend-988207147245.us-central1.run.app/), validated on public, de-identified datasets.
+The source is on [GitHub](https://github.com/KunjShah95/fairness-lens-studio), validated on public, de-identified datasets.
 
 Fairness isn't just a feature—it's a requirement for responsible AI deployment.
         `,
@@ -559,7 +566,7 @@ export const FEATURED_PROJECTS = [
         solution: 'Built a comprehensive fairness evaluation pipeline that automates bias detection and ensures compliance with international standards.',
         techStack: ['Python', 'FastAPI', 'LangChain', 'PostgreSQL'],
         result: 'Identified significant performance gaps and reduced audit time from weeks to hours with high reliability.',
-        demoUrl: 'https://fairness-lens-backend-988207147245.us-central1.run.app/',
+        demoUrl: 'https://github.com/KunjShah95/fairness-lens-studio',
         githubUrl: 'https://github.com/KunjShah95/fairness-lens-studio',
     },
     {
