@@ -19,6 +19,7 @@ import { FinalCTA } from './components/FinalCTA'
 import { SEO } from './components/SEO'
 import { InitialLoader } from './components/InitialLoader'
 import { BLOGS } from './data/portfolio'
+import { CONTRIBUTIONS, OSS_STATS } from './data/opensource'
 import { PORTFOLIO_FAQ } from './data/seo-faq'
 
 // Lazy load secondary pages
@@ -49,6 +50,59 @@ function Home() {
       <ProcessSection />
       <ProofBar />
       <FeaturedProjects />
+
+      <section id="open-source" className="py-24 md:py-32 border-t border-rule/12">
+        <div className="max-w-manifest mx-auto px-6">
+          <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div>
+              <div className="kicker">02.5 · Open source</div>
+              <h2 className="display text-4xl md:text-5xl mt-3 max-w-2xl">Shipping in other people&rsquo;s repos too.</h2>
+            </div>
+            <p className="text-sm text-ink-secondary max-w-xs self-start md:self-auto md:text-right">
+              Real work in {OSS_STATS.orgs.join(', ')} and {OSS_STATS.projects}+ more —
+              verified on GitHub.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-rule/12 mb-12 border border-rule/12">
+            {([
+              [OSS_STATS.mergedPRs, 'merged PRs'],
+              [OSS_STATS.openedIssues, 'issues opened'],
+              [OSS_STATS.totalPRs, 'total PRs'],
+              [`${OSS_STATS.projects}+`, 'external projects'],
+            ] as [string | number, string][]).map(([n, l]) => (
+              <div key={l} className="bg-paper p-5 md:p-6">
+                <div className="display text-3xl md:text-4xl text-ink-primary tabular-nums">{n}</div>
+                <div className="kicker mt-1">{l}</div>
+              </div>
+            ))}
+          </div>
+
+          <ul className="divide-y divide-rule/12 border-y border-rule/12">
+            {CONTRIBUTIONS.map((c) => (
+              <li key={c.url}>
+                <a
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:gap-6"
+                >
+                  <div className="flex items-center gap-3 md:w-44 md:shrink-0">
+                    <span className="display text-base text-ink-primary group-hover:underline decoration-rule/32 underline-offset-4">
+                      {c.label}
+                    </span>
+                    {c.notable && <span className="kicker text-ink-tertiary">&#9733;</span>}
+                  </div>
+                  <p className="flex-1 text-sm text-ink-secondary leading-relaxed">{c.title}</p>
+                  <span className="font-mono text-xs text-ink-tertiary md:w-28 md:text-right">
+                    {c.kind === 'merged' ? 'merged' : 'proposed'} &middot; {c.tag}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <GitHubProfile />
 

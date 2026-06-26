@@ -5,15 +5,8 @@ const CACHE_TTL_SECONDS = 300 // 5 minutes — matches the browser refresh inter
 
 export async function GET() {
   try {
-    const [uRes, rRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
-        headers: { 'User-Agent': 'kunjshah-portfolio' },
-      }),
-      fetch(
-        `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=100&type=owner`,
-        { headers: { 'User-Agent': 'kunjshah-portfolio' } },
-      ),
-    ])
+    const headers = { 'User-Agent': 'kunjshah-portfolio' }
+    const uRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, { headers })
 
     if (!uRes.ok) {
       return new Response(
@@ -21,15 +14,27 @@ export async function GET() {
         { status: 502, headers: { 'Content-Type': 'application/json' } },
       )
     }
-    if (!rRes.ok) {
-      return new Response(
-        JSON.stringify({ error: `GitHub repos API returned ${rRes.status}` }),
-        { status: 502, headers: { 'Content-Type': 'application/json' } },
-      )
-    }
-
     const user = await uRes.json()
-    const repos = await rRes.json()
+
+    // Paginate all owned repos so totalStars covers every repo, not just the
+    // first 100. user.public_repos tells us how many pages to expect.
+    const pages = Math.max(1, Math.ceil((user.public_repos ?? 100) / 100))
+    const repos: any[] = []
+    for (let page = 1; page <= pages; page++) {
+      const rRes = await fetch(
+        `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=100&type=owner&page=${page}`,
+        { headers },
+      )
+      if (!rRes.ok) {
+        return new Response(
+          JSON.stringify({ error: `GitHub repos API returned ${rRes.status}` }),
+          { status: 502, headers: { 'Content-Type': 'application/json' } },
+        )
+      }
+      const batch = await rRes.json()
+      if (!Array.isArray(batch) || batch.length === 0) break
+      repos.push(...batch)
+    }
 
     const totalStars = repos.reduce(
       (s: number, r: { stargazers_count: number }) => s + r.stargazers_count,

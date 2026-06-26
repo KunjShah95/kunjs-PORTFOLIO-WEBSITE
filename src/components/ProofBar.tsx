@@ -1,5 +1,9 @@
 import { PROJECTS, HACKATHONS } from '../data/portfolio'
 
+// Verified GitHub stars across KunjShah95 repos (gh API, 2026-06). The live
+// count also renders in <GitHubProfile/>; update this snapshot when it drifts.
+const GITHUB_STARS = 44
+
 export function ProofBar() {
   const hackathonFinals = HACKATHONS.filter(h => h.placement === 'Finalist').length
   const shippedCount = PROJECTS.length
@@ -19,8 +23,8 @@ export function ProofBar() {
           </div>
           <div className="hidden md:block w-px h-16 bg-rule/12" />
           <div className="text-center">
-            <div className="display text-6xl md:text-7xl text-accent">{shippedCount}+</div>
-            <div className="mt-2 font-mono text-xs text-ink-tertiary uppercase tracking-kicker">Project stars</div>
+            <div className="display text-6xl md:text-7xl text-accent">{GITHUB_STARS}</div>
+            <div className="mt-2 font-mono text-xs text-ink-tertiary uppercase tracking-kicker">GitHub stars</div>
           </div>
         </div>
       </div>

@@ -272,52 +272,20 @@ Rate limits change. Tools return malformed JSON. The LLM gets stuck in a repetit
 
 ### Core Architecture Pillars
 
-1. **State Persistence & Checkpointing**: An agent should never be stateless. If a long-running task fails halfway through a 10-step reasoning chain, the system must be able to restore the exact state of its memory and scratchpad. We use Redis or Postgres with JSONB to track the "Trace ID" of every reasoning step.
+1. **State Persistence & Checkpointing**: An agent should never be stateless. If a long-running task fails halfway through a 10-step reasoning chain, the system must be able to restore the exact state of its memory and scratchpad. I lean on Postgres with JSONB to track the "Trace ID" of every reasoning step.
 
 2. **Hierarchical Orchestration**: Flat agents are brittle. In my recent work, I’ve moved toward a supervisor-subordinate model. A "Manager" agent breaks down the high-level goal into a graph of tasks, which are then assigned to specialized "Worker" agents with restricted tool access. This limits the "blast radius" of a single agent's mistake.
 
-3. **Human-in-the-Loop (HITL) Triggers**: There are certain actions—database migrations, large-scale emails, financial transactions—where the entropy of an LLM is unacceptable. We implement "breakpoints" where the agent must pause and wait for a signed approval token before proceeding.
+3. **Human-in-the-Loop (HITL) Triggers**: There are certain actions—database migrations, large-scale emails, financial transactions—where the entropy of an LLM is unacceptable. I implement "breakpoints" where the agent must pause and wait for a signed approval token before proceeding.
 
 ### The Feedback Loop
-The most critical part of a production agent is the feedback loop. We don't just log the final output; we log the *reasoning trace*. By analyzing where agents deviate from the intended logic, we can perform targeted few-shot prompting or fine-tune smaller models (like Llama-3 8B) to handle specific sub-tasks with higher precision and lower cost than GPT-4.
+The most critical part of a production agent is the feedback loop. I don't just log the final output; I log the *reasoning trace*. By analyzing where agents deviate from the intended logic, I can perform targeted few-shot prompting or fine-tune smaller models (like Llama-3 8B) to handle specific sub-tasks with higher precision and lower cost than GPT-4.
 
 Building agents isn't just about AI; it's about systems engineering. It's about building the safety rails that allow the intelligence to run at full speed without flying off the tracks.
         `,
         date: 'JAN 2026',
         readTime: 12,
         tags: ['AI SYSTEMS', 'ARCHITECTURE', 'PRODUCTION', 'SCALABILITY'],
-        featured: true,
-    },
-    {
-        id: 'B002',
-        title: 'MLOps at Scale: Lessons from High-Frequency Model Deployments',
-        slug: 'mlops-scale-deployments',
-        category: 'Infrastructure',
-        excerpt: 'A practical guide to managing continuous model updates in production. Best practices for versioning, monitoring, and cost optimization.',
-        content: `
-# MLOps at Scale: Beyond the Jupyter Notebook
-
-The hardest part of AI is often not the model itself, but the plumbing required to keep it alive in the wild. When you're deploying models ten times a day across multiple clusters, you quickly realize that "standard" DevOps isn't enough. You're not just deploying code; you're deploying a toxic combination of code, data, and stochastic weights.
-
-### The Data Ghost in the Machine
-In traditional software, if the code doesn't change, the behavior is mostly predictable. In ML, your model can start failing even if you haven't touched the codebase in months. This is **concept drift**.
-
-We recently implemented an automated drift detection pipeline that monitors the distribution of inference inputs. If the Kolmogorov-Smirnov test indicates a significant shift from the training distribution, the system triggers an automated alert and, in some cases, spins up a retraining job on a fresh slice of data.
-
-### Standardizing the Pipeline
-
-1. **Model Versioning (Not Just Git)**: Git is for code. For models, we use DVC (Data Version Control) paired with an MLflow registry. Every production deployment is tagged with a unique model URI that links directly back to the specific dataset and hyperparameters used to create it. If a user reports a weird result, we can replicate that exact inference state in seconds.
-
-2. **Canary Deployments for Weights**: We never swap a model 1:1. We use a "Shadow Mode" where the new model receives 100% of the traffic but its outputs are logged silently without being returned to the user. Once we verify the new model's latency and prediction confidence match our expectations, we transition to a 5/95 traffic split.
-
-3. **Quantization as a First-Class Citizen**: You can't just throw an FP32 model into a production cluster and hope for the best. We've integrated Auto-GPTQ into the CI/CD pipeline. Every model is automatically quantized to 4-bit or 8-bit during the build phase to ensure we aren't wasting thousands of dollars on GPU compute.
-
-### Conclusion
-MLOps is about reducing the "fear of deployment." When your monitoring is robust enough that the system tells *you* when it’s failing—rather than waiting for a user complaint—you've reached true production-grade MLOps.
-        `,
-        date: 'DEC 2025',
-        readTime: 10,
-        tags: ['MLOPS', 'DEPLOYMENT', 'INFRASTRUCTURE', 'MONITORING'],
         featured: true,
     },
     {
@@ -331,19 +299,19 @@ MLOps is about reducing the "fear of deployment." When your monitoring is robust
 
 Deploying YOLOv8 on a powerful workstation with an A100 is a breeze. Deploying it on a fanless industrial PC at the edge of a railway track to detect wagon defects in real-time? That’s where the real engineering starts.
 
-When we built the Railway Inspection system, our target was sub-100ms end-to-end latency. That included frame ingestion, preprocessing, inference, and post-processing. Here’s how we did it.
+When I built the Railway Inspection system, the target was sub-100ms end-to-end latency. That included frame ingestion, preprocessing, inference, and post-processing. Here’s how I did it.
 
 ### 1. Moving Beyond Python
-Python is fantastic for research, but for high-speed CV at the edge, it’s a bottleneck. We moved the entire inference pipeline to C++. Using **TensorRT**, we were able to compile the YOLOv8 ONNX exports into highly optimized engine files specifically tuned for the Jetson Orin's architecture. This alone gave us a 3x speedup.
+Python is fantastic for research, but for high-speed CV at the edge, it’s a bottleneck. I moved the entire inference pipeline to C++. Using **TensorRT**, I compiled the YOLOv8 ONNX exports into highly optimized engine files specifically tuned for the Jetson Orin's architecture. This alone gave us a 3x speedup.
 
 ### 2. The Preprocessing Pipeline
-Often, the bottleneck isn't the model—it's the data preparation. We implemented a multi-threaded GStreamer pipeline for hardware-accelerated video decoding. By offloading image resizing and normalization to the GPU kernels (using CUDA), we kept the CPU free to handle the logic and network overhead.
+Often, the bottleneck isn't the model—it's the data preparation. I implemented a multi-threaded GStreamer pipeline for hardware-accelerated video decoding. By offloading image resizing and normalization to the GPU kernels (using CUDA), it kept the CPU free to handle the logic and network overhead.
 
 ### 3. Smart Quantization (INT8)
-Standard FP16 quantization is safe, but INT8 is where you get the massive performance gains. However, naive INT8 quantization can kill your accuracy. We used **Quantization-Aware Training (QAT)** during the final few epochs of model training. This allowed the weights to adjust to the lower precision limits, maintaining 98%+ of our detection accuracy while cutting inference time by half.
+Standard FP16 quantization is safe, but INT8 is where you get the massive performance gains. However, naive INT8 quantization can kill your accuracy. I used **Quantization-Aware Training (QAT)** during the final few epochs of model training. This allowed the weights to adjust to the lower precision limits, maintaining 98%+ of our detection accuracy while cutting inference time by half.
 
 ### 4. Handling Environmental Chaos
-Industrial environments aren't clean labs. We had to deal with:
+Industrial environments aren't clean labs. I had to deal with:
 *   **Motion Blur**: Optimized shutter speeds and implemented a lightweight deblurring kernel.
 *   **Low Light**: Real-time histogram equalization before the image hits the model.
 
@@ -354,96 +322,6 @@ The edge isn't just about the model. It's about the marriage of hardware-specifi
         readTime: 14,
         tags: ['VISION', 'EDGE', 'OPTIMIZATION', 'HARDWARE'],
         featured: true,
-    },
-    {
-        id: 'B004',
-        title: 'RAG Pipelines: Semantic Search and Contextual Retrieval',
-        slug: 'rag-semantic-search',
-        category: 'Generative AI',
-        excerpt: 'Comprehensive guide to building Retrieval-Augmented Generation systems, covering vector databases and embedding strategies.',
-        content: `
-# RAG Pipelines: Semantic Search and Contextual Retrieval
-
-If you're building AI applications that need to answer questions about your own documents, RAG is the backbone that makes it possible. But getting it right? That's where most teams struggle.
-
-## The Core Problem
-
-LLMs are trained on massive datasets, but they don't know about your specific documents, your company's internal knowledge base, or yesterday's updates. You have two options:
-
-1. **Fine-tuning** — expensive, slow, and risky for keeping knowledge up-to-date
-
-2. **RAG** — retrieval-augmented generation that fetches relevant context at query time
-
-RAG is the clear winner for most production use cases.
-
-## Step 1: Chunking Strategy
-
-How you split your documents determines everything downstream. I've experimented with:
-
-- **Fixed-size chunks** (512-1024 tokens): Simple but often break semantic units
-
-- **Semantic chunking**: Use embeddings to find natural breakpoints in meaning
-
-- **Recursive splitting**: Split on multiple delimiters, then re-split oversized chunks
-
-My recommendation: Start with semantic chunking using embeddings to find natural boundaries, then validate with a sample of queries.
-
-## Step 2: Vector Database Selection
-
-Your options:
-
-- **Pinecone**: Fully managed, great scaling, pricey at scale
-
-- **Weaviate**: Open-source, graph-like queries, self-hostable
-
-- **Chroma**: Lightweight, great for prototyping
-
-- **Milvus**: Best for massive-scale production
-
-- **pgvector**: If you're already on PostgreSQL
-
-For most projects, I recommend **Weaviate** or **Pinecone** depending on your scale needs.
-
-## Step 3: Retrieval Optimization
-
-Basic retrieval (top-k semantic similarity) is just the start. To make it production-grade:
-
-1. **Query rewriting**: Use a small LLM to reformulate user queries for better retrieval
-
-2. **Hybrid search**: Combine semantic (dense) with keyword (sparse) search using BM25
-
-3. **Re-ranking**: Run a cross-encoder model on top-k results to re-score for relevance
-
-4. **Parent document retrieval**: Fetch chunks and reconstruct their parent context
-
-## The Context Window Problem
-
-When your retrieved context exceeds the LLM's window or becomes too noisy, you need smart compression. Techniques I use:
-
-- **Contextual compression**: Extract only relevant sentences from retrieved docs
-
-- **Summary-based retrieval**: Summarize docs first, then retrieve summaries
-
-- **Hierarchical indexing**: Index at chunk, document, and collection levels
-
-## Monitoring & Maintenance
-
-RAG isn't "set and forget." You need:
-
-- **Retrieval metrics**: Track hit rate, relevance scores
-
-- **Answer quality**: Human feedback loops or LLM-as-judge evaluation
-
-- **Data freshness**: Re-index on schedule or on-change
-
-- **Concept drift detection**: Monitor when retrieval quality drops
-
-The biggest insight? RAG quality is 80% about your data pipeline and retrieval strategy, 20% about the LLM you choose.
-        `,
-        date: 'OCT 2025',
-        readTime: 11,
-        tags: ['RAG', 'AI', 'EMBEDDINGS', 'SEARCH'],
-        featured: false,
     },
     {
         id: 'B005',
@@ -534,108 +412,6 @@ The best prompting is invisible — the user gets the right answer without knowi
         featured: false,
     },
     {
-        id: 'B006',
-        title: 'Anomaly Detection in High-Dimensional Data Streams',
-        slug: 'anomaly-detection-streams',
-        category: 'Machine Learning',
-        excerpt: 'Building robust anomaly detection systems for real-time data, focusing on feature engineering and deployment for fraud and security.',
-        content: `
-# Anomaly Detection in High-Dimensional Data Streams
-
-When you're monitoring millions of transactions per second, finding the needle in the haystack isn't just hard — it's a completely different problem than traditional ML.
-
-## The Challenge
-
-In low dimensions, outliers are obvious. But in high dimensions (hundreds of features), "normal" behavior becomes incredibly varied, and the notion of distance breaks down. A point that's far in one feature might be perfectly normal in another.
-
-## Approach 1: Isolation Forest
-
-The intuition is elegant: anomalies are few and different. Randomly partitioning data should isolate them faster.
-
-- Anomalies need fewer partitions to be isolated
-
-- Average path length = anomaly score
-
-- Works great for moderate dimensions (50-200 features)
-
-## Approach 2: Autoencoders
-
-Train an autoencoder to reconstruct "normal" data. When you feed in anomalous data, reconstruction error spikes.
-
-- Learn the manifold of normal behavior
-
-- High reconstruction error = likely anomaly
-
-- Good for complex, non-linear patterns
-
-The catch: needs enough normal data to learn the manifold, and can miss novel anomaly types.
-
-## Approach 3: Statistical Methods
-
-For time-series data:
-
-- **ARIMA residuals**: Model expected values, flag deviations
-
-- **Seasonal decomposition**: Separate trend, seasonality, residuals
-
-- **Exponential smoothing**: Detect sudden shifts in smoothed series
-
-## Handling Concept Drift
-
-Your model trained on January data might fail in March. Solutions:
-
-1. **Rolling windows**: Retrain on recent window only
-
-2. **Ensemble updates**: Maintain multiple models, weight by recency
-
-3. **Drift detection**: Monitor prediction distribution, trigger retrain when significant shift detected
-
-4. **Online learning**: Update incrementally as new data arrives
-
-## Real-Time Architecture
-
-For production systems:
-
-- **Stream processing**: Kafka plus Flink or Spark Streaming
-
-- **Feature store**: Pre-compute rolling statistics
-
-- **Model serving**: Low-latency inference under 10ms
-
-- **Alert pipeline**: Threshold-based or ML-based alerting
-
-## What Actually Works
-
-In production across multiple fraud detection systems:
-
-- **Ensemble is key**: Combine statistical plus ML plus rules
-
-- **Feature engineering over model choice**: Domain expertise wins
-
-- **Label quality matters**: False positives kill your system
-
-- **Tune for precision, not recall**: Better to miss one than alert on ten
-
-## The Uncomfortable Truth
-
-No model catches everything. Build for:
-
-- Detection latency under 100ms
-
-- Graceful degradation under load
-
-- Human-in-the-loop for edge cases
-
-- Continuous monitoring and iteration
-
-Anomaly detection is not a solved problem — it's an ongoing arms race against adversaries.
-        `,
-        date: 'AUG 2025',
-        readTime: 13,
-        tags: ['ANOMALY', 'STREAMING', 'ML', 'SECURITY'],
-        featured: false,
-    },
-    {
         id: 'B007',
         title: 'EquityLens: Building an AI Fairness Auditing Platform',
         slug: 'equitylens-case-study',
@@ -677,11 +453,11 @@ I integrated direct mappings to regulatory frameworks:
 
 ## Results
 
-- Detected **23% performance gap** in a commercial triage model across demographic groups
-- Reduced compliance audit time from **3 weeks to 4 hours**
-- Deployed to production with **99.9% uptime**
+- Surfaced a **23% performance gap** on a public triage dataset across demographic groups
+- Cut a manual fairness review from days to under an hour
+- Packaged as a reproducible audit report with an interactive dashboard
 
-The platform is live at [fairness-lens-backend](https://fairness-lens-backend-988207147245.us-central1.run.app/) and handles healthcare data from multiple hospital systems.
+The platform is live at [fairness-lens-backend](https://fairness-lens-backend-988207147245.us-central1.run.app/), validated on public, de-identified datasets.
 
 Fairness isn't just a feature—it's a requirement for responsible AI deployment.
         `,
@@ -719,125 +495,15 @@ CrewAI allows you to define specialized agents with distinct personas (e.g., Res
 LangGraph enables cyclical graphs, which are essential for self-correction loops. If an agent's code execution fails a test, the graph can route the control back to the "Coder" agent to fix the bug.
 
 ## Designing for Resilience
-In production, we must design for the "failure case."
+In production, I design for the "failure case."
 - **Fallback Models**: If GPT-4 hits a rate limit, the orchestrator should automatically switch to a local Llama-3 instance via Ollama.
 - **Human-in-the-Loop**: Critical actions (like deleting data or making payments) should trigger a "pause" in the graph for human approval.
 
 Orchestration is what turns a chatbot into a reliable digital employee.
         `,
-        date: 'MAY 2024',
+        date: 'FEB 2026',
         readTime: 12,
         tags: ['AI SYSTEMS', 'ORCHESTRATION', 'WORKFLOWS'],
-        featured: false,
-    },
-    {
-        id: 'B009',
-        title: 'Scaling AI Inference: Optimization Strategies for Production',
-        slug: 'scaling-llm-inference',
-        category: 'Infrastructure',
-        excerpt: 'How to reduce latency and cost in high-throughput AI applications without sacrificing accuracy, from quantization to decoding strategies.',
-        content: `
-# Scaling LLM Inference: Optimization Strategies for Production
-
-As we move AI from prototypes to enterprise-grade applications, the bottleneck shifts from model capability to **inference efficiency**. Scaling a model to handle thousands of concurrent requests requires a deep understanding of the hardware-software interface.
-
-## The Latency-Cost Trade-off
-The primary goal of inference optimization is to minimize Time-To-First-Token (TTFT) and maximize tokens per second, while keeping VRAM usage low.
-
-### 1. Quantization: The 80/20 Rule
-Quantizing a model from FP16 to INT4 or INT8 can reduce VRAM requirements by up to 75% with minimal impact on perplexity.
-- **GGUF**: Best for CPU/GPU hybrid inference (local LLMs).
-- **AWQ/GPTQ**: Optimized for high-throughput GPU serving.
-
-### 2. Speculative Decoding
-Speculative decoding uses a smaller "draft" model (e.g., Llama-7B) to predict the next few tokens, which are then validated in parallel by the "target" model (e.g., Llama-70B). This can result in a 2-3x speedup for sequence generation without losing quality.
-
-### 3. KV-Cache Management
-In long-context RAG applications, the KV-cache can consume massive amounts of VRAM. Techniques like **PagedAttention** (used in vLLM) allow for dynamic memory allocation, preventing fragmentation and enabling much higher batch sizes.
-
-## Choosing the Right Backend
-In my production pipelines, I’ve found that:
-- **vLLM** is the gold standard for high-throughput serving on NVIDIA GPUs.
-- **Ollama** is unbeatable for local development and private edge deployments.
-- **Groq** (LPU architecture) is the current leader for raw inference speed (sub-50ms TTFT).
-
-Efficiency isn't just about saving money; it's about enabling the "instant" UX that users expect from modern AI.
-        `,
-        date: 'APR 2024',
-        readTime: 10,
-        tags: ['MLOPS', 'INFERENCE', 'OPTIMIZATION', 'SCALABILITY'],
-        featured: false,
-    },
-    {
-        id: 'B010',
-        title: 'Next.js 15: Engineering High-Performance AI Interfaces',
-        slug: 'nextjs-15-performance',
-        category: 'Frontend',
-        excerpt: 'Leveraging modern web features to build fast, streaming AI interfaces that provide an instant user experience.',
-        content: `
-# Next.js 15: Engineering High-Performance AI Interfaces
-
-Building AI interfaces is different from building standard CRUD apps. You're dealing with long-running requests, token streaming, and complex UI states. Next.js 15, paired with React 19, introduces several patterns that are specifically beneficial for AI applications.
-
-## Streaming as a First-Class Citizen
-AI responses are slow. Waiting 10 seconds for a full response is a UX killer. Next.js 15 makes it easier to implement partial hydration and streaming.
-- **Loading UI (Suspense)**: Instantly show the interface while the AI backend generates the initial tokens.
-- **Server Actions**: Securely handle model routing and tool execution on the server, keeping API keys away from the client.
-
-## React 19 Hooks for AI
-The new \`useActionState\` and \`useOptimistic\` hooks are game-changers for AI chatbots.
-- **useOptimistic**: Instantly show the user's message and a "typing..." indicator before the server even receives the request.
-- **useActionState**: Simplifies handling of the streaming state, error handling, and form submission logic.
-
-## Partial Prerendering (PPR)
-PPR allows you to combine static content (like the chatbot sidebar and previous history) with dynamic streaming content (the current response) in a single request. This reduces the number of round-trips and makes the app feel significantly faster.
-
-## The "Zero-Latency" Goal
-In my portfolio redesign, I’ve focused on "Industrial Aesthetics" which prioritize functional speed. By using CSS-only animations and minimizing client-side JS, we ensure that the interface remains responsive even while the heavy lifting happens in the LLM background.
-
-Performance is the foundation of trust in AI.
-        `,
-        date: 'MAR 2024',
-        readTime: 8,
-        tags: ['NEXTJS', 'FRONTEND', 'PERFORMANCE', 'UX'],
-        featured: false,
-    },
-    {
-        id: 'B011',
-        title: 'Secure CI/CD for AI Models: Protecting the Development Lifecycle',
-        slug: 'secure-cicd-ai-models',
-        category: 'Cybersecurity',
-        excerpt: 'Implementing robust security checks in AI development, from scanning for vulnerabilities to ensuring data integrity in automated pipelines.',
-        content: `
-# Secure CI/CD for AI Models: Protecting the Neural Supply Chain
-
-In the rush to deploy AI, security is often an afterthought. However, AI introduces a new attack surface: the **neural supply chain**. From poisoned training data to prompt injection, the vulnerabilities are unique and dangerous.
-
-## The New Attack Vectors
-1. **Prompt Injection**: Malicious input designed to bypass system instructions or leak sensitive system prompts.
-2. **Data Leakage**: LLMs "remembering" sensitive training data or PII and revealing it to unauthorized users.
-3. **Weight Tampering**: If an attacker gains access to your model weights (e.g., in Hugging Face or S3), they can subtly alter model behavior without changing a line of code.
-
-## Implementing a Security-First Pipeline
-A modern AI CI/CD pipeline should include:
-
-### 1. Automated Red-Teaming
-Use a smaller LLM to "attack" your main model during the CI phase. We use frameworks like **Giskard** or custom scripts to test for bias, toxicity, and prompt injection resilience.
-
-### 2. PII Scrubbing
-Before data hits your fine-tuning pipeline or vector database, it must pass through a scrubbing layer. We use **Presidio** to identify and mask names, emails, and financial information.
-
-### 3. Model Integrity Checks
-Implement SHA-256 hashing for model weights. Before loading a model into production, the inference server should verify the hash against a known good value stored in a secure secret manager.
-
-### 4. Output Filtering
-Never return raw LLM output directly. Implement a "Guardrail" layer that checks the generated text against a list of restricted topics or PII patterns before it reaches the end user.
-
-Security isn't a checkbox; it's a continuous process that starts in the development environment.
-        `,
-        date: 'FEB 2024',
-        readTime: 9,
-        tags: ['SECURITY', 'CICD', 'AI SAFETY', 'DEVOPS'],
         featured: false,
     },
 ];

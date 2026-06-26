@@ -1,6 +1,7 @@
 import { PageHeader } from '../components/ui/PageHeader';
 import { Rule } from '../components/ui/Rule';
 import { SKILL_GROUPS, EXPERIENCE } from '../data/portfolio';
+import { CONTRIBUTIONS, OSS_STATS } from '../data/opensource';
 import { TracingBeam } from '../components/effects/TracingBeam';
 import { TextReveal } from '../components/effects/TextReveal';
 import { BentoGrid, BentoCard } from '../components/bento';
@@ -122,6 +123,64 @@ export function AboutPage() {
                   );
                 })}
               </BentoGrid>
+            </section>
+
+            <Rule label="Open Source" />
+            <section id="open-source">
+              <h2 className="display text-3xl mb-2">Open source</h2>
+              <p className="text-ink-secondary leading-relaxed mb-8 max-w-prose">
+                {OSS_STATS.mergedPRs} merged pull requests and {OSS_STATS.openedIssues} issues
+                across {OSS_STATS.projects}+ external projects — including {OSS_STATS.orgs.join(', ')}.
+                Verified on{' '}
+                <a
+                  href="https://github.com/KunjShah95"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ink-primary underline decoration-rule/32 underline-offset-4 hover:decoration-ink-primary"
+                >
+                  GitHub
+                </a>.
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-rule/12 mb-10 border border-rule/12">
+                {([
+                  [OSS_STATS.mergedPRs, 'merged PRs'],
+                  [OSS_STATS.openedIssues, 'issues opened'],
+                  [OSS_STATS.totalPRs, 'total PRs'],
+                  [`${OSS_STATS.projects}+`, 'projects'],
+                ] as [string | number, string][]).map(([n, l]) => (
+                  <div key={l} className="bg-paper p-4 md:p-5">
+                    <div className="display text-2xl md:text-3xl text-ink-primary tabular-nums">{n}</div>
+                    <div className="kicker mt-1">{l}</div>
+                  </div>
+                ))}
+              </div>
+              <ul className="divide-y divide-rule/12 border-y border-rule/12">
+                {CONTRIBUTIONS.map((c) => (
+                  <li key={c.url}>
+                    <a
+                      href={c.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:gap-6"
+                    >
+                      <div className="flex items-center gap-3 md:w-48 md:shrink-0">
+                        <span className="display text-base text-ink-primary group-hover:underline decoration-rule/32 underline-offset-4">
+                          {c.label}
+                        </span>
+                        {c.notable && (
+                          <span className="kicker text-ink-tertiary">★</span>
+                        )}
+                      </div>
+                      <p className="flex-1 text-sm text-ink-secondary leading-relaxed">
+                        {c.title}
+                      </p>
+                      <span className="font-mono text-xs text-ink-tertiary md:w-28 md:text-right">
+                        {c.kind === 'merged' ? 'merged' : 'proposed'} · {c.tag}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </section>
 
             <Rule label="CV" />
