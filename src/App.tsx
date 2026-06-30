@@ -42,7 +42,7 @@ function Home() {
     <div className="space-y-0">
       <SEO
         title="Kunj Shah | Freelancer — AI Agents, Web Apps & APIs"
-        description="Kunj Shah is a 22-year-old freelancer in Ahmedabad who ships AI agents, web apps, and APIs for founders and small teams. Portfolio, essays, and a list of things that broke in production."
+        description="Kunj Shah is a freelance AI engineer in Ahmedabad shipping AI agents, web apps, and APIs for founders from whiteboard to production in weeks."
         faqItems={PORTFOLIO_FAQ}
       />
       <Hero />

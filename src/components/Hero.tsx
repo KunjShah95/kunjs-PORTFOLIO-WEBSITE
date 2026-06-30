@@ -87,8 +87,8 @@ export function Hero() {
                 className="w-full h-full object-cover object-[center_25%]"
                 loading="eager"
                 decoding="async"
-                width="600"
-                height="750"
+                width="395"
+                height="878"
               />
             </div>
             <figcaption className="mt-3 font-mono text-xs text-ink-tertiary text-right">

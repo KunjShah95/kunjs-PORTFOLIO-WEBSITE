@@ -47,6 +47,7 @@ const routes = [
   { path: 'hackathons', title: 'Hackathons', desc: 'Kunj Shah at hackathons — 4 finals including Autonomous Hacks, Odoo, and SIH.' },
   { path: 'labs', title: 'Labs', desc: 'Experiments and research prototypes by Kunj Shah.' },
   { path: 'contact', title: 'Contact', desc: 'Have something to ship? Reach Kunj Shah — AI agents, web apps, APIs, prototypes.' },
+  { path: 'education', title: 'Education', desc: 'Educational background of Kunj Shah — Computer Engineering coursework, research projects, and academic history.' },
 ];
 
 // detail routes from data
@@ -57,7 +58,7 @@ for (const b of blogs) {
   routes.push({ path: `blogs/${b.slug}`, title: b.title, desc: b.desc, kicker: 'Essay' });
 }
 
-function noscriptBody(r) {
+function routeBody(r) {
   const links = projects.length
     ? `<p><a href="/projects">All projects</a> · <a href="/blogs">Writing</a> · <a href="/about">About</a> · <a href="/contact">Contact</a></p>`
     : '';
@@ -79,8 +80,8 @@ for (const r of routes) {
     .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
     .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(fullTitle)}$2`)
     .replace(/(<meta name="twitter:description"\s+content=")[\s\S]*?("\s*\/>)/, `$1${esc(r.desc)}$2`)
-    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
-    .replace(/<noscript>[\s\S]*?<\/noscript>/, `<noscript>${noscriptBody(r)}</noscript>`);
+    .replace(/(<link data-rh="true" rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
+    .replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${routeBody(r)}</div>`);
 
   const dir = join(DIST, r.path);
   mkdirSync(dir, { recursive: true });
@@ -88,4 +89,25 @@ for (const r of routes) {
   count++;
 }
 
-console.log(`prerender-routes: wrote ${count} route shells (${projects.length} projects, ${blogs.length} blogs)`);
+// Generate 404.html custom fallback
+const errorRoute = {
+  path: '404',
+  title: 'Page Not Found',
+  desc: 'The page you are looking for does not exist or has been moved. Return to the home page or browse projects and writing.',
+  kicker: '404'
+};
+const errorUrl = `${ORIGIN}/404`;
+const errorFullTitle = `${NAME} | ${errorRoute.title}`;
+let html404 = tpl
+  .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(errorFullTitle)}</title>`)
+  .replace(/(<meta name="description"\s+content=")[\s\S]*?("\s*\/>)/, `$1${esc(errorRoute.desc)}$2`)
+  .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${esc(errorFullTitle)}$2`)
+  .replace(/(<meta property="og:description"\s+content=")[\s\S]*?("\s*\/>)/, `$1${esc(errorRoute.desc)}$2`)
+  .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${errorUrl}$2`)
+  .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${esc(errorFullTitle)}$2`)
+  .replace(/(<meta name="twitter:description"\s+content=")[\s\S]*?("\s*\/>)/, `$1${esc(errorRoute.desc)}$2`)
+  .replace(/(<link data-rh="true" rel="canonical" href=")[^"]*(")/, `$1${errorUrl}$2`)
+  .replace(/<div id="root">[\s\S]*?<\/div>/, `<div id="root">${routeBody(errorRoute)}</div>`);
+writeFileSync(join(DIST, '404.html'), html404);
+
+console.log(`prerender-routes: wrote ${count} route shells (${projects.length} projects, ${blogs.length} blogs) and 404.html`);
