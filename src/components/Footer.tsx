@@ -15,7 +15,7 @@ const LINKS = [
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative mt-32 overflow-hidden border-t border-rule/12">
+    <footer className="relative mt-20 overflow-hidden border-t border-rule/12">
       <BackgroundBeams count={1} />
       <GradientOrb size={250} className="bottom-[-100px] left-[-80px]" />
       <div className="relative max-w-manifest mx-auto px-6">
@@ -24,7 +24,7 @@ export function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.6 }}
-          className="py-16 md:py-20 flex flex-col items-center gap-10"
+          className="py-14 md:py-18 flex flex-col items-center gap-10"
         >
           <div className="kicker">Find me elsewhere</div>
           <div className="w-full max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -34,7 +34,7 @@ export function Footer() {
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
-                  className="glass glass-shine group w-full flex items-center justify-between gap-4 p-5 rounded-2xl transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgb(0_0_0/0.16)]"
+                  className="glass glass-shine noise-texture group w-full flex items-center justify-between gap-4 p-5 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgb(0_0_0/0.16)]"
                 >
                   <div>
                     <div className="font-mono text-xs uppercase tracking-kicker text-ink-tertiary">{link.label}</div>
@@ -45,8 +45,13 @@ export function Footer() {
               </Magnetic>
             ))}
           </div>
-          <div className="font-mono text-xs text-ink-tertiary">
-            &copy; {year} Kunj Shah
+          <div className="flex flex-col items-center gap-2">
+            <div className="font-mono text-xs text-ink-tertiary">
+              &copy; {year} Kunj Shah &middot; Designed &amp; built by hand
+            </div>
+            <div className="font-mono text-[10px] text-ink-quaternary">
+              Currently shipping AI products every week
+            </div>
           </div>
         </motion.div>
       </div>

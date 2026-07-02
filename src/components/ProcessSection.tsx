@@ -9,6 +9,7 @@ const STEPS = [
     title: 'You tell me what you need',
     desc: 'Brief, scope, timeline. A day, not a week. We align on a Google Doc and define the MVP parameters.',
     bgTint: 'rgba(124, 118, 255, 0.12)',
+    gradient: 'from-accent/25 to-purple-500/15',
   },
   {
     icon: Rocket,
@@ -16,6 +17,7 @@ const STEPS = [
     title: 'I build it',
     desc: 'No overhead, no pointless meetings. Just direct communication on Slack/Discord and daily updates. Speed over bureaucracy.',
     bgTint: 'rgba(6, 182, 212, 0.12)',
+    gradient: 'from-cyan-400/25 to-accent/15',
   },
   {
     icon: CheckCircle,
@@ -23,6 +25,7 @@ const STEPS = [
     title: 'You get a working system',
     desc: 'Fully deployed to Vercel/Fly/AWS, fully documented codebase with clean handoff. Ready to serve real users.',
     bgTint: 'rgba(34, 197, 94, 0.12)',
+    gradient: 'from-green-400/25 to-cyan-400/15',
   },
 ]
 
@@ -54,14 +57,14 @@ export function ProcessSection() {
                   <div className="absolute -left-[31px] md:-left-[43px] top-7 z-20 flex items-center justify-center">
                     <span className="relative flex h-4.5 w-4.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent/40 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-4.5 w-4.5 bg-accent border-2 border-paper"></span>
+                      <span className="relative inline-flex rounded-full h-4.5 w-4.5 bg-accent border-2 border-paper shadow-[0_0_12px_rgb(var(--accent)/0.3)]"></span>
                     </span>
                   </div>
 
                   <LiquidGlass
                     intensity="medium"
                     tint={s.bgTint}
-                    className="p-6 md:p-8 rounded-2xl border border-rule/12 hover:border-accent/30 transition-all shadow-lg"
+                    className="p-6 md:p-8 rounded-2xl border border-rule/12 hover:border-accent/30 transition-all shadow-lg noise-texture hover-lift"
                   >
                     <HoverExpand
                       header={
@@ -74,14 +77,14 @@ export function ProcessSection() {
                               {s.title}
                             </h3>
                           </div>
-                          <div className="w-10 h-10 rounded-lg bg-paper/60 border border-rule/8 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
-                            <Icon className="w-5 h-5 text-ink-secondary group-hover:text-accent transition-colors" strokeWidth={1.5} />
+                          <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${s.gradient} border border-rule/8 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                            <Icon className="w-5 h-5 text-accent" strokeWidth={1.5} />
                           </div>
                         </div>
                       }
                     >
                       <div className="border-t border-rule/8 pt-4 mt-2">
-                        <p className="text-sm md:text-base text-ink-secondary leading-relaxed max-w-[65ch]">
+                        <p className="text-sm md:text-base text-ink-secondary leading-relaxed max-w-[65ch] font-body">
                           {s.desc}
                         </p>
                       </div>

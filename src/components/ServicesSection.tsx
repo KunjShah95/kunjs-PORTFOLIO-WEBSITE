@@ -9,6 +9,7 @@ const SERVICES = [
     desc: 'LangChain, LLM orchestration, retrieval pipelines, autonomous workflows — production-ready.',
     span: 'md:col-span-2',
     bgTint: 'rgba(124, 118, 255, 0.12)',
+    gradient: 'from-accent/20 via-purple-500/15 to-cyan-400/10',
   },
   {
     icon: Globe,
@@ -16,6 +17,7 @@ const SERVICES = [
     desc: 'React, Next.js, FastAPI, Tailwind. Full-stack apps shipped in weeks, not months.',
     span: 'md:col-span-1',
     bgTint: 'rgba(6, 182, 212, 0.12)',
+    gradient: 'from-cyan-400/20 via-blue-500/15 to-accent/10',
   },
   {
     icon: Lightbulb,
@@ -23,6 +25,7 @@ const SERVICES = [
     desc: 'From whiteboard to working demo in days. Test your idea before committing to production.',
     span: 'md:col-span-1',
     bgTint: 'rgba(234, 179, 8, 0.12)',
+    gradient: 'from-yellow-400/20 via-orange-400/15 to-accent/10',
   },
   {
     icon: Server,
@@ -30,6 +33,7 @@ const SERVICES = [
     desc: 'Postgres, Docker, cloud deployment, CI/CD. The boring tech that keeps things running.',
     span: 'md:col-span-2',
     bgTint: 'rgba(168, 85, 247, 0.12)',
+    gradient: 'from-purple-500/20 via-accent/15 to-pink-400/10',
   },
 ]
 
@@ -61,16 +65,17 @@ export function ServicesSection() {
                 className={s.span}
               >
                 <TiltCard scale={1.015} maxRotation={5}>
-                  <LiquidGlass intensity="medium" tint={s.bgTint} className="h-full p-8 md:p-10 rounded-2xl flex flex-col justify-between min-h-[260px] group border border-rule/12 hover:border-accent/30 transition-all">
+                  <LiquidGlass intensity="medium" tint={s.bgTint} className="h-full p-8 md:p-10 rounded-2xl flex flex-col justify-between min-h-[260px] group border border-rule/12 hover:border-accent/30 transition-all noise-texture relative overflow-hidden">
                     {/* Animated top-border wipe on hover */}
                     <span className="absolute top-0 left-0 h-[2px] w-0 bg-gradient-to-r from-accent via-cyan-400 to-purple-500 group-hover:w-full transition-all duration-slow ease-out-soft" />
 
                     <div>
-                      <div className="w-12 h-12 rounded-xl bg-accent/8 flex items-center justify-center mb-6 group-hover:bg-accent/15 transition-colors group-hover:scale-105 duration-300">
-                        <Icon className="w-6 h-6 text-accent animate-float" strokeWidth={1.5} style={{ animationDelay: `${i * 0.5}s` }} />
+                      {/* Gradient icon container */}
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${s.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-rule/8`}>
+                        <Icon className="w-6 h-6 text-accent" strokeWidth={1.5} />
                       </div>
                       <h3 className="display text-2xl mb-3 text-ink-primary font-bold tracking-tight">{s.title}</h3>
-                      <p className="text-sm md:text-base text-ink-secondary leading-relaxed max-w-[45ch]">{s.desc}</p>
+                      <p className="text-sm md:text-base text-ink-secondary leading-relaxed max-w-[45ch] font-body">{s.desc}</p>
                     </div>
 
                     {/* Subtle micro-glow bar at bottom */}

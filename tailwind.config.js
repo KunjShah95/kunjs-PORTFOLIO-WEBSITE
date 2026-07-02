@@ -36,9 +36,9 @@ export default {
       },
       fontFamily: {
         display: ['"Hanken Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
-        body:    ['"Hanken Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
+        body:    ['"Geist"', '"Hanken Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
         mono:    ['"JetBrains Mono"', '"SF Mono"', 'Menlo', 'monospace'],
-        sans:    ['"Hanken Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
+        sans:    ['"Geist"', '"Hanken Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
         serif:   ['"Hanken Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
       },
       borderRadius: {

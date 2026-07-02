@@ -77,7 +77,7 @@ export function FeaturedProjects() {
 
         {inView && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {/* HERO PROJECT CARD — spans 2 columns */}
+            {/* HERO PROJECT CARD — spans 2 columns with case study structure */}
             {hero && (
               <div className="md:col-span-2 md:row-span-2">
                 <TiltCard scale={1.01} maxRotation={4}>
@@ -85,7 +85,7 @@ export function FeaturedProjects() {
                     <LiquidGlass
                       intensity="strong"
                       tint="rgba(124, 118, 255, 0.15)"
-                      className="p-8 md:p-10 flex flex-col justify-between h-full min-h-[480px] border border-rule/12 hover:border-accent/40 group transition-all"
+                      className="p-8 md:p-10 flex flex-col justify-between h-full min-h-[480px] border border-rule/12 hover:border-accent/40 group transition-all noise-texture"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-6">
@@ -102,7 +102,7 @@ export function FeaturedProjects() {
                             </div>
                           </div>
                           {hero.impact && (
-                            <span className="font-mono text-xs text-accent px-2.5 py-1 rounded-full bg-accent/8 border border-accent/20 font-bold uppercase tracking-wider self-start">
+                            <span className="font-mono text-xs text-accent px-2.5 py-1 rounded-full bg-accent/8 border border-accent/20 font-bold uppercase tracking-wider self-start" style={{ animation: 'glow-pulse 3s ease-in-out infinite' }}>
                               {hero.impact}
                             </span>
                           )}
@@ -114,9 +114,21 @@ export function FeaturedProjects() {
                           </Link>
                         </h3>
 
-                        <p className="mt-6 text-ink-secondary text-base md:text-lg leading-relaxed max-w-prose">
-                          {hero.desc}
-                        </p>
+                        {/* Case study structure */}
+                        <div className="mt-8 space-y-4">
+                          {hero.problem && (
+                            <div className="flex gap-3">
+                              <span className="font-mono text-[10px] uppercase tracking-wider text-ink-tertiary font-bold pt-0.5 shrink-0 w-16">Problem</span>
+                              <p className="text-sm text-ink-secondary leading-relaxed font-body">{hero.problem}</p>
+                            </div>
+                          )}
+                          {hero.outcome && (
+                            <div className="flex gap-3">
+                              <span className="font-mono text-[10px] uppercase tracking-wider text-accent font-bold pt-0.5 shrink-0 w-16">Result</span>
+                              <p className="text-sm text-ink-primary leading-relaxed font-semibold font-body">{hero.outcome}</p>
+                            </div>
+                          )}
+                        </div>
                       </div>
 
                       <div>
@@ -124,10 +136,11 @@ export function FeaturedProjects() {
                           <div className="mt-8 pt-6 border-t border-rule/8">
                             <Kicker className="block mb-3">Stack</Kicker>
                             <ul className="flex flex-wrap gap-2">
-                              {hero.tech.map((t) => (
+                              {hero.tech.map((t, i) => (
                                 <li
                                   key={t}
                                   className="font-mono text-xs text-ink-primary px-3 py-1 border border-rule/8 rounded-full bg-paper/60 hover:bg-accent/15 hover:border-accent/40 group-hover:scale-105 transition-all duration-300"
+                                  style={{ transitionDelay: `${i * 40}ms` }}
                                 >
                                   {t}
                                 </li>
@@ -152,14 +165,14 @@ export function FeaturedProjects() {
               </div>
             )}
 
-            {/* SUPPORTING PROJECT CARDS */}
+            {/* SUPPORTING PROJECT CARDS with case study framing */}
             {supporting.map((p, i) => (
               <div key={p.slug} className="md:col-span-1">
                 <TiltCard scale={1.015} maxRotation={5}>
                   <LiquidGlass
                     intensity="subtle"
                     tint="rgba(6, 182, 212, 0.1)"
-                    className="p-6 md:p-8 flex flex-col justify-between h-full min-h-[300px] border border-rule/12 hover:border-accent/40 group transition-all rounded-3xl"
+                    className="p-6 md:p-8 flex flex-col justify-between h-full min-h-[300px] border border-rule/12 hover:border-accent/40 group transition-all rounded-3xl noise-texture hover-lift"
                   >
                     <div>
                       <div className="flex items-start justify-between mb-3">
@@ -179,9 +192,16 @@ export function FeaturedProjects() {
                           {p.title}
                         </Link>
                       </h3>
-                      {p.desc && (
-                        <p className="text-sm text-ink-secondary leading-relaxed line-clamp-4">
-                          {p.desc}
+                      
+                      {/* Mini case study for supporting cards */}
+                      {p.problem && (
+                        <p className="text-xs text-ink-tertiary leading-relaxed line-clamp-2 font-body mb-2">
+                          <span className="font-mono font-bold text-ink-quaternary">Problem:</span> {p.problem}
+                        </p>
+                      )}
+                      {p.outcome && (
+                        <p className="text-xs text-accent/80 leading-relaxed line-clamp-2 font-body font-medium">
+                          <span className="font-mono font-bold text-accent">Result:</span> {p.outcome}
                         </p>
                       )}
                     </div>
@@ -192,10 +212,10 @@ export function FeaturedProjects() {
                       )}
                       <Link
                         to={`/projects/${p.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover group/link"
                       >
                         Read Case
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                       </Link>
                     </div>
                   </LiquidGlass>
@@ -207,7 +227,7 @@ export function FeaturedProjects() {
 
         {/* Hackathons glass pill bar */}
         <div className="mt-16 pt-8 border-t border-rule/12">
-          <LiquidGlass intensity="subtle" tint="rgba(124, 118, 255, 0.05)" className="p-6 rounded-2xl border border-rule/8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <LiquidGlass intensity="subtle" tint="rgba(124, 118, 255, 0.05)" className="p-6 rounded-2xl border border-rule/8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 noise-texture">
             <div className="font-mono text-xs text-ink-secondary uppercase tracking-wider leading-relaxed">
               <span className="text-accent font-bold">{HACKATHONS.filter(h => h.placement === 'Finalist').length} hackathon finals</span>
               <span className="mx-3 text-ink-quaternary">/</span>
