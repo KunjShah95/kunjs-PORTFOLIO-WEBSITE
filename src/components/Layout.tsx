@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 import { StickyCTA } from './StickyCTA'
@@ -11,6 +12,8 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
+   const { pathname } = useLocation()
+   const isHome = pathname === '/'
    const [isCommandOpen, setIsCommandOpen] = useState(false)
 
    return (
@@ -28,8 +31,8 @@ export function Layout({ children }: LayoutProps) {
             {children}
          </main>
 
-         <Footer />
-         <StickyCTA />
+         {!isHome && <Footer />}
+          <StickyCTA />
 
          <CommandMenu open={isCommandOpen} setOpen={setIsCommandOpen} />
          <AIAssistant />

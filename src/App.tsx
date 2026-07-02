@@ -1,4 +1,5 @@
 import { Suspense, lazy } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 import { motion, MotionConfig } from 'framer-motion'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
@@ -9,18 +10,26 @@ import { ScrollToTop } from './components/ScrollToTop'
 import { useWebMCP } from './hooks/useWebMCP'
 
 // Eager load critical components for Home
-import { Hero } from './components/Hero'
+import { BentoHero } from './components/BentoHero'
 import { ServicesSection } from './components/ServicesSection'
 import { ProcessSection } from './components/ProcessSection'
 import { ProofBar } from './components/ProofBar'
 import { FeaturedProjects } from './components/FeaturedProjects'
 import { GitHubProfile } from './components/GitHubProfile'
 import { FinalCTA } from './components/FinalCTA'
+import {
+  SpotlightCard,
+  BackgroundBeams,
+  GradientOrb,
+  LiquidGlass,
+  TiltCard,
+  CountUp,
+} from './components/effects'
 import { SEO } from './components/SEO'
 import { InitialLoader } from './components/InitialLoader'
 import { BLOGS } from './data/portfolio'
-import { CONTRIBUTIONS, OSS_STATS } from './data/opensource'
 import { PORTFOLIO_FAQ } from './data/seo-faq'
+import { useGitHubPRs } from './hooks/useGitHubPRs'
 
 // Lazy load secondary pages
 const BlogsPage = lazy(() => import('./pages/BlogsPage').then(module => ({ default: module.BlogsPage })))
@@ -36,158 +45,229 @@ const ExperiencePage = lazy(() => import('./pages/ExperiencePage').then(module =
 const EducationPage = lazy(() => import('./pages/EducationPage').then(module => ({ default: module.EducationPage })))
 
 function Home() {
-  const latestBlogs = BLOGS.slice(0, 3);
+  const latestBlogs = BLOGS.slice(0, 3)
+  const { contributions, stats: liveStats } = useGitHubPRs()
 
   return (
     <div className="space-y-0">
       <SEO
-        title="Kunj Shah | Freelancer — AI Agents, Web Apps & APIs"
-        description="Kunj Shah is a freelance AI engineer in Ahmedabad shipping AI agents, web apps, and APIs for founders from whiteboard to production in weeks."
+        title="Kunj Shah | AI Engineer &amp; Software Developer — Agentic AI, AI/ML"
+        description="Kunj Shah is an AI Engineer and Software Developer building autonomous agents, production AI/ML pipelines, and scalable software backend systems."
         faqItems={PORTFOLIO_FAQ}
       />
-      <Hero />
+      <BentoHero />
       <ServicesSection />
       <ProcessSection />
       <ProofBar />
       <FeaturedProjects />
 
-      <section id="open-source" className="py-24 md:py-32 border-t border-rule/12">
-        <div className="max-w-manifest mx-auto px-6">
-          <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+      <section id="open-source" className="relative py-24 md:py-32 overflow-hidden border-t border-rule/12 bg-sunken/10">
+        <BackgroundBeams count={3} className="opacity-30" />
+        <div className="relative max-w-manifest mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+          >
             <div>
-              <div className="kicker">02.5 · Open source</div>
-              <h2 className="display text-4xl md:text-5xl mt-3 max-w-2xl">Shipping in other people&rsquo;s repos too.</h2>
+              <div className="kicker text-accent font-semibold">02.5 · Open source</div>
+              <h2 className="display text-4xl md:text-5xl mt-3 max-w-2xl font-bold leading-[1.05]">Shipping in other people&rsquo;s repos too.</h2>
             </div>
             <p className="text-sm text-ink-secondary max-w-xs self-start md:self-auto md:text-right">
-              Real work in {OSS_STATS.orgs.join(', ')} and {OSS_STATS.projects}+ more —
+              Real work in {liveStats.orgs.join(', ')} and {liveStats.projects}+ more —
               verified on GitHub.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-rule/12 mb-12 border border-rule/12">
+          {/* Liquid glass stats row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
             {([
-              [OSS_STATS.mergedPRs, 'merged PRs'],
-              [OSS_STATS.openedIssues, 'issues opened'],
-              [OSS_STATS.totalPRs, 'total PRs'],
-              [`${OSS_STATS.projects}+`, 'external projects'],
-            ] as [string | number, string][]).map(([n, l]) => (
-              <div key={l} className="bg-paper p-5 md:p-6">
-                <div className="display text-3xl md:text-4xl text-ink-primary tabular-nums">{n}</div>
-                <div className="kicker mt-1">{l}</div>
-              </div>
+              [liveStats.mergedPRs, 'merged PRs', false, 'rgba(124, 118, 255, 0.1)'],
+              [liveStats.openedIssues, 'issues opened', false, 'rgba(6, 182, 212, 0.1)'],
+              [liveStats.totalPRs, 'total PRs', false, 'rgba(168, 85, 247, 0.1)'],
+              [liveStats.projects, 'external projects', true, 'rgba(34, 197, 94, 0.1)'],
+            ] as [number, string, boolean, string][]).map(([n, l, isCount, tint], i) => (
+              <motion.div
+                key={l}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+              >
+                <TiltCard scale={1.02} maxRotation={5}>
+                  <LiquidGlass intensity="subtle" tint={tint} className="p-5 md:p-6 border border-rule/12 rounded-2xl">
+                    <div className="display text-3xl md:text-4xl text-accent font-extrabold tabular-nums">
+                      <CountUp value={n} duration={1} suffix={isCount ? '+' : ''} />
+                    </div>
+                    <div className="kicker mt-2 text-ink-secondary">{l}</div>
+                  </LiquidGlass>
+                </TiltCard>
+              </motion.div>
             ))}
           </div>
 
-          <ul className="divide-y divide-rule/12 border-y border-rule/12">
-            {CONTRIBUTIONS.map((c) => (
-              <li key={c.url}>
-                <a
-                  href={c.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col gap-1 py-5 md:flex-row md:items-baseline md:gap-6"
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <span className="kicker">Contributions</span>
+              <span className="font-mono text-xs text-ink-tertiary">{contributions.length} total</span>
+            </div>
+            
+            <div className="divide-y divide-rule/8 rounded-2xl border border-rule/12 overflow-hidden bg-paper/20 backdrop-blur-sm">
+              {contributions.map((c, i) => (
+                <motion.div
+                  key={c.url}
+                  initial={{ opacity: 0, x: -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.04 }}
                 >
-                  <div className="flex items-center gap-3 md:w-44 md:shrink-0">
-                    <span className="display text-base text-ink-primary group-hover:underline decoration-rule/32 underline-offset-4">
-                      {c.label}
-                    </span>
-                    {c.notable && <span className="kicker text-ink-tertiary">&#9733;</span>}
-                  </div>
-                  <p className="flex-1 text-sm text-ink-secondary leading-relaxed">{c.title}</p>
-                  <span className="font-mono text-xs text-ink-tertiary md:w-28 md:text-right">
-                    {c.kind === 'merged' ? 'merged' : 'proposed'} &middot; {c.tag}
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
+                  <a
+                    href={c.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col gap-2 py-5 px-6 md:flex-row md:items-center md:gap-6 hover:bg-accent/5 transition-colors relative"
+                  >
+                    {/* Hover border-left accent indicator */}
+                    <span className="absolute left-0 inset-y-0 w-0.5 bg-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                    <div className="flex items-center gap-3 md:w-44 md:shrink-0">
+                      {c.notable && (
+                        <span className="w-2 h-2 rounded-full bg-accent animate-pulse-dot" />
+                      )}
+                      <span className="display text-base font-bold text-ink-primary group-hover:text-accent transition-colors">
+                        {c.label}
+                      </span>
+                    </div>
+                    <p className="flex-1 text-sm text-ink-secondary leading-relaxed group-hover:text-ink-primary transition-colors">{c.title}</p>
+                    <div className="flex items-center gap-2 font-mono text-xs text-ink-tertiary md:w-36 md:justify-end shrink-0">
+                      <span className="px-2 py-0.5 rounded bg-paper/60 border border-rule/8 text-[10px]">
+                        {c.kind === 'merged' ? 'merged' : 'proposed'}
+                      </span>
+                      <span>&middot;</span>
+                      <span className="text-accent">{c.tag}</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-200 text-accent ml-1" />
+                    </div>
+                  </a>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
       <GitHubProfile />
 
-      <section id="writing" className="py-24 md:py-32">
-        <div className="max-w-manifest mx-auto px-6">
-          <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+      <section id="writing" className="relative py-24 md:py-32 overflow-hidden bg-sunken/5">
+        <GradientOrb size={350} className="top-[-80px] right-[-60px] opacity-40" />
+        <div className="relative max-w-manifest mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+          >
             <div>
-              <div className="kicker">03 · Writing</div>
-              <h2 className="display text-4xl md:text-5xl mt-3 max-w-2xl">Long-form notes from shipping.</h2>
+              <div className="kicker text-accent font-semibold">03 · Writing</div>
+              <h2 className="display text-4xl md:text-5xl mt-3 max-w-2xl font-bold leading-[1.05]">Long-form notes from shipping.</h2>
             </div>
             <Link
               to="/blogs"
-              className="group inline-flex items-center gap-2 text-sm text-ink-secondary hover:text-ink-primary self-start md:self-auto"
+              className="group inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover self-start md:self-auto transition-colors"
             >
               All essays
               <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
             </Link>
-          </div>
+          </motion.div>
 
           {latestBlogs.length > 0 && (() => {
             const [lead, ...rest] = latestBlogs;
             return (
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-px bg-rule/12">
-                {/* Hero essay — full row on mobile, 8 cols on desktop */}
-                <motion.article
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                  className="md:col-span-8 bg-paper p-8 md:p-12 flex flex-col group min-h-[280px]"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="kicker">{lead.category}</span>
-                    <span className="font-mono text-xs text-ink-quaternary">·</span>
-                    <span className="kicker">{lead.date}</span>
-                    <span className="font-mono text-xs text-ink-quaternary">·</span>
-                    <span className="kicker">{lead.readTime} min read</span>
-                  </div>
-                  <h3 className="display text-3xl md:text-5xl mt-6 leading-[0.95] tracking-tightest flex-1">
-                    <Link to={`/blogs/${lead.slug}`} className="hover:underline decoration-ink-primary/30 underline-offset-8 decoration-1">
-                      {lead.title}
-                    </Link>
-                  </h3>
-                  <p className="mt-6 text-base md:text-lg text-ink-secondary leading-relaxed max-w-2xl">
-                    {lead.excerpt}
-                  </p>
-                  <Link
-                    to={`/blogs/${lead.slug}`}
-                    className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink-primary self-start"
-                  >
-                    Read essay
-                    <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
-                  </Link>
-                </motion.article>
-
-                {/* Supporting essays — stacked on the right */}
-                <div className="md:col-span-4 flex flex-col gap-px bg-rule/12">
-                  {rest.map((blog, i) => (
-                    <motion.article
-                      key={blog.id}
-                      initial={{ opacity: 0, y: 12 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
-                      className="bg-paper p-6 md:p-8 flex-1 flex flex-col group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className="kicker">{blog.category}</span>
-                        <span className="font-mono text-xs text-ink-quaternary">·</span>
-                        <span className="kicker">{blog.date}</span>
-                      </div>
-                      <h3 className="display text-xl md:text-2xl mt-4 leading-tight flex-1">
-                        <Link to={`/blogs/${blog.slug}`} className="hover:underline decoration-ink-primary/30 underline-offset-4 decoration-1">
-                          {blog.title}
-                        </Link>
-                      </h3>
-                      <p className="mt-3 text-sm text-ink-secondary line-clamp-2">{blog.excerpt}</p>
-                      <Link
-                        to={`/blogs/${blog.slug}`}
-                        className="mt-4 pt-4 border-t border-rule/12 inline-flex items-center gap-1.5 text-sm text-ink-secondary group-hover:text-ink-primary transition-colors"
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+                {/* Hero essay */}
+                <div className="md:col-span-8">
+                  <TiltCard scale={1.01} maxRotation={3}>
+                    <SpotlightCard className="h-full rounded-3xl">
+                      <LiquidGlass
+                        intensity="medium"
+                        tint="rgba(124, 118, 255, 0.1)"
+                        className="p-8 md:p-12 flex flex-col justify-between min-h-[380px] border border-rule/12 hover:border-accent/30 group transition-all"
                       >
-                        Read
-                        <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
-                      </Link>
-                    </motion.article>
+                        <div>
+                          <div className="flex flex-wrap items-center gap-3 text-xs">
+                            <span className="kicker text-accent">{lead.category}</span>
+                            <span className="font-mono text-ink-quaternary">·</span>
+                            <span className="kicker text-ink-secondary">{lead.date}</span>
+                            <span className="font-mono text-ink-quaternary">·</span>
+                            <span className="kicker text-ink-secondary">{lead.readTime} min read</span>
+                          </div>
+                          <h3 className="display text-3xl md:text-5xl mt-6 leading-[1.02] tracking-tightest font-bold">
+                            <Link to={`/blogs/${lead.slug}`} className="hover:text-accent transition-colors">
+                              {lead.title}
+                            </Link>
+                          </h3>
+                          <p className="mt-6 text-base md:text-lg text-ink-secondary leading-relaxed max-w-2xl">
+                            {lead.excerpt}
+                          </p>
+                        </div>
+                        <div className="mt-8">
+                          <Link
+                            to={`/blogs/${lead.slug}`}
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors group/link"
+                          >
+                            Read essay
+                            <span className="inline-block transition-transform group-hover/link:translate-x-1">&rarr;</span>
+                          </Link>
+                        </div>
+                      </LiquidGlass>
+                    </SpotlightCard>
+                  </TiltCard>
+                </div>
+
+                {/* Supporting essays */}
+                <div className="md:col-span-4 flex flex-col gap-6 md:gap-8">
+                  {rest.map((blog) => (
+                    <div key={blog.id} className="flex-1 flex">
+                      <TiltCard scale={1.015} maxRotation={4} className="w-full flex">
+                        <SpotlightCard className="w-full rounded-3xl flex">
+                          <LiquidGlass
+                            intensity="subtle"
+                            tint="rgba(6, 182, 212, 0.08)"
+                            className="p-6 md:p-8 flex flex-col justify-between w-full border border-rule/12 hover:border-accent/30 group transition-all"
+                          >
+                            <div>
+                              <div className="flex items-center gap-3 text-xs">
+                                <span className="kicker text-accent">{blog.category}</span>
+                                <span className="font-mono text-ink-quaternary">·</span>
+                                <span className="kicker text-ink-secondary">{blog.date}</span>
+                              </div>
+                              <h3 className="display text-xl md:text-2xl mt-4 leading-tight font-bold">
+                                <Link to={`/blogs/${blog.slug}`} className="hover:text-accent transition-colors">
+                                  {blog.title}
+                                </Link>
+                              </h3>
+                              <p className="mt-3 text-sm text-ink-secondary line-clamp-3 leading-relaxed">{blog.excerpt}</p>
+                            </div>
+                            <div className="mt-6 pt-4 border-t border-rule/8">
+                              <Link
+                                to={`/blogs/${blog.slug}`}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover transition-colors group/link2"
+                              >
+                                Read
+                                <span className="inline-block transition-transform group-hover/link2:translate-x-0.5">&rarr;</span>
+                              </Link>
+                            </div>
+                          </LiquidGlass>
+                        </SpotlightCard>
+                      </TiltCard>
+                    </div>
                   ))}
                 </div>
               </div>

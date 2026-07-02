@@ -9,7 +9,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { IDENTITY } from '../data/portfolio'
 import { SectionLabel } from './ui/SectionLabel'
 import { Kicker } from './ui/Kicker'
-import { BentoGrid, BentoCard } from './bento'
+import { LiquidGlass, TiltCard, SpotlightCard, TextReveal, CountUp } from './effects'
 
 const GITHUB_USERNAME = IDENTITY.github_username
 
@@ -148,23 +148,14 @@ export function GitHubProfile() {
     return () => clearInterval(interval)
   }, [loadStatic])
 
-  const metaLine = user
-    ? [
-        `${user.public_repos} public repos`,
-        `${totalStars} total stars`,
-        `${user.followers} followers`,
-        user.location,
-      ].filter(Boolean)
-    : []
-
   return (
-    <section id="github" className="border-y border-rule/12">
+    <section id="github" className="border-y border-rule/12 overflow-hidden bg-sunken/5">
       <div className="max-w-manifest mx-auto px-6 py-24 md:py-32">
-        <SectionLabel number="02" label="Open source" />
+        <SectionLabel number="04" label="Open source" />
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
-          <h2 className="md:col-span-8 display text-4xl md:text-5xl">
-            What I&rsquo;m shipping in public.
+          <h2 className="md:col-span-8 display text-4xl md:text-5xl leading-[1.05]">
+            <TextReveal text="What I'm shipping in public." />
           </h2>
           <div className="md:col-span-4 flex flex-col justify-end gap-4">
             <p className="text-ink-secondary leading-relaxed">
@@ -173,7 +164,7 @@ export function GitHubProfile() {
                 href={`https://github.com/${GITHUB_USERNAME}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ink-primary underline decoration-ink-primary/30 decoration-2 underline-offset-4 hover:decoration-ink-primary/60 transition-colors"
+                className="text-accent underline decoration-accent/30 decoration-2 underline-offset-4 hover:decoration-accent/65 font-semibold transition-colors"
               >
                 github.com/{GITHUB_USERNAME}
               </a>
@@ -187,7 +178,7 @@ export function GitHubProfile() {
                   <button
                     onClick={() => loadStatic(true)}
                     disabled={refreshing}
-                    className="inline-flex items-center gap-1.5 hover:text-ink-primary transition-colors disabled:opacity-50"
+                    className="inline-flex items-center gap-1.5 hover:text-accent font-semibold transition-colors disabled:opacity-50"
                   >
                     {refreshing && <Loader2 className="w-3 h-3 animate-spin" />}
                     {refreshing ? 'refreshing' : 'refresh data'}
@@ -207,24 +198,46 @@ export function GitHubProfile() {
           </div>
         </div>
 
-        {/* Single-line meta strip */}
-        {metaLine.length > 0 && (
-          <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 pb-8 mb-12 border-b border-rule/12 font-mono text-sm text-ink-secondary">
-            {metaLine.map((m, i) => (
-              <span key={m} className="inline-flex items-baseline gap-2">
-                <span className="text-ink-primary">{m}</span>
-                {i < metaLine.length - 1 && <span className="text-ink-quaternary">/</span>}
-              </span>
-            ))}
+        {/* Glassmorphic user statistics bar */}
+        {user && (
+          <div className="mb-14">
+            <LiquidGlass intensity="subtle" tint="rgba(124, 118, 255, 0.05)" className="p-6 rounded-2xl border border-rule/8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 font-mono text-center md:text-left">
+                <div>
+                  <div className="text-2xl font-bold text-ink-primary">
+                    <CountUp value={user.public_repos} duration={1} />
+                  </div>
+                  <div className="text-xs text-ink-tertiary uppercase tracking-wider mt-1">public repos</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-ink-primary">
+                    <CountUp value={totalStars} duration={1} />
+                  </div>
+                  <div className="text-xs text-ink-tertiary uppercase tracking-wider mt-1">total stars</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-ink-primary">
+                    <CountUp value={user.followers} duration={1} />
+                  </div>
+                  <div className="text-xs text-ink-tertiary uppercase tracking-wider mt-1">followers</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-ink-primary">
+                    {user.location || 'Ahmedabad, IN'}
+                  </div>
+                  <div className="text-xs text-ink-tertiary uppercase tracking-wider mt-1">location</div>
+                </div>
+              </div>
+            </LiquidGlass>
           </div>
         )}
 
-        {/* Recent repos */}
+        {/* Recent repos list */}
         <div>
           <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
             <div>
               <Kicker accent>Recent work</Kicker>
-              <h3 className="display text-3xl md:text-4xl mt-3">
+              <h3 className="display text-3xl md:text-4xl mt-3 font-bold">
                 Latest six repositories.
               </h3>
             </div>
@@ -233,7 +246,7 @@ export function GitHubProfile() {
                 href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-xs text-ink-tertiary hover:text-ink-primary transition-colors inline-flex items-center gap-1.5"
+                className="font-mono text-xs text-accent font-bold hover:text-accent-hover transition-colors inline-flex items-center gap-1.5"
               >
                 all {user.public_repos} on github
                 <ArrowUpRight className="w-3 h-3" />
@@ -242,61 +255,72 @@ export function GitHubProfile() {
           </div>
 
           {repos.length > 0 ? (
-            <BentoGrid cols={3} className="border border-rule/12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {repos.slice(0, 6).map((repo) => (
-                <a
-                  key={repo.id}
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative block"
-                >
-                  <BentoCard variant="default" className="p-6 md:p-8 flex flex-col h-full">
-                    <Kicker className="block mb-3">
-                      pushed {formatPushedDate(repo.pushed_at)}
-                    </Kicker>
-                    <div className="font-mono text-base text-ink-primary group-hover:underline decoration-ink-primary/40 underline-offset-4 break-all mb-3 transition-colors">
-                      {repo.name}
-                    </div>
-                    {repo.description && (
-                      <p className="text-sm text-ink-secondary leading-relaxed line-clamp-3 mb-6 min-h-[3.75rem]">
-                        {repo.description}
-                      </p>
-                    )}
-                    <div className="flex items-center gap-4 font-mono text-xs text-ink-tertiary mt-auto">
-                      {repo.language && (
-                        <span className="inline-flex items-center gap-1.5">
-                          <span
-                            className="inline-block w-1.5 h-1.5 rounded-full"
-                            style={{ backgroundColor: LANGUAGE_COLORS[repo.language] ?? '#888' }}
-                          />
-                          {repo.language}
-                        </span>
-                      )}
-                      <span className="inline-flex items-center gap-1">
-                        <Star className="w-3 h-3" />
-                        {repo.stargazers_count}
-                      </span>
-                      <span className="inline-flex items-center gap-1">
-                        <GitFork className="w-3 h-3" />
-                        {repo.forks_count}
-                      </span>
-                      <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </span>
-                    </div>
-                    <span
-                      aria-hidden
-                      className="absolute top-0 left-0 h-px w-0 bg-ink-primary group-hover:w-full transition-all duration-slow ease-out-soft"
-                    />
-                  </BentoCard>
-                </a>
+                <div key={repo.id}>
+                  <TiltCard scale={1.015} maxRotation={5}>
+                    <SpotlightCard className="h-full rounded-2xl">
+                      <LiquidGlass
+                        intensity="subtle"
+                        tint="rgba(124, 118, 255, 0.08)"
+                        className="p-6 md:p-8 flex flex-col h-full min-h-[220px] border border-rule/12 hover:border-accent/40 group transition-all"
+                      >
+                        <div className="mb-4">
+                          <Kicker className="block mb-2 text-[10px]">
+                            pushed {formatPushedDate(repo.pushed_at)}
+                          </Kicker>
+                          <a
+                            href={repo.html_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono text-base font-bold text-ink-primary hover:text-accent underline decoration-transparent hover:decoration-accent/40 underline-offset-4 break-all transition-colors"
+                          >
+                            {repo.name}
+                          </a>
+                        </div>
+
+                        {repo.description && (
+                          <p className="text-sm text-ink-secondary leading-relaxed line-clamp-3 mb-6 flex-1">
+                            {repo.description}
+                          </p>
+                        )}
+
+                        <div className="flex items-center gap-4 font-mono text-xs text-ink-tertiary mt-auto pt-4 border-t border-rule/8">
+                          {repo.language && (
+                            <span className="inline-flex items-center gap-1.5">
+                              <span
+                                className="inline-block w-1.5 h-1.5 rounded-full animate-pulse-dot"
+                                style={{ backgroundColor: LANGUAGE_COLORS[repo.language] ?? '#888' }}
+                              />
+                              {repo.language}
+                            </span>
+                          )}
+                          <span className="inline-flex items-center gap-1">
+                            <Star className="w-3.5 h-3.5" />
+                            <span className="font-semibold text-ink-secondary">{repo.stargazers_count}</span>
+                          </span>
+                          <span className="inline-flex items-center gap-1">
+                            <GitFork className="w-3.5 h-3.5" />
+                            <span className="font-semibold text-ink-secondary">{repo.forks_count}</span>
+                          </span>
+                          <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                            <ArrowUpRight className="w-4 h-4 text-accent" />
+                          </span>
+                        </div>
+                      </LiquidGlass>
+                    </SpotlightCard>
+                  </TiltCard>
+                </div>
               ))}
-            </BentoGrid>
+            </div>
           ) : repoLoading ? (
-            <div className="flex items-center justify-center py-20 text-sm text-ink-tertiary font-mono">
-              <Loader2 className="w-4 h-4 animate-spin mr-2" />
-              loading repositories&hellip;
+            /* Shimmer loading skeletons */
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {Array.from({ length: 6 }).map((_, idx) => (
+                <div key={idx} className="h-[220px] rounded-2xl border border-rule/8 bg-paper/20 overflow-hidden relative">
+                  <div className="absolute inset-0 animate-shimmer" />
+                </div>
+              ))}
             </div>
           ) : (
             <div className="flex items-center justify-center py-20 text-sm text-ink-tertiary font-mono">

@@ -1,42 +1,54 @@
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
-import { BentoGrid, BentoCard } from './bento';
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import { BackgroundBeams } from './effects/BackgroundBeams';
+import { GradientOrb } from './effects/GradientOrb';
+import { Magnetic } from './effects';
 
-const ELSEWHERE: Array<{ href: string; label: string; icon?: typeof Github; external?: boolean }> = [
-  { href: 'https://github.com/KunjShah95',       label: 'KunjShah95 — main',     icon: Github, external: true },
-  { href: 'https://github.com/KunjShah01',       label: 'KunjShah01 — side',     icon: Github, external: true },
-  { href: 'https://linkedin.com/in/kunjshah05',  label: 'linkedin/in/kunjshah05', icon: Linkedin, external: true },
-  { href: 'https://twitter.com/kunjshah_dev',    label: '@kunjshah_dev',         icon: Twitter, external: true },
-  { href: 'mailto:kkshah2005@gmail.com',           label: 'kkshah2005@gmail.com', icon: Mail },
+const LINKS = [
+  { href: 'https://github.com/KunjShah95',       label: 'GitHub',                value: 'KunjShah95 — main',     external: true },
+  { href: 'https://github.com/KunjShah01',       label: 'GitHub',                value: 'KunjShah01 — side',     external: true },
+  { href: 'https://linkedin.com/in/kunjshah05',  label: 'LinkedIn',              value: 'in/kunjshah05',         external: true },
+  { href: 'https://twitter.com/kunjshah_dev',    label: 'Twitter',               value: '@kunjshah_dev',         external: true },
+  { href: 'mailto:kkshah2005@gmail.com',          label: 'Email',                value: 'kkshah2005@gmail.com' },
 ];
 
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-32 border-t border-rule/12">
-      <div className="max-w-manifest mx-auto px-6">
-        {/* Bottom bar — copyright + social links */}
-        <div className="py-10 flex flex-col items-center gap-8">
-          <BentoGrid cols={3} className="w-auto">
-            {ELSEWHERE.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target={link.external ? '_blank' : undefined}
-                rel={link.external ? 'noopener noreferrer' : undefined}
-              >
-                <BentoCard variant="inset" className="px-4 py-3 flex items-center gap-2">
-                  {link.icon && <link.icon className="w-3.5 h-3.5 text-ink-tertiary group-hover:text-ink-primary transition-colors" />}
-                  <span className="font-mono text-xs text-ink-tertiary group-hover:text-ink-primary transition-colors">
-                    {link.label}
-                  </span>
-                </BentoCard>
-              </a>
+    <footer className="relative mt-32 overflow-hidden border-t border-rule/12">
+      <BackgroundBeams count={1} />
+      <GradientOrb size={250} className="bottom-[-100px] left-[-80px]" />
+      <div className="relative max-w-manifest mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+          className="py-16 md:py-20 flex flex-col items-center gap-10"
+        >
+          <div className="kicker">Find me elsewhere</div>
+          <div className="w-full max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {LINKS.map((link) => (
+              <Magnetic key={link.value} strength={0.2} className="w-full">
+                <a
+                  href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                  className="glass glass-shine group w-full flex items-center justify-between gap-4 p-5 rounded-2xl transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgb(0_0_0/0.16)]"
+                >
+                  <div>
+                    <div className="font-mono text-xs uppercase tracking-kicker text-ink-tertiary">{link.label}</div>
+                    <div className="font-mono text-sm mt-1 text-ink-secondary">{link.value}</div>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-ink-tertiary group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
+                </a>
+              </Magnetic>
             ))}
-          </BentoGrid>
+          </div>
           <div className="font-mono text-xs text-ink-tertiary">
             &copy; {year} Kunj Shah
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

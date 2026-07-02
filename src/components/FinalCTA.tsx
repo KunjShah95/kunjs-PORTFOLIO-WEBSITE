@@ -1,99 +1,116 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowUpRight, Mail, Github, Linkedin, Twitter } from 'lucide-react';
-import { BackgroundBeams } from './effects/BackgroundBeams';
-import { GradientOrb } from './effects/GradientOrb';
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { ArrowUpRight, Mail, Github, Linkedin, Twitter } from 'lucide-react'
+import {
+  LiquidGlass,
+  TiltCard,
+  Magnetic,
+  TextScramble,
+  BackgroundBeams,
+  GradientOrb,
+} from './effects'
+
+const SOCIALS = [
+  { label: 'GitHub Main', icon: Github, href: 'https://github.com/KunjShah95', tint: 'rgba(124, 118, 255, 0.12)' },
+  { label: 'GitHub Side', icon: Github, href: 'https://github.com/KunjShah01', tint: 'rgba(6, 182, 212, 0.12)' },
+  { label: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/kunjshah05', tint: 'rgba(168, 85, 247, 0.12)' },
+  { label: 'Twitter', icon: Twitter, href: 'https://twitter.com/kunjshah_dev', tint: 'rgba(234, 179, 8, 0.12)' },
+]
 
 export function FinalCTA() {
   return (
-    <section className="relative bg-ink-primary text-paper overflow-hidden">
-      <BackgroundBeams count={3} className="opacity-30" />
-      <GradientOrb size={500} className="bottom-[-120px] left-[-100px]" />
-      <div className="relative max-w-manifest mx-auto px-6 py-32 md:py-48">
+    <section className="relative bg-ink-primary text-paper overflow-hidden py-24 md:py-32">
+      {/* Background beams and orbs */}
+      <BackgroundBeams count={4} className="opacity-10" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 h-[420px] w-[820px] rounded-full opacity-30 blur-[120px]"
+        style={{ background: 'radial-gradient(circle, rgb(var(--accent) / 0.55), transparent 70%)' }}
+      />
+      <GradientOrb size={460} className="bottom-[-140px] left-[-100px] opacity-20" />
+
+      <div className="relative z-10 max-w-manifest mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-12 gap-8"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center text-center"
         >
-          <div className="md:col-span-8">
-            <div className="kicker text-paper/80">Get in touch</div>
-            <h2 className="display text-5xl md:text-7xl mt-4 leading-[0.95] tracking-tightest max-w-4xl text-paper">
-              Have something
-              <br />
-              to ship? <em className="italic text-accent">Let&rsquo;s build it.</em>
-            </h2>
-            <p className="mt-8 text-paper/85 text-lg leading-relaxed max-w-xl">
-              You describe it, I build it. AI agents, web apps, APIs, prototypes — whiteboard to production in weeks, not quarters. Real systems, real users, real load.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-3">
+          <span className="font-mono text-xs uppercase tracking-kicker text-paper/60 font-semibold px-3 py-1 rounded-full border border-paper/10 bg-paper/5">
+            Let's connect
+          </span>
+          <h2 className="display text-5xl md:text-7xl mt-6 leading-[0.98] tracking-tightest max-w-4xl text-paper font-extrabold">
+            Looking for an AI Engineer?{' '}
+            <span className="text-accent">
+              <TextScramble words={["Let's build.", "Let's deploy.", "Let's innovate."]} className="min-w-[12ch] text-accent inline-block" />
+            </span>
+          </h2>
+          <p className="mt-8 text-paper/70 text-lg md:text-xl leading-relaxed max-w-2xl">
+            I design production agentic systems, implement reliable machine learning models, and build robust software
+            architectures. Open to full-time engineering roles, research labs, and strategic developer collaborations.
+          </p>
+
+          {/* Liquid glass buttons */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+            <Magnetic strength={0.15}>
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 px-6 h-12 rounded-md bg-paper text-ink-primary font-body text-sm font-medium hover:bg-accent hover:text-accent-ink transition-colors duration-base ease-out-soft"
+                className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-accent text-accent-ink font-semibold text-base overflow-hidden hover:scale-[1.02] active:scale-95 transition-all shadow-[0_10px_28px_rgb(var(--accent)/0.34)]"
               >
                 Start a conversation
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
+            </Magnetic>
+
+            <Magnetic strength={0.15}>
               <a
                 href="mailto:kkshah2005@gmail.com"
-                className="group inline-flex items-center gap-2 px-6 h-12 rounded-md border border-paper/20 text-paper font-body text-sm font-medium hover:border-paper hover:bg-paper/5 transition-colors"
+                className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl border border-paper/15 text-paper font-semibold text-base bg-paper/5 hover:bg-paper/10 hover:border-paper/25 active:scale-95 transition-all"
               >
-                <Mail className="w-4 h-4" />
+                <Mail className="w-5 h-5 text-paper/70" />
                 kkshah2005@gmail.com
               </a>
-            </div>
+            </Magnetic>
           </div>
 
-          <div className="md:col-span-4 md:pl-8 md:border-l border-paper/15 flex flex-col justify-end gap-4">
-            <div className="kicker text-paper/80">Elsewhere</div>
-            <div className="grid grid-cols-2 gap-3">
-              <a
-                href="https://github.com/KunjShah95"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center justify-center gap-2 p-4 rounded-md border border-paper/15 hover:border-paper/40 hover:bg-paper/5 transition-all duration-base"
-              >
-                <Github className="w-5 h-5 text-paper/70 group-hover:text-paper transition-colors" />
-                <span className="font-mono text-[11px] text-paper/60 group-hover:text-paper/90 transition-colors">Main</span>
-              </a>
-              <a
-                href="https://github.com/KunjShah01"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center justify-center gap-2 p-4 rounded-md border border-paper/15 hover:border-paper/40 hover:bg-paper/5 transition-all duration-base"
-              >
-                <Github className="w-5 h-5 text-paper/70 group-hover:text-paper transition-colors" />
-                <span className="font-mono text-[11px] text-paper/60 group-hover:text-paper/90 transition-colors">Side</span>
-              </a>
-              <a
-                href="https://linkedin.com/in/kunjshah05"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center justify-center gap-2 p-4 rounded-md border border-paper/15 hover:border-paper/40 hover:bg-paper/5 transition-all duration-base"
-              >
-                <Linkedin className="w-5 h-5 text-paper/70 group-hover:text-paper transition-colors" />
-                <span className="font-mono text-[11px] text-paper/60 group-hover:text-paper/90 transition-colors">LinkedIn</span>
-              </a>
-              <a
-                href="https://twitter.com/kunjshah_dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center justify-center gap-2 p-4 rounded-md border border-paper/15 hover:border-paper/40 hover:bg-paper/5 transition-all duration-base"
-              >
-                <Twitter className="w-5 h-5 text-paper/70 group-hover:text-paper transition-colors" />
-                <span className="font-mono text-[11px] text-paper/60 group-hover:text-paper/90 transition-colors">Twitter</span>
-              </a>
-            </div>
+          {/* Social liquid glass grid */}
+          <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-2xl">
+            {SOCIALS.map(({ label, icon: Icon, href, tint }) => (
+              <div key={label} className="w-full">
+                <TiltCard scale={1.03} maxRotation={6}>
+                  <Magnetic strength={0.2} className="w-full">
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full block"
+                    >
+                      <LiquidGlass
+                        tint={tint}
+                        intensity="subtle"
+                        className="w-full flex flex-col items-center justify-center gap-3 p-5 rounded-2xl border border-paper/10 bg-paper/5 hover:bg-paper/10 hover:border-paper/20 transition-all shadow-md group"
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-paper/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                          <Icon className="w-5 h-5 text-paper/80 group-hover:text-accent transition-colors" />
+                        </div>
+                        <span className="font-mono text-xs text-paper/50 group-hover:text-paper/90 transition-colors font-medium">
+                          {label}
+                        </span>
+                      </LiquidGlass>
+                    </a>
+                  </Magnetic>
+                </TiltCard>
+              </div>
+            ))}
           </div>
         </motion.div>
 
-        {/* Bottom colophon line */}
-        <div className="mt-20 pt-8 border-t border-paper/15 flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono text-xs text-paper/70">
+        <div className="mt-24 pt-8 border-t border-paper/10 flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono text-xs text-paper/50">
           <div>&copy; 2026 Kunj Shah &middot; Built in Ahmedabad</div>
           <div>Designed &amp; shipped by hand &middot; v.2026</div>
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -5,10 +5,10 @@ import { Brain, Database, Terminal, Workflow, ExternalLink, Github, Twitter, Lin
 
 export const IDENTITY: UserIdentity = {
     name: "Kunj Shah",
-    persona: "AI Engineer & Agentic Systems Builder",
+    persona: "AI Engineer, ML Specialist & Software Developer",
     location: "Ahmedabad, IN",
     contact: "kkshah2005@gmail.com",
-    focus: ["Autonomous Agents", "LLM Orchestration", "Agentic Workflows", "AI Infrastructure"],
+    focus: ["Agentic AI / ML", "Software Development", "LLM Systems", "AI Engineering & Ops"],
     github_username: "KunjShah95",
     profile_photo: "/profile.png"
 };
@@ -198,28 +198,28 @@ export const EDUCATION: Education[] = [
 
 export const SKILL_GROUPS: SkillGroup[] = [
     {
-        category: 'Full Stack AI',
+        category: 'Full Stack Dev',
         icon: Brain,
-        description: 'Developing end-to-end intelligent applications with integrated ML backends and responsive frontends.',
-        skills: ['React / Next.js', 'FastAPI / Python', 'PostgreSQL / Vald', 'API Architecture']
+        description: 'Building responsive frontend interfaces and secure, scalable API architectures to support production workloads.',
+        skills: ['React / Next.js 15', 'TypeScript / Node.js', 'FastAPI / Python', 'REST & GraphQL APIs', 'Tailwind CSS']
     },
     {
-        category: 'AI Automation',
+        category: 'Agentic AI',
         icon: Workflow,
-        description: 'Automating complex reasoning tasks using modern LLM frameworks and autonomous agentic patterns.',
-        skills: ['LangChain / CrewAI', 'Agentic Workflows', 'RAG Pipelines', 'Automated Scraping']
+        description: 'Designing autonomous workflows, multi-agent frameworks, and retrieval-augmented reasoning patterns.',
+        skills: ['LangChain / LangGraph', 'CrewAI / AutoGen', 'RAG / Vector Databases', 'Agentic Workflows', 'Tool Integration']
     },
     {
-        category: 'Core AI/ML',
+        category: 'Core AI / ML',
         icon: Terminal,
-        description: 'Engineering the neural core of applications through vision, NLP, and advanced predictive modeling.',
-        skills: ['PyTorch / CUDA', 'YOLOv8 / OpenCV', 'Transformers / NLP', 'Scikit-Learn']
+        description: 'Developing models for computer vision, natural language understanding, and predictive analytics.',
+        skills: ['PyTorch / TensorFlow', 'YOLOv8 / OpenCV', 'Transformers / NLP', 'Scikit-Learn', 'CUDA Acceleration']
     },
     {
-        category: 'DevOps & Infra',
+        category: 'Cloud & DevOps',
         icon: Database,
-        description: 'Building the foundation for automation through robust CI/CD, containers, and secure shell workflows.',
-        skills: ['Docker / Kubernetes', 'Git / GitHub', 'Linux Shell', 'Cloud Deployment']
+        description: 'Provisioning secure cloud infrastructure, configuring CI/CD deployment pipelines, and managing containers.',
+        skills: ['AWS / GCP Cloud', 'Docker / Kubernetes', 'CI/CD Github Actions', 'Linux & Bash Scripting', 'Supabase / Firebase']
     }
 ];
 
