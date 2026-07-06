@@ -4,6 +4,8 @@ import { ArrowLeft } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { BLOGS } from '../data/portfolio';
+import { SEO } from '../components/SEO';
+import { SITE_URL } from '../lib/site';
 import { Kicker } from '../components/ui/Kicker';
 
 export function BlogDetailPage() {
@@ -11,8 +13,20 @@ export function BlogDetailPage() {
   const blog = BLOGS.find((b) => b.slug === slug);
   if (!blog) return <Navigate to="/blogs" replace />;
 
+  const tags = blog.tags?.map((t) => t.toLowerCase().replace(/\s+/g, '-')) ?? []
+
   return (
     <article>
+      <SEO
+        title={`${blog.title} — Kunj Shah`}
+        description={blog.excerpt}
+        url={`${SITE_URL}/blogs/${blog.slug}`}
+        type="article"
+        articleHeadline={blog.title}
+        articleSection={blog.category}
+        articleTags={tags}
+        keywords={[...tags, blog.category, 'Kunj Shah', 'AI essay']}
+      />
       <header className="py-16 md:py-24 border-b border-rule/12">
         <div className="max-w-manifest mx-auto px-6">
           <div className="flex justify-center mb-8">

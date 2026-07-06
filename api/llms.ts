@@ -65,6 +65,8 @@ Kunj Shah is an AI engineer and agent builder based in Ahmedabad, IN. Specialize
 - LinkedIn: https://www.linkedin.com/in/kunjshah05
 - X (Twitter): https://x.com/kunjshah_dev
 - Hugging Face: https://huggingface.co/kunjshah01
+- Peerlist: https://peerlist.io/kunjshah
+- Medium: https://medium.com/@kkshah2005
 
 ## Verified Achievements
 

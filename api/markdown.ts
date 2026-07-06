@@ -57,6 +57,8 @@ Focus: Full Stack AI, Autonomous Automation, Neural Intelligence, Workflow Engin
 - GitHub (alt): https://github.com/KunjShah01
 - LinkedIn: https://www.linkedin.com/in/kunjshah05
 - X (Twitter): https://x.com/kunjshah_dev
+- Peerlist: https://peerlist.io/kunjshah
+- Medium: https://medium.com/@kkshah2005
 
 ## Tech Stack
 

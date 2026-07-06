@@ -11,6 +11,8 @@ export interface Project {
     problem?: string;
     outcome?: string;
     featured?: boolean;
+    /** Slug of the blog post that serves as this project's case study */
+    caseStudy?: string;
 }
 
 export interface Blog {

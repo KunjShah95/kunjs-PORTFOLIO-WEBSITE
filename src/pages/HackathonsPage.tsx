@@ -1,9 +1,16 @@
 import { HACKATHONS } from '../data/portfolio';
+import { SEO } from '../components/SEO';
+import { SITE_URL } from '../lib/site';
 import { PageHeader } from '../components/ui/PageHeader';
 
 export function HackathonsPage() {
   return (
     <>
+      <SEO
+        title="Hackathons — Kunj Shah"
+        description={`${HACKATHONS.length} hackathons by Kunj Shah — finalist at Autonomous Hacks, Odoo Adani, SIH. AI, automation, and full-stack sprints.`}
+        url={`${SITE_URL}/hackathons`}
+      />
       <PageHeader
         kicker="Hackathons"
         title={`${HACKATHONS.length} sprints, ranked by what I learned.`}

@@ -33,7 +33,7 @@ interface SEOProps {
 }
 
 const defaultMeta = {
-  title: 'Kunj Shah | AI Engineer & Agent Builder',
+  title: 'Kunj Shah | AI Engineer & Agent Builder — AI Agents, Web Apps & APIs',
   description:
     'Kunj Shah is an AI engineer in Ahmedabad building production AI systems — agents, retrieval pipelines, and the backend to hold them up. Shipped work, hackathon finals, and open-source contributions.',
   image: `${SITE_URL}/og-image.png`,
@@ -342,6 +342,8 @@ export function SEO({
       <link rel="canonical" href={url} />
       <link rel="me" href="https://github.com/KunjShah95" />
       <link rel="me" href="https://www.linkedin.com/in/kunjshah05" />
+      <link rel="me" href="https://peerlist.io/kunjshah" />
+      <link rel="me" href="https://medium.com/@kkshah2005" />
 
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
     </Helmet>

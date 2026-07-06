@@ -1,3 +1,5 @@
+import { SEO } from '../components/SEO'
+import { SITE_URL } from '../lib/site'
 import { PageHeader } from '../components/ui/PageHeader'
 import { Rule } from '../components/ui/Rule'
 import { SKILL_GROUPS, EXPERIENCE } from '../data/portfolio'
@@ -17,6 +19,11 @@ export function AboutPage() {
   const { contributions, stats: liveStats } = useGitHubPRs()
   return (
     <>
+      <SEO
+        title="About — Kunj Shah"
+        description="I build things that ship, break, get fixed, and ship again. AI agents, web apps, APIs — and the backend to make them real. Bio, principles, open source, and stack."
+        url={`${SITE_URL}/about`}
+      />
       <PageHeader
         kicker="About"
         title="A short biography, written in first person."

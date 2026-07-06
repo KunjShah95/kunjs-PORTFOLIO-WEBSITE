@@ -24,6 +24,7 @@ export const PROJECTS: Project[] = [
         demo: 'https://offerchecker-pi.vercel.app/',
         slug: 'offerguard-ai',
         impact: 'Live',
+        caseStudy: 'case-study-offerguard-ai',
         problem: 'Job seekers receive opaque offer letters and recruiter messages that hide red flags around pay, culture, and ghost hiring risks.',
         outcome: 'Reduced offer evaluation time from hours to seconds with multi-provider AI analysis and automated negotiation strategy generation.',
     },
@@ -36,6 +37,7 @@ export const PROJECTS: Project[] = [
         github: 'https://github.com/KunjShah95/fairness-lens-studio',
         slug: 'equitylens',
         impact: 'Production',
+        caseStudy: 'case-study-equitylens',
         problem: 'Healthcare AI models often contain hidden biases that lead to unequal patient treatment recommendations.',
         outcome: 'Detected a 23% performance gap in commercial triage models and reduced audit overhead significantly.',
     },
@@ -100,6 +102,7 @@ export const PROJECTS: Project[] = [
         github: 'https://github.com/KunjShah95/Railway-Inspection',
         slug: 'railway-inspection',
         impact: 'Deployed',
+        caseStudy: 'case-study-railway-inspection',
         problem: 'Manual railway inspections are slow, hazardous, and prone to human error in defect detection.',
         outcome: 'Automated detection with 98.7% accuracy and 4.2x speedup over traditional methods.',
     },
@@ -136,6 +139,7 @@ export const PROJECTS: Project[] = [
         github: 'https://github.com/KunjShah95/UPI-Fraud-Detection',
         slug: 'upi-fraud-guard',
         impact: 'Stable',
+        caseStudy: 'case-study-upi-fraud-guard',
         problem: 'Real-time UPI transactions are vulnerable to sophisticated fraud patterns that static rules miss.',
         outcome: 'Detected 88% of anomalous transactions with a false positive rate under 0.1%.',
     },
@@ -253,12 +257,207 @@ export const SOCIALS: Social[] = [
         url: 'https://huggingface.co/kunjshah01',
         icon: ExternalLink,
         label: 'Hugging Face'
+    },
+    {
+        name: 'PEERLIST',
+        url: 'https://peerlist.io/kunjshah',
+        icon: ExternalLink,
+        label: 'Peerlist'
+    },
+    {
+        name: 'MEDIUM',
+        url: 'https://medium.com/@kkshah2005',
+        icon: ExternalLink,
+        label: 'Medium'
     }
 ];
 
 export const TESTIMONIALS: never[] = [];
 
 export const BLOGS: Blog[] = [
+    {
+        id: 'B009',
+        title: 'What Breaking Things Taught Me About Building Them',
+        slug: 'breaking-things-taught-me',
+        category: 'Building',
+        excerpt: 'The projects that failed taught me more than the ones that shipped. A honest look at mistakes, recoveries, and what I wish I knew earlier.',
+        content: `
+# What Breaking Things Taught Me About Building Them
+
+I spent three weeks building a feature once. It was supposed to be smart — an AI system that could read resumes and match them to jobs automatically. I had it all figured out. The architecture was clean. The code was modular. I was proud of it.
+
+Then I showed it to someone.
+
+They pointed out something I had completely missed. The system worked great for tech jobs. But for everything else, it was guessing. I had trained it on data that looked like my own resume — technical, full of keywords like Python and React. When a teacher or a nurse uploaded theirs, the system got confused.
+
+I remember staring at the screen, feeling that sinking feeling in my stomach. Three weeks. Wasted.
+
+Or so I thought.
+
+## The Real Lesson
+
+Looking back, that failure was the best thing that could have happened to me. It taught me something that no tutorial or course ever did:
+
+**Your assumptions are your biggest blind spot.**
+
+I assumed my data was representative. I assumed the problem was simpler than it was. I assumed I had thought of everything. Every single assumption was wrong.
+
+After that, I changed how I build things:
+
+- **Show it early.** Even if it's ugly. Even if it's broken. Show it to someone before you're proud of it. The feedback hurts less when you haven't invested weeks.
+- **Test with real people.** Not your friends who code. Real people who will use it. They will break it in ways you never imagined.
+- **Small loops, quick feedback.** A week of building followed by a day of listening. Repeat.
+
+## The Projects That Never Shipped
+
+I have a graveyard of projects that never saw the light of day. A chatbot that couldn't stop apologizing. A scheduling tool that was too complicated for anyone to use. A dashboard that looked beautiful but answered questions nobody was asking.
+
+Each one hurt in its own way. But each one also taught me something specific:
+
+The chatbot taught me that AI without clear boundaries is just confusing. The scheduling tool taught me that features don't matter if the core experience is broken. The dashboard taught me to ask \*what do you need?\* before \*what can I build?\*
+
+## Building Anyway
+
+Here's the strange thing. Knowing that most projects fail — knowing that I'll probably make the same mistakes again in slightly different ways — doesn't stop me from building.
+
+Because every now and then, something clicks. A user writes back saying \*this actually helps.\* A system runs in production for a month without breaking. A stranger on the internet sends a pull request.
+
+Those moments make up for all the broken things.
+
+**So I keep building. I just fail faster now, and I listen more carefully.**
+        `,
+        date: 'JUN 2026',
+        readTime: 7,
+        tags: ['BUILDING', 'LESSONS', 'FAILURE', 'MINDSET'],
+        featured: true,
+    },
+    {
+        id: 'B010',
+        title: 'Shipping Is Harder Than Building — And That Is Okay',
+        slug: 'shipping-harder-than-building',
+        category: 'Building',
+        excerpt: 'The gap between a working prototype and something real people use is bigger than most people think. Here is what bridging it actually looks like.',
+        content: `
+# Shipping Is Harder Than Building — And That Is Okay
+
+I can build a prototype in a weekend. I have done it many times. A weekend of focused work, good music, and the thrill of creating something from nothing. By Sunday night, I have something that works.
+
+The hard part comes Monday morning.
+
+That is when you realize the difference between something that \*works\* and something that \*works for someone else.\*
+
+## The Gap
+
+A prototype runs on your machine. It uses your data, your network, your patience. You know exactly where to click and what to expect. When something breaks, you understand why.
+
+A shipped product runs on someone else's machine. They have different data, slower internet, and zero patience. They will click where you did not expect them to click. They will expect things you never thought to build.
+
+**That gap — between your machine and theirs — is where most projects die.**
+
+I have felt this gap more times than I can count. You finish building. You feel proud. You share it. And then... silence. Or worse, confusion. People do not get it. They do not know what to do with it.
+
+## What Bridging The Gap Looks Like
+
+After enough of these experiences, I started noticing patterns in what actually helps:
+
+**1. Watch someone use it.**
+Not a demo. Not a walkthrough. Sit next to them and watch them try to figure it out on their own. Do not say anything. Watch where they hesitate. Watch where they frown. Those are your real bugs.
+
+**2. Cut everything that isn't essential.**
+When you build, you add features because they seem cool. When you ship, you remove features because they create confusion. Every extra button is a decision the user has to make. Every decision is a chance for them to leave.
+
+**3. Write like a human.**
+Not a documentation writer. Not a marketer. A human. If your project needs a 5-minute tutorial to explain what it does, the problem is not the tutorial. The problem is the project.
+
+## The Emotional Part
+
+Here is what nobody tells you about shipping:
+
+It is lonely.
+
+Building is exciting. Every line of code feels like progress. But shipping is a slow grind of fixing bugs you missed, answering questions you thought were obvious, and wondering if anyone even cares.
+
+I have spent days on what felt like nothing — replying to a single user's email, fixing a typo in a button label, tweaking a loading animation. It does not feel like progress. But it is.
+
+**Because that is what shipping actually is. Not a big launch. Not a moment of glory. A thousand small fixes, made patiently, over time.**
+
+## Why It Matters
+
+I ship things because I believe in the slow accumulation of useful things. A small tool that helps ten people is more meaningful to me than a grand idea that helps nobody.
+
+So if you are stuck in that gap right now — between your prototype and the thing you want to share — keep going. The silence does not mean failure. It just means you are still building trust.
+
+One user at a time.
+        `,
+        date: 'MAY 2026',
+        readTime: 8,
+        tags: ['BUILDING', 'SHIPPING', 'PRODUCT', 'MINDSSET'],
+        featured: true,
+    },
+    {
+        id: 'B011',
+        title: 'Why I Build Things That Do Not Exist Yet',
+        slug: 'why-i-build-things',
+        category: 'Building',
+        excerpt: 'A personal reflection on curiosity, frustration, and the quiet joy of making something that only existed in your head a few hours ago.',
+        content: `
+# Why I Build Things That Do Not Exist Yet
+
+A few months ago, I needed a tool that did not exist. I wanted to take a long article, feed it to an AI, and have it ask me questions about what I just read. Not summarize it. Not explain it. Question me. Like a teacher would.
+
+I looked for this tool everywhere. Nothing.
+
+So I built it.
+
+It took an evening. The code was messy. The interface was ugly. But when I pasted an article into it and the AI started asking me questions, I felt something that I have felt many times before:
+
+**The quiet joy of making something real that did not exist a few hours ago.**
+
+## Why I Really Build
+
+People ask me why I spend so much time building things. The polite answer is that I want to solve problems. The real answer is more selfish:
+
+I build because I get curious.
+
+Something frustrates me or fascinates me, and the only way to understand it is to try making it. Reading about how something works has never been enough. I need to touch it. Break it. Try to put it back together in my own way.
+
+This is why I have built a tokenizer from scratch, even though better ones already exist. Why I have trained a vision model on railway tracks, even though I do not work for a railway company. Why I have written the same research agent three times, each time learning what I missed the last two.
+
+**I build to understand. Not to impress. Not to launch. To understand.**
+
+## Frustration As Fuel
+
+The most honest driver of my work is frustration. Not the angry kind. The kind that comes from bumping into the same problem twice and thinking \*there has to be a better way.\*
+
+I built a fraud detection system because I was frustrated that small transactions — the kind that scammers use to test stolen cards — were invisible to traditional monitoring. I built a resume analyzer because I was frustrated by how much time I spent tailoring applications manually. I built a fairness auditing tool because I was frustrated that nobody was checking whether AI systems were fair.
+
+**Every project started with a small frustration. Every one of them taught me something I did not expect.**
+
+## The Lonely Part
+
+Here is the other side of building things that do not exist yet:
+
+Most of them will not matter to anyone but you.
+
+I have projects on my GitHub that nobody has starred. Experiments that went nowhere. Ideas that made perfect sense at 2 AM and no sense at all the next morning.
+
+And that is okay.
+
+Because every one of those projects taught me something. A broken experiment is still a lesson. An abandoned idea still shaped how I think. The value is not in what gets shipped. It is in what gets learned.
+
+## A Quiet Invitation
+
+If you are reading this and you have an idea you keep thinking about — something small, something weird, something that probably does not make sense — build it.
+
+Not because it will succeed. Not because anyone will care. But because the act of building it will change how you see the world.
+
+**That alone is worth it.**
+        `,
+        date: 'APR 2026',
+        readTime: 7,
+        tags: ['BUILDING', 'MOTIVATION', 'PERSONAL', 'CURIOSITY'],
+        featured: true,
+    },
     {
         id: 'B001',
         title: 'Building Production-Grade AI Systems',
@@ -512,6 +711,430 @@ Orchestration is what turns a chatbot into a reliable digital employee.
         readTime: 12,
         tags: ['AI SYSTEMS', 'ORCHESTRATION', 'WORKFLOWS'],
         featured: false,
+    },
+    {
+        id: 'B012',
+        title: 'When AI Gets It Wrong: A Story About Trust',
+        slug: 'when-ai-gets-it-wrong',
+        category: 'AI Ethics',
+        excerpt: 'I built a system that made a mistake. Not a technical bug — a human one. Here is what I learned about trust, testing, and taking responsibility.',
+        content: `
+# When AI Gets It Wrong: A Story About Trust
+
+I built a system once that was supposed to help people. It read job descriptions, analyzed them for red flags, and told the user if something seemed off. Toxic language. Unreasonable demands. Signs of ghost hiring.
+
+It worked beautifully in testing. Every test case passed. The accuracy numbers looked great.
+
+And then it told someone their dream job was toxic. When it was not.
+
+## The Call I Did Not Expect
+
+A user wrote to me. They said the system had flagged an offer they were excited about. It highlighted words like \*fast-paced\* and \*wear many hats\* as potential burnout risks. The user was confused. They had talked to the team. They knew the culture. The system was wrong.
+
+I remember reading that email and feeling my stomach drop.
+
+I built this thing to help people. And here it was, causing stress instead.
+
+The worst part? The system was not technically wrong. Those phrases *can* be red flags. But it lacked context. It could not tell the difference between a genuinely toxic workplace and a startup that is just passionate. It saw patterns, not people.
+
+## What I Learned
+
+That experience changed how I think about building AI systems.
+
+**1. Accuracy is not enough.**
+A system can be 95% accurate and still hurt someone in the 5%. If you are building something that affects real decisions, you need to think about the edge cases. Not as bugs to fix — but as people to consider.
+
+**2. Tell people when you might be wrong.**
+I added a disclaimer after that incident. Not a legal one. A human one. Something like: \*I am a tool, not a judge. Use me as input, not truth.\* It felt obvious in hindsight. But I had been too excited about the technology to think about the responsibility.
+
+**3. Build room for human judgment.**
+The best systems do not replace human decisions. They inform them. A flag is useful. A verdict is dangerous. I started designing every output as a suggestion, not a conclusion.
+
+## Trust Takes Time
+
+Here is the thing I keep coming back to:
+
+Trust in AI is not built by having better accuracy. It is built by being honest about limitations. By admitting when you are wrong. By designing systems that respect the user's ability to make their own choice.
+
+I still build systems that analyze and flag and recommend. But now I build them with more humility.
+
+**And I always include a way for a human to say: I disagree.**
+        `,
+        date: 'MAR 2026',
+        readTime: 7,
+        tags: ['AI ETHICS', 'TRUST', 'LESSONS', 'HUMAN'],
+        featured: true,
+    },
+    {
+        id: 'B013',
+        title: 'The Messy Middle of Every Project',
+        slug: 'messy-middle-of-projects',
+        category: 'Building',
+        excerpt: 'The part between starting and finishing is the hardest. Nobody talks about it enough. Here is what it actually feels like and how I get through it.',
+        content: `
+# The Messy Middle of Every Project
+
+Starting a project feels amazing. You have an idea. Everything is possible. The code is fresh. The motivation is high. You stay up late because you cannot stop thinking about it.
+
+Finishing a project also feels amazing. You ship. You share. You feel that quiet pride of something complete.
+
+But between starting and finishing is a long stretch that nobody talks about. I call it the messy middle.
+
+## What The Messy Middle Feels Like
+
+The messy middle is when:
+- The exciting parts are done and the boring parts are all that is left
+- You realize the architecture you planned needs to change
+- A bug takes three days to fix instead of three hours
+- You open the code and feel tired before you even start
+
+I have been in the messy middle of almost every project I have ever built. And every time, I have the same thought: \*maybe this one is not worth finishing.\*
+
+**That thought is a liar.**
+
+## How I Get Through It
+
+Over time, I have found a few things that actually help when I am stuck in the messy middle:
+
+**1. Shrink the goal.**
+When the whole project feels overwhelming, I stop thinking about the whole project. I pick one tiny thing — fix one bug, write one paragraph, refactor one function — and do only that. No multitasking. Just the one thing. Finishing something small gives me enough momentum to keep going.
+
+**2. Talk to someone.**
+Not for advice. Just to say \*I am building this thing and it is harder than I expected.\* Saying it out loud makes it smaller. And sometimes the other person asks a question that unblocks me without meaning to.
+
+**3. Remember why I started.**
+I keep a note at the top of every project. One sentence. \*I am building this because...\* When I am in the messy middle, I read that sentence. It reminds me that the hard work has a direction, even when it does not feel like it.
+
+## The Middle Is Where The Work Happens
+
+Here is what I have learned to accept:
+
+The messy middle is not a sign that something is wrong. It is a sign that you are past the easy part and into the real work. The excitement of starting is a gift. But the discipline of continuing is what actually builds things.
+
+**So if you are in the messy middle of something right now, keep going. The other side is closer than it feels.**
+        `,
+        date: 'FEB 2026',
+        readTime: 6,
+        tags: ['BUILDING', 'MOTIVATION', 'MINDSET', 'PROCESS'],
+        featured: true,
+    },
+    {
+        id: 'B014',
+        title: 'Writing Code for Humans',
+        slug: 'writing-code-for-humans',
+        category: 'Building',
+        excerpt: 'The best code I have ever written is not the smartest. It is the kindest. Here is why I care more about readability than cleverness.',
+        content: `
+# Writing Code for Humans
+
+I used to think good code was clever code. The kind that made other developers nod and say \*nice.\* Short. Elegant. Using every feature of the language in a single line.
+
+I don not think that anymore.
+
+## The Code I Regret
+
+A few months ago, I opened a project I had not touched in six months. It was my own code. And I could not understand it.
+
+There was a function that did three things in one loop. There was a variable name that made sense only to me at 2 AM. There was an optimization that saved two milliseconds but took me an hour to trace through.
+
+I remember staring at the screen and thinking: \*who wrote this?\*
+
+I did. And future me was furious at past me.
+
+**Clever code is a gift to your ego. Clear code is a gift to everyone else — including future you.**
+
+## What I Do Differently Now
+
+I have changed how I write code. Not because I got smarter, but because I got more considerate:
+
+**1. I name things carefully.**
+A variable called \*data\* tells me nothing. A variable called \*parsedJobDescriptions\* tells me exactly what it holds. I spend more time choosing names now. It feels slow in the moment. It saves hours later.
+
+**2. I write small functions.**
+If a function does more than one thing, I split it. Even if it means more files. A hundred simple files are easier to understand than one clever one.
+
+**3. I add context, not comments.**
+Comments that say \*this is a loop\* are useless. Comments that say \*we sort by priority here because the API requires ordered input\* are gold. But even better: I try to make the code explain itself.
+
+## The Kindness Principle
+
+Here is the idea I keep coming back to:
+
+**Write code as if the person reading it is a kind stranger who is trying to help you.**
+
+They do not know what you were thinking at 2 AM. They do not share your assumptions. They just need to understand what the code does so they can fix a bug or add a feature.
+
+The kindest thing you can do is make that as easy as possible.
+
+## It Pays Off
+
+I have noticed something since I started writing code this way. When I come back to an old project, I can jump in faster. When someone else reads my code, they ask fewer questions. When something breaks, I find the bug sooner.
+
+Writing for humans is not just nice. It is practical.
+
+**And honestly, it feels better too.**
+        `,
+        date: 'JAN 2026',
+        readTime: 6,
+        tags: ['CODING', 'CRAFT', 'MINDSET', 'BEST PRACTICES'],
+        featured: true,
+    },
+    {
+        id: 'B015',
+        title: 'Starting Before You Are Ready',
+        slug: 'starting-before-you-are-ready',
+        category: 'Building',
+        excerpt: 'I have never felt ready for any project I finished. The ones I waited to start are the ones I never built. Here is why I jump in anyway.',
+        content: `
+# Starting Before You Are Ready
+
+I almost did not start any of my projects.
+
+Every single one of them began with the same feeling: \*I do not know enough to build this.\*
+
+The Railway Inspection system? I had never deployed a model on edge hardware before. The fraud detection engine? I had never worked with financial transaction data. The fairness auditing tool? I barely understood bias metrics when I started.
+
+**I learned by building. Not by waiting until I was ready.**
+
+## The Waiting Trap
+
+Here is how the waiting trap works:
+
+You have an idea. You think about it. You read about it. You watch tutorials. You bookmark resources. You tell yourself you will start once you understand it better.
+
+But understanding never comes from reading. It comes from doing.
+
+I spent two weeks reading about quantization before I started the Railway Inspection project. Two weeks of tutorials and papers and notes. And you know what? None of it stuck.
+
+Then I wrote one line of code that quantized a model. And in that moment, I understood more than I had in two weeks of reading.
+
+**The reading is not the learning. The doing is.**
+
+## What I Do Now
+
+I have a rule now. It is simple and I break it all the time, but when I follow it, everything gets better:
+
+**Start before you feel ready. Let the panic of not knowing push you to figure it out.**
+
+Concretely, this means:
+- I write the first line of code within an hour of having the idea
+- I accept that the first version will be bad (it always is)
+- I treat confusion as a sign that I am learning, not a sign that I should stop
+
+## The Fear Never Goes Away
+
+I have built a lot of things at this point. And I still feel the same fear before every new project. The voice that says \*you are not qualified\* and \*someone else can do this better.\*
+
+That voice never goes away. I have just learned to build things while it is talking.
+
+**If you are waiting to feel ready before you start something, here is your sign: you will never feel ready. Start anyway.**
+        `,
+        date: 'DEC 2025',
+        readTime: 6,
+        tags: ['BUILDING', 'MINDSET', 'STARTING', 'FEAR'],
+        featured: true,
+    },
+    {
+        id: 'B016',
+        title: 'How I Built OfferGuard AI: A Case Study',
+        slug: 'case-study-offerguard-ai',
+        category: 'Case Study',
+        excerpt: 'How I built an AI-powered job offer analyzer that reads offer letters, recruiter chats, and job descriptions to surface red flags in seconds. The full story from idea to deployment.',
+        content: `
+# How I Built OfferGuard AI: A Case Study
+
+The idea came from a conversation. A friend had received a job offer that looked great on paper — good salary, nice title, respectable company. But something felt off. They could not put their finger on it. They asked me: \*can you build something that reads this and tells me what to look out for?\*
+
+I said yes before I knew how.
+
+## The Problem
+
+Job seekers receive offers that are designed to look good. The recruiter is on your side — until they are not. Ghost jobs, bait-and-switch titles, burnout culture hidden behind words like \*fast-paced\* and \*wear many hats.\*
+
+The existing tools were either generic (glassdoor reviews from strangers) or required a lawyer. Nobody was reading the actual text of the offer and analyzing it in real time.
+
+## What I Built
+
+OfferGuard AI takes three inputs:
+- A job description
+- An offer letter (or offer summary)
+- A recruiter chat transcript
+
+It analyzes all three together and surfaces:
+- **Toxicity signals**: language patterns that correlate with poor work environments
+- **Burnout risk**: unreasonable expectations disguised as opportunity
+- **Salary fairness**: market comparison based on role, location, and experience
+- **Ghost job detection**: signs that the role may not be real
+- **Negotiation strategy**: specific talking points the candidate can use
+
+## The Technical Side
+
+I used a multi-provider AI approach. Different models are better at different things. One model handles the initial scan, another does the deep analysis, and a third cross-checks the results for consistency. This way, if one model misses something, another catches it.
+
+The frontend is built with TanStack Start and React 19. Users paste their documents and get results in seconds. No signup required. No data stored.
+
+## What I Learned
+
+The hardest part was not the technology. It was the responsibility.
+
+When you tell someone their job offer might be toxic, you are affecting a real decision in their life. I spent more time on the disclaimer than on any single feature. \*I am a tool, not a judge. Use me as input, not truth.\*
+
+I also learned that people do not want a verdict. They want context. The most useful feature is not the red flag count — it is the specific sentences highlighted with an explanation of why they matter.
+
+## The Result
+
+The project is live at [offerchecker-pi.vercel.app](https://offerchecker-pi.vercel.app/). It has been used by job seekers across multiple industries. The feedback that matters most is when someone writes back and says \*that helped me negotiate a better offer.\*
+
+**That is why I build things.**
+        `,
+        date: 'MAR 2026',
+        readTime: 8,
+        tags: ['CASE STUDY', 'AI', 'PRODUCT', 'BUILDING'],
+        featured: true,
+    },
+    {
+        id: 'B017',
+        title: 'Building EquityLens: Auditing AI for Fairness',
+        slug: 'case-study-equitylens',
+        category: 'Case Study',
+        excerpt: 'The story of building an AI fairness auditing platform that detects bias in healthcare models. What I found, how I built it, and why it matters more than ever.',
+        content: `
+# Building EquityLens: Auditing AI for Fairness
+
+I started this project because I was angry.
+
+Healthcare algorithms were making decisions about patient care — who gets prioritized, what treatment is recommended, which patients need follow-ups. And nobody was checking if these systems were fair.
+
+## The Problem
+
+A model trained mostly on data from one demographic group will perform worse for other groups. This is not a bug. It is a feature of how machine learning works. Models learn patterns from their training data. If the training data is skewed, the model will be skewed too.
+
+The problem is that in healthcare, skewed decisions have real consequences. A triage system that underestimates the severity of a patient's condition can delay critical care. A treatment recommender that works better for one group than another creates unequal outcomes.
+
+The EU AI Act now requires transparency for AI systems affecting fundamental rights. But compliance is expensive. Most small hospitals and clinics do not have the resources to audit their models.
+
+## What I Built
+
+EquityLens is a fairness auditing platform that automates the detection of bias in AI models. It computes standard fairness metrics — demographic parity, equalized odds, calibration — and maps them directly to regulatory frameworks like the EU AI Act and NIST AI RMF.
+
+The platform includes:
+- A fairness metrics engine that evaluates models against multiple demographic axes
+- Causal inference modules that distinguish correlation from causation
+- Interactive visualizations showing fairness-accuracy tradeoffs
+- Automated drift detection for monitoring bias over time
+- Compliance report generation aligned with international standards
+
+## The Technical Side
+
+The backend is built with FastAPI and Python. The fairness engine uses standard ML fairness libraries plus custom implementations for healthcare-specific metrics. The frontend is built with React, and the visualization layer uses interactive charts that let stakeholders explore tradeoffs.
+
+The hardest technical challenge was the causal inference module. It is not enough to detect that bias exists — you need to understand *why*. I implemented multiple causal analysis methods to distinguish between genuine model bias and confounding variables in the data.
+
+## What I Found
+
+When I ran the platform on a public healthcare triage dataset, it surfaced a 23% performance gap across demographic groups. The model was significantly less accurate for certain populations.
+
+That number — 23% — is the reason I built this.
+
+## The Result
+
+The platform is open source on [GitHub](https://github.com/KunjShah95/fairness-lens-studio). It reduces a manual fairness review from days to under an hour. It has been validated on public, de-identified healthcare datasets.
+
+**Fairness is not a feature. It is a requirement.**
+        `,
+        date: 'FEB 2026',
+        readTime: 8,
+        tags: ['CASE STUDY', 'AI ETHICS', 'HEALTHCARE', 'BUILDING'],
+        featured: true,
+    },
+    {
+        id: 'B018',
+        title: 'Teaching a Computer to Inspect Railway Tracks',
+        slug: 'case-study-railway-inspection',
+        category: 'Case Study',
+        excerpt: 'Building a real-time railway defect detection system that runs on edge hardware. The story of YOLOv8, TensorRT, and why every millisecond matters.',
+        content: `
+# Teaching a Computer to Inspect Railway Tracks
+
+A railway track inspection system has to find tiny defects in metal, at high speed, in broad daylight and pouring rain, on a computer that fits in a backpack. This is the story of how I built one.
+
+## The Problem
+
+Manual railway inspection is slow, dangerous, and inconsistent. A human inspector walks miles of track looking for cracks, deformations, and wear patterns. In a moving train, the window for detecting a defect is milliseconds. Miss one, and the consequences are serious.
+
+The existing automated systems were expensive and required specialized hardware. I wanted to build something that could run on affordable edge devices and still meet the accuracy requirements.
+
+## What I Built
+
+A computer vision system that runs YOLOv8 on a Jetson Orin edge device, detecting railway wagon defects in real time. The target was sub-100ms end-to-end latency — from camera frame to detection output.
+
+I moved the inference pipeline from Python to C++ using TensorRT, compiling the model into highly optimized engine files for the Jetson architecture. This gave a 3x speedup immediately.
+
+The preprocessing pipeline used hardware-accelerated video decoding via GStreamer, offloading image resizing and normalization to the GPU. This kept the CPU free for logic and networking.
+
+## The Hardest Part
+
+The real world is not a clean lab. I had to handle:
+- **Motion blur**: trains move fast. I optimized shutter speeds and added a lightweight deblurring kernel.
+- **Low light**: inspections happen at all hours. Real-time histogram equalization before inference.
+- **Temperature variation**: the edge device sits outside. Thermal management in software.
+
+The most important lesson was that INT8 quantization with Quantization-Aware Training maintained 98%+ accuracy while cutting inference time in half. It was the difference between a lab demo and a real-world system.
+
+## The Result
+
+The system achieved 98.7% defect detection accuracy with a 4.2x speedup over traditional methods. It runs on affordable edge hardware, making automated inspection accessible to smaller rail operators.
+
+**The edge is not just about the model. It is about every millisecond.**
+        `,
+        date: 'JAN 2026',
+        readTime: 7,
+        tags: ['CASE STUDY', 'COMPUTER VISION', 'EDGE', 'HARDWARE'],
+        featured: true,
+    },
+    {
+        id: 'B019',
+        title: 'Catching Fraud Before It Happens: UPI Fraud Guard',
+        slug: 'case-study-upi-fraud-guard',
+        category: 'Case Study',
+        excerpt: 'Using machine learning to catch fraudulent UPI transactions that static rules miss. The story of building a real-time fraud detection engine from scratch.',
+        content: `
+# Catching Fraud Before It Happens: UPI Fraud Guard
+
+Fraudsters are getting smarter. Static rule-based systems cannot keep up. This is the story of building a machine learning system that detects fraudulent UPI transactions in real time.
+
+## The Problem
+
+UPI (Unified Payments Interface) processes billions of transactions in India every month. Most are legitimate. But the ones that are not — the fraudulent ones — are getting harder to catch.
+
+Traditional fraud detection relies on static rules: flag transactions above a certain amount, block repeated attempts from the same IP, watch for unusual locations. But fraudsters have learned to work around these rules. They test with small amounts. They use multiple accounts. They mimic legitimate behavior.
+
+The challenge was to build a system that could detect fraud patterns that static rules miss, while keeping false positives low enough that genuine users are not blocked.
+
+## What I Built
+
+UPI Fraud Guard is a machine learning-based fraud detection engine that analyzes transaction patterns in real time. It uses an ensemble of models — XGBoost for structured pattern detection, anomaly detection for unusual behavior, and a custom scoring layer that combines signals into a risk score.
+
+The system processes transactions as they happen. Each transaction is scored in milliseconds. High-risk transactions are flagged for review. Medium-risk transactions are monitored. Low-risk transactions pass through.
+
+## The Technical Side
+
+The backend is built with Flask and Python. The feature engineering pipeline extracts dozens of signals from each transaction: amount, frequency, time patterns, device fingerprints, location proximity, and historical behavior.
+
+The model training used Scikit-learn for preprocessing and XGBoost for the primary classifier. I used SMOTE for handling the class imbalance (fraudulent transactions are rare — less than 0.1% of total volume).
+
+The hardest part was the evaluation. When you are dealing with financial transactions, false positives are expensive. Blocking a legitimate transaction is worse than letting a fraudulent one through in some cases. I designed the system with configurable thresholds so operators can tune the sensitivity based on their risk tolerance.
+
+## The Result
+
+The system detected 88% of anomalous transactions with a false positive rate under 0.1%. It reduced the manual review workload significantly while catching fraud patterns that static rules missed entirely.
+
+**The best fraud detection is invisible. It stops bad transactions without the good ones ever noticing.**
+        `,
+        date: 'DEC 2025',
+        readTime: 7,
+        tags: ['CASE STUDY', 'ML', 'FRAUD', 'FINANCE'],
+        featured: true,
     },
 ];
 

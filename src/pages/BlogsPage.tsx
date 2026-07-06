@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { BLOGS } from '../data/portfolio';
+import { SEO } from '../components/SEO';
+import { SITE_URL } from '../lib/site';
 import { PageHeader } from '../components/ui/PageHeader';
 import { Kicker } from '../components/ui/Kicker';
 import { BentoGrid, BentoCard } from '../components/bento';
@@ -17,6 +19,11 @@ export function BlogsPage() {
 
   return (
     <>
+      <SEO
+        title="Writing — Kunj Shah"
+        description={`${BLOGS.length} essays on AI, agents, and shipping. Long-form notes from building production AI systems by Kunj Shah.`}
+        url={`${SITE_URL}/blogs`}
+      />
       <PageHeader
         kicker="Writing"
         title={`${BLOGS.length} essays on AI, agents, and shipping.`}

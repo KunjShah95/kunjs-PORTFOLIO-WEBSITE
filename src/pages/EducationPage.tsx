@@ -1,9 +1,16 @@
 import { EDUCATION } from '../data/portfolio';
+import { SEO } from '../components/SEO';
+import { SITE_URL } from '../lib/site';
 import { PageHeader } from '../components/ui/PageHeader';
 
 export function EducationPage() {
   return (
     <>
+      <SEO
+        title="Education — Kunj Shah"
+        description="Educational background of Kunj Shah — B.Tech Computer Science at Indus University, Ahmedabad. AI/ML integration and automation."
+        url={`${SITE_URL}/education`}
+      />
       <PageHeader
         kicker="Education"
         title="Where I studied."

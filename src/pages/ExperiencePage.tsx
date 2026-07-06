@@ -1,9 +1,16 @@
 import { EXPERIENCE } from '../data/portfolio';
+import { SEO } from '../components/SEO';
+import { SITE_URL } from '../lib/site';
 import { PageHeader } from '../components/ui/PageHeader';
 
 export function ExperiencePage() {
   return (
     <>
+      <SEO
+        title="Experience — Kunj Shah"
+        description="Work history of Kunj Shah — AI automation intern at PHAZE_AI, open source contributor at OWASP, Microsoft, and Ollama."
+        url={`${SITE_URL}/experience`}
+      />
       <PageHeader
         kicker="Experience"
         title="Work history, oldest to newest."

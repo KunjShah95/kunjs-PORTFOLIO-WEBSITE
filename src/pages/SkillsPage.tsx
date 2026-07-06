@@ -1,4 +1,6 @@
 import { SKILL_GROUPS } from '../data/portfolio';
+import { SEO } from '../components/SEO';
+import { SITE_URL } from '../lib/site';
 import { PageHeader } from '../components/ui/PageHeader';
 import { Kicker } from '../components/ui/Kicker';
 import { BentoGrid, BentoCard } from '../components/bento';
@@ -14,6 +16,11 @@ export function SkillsPage() {
 
   return (
     <>
+      <SEO
+        title="Skills — Kunj Shah"
+        description="The tools Kunj Shah ships with — React, FastAPI, LangChain, PyTorch, Docker, and cloud infra. Full stack, AI/ML, and DevOps skills."
+        url={`${SITE_URL}/skills`}
+      />
       <PageHeader
         kicker="Skills"
         title="Tools I reach for, grouped by what they do."

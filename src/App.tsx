@@ -26,6 +26,7 @@ import {
   CountUp,
 } from './components/effects'
 import { SEO } from './components/SEO'
+import { SITE_URL } from './lib/site'
 import { InitialLoader } from './components/InitialLoader'
 import { BLOGS } from './data/portfolio'
 import { PORTFOLIO_FAQ } from './data/seo-faq'
@@ -51,8 +52,8 @@ function Home() {
   return (
     <div className="space-y-0">
       <SEO
-        title="Kunj Shah | AI Engineer &amp; Software Developer — Agentic AI, AI/ML"
-        description="Kunj Shah is an AI Engineer and Software Developer building autonomous agents, production AI/ML pipelines, and scalable software backend systems."
+        title="Kunj Shah | AI Engineer & Agent Builder — AI Agents, Web Apps & APIs"
+        description="Kunj Shah is an AI engineer and agent builder in Ahmedabad shipping production AI agents, LLM pipelines, web apps, and APIs. Autonomous agents, RAG, LangChain, FastAPI, React."
         faqItems={PORTFOLIO_FAQ}
       />
       <BentoHero />
@@ -284,6 +285,11 @@ function Home() {
 function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center space-y-4 pt-20">
+      <SEO
+        title="Page Not Found — Kunj Shah"
+        description="The page you are looking for does not exist or has been moved. Return to the home page or browse projects and writing."
+        url={`${SITE_URL}/404`}
+      />
       <h1 className="text-6xl font-bold text-txt font-display">404</h1>
       <p className="text-muted text-lg">Page not found</p>
       <Link to="/" className="text-primary hover:underline text-sm font-medium">Return home</Link>

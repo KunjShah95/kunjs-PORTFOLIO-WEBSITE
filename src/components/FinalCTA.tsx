@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Mail, Github, Linkedin, Twitter } from 'lucide-react'
+import { ArrowUpRight, Mail, Github, Linkedin, Twitter, ExternalLink } from 'lucide-react'
 import {
   LiquidGlass,
   TiltCard,
@@ -15,6 +15,8 @@ const SOCIALS = [
   { label: 'GitHub Side', icon: Github, href: 'https://github.com/KunjShah01', tint: 'rgba(6, 182, 212, 0.12)' },
   { label: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/kunjshah05', tint: 'rgba(168, 85, 247, 0.12)' },
   { label: 'Twitter', icon: Twitter, href: 'https://twitter.com/kunjshah_dev', tint: 'rgba(234, 179, 8, 0.12)' },
+  { label: 'Peerlist', icon: ExternalLink, href: 'https://peerlist.io/kunjshah', tint: 'rgba(6, 182, 212, 0.12)' },
+  { label: 'Medium', icon: ExternalLink, href: 'https://medium.com/@kkshah2005', tint: 'rgba(245, 158, 11, 0.12)' },
 ]
 
 export function FinalCTA() {

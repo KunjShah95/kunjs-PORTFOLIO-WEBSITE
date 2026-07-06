@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { SEO } from '../components/SEO';
+import { SITE_URL } from '../lib/site';
 import { BackgroundBeams } from '../components/effects/BackgroundBeams';
 import { GradientOrb } from '../components/effects/GradientOrb';
 import { Magnetic } from '../components/effects';
@@ -15,6 +17,11 @@ const METHODS = [
 export function ContactPage() {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
+      <SEO
+        title="Contact — Kunj Shah"
+        description="The fastest way to reach Kunj Shah is email. If you're working on something and want an extra set of hands, write."
+        url={`${SITE_URL}/contact`}
+      />
       <BackgroundBeams count={2} />
       <GradientOrb size={350} className="top-[-80px] right-[-60px]" />
       <div className="relative max-w-manifest mx-auto px-6">

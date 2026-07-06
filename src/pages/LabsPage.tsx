@@ -1,3 +1,5 @@
+import { SEO } from '../components/SEO';
+import { SITE_URL } from '../lib/site';
 import { PageHeader } from '../components/ui/PageHeader';
 import { Kicker } from '../components/ui/Kicker';
 
@@ -28,6 +30,11 @@ const LABS = [
 export function LabsPage() {
   return (
     <>
+      <SEO
+        title="Labs — Kunj Shah"
+        description="Experiments, prototypes, and research by Kunj Shah — synthetic memory, neural protocols, context window optimization. Outside production work."
+        url={`${SITE_URL}/labs`}
+      />
       <PageHeader
         kicker="Labs"
         title="Experiments, prototypes, and abandoned ideas."

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import { PROJECTS } from '../data/portfolio'
+import { SEO } from '../components/SEO'
+import { SITE_URL } from '../lib/site'
 import { PageHeader } from '../components/ui/PageHeader'
 import { Kicker } from '../components/ui/Kicker'
 import { useReveal } from '../hooks/useReveal'
@@ -41,6 +43,11 @@ export function ProjectsPage() {
 
   return (
     <>
+      <SEO
+        title="Projects — Kunj Shah"
+        description={`${PROJECTS.length} projects I've built — production AI agents, web apps, APIs, and ML systems. Case studies with architecture, challenges, and results.`}
+        url={`${SITE_URL}/projects`}
+      />
       <PageHeader
         kicker="Projects"
         title={`${PROJECTS.length} things I've built, broken down by year.`}
