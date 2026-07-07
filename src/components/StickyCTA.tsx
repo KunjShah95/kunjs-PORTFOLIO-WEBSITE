@@ -7,7 +7,17 @@ export function StickyCTA() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 600);
+    const finalCta = document.getElementById('final-cta');
+    const onScroll = () => {
+      const pastThreshold = window.scrollY > 600;
+      if (finalCta) {
+        const rect = finalCta.getBoundingClientRect();
+        const finalCtaVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        setShow(pastThreshold && !finalCtaVisible);
+      } else {
+        setShow(pastThreshold);
+      }
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);

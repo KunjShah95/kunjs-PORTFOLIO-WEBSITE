@@ -21,7 +21,7 @@ const SOCIALS = [
 
 export function FinalCTA() {
   return (
-    <section className="relative bg-ink-primary text-paper overflow-hidden py-24 md:py-32">
+    <section id="final-cta" className="relative bg-ink-primary text-paper overflow-hidden py-24 md:py-32">
       {/* Background beams and orbs */}
       <BackgroundBeams count={4} className="opacity-10" />
       <div

@@ -63,9 +63,9 @@ export function BentoHero() {
             variants={reveal} initial="hidden" animate="visible" custom={0.07}
             className="display text-[12vw] leading-[1.02] sm:text-5xl md:text-[3.8rem] lg:text-[4.2rem] max-w-[20ch]"
           >
-            I build AI systems from{' '}
-            <span className="text-accent">transformer weights</span> to{' '}
-            <span className="text-accent">customer deployment</span>.
+            Autonomous systems aren't the{' '}
+            <span className="text-accent">future</span>. They're{' '}
+            <span className="text-accent">what I build today</span>.
           </motion.h1>
 
           <motion.p
