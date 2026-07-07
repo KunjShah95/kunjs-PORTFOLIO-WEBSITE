@@ -13,6 +13,21 @@ export interface Project {
     featured?: boolean;
     /** Slug of the blog post that serves as this project's case study */
     caseStudy?: string;
+    /** Key-value metrics (e.g. "Tokens processed": "40,000+", "Avg latency": "2.1s") */
+    metrics?: Record<string, string>;
+    /** Engineering architecture description */
+    architecture?: string;
+    /** Key challenges faced during development */
+    challenges?: string[];
+    /** Lessons learned */
+    lessons?: string[];
+    /** Benchmark data (e.g. "Accuracy": "98.7%", "Speedup": "4.2x") */
+    benchmarks?: Record<string, string>;
+    /** Real user / usage numbers */
+    liveUsers?: string;
+    tokensProcessed?: string;
+    inferenceLatency?: string;
+    githubStars?: number;
 }
 
 export interface Blog {

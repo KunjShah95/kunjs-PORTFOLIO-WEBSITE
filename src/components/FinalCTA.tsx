@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Mail, Github, Linkedin, Twitter, ExternalLink } from 'lucide-react'
+import { ArrowUpRight, Mail, Github, Linkedin, Twitter, ExternalLink, FileDown } from 'lucide-react'
 import {
   LiquidGlass,
   TiltCard,
@@ -43,26 +43,39 @@ export function FinalCTA() {
             Let's connect
           </span>
           <h2 className="display text-5xl md:text-7xl mt-6 leading-[0.98] tracking-tightest max-w-4xl text-paper font-extrabold">
-            Looking for an AI Engineer?{' '}
+            Building something ambitious?{' '}
             <span className="text-accent">
-              <TextScramble words={["Let's build.", "Let's deploy.", "Let's innovate."]} className="min-w-[12ch] text-accent inline-block" />
+              <TextScramble words={["Let's make it real.", "Ship it.", "Build it."]} className="min-w-[12ch] text-accent inline-block" />
             </span>
           </h2>
           <p className="mt-8 text-paper/70 text-lg md:text-xl leading-relaxed max-w-2xl font-body">
-            I design production agentic systems, implement reliable machine learning models, and build robust software
-            architectures. Open to full-time engineering roles, research labs, and strategic developer collaborations.
+            I design production AI systems — autonomous agents, LLM pipelines, edge computer vision — 
+            and ship them with measurable results. Open to full-time AI engineering roles, freelance projects, 
+            and research collaborations.
           </p>
 
-          {/* Liquid glass buttons */}
+          {/* CTA buttons */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
             <Magnetic strength={0.15}>
               <Link
                 to="/contact"
                 className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-accent text-accent-ink font-semibold text-base overflow-hidden hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 transition-all shadow-[0_10px_28px_rgb(var(--accent)/0.34)]"
               >
-                Start a conversation
+                Book a call
                 <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
+            </Magnetic>
+
+            <Magnetic strength={0.15}>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl border border-paper/15 text-paper font-semibold text-base bg-paper/5 hover:bg-paper/10 hover:border-paper/25 hover:-translate-y-0.5 active:scale-95 transition-all"
+              >
+                <FileDown className="w-5 h-5 text-paper/70" />
+                Download résumé
+              </a>
             </Magnetic>
 
             <Magnetic strength={0.15}>
@@ -121,7 +134,7 @@ export function FinalCTA() {
 
         <div className="mt-24 pt-8 border-t border-paper/10 flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono text-xs text-paper/50">
           <div>&copy; 2026 Kunj Shah &middot; Built in Ahmedabad</div>
-          <div>Designed &amp; shipped by hand &middot; Currently shipping AI products every week</div>
+          <div>12+ projects shipped &middot; 44+ PRs merged &middot; 4 hackathon finals</div>
         </div>
       </div>
     </section>

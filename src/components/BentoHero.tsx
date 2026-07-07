@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, MapPin, Zap } from 'lucide-react'
+import { ArrowRight, MapPin, Zap, Activity, GitMerge, Award } from 'lucide-react'
 import { IDENTITY, LIVE_STATUS, PROJECTS, SKILL_GROUPS } from '../data/portfolio'
 import { OSS_STATS } from '../data/opensource'
 import { AnimatedCounter } from './AnimatedCounter'
-import { Magnetic, SpotlightCard, GlowBorder, TextScramble, TiltCard, CountUp, LiquidGlass } from './effects'
+import { Magnetic, SpotlightCard, GlowBorder, TiltCard, CountUp, LiquidGlass } from './effects'
 
 const NOW = [
   'Building a multi-agent research workflow',
   'Shipping open-source AI security tooling',
-  'Open to freelance and fractional AI-eng work',
+  'Open to full-time AI eng roles & freelance',
 ]
 
 const CURRENTLY_BUILDING = [
@@ -20,9 +20,9 @@ const CURRENTLY_BUILDING = [
 ]
 
 const TRUST_SIGNALS = [
-  { value: 12, suffix: '+', label: 'Projects' },
-  { value: OSS_STATS.mergedPRs, suffix: '+', label: 'PRs Merged' },
-  { value: 4, suffix: '', label: 'Hackathon Finals' },
+  { value: 12, suffix: '+', label: 'Shipped projects' },
+  { value: OSS_STATS.mergedPRs, suffix: '+', label: 'Open-source PRs' },
+  { value: 4, suffix: '', label: 'Hackathon finals' },
 ]
 
 const WRITING_ENTRIES = [
@@ -56,23 +56,26 @@ export function BentoHero() {
               <span className="absolute inset-0 rounded-full bg-live animate-ping-soft" />
               <span className="absolute inset-0 rounded-full bg-live animate-pdot" />
             </span>
-            Open for AI &amp; Software roles · {LIVE_STATUS.available ? '2026' : 'booked'}
+            Available for AI engineering roles · {LIVE_STATUS.available ? '2026' : 'booked'}
           </motion.div>
 
           <motion.h1
             variants={reveal} initial="hidden" animate="visible" custom={0.07}
             className="display text-[12vw] leading-[1.02] sm:text-5xl md:text-[3.8rem] lg:text-[4.2rem] max-w-[20ch]"
           >
-            Building AI products that{' '}
-            <TextScramble words={['automate real work', 'scale reliably', 'ship weekly', 'reason \u0026 adapt']} className="text-accent min-w-[10ch]" />.
+            I build AI systems from{' '}
+            <span className="text-accent">transformer weights</span> to{' '}
+            <span className="text-accent">customer deployment</span>.
           </motion.h1>
 
           <motion.p
             variants={reveal} initial="hidden" animate="visible" custom={0.14}
             className="text-base md:text-lg leading-relaxed text-ink-secondary max-w-[56ch] font-body"
           >
-            AI Engineer &amp; Software Developer — autonomous agents, production ML pipelines,
-            and scalable systems. Not demos. Real products.
+            AI Engineer — I replace repetitive human work with autonomous agents, 
+            ship production ML pipelines, and build systems that scale. 
+            From tokenizers written from scratch to multi-provider LLM orchestration 
+            serving thousands of tokens.
           </motion.p>
 
           {/* Inline trust signals */}
@@ -80,8 +83,11 @@ export function BentoHero() {
             variants={reveal} initial="hidden" animate="visible" custom={0.18}
             className="flex flex-wrap items-center gap-x-5 gap-y-2"
           >
-            {TRUST_SIGNALS.map((s) => (
+            {TRUST_SIGNALS.map((s, i) => (
               <span key={s.label} className="inline-flex items-center gap-1.5 font-mono text-xs text-ink-tertiary">
+                {i === 0 && <Activity className="w-3 h-3 text-accent" />}
+                {i === 1 && <GitMerge className="w-3 h-3 text-accent" />}
+                {i === 2 && <Award className="w-3 h-3 text-accent" />}
                 <span className="text-accent font-bold text-sm tabular-nums">
                   <CountUp value={s.value} duration={1.2} suffix={s.suffix} />
                 </span>
@@ -103,7 +109,7 @@ export function BentoHero() {
                 to="/projects"
                 className="group inline-flex items-center gap-2 h-12 px-5 rounded-xl bg-accent text-accent-ink font-semibold text-[15px] transition-[filter,box-shadow,transform] hover:brightness-110 hover:shadow-[0_10px_28px_rgb(var(--accent)/0.34)] hover:-translate-y-0.5 active:translate-y-0"
               >
-                View selected work <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                See engineering work <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </Magnetic>
             <a
@@ -125,7 +131,7 @@ export function BentoHero() {
             <div className="w-full h-full rounded-[2.5rem] overflow-hidden border border-accent/20 bg-accent/5 relative group shadow-2xl">
               <img 
                 src={IDENTITY.profile_photo} 
-                alt={IDENTITY.name} 
+                alt={`${IDENTITY.name} — AI Engineer`}
                 className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-slow ease-out-soft" 
                 loading="eager" 
               />
@@ -180,17 +186,18 @@ export function BentoHero() {
           <SpotlightCard className={`${CARD} h-full p-6 flex flex-col gap-4 min-h-[320px]`}>
             <div className="flex flex-col gap-0.5">
               <span className="font-bold text-xl tracking-tight">{IDENTITY.name}</span>
-              <span className="text-sm text-ink-tertiary font-body">AI Engineer · Full-stack Specialist</span>
+              <span className="text-sm text-ink-tertiary font-body">AI Engineer · Systems Builder</span>
             </div>
             <p className="text-[15px] leading-relaxed text-ink-secondary font-body">
-              I turn fuzzy problems into reliable systems — designing multi-agent architectures,
-              wiring up evals and guardrails, and shipping the full stack around them. Building at the
-              edge of <strong className="font-semibold text-ink-primary">agentic AI</strong>.
+              I design and ship production AI systems — from multi-agent architectures 
+              and RAG pipelines to edge-deployed computer vision. Every project here 
+              shipped with real metrics: latency, accuracy, cost reduction. 
+              I care about <strong className="font-semibold text-ink-primary">measurable engineering</strong>, not demos.
             </p>
             <div className="border-t border-rule/8 pt-3">
-              <span className="font-mono text-[10px] uppercase text-ink-tertiary tracking-wider block mb-2 font-semibold">Roles I fill</span>
+              <span className="font-mono text-[10px] uppercase text-ink-tertiary tracking-wider block mb-2 font-semibold">What I build</span>
               <div className="flex flex-wrap gap-1.5">
-                {['AI / ML Engineer', 'Agentic AI Dev', 'Full Stack Developer', 'Cloud & DevOps'].map((role) => (
+                {['AI Agents', 'LLM Systems', 'Computer Vision', 'Full-Stack AI'].map((role) => (
                   <span key={role} className="px-2 py-0.5 text-[10.5px] font-semibold text-accent bg-accent/8 border border-accent/20 rounded-md hover:bg-accent hover:text-white transition-colors duration-200 cursor-default">
                     {role}
                   </span>
@@ -203,8 +210,8 @@ export function BentoHero() {
               </span>
               <div className="flex gap-4 font-mono text-xs">
                 <a href="https://github.com/KunjShah95" target="_blank" rel="noopener noreferrer" className="text-ink-tertiary hover:text-accent transition-colors">GitHub ↗</a>
-                <a href="https://x.com/kunjshah_dev" target="_blank" rel="noopener noreferrer" className="text-ink-tertiary hover:text-accent transition-colors">X ↗</a>
                 <a href="https://www.linkedin.com/in/kunjshah05" target="_blank" rel="noopener noreferrer" className="text-ink-tertiary hover:text-accent transition-colors">LinkedIn ↗</a>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="text-ink-tertiary hover:text-accent transition-colors">Résumé ↗</a>
               </div>
             </div>
           </SpotlightCard>
@@ -339,10 +346,10 @@ export function BentoHero() {
         >
           <GlowBorder className="w-full">
             <div className="p-5 flex flex-col gap-3 justify-center h-full">
-              <span className="font-bold text-base leading-snug tracking-tight">Have a gnarly AI problem?</span>
+              <span className="font-bold text-base leading-snug tracking-tight">Building something ambitious?</span>
               <Magnetic>
                 <Link to="/contact" className="inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-accent text-accent-ink font-semibold text-sm hover:brightness-110 hover:-translate-y-0.5 transition-all">
-                  Let&rsquo;s talk <ArrowRight className="w-4 h-4" />
+                  Let&rsquo;s make it real <ArrowRight className="w-4 h-4" />
                 </Link>
               </Magnetic>
               <a href={`mailto:${IDENTITY.contact}`} className="font-mono text-xs text-ink-tertiary hover:text-accent transition-colors">{IDENTITY.contact}</a>

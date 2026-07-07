@@ -30,6 +30,16 @@ interface SEOProps {
   articleSection?: string
   articleTags?: string[]
   breadcrumbs?: readonly BreadcrumbItem[]
+  /** When set, emits SoftwareSourceCode / Project schema for project pages. */
+  projectData?: {
+    name: string
+    description: string
+    url: string
+    applicationCategory?: string
+    programmingLanguage?: string
+    operatingSystem?: string
+    offers?: { price: string; priceCurrency: string }
+  }
 }
 
 const defaultMeta = {
@@ -88,6 +98,7 @@ function buildJsonLd(opts: {
   articleSection?: string
   articleTags?: string[]
   breadcrumbs?: readonly BreadcrumbItem[]
+  projectData?: SEOProps['projectData']
 }) {
   const {
     pageTitle,
@@ -102,6 +113,7 @@ function buildJsonLd(opts: {
     articleSection,
     articleTags,
     breadcrumbs,
+    projectData,
   } = opts
 
   const person = {
@@ -217,6 +229,22 @@ function buildJsonLd(opts: {
     })
   }
 
+  if (projectData) {
+    graph.push({
+      '@type': 'SoftwareSourceCode',
+      '@id': `${projectData.url}#project`,
+      name: projectData.name,
+      description: projectData.description,
+      url: projectData.url,
+      applicationCategory: projectData.applicationCategory || 'AI Application',
+      programmingLanguage: projectData.programmingLanguage || 'TypeScript, Python',
+      operatingSystem: projectData.operatingSystem || 'Web',
+      author: { '@id': `${SITE_URL}/#person` },
+      offers: projectData.offers || undefined,
+      codeRepository: projectData.url,
+    })
+  }
+
   return {
     '@context': 'https://schema.org',
     '@graph': graph,
@@ -261,6 +289,7 @@ export function SEO({
   articleSection,
   articleTags,
   breadcrumbs,
+  projectData,
 }: SEOProps) {
   const pageTitle =
     title == null
@@ -286,6 +315,7 @@ export function SEO({
     articleSection,
     articleTags,
     breadcrumbs,
+    projectData,
   })
 
   const ogPublished = datePublished ? isoDateToOgDateTime(datePublished) : null

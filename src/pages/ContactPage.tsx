@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, FileDown } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { SITE_URL } from '../lib/site';
 import { BackgroundBeams } from '../components/effects/BackgroundBeams';
 import { GradientOrb } from '../components/effects/GradientOrb';
-import { Magnetic } from '../components/effects';
+import { Magnetic, TextScramble } from '../components/effects';
 
 const METHODS = [
   { label: 'Email', value: 'kkshah2005@gmail.com', href: 'mailto:kkshah2005@gmail.com', primary: true },
@@ -19,7 +19,7 @@ export function ContactPage() {
     <section className="relative py-24 md:py-32 overflow-hidden">
       <SEO
         title="Contact — Kunj Shah"
-        description="The fastest way to reach Kunj Shah is email. If you're working on something and want an extra set of hands, write."
+        description="The fastest way to reach Kunj Shah is email. If you're working on something and want an extra set of hands, write. Also find me on GitHub, LinkedIn, and Twitter."
         url={`${SITE_URL}/contact`}
       />
       <BackgroundBeams count={2} />
@@ -33,15 +33,43 @@ export function ContactPage() {
         >
           <div className="kicker">Get in touch</div>
           <h1 className="display text-5xl md:text-7xl mt-4 leading-[0.95] tracking-tightest max-w-3xl">
-            The fastest way to reach me is{' '}
-            <a href="mailto:kkshah2005@gmail.com" className="text-ink-primary underline decoration-ink-primary/30 decoration-2 underline-offset-8 hover:decoration-ink-primary/60 transition-colors">email</a>.
+            Building something ambitious?{' '}
+            <span className="text-accent">
+              <TextScramble words={["Let's make it real.", "Ship it.", "Build it."]} className="min-w-[10ch] text-accent inline-block" />
+            </span>
           </h1>
           <p className="mt-8 text-lg text-ink-secondary max-w-2xl leading-relaxed">
-            If you&rsquo;re working on something and want an extra set of hands, write to me. I usually reply within a day. For longer briefs, it helps to include the scope, the timeline, and what success would look like. Even a rough sketch is enough.
+            I build production AI systems — from transformer weights to customer deployment. 
+            If you have an AI product, a hard engineering problem, or an idea that needs a technical founder, 
+            write to me. I usually reply within a day.
           </p>
+
+          {/* CTA buttons */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Magnetic>
+              <a
+                href="mailto:kkshah2005@gmail.com"
+                className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-accent text-accent-ink font-semibold text-base hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 transition-all shadow-[0_10px_28px_rgb(var(--accent)/0.34)]"
+              >
+                Email me
+                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl border border-rule/15 text-ink-primary font-semibold text-base bg-elevated hover:bg-sunken hover:-translate-y-0.5 active:scale-95 transition-all"
+              >
+                <FileDown className="w-5 h-5" />
+                Download résumé
+              </a>
+            </Magnetic>
+          </div>
         </motion.div>
 
-        <div className="mt-24 max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="mt-20 max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
           {METHODS.map((m) => (
             <Magnetic key={m.label} strength={0.2} className="w-full">
               <a

@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Database, Workflow, Cpu, Code } from 'lucide-react'
 import { motion, MotionConfig } from 'framer-motion'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
@@ -59,6 +59,189 @@ function Home() {
       <BentoHero />
       <ServicesSection />
       <ProcessSection />
+
+      {/* How I Build AI Systems — Engineering Architecture Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden bg-sunken/10 border-t border-rule/12">
+        <GradientOrb size={400} className="top-[-120px] left-[-80px] opacity-30" />
+        <div className="relative max-w-manifest mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-14"
+          >
+            <div className="kicker text-accent font-semibold">02.2 · How I Build</div>
+            <h2 className="display text-4xl md:text-5xl mt-3 max-w-3xl font-bold leading-[1.05]">Systems I build, from the inside out.</h2>
+            <p className="mt-4 text-base text-ink-secondary max-w-2xl leading-relaxed">
+              Architecture matters more than frameworks. Here is how I design the AI systems I ship.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* RAG Pipeline */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+            >
+              <TiltCard scale={1.01} maxRotation={3}>
+                <SpotlightCard className="h-full rounded-2xl">
+                  <LiquidGlass intensity="subtle" tint="rgba(124, 118, 255, 0.08)" className="p-6 md:p-8 h-full border border-rule/12 hover:border-accent/30 transition-all group">
+                    <div className="flex items-center gap-2 mb-5">
+                      <Database className="w-4 h-4 text-accent" />
+                      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent font-bold">RAG Pipeline</span>
+                    </div>
+                    <div className="space-y-2.5 font-mono text-[13px] leading-relaxed">
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">1</span>
+                        <span className="text-ink-secondary">Documents → Chunking → Embedding</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-4">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">2</span>
+                        <span className="text-ink-secondary">Vector store (ChromaDB) → Similarity search</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-8">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">3</span>
+                        <span className="text-ink-secondary">Retrieved context + Query → LLM generation</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-12">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">4</span>
+                        <span className="text-ink-secondary">Grounded answer with source citations</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-rule/8">
+                      <span className="font-mono text-[10px] text-ink-tertiary">ChromaDB · LangChain · Multi-provider LLM · Hybrid search</span>
+                    </div>
+                  </LiquidGlass>
+                </SpotlightCard>
+              </TiltCard>
+            </motion.div>
+
+            {/* Multi-Agent System */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <TiltCard scale={1.01} maxRotation={3}>
+                <SpotlightCard className="h-full rounded-2xl">
+                  <LiquidGlass intensity="subtle" tint="rgba(6, 182, 212, 0.08)" className="p-6 md:p-8 h-full border border-rule/12 hover:border-accent/30 transition-all group">
+                    <div className="flex items-center gap-2 mb-5">
+                      <Workflow className="w-4 h-4 text-accent" />
+                      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent font-bold">Multi-Agent Architecture</span>
+                    </div>
+                    <div className="space-y-2.5 font-mono text-[13px] leading-relaxed">
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">M</span>
+                        <span className="text-ink-secondary">Manager agent: decomposes goals → task graph</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-4">
+                        <span className="w-6 h-6 rounded-md bg-cyan-500/10 flex items-center justify-center text-[10px] font-bold text-cyan-400">W</span>
+                        <span className="text-ink-secondary">Worker agents: parallel execution with tool access</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-4">
+                        <span className="w-6 h-6 rounded-md bg-amber-500/10 flex items-center justify-center text-[10px] font-bold text-amber-400">G</span>
+                        <span className="text-ink-secondary">Guardrails: eval → HITL gates → fallback</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-8">
+                        <span className="w-6 h-6 rounded-md bg-live/10 flex items-center justify-center text-[10px] font-bold text-live">✓</span>
+                        <span className="text-ink-secondary">Checkpointing + state persistence (Postgres JSONB)</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-rule/8">
+                      <span className="font-mono text-[10px] text-ink-tertiary">LangGraph · CrewAI · Supervisor/Worker pattern · Postgres state</span>
+                    </div>
+                  </LiquidGlass>
+                </SpotlightCard>
+              </TiltCard>
+            </motion.div>
+
+            {/* Edge CV Pipeline */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+            >
+              <TiltCard scale={1.01} maxRotation={3}>
+                <SpotlightCard className="h-full rounded-2xl">
+                  <LiquidGlass intensity="subtle" tint="rgba(34, 197, 94, 0.08)" className="p-6 md:p-8 h-full border border-rule/12 hover:border-accent/30 transition-all group">
+                    <div className="flex items-center gap-2 mb-5">
+                      <Cpu className="w-4 h-4 text-accent" />
+                      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent font-bold">Edge Computer Vision</span>
+                    </div>
+                    <div className="space-y-2.5 font-mono text-[13px] leading-relaxed">
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">1</span>
+                        <span className="text-ink-secondary">GStreamer pipeline: HW-accelerated video decode</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-4">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">2</span>
+                        <span className="text-ink-secondary">CUDA preprocess → TensorRT INT8 inference</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-8">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">3</span>
+                        <span className="text-ink-secondary">NMS post-process → Defect classification</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-12">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">4</span>
+                        <span className="text-ink-secondary">Alert → API → Dashboard (sub-100ms end-to-end)</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-rule/8">
+                      <span className="font-mono text-[10px] text-ink-tertiary">C++ · TensorRT · YOLOv8 · Jetson Orin · QAT INT8</span>
+                    </div>
+                  </LiquidGlass>
+                </SpotlightCard>
+              </TiltCard>
+            </motion.div>
+
+            {/* Tokenizer / Transformer internals */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <TiltCard scale={1.01} maxRotation={3}>
+                <SpotlightCard className="h-full rounded-2xl">
+                  <LiquidGlass intensity="subtle" tint="rgba(168, 85, 247, 0.08)" className="p-6 md:p-8 h-full border border-rule/12 hover:border-accent/30 transition-all group">
+                    <div className="flex items-center gap-2 mb-5">
+                      <Code className="w-4 h-4 text-accent" />
+                      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent font-bold">LLM Internals: BPE Tokenizer</span>
+                    </div>
+                    <div className="space-y-2.5 font-mono text-[13px] leading-relaxed">
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">1</span>
+                        <span className="text-ink-secondary">Pre-tokenize: regex split (GPT-2/4 pattern)</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-4">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">2</span>
+                        <span className="text-ink-secondary">BPE merge: learn ~50K merge rules from corpus</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-8">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">3</span>
+                        <span className="text-ink-secondary">Encode: apply merges → token IDs</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2.5 rounded-lg bg-accent/5 border border-rule/8 ml-12">
+                        <span className="w-6 h-6 rounded-md bg-accent/10 flex items-center justify-center text-[10px] font-bold text-accent">4</span>
+                        <span className="text-ink-secondary">Decode: token IDs → byte sequences → text</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-rule/8">
+                      <span className="font-mono text-[10px] text-ink-tertiary">Pure Python implementation · 15% token reduction on technical data</span>
+                    </div>
+                  </LiquidGlass>
+                </SpotlightCard>
+              </TiltCard>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       <ProofBar />
       <FeaturedProjects />
 

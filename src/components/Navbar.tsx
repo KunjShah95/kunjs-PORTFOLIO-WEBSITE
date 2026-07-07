@@ -9,7 +9,6 @@ const NAV = [
   { to: '/projects', label: 'Projects' },
   { to: '/about', label: 'About' },
   { to: '/blogs', label: 'Writing' },
-  { to: '/experience', label: 'Experience' },
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -95,6 +94,9 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
               <Search className="w-3 h-3" />
               <span className="kicker text-[10px]">&#8984;K</span>
             </button>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="hidden sm:inline-flex items-center gap-1 px-2.5 h-7 rounded-lg border border-rule/12 text-ink-tertiary hover:text-ink-primary hover:border-rule/25 hover:bg-elevated/40 transition-all text-[11px] font-mono font-semibold">
+              Resume
+            </a>
             <a href="https://github.com/KunjShah95" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hidden sm:inline-flex p-1.5 text-ink-tertiary hover:text-ink-primary rounded-lg hover:bg-elevated/40 transition-all">
               <Github className="w-3.5 h-3.5" />
             </a>

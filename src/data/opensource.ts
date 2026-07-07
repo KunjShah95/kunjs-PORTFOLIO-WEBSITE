@@ -19,6 +19,8 @@ export const OSS_STATS = {
   totalPRs: 72,           // external, all states
   projects: 13,           // distinct external repos contributed to
   orgs: ['OWASP', 'Microsoft', 'Ollama'],
+  linesChanged: 15000,    // estimated lines across all contributions
+  codeReviews: 18,        // PRs reviewed for others
 } as const;
 
 export const CONTRIBUTIONS: Contribution[] = [
