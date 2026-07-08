@@ -2,14 +2,10 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, MapPin } from 'lucide-react';
 import { LIVE_STATUS, IDENTITY } from '../data/portfolio';
-import { BackgroundBeams } from './effects/BackgroundBeams'
-import { GradientOrb } from './effects/GradientOrb'
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center border-b border-rule/12 overflow-hidden">
-      <BackgroundBeams count={3} />
-      <GradientOrb size={500} className="top-[-150px] right-[-100px]" />
       <div className="relative w-full max-w-manifest mx-auto px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: -4 }}

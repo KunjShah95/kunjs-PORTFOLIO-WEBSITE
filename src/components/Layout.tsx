@@ -7,8 +7,6 @@ import { StickyCTA } from './StickyCTA'
 import { CommandMenu } from './CommandMenu'
 import { AIAssistant } from './AIAssistant'
 import { FloatingDock } from './FloatingDock'
-import { CursorGlow } from './effects/CursorGlow'
-
 interface LayoutProps {
    children: React.ReactNode
 }
@@ -20,7 +18,6 @@ export function Layout({ children }: LayoutProps) {
 
    return (
       <div className="min-h-screen bg-paper text-ink-primary font-body">
-         <CursorGlow />
          <a
             href="#main"
             className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-2 focus:bg-ink-primary focus:text-ink-inverse focus:rounded-sm"

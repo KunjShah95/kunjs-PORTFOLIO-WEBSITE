@@ -12,7 +12,7 @@ export function LiquidGlass({
   children,
   className,
   intensity = 'medium',
-  tint = 'rgba(124, 118, 255, 0.15)', // Default accent tint
+  tint = 'rgba(226, 109, 72, 0.15)', // Default warm terracotta accent tint
 }: LiquidGlassProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [pos, setPos] = useState({ x: 50, y: 50 })
