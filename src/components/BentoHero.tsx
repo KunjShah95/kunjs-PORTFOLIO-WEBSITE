@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, MapPin, Zap, Activity, GitMerge, Award } from 'lucide-react'
+import { ArrowRight, MapPin, Activity, GitMerge, Award } from 'lucide-react'
 import { IDENTITY, LIVE_STATUS, PROJECTS, SKILL_GROUPS } from '../data/portfolio'
 import { OSS_STATS } from '../data/opensource'
 import { AnimatedCounter } from './AnimatedCounter'
-import { Magnetic, SpotlightCard, GlowBorder, TiltCard, CountUp, LiquidGlass } from './effects'
+import { Magnetic, SpotlightCard, CountUp } from './effects'
 
 const NOW = [
   'Building a multi-agent research workflow',
@@ -112,12 +112,35 @@ export function BentoHero() {
                 See engineering work <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </Magnetic>
-            <a
-              href="/resume.pdf" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center h-12 px-5 rounded-xl border border-rule/12 bg-elevated text-ink-primary font-semibold text-[15px] hover:bg-sunken hover:-translate-y-0.5 transition-all noise-texture"
-            >
-              Résumé
-            </a>
+            <div className="relative group">
+              <button
+                className="inline-flex items-center h-12 px-5 rounded-xl border border-rule/12 bg-elevated text-ink-primary font-semibold text-[15px] hover:bg-sunken hover:-translate-y-0.5 transition-all noise-texture"
+              >
+                Résumé
+              </button>
+              <div className="absolute left-0 top-full pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                <div className="w-56 bg-elevated/95 backdrop-blur-xl border border-rule/12 p-1.5 rounded-xl shadow-2xl flex flex-col gap-1 noise-texture">
+                  <a
+                    href="/kunjaiml.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
+                  >
+                    <span>AI / ML Roles <span className="block text-[10px] text-ink-tertiary group-hover:text-accent-ink/70 font-mono">kunjaiml.pdf</span></span>
+                    <span className="text-xs text-ink-tertiary">↗</span>
+                  </a>
+                  <a
+                    href="/kunjshah_cv.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
+                  >
+                    <span>Full Stack Roles <span className="block text-[10px] text-ink-tertiary group-hover:text-accent-ink/70 font-mono">kunjshah_cv.pdf</span></span>
+                    <span className="text-xs text-ink-tertiary">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
 
@@ -127,50 +150,34 @@ export function BentoHero() {
           className="flex flex-col gap-4"
         >
           {/* Profile photo */}
-          <TiltCard scale={1.015} maxRotation={5} className="w-full max-w-[280px] aspect-[3.8/5] md:max-w-[300px] mx-auto md:mx-0">
-            <div className="w-full h-full rounded-[2.5rem] overflow-hidden border border-accent/20 bg-accent/5 relative group shadow-2xl">
-              <img 
-                src={IDENTITY.profile_photo} 
-                alt={`${IDENTITY.name} — AI Engineer`}
-                className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-slow ease-out-soft" 
-                loading="eager" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-sunken/60 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute inset-0 rounded-[2.5rem] border border-white/10 pointer-events-none" />
-              {/* Floating status chip at bottom */}
-              <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 px-3 py-2 rounded-xl bg-paper/80 backdrop-blur-md border border-rule/15">
-                <span className="relative inline-block w-2 h-2">
-                  <span className="absolute inset-0 rounded-full bg-live animate-ping-soft" />
-                  <span className="absolute inset-0 rounded-full bg-live" />
-                </span>
-                <span className="font-mono text-[10px] text-ink-secondary">Shipping every week</span>
-              </div>
-            </div>
-          </TiltCard>
+          <div className="w-full max-w-[280px] aspect-[3.8/5] md:max-w-[300px] mx-auto md:mx-0 rounded-2xl overflow-hidden border border-rule/12">
+            <img
+              src={IDENTITY.profile_photo}
+              alt={`${IDENTITY.name} — AI Engineer`}
+              className="w-full h-full object-cover object-[center_20%]"
+              loading="eager"
+            />
+          </div>
 
-          {/* Currently Building mini card */}
+          {/* Currently Building */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
+            className="p-4 rounded-xl border border-rule/12 bg-elevated max-w-[300px] mx-auto md:mx-0"
           >
-            <LiquidGlass intensity="subtle" tint="rgba(124, 118, 255, 0.08)" className="p-4 rounded-2xl border border-rule/12 max-w-[300px] mx-auto md:mx-0">
-              <div className="flex items-center gap-2 mb-3">
-                <Zap className="w-3.5 h-3.5 text-accent" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-tertiary font-semibold">Currently Building</span>
-              </div>
-              <div className="flex flex-col gap-1.5">
-                {CURRENTLY_BUILDING.map((item) => (
-                  <div key={item.name} className="flex items-center gap-2">
-                    <span className="text-accent text-xs">→</span>
-                    <span className="text-[13px] text-ink-secondary font-medium">{item.name}</span>
-                    {item.status === 'live' && (
-                      <span className="font-mono text-[9px] text-live bg-live/10 px-1.5 py-0.5 rounded font-bold">LIVE</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </LiquidGlass>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-tertiary block mb-3">Currently Building</span>
+            <div className="flex flex-col gap-1.5">
+              {CURRENTLY_BUILDING.map((item) => (
+                <div key={item.name} className="flex items-center gap-2">
+                  <span className="text-accent text-xs">→</span>
+                  <span className="text-[13px] text-ink-secondary font-medium">{item.name}</span>
+                  {item.status === 'live' && (
+                    <span className="font-mono text-[9px] text-live bg-live/10 px-1.5 py-0.5 rounded font-bold">LIVE</span>
+                  )}
+                </div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </header>
@@ -208,10 +215,11 @@ export function BentoHero() {
               <span className="font-mono text-xs text-ink-tertiary inline-flex items-center gap-1.5">
                 <MapPin className="w-3 h-3" /> {IDENTITY.location}
               </span>
-              <div className="flex gap-4 font-mono text-xs">
+              <div className="flex gap-4 font-mono text-xs flex-wrap">
                 <a href="https://github.com/KunjShah95" target="_blank" rel="noopener noreferrer" className="text-ink-tertiary hover:text-accent transition-colors">GitHub ↗</a>
                 <a href="https://www.linkedin.com/in/kunjshah05" target="_blank" rel="noopener noreferrer" className="text-ink-tertiary hover:text-accent transition-colors">LinkedIn ↗</a>
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="text-ink-tertiary hover:text-accent transition-colors">Résumé ↗</a>
+                <a href="/kunjaiml.pdf" target="_blank" rel="noopener noreferrer" className="text-ink-tertiary hover:text-accent transition-colors">AI/ML Resume ↗</a>
+                <a href="/kunjshah_cv.pdf" target="_blank" rel="noopener noreferrer" className="text-ink-tertiary hover:text-accent transition-colors">Fullstack Resume ↗</a>
               </div>
             </div>
           </SpotlightCard>
@@ -339,22 +347,20 @@ export function BentoHero() {
           </div>
         </motion.div>
 
-        {/* Glow CTA */}
+        {/* CTA */}
         <motion.div
           variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.13}
-          className="md:[grid-area:glow] flex"
+          className={`md:[grid-area:glow] ${CARD} flex`}
         >
-          <GlowBorder className="w-full">
-            <div className="p-5 flex flex-col gap-3 justify-center h-full">
-              <span className="font-bold text-base leading-snug tracking-tight">Building something ambitious?</span>
-              <Magnetic>
-                <Link to="/contact" className="inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-accent text-accent-ink font-semibold text-sm hover:brightness-110 hover:-translate-y-0.5 transition-all">
-                  Let&rsquo;s make it real <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Magnetic>
-              <a href={`mailto:${IDENTITY.contact}`} className="font-mono text-xs text-ink-tertiary hover:text-accent transition-colors">{IDENTITY.contact}</a>
-            </div>
-          </GlowBorder>
+          <div className="p-5 flex flex-col gap-3 justify-center h-full w-full">
+            <span className="font-bold text-base leading-snug tracking-tight">Building something ambitious?</span>
+            <Magnetic>
+              <Link to="/contact" className="inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-accent text-accent-ink font-semibold text-sm hover:brightness-110 hover:-translate-y-0.5 transition-all">
+                Let&rsquo;s make it real <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Magnetic>
+            <a href={`mailto:${IDENTITY.contact}`} className="font-mono text-xs text-ink-tertiary hover:text-accent transition-colors">{IDENTITY.contact}</a>
+          </div>
         </motion.div>
 
         {/* Latest writing */}

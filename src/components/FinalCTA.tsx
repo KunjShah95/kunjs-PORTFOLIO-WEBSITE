@@ -1,36 +1,20 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Mail, Github, Linkedin, Twitter, ExternalLink, FileDown } from 'lucide-react'
-import {
-  LiquidGlass,
-  TiltCard,
-  Magnetic,
-  TextScramble,
-  BackgroundBeams,
-  GradientOrb,
-} from './effects'
+import { ArrowUpRight, Mail, FileDown } from 'lucide-react'
+import { Magnetic } from './effects'
 
 const SOCIALS = [
-  { label: 'GitHub Main', icon: Github, href: 'https://github.com/KunjShah95', tint: 'rgba(124, 118, 255, 0.12)' },
-  { label: 'GitHub Side', icon: Github, href: 'https://github.com/KunjShah01', tint: 'rgba(6, 182, 212, 0.12)' },
-  { label: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/in/kunjshah05', tint: 'rgba(168, 85, 247, 0.12)' },
-  { label: 'Twitter', icon: Twitter, href: 'https://twitter.com/kunjshah_dev', tint: 'rgba(234, 179, 8, 0.12)' },
-  { label: 'Peerlist', icon: ExternalLink, href: 'https://peerlist.io/kunjshah', tint: 'rgba(6, 182, 212, 0.12)' },
-  { label: 'Medium', icon: ExternalLink, href: 'https://medium.com/@kkshah2005', tint: 'rgba(245, 158, 11, 0.12)' },
+  { label: 'GitHub', value: 'KunjShah95', href: 'https://github.com/KunjShah95' },
+  { label: 'GitHub', value: 'KunjShah01', href: 'https://github.com/KunjShah01' },
+  { label: 'LinkedIn', value: 'kunjshah05', href: 'https://linkedin.com/in/kunjshah05' },
+  { label: 'Twitter', value: '@kunjshah_dev', href: 'https://twitter.com/kunjshah_dev' },
+  { label: 'Peerlist', value: 'kunjshah', href: 'https://peerlist.io/kunjshah' },
+  { label: 'Medium', value: '@kkshah2005', href: 'https://medium.com/@kkshah2005' },
 ]
 
 export function FinalCTA() {
   return (
     <section id="final-cta" className="relative bg-ink-primary text-paper overflow-hidden py-24 md:py-32">
-      {/* Background beams and orbs */}
-      <BackgroundBeams count={4} className="opacity-10" />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 h-[420px] w-[820px] rounded-full opacity-30 blur-[120px]"
-        style={{ background: 'radial-gradient(circle, rgb(var(--accent) / 0.55), transparent 70%)' }}
-      />
-      <GradientOrb size={460} className="bottom-[-140px] left-[-100px] opacity-20" />
-
       <div className="relative z-10 max-w-manifest mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -44,9 +28,7 @@ export function FinalCTA() {
           </span>
           <h2 className="display text-5xl md:text-7xl mt-6 leading-[0.98] tracking-tightest max-w-4xl text-paper font-extrabold">
             Building something ambitious?{' '}
-            <span className="text-accent">
-              <TextScramble words={["Let's make it real.", "Ship it.", "Build it."]} className="min-w-[12ch] text-accent inline-block" />
-            </span>
+            <span className="text-accent">Let&rsquo;s make it real.</span>
           </h2>
           <p className="mt-8 text-paper/70 text-lg md:text-xl leading-relaxed max-w-2xl font-body">
             I design production AI systems — autonomous agents, LLM pipelines, edge computer vision — 
@@ -66,17 +48,38 @@ export function FinalCTA() {
               </Link>
             </Magnetic>
 
-            <Magnetic strength={0.15}>
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl border border-paper/15 text-paper font-semibold text-base bg-paper/5 hover:bg-paper/10 hover:border-paper/25 hover:-translate-y-0.5 active:scale-95 transition-all"
-              >
-                <FileDown className="w-5 h-5 text-paper/70" />
-                Download résumé
-              </a>
-            </Magnetic>
+            <div className="relative group">
+              <Magnetic strength={0.15}>
+                <button
+                  className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl border border-paper/15 text-paper font-semibold text-base bg-paper/5 hover:bg-paper/10 hover:border-paper/25 hover:-translate-y-0.5 active:scale-95 transition-all w-full md:w-auto"
+                >
+                  <FileDown className="w-5 h-5 text-paper/70" />
+                  Download résumé
+                </button>
+              </Magnetic>
+              <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                <div className="w-60 bg-[#1e1d1b] border border-white/10 p-1.5 rounded-xl shadow-2xl flex flex-col gap-1 text-left">
+                  <a
+                    href="/kunjaiml.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-white transition-colors font-medium flex items-center justify-between text-zinc-100"
+                  >
+                    <span>AI / ML Roles <span className="block text-[10px] text-zinc-400 group-hover:text-white/70 font-mono">kunjaiml.pdf</span></span>
+                    <span className="text-xs text-zinc-400">↗</span>
+                  </a>
+                  <a
+                    href="/kunjshah_cv.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-white transition-colors font-medium flex items-center justify-between text-zinc-100"
+                  >
+                    <span>Full Stack Roles <span className="block text-[10px] text-zinc-400 group-hover:text-white/70 font-mono">kunjshah_cv.pdf</span></span>
+                    <span className="text-xs text-zinc-400">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
 
             <Magnetic strength={0.15}>
               <a
@@ -89,47 +92,23 @@ export function FinalCTA() {
             </Magnetic>
           </div>
 
-          {/* Social liquid glass grid */}
-          <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-2xl">
-            {SOCIALS.map(({ label, icon: Icon, href, tint }) => (
-              <div key={label} className="w-full">
-                <TiltCard scale={1.03} maxRotation={6}>
-                  <Magnetic strength={0.2} className="w-full">
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full block"
-                    >
-                      <LiquidGlass
-                        tint={tint}
-                        intensity="subtle"
-                        className="w-full flex flex-col items-center justify-center gap-3 p-5 rounded-2xl border border-paper/10 bg-paper/5 hover:bg-paper/10 hover:border-paper/20 hover:-translate-y-1 transition-all shadow-md group"
-                      >
-                        <div className="w-10 h-10 rounded-xl bg-paper/10 flex items-center justify-center group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-300">
-                          <Icon className="w-5 h-5 text-paper/80 group-hover:text-accent transition-colors" />
-                        </div>
-                        <span className="font-mono text-xs text-paper/50 group-hover:text-paper/90 transition-colors font-medium">
-                          {label}
-                        </span>
-                      </LiquidGlass>
-                    </a>
-                  </Magnetic>
-                </TiltCard>
-              </div>
+          {/* Social links — plain mono list */}
+          <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-3 w-full max-w-lg">
+            {SOCIALS.map(({ label, value, href }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 font-mono text-xs text-paper/40 hover:text-accent transition-colors"
+              >
+                <span className="text-paper/20 group-hover:text-accent/50 transition-colors">{label}</span>
+                <span className="text-paper/20">·</span>
+                <span>{value}</span>
+                <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
             ))}
           </div>
-
-          {/* Stronger closing tagline */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="mt-12 font-display text-lg md:text-xl text-paper/40 italic tracking-tight"
-          >
-            Let's build something that matters.
-          </motion.p>
         </motion.div>
 
         <div className="mt-24 pt-8 border-t border-paper/10 flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono text-xs text-paper/50">
