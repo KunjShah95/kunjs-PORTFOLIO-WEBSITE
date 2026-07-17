@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import { BLOGS } from '../data/portfolio';
 import { SEO } from '../components/SEO';
 import { SITE_URL } from '../lib/site';
+import { blogDateToIsoDate } from '../lib/seo-dates';
 import { Kicker } from '../components/ui/Kicker';
 
 export function BlogDetailPage() {
@@ -26,6 +27,8 @@ export function BlogDetailPage() {
         articleSection={blog.category}
         articleTags={tags}
         keywords={[...tags, blog.category, 'Kunj Shah', 'AI essay']}
+        datePublished={blogDateToIsoDate(blog.date)}
+        dateModified={blogDateToIsoDate(blog.date)}
       />
       <header className="py-16 md:py-24 border-b border-rule/12">
         <div className="max-w-manifest mx-auto px-6">

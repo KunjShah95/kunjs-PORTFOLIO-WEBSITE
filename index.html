@@ -53,7 +53,45 @@
     <link rel="me" href="https://www.linkedin.com/in/kunjshah05" />
     <link rel="me" href="https://peerlist.io/kunjshah" />
     <link rel="me" href="https://medium.com/@kkshah2005" />
-    <meta name="theme-color" content="#5b53f0" />
+    <meta name="theme-color" content="#E26D48" />
+
+    <!-- Static JSON-LD for crawlers that don't execute JS -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://kunjshah.vercel.app/#person",
+          "name": "Kunj Shah",
+          "jobTitle": "AI Engineer & Agent Builder",
+          "url": "https://kunjshah.vercel.app",
+          "image": "https://kunjshah.vercel.app/profile.png",
+          "email": "mailto:kkshah2005@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "addressCountry": "IN"
+          },
+          "knowsAbout": ["Generative AI", "Large language models", "Autonomous agents", "RAG", "LangChain", "FastAPI", "React", "PyTorch"],
+          "sameAs": ["https://github.com/KunjShah95", "https://www.linkedin.com/in/kunjshah05", "https://peerlist.io/kunjshah", "https://medium.com/@kkshah2005"],
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Indus University"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://kunjshah.vercel.app/#website",
+          "name": "Kunj Shah — Portfolio",
+          "url": "https://kunjshah.vercel.app",
+          "publisher": { "@id": "https://kunjshah.vercel.app/#person" },
+          "inLanguage": "en"
+        }
+      ]
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
