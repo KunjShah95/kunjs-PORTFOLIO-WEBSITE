@@ -27,7 +27,7 @@ function SectionLabel({ label, accent = 'primary' }: { label: string; accent?: '
       aria-hidden
     >
       <span
-        className="txt-mono text-[10px] uppercase tracking-[0.28em] font-bold"
+        className="font-mono text-[10px] uppercase tracking-[0.28em] font-bold"
         style={{ color: `rgb(var(--${accent === 'primary' ? 'primary' : 'secondary'}-rgb) / 0.55)` }}
       >
         {label}
@@ -48,7 +48,7 @@ export function Chapter({ label, title, subtitle, accent = 'primary', children, 
     <section
       ref={ref}
       id={id}
-      className={`section-padding bg-bg relative overflow-hidden ${className}`}
+      className={`section-padding bg-paper relative overflow-hidden ${className}`}
     >
       <div className="container-aligned">
         {/* Chapter header */}
@@ -69,16 +69,16 @@ export function Chapter({ label, title, subtitle, accent = 'primary', children, 
                 className="origin-left h-px w-8 block"
                 style={{ background: `rgb(var(--${accent === 'primary' ? 'primary' : 'secondary'}-rgb) / 0.7)` }}
               />
-              <span className="txt-mono text-[10px] text-muted uppercase tracking-[0.22em]">
+              <span className="font-mono text-[10px] text-ink-secondary uppercase tracking-[0.22em]">
                 {label} — {title}
               </span>
             </div>
 
-            <h2 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-bold text-txt tracking-[-0.025em] leading-[1.12]">
+            <h2 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-bold text-ink-primary tracking-[-0.025em] leading-[1.12]">
               {title}
             </h2>
             {subtitle && (
-              <p className="mt-3 text-muted text-lg leading-relaxed max-w-2xl">
+              <p className="mt-3 text-ink-secondary text-lg leading-relaxed max-w-2xl">
                 {subtitle}
               </p>
             )}
@@ -104,19 +104,19 @@ export function ChapterDivider({ label }: { label?: string }) {
   const inView = useInView(ref, { once: true, margin: '-40px' })
 
   return (
-    <div ref={ref} className="relative py-4 overflow-hidden bg-bg" aria-hidden>
+    <div ref={ref} className="relative py-4 overflow-hidden bg-paper" aria-hidden>
       <motion.div
         initial={{ scaleX: 0 }}
         animate={inView ? { scaleX: 1 } : {}}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="origin-left h-px w-full bg-gradient-to-r from-transparent via-border to-transparent"
+        className="origin-left h-px w-full bg-gradient-to-r from-transparent via-rule to-transparent"
       />
       {label && (
         <motion.span
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.4, duration: 0.4 }}
-          className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 txt-mono text-[9px] text-muted uppercase tracking-[0.3em] bg-bg px-4"
+          className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 font-mono text-[9px] text-ink-secondary uppercase tracking-[0.3em] bg-paper px-4"
         >
           {label}
         </motion.span>

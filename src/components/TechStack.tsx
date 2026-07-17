@@ -35,7 +35,7 @@ const techCategories = [
 
 export function TechStack() {
   return (
-    <section className="section-padding bg-surface/30 relative">
+    <section className="section-padding bg-elevated/30 relative">
       <div className="container-aligned">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -44,17 +44,17 @@ export function TechStack() {
           className="mb-12 text-center"
         >
           <div className="flex items-center justify-center gap-2 mb-4">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-txt">
-              Tech <span className="text-primary">Stack</span>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-ink-primary">
+              Tech <span className="text-accent">Stack</span>
             </h2>
             <Link 
               to="/skills"
-              className="inline-flex items-center gap-1 text-sm text-muted hover:text-primary transition-colors"
+              className="inline-flex items-center gap-1 text-sm text-ink-secondary hover:text-accent transition-colors"
             >
               View All <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <p className="text-lg text-muted max-w-2xl mx-auto">
+          <p className="text-lg text-ink-secondary max-w-2xl mx-auto">
             The tools and frameworks I use to build scalable, intelligent systems.
           </p>
         </motion.div>
@@ -67,20 +67,20 @@ export function TechStack() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ delay: i * 0.1 }}
-              className="p-6 rounded-xl bg-surface/50 border border-border/50 shadow-sm flex flex-col h-full hover:border-primary/40 hover:bg-surface/80 transition-all duration-300 group"
+              className="p-6 rounded-xl bg-elevated/50 border border-rule/50 shadow-sm flex flex-col h-full hover:border-accent/40 hover:bg-elevated/80 transition-all duration-300 group"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className={`p-3 rounded-xl ${cat.bg} group-hover:scale-110 transition-transform duration-300 shadow-inner`}>
                   <cat.icon className={`w-5 h-5 ${cat.color}`} />
                 </div>
-                <h3 className="text-lg font-bold text-txt group-hover:text-primary transition-colors">{cat.title}</h3>
+                <h3 className="text-lg font-bold text-ink-primary group-hover:text-accent transition-colors">{cat.title}</h3>
               </div>
               
               <div className="flex flex-wrap gap-2 content-start flex-1">
                 {cat.skills.map(skill => (
                   <span
                     key={skill}
-                    className="px-2.5 py-1.5 rounded-md bg-bg/50 border border-border text-[11px] font-mono text-muted group-hover:border-primary/20 group-hover:text-txt transition-all hover:bg-primary/5 hover:border-primary/40 cursor-default"
+                    className="px-2.5 py-1.5 rounded-md bg-paper/50 border border-rule/12 text-[11px] font-mono text-ink-secondary group-hover:border-accent/20 group-hover:text-ink-primary transition-all hover:bg-accent/5 hover:border-accent/40 cursor-default"
                   >
                     {skill}
                   </span>
