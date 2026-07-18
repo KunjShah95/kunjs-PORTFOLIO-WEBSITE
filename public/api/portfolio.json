@@ -87,12 +87,13 @@
     },
     {
       "id": "04",
-      "title": "CinePulse",
-      "category": "Full Stack ML",
-      "description": "End-to-end movie recommender system with NLP classification backend.",
-      "tech": ["Python", "PyTorch", "React", "FastAPI"],
-      "github": "https://github.com/KunjShah95/CinePulse",
-      "slug": "cinepulse",
+      "title": "ArchMind AI",
+      "category": "Agentic AI Platform",
+      "description": "Autonomous research platform that plans, searches, reads, and synthesizes the web into cited, structured reports.",
+      "tech": ["Python", "LangGraph", "React", "FastAPI", "ChromaDB"],
+      "github": "https://github.com/KunjShah95/archmind-ai",
+      "demo": "https://archmind-ai-topaz.vercel.app/",
+      "slug": "archmind-ai",
       "impact": "Production Ready"
     },
     {
@@ -138,13 +139,14 @@
     },
     {
       "id": "09",
-      "title": "AETHER AI",
-      "category": "Agentic Automation",
-      "description": "Multi-model terminal assistant with local inference.",
-      "tech": ["Python", "Ollama", "Gemini", "Groq"],
-      "github": "https://github.com/KunjShah95/AETHER-AI",
-      "slug": "aether-ai",
-      "impact": "Open Source Framework"
+      "title": "ArchMind Research Agent",
+      "category": "Agentic AI",
+      "description": "Autonomous research agent that explores the web, evaluates sources, and writes cited analysis with verifiable provenance.",
+      "tech": ["Python", "LangGraph", "Streamlit", "RAG", "Web Scraping"],
+      "github": "https://github.com/KunjShah01/INTERNSHIP-ASSESSMENT",
+      "demo": "https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/",
+      "slug": "archmind-research-agent",
+      "impact": "Live"
     },
     {
       "id": "10",

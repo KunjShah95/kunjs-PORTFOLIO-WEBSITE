@@ -145,20 +145,22 @@ export const PROJECTS: Project[] = [
     },
     {
         id: '01',
-        title: 'CinePulse',
-        category: 'Full Stack ML',
-        desc: 'End-to-end movie recommender system with an NLP classification backend and a responsive user interface for real-time mood-based discovery.',
-        tech: ['PYTHON', 'PYTORCH', 'REACT', 'FASTAPI'],
-        github: 'https://github.com/KunjShah95/CinePulse',
-        slug: 'cinepulse',
+        title: 'ArchMind AI',
+        category: 'Agentic AI Platform',
+        desc: 'Autonomous research intelligence platform that plans, searches, reads, and synthesizes from the web into cited, structured reports — built as a multi-agent system with a production-grade UI.',
+        tech: ['PYTHON', 'LANGGRAPH', 'REACT', 'FASTAPI', 'CHROMADB'],
+        github: 'https://github.com/KunjShah95/archmind-ai',
+        demo: 'https://archmind-ai-topaz.vercel.app/',
+        slug: 'archmind-ai',
         impact: 'Production',
-        problem: 'Movie discovery is often limited to static genre filters that fail to capture current user intent or mood.',
-        outcome: 'Achieved 92% recommendation accuracy in user testing with sub-50ms inference latency.',
-        metrics: { 'Recommendation accuracy': '92%', 'Inference latency': '< 50ms', 'Mood dimensions': '5' },
-        architecture: 'NLP mood classifier extracts emotional signals from user queries, feeding a collaborative filtering + content-based hybrid recommender. FastAPI serves PyTorch model with ONNX runtime optimization and response caching for sub-50ms p95 latency.',
-        challenges: ['Bridging natural language mood queries to structured recommendation signals', 'Maintaining sub-50ms inference with a PyTorch model in production'],
-        lessons: ['Hybrid recommenders outperform pure approaches for mood-driven discovery', 'ONNX runtime optimization is essential for low-latency PyTorch serving'],
-        benchmarks: { 'Recommendation accuracy': '92%', 'p95 inference latency': '< 50ms', 'Satisfaction': '4.5/5' },
+        caseStudy: 'case-study-archmind-ai',
+        problem: 'Deep research is slow, fragmented, and hard to trust — analysts juggle dozens of tabs, lose provenance, and still end up with unverified notes.',
+        outcome: 'Shipped a live multi-agent research engine that turns a single query into a structured, fully-cited report with source tracing and verdict-quality synthesis.',
+        metrics: { 'Agents orchestrated': '4+', 'Citations per report': '30+', 'Sources ingested': 'Web-scale', 'Latency': 'Minutes not hours' },
+        architecture: 'Supervisor-planner decomposes a query into a research graph. Worker agents run retrieval + reading + extraction in parallel, writing findings to a shared memory (ChromaDB). A synthesis agent cross-checks claims against sources and emits a structured, cited report. LangGraph manages state, checkpoints, and self-correction loops.',
+        challenges: ['Keeping citations grounded — agents must quote real sources, not hallucinate references', 'Orchestrating long-running multi-step graphs without losing state on failure', 'Balancing depth vs latency for interactive research'],
+        lessons: ['Citation grounding is the difference between a toy and a tool', 'Checkpointed graphs make long agentic runs recoverable and debuggable'],
+        benchmarks: { 'Source grounding': 'Verified citations', 'Report quality': 'Structured + synthesized', 'Uptime': 'Live on Vercel' },
     },
     {
         id: '02',
@@ -197,20 +199,22 @@ export const PROJECTS: Project[] = [
     },
     {
         id: '06',
-        title: 'AETHER AI',
-        category: 'AI Systems',
-        desc: 'Personal automation assistant designed for terminal workflows, featuring local inference and secure command execution.',
-        tech: ['PYTHON', 'OLLAMA', 'GEMINI', 'GROQ'],
-        github: 'https://github.com/KunjShah95/AETHER-AI',
-        slug: 'aether-ai',
-        impact: 'Framework',
-        problem: 'Cloud-dependent AI assistants introduce latency and privacy concerns for sensitive development workflows.',
-        outcome: 'Engineered a local-first assistant capable of executing complex shell commands with zero data leakage.',
-        metrics: { 'Inference modes': '3 (local/cloud/hybrid)', 'Privacy': 'Zero data leakage', 'Models': 'Ollama + Gemini + Groq' },
-        architecture: 'Local-first AI assistant with fallback to cloud inference. Sandboxed command execution validates and runs shell commands with user confirmation gates. Plugin architecture for extending tool capabilities without modifying core.',
-        challenges: ['Ensuring command safety without crippling functionality', 'Graceful fallback between local (Ollama) and cloud (Gemini/Groq) models mid-session'],
-        lessons: ['Local models handle 80% of terminal tasks — cloud only needed for complex reasoning', 'Sandboxed execution with confirmation gates balances safety and usability'],
-        benchmarks: { 'Local inference latency': '< 500ms', 'Cloud fallback rate': '~20%', 'Command accuracy': '94%' },
+        title: 'ArchMind Research Agent',
+        category: 'Agentic AI',
+        desc: 'The autonomous research agent behind ArchMind AI — a self-planning agent that explores the web, evaluates sources, and writes cited analysis with verifiable provenance.',
+        tech: ['PYTHON', 'LANGGRAPH', 'STREAMLIT', 'RAG', 'WEB SCRAPING'],
+        github: 'https://github.com/KunjShah01/INTERNSHIP-ASSESSMENT',
+        demo: 'https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/',
+        slug: 'archmind-research-agent',
+        impact: 'Live',
+        caseStudy: 'case-study-archmind-research-agent',
+        problem: 'Internship and market research is repetitive and error-prone — matching roles, companies, and requirements by hand wastes days and misses signal.',
+        outcome: 'Deployed a research agent that automates the full discovery-to-report pipeline, turning open-ended requests into structured, cited findings in minutes.',
+        metrics: { 'Pipeline stages': 'Plan → Search → Read → Synthesize', 'Deployment': 'Streamlit Cloud', 'Citations': 'Source-linked', 'Token efficiency': 'Routed' },
+        architecture: 'A planner agent breaks the request into sub-queries. Search + scraping agents gather evidence from the web, an extractor normalizes structured fields, and a writer agent produces a cited report. RAG over collected evidence keeps the synthesis grounded; the whole flow is exposed through an interactive Streamlit UI.',
+        challenges: ['Extracting structured signal from noisy, inconsistent web sources', 'Preventing the agent from drifting off-topic on broad research queries'],
+        lessons: ['A tight planner keeps research agents on-track and cheap', 'Grounded RAG beats free-form generation for factual reports'],
+        benchmarks: { 'Deployment': 'Live', 'Report grounding': 'Cited', 'Interaction': 'Streamlit UI' },
     },
     {
         id: '07',
@@ -1198,6 +1202,101 @@ The system detected 88% of anomalous transactions with a false positive rate und
         tags: ['CASE STUDY', 'ML', 'FRAUD', 'FINANCE'],
         featured: true,
     },
+    {
+        id: 'B020',
+        title: 'Building ArchMind AI: An Autonomous Research Platform',
+        slug: 'case-study-archmind-ai',
+        category: 'Case Study',
+        excerpt: 'How I built a multi-agent research platform that plans, searches, reads, and synthesizes the web into structured, fully-cited reports. The full story from architecture to live deployment.',
+        content: `
+# Building ArchMind AI: An Autonomous Research Platform
+
+The idea was simple to say and hard to build: *give it a question, get back a report you can trust.* Not a chatbot answer — a real research artifact with sources you can click, claims you can verify, and synthesis that actually connects the dots.
+
+## The Problem
+
+Research today is fragmented. You open twenty tabs, skim ten articles, lose the thread, copy notes into a doc, and still can't be sure what's verified. The harder the question, the more the noise wins. And most "AI research" tools just summarize the first few results — no planning, no provenance, no structure.
+
+## What I Built
+
+ArchMind AI is a multi-agent system that runs a research *process*, not a single prompt:
+
+- **Planner / supervisor**: decomposes the query into a graph of sub-questions
+- **Retrieval + reading agents**: fetch and parse web sources in parallel, writing findings to shared memory
+- **Synthesis agent**: cross-checks claims against sources and emits a structured, cited report
+
+The orchestration runs on LangGraph — every step is checkpointed, so a long run can recover from failure instead of starting over. A production UI (React + FastAPI) wraps the engine so anyone can submit a query and watch the research unfold.
+
+## The Technical Side
+
+The hardest part was **grounding**. A research agent is useless if it fabricates citations. I forced every claim through a verification step against the retrieved evidence stored in ChromaDB, and the synthesis agent only cites sources it can point to. State and intermediate reasoning traces live in a persistent memory layer, which also makes the whole system debuggable.
+
+Self-correction loops route a weak or contradicted finding back to the planner for another pass rather than shipping it.
+
+## What I Learned
+
+- **Citation grounding is the difference between a toy and a tool.** Everything else is secondary.
+- **Checkpointed graphs change the game** for long agentic runs — failures become recoverable, not fatal.
+- Users don't want a wall of text; they want a *structured* report they can skim and drill into.
+
+## The Result
+
+ArchMind AI is live at [archmind-ai-topaz.vercel.app](https://archmind-ai-topaz.vercel.app/), with the source on [GitHub](https://github.com/KunjShah95/archmind-ai). It turns a single query into a cited, structured report in minutes instead of hours.
+
+**Autonomous research is only as good as its citations.**
+        `,
+        date: 'JUN 2026',
+        readTime: 8,
+        tags: ['CASE STUDY', 'AGENTS', 'RAG', 'PRODUCT'],
+        featured: true,
+    },
+    {
+        id: 'B021',
+        title: 'The ArchMind Research Agent: Autonomous Discovery to Report',
+        slug: 'case-study-archmind-research-agent',
+        category: 'Case Study',
+        excerpt: 'Building the autonomous research agent behind ArchMind — a self-planning agent that explores the web, evaluates sources, and writes cited analysis. Deployed on Streamlit Cloud.',
+        content: `
+# The ArchMind Research Agent: Autonomous Discovery to Report
+
+ArchMind AI needed a brain that could actually *do* research, not just talk about it. That brain is the ArchMind Research Agent — an autonomous, self-planning agent that takes an open-ended request and returns structured, cited findings.
+
+## The Problem
+
+Internship and market research is repetitive and error-prone. Matching roles, companies, and requirements by hand wastes days and misses signal. Generic search dumps links; it doesn't *reason* about what you need.
+
+## What I Built
+
+The agent runs a four-stage pipeline:
+
+1. **Plan** — a planner agent breaks the request into focused sub-queries
+2. **Search** — web search + scraping agents gather evidence
+3. **Read** — an extractor normalizes structured fields from noisy sources
+4. **Synthesize** — a writer agent produces a cited report grounded in the collected evidence
+
+RAG over the gathered evidence keeps the synthesis factual instead of hallucinated. The whole flow is exposed through an interactive Streamlit UI so users can watch and steer the research live.
+
+## The Technical Side
+
+The biggest engineering challenge was **signal extraction** — web sources are inconsistent, messy, and often contradictory. I constrained the planner tightly so the agent stays on-topic and cheap, and I used RAG over collected evidence to anchor the writer rather than letting it free-generate. The result is a pipeline that is both autonomous and verifiable.
+
+## What I Learned
+
+- A **tight planner** keeps research agents on-track and keeps token costs down.
+- **Grounded RAG beats free-form generation** every time for factual reports.
+- An interactive UI turns a black-box agent into something people actually trust.
+
+## The Result
+
+The agent is deployed at [internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app](https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/), with source on [GitHub](https://github.com/KunjShah01/INTERNSHIP-ASSESSMENT). It turns open-ended research requests into structured, cited findings in minutes.
+
+**Autonomy without grounding is just confident guessing.**
+        `,
+        date: 'JUN 2026',
+        readTime: 7,
+        tags: ['CASE STUDY', 'AGENTS', 'RAG', 'DEPLOY'],
+        featured: true,
+    },
 ];
 
 export const LOGS: LogEntry[] = [
@@ -1245,14 +1344,24 @@ export const LOGS: LogEntry[] = [
 
 export const FEATURED_PROJECTS = [
     {
-        id: 'equity-lens',
-        title: 'AI Fairness Auditing Platform',
-        problem: 'Healthcare AI models often contain hidden biases that lead to unequal patient treatment recommendations without transparency.',
-        solution: 'Built a comprehensive fairness evaluation pipeline that automates bias detection and ensures compliance with international standards.',
-        techStack: ['Python', 'FastAPI', 'LangChain', 'PostgreSQL'],
-        result: 'Identified significant performance gaps and reduced audit time from weeks to hours with high reliability.',
-        demoUrl: 'https://github.com/KunjShah95/fairness-lens-studio',
-        githubUrl: 'https://github.com/KunjShah95/fairness-lens-studio',
+        id: 'archmind-ai',
+        title: 'ArchMind AI',
+        problem: 'Deep research is slow, fragmented, and hard to trust — analysts juggle dozens of tabs and still end up with unverified notes.',
+        solution: 'Built a multi-agent research platform that plans, searches, reads, and synthesizes the web into structured, fully-cited reports.',
+        techStack: ['Python', 'LangGraph', 'React', 'FastAPI', 'ChromaDB'],
+        result: 'Turns a single query into a structured, cited report in minutes, live on Vercel.',
+        demoUrl: 'https://archmind-ai-topaz.vercel.app/',
+        githubUrl: 'https://github.com/KunjShah95/archmind-ai',
+    },
+    {
+        id: 'archmind-research-agent',
+        title: 'ArchMind Research Agent',
+        problem: 'Internship and market research is repetitive and error-prone, missing signal when done by hand.',
+        solution: 'An autonomous research agent that explores the web, evaluates sources, and writes cited analysis with verifiable provenance.',
+        techStack: ['Python', 'LangGraph', 'Streamlit', 'RAG', 'Web Scraping'],
+        result: 'Automates the full discovery-to-report pipeline, deployed on Streamlit Cloud.',
+        demoUrl: 'https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/',
+        githubUrl: 'https://github.com/KunjShah01/INTERNSHIP-ASSESSMENT',
     },
     {
         id: 'learnai',
@@ -1263,16 +1372,6 @@ export const FEATURED_PROJECTS = [
         result: 'Increased quiz completion rates by 45% through adaptive difficulty adjustment.',
         demoUrl: 'https://intelligent-learning-assistant.vercel.app',
         githubUrl: 'https://github.com/KunjShah95/intelligent-learning-assistant',
-    },
-    {
-        id: 'resumemaster-ai',
-        title: 'ResumeMasterAI 2026',
-        problem: 'Manual management of multiple AI models lead to high costs, latency, and inconsistent resume quality.',
-        solution: 'Engineered a smart AI Gateway for optimized model routing and a hierarchical system for end-to-end career automation.',
-        techStack: ['Python', 'LangGraph', 'AI Gateway', 'PostgreSQL'],
-        result: 'Reduced API costs by 65% while significantly increasing candidate match precision.',
-        demoUrl: 'https://resumemasterai.streamlit.app/',
-        githubUrl: 'https://github.com/KunjShah01/job-snipper',
     },
 ];
 

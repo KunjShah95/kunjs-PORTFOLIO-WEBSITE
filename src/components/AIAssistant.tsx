@@ -91,7 +91,7 @@ export function AIAssistant() {
     // 3. General Projects / Portfolio
     else if (query.includes('project') || query.includes('work') || query.includes('portfolio') || query.includes('what have you built')) {
       const topProjects = PROJECTS.slice(0, 3).map(p => `• **${p.title}**: ${p.desc}`).join('\n\n');
-      response = `Kunj has built some impressive AI systems. Here are a few highlights:\n\n${topProjects}\n\nAsk me about "CinePulse" or "Sentinel CLI" to learn more!`;
+      response = `Kunj has built some impressive AI systems. Here are a few highlights:\n\n${topProjects}\n\nAsk me about "ArchMind AI" or "Sentinel CLI" to learn more!`;
     }
     // 4. Experience / Job
     else if (query.includes('experience') || query.includes('job') || query.includes('working') || query.includes('intern')) {

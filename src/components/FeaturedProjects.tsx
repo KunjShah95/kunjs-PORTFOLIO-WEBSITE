@@ -22,8 +22,10 @@ function getRolesForProject(slug: string): string[] {
       return ['Backend Systems', 'Security / DevOps']
     case 'railway-inspection':
       return ['AI/ML (Vision)', 'C++ Developer']
-    case 'cinepulse':
-      return ['AI Engineer', 'Full Stack Dev']
+    case 'archmind-ai':
+      return ['AI Engineer', 'Agent Builder']
+    case 'archmind-research-agent':
+      return ['AI Systems', 'Agent Builder']
     default:
       return ['AI Engineer', 'Software Developer']
   }
