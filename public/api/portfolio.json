@@ -89,7 +89,7 @@
       "id": "04",
       "title": "ArchMind AI",
       "category": "Agentic AI Platform",
-      "description": "Autonomous research platform that plans, searches, reads, and synthesizes the web into cited, structured reports.",
+      "description": "AI Staff Architect — upload diagrams or code, and specialized agents score your architecture, surface risks, propose redesigns, and simulate failures.",
       "tech": ["Python", "LangGraph", "React", "FastAPI", "ChromaDB"],
       "github": "https://github.com/KunjShah95/archmind-ai",
       "demo": "https://archmind-ai-topaz.vercel.app/",

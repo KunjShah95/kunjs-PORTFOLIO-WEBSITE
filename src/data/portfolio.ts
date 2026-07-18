@@ -146,21 +146,21 @@ export const PROJECTS: Project[] = [
     {
         id: '01',
         title: 'ArchMind AI',
-        category: 'Agentic AI Platform',
-        desc: 'Autonomous research intelligence platform that plans, searches, reads, and synthesizes from the web into cited, structured reports — built as a multi-agent system with a production-grade UI.',
-        tech: ['PYTHON', 'LANGGRAPH', 'REACT', 'FASTAPI', 'CHROMADB'],
+        category: 'Architecture Intelligence',
+        desc: 'AI Staff Architect for modern engineering teams — upload a diagram or paste code, and specialized agents score your architecture, surface risks, propose redesigns, and simulate failures.',
+        tech: ['TYPESCRIPT', 'PYTHON', 'FASTAPI', 'REACT', 'SUPABASE'],
         github: 'https://github.com/KunjShah95/archmind-ai',
         demo: 'https://archmind-ai-topaz.vercel.app/',
         slug: 'archmind-ai',
         impact: 'Production',
         caseStudy: 'case-study-archmind-ai',
-        problem: 'Deep research is slow, fragmented, and hard to trust — analysts juggle dozens of tabs, lose provenance, and still end up with unverified notes.',
-        outcome: 'Shipped a live multi-agent research engine that turns a single query into a structured, fully-cited report with source tracing and verdict-quality synthesis.',
-        metrics: { 'Agents orchestrated': '4+', 'Citations per report': '30+', 'Sources ingested': 'Web-scale', 'Latency': 'Minutes not hours' },
-        architecture: 'Supervisor-planner decomposes a query into a research graph. Worker agents run retrieval + reading + extraction in parallel, writing findings to a shared memory (ChromaDB). A synthesis agent cross-checks claims against sources and emits a structured, cited report. LangGraph manages state, checkpoints, and self-correction loops.',
-        challenges: ['Keeping citations grounded — agents must quote real sources, not hallucinate references', 'Orchestrating long-running multi-step graphs without losing state on failure', 'Balancing depth vs latency for interactive research'],
-        lessons: ['Citation grounding is the difference between a toy and a tool', 'Checkpointed graphs make long agentic runs recoverable and debuggable'],
-        benchmarks: { 'Source grounding': 'Verified citations', 'Report quality': 'Structured + synthesized', 'Uptime': 'Live on Vercel' },
+        problem: 'Architecture review is a slow, senior-engineer-only bottleneck — diagrams sit in docs, risks go unnoticed until production incidents, and teams lack automated tooling to evaluate design tradeoffs.',
+        outcome: 'Shipped a live architecture intelligence platform that parses diagrams and code into a graph, runs 7 specialized analysis agents across it, and returns a scored report with prioritized findings — plus simulation, compliance auditing, and one-click redesigns.',
+        metrics: { 'Analysis agents': '7 (Scalability, Security, Reliability, Performance, Cost, Maintainability, Observability)', 'Provider fallback': '6 + heuristic engine', 'Deployment': 'Vercel + Render + Supabase', 'Architecture formats': 'Mermaid, PlantUML, Image, URL' },
+        architecture: 'Frontend (Vite + React + TS) on Vercel talks to a FastAPI backend on Render. Supabase handles auth (JWT) and PostgreSQL. The backend parses architecture inputs (Mermaid/PlantUML text or image/PDF vision extraction) into a graph, runs seven parallel agent analyses, and aggregates findings into a scored report. A provider fallback chain (Groq → NVIDIA → OpenRouter → Gemini → Ollama → HuggingFace) routes LLM calls, with an 18-rule heuristic engine as the zero-config fallback.',
+        challenges: ['Parsing diverse architecture formats (Mermaid, PlantUML, hand-drawn images) into a unified graph representation', 'Building a resilient LLM strategy that works with zero API keys via heuristic fallback', 'Cold starts on Render free tier requiring a keep-warm workflow and client-side warming'],
+        lessons: ['Seven specialized agents scoring independent dimensions produce better architecture insight than a single monolithic analysis', 'A heuristic fallback engine makes the product viable without any LLM keys — eliminating the chicken-and-egg problem for new users'],
+        benchmarks: { 'Analysis dimensions': '7', 'LLM providers': '6 + heuristic fallback', 'Uptime': 'Keep-warm via GitHub Actions', 'Deployment': 'Full-stack on Vercel + Render + Supabase' },
     },
     {
         id: '02',
@@ -1204,50 +1204,59 @@ The system detected 88% of anomalous transactions with a false positive rate und
     },
     {
         id: 'B020',
-        title: 'Building ArchMind AI: An Autonomous Research Platform',
+        title: 'Building ArchMind AI: An Architecture Intelligence Platform',
         slug: 'case-study-archmind-ai',
         category: 'Case Study',
-        excerpt: 'How I built a multi-agent research platform that plans, searches, reads, and synthesizes the web into structured, fully-cited reports. The full story from architecture to live deployment.',
+        excerpt: 'How I built ArchMind AI — an AI Staff Architect that parses diagrams and code into architecture graphs, runs 7 specialized agents for review, simulates failures, and generates redesigns. Full-stack with a resilient zero-LLM-key fallback.',
         content: `
-# Building ArchMind AI: An Autonomous Research Platform
+# Building ArchMind AI: An Architecture Intelligence Platform
 
-The idea was simple to say and hard to build: *give it a question, get back a report you can trust.* Not a chatbot answer — a real research artifact with sources you can click, claims you can verify, and synthesis that actually connects the dots.
+Architecture review has always been a slow, senior-engineer-only bottleneck. Diagrams sit in static docs, risks go unnoticed until production incidents, and teams lack automated tooling to evaluate tradeoffs. I built ArchMind AI to change that.
 
 ## The Problem
 
-Research today is fragmented. You open twenty tabs, skim ten articles, lose the thread, copy notes into a doc, and still can't be sure what's verified. The harder the question, the more the noise wins. And most "AI research" tools just summarize the first few results — no planning, no provenance, no structure.
+Engineering teams face three structural problems with architecture:
+
+1. **Review is bottlenecked on senior engineers** — there are never enough staff architects to review every design doc, and most reviews happen as a rubber stamp after decisions are already made.
+2. **Architecture knowledge is static** — diagrams in a wiki rot. There is no live analysis, no automated risk detection, no way to ask "what breaks if this service fails?"
+3. **Multi-dimensional tradeoffs are invisible** — a design might be scalable but insecure, cheap but unreliable. Teams lack tooling that scores across all the axes that matter.
 
 ## What I Built
 
-ArchMind AI is a multi-agent system that runs a research *process*, not a single prompt:
+ArchMind AI is an **AI Staff Architect** — upload a Mermaid/PlantUML diagram, an image/PDF, paste code, and the platform does the rest:
 
-- **Planner / supervisor**: decomposes the query into a graph of sub-questions
-- **Retrieval + reading agents**: fetch and parse web sources in parallel, writing findings to shared memory
-- **Synthesis agent**: cross-checks claims against sources and emits a structured, cited report
-
-The orchestration runs on LangGraph — every step is checkpointed, so a long run can recover from failure instead of starting over. A production UI (React + FastAPI) wraps the engine so anyone can submit a query and watch the research unfold.
+- **7-Agent Analysis Engine** — Scalability, Security, Reliability, Performance, Cost, Maintainability, and Observability agents each score a dimension and emit severity-ranked findings, aggregated into an overall architecture score.
+- **AI Architecture Generator** — Describe a system in natural language (*"Design an e-commerce platform for 10M users"*) and get back a Mermaid diagram, tech-stack rationale, and starter Kubernetes/Terraform manifests.
+- **Simulation & Resilience Suite** — Project latency (p50/p95/p99) and cost across user tiers, and run a chaos failure simulator that traces cascade failures and estimates recovery MTTR.
+- **One-Click Redesigns** — Re-optimize a design against blueprints such as Cost Optimized, High Availability, Enterprise Scale, and Multi-Region, with side-by-side comparison.
+- **Compliance Auditing** — Score readiness against SOC 2, ISO 27001, GDPR, HIPAA, and PCI DSS and list outstanding gaps.
+- **Architecture Copilot** — Chat with an assistant that knows your components, connections, and findings (*"What happens if Redis fails?"*).
+- **DevOps, IaC & API Auditing** — Scan Terraform, Kubernetes YAML, and Docker Compose for misconfigurations; review OpenAPI specs; detect missing database indexes.
 
 ## The Technical Side
 
-The hardest part was **grounding**. A research agent is useless if it fabricates citations. I forced every claim through a verification step against the retrieved evidence stored in ChromaDB, and the synthesis agent only cites sources it can point to. State and intermediate reasoning traces live in a persistent memory layer, which also makes the whole system debuggable.
+The frontend (Vite + React + TypeScript + Tailwind + shadcn/ui) on Vercel talks to a FastAPI backend on Render. Supabase handles JWT auth and PostgreSQL. The backend parses architecture inputs (Mermaid/PlantUML text or image/PDF via vision extraction) into a unified graph, runs seven agent analyses in parallel, and aggregates findings into a scored report.
 
-Self-correction loops route a weak or contradicted finding back to the planner for another pass rather than shipping it.
+The hardest engineering challenge was the **LLM strategy**. I wanted the product to work with zero API keys — no chicken-and-egg problem for new users. The solution is a provider fallback chain (Groq → NVIDIA → OpenRouter → Gemini → Ollama → HuggingFace) with an 18-rule heuristic engine as the final fallback. No LLM keys configured? The heuristic engine produces a baseline score so the product still delivers value. Configure any provider, and it upgrades automatically.
+
+Render's free tier spins down after ~15 min idle, causing a ~40s cold start. I solved this with a GitHub Actions keep-warm workflow that pings /api/health every 10 minutes, plus client-side warming on page load.
 
 ## What I Learned
 
-- **Citation grounding is the difference between a toy and a tool.** Everything else is secondary.
-- **Checkpointed graphs change the game** for long agentic runs — failures become recoverable, not fatal.
-- Users don't want a wall of text; they want a *structured* report they can skim and drill into.
+- **Seven specialized agents beat one monolithic analysis** every time. Each dimension (security, cost, reliability) has different evaluation logic — mixing them degrades quality.
+- **A heuristic fallback engine makes the product viable for anyone.** Zero-config onboarding is a product decision, not just a technical one.
+- **Architecture review is inherently multi-agent** — the same way you'd ask a security engineer, a SRE, and a cost analyst to review a design, the platform needs specialized agents for each dimension.
+- **Cold starts are a UX problem disguised as an infrastructure problem** — solve them at the UX layer (warming + graceful degradation), not just with more expensive hosting.
 
 ## The Result
 
-ArchMind AI is live at [archmind-ai-topaz.vercel.app](https://archmind-ai-topaz.vercel.app/), with the source on [GitHub](https://github.com/KunjShah95/archmind-ai). It turns a single query into a cited, structured report in minutes instead of hours.
+ArchMind AI is live at [archmind-ai-topaz.vercel.app](https://archmind-ai-topaz.vercel.app/), with full source on [GitHub](https://github.com/KunjShah95/archmind-ai). Upload a diagram or paste code, and get a multi-dimensional architecture score with prioritized findings in minutes.
 
-**Autonomous research is only as good as its citations.**
+**Architecture review should be automated, continuous, and multi-dimensional — not a rubber stamp from the one senior engineer who has time.**
         `,
-        date: 'JUN 2026',
-        readTime: 8,
-        tags: ['CASE STUDY', 'AGENTS', 'RAG', 'PRODUCT'],
+        date: 'JUL 2026',
+        readTime: 10,
+        tags: ['CASE STUDY', 'ARCHITECTURE', 'AGENTS', 'FULLSTACK', 'AI'],
         featured: true,
     },
     {
@@ -1346,10 +1355,10 @@ export const FEATURED_PROJECTS = [
     {
         id: 'archmind-ai',
         title: 'ArchMind AI',
-        problem: 'Deep research is slow, fragmented, and hard to trust — analysts juggle dozens of tabs and still end up with unverified notes.',
-        solution: 'Built a multi-agent research platform that plans, searches, reads, and synthesizes the web into structured, fully-cited reports.',
-        techStack: ['Python', 'LangGraph', 'React', 'FastAPI', 'ChromaDB'],
-        result: 'Turns a single query into a structured, cited report in minutes, live on Vercel.',
+        problem: 'Architecture review is a slow, senior-engineer-only bottleneck — diagrams rot in docs, risks go unseen until incidents, and teams lack automated tooling for design tradeoffs.',
+        solution: 'Built an AI Staff Architect that parses diagrams/code into a graph, runs 7 specialized agents for review, simulates failures, runs compliance audits, and generates one-click redesigns.',
+        techStack: ['TypeScript', 'Python', 'React', 'FastAPI', 'Supabase'],
+        result: 'Turns an architecture diagram into a multi-dimensional scored report with prioritized findings, live on Vercel + Render.',
         demoUrl: 'https://archmind-ai-topaz.vercel.app/',
         githubUrl: 'https://github.com/KunjShah95/archmind-ai',
     },
