@@ -3,7 +3,6 @@ import { ArrowUpRight } from 'lucide-react'
 import { PROJECTS, IDENTITY } from '../data/portfolio'
 import { SectionLabel } from './ui/SectionLabel'
 import { Kicker } from './ui/Kicker'
-import { useReveal } from '../hooks/useReveal'
 import { LiquidGlass, TiltCard, SpotlightCard, Magnetic, TextReveal } from './effects'
 
 function getRolesForProject(slug: string): string[] {
@@ -34,10 +33,9 @@ function getRolesForProject(slug: string): string[] {
 export function FeaturedProjects() {
   const list = PROJECTS.slice(0, 3)
   const [hero, ...supporting] = list
-  const { ref, inView } = useReveal({ amount: 0.1 })
 
   return (
-    <section ref={ref} id="work" className="py-24 md:py-32 border-b border-rule/12 overflow-hidden bg-sunken/5">
+    <section id="work" className="py-24 md:py-32 border-b border-rule/12 overflow-hidden bg-sunken/5">
       <div className="max-w-manifest mx-auto px-6">
         <SectionLabel number="03" label="Selected work" />
 
@@ -69,7 +67,6 @@ export function FeaturedProjects() {
           </span>
         </div>
 
-        {inView && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {/* HERO PROJECT CARD — spans 2 columns with case study structure */}
             {hero && (
@@ -77,7 +74,7 @@ export function FeaturedProjects() {
                 <TiltCard scale={1.01} maxRotation={4}>
                   <SpotlightCard className="h-full rounded-3xl">
                     <LiquidGlass
-                      intensity="strong"
+                      intensity="medium"
                       tint="rgba(124, 118, 255, 0.15)"
                       className="p-8 md:p-10 flex flex-col justify-between h-full min-h-[480px] border border-rule/12 hover:border-accent/40 group transition-all noise-texture"
                     >
@@ -220,7 +217,6 @@ export function FeaturedProjects() {
               </div>
             ))}
           </div>
-        )}
 
         {/* Hackathons glass pill bar */}
         <div className="mt-16 pt-8 border-t border-rule/12">

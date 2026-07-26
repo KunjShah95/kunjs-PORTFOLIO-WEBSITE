@@ -1,5 +1,5 @@
 import { useAnimation, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface RevealOptions {
   amount?: number
@@ -12,8 +12,10 @@ export function useReveal(options: RevealOptions = {}) {
   const controls = useAnimation()
   const inView = useInView(ref, { amount, once })
 
-  if (inView) controls.start('visible')
-  else if (!once) controls.start('hidden')
+  useEffect(() => {
+    if (inView) controls.start('visible')
+    else if (!once) controls.start('hidden')
+  }, [controls, inView, once])
 
   return { ref, controls, inView }
 }

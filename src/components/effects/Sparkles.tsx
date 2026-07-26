@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { clsx } from 'clsx'
 import { useMemo } from 'react'
 
@@ -32,25 +31,17 @@ export function Sparkles({ className, count = 12, color }: SparklesProps) {
   return (
     <div className={clsx('absolute inset-0 overflow-hidden pointer-events-none', className)} aria-hidden>
       {sparkles.map((s) => (
-        <motion.div
+        <div
           key={s.id}
-          className="absolute rounded-full"
+          className="absolute rounded-full animate-sparkle"
           style={{
             left: `${s.x}%`,
             top: `${s.y}%`,
             width: s.size,
             height: s.size,
             backgroundColor: color ?? 'rgb(var(--accent))',
-          }}
-          animate={{
-            opacity: [0, 0.6, 0],
-            scale: [0, 1.2, 0],
-          }}
-          transition={{
-            duration: s.duration,
-            repeat: Infinity,
-            delay: s.delay,
-            ease: 'easeInOut',
+            animationDelay: `${s.delay}s`,
+            animationDuration: `${s.duration}s`,
           }}
         />
       ))}

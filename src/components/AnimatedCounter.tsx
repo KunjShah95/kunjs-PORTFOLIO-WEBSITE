@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { useInView } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
 interface AnimatedCounterProps {
@@ -34,8 +34,8 @@ export function AnimatedCounter({ value, suffix = '', prefix = '' }: AnimatedCou
   }, [value, isInView])
 
   return (
-    <motion.span ref={ref}>
+    <span ref={ref}>
       {prefix}{count}{suffix}
-    </motion.span>
+    </span>
   )
 }

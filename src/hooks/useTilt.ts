@@ -39,7 +39,6 @@ export function useTilt(options: TiltOptions = {}) {
       rotateX,
       rotateY,
       scale: hoverScale,
-      transition: 'transform 0.1s',
       transformStyle: 'preserve-3d' as const,
       perspective: 800,
     },

@@ -390,6 +390,24 @@
   100% { transform: translateX(-10%) translateY(0%); }
 }
 
+@keyframes beam-float {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(var(--bx1, 30px), var(--by1, -40px)) scale(var(--bs1, 1.1)); }
+  66% { transform: translate(var(--bx2, -20px), var(--by2, 20px)) scale(var(--bs2, 0.95)); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+@keyframes orb-drift {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.08) rotate(5deg); }
+  66% { transform: scale(0.97) rotate(-2deg); }
+}
+
 /* Imported design motion */
 @keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes spin-slow { to { transform: rotate(1turn); } }
@@ -425,6 +443,15 @@
   }
   .animate-beam {
     animation: beam-drift 12s ease-in-out infinite;
+  }
+  .animate-beam-float {
+    animation: beam-float 12s ease-in-out infinite;
+  }
+  .animate-sparkle {
+    animation: sparkle 2.5s ease-in-out infinite;
+  }
+  .animate-orb-drift {
+    animation: orb-drift 12s ease-in-out infinite;
   }
   .animate-marq { animation: marq 26s linear infinite; }
   .animate-marq-rev { animation: marq 32s linear infinite reverse; }
@@ -497,7 +524,8 @@
   @media (prefers-reduced-motion: reduce) {
     .animate-marq, .animate-marq-rev, .animate-spin-slow,
     .animate-pdot, .animate-ping-soft, .animate-shimmer, .animate-pulse-dot,
-    .animate-glow-pulse { animation: none !important; }
+    .animate-glow-pulse, .animate-beam-float, .animate-sparkle,
+    .animate-orb-drift { animation: none !important; }
   }
 }
 

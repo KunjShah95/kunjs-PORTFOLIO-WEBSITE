@@ -58,7 +58,7 @@ export function ServicesSection() {
                     <h3 className="font-display text-xl font-bold tracking-tight mb-2">{s.title}</h3>
                     <p className="text-sm text-ink-secondary leading-relaxed font-body">{s.desc}</p>
                   </div>
-                  <div className="mt-auto w-8 h-px bg-accent/30 group-hover:w-full transition-all duration-500 ease-out" />
+                  <div className="mt-auto h-px bg-accent/30 w-full origin-left scale-x-[0.25] group-hover:scale-x-100 transition-transform duration-500 ease-out" />
                 </div>
               </motion.div>
             )

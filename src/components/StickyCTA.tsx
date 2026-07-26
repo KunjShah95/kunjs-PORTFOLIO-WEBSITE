@@ -10,13 +10,10 @@ export function StickyCTA() {
     const finalCta = document.getElementById('final-cta');
     const onScroll = () => {
       const pastThreshold = window.scrollY > 600;
-      if (finalCta) {
-        const rect = finalCta.getBoundingClientRect();
-        const finalCtaVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        setShow(pastThreshold && !finalCtaVisible);
-      } else {
-        setShow(pastThreshold);
-      }
+      const next = finalCta
+        ? pastThreshold && !(finalCta.getBoundingClientRect().top < window.innerHeight)
+        : pastThreshold;
+      setShow(prev => next !== prev ? next : prev);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });

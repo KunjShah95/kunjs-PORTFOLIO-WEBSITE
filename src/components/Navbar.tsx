@@ -20,7 +20,10 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      const s = window.scrollY > 8;
+      setScrolled(prev => s !== prev ? s : prev);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
