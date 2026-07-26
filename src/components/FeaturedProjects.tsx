@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
-import { PROJECTS, HACKATHONS, IDENTITY } from '../data/portfolio'
+import { PROJECTS, IDENTITY } from '../data/portfolio'
 import { SectionLabel } from './ui/SectionLabel'
 import { Kicker } from './ui/Kicker'
 import { useReveal } from '../hooks/useReveal'
@@ -48,7 +48,7 @@ export function FeaturedProjects() {
           <div className="md:col-span-4 flex md:justify-end items-end">
             <Magnetic strength={0.2}>
               <Link to="/projects" className="group inline-flex items-center gap-2 text-sm text-accent hover:text-accent-hover font-semibold transition-colors">
-                All projects ({PROJECTS.length})
+                All projects
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
               </Link>
             </Magnetic>
@@ -56,14 +56,6 @@ export function FeaturedProjects() {
         </div>
 
         <div className="flex flex-wrap items-center gap-4 pb-8 mb-8 border-b border-rule/12 font-mono text-sm">
-          <span className="inline-flex items-center gap-2 text-ink-secondary bg-paper/40 px-3.5 py-1.5 rounded-full border border-rule/8">
-            <span className="text-accent font-bold">{PROJECTS.length}</span> things shipped
-          </span>
-          <span className="text-ink-quaternary">/</span>
-          <span className="inline-flex items-center gap-2 text-ink-secondary bg-paper/40 px-3.5 py-1.5 rounded-full border border-rule/8">
-            <span className="text-accent font-bold">{HACKATHONS.filter(h => h.placement === 'Finalist').length}</span> hackathon finals
-          </span>
-          <span className="text-ink-quaternary">/</span>
           <span className="inline-flex items-center gap-2 text-ink-secondary bg-paper/40 px-3.5 py-1.5 rounded-full border border-rule/8">
             Open source on{' '}
             <a
@@ -104,7 +96,7 @@ export function FeaturedProjects() {
                             </div>
                           </div>
                           {hero.impact && (
-                            <span className="font-mono text-xs text-accent px-2.5 py-1 rounded-full bg-accent/8 border border-accent/20 font-bold uppercase tracking-wider self-start" style={{ animation: 'glow-pulse 3s ease-in-out infinite' }}>
+                            <span className="font-mono text-xs text-accent px-2.5 py-1 rounded-full bg-accent/8 border border-accent/20 font-bold uppercase tracking-wider self-start animate-glow-pulse">
                               {hero.impact}
                             </span>
                           )}
@@ -134,8 +126,11 @@ export function FeaturedProjects() {
                       </div>
 
                       <div>
+                        <a href={hero.demo || `https://offerchecker-pi.vercel.app/`} target="_blank" rel="noopener noreferrer" className="block mt-6 mb-6 rounded-xl border border-rule/12 overflow-hidden hover:border-accent/30 transition-colors">
+                          <img src="/download.png" alt={`${hero.title} demo`} className="w-full h-auto" />
+                        </a>
                         {hero.tech && (
-                          <div className="mt-8 pt-6 border-t border-rule/8">
+                          <div className="pt-6 border-t border-rule/8">
                             <Kicker className="block mb-3">Stack</Kicker>
                             <ul className="flex flex-wrap gap-2">
                               {hero.tech.map((t, i) => (
@@ -154,10 +149,10 @@ export function FeaturedProjects() {
                         <div className="mt-8 flex justify-between items-center">
                           <Link
                             to={`/projects/${hero.slug}`}
-                            className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors group/btn"
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors group/btn shrink-0"
                           >
                             Read case study
-                            <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-1.5 group-hover/btn:-translate-y-1.5 transition-transform duration-300" />
+                            <ArrowUpRight className="w-4 h-4 transition-transform duration-300" />
                           </Link>
                         </div>
                       </div>
@@ -214,10 +209,10 @@ export function FeaturedProjects() {
                       )}
                       <Link
                         to={`/projects/${p.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover group/link"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover group/link shrink-0"
                       >
                         Read Case
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                        <ArrowUpRight className="w-3.5 h-3.5 transition-transform" />
                       </Link>
                     </div>
                   </LiquidGlass>
@@ -231,8 +226,6 @@ export function FeaturedProjects() {
         <div className="mt-16 pt-8 border-t border-rule/12">
           <LiquidGlass intensity="subtle" tint="rgba(124, 118, 255, 0.05)" className="p-6 rounded-2xl border border-rule/8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 noise-texture">
             <div className="font-mono text-xs text-ink-secondary uppercase tracking-wider leading-relaxed">
-              <span className="text-accent font-bold">{HACKATHONS.filter(h => h.placement === 'Finalist').length} hackathon finals</span>
-              <span className="mx-3 text-ink-quaternary">/</span>
               <span className="text-ink-primary font-medium">Autonomous Hacks · Odoo Adani · Odoo Gandhinagar · SIH</span>
             </div>
             <Link

@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react'
-import { ArrowUpRight, Database, Workflow, Cpu, Code } from 'lucide-react'
+import { ArrowUpRight, Database, Workflow, Code } from 'lucide-react'
 import { motion, MotionConfig } from 'framer-motion'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
@@ -12,10 +12,7 @@ import { useWebMCP } from './hooks/useWebMCP'
 // Eager load critical components for Home
 import { BentoHero } from './components/BentoHero'
 import { ServicesSection } from './components/ServicesSection'
-import { ProcessSection } from './components/ProcessSection'
-import { ProofBar } from './components/ProofBar'
 import { FeaturedProjects } from './components/FeaturedProjects'
-import { GitHubProfile } from './components/GitHubProfile'
 import { FinalCTA } from './components/FinalCTA'
 import {
   SpotlightCard,
@@ -55,8 +52,9 @@ function Home() {
         faqItems={PORTFOLIO_FAQ}
       />
       <BentoHero />
+      <FeaturedProjects />
+
       <ServicesSection />
-      <ProcessSection />
 
       {/* How I Build AI Systems — Engineering Architecture Section */}
       <section className="relative py-24 md:py-32 overflow-hidden bg-sunken/10 border-t border-rule/12">
@@ -136,7 +134,7 @@ function Home() {
               </div>
             </motion.div>
 
-            {/* Edge CV Pipeline */}
+            {/* Full Stack AI App */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -145,15 +143,15 @@ function Home() {
               className="rounded-2xl border border-rule/12 bg-elevated p-6 md:p-8 hover:border-accent/20 transition-colors group"
             >
               <div className="flex items-center gap-2 mb-5">
-                <Cpu className="w-4 h-4 text-accent" />
-                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-tertiary">Edge Computer Vision</span>
+                <Code className="w-4 h-4 text-accent" />
+                <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-tertiary">Full-Stack AI App</span>
               </div>
               <div className="space-y-2 font-mono text-[13px] leading-relaxed">
                 {[
-                  'GStreamer pipeline: HW-accelerated video decode',
-                  'CUDA preprocess → TensorRT INT8 inference',
-                  'NMS post-process → Defect classification',
-                  'Alert → API → Dashboard (sub-100ms end-to-end)',
+                  'React / Next.js frontend → FastAPI / Python backend',
+                  'PostgreSQL + Redis for state and caching',
+                  'Multi-provider LLM orchestration with fallback chain',
+                  'CI/CD deploy on Vercel + Render with Docker',
                 ].map((step, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <span className="text-accent/50 shrink-0 tabular-nums">{i + 1}.</span>
@@ -162,7 +160,7 @@ function Home() {
                 ))}
               </div>
               <div className="mt-5 pt-4 border-t border-rule/8">
-                <span className="font-mono text-[10px] text-ink-tertiary">C++ · TensorRT · YOLOv8 · Jetson Orin · QAT INT8</span>
+                <span className="font-mono text-[10px] text-ink-tertiary">React · FastAPI · PostgreSQL · Docker · Vercel + Render</span>
               </div>
             </motion.div>
 
@@ -198,9 +196,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      <ProofBar />
-      <FeaturedProjects />
 
       <section id="open-source" className="relative py-24 md:py-32 overflow-hidden border-t border-rule/12 bg-sunken/10">
         <div className="relative max-w-manifest mx-auto px-6">
@@ -301,8 +296,6 @@ function Home() {
           </motion.div>
         </div>
       </section>
-
-      <GitHubProfile />
 
       <section id="writing" className="relative py-24 md:py-32 overflow-hidden bg-sunken/5">
         <div className="relative max-w-manifest mx-auto px-6">

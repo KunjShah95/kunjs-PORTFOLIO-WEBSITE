@@ -490,9 +490,14 @@
     animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-marq, .animate-marq-rev, .animate-spin-slow,
-    .animate-pdot, .animate-ping-soft, .animate-shimmer, .animate-pulse-dot { animation: none !important; }
+    .animate-pdot, .animate-ping-soft, .animate-shimmer, .animate-pulse-dot,
+    .animate-glow-pulse { animation: none !important; }
   }
 }
 

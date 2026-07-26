@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Menu, X, Github, Linkedin, Mail } from 'lucide-react';
@@ -15,6 +15,8 @@ const NAV = [
 export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [resumeOpen, setResumeOpen] = useState(false);
+  const resumeRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -25,6 +27,16 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
   }, []);
 
   useEffect(() => { setMobileOpen(false); }, [location.pathname]);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (resumeRef.current && !resumeRef.current.contains(e.target as Node)) {
+        setResumeOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
 
   return (
     <>
@@ -94,16 +106,20 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
               <Search className="w-3 h-3" />
               <span className="kicker text-[10px]">&#8984;K</span>
             </button>
-            <div className="relative group hidden sm:block">
-              <button className="inline-flex items-center gap-1 px-2.5 h-7 rounded-lg border border-rule/12 text-ink-tertiary hover:text-ink-primary hover:border-rule/25 hover:bg-elevated/40 transition-all text-[11px] font-mono font-semibold">
+            <div className="relative hidden sm:block" ref={resumeRef}>
+              <button
+                onClick={() => setResumeOpen((o) => !o)}
+                className="inline-flex items-center gap-1 px-2.5 h-7 rounded-lg border border-rule/12 text-ink-tertiary hover:text-ink-primary hover:border-rule/25 hover:bg-elevated/40 transition-all text-[11px] font-mono font-semibold"
+              >
                 Resume
               </button>
-              <div className="absolute right-0 top-full pt-1.5 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+              <div className={`absolute right-0 top-full pt-1.5 transition-all duration-200 z-50 ${resumeOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
                 <div className="w-44 bg-elevated/95 backdrop-blur-xl border border-rule/12 p-1.5 rounded-xl shadow-xl flex flex-col gap-0.5 noise-texture">
                   <a
                     href="/kunjaiml.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => setResumeOpen(false)}
                     className="w-full text-left px-2.5 py-1.5 rounded-lg text-[11px] font-mono hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
                   >
                     <span>AI / ML Roles</span>
@@ -113,6 +129,7 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
                     href="/kunjshah_cv.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => setResumeOpen(false)}
                     className="w-full text-left px-2.5 py-1.5 rounded-lg text-[11px] font-mono hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
                   >
                     <span>Full Stack Roles</span>

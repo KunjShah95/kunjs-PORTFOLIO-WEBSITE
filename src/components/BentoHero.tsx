@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, MapPin, Activity, GitMerge, Award } from 'lucide-react'
@@ -40,7 +40,19 @@ const CARD = 'rounded-2xl border border-rule/12 bg-elevated noise-texture'
 
 export function BentoHero() {
   const [activeSkillIdx, setActiveSkillIdx] = useState(0)
+  const [resumeOpen, setResumeOpen] = useState(false)
+  const resumeRef = useRef<HTMLDivElement>(null)
   const featured = PROJECTS.find((p) => p.slug === 'offerguard-ai') ?? PROJECTS[0]
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (resumeRef.current && !resumeRef.current.contains(e.target as Node)) {
+        setResumeOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
 
   return (
     <section className="relative w-full max-w-manifest mx-auto px-6 pt-10 pb-16 md:pt-16 md:pb-24">
@@ -112,30 +124,33 @@ export function BentoHero() {
                 See engineering work <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </Magnetic>
-            <div className="relative group">
+            <div className="relative" ref={resumeRef}>
               <button
+                onClick={() => setResumeOpen((o) => !o)}
                 className="inline-flex items-center h-12 px-5 rounded-xl border border-rule/12 bg-elevated text-ink-primary font-semibold text-[15px] hover:bg-sunken hover:-translate-y-0.5 transition-all noise-texture"
               >
                 Résumé
               </button>
-              <div className="absolute left-0 top-full pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+              <div className={`absolute left-0 top-full pt-2 transition-all duration-200 z-50 ${resumeOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
                 <div className="w-56 bg-elevated/95 backdrop-blur-xl border border-rule/12 p-1.5 rounded-xl shadow-2xl flex flex-col gap-1 noise-texture">
                   <a
                     href="/kunjaiml.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => setResumeOpen(false)}
                     className="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
                   >
-                    <span>AI / ML Roles <span className="block text-[10px] text-ink-tertiary group-hover:text-accent-ink/70 font-mono">kunjaiml.pdf</span></span>
+                    <span>AI / ML Roles <span className="block text-[10px] text-ink-tertiary font-mono">kunjaiml.pdf</span></span>
                     <span className="text-xs text-ink-tertiary">↗</span>
                   </a>
                   <a
                     href="/kunjshah_cv.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => setResumeOpen(false)}
                     className="w-full text-left px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
                   >
-                    <span>Full Stack Roles <span className="block text-[10px] text-ink-tertiary group-hover:text-accent-ink/70 font-mono">kunjshah_cv.pdf</span></span>
+                    <span>Full Stack Roles <span className="block text-[10px] text-ink-tertiary font-mono">kunjshah_cv.pdf</span></span>
                     <span className="text-xs text-ink-tertiary">↗</span>
                   </a>
                 </div>
@@ -197,14 +212,14 @@ export function BentoHero() {
             </div>
             <p className="text-[15px] leading-relaxed text-ink-secondary font-body">
               I design and ship production AI systems — from multi-agent architectures 
-              and RAG pipelines to edge-deployed computer vision. Every project here 
+              and RAG pipelines to full-stack AI applications. Every project here 
               shipped with real metrics: latency, accuracy, cost reduction. 
               I care about <strong className="font-semibold text-ink-primary">measurable engineering</strong>, not demos.
             </p>
             <div className="border-t border-rule/8 pt-3">
               <span className="font-mono text-[10px] uppercase text-ink-tertiary tracking-wider block mb-2 font-semibold">What I build</span>
               <div className="flex flex-wrap gap-1.5">
-                {['AI Agents', 'LLM Systems', 'Computer Vision', 'Full-Stack AI'].map((role) => (
+                {['AI Agents', 'LLM Systems', 'Full-Stack Apps', 'APIs & Backend'].map((role) => (
                   <span key={role} className="px-2 py-0.5 text-[10.5px] font-semibold text-accent bg-accent/8 border border-accent/20 rounded-md hover:bg-accent hover:text-white transition-colors duration-200 cursor-default">
                     {role}
                   </span>
@@ -250,7 +265,7 @@ export function BentoHero() {
           variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0.12}
           className="md:[grid-area:feat] flex"
         >
-          <Link to={`/projects/${featured.slug}`} className={`${CARD} w-full p-6 flex flex-col gap-3.5 min-h-[320px] group hover:border-accent/30 transition-all hover-lift`}>
+          <a href={featured.demo || `https://offerchecker-pi.vercel.app/`} target="_blank" rel="noopener noreferrer" className={`${CARD} w-full p-6 flex flex-col gap-3.5 min-h-[320px] group hover:border-accent/30 transition-all hover-lift`}>
             <div className="flex items-center justify-between">
               <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-ink-tertiary">Featured build</span>
               <span className="font-mono text-[11px] text-live flex items-center gap-1">
@@ -258,8 +273,8 @@ export function BentoHero() {
                 live
               </span>
             </div>
-            <div className="flex-1 min-h-[130px] rounded-xl border border-rule/12 flex items-center justify-center overflow-hidden" style={{ background: 'repeating-linear-gradient(135deg, rgb(var(--accent) / 0.08) 0 10px, rgb(var(--bg-elevated)) 10px 20px)' }}>
-              <span className="font-mono text-[11.5px] text-ink-tertiary bg-elevated px-2.5 py-1.5 rounded-md border border-rule/12">{featured.title.toLowerCase()} · preview</span>
+            <div className="flex-1 min-h-[130px] rounded-xl border border-rule/12 overflow-hidden bg-sunken/40">
+              <img src="/download.png" alt={featured.title} className="w-full h-full object-contain" />
             </div>
             <div className="flex items-baseline gap-2.5">
               <span className="font-bold text-xl tracking-tight">{featured.title}</span>
@@ -271,7 +286,7 @@ export function BentoHero() {
                 <span key={t} className="font-mono text-[11px] px-2.5 py-1.5 border border-rule/12 rounded-full text-ink-tertiary group-hover:border-accent/20 transition-colors">{t}</span>
               ))}
             </div>
-          </Link>
+          </a>
         </motion.div>
 
         {/* Interactive daily toolbox */}

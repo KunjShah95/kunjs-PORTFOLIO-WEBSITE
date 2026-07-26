@@ -31,7 +31,7 @@ export function FinalCTA() {
             <span className="text-accent">Let&rsquo;s make it real.</span>
           </h2>
           <p className="mt-8 text-paper/70 text-lg md:text-xl leading-relaxed max-w-2xl font-body">
-            I design production AI systems — autonomous agents, LLM pipelines, edge computer vision — 
+            I design production AI systems — autonomous agents, LLM pipelines, full-stack applications — 
             and ship them with measurable results. Open to full-time AI engineering roles, freelance projects, 
             and research collaborations.
           </p>

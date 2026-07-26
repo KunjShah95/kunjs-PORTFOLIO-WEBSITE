@@ -101,6 +101,12 @@ export function ProjectsPage() {
                         </div>
                       </div>
 
+                      {p.slug === 'offerguard-ai' && (
+                        <a href={p.demo || 'https://offerchecker-pi.vercel.app/'} target="_blank" rel="noopener noreferrer" className="block mb-4 rounded-xl border border-rule/12 overflow-hidden hover:border-accent/30 transition-colors">
+                          <img src="/download.png" alt={`${p.title} demo`} className="w-full h-auto" />
+                        </a>
+                      )}
+
                       <h3 className="display text-xl font-bold tracking-tight mb-3">
                         <Link to={`/projects/${p.slug}`} className="hover:text-accent transition-colors">
                           {p.title}
@@ -116,10 +122,10 @@ export function ProjectsPage() {
                       <span className="font-mono text-xs text-ink-tertiary uppercase font-bold tracking-wider">{p.impact}</span>
                       <Link
                         to={`/projects/${p.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-accent-hover transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-accent-hover transition-colors shrink-0"
                       >
                         Case study
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        <ArrowUpRight className="w-3.5 h-3.5 transition-transform" />
                       </Link>
                     </div>
                   </LiquidGlass>
