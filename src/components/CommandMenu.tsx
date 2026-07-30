@@ -1,6 +1,5 @@
-
 import { useEffect, useState, Dispatch, SetStateAction } from 'react'
-import { Search, User, Briefcase, Activity, Hash, Cpu, Command, Trophy, GraduationCap, Mail } from 'lucide-react'
+import { Search, User, Briefcase, Activity, Hash, Cpu, Trophy, GraduationCap, Mail, Command } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
@@ -70,17 +69,17 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setOpen(false)}
-            className="fixed inset-0 bg-black/80 backdrop-blur-lg"
+            className="fixed inset-0 bg-black/70 backdrop-blur-md"
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.97, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: -8 }}
             transition={{ duration: 0.15 }}
-            className="relative w-full max-w-md bg-elevated rounded-md border border-rule/12 shadow-2xl shadow-black/40 overflow-hidden"
+            className="relative w-full max-w-md bg-elevated rounded-xl border border-rule/10 shadow-2xl shadow-black/30 overflow-hidden"
           >
             {/* Search Input */}
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-rule/12">
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-rule/10">
               <Search className="h-4 w-4 text-ink-tertiary shrink-0" />
               <input
                 autoFocus
@@ -89,7 +88,7 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
                 className="flex-1 h-6 bg-transparent text-sm text-ink-primary outline-none placeholder:text-ink-tertiary"
                 placeholder="Search pages..."
               />
-              <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded border border-rule/12 bg-sunken text-[10px] text-ink-tertiary font-mono">
+              <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded border border-rule/10 bg-sunken text-[10px] text-ink-tertiary font-mono">
                 ESC
               </kbd>
             </div>
@@ -124,10 +123,10 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
             </div>
 
             {/* Footer */}
-            <div className="px-4 py-2.5 border-t border-rule/12 bg-sunken/50 flex items-center gap-3 text-[10px] text-ink-tertiary">
+            <div className="px-4 py-2.5 border-t border-rule/10 bg-sunken/50 flex items-center gap-3 text-[10px] text-ink-tertiary">
               <Command className="w-3 h-3" />
               <span>to open</span>
-              <span className="mx-1">·</span>
+              <span className="mx-1">/</span>
               <span>Esc to close</span>
             </div>
           </motion.div>

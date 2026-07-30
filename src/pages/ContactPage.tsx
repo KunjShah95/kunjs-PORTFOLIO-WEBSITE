@@ -52,14 +52,14 @@ export function ContactPage() {
             <div className="relative group">
               <Magnetic>
                 <button
-                  className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl border border-rule/15 text-ink-primary font-semibold text-base bg-elevated hover:bg-sunken hover:-translate-y-0.5 active:scale-95 transition-all w-full md:w-auto"
+                  className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl border border-rule/10 text-ink-primary font-semibold text-base bg-elevated hover:bg-sunken hover:-translate-y-0.5 active:scale-95 transition-all w-full md:w-auto"
                 >
                   <FileDown className="w-5 h-5" />
                   Download résumé
                 </button>
               </Magnetic>
               <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                <div className="w-60 bg-elevated/95 backdrop-blur-xl border border-rule/12 p-1.5 rounded-xl shadow-2xl flex flex-col gap-1 noise-texture text-left">
+                <div className="w-60 bg-elevated/95 backdrop-blur-xl border border-rule/10 p-1.5 rounded-xl shadow-2xl flex flex-col gap-1 noise-texture text-left">
                   <a
                     href="/kunjaiml.pdf"
                     target="_blank"
@@ -84,7 +84,7 @@ export function ContactPage() {
           </div>
         </motion.div>
 
-        <div className="mt-20 max-w-2xl mx-auto divide-y divide-rule/12 border border-rule/12 rounded-2xl overflow-hidden">
+        <div className="mt-20 max-w-2xl mx-auto divide-y divide-rule/10 border border-rule/10 rounded-xl overflow-hidden bg-paper/50 backdrop-blur-sm">
           {METHODS.map((m) => (
             <a
               key={m.label}
@@ -104,7 +104,7 @@ export function ContactPage() {
           ))}
         </div>
 
-        <div className="mt-24 max-w-2xl mx-auto pt-12 border-t border-rule/12 text-center">
+        <div className="mt-24 max-w-2xl mx-auto pt-12 border-t border-rule/10 text-center">
           <div className="kicker">Currently</div>
           <p className="mt-3 text-ink-secondary leading-relaxed">
             Rewriting a research agent for the third time. Reading <em>Designing Data-Intensive Applications</em> again. Usually up for new work. If you have something, write to me.

@@ -96,7 +96,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\", <https://kunjshah.dev/api/llms>; rel=\"llms-full-text\", <https://kunjshah.dev/llms.txt>; rel=\"alternate\", <https://kunjshah.dev/sitemap.xml>; rel=\"sitemap\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\", <https://kunjshah.vercel.app/api/llms>; rel=\"llms-full-text\", <https://kunjshah.vercel.app/llms.txt>; rel=\"alternate\", <https://kunjshah.vercel.app/sitemap.xml>; rel=\"sitemap\""
         }
       ]
     }

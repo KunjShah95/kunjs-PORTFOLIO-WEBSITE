@@ -31,8 +31,8 @@ export function FloatingDock() {
       <motion.nav
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-auto flex items-center gap-1.5 px-3 py-2 rounded-full border border-rule/12 bg-paper/85 backdrop-blur-lg shadow-lg"
+        transition={{ delay: 1.5, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="pointer-events-auto flex items-center gap-0.5 px-2.5 py-1 rounded-full border border-rule/10 bg-paper/80 backdrop-blur-lg shadow-lg"
         aria-label="Quick navigation"
       >
         {DOCK_ITEMS.map(({ icon: Icon, label, to }) => {
@@ -44,21 +44,21 @@ export function FloatingDock() {
               onMouseEnter={() => setHovered(label)}
               onMouseLeave={() => setHovered(null)}
               className={clsx(
-                'relative flex flex-col items-center justify-center w-10 h-10 rounded-full transition-colors duration-base',
+                'relative flex flex-col items-center justify-center w-7 h-7 rounded-full transition-colors duration-200',
                 isActive
-                  ? 'bg-ink-primary text-paper'
+                  ? 'bg-accent text-accent-ink'
                   : 'text-ink-tertiary hover:text-ink-primary hover:bg-elevated',
               )}
               aria-label={label}
             >
-              <Icon className="w-4 h-4" />
+              <Icon className="w-3 h-3" />
               <AnimatePresence>
                 {hovered === label && !isActive && (
                   <motion.span
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 4 }}
-                    className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-ink-primary text-paper text-[10px] font-mono whitespace-nowrap"
+                    className="absolute -top-7 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded-md bg-ink-primary text-paper text-[8px] font-mono whitespace-nowrap"
                   >
                     {label}
                   </motion.span>

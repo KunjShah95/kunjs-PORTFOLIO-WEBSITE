@@ -5,7 +5,7 @@ const SERVICES = [
   {
     icon: Cpu,
     title: 'AI Agents & Automations',
-    desc: 'LangChain, LLM orchestration, retrieval pipelines, autonomous workflows — production-ready.',
+    desc: 'LangChain, LLM orchestration, retrieval pipelines, autonomous workflows production-ready.',
     span: 'md:col-span-2',
   },
   {
@@ -28,42 +28,63 @@ const SERVICES = [
   },
 ]
 
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } }
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.32, 0.72, 0, 1] } }
+}
+
 export function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 md:py-32 border-b border-rule/12 overflow-hidden bg-sunken/20">
-
-      <div className="relative z-10 max-w-manifest mx-auto px-6">
-        <div className="mb-16">
-          <span className="kicker">What I ship</span>
-          <h2 className="display text-4xl md:text-6xl mt-4 max-w-3xl leading-[1.05]">
-            You describe it, I build it.
+    <section id="services" className="relative py-24 md:py-32 border-t border-rule/10">
+      <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+          className="mb-14"
+        >
+          <h2 className="display text-4xl md:text-5xl leading-[1.05] max-w-3xl font-semibold">
+            What I build.
           </h2>
-        </div>
+          <p className="mt-3 text-base text-ink-secondary max-w-2xl leading-relaxed">
+            You describe the problem. I ship the solution. From autonomous agents to deployment infrastructure.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule/10 rounded-2xl overflow-hidden border border-rule/12">
-          {SERVICES.map((s, i) => {
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+        >
+          {SERVICES.map((s) => {
             const Icon = s.icon
             return (
               <motion.div
                 key={s.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                className={`${s.span} bg-paper`}
+                variants={fadeUp}
+                className={`${s.span}`}
               >
-                <div className="h-full p-8 md:p-10 flex flex-col gap-5 group hover:bg-elevated transition-colors duration-300">
-                  <Icon className="w-5 h-5 text-accent" strokeWidth={1.5} />
+                <div className="card-premium h-full p-6 md:p-8 flex flex-col gap-4 group">
+                  <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 text-accent">
+                    <Icon className="w-4 h-4" strokeWidth={1.5} />
+                  </span>
                   <div>
-                    <h3 className="font-display text-xl font-bold tracking-tight mb-2">{s.title}</h3>
-                    <p className="text-sm text-ink-secondary leading-relaxed font-body">{s.desc}</p>
+                    <h3 className="font-display text-base font-semibold tracking-tight mb-1.5">{s.title}</h3>
+                    <p className="text-sm text-ink-secondary leading-relaxed">{s.desc}</p>
                   </div>
-                  <div className="mt-auto h-px bg-accent/30 w-full origin-left scale-x-[0.25] group-hover:scale-x-100 transition-transform duration-500 ease-out" />
                 </div>
               </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -43,13 +43,13 @@ interface SEOProps {
 }
 
 const defaultMeta = {
-  title: 'Kunj Shah | AI Engineer & Agent Builder — AI Agents, Web Apps & APIs',
+  title: 'Kunj Shah | AI Engineer & Agent Builder — Autonomous Agents, LLMs & Production AI Systems',
   description:
-    'Kunj Shah is an AI engineer in Ahmedabad building production AI systems — agents, retrieval pipelines, and the backend to hold them up. Shipped work, hackathon finals, and open-source contributions.',
+    'Kunj Shah is an AI engineer in Ahmedabad building production AI systems — autonomous agents, LLM orchestration, RAG pipelines, edge computer vision, and full-stack AI applications. 12+ shipped projects, 44+ open-source PRs (OWASP, Microsoft, Ollama), 4 hackathon finals. Available for AI engineering roles.',
   image: `${SITE_URL}/og-image.png`,
   siteUrl: SITE_URL,
   twitterHandle: '@kunjshah_dev',
-  siteName: 'Kunj Shah — Portfolio',
+  siteName: 'Kunj Shah — AI Engineer & Agent Builder',
 }
 
 const knowsAbout = [
@@ -265,22 +265,25 @@ export function SEO({
     'Kunj Shah Ahmedabad',
     'AI engineer India',
     'AI engineer Ahmedabad',
-    'agent developer',
-    'AI safety auditing',
-    'EU AI Act compliance',
+    'AI agent builder',
+    'production AI systems',
+    'autonomous agents',
+    'LLM engineer',
+    'agentic AI portfolio',
     'LLM orchestration',
     'LangChain developer',
+    'LangGraph developer',
     'generative AI portfolio',
+    'RAG pipeline engineer',
     'MLOps engineer',
     'AI fairness auditing',
     'computer vision engineer India',
     'multi-agent systems',
     'CrewAI developer',
-    'LangGraph developer',
     'hire AI developer India',
-    'agentic AI portfolio',
     'Kunj Shah projects',
-    'Indus University AI',
+    'edge AI engineer',
+    'AI architecture portfolio',
   ],
   faqItems,
   datePublished,

@@ -34,7 +34,7 @@ export function BlogsPage() {
         <div className="max-w-3xl mx-auto">
           {years.map((year) => (
             <div key={year} className="mb-16 last:mb-0">
-              <div className="flex items-center gap-4 pb-4 mb-4 border-b border-rule/12">
+              <div className="flex items-center gap-4 pb-4 mb-4 border-b border-rule/10">
                 <div className="kicker">{year}</div>
                 <div className="font-mono text-3xl text-ink-primary">{byYear[year].length}</div>
               </div>

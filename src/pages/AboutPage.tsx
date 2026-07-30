@@ -45,7 +45,7 @@ export function AboutPage() {
           <Rule label="Principles" />
           <section id="principles" className="pl-6 md:pl-10">
             <h2 className="display text-3xl mb-6 font-bold tracking-tight">Principles</h2>
-            <ol className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule/10 rounded-2xl overflow-hidden border border-rule/12">
+            <ol className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule/10 rounded-xl overflow-hidden border border-rule/10">
               {[
                 { num: '01', title: 'Ship to learn.', desc: 'A prototype in a notebook is a hypothesis. A deployed system with real users is a fact.' },
                 { num: '02', title: 'Workflows > Prompts.', desc: 'The right system architecture is 80% of the work. Prompt engineering is the last 20%.' },
@@ -81,7 +81,7 @@ export function AboutPage() {
               {SKILL_GROUPS.map((group, i) => {
                 const Icon = group.icon
                 return (
-                  <div key={group.category} className="rounded-2xl border border-rule/12 bg-elevated p-6 md:p-8 flex flex-col justify-between group hover:border-accent/20 transition-colors">
+                  <div key={group.category} className="rounded-xl border border-rule/10 bg-elevated p-6 md:p-8 flex flex-col justify-between group hover:border-accent/20 transition-colors">
                     <div>
                       <div className="flex items-center justify-between mb-5">
                         <span className="font-mono text-[10px] text-ink-tertiary">
@@ -102,7 +102,7 @@ export function AboutPage() {
                       <span className="font-mono text-[10px] uppercase text-ink-tertiary tracking-wider block mb-2.5">Stack</span>
                       <ul className="flex flex-wrap gap-1.5">
                         {group.skills.map((skill) => (
-                          <li key={skill} className="font-mono text-[11px] text-ink-secondary px-2.5 py-1 border border-rule/8 rounded-full hover:border-accent/30 hover:text-ink-primary transition-colors">
+                          <li key={skill} className="font-mono text-[11px] text-ink-secondary px-2.5 py-1 border border-rule/10 rounded hover:border-accent/30 hover:text-ink-primary transition-colors">
                             {skill}
                           </li>
                         ))}
@@ -142,7 +142,7 @@ export function AboutPage() {
               ] as [string | number, string][]).map(([n, l]) => {
                 const isNumeric = typeof n === 'number'
                 return (
-                  <div key={l} className="p-4 md:p-5 rounded-2xl border border-rule/12 bg-elevated text-center">
+                  <div key={l} className="p-4 md:p-5 rounded-xl border border-rule/10 bg-elevated text-center">
                     <div className="font-display text-2xl md:text-3xl text-accent font-extrabold tabular-nums">
                       {isNumeric ? <CountUp value={n as number} duration={1} /> : n}
                     </div>
@@ -152,7 +152,7 @@ export function AboutPage() {
               })}
             </div>
 
-            <ul className="divide-y divide-rule/8 rounded-2xl border border-rule/12 overflow-hidden bg-paper/20 backdrop-blur-sm">
+            <ul className="divide-y divide-rule/10 rounded-xl border border-rule/10 overflow-hidden bg-paper/20">
               {contributions.map((c) => (
                 <li key={c.url}>
                   <a
@@ -191,29 +191,64 @@ export function AboutPage() {
           {/* CV/Experience Section */}
           <Rule label="CV" />
           <section id="cv" className="pl-6 md:pl-10">
-            <h2 className="display text-3xl mb-6 font-bold tracking-tight">Experience</h2>
-            <div className="divide-y divide-rule/8 border border-rule/12 rounded-2xl overflow-hidden">
-              {EXPERIENCE.map((exp, i) => (
-                <div key={i} className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8 p-6 md:p-8 bg-paper hover:bg-elevated transition-colors">
-                  <div className="md:w-1/4 shrink-0">
-                    <span className="font-mono text-[11px] text-ink-tertiary">{exp.period}</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-display text-lg font-bold text-ink-primary">{exp.role.replace(/_/g, ' ')}</h3>
-                    <div className="font-mono text-sm text-accent mt-1">{exp.company.replace(/_/g, ' ')}</div>
-                    <p className="mt-3 text-sm text-ink-secondary leading-relaxed">{exp.description}</p>
-                    {exp.skills && (
-                      <div className="mt-4 flex flex-wrap gap-1.5">
-                        {exp.skills.map(skill => (
-                          <span key={skill} className="px-2 py-0.5 rounded border border-rule/8 text-[10px] font-mono text-ink-tertiary">
-                            {skill.replace(/_/g, ' ')}
-                          </span>
-                        ))}
+            <h2 className="display text-3xl mb-2 font-bold tracking-tight">Experience</h2>
+            <p className="text-ink-secondary leading-relaxed mb-10 max-w-prose text-sm">
+              Where I&rsquo;ve shipped code, learned hard lessons, and built things that mattered.
+            </p>
+
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-[18px] top-2 bottom-2 w-px bg-rule/20" aria-hidden />
+
+              <div className="space-y-6">
+                {EXPERIENCE.map((exp, i) => (
+                  <div key={i} className="relative flex items-start gap-5 pl-0">
+                    {/* Timeline dot */}
+                    <div className="relative z-10 shrink-0 mt-1">
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold shadow-sm ${
+                        i === 0
+                          ? 'bg-accent text-accent-ink shadow-accent/20'
+                          : 'bg-elevated border border-rule/10 text-ink-tertiary'
+                      }`}>
+                        {exp.company === 'PHAZE_AI' ? 'PA' : exp.company === 'Ideabot' ? 'IB' : 'OS'}
                       </div>
-                    )}
+                    </div>
+
+                    {/* Card */}
+                    <div className="flex-1 min-w-0 card-premium p-5">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h3 className="font-display text-base font-bold text-ink-primary">
+                              {exp.role.replace(/_/g, ' ')}
+                            </h3>
+                            <span className="text-xs text-accent font-medium font-mono">
+                              @ {exp.company.replace(/_/g, ' ')}
+                            </span>
+                          </div>
+                        </div>
+                        <span className="font-mono text-[11px] text-ink-quaternary shrink-0 whitespace-nowrap">
+                          {exp.period}
+                        </span>
+                      </div>
+
+                      <p className="text-sm text-ink-secondary leading-relaxed mb-4">
+                        {exp.description}
+                      </p>
+
+                      {exp.skills && (
+                        <div className="flex flex-wrap gap-1.5">
+                          {exp.skills.map(skill => (
+                            <span key={skill} className="px-2 py-0.5 rounded-md border border-rule/10 text-[10px] font-mono text-ink-tertiary bg-sunken/30">
+                              {skill.replace(/_/g, ' ')}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
         </div>

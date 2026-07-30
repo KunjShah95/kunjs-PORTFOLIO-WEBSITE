@@ -6,7 +6,6 @@ import { SITE_URL } from '../lib/site';
 import { PageHeader } from '../components/ui/PageHeader';
 import { MetaRow } from '../components/ui/MetaRow';
 import { Rule } from '../components/ui/Rule';
-import { LiquidGlass, SpotlightCard } from '../components/effects';
 
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -73,12 +72,12 @@ export function ProjectDetailPage() {
 
           {/* Key Metrics Grid */}
           {metrics && metrics.length > 0 && (
-            <div className="mb-12 p-6 rounded-2xl border border-rule/12 bg-elevated/60 noise-texture">
+            <div className="mb-12 p-6 rounded-xl border border-rule/10 bg-white/[0.03] backdrop-blur-sm">
               <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent font-bold">Key Metrics</span>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                 {metrics.slice(0, 4).map(([key, val]) => (
                   <div key={key} className="flex flex-col gap-0.5">
-                    <span className="display text-xl font-bold text-ink-primary tabular-nums">{val}</span>
+                    <span className="display text-xl font-bold text-accent tabular-nums">{val}</span>
                     <span className="font-mono text-[11px] text-ink-tertiary leading-tight">{key}</span>
                   </div>
                 ))}
@@ -106,7 +105,7 @@ export function ProjectDetailPage() {
               <Rule label="Architecture" />
               <div className="mb-10">
                 <h2 className="display text-2xl mb-4">Architecture &amp; Design</h2>
-                <div className="p-6 rounded-2xl border border-rule/12 bg-sunken/30 font-mono text-sm leading-relaxed text-ink-secondary">
+                <div className="p-6 rounded-xl border border-rule/10 bg-white/[0.03] backdrop-blur-sm font-mono text-sm leading-relaxed text-ink-secondary">
                   <div className="flex items-center gap-2 mb-4 text-accent">
                     <span className="w-2 h-2 rounded-full bg-accent" />
                     <span className="font-bold text-xs uppercase tracking-wider">System Overview</span>
@@ -125,7 +124,7 @@ export function ProjectDetailPage() {
                 <h2 className="display text-2xl mb-4">Engineering Challenges</h2>
                 <div className="space-y-4">
                   {project.challenges.map((c, i) => (
-                    <div key={i} className="flex gap-3">
+                    <div key={i} className="flex gap-3 p-4 rounded-xl border border-rule/10 bg-white/[0.03]">
                       <span className="text-accent font-mono text-sm shrink-0 mt-0.5">0{i + 1}</span>
                       <p className="text-base leading-relaxed text-ink-secondary">{c}</p>
                     </div>
@@ -143,7 +142,7 @@ export function ProjectDetailPage() {
                 <h2 className="display text-2xl mb-4">Benchmarks &amp; Performance</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {benchmarks.map(([key, val]) => (
-                    <div key={key} className="p-4 rounded-xl border border-rule/12 bg-elevated/40">
+                    <div key={key} className="p-4 rounded-xl border border-rule/10 bg-white/[0.03]">
                       <div className="text-accent font-bold text-lg tabular-nums font-mono">{val}</div>
                       <div className="text-[12px] text-ink-tertiary mt-0.5 font-mono">{key}</div>
                     </div>
@@ -161,7 +160,7 @@ export function ProjectDetailPage() {
                 <h2 className="display text-2xl mb-4">Lessons Learned</h2>
                 <div className="space-y-3">
                   {project.lessons.map((l, i) => (
-                    <div key={i} className="flex gap-3 items-start p-4 rounded-xl border border-rule/12 bg-accent/5">
+                    <div key={i} className="flex gap-3 items-start p-4 rounded-xl border border-accent/15 bg-accent/5">
                       <span className="text-accent mt-0.5">*</span>
                       <p className="text-sm leading-relaxed text-ink-secondary">{l}</p>
                     </div>
@@ -180,12 +179,8 @@ export function ProjectDetailPage() {
                   to={`/blogs/${caseStudy.slug}`}
                   className="block group no-underline"
                 >
-                  <SpotlightCard className="rounded-2xl">
-                    <LiquidGlass
-                      intensity="subtle"
-                      tint="rgba(124, 118, 255, 0.08)"
-                      className="p-6 md:p-8 border border-rule/12 rounded-2xl hover:border-accent/30 transition-all group"
-                    >
+                  <div className="p-[1px] rounded-xl bg-gradient-to-b from-accent/25 to-transparent group-hover:from-accent/40 transition-all duration-500">
+                    <div className="p-6 md:p-8 rounded-[calc(12px-1px)] bg-paper hover:bg-elevated transition-colors">
                       <div className="flex items-start gap-5">
                         <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
                           <BookOpen className="w-6 h-6 text-accent" />
@@ -205,8 +200,8 @@ export function ProjectDetailPage() {
                           </div>
                         </div>
                       </div>
-                    </LiquidGlass>
-                  </SpotlightCard>
+                    </div>
+                  </div>
                 </Link>
               </div>
             </>

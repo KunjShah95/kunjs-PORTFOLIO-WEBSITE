@@ -139,10 +139,9 @@ export function AIAssistant() {
   return (
     <>
       <button
-        onClick={openAssistant}
-        className="fixed bottom-4 right-4 md:bottom-24 md:right-6 z-[110] w-12 h-12 sm:w-14 sm:h-14 bg-ink-primary text-paper hover:bg-accent transition-all duration-300 flex items-center justify-center group rounded-full border border-accent/20"
+        onClick={openAssistant}              className="fixed bottom-4 right-4 md:bottom-24 md:right-6 z-[110] w-11 h-11 bg-ink-primary text-paper hover:bg-accent transition-all duration-300 flex items-center justify-center group rounded-full border border-accent/20 shadow-lg"
       >
-        <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform text-accent" />
+        <Sparkles className="w-4 h-4 group-hover:scale-110 transition-transform text-accent" />
         <span className="sr-only">AI Assistant</span>
       </button>
 
@@ -161,12 +160,12 @@ onClick={closeAssistant}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="fixed bottom-4 right-4 md:bottom-24 md:right-6 z-[110] w-[calc(100vw-32px)] sm:w-[400px] h-[500px] sm:h-[600px] max-h-[80vh] bg-paper border border-rule/12 flex flex-col overflow-hidden rounded-md"
+              className="fixed bottom-4 right-4 md:bottom-24 md:right-6 z-[110] w-[calc(100vw-32px)] sm:w-[400px] h-[500px] sm:h-[600px] max-h-[80vh] bg-paper border border-rule/10 flex flex-col overflow-hidden rounded-xl shadow-2xl"
             >
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-rule/12 bg-elevated/50">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse-dot"></div>
                   <span className="text-xs font-bold tracking-wider uppercase text-ink-primary">Kunj's Assistant</span>
                 </div>
                 <button onClick={closeAssistant} className="p-2 hover:bg-elevated rounded-full transition-colors">

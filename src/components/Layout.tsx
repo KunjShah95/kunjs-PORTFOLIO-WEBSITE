@@ -3,10 +3,11 @@ import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
-import { StickyCTA } from './StickyCTA'
 import { CommandMenu } from './CommandMenu'
 import { AIAssistant } from './AIAssistant'
 import { FloatingDock } from './FloatingDock'
+import { CursorGlow } from './effects/CursorGlow'
+
 interface LayoutProps {
    children: React.ReactNode
 }
@@ -26,23 +27,23 @@ export function Layout({ children }: LayoutProps) {
          </a>
 
          <Navbar onOpenCommand={() => setIsCommandOpen(true)} />
+         <CursorGlow />
 
          <AnimatePresence mode="wait">
             <motion.main
                key={pathname}
                id="main"
-               className="pt-16"
-               initial={{ opacity: 0, y: 8 }}
+               className="pt-14"
+               initial={{ opacity: 0, y: 6 }}
                animate={{ opacity: 1, y: 0 }}
-               exit={{ opacity: 0, y: -8 }}
-               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+               exit={{ opacity: 0, y: -6 }}
+               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             >
                {children}
             </motion.main>
          </AnimatePresence>
 
          {!isHome && <Footer />}
-          <StickyCTA />
 
          <CommandMenu open={isCommandOpen} setOpen={setIsCommandOpen} />
          <AIAssistant />

@@ -20,7 +20,7 @@ export function HackathonsPage() {
       <section className="max-w-manifest mx-auto px-6 py-16">
         <div className="max-w-prose mx-auto space-y-12">
           {HACKATHONS.map((h, i) => (
-            <article key={i} className="pb-12 border-b border-rule/12 last:border-0">
+            <article key={i} className="pb-12 border-b border-rule/10 last:border-0">
               <div className="flex items-center gap-3">
                 <div className="kicker">{h.year}</div>
                 {h.event && <span className="text-ink-quaternary">/</span>}

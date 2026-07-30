@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { Sun, Moon } from 'lucide-react'
 
 function getInitialTheme(): 'dark' | 'light' {
-  if (typeof window === 'undefined') return 'dark'
+  if (typeof window === 'undefined') return 'light'
   const stored = localStorage.getItem('theme')
   if (stored === 'light' || stored === 'dark') return stored
-  return 'dark'
+  return 'light'
 }
 
 export function ThemeToggle() {
@@ -13,7 +13,7 @@ export function ThemeToggle() {
 
   useEffect(() => {
     const root = document.documentElement
-    root.classList.toggle('light', theme === 'light')
+    root.classList.toggle('dark', theme === 'dark')
     localStorage.setItem('theme', theme)
   }, [theme])
 

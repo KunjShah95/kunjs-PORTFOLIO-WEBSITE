@@ -29,13 +29,13 @@ export function SkillsPage() {
       />
       <section ref={ref} className="max-w-manifest mx-auto px-6 py-16">
         {inView && (
-          <BentoGrid cols={2} className="border border-rule/12">
+          <BentoGrid cols={2} className="border border-rule/10">
             {groups.map((g) => (
               <BentoCard key={g.name} variant="inset" className="p-8">
                 <Kicker>{g.name}</Kicker>
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {g.items.map((s) => (
-                    <li key={s} className="px-3 h-7 inline-flex items-center rounded-full bg-elevated border border-rule/12 text-sm font-mono text-ink-primary">
+                    <li key={s} className="px-3 h-7 inline-flex items-center rounded-md bg-elevated border border-rule/10 text-sm font-mono text-ink-primary">
                       {s}
                     </li>
                   ))}

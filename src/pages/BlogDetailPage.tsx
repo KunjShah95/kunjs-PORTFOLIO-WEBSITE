@@ -30,7 +30,7 @@ export function BlogDetailPage() {
         datePublished={blogDateToIsoDate(blog.date)}
         dateModified={blogDateToIsoDate(blog.date)}
       />
-      <header className="py-16 md:py-24 border-b border-rule/12">
+      <header className="py-16 md:py-24 border-b border-rule/10">
         <div className="max-w-manifest mx-auto px-6">
           <div className="flex justify-center mb-8">
             <Link to="/blogs" className="inline-flex items-center gap-1.5 text-sm text-ink-secondary hover:text-ink-primary">
@@ -41,7 +41,7 @@ export function BlogDetailPage() {
             <Kicker accent>{blog.category} &middot; {blog.date}</Kicker>
             <h1 className="display text-4xl md:text-5xl mt-4 leading-tight tracking-tightest">{blog.title}</h1>
             <p className="mt-6 text-xl text-ink-secondary leading-relaxed font-display italic">{blog.excerpt}</p>
-            <div className="mt-8 pt-6 border-t border-rule/12 flex items-center justify-center gap-4">
+            <div className="mt-8 pt-6 border-t border-rule/10 flex items-center justify-center gap-4">
               <div className="kicker">By Kunj Shah</div>
               <div className="kicker">{blog.readTime ?? '5 min read'}</div>
             </div>
@@ -57,7 +57,7 @@ export function BlogDetailPage() {
         </div>
       </div>
 
-      <footer className="border-t border-rule/12 py-16">
+      <footer className="border-t border-rule/10 py-16">
         <div className="max-w-prose mx-auto px-6">
           <div className="kicker">Continue reading</div>
           <Link to="/blogs" className="display text-2xl mt-3 inline-block hover:underline decoration-ink-primary/40 underline-offset-4">

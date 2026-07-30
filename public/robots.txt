@@ -2,6 +2,8 @@
 Content-Signal: ai-train=no, search=yes, ai-input=no
 User-agent: *
 Allow: /
+Disallow: /api/portfolio.json
+Disallow: /manifest.json
 
 # AI / answer engines — allow crawling so sources can be cited (GEO / AEO).
 User-agent: GPTBot
@@ -25,7 +27,19 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://kunjshah.vercel.app/sitemap.xml
+# OpenAI's newer search crawler (added 2026)
+User-agent: oai-searchbot
+Allow: /
 
-# AI Agents: Machine-readable JSON endpoint
-Allow: /api/portfolio.json
+# Apple search / Siri / Spotlight
+User-agent: Applebot
+Allow: /
+
+# Social preview crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+Sitemap: https://kunjshah.vercel.app/sitemap.xml

@@ -20,7 +20,7 @@ export function EducationPage() {
       <section className="max-w-manifest mx-auto px-6 py-16">
         <div className="max-w-prose mx-auto space-y-8">
           {EDUCATION.map((edu, i) => (
-            <article key={i} className="pb-8 border-b border-rule/12 last:border-0">
+            <article key={i} className="pb-8 border-b border-rule/10 last:border-0">
               <div className="kicker">{edu.period}</div>
               <h3 className="display text-2xl mt-2">{edu.degree}</h3>
               <div className="font-mono text-sm text-ink-secondary mt-1">{edu.school}</div>
