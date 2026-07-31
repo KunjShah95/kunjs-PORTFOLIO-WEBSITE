@@ -354,7 +354,23 @@
   100% { background-position: -200% 0; }
 }
 
+/* Marquee — items are doubled in markup, so -50% loops seamlessly */
+@keyframes marq {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marq-rev {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
 @layer utilities {
+  .animate-marq {
+    animation: marq 40s linear infinite;
+  }
+  .animate-marq-rev {
+    animation: marq-rev 40s linear infinite;
+  }
   .animate-float {
     animation: float 4s ease-in-out infinite;
   }

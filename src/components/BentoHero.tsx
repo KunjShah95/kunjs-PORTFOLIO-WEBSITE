@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight, MapPin } from 'lucide-react'
 import { IDENTITY } from '../data/portfolio'
 import { OSS_STATS } from '../data/opensource'
+import { ShaderBackground } from './effects/ShaderBackground'
+import { Magnetic } from './effects/Magnetic'
 
 const TRUST_SIGNALS = [
   { value: '12+', label: 'Projects shipped' },
@@ -13,10 +15,19 @@ const TRUST_SIGNALS = [
 export function BentoHero() {
   return (
     <section className="relative w-full max-w-5xl mx-auto px-6 pt-16 pb-24 md:pt-24 md:pb-32">
-      {/* Background accent — soft abstract shape */}
-      <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] pointer-events-none" aria-hidden>
-        <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-accent/5 blur-3xl" />
-        <div className="absolute top-40 right-40 w-48 h-48 rounded-full bg-accent/8 blur-2xl" />
+      {/* Signature layer — full-bleed WebGL aurora, tuned low for text contrast */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 w-screen h-full overflow-hidden pointer-events-none"
+        aria-hidden
+      >
+        <ShaderBackground className="opacity-[0.55] md:opacity-70" intensity={0.55} />
+        {/* CSS fallback tint (shows if WebGL unavailable) */}
+        <div className="absolute top-16 right-[12%] w-72 h-72 rounded-full bg-accent/5 blur-3xl -z-10" />
+        {/* Left scrim keeps the headline crisp over the field */}
+        <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/70 to-transparent" />
+        {/* Top + bottom fades melt the field into the page */}
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-paper to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center">
@@ -69,15 +80,17 @@ export function BentoHero() {
             transition={{ duration: 0.4, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-wrap gap-3 pt-2"
           >
-            <Link
-              to="/projects"
-              className="group inline-flex items-center gap-2 h-11 px-5 rounded-full bg-accent text-accent-ink font-semibold text-sm hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.98] transition-all shadow-[0_4px_20px_rgb(var(--accent)/0.30)]"
-            >
-              <span>View my work</span>
-              <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                <ArrowUpRight className="w-3 h-3" />
-              </span>
-            </Link>
+            <Magnetic>
+              <Link
+                to="/projects"
+                className="group inline-flex items-center gap-2 h-11 px-5 rounded-full bg-accent text-accent-ink font-semibold text-sm hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.98] transition-all shadow-[0_4px_20px_rgb(var(--accent)/0.30)]"
+              >
+                <span>View my work</span>
+                <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+                  <ArrowUpRight className="w-3 h-3" />
+                </span>
+              </Link>
+            </Magnetic>
             <Link
               to="/contact"
               className="group inline-flex items-center gap-2 h-11 px-5 rounded-full border border-rule/20 text-ink-primary font-medium text-sm hover:bg-elevated hover:-translate-y-0.5 active:scale-[0.98] transition-all"

@@ -2,6 +2,7 @@ import { SEO } from '../components/SEO';
 import { SITE_URL } from '../lib/site';
 import { PageHeader } from '../components/ui/PageHeader';
 import { Kicker } from '../components/ui/Kicker';
+import { SpotlightCard } from '../components/effects/SpotlightCard';
 
 const LABS = [
   {
@@ -68,7 +69,8 @@ export function LabsPage() {
       <section className="max-w-manifest mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {LABS.map((l, i) => (
-            <article key={i} className="bg-paper p-6 flex flex-col rounded-xl border border-rule/10 hover:border-accent/20 transition-colors">
+            <SpotlightCard key={i} className="h-full rounded-xl border border-rule/10 bg-paper hover:border-accent/25 transition-colors hover-lift">
+              <article className="p-6 flex flex-col h-full">
               <Kicker>{l.status ?? 'Experiment'}</Kicker>
               <h3 className="display text-xl mt-3 leading-tight flex-1">
                 {'url' in l && l.url ? (
@@ -87,7 +89,8 @@ export function LabsPage() {
                   ))}
                 </div>
               )}
-            </article>
+              </article>
+            </SpotlightCard>
           ))}
         </div>
       </section>

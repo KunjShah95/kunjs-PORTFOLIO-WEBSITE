@@ -3,6 +3,7 @@ import { ArrowUpRight, FileDown } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { SITE_URL } from '../lib/site';
 import { Magnetic } from '../components/effects';
+import { ShaderBackground } from '../components/effects/ShaderBackground';
 
 const METHODS = [
   { label: 'Email', value: 'kkshah2005@gmail.com', href: 'mailto:kkshah2005@gmail.com', primary: true },
@@ -20,6 +21,11 @@ export function ContactPage() {
         description="The fastest way to reach Kunj Shah is email. If you're working on something and want an extra set of hands, write. Also find me on GitHub, LinkedIn, and Twitter."
         url={`${SITE_URL}/contact`}
       />
+      {/* Signature aurora behind the ask */}
+      <div className="absolute inset-x-0 top-0 h-[70vh] -z-10 pointer-events-none" aria-hidden>
+        <ShaderBackground className="opacity-45 md:opacity-[0.6]" intensity={0.5} />
+        <div className="absolute inset-0 bg-gradient-to-b from-paper/30 via-paper/70 to-paper" />
+      </div>
       <div className="relative max-w-manifest mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 8 }}

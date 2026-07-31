@@ -33,14 +33,14 @@ export function Footer() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-2.5">
+            <div className="flex flex-wrap gap-x-6 gap-y-2.5 md:max-w-md md:justify-end">
               {LINKS.map((link) => (
                 <a
                   key={link.value}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 text-sm"
+                  className="group flex items-center gap-2 text-sm whitespace-nowrap"
                 >
                   <span className="text-ink-quaternary font-mono text-[10px] uppercase tracking-wider group-hover:text-accent transition-colors">
                     {link.label}

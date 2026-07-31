@@ -46,7 +46,7 @@ export function SpotlightCard({ children, className }: SpotlightCardProps) {
           background: `radial-gradient(280px circle at var(--sx, 50%) var(--sy, 50%), rgb(var(--accent) / 0.15), transparent 62%)`,
         }}
       />
-      <div className="relative">{children}</div>
+      <div className="relative h-full">{children}</div>
     </div>
   )
 }

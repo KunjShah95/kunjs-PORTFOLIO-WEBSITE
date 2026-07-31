@@ -11,6 +11,7 @@ import { useWebMCP } from './hooks/useWebMCP'
 
 // Eager load critical components for Home
 import { BentoHero } from './components/BentoHero'
+import { TechMarquee } from './components/TechMarquee'
 import { ServicesSection } from './components/ServicesSection'
 import { FeaturedProjects } from './components/FeaturedProjects'
 import { FinalCTA } from './components/FinalCTA'
@@ -48,6 +49,7 @@ function Home() {
         dateModified="2026-07-30"
       />
       <BentoHero />
+      <TechMarquee />
       <FeaturedProjects />
 
       <ServicesSection />

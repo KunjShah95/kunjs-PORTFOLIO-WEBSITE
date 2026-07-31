@@ -5,6 +5,7 @@ import { PROJECTS } from '../data/portfolio'
 import { SEO } from '../components/SEO'
 import { SITE_URL } from '../lib/site'
 import { PageHeader } from '../components/ui/PageHeader'
+import { SpotlightCard } from '../components/effects/SpotlightCard'
 import { useReveal } from '../hooks/useReveal'
 
 const FILTERS = ['All', 'AI Agents', 'RAG', 'Voice', 'Infra', 'Open Source']
@@ -77,9 +78,9 @@ export function ProjectsPage() {
         {inView && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {filtered.map((p) => (
-              <div
+              <SpotlightCard
                 key={p.slug}
-                className="group relative flex flex-col justify-between h-full min-h-[320px] rounded-xl border border-rule/10 bg-paper hover:border-accent/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgb(var(--accent)/0.06)]"
+                className="group flex flex-col h-full min-h-[320px] rounded-xl border border-rule/10 bg-paper hover:border-accent/25 transition-all duration-300 hover-lift"
               >
                 <div className="p-6 md:p-8 flex flex-col justify-between h-full">
                   <div>
@@ -127,7 +128,7 @@ export function ProjectsPage() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         )}

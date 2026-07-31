@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, FileDown } from 'lucide-react'
+import { ShaderBackground } from './effects/ShaderBackground'
+import { Magnetic } from './effects/Magnetic'
 
 const SOCIALS = [
   { label: 'GitHub', value: 'KunjShah95', href: 'https://github.com/KunjShah95' },
@@ -27,7 +29,12 @@ export function FinalCTA() {
   }, [])
 
   return (
-    <section id="final-cta" className="relative border-t border-rule/10 py-24 md:py-32">
+    <section id="final-cta" className="relative border-t border-rule/10 py-24 md:py-32 overflow-hidden">
+      {/* Signature shader — mirrors the hero, fades into the page */}
+      <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden>
+        <ShaderBackground className="opacity-50 md:opacity-[0.65]" intensity={0.5} />
+        <div className="absolute inset-0 bg-gradient-to-b from-paper via-paper/60 to-paper" />
+      </div>
       <div className="relative z-10 max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -44,13 +51,15 @@ export function FinalCTA() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/contact"
-              className="group inline-flex items-center gap-2 h-11 px-5 rounded-full bg-accent text-accent-ink font-semibold text-sm hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-[0_4px_20px_rgb(var(--accent)/0.30)]"
-            >
-              Start a conversation
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </Link>
+            <Magnetic>
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-2 h-11 px-5 rounded-full bg-accent text-accent-ink font-semibold text-sm hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-[0_4px_20px_rgb(var(--accent)/0.30)]"
+              >
+                Start a conversation
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+            </Magnetic>
 
             <div className="relative" ref={resumeRef}>
               <button
@@ -89,14 +98,14 @@ export function FinalCTA() {
             </div>
           </div>
 
-          <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-3 w-full max-w-lg">
+          <div className="mt-14 flex flex-wrap justify-center gap-x-6 gap-y-3 w-full max-w-2xl">
             {SOCIALS.map(({ label, value, href }) => (
               <a
                 key={href}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 font-mono text-xs text-ink-quaternary hover:text-accent transition-colors"
+                className="group flex items-center gap-2 font-mono text-xs text-ink-quaternary hover:text-accent transition-colors whitespace-nowrap"
               >
                 <span className="text-ink-quaternary/60 group-hover:text-accent/50 transition-colors">{label}</span>
                 <span className="text-ink-quaternary/40">/</span>
