@@ -9,7 +9,7 @@ const SOCIALS = [
   { label: 'GitHub', value: 'KunjShah95', href: 'https://github.com/KunjShah95' },
   { label: 'LinkedIn', value: 'kunjshah05', href: 'https://linkedin.com/in/kunjshah05' },
   { label: 'Twitter', value: '@kunjshah_dev', href: 'https://twitter.com/kunjshah_dev' },
-  { label: 'Email', value: 'kkshah2005@gmail.com', href: 'mailto:kkshah2005@gmail.com' },
+  { label: 'Email', value: 'kunjkshah05@gmail.com', href: 'mailto:kunjkshah05@gmail.com' },
   { label: 'Medium', value: '@kkshah2005', href: 'https://medium.com/@kkshah2005' },
   { label: 'Peerlist', value: 'kunjshah', href: 'https://peerlist.io/kunjshah' },
 ]

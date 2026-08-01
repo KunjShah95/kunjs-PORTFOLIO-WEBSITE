@@ -4,7 +4,7 @@ const LINKS = [
   { href: 'https://github.com/KunjShah95',       label: 'GitHub',    value: 'KunjShah95' },
   { href: 'https://linkedin.com/in/kunjshah05',  label: 'LinkedIn',  value: 'in/kunjshah05' },
   { href: 'https://twitter.com/kunjshah_dev',    label: 'Twitter',   value: '@kunjshah_dev' },
-  { href: 'mailto:kkshah2005@gmail.com',          label: 'Email',    value: 'kkshah2005@gmail.com' },
+  { href: 'mailto:kunjkshah05@gmail.com',         label: 'Email',    value: 'kunjkshah05@gmail.com' },
   { href: 'https://medium.com/@kkshah2005',       label: 'Medium',   value: '@kkshah2005' },
   { href: 'https://peerlist.io/kunjshah',        label: 'Peerlist',  value: '@kunjshah' },
 ];

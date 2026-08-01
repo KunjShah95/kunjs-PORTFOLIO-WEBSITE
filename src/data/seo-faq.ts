@@ -28,7 +28,7 @@ export const PORTFOLIO_FAQ = [
   {
     question: 'Is Kunj Shah available for freelance or contract AI work?',
     answer:
-      'Yes, Kunj Shah is available for freelancing and open to AI engineer, data engineer, ML engineer, and agent builder roles. He works fast and direct — brief to production in weeks, not quarters. Use the contact page or email kkshah2005@gmail.com to discuss scope, stack, and timeline.',
+      'Yes, Kunj Shah is available for freelancing and open to AI engineer, data engineer, ML engineer, and agent builder roles. He works fast and direct — brief to production in weeks, not quarters. Use the contact page or email kunjkshah05@gmail.com to discuss scope, stack, and timeline.',
   },
   {
     question: 'Where can I see Kunj Shah\'s projects and code?',

@@ -33,6 +33,16 @@ export function BentoHero() {
       <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center">
         {/* Left: main statement */}
         <div className="flex flex-col gap-5">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-[11px] font-mono text-accent"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot" />
+            I ship production AI for startups — brief to deployed in weeks
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}

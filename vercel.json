@@ -56,6 +56,32 @@
       ]
     },
     {
+      "source": "/pricing.md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
+        }
+      ]
+    },
+    {
+      "source": "/services.md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
+        }
+      ]
+    },
+    {
       "source": "/.well-known/openid-configuration",
       "headers": [
         {
@@ -96,7 +122,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\", <https://kunjshah.vercel.app/api/llms>; rel=\"llms-full-text\", <https://kunjshah.vercel.app/llms.txt>; rel=\"alternate\", <https://kunjshah.vercel.app/sitemap.xml>; rel=\"sitemap\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\", <https://kunjshah.vercel.app/api/llms>; rel=\"llms-full-text\", <https://kunjshah.vercel.app/llms.txt>; rel=\"alternate\", <https://kunjshah.vercel.app/pricing.md>; rel=\"pricing\", <https://kunjshah.vercel.app/services.md>; rel=\"service\", <https://kunjshah.vercel.app/sitemap.xml>; rel=\"sitemap\""
         }
       ]
     }

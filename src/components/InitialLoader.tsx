@@ -14,7 +14,7 @@ export function InitialLoader() {
     const t = setTimeout(() => {
       setVisible(false);
       sessionStorage.setItem(SESSION_KEY, '1');
-    }, 800);
+    }, 500);
     return () => clearTimeout(t);
   }, [visible]);
 

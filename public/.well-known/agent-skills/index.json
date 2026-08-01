@@ -1,0 +1,37 @@
+{
+  "name": "Kunj Shah — Portfolio",
+  "url": "https://kunjshah.vercel.app",
+  "description": "Index of skills and guidance available to AI agents interacting with the Kunj Shah portfolio.",
+  "skills": [
+    {
+      "id": "portfolio-overview",
+      "name": "Portfolio Overview",
+      "url": "https://kunjshah.vercel.app/about",
+      "description": "Bio, focus areas, and engineering philosophy."
+    },
+    {
+      "id": "projects",
+      "name": "Projects",
+      "url": "https://kunjshah.vercel.app/projects",
+      "description": "Case studies and metrics across shipped AI systems."
+    },
+    {
+      "id": "open-source",
+      "name": "Open Source",
+      "url": "https://github.com/KunjShah95",
+      "description": "Merged contributions across OWASP, Microsoft, and Ollama."
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "url": "https://kunjshah.vercel.app/blogs",
+      "description": "Long-form essays on AI engineering and production systems."
+    },
+    {
+      "id": "contact",
+      "name": "Contact",
+      "url": "https://kunjshah.vercel.app/contact",
+      "description": "How to reach Kunj Shah for roles, freelance, and collaboration."
+    }
+  ]
+}

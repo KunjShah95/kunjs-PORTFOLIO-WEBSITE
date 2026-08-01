@@ -8,7 +8,24 @@ import { PageHeader } from '../components/ui/PageHeader'
 import { SpotlightCard } from '../components/effects/SpotlightCard'
 import { useReveal } from '../hooks/useReveal'
 
-const FILTERS = ['All', 'AI Agents', 'RAG', 'Voice', 'Infra', 'Open Source']
+const CATEGORY_ORDER = [
+  'AI Career Platform',
+  'Agentic AI',
+  'AI Ethics',
+  'Computer Vision',
+  'Core AI',
+  'Machine Learning',
+  'AI Research',
+  'EdTech AI',
+  'Smart Infrastructure',
+  'Cybersecurity',
+  'Architecture Intelligence',
+]
+
+const FILTERS = [
+  'All',
+  ...CATEGORY_ORDER.filter((c) => PROJECTS.some((p) => p.category === c)),
+]
 
 function getRolesForProject(slug: string): string[] {
   switch (slug) {
@@ -76,6 +93,7 @@ export function ProjectsPage() {
         </div>
 
         {inView && (
+          filtered.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {filtered.map((p) => (
               <SpotlightCard
@@ -131,6 +149,17 @@ export function ProjectsPage() {
               </SpotlightCard>
             ))}
           </div>
+          ) : (
+            <div className="rounded-xl border border-rule/10 bg-paper p-12 text-center">
+              <p className="font-mono text-sm text-ink-tertiary">No projects in this category yet.</p>
+              <button
+                onClick={() => setActive('All')}
+                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-accent-hover transition-colors"
+              >
+                View all projects
+              </button>
+            </div>
+          )
         )}
       </section>
     </>

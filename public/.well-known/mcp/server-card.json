@@ -1,0 +1,16 @@
+{
+  "name": "Kunj Shah — Portfolio",
+  "url": "https://kunjshah.vercel.app",
+  "description": "MCP server card for the Kunj Shah portfolio. This server is a read-only resource exposing portfolio content, projects, and writing.",
+  "capabilities": {
+    "resources": {
+      "listChanged": false
+    },
+    "tools": {
+      "enabled": false
+    }
+  },
+  "endpoints": {
+    "resourceBase": "https://kunjshah.vercel.app/.well-known/mcp/resources/"
+  }
+}

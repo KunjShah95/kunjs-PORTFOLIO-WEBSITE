@@ -45,6 +45,8 @@ Kunj Shah builds end-to-end AI systems: generative AI applications, autonomous a
 - Writing / blog index: https://kunjshah.vercel.app/blogs
 - Hackathons: https://kunjshah.vercel.app/hackathons
 - Contact: https://kunjshah.vercel.app/contact
+- Pricing (for AI agents): https://kunjshah.vercel.app/pricing.md
+- Services (for AI agents): https://kunjshah.vercel.app/services.md
 - AI video work: https://kunjshah.vercel.app/ai-videos
 
 ## Profiles (same person)

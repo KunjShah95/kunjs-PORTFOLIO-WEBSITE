@@ -101,9 +101,9 @@ export function AIAssistant() {
     // 5. Skills / Tech Stack
     else if (query.includes('skill') || query.includes('tech') || query.includes('code') || query.includes('stack')) {
       response = `Kunj has a strong technical toolkit:\n\n` +
-        `🧠 **AI & GenAI:** He builds with LangChain, Python, and Large Language Models (LLMs).\n` +
-        `💻 **Web Dev:** He builds fast sites using React and TypeScript.\n` +
-        `🛠️ **Systems:** He knows his way around Linux, Docker, and Cloud deployment.\n\nBasically, if it involves AI or code, he's on it!`;
+        `**AI & GenAI:** He builds with LangChain, Python, and Large Language Models (LLMs).\n` +
+        `**Web Dev:** He builds fast sites using React and TypeScript.\n` +
+        `**Systems:** He knows his way around Linux, Docker, and Cloud deployment.\n\nBasically, if it involves AI or code, he's on it!`;
     }
     // 6. Education
     else if (query.includes('study') || query.includes('college') || query.includes('education') || query.includes('degree')) {
@@ -139,7 +139,7 @@ export function AIAssistant() {
   return (
     <>
       <button
-        onClick={openAssistant}              className="fixed bottom-4 right-4 md:bottom-24 md:right-6 z-[110] w-11 h-11 bg-ink-primary text-paper hover:bg-accent transition-all duration-300 flex items-center justify-center group rounded-full border border-accent/20 shadow-lg"
+        onClick={openAssistant}              className="fixed bottom-4 right-4 md:bottom-6 md:left-6 md:right-auto z-[110] w-11 h-11 bg-ink-primary text-paper hover:bg-accent transition-all duration-300 flex items-center justify-center group rounded-full border border-accent/20 shadow-lg"
       >
         <Sparkles className="w-4 h-4 group-hover:scale-110 transition-transform text-accent" />
         <span className="sr-only">AI Assistant</span>
@@ -160,7 +160,7 @@ onClick={closeAssistant}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="fixed bottom-4 right-4 md:bottom-24 md:right-6 z-[110] w-[calc(100vw-32px)] sm:w-[400px] h-[500px] sm:h-[600px] max-h-[80vh] bg-paper border border-rule/10 flex flex-col overflow-hidden rounded-xl shadow-2xl"
+              className="fixed bottom-4 right-4 md:bottom-6 md:left-6 md:right-auto z-[110] w-[calc(100vw-32px)] sm:w-[400px] h-[500px] sm:h-[600px] max-h-[80vh] bg-paper border border-rule/10 flex flex-col overflow-hidden rounded-xl shadow-2xl"
             >
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-rule/12 bg-elevated/50">

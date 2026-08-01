@@ -36,22 +36,21 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
   }, [setOpen, open])
 
   const commands = [
-    { icon: User, label: 'Home', description: 'Back to main page', shortcut: 'H', path: '/' },
-    { icon: User, label: 'About', description: 'About profile and background', shortcut: 'A', path: '/about' },
-    { icon: Briefcase, label: 'Projects', description: 'View all projects', shortcut: 'P', path: '/projects' },
-    { icon: Trophy, label: 'Hackathons', description: 'Competition highlights', shortcut: 'K', path: '/hackathons' },
-    { icon: Cpu, label: 'Skills', description: 'Technical capabilities', shortcut: 'S', path: '/skills' },
-    { icon: Hash, label: 'Writing', description: 'Articles and blog posts', shortcut: 'W', path: '/blogs' },
-    { icon: Activity, label: 'Labs', description: 'Research and experiments', shortcut: 'L', path: '/labs' },
-    { icon: GraduationCap, label: 'Education', description: 'Academic background', shortcut: 'E', path: '/education' },
-    { icon: Mail, label: 'Contact', description: 'Get in touch', shortcut: 'C', path: '/contact' },
+    { icon: User, label: 'Home', description: 'Back to main page', path: '/' },
+    { icon: User, label: 'About', description: 'About profile and background', path: '/about' },
+    { icon: Briefcase, label: 'Projects', description: 'View all projects', path: '/projects' },
+    { icon: Trophy, label: 'Hackathons', description: 'Competition highlights', path: '/hackathons' },
+    { icon: Cpu, label: 'Skills', description: 'Technical capabilities', path: '/skills' },
+    { icon: Hash, label: 'Writing', description: 'Articles and blog posts', path: '/blogs' },
+    { icon: Activity, label: 'Labs', description: 'Research and experiments', path: '/labs' },
+    { icon: GraduationCap, label: 'Education', description: 'Academic background', path: '/education' },
+    { icon: Mail, label: 'Contact', description: 'Get in touch', path: '/contact' },
   ]
 
   const q = search.toLowerCase()
   const filteredCommands = commands.filter(cmd =>
     cmd.label.toLowerCase().includes(q) ||
-    cmd.description.toLowerCase().includes(q) ||
-    cmd.shortcut.toLowerCase() === q
+    cmd.description.toLowerCase().includes(q)
   )
 
   const handleAction = (path: string) => {
@@ -111,7 +110,6 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
                         <div className="font-medium text-ink-primary text-sm">{cmd.label}</div>
                         <div className="text-[11px] text-ink-tertiary">{cmd.description}</div>
                       </div>
-                      <span className="text-[10px] text-ink-tertiary/60 font-mono">{cmd.shortcut}</span>
                     </button>
                   ))
                 ) : (
@@ -125,7 +123,7 @@ export function CommandMenu({ open, setOpen }: CommandMenuProps) {
             {/* Footer */}
             <div className="px-4 py-2.5 border-t border-rule/10 bg-sunken/50 flex items-center gap-3 text-[10px] text-ink-tertiary">
               <Command className="w-3 h-3" />
-              <span>to open</span>
+              <span>&#8984;K / Ctrl-K to open</span>
               <span className="mx-1">/</span>
               <span>Esc to close</span>
             </div>

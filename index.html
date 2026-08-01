@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" class="dark" style="color-scheme: dark;">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/profile.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -67,7 +67,7 @@
           "jobTitle": "AI Engineer & Agent Builder",
           "url": "https://kunjshah.vercel.app",
           "image": "https://kunjshah.vercel.app/profile.png",
-          "email": "mailto:kkshah2005@gmail.com",
+          "email": "mailto:kunjkshah05@gmail.com",
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Ahmedabad",
@@ -114,6 +114,19 @@
         }
     </style>
     <script>
+        // Apply theme before paint to avoid a flash of the wrong theme.
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var dark = stored
+                    ? stored === 'dark'
+                    : window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.classList.toggle('dark', dark);
+                document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+            } catch (e) {}
+        })();
+    </script>
+    <script>
         document.documentElement.classList.add('js-enabled');
     </script>
 </head>
@@ -151,7 +164,7 @@
                 <li>See the complete list of shipped products on the <a href="/projects">Projects</a> page.</li>
                 <li>Learn more about my technical background, principles, and philosophy on the <a href="/about">About</a> page.</li>
                 <li>Check my professional history on the <a href="/experience">Experience</a> page.</li>
-                <li>Get in touch with me to build your next project via the <a href="/contact">Contact</a> page or email me directly at <a href="mailto:kkshah2005@gmail.com">kkshah2005@gmail.com</a>.</li>
+                <li>Get in touch with me to build your next project via the <a href="/contact">Contact</a> page or email me directly at <a href="mailto:kunjkshah05@gmail.com">kunjkshah05@gmail.com</a>.</li>
             </ul>
         </main>
     </div>

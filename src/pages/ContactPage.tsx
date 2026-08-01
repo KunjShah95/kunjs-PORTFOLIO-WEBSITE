@@ -6,7 +6,7 @@ import { Magnetic } from '../components/effects';
 import { ShaderBackground } from '../components/effects/ShaderBackground';
 
 const METHODS = [
-  { label: 'Email', value: 'kkshah2005@gmail.com', href: 'mailto:kkshah2005@gmail.com', primary: true },
+  { label: 'Email', value: 'kunjkshah05@gmail.com', href: 'mailto:kunjkshah05@gmail.com', primary: true },
   { label: 'YouTube', value: '@kunjshah4158', href: 'https://www.youtube.com/@kunjshah4158' },
   { label: 'GitHub', value: '@KunjShah95', href: 'https://github.com/KunjShah95' },
   { label: 'LinkedIn', value: 'in/kunjshah05', href: 'https://linkedin.com/in/kunjshah05' },
@@ -48,7 +48,7 @@ export function ContactPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Magnetic>
               <a
-                href="mailto:kkshah2005@gmail.com"
+                href="mailto:kunjkshah05@gmail.com"
                 className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-accent text-accent-ink font-semibold text-base hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 transition-all shadow-[0_10px_28px_rgb(var(--accent)/0.34)]"
               >
                 Email me
