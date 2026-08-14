@@ -15,6 +15,24 @@ export const IDENTITY: UserIdentity = {
 
 export const PROJECTS: Project[] = [
     {
+        id: '13',
+        title: 'EngineerOS',
+        category: 'Agentic AI',
+        desc: 'AI-native workspace for notes, tasks, projects, and a knowledge graph in one connected system. Semantic search. AI assistant with citations. Your data, your Supabase.',
+        tech: ['NEXT.JS', 'REACT', 'TYPESCRIPT', 'SUPABASE', 'TAILWIND', 'VERCEL'],
+        github: 'https://github.com/KunjShah95/EngineerOS',
+        demo: 'https://engineeros-delta.vercel.app/',
+        slug: 'engineeros',
+        impact: 'Live',
+        problem: 'Engineers juggle disconnected tools for notes, tasks, docs, and knowledge — context is lost across tabs and teams.',
+        outcome: 'Unified workspace with semantic search, AI assistant with citations, and agent-based task orchestration. All data stored in user-owned Supabase.',
+        metrics: { 'Components': 'Unified notes + tasks + projects + knowledge graph', 'Search': 'Semantic (pgvector)', 'Assistant': 'Multi-agent with citations' },
+        architecture: 'Next.js 14 App Router with React Server Components. Supabase (PostgreSQL + pgvector) for auth, data, and semantic search. LangGraph for multi-agent task orchestration. Tailwind + shadcn/ui. Deployed on Vercel Edge with Supabase Realtime for collaboration.',
+        challenges: ['Balancing local-first feel with server-side semantic search', 'Multi-agent state synchronization across real-time collaboration sessions', 'Keeping LLM costs predictable with multi-step agent workflows'],
+        lessons: ['Local-first UX with server-side intelligence is the right default for developer tools', 'Citations + provenance make AI assistants trustworthy for engineering work', 'Agent state checkpoints are essential for recoverable workflows'],
+        benchmarks: { 'Search latency': '< 200ms p95', 'Agent step latency': '< 3s', 'Vector index': 'HNSW (pgvector)' },
+    },
+    {
         id: '12',
         title: 'OfferGuard AI',
         category: 'AI Career Platform',

@@ -14,6 +14,7 @@ import { BentoHero } from './components/BentoHero'
 import { TechMarquee } from './components/TechMarquee'
 import { ServicesSection } from './components/ServicesSection'
 import { FeaturedProjects } from './components/FeaturedProjects'
+import { LiveProjectShowcase } from './components/LiveProjectShowcase'
 import { FinalCTA } from './components/FinalCTA'
 import { SEO } from './components/SEO'
 import { SITE_URL } from './lib/site'
@@ -51,6 +52,7 @@ function Home() {
       <BentoHero />
       <TechMarquee />
       <FeaturedProjects />
+      <LiveProjectShowcase />
 
       <ServicesSection />
 

@@ -8,6 +8,7 @@ import { useGitHubPRs } from '../hooks/useGitHubPRs'
 import {
   CountUp,
 } from '../components/effects'
+import { PORTFOLIO_FAQ } from '../data/seo-faq'
 
 export function AboutPage() {
   const { contributions, stats: liveStats } = useGitHubPRs()
@@ -17,6 +18,7 @@ export function AboutPage() {
         title="About Kunj Shah | AI Engineer & ML Specialist"
         description="A short biography, background context, and technical toolkit of Kunj Shah, an AI engineer shipping agents and ML pipelines."
         url={`${SITE_URL}/about`}
+        faqItems={PORTFOLIO_FAQ}
       />
       <PageHeader
         kicker="About"

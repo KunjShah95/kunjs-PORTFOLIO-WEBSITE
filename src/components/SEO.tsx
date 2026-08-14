@@ -50,6 +50,7 @@ const defaultMeta = {
   siteUrl: SITE_URL,
   twitterHandle: '@kunjshah_dev',
   siteName: 'Kunj Shah — AI Engineer & Agent Builder',
+  twitterCARD: 'summary_large_image',
 }
 
 const knowsAbout = [
@@ -338,6 +339,8 @@ export function SEO({
 
       <meta name="geo.region" content="IN-GJ" />
       <meta name="geo.placename" content="Ahmedabad" />
+      <meta name="geo.position" content="23.0225;72.5714" />
+      <meta name="icbm" content="23.0225,72.5714" />
 
       <meta property="og:type" content={type === 'article' ? 'article' : type} />
       <meta property="og:url" content={url} />
