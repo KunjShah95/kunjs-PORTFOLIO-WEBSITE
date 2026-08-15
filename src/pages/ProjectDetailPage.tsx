@@ -24,7 +24,7 @@ export function ProjectDetailPage() {
         title={`${project.title} — Kunj Shah`}
         description={`${project.desc} ${project.outcome ? `Outcome: ${project.outcome}` : ''} Stack: ${(project.tech ?? []).join(', ')}. Full case study with architecture, benchmarks, and lessons learned.`}
         url={`${SITE_URL}/projects/${project.slug}`}
-        image={`${SITE_URL}/og-image.png`}
+        image=""
         projectData={{
           name: project.title,
           description: project.desc,

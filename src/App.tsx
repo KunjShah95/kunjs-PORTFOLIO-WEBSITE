@@ -51,11 +51,12 @@ function Home() {
       />
       <BentoHero />
       <TechMarquee />
-      <FeaturedProjects />
+<FeaturedProjects />
+
+      {/* EngineerOS Live Showcase */}
       <LiveProjectShowcase />
 
       <ServicesSection />
-
       {/* How I Build AI Systems */}
       <section className="relative py-24 md:py-32 border-t border-rule/10">
         <div className="relative max-w-5xl mx-auto px-6">

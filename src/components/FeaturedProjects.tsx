@@ -83,8 +83,8 @@ export function FeaturedProjects() {
                   {/* Preview */}
                   <div className="w-full md:w-[280px] shrink-0 rounded-lg overflow-hidden border border-accent/10 aspect-video md:aspect-[4/3] bg-sunken">
                     <img
-                      src="/images/offerguard-preview.png"
-                      alt="OfferGuard AI preview"
+                      src="/images/engineeros-preview.png"
+                      alt="EngineerOS preview"
                       className="w-full h-full object-cover object-top"
                       loading="lazy"
                     />
