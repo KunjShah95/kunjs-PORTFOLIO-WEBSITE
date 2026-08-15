@@ -422,6 +422,7 @@ Those moments make up for all the broken things.
         readTime: 7,
         tags: ['BUILDING', 'LESSONS', 'FAILURE', 'MINDSET'],
         featured: true,
+        coverImage: '/images/blog-breaking-things.png',
     },
     {
         id: 'B010',
@@ -485,6 +486,7 @@ One user at a time.
         readTime: 8,
         tags: ['BUILDING', 'SHIPPING', 'PRODUCT', 'MINDSSET'],
         featured: true,
+        coverImage: '/images/blog-shipping.png',
     },
     {
         id: 'B011',
@@ -549,6 +551,7 @@ Not because it will succeed. Not because anyone will care. But because the act o
         readTime: 7,
         tags: ['BUILDING', 'MOTIVATION', 'PERSONAL', 'CURIOSITY'],
         featured: true,
+        coverImage: '/images/blog-why-i-build.png',
     },
     {
         id: 'B001',
@@ -708,6 +711,7 @@ The best prompting is invisible — the user gets the right answer without knowi
         readTime: 9,
         tags: ['PROMPTS', 'AI', 'REASONING', 'ENGINEERING'],
         featured: false,
+        coverImage: '/images/blog-prompts.png',
     },
     {
         id: 'B007',
@@ -763,6 +767,7 @@ Fairness isn't just a feature—it's a requirement for responsible AI deployment
         readTime: 8,
         tags: ['ETHICS', 'HEALTHCARE', 'COMPLIANCE', 'CASE STUDY'],
         featured: true,
+        coverImage: '/images/blog-equitylens.png',
     },
     {
         id: 'B008',
@@ -803,6 +808,7 @@ Orchestration is what turns a chatbot into a reliable digital employee.
         readTime: 12,
         tags: ['AI SYSTEMS', 'ORCHESTRATION', 'WORKFLOWS'],
         featured: false,
+        coverImage: '/images/blog-workflows.png',
     },
     {
         id: 'B012',
@@ -856,6 +862,7 @@ I still build systems that analyze and flag and recommend. But now I build them 
         readTime: 7,
         tags: ['AI ETHICS', 'TRUST', 'LESSONS', 'HUMAN'],
         featured: true,
+        coverImage: '/images/blog-trust.png',
     },
     {
         id: 'B013',
@@ -909,6 +916,7 @@ The messy middle is not a sign that something is wrong. It is a sign that you ar
         readTime: 6,
         tags: ['BUILDING', 'MOTIVATION', 'MINDSET', 'PROCESS'],
         featured: true,
+        coverImage: '/images/blog-messy-middle.png',
     },
     {
         id: 'B014',
@@ -970,6 +978,7 @@ Writing for humans is not just nice. It is practical.
         readTime: 6,
         tags: ['CODING', 'CRAFT', 'MINDSET', 'BEST PRACTICES'],
         featured: true,
+        coverImage: '/images/blog-coding-humans.png',
     },
     {
         id: 'B015',
@@ -1025,6 +1034,7 @@ That voice never goes away. I have just learned to build things while it is talk
         readTime: 6,
         tags: ['BUILDING', 'MINDSET', 'STARTING', 'FEAR'],
         featured: true,
+        coverImage: '/images/blog-starting.png',
     },
     {
         id: 'B016',
@@ -1083,6 +1093,7 @@ The project is live at [offerchecker-pi.vercel.app](https://offerchecker-pi.verc
         readTime: 8,
         tags: ['CASE STUDY', 'AI', 'PRODUCT', 'BUILDING'],
         featured: true,
+        coverImage: '/images/blog-offerguard.png',
     },
     {
         id: 'B017',
@@ -1138,6 +1149,7 @@ The platform is open source on [GitHub](https://github.com/KunjShah95/fairness-l
         readTime: 8,
         tags: ['CASE STUDY', 'AI ETHICS', 'HEALTHCARE', 'BUILDING'],
         featured: true,
+        coverImage: '/images/blog-equitylens2.png',
     },
     {
         id: 'B018',
@@ -1225,8 +1237,9 @@ The system detected 88% of anomalous transactions with a false positive rate und
         `,
         date: 'DEC 2025',
         readTime: 7,
-        tags: ['CASE STUDY', 'ML', 'FRAUD', 'FINANCE'],
+tags: ['CASE STUDY', 'ML', 'FRAUD', 'FINANCE'],
         featured: true,
+        coverImage: '/images/blog-upi-fraud.png',
     },
     {
         id: 'B020',

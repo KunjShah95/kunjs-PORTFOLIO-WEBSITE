@@ -23,6 +23,7 @@ export function BlogsPage() {
         title="Writing — Kunj Shah"
         description={`${BLOGS.length} essays on AI, agents, and shipping. Long-form notes from building production AI systems by Kunj Shah.`}
         url={`${SITE_URL}/blogs`}
+        isHome={true}
       />
       <PageHeader
         kicker="Writing"

@@ -41,6 +41,7 @@ export interface Blog {
     readTime: number;
     tags: string[];
     featured: boolean;
+    coverImage?: string;
 }
 
 export interface LogEntry {

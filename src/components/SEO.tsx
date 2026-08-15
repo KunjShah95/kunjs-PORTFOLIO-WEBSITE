@@ -31,15 +31,14 @@ interface SEOProps {
   articleTags?: string[]
   breadcrumbs?: readonly BreadcrumbItem[]
   /** When set, emits SoftwareSourceCode / Project schema for project pages. */
-  projectData?: {
-    name: string
-    description: string
-    url: string
-    applicationCategory?: string
-    programmingLanguage?: string
-    operatingSystem?: string
-    offers?: { price: string; priceCurrency: string }
-  }
+  projectData?: SEOProps['projectData']
+  /** When set, renders HomePage schema instead of WebPage. */
+  isHome?: boolean
+  /** When set, overrides the default og:image for article pages. */
+  articleImage?: string
+}
+  /** When set, overrides the default og:image for article pages. */
+  articleImage?: string
 }
 
 const defaultMeta = {
@@ -100,6 +99,7 @@ function buildJsonLd(opts: {
   articleTags?: string[]
   breadcrumbs?: readonly BreadcrumbItem[]
   projectData?: SEOProps['projectData']
+  isHome?: boolean
 }) {
   const {
     pageTitle,
@@ -185,6 +185,20 @@ function buildJsonLd(opts: {
       inLanguage: 'en-US',
       ...(articleSection && { articleSection }),
       ...(articleTags?.length && { keywords: articleTags.join(', ') }),
+    })
+  } else if (isHome) {
+    graph.push({
+      '@type': 'HomePage',
+      '@id': `${url}#homepage`,
+      name: pageTitle,
+      description,
+      url,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      inLanguage: 'en-US',
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: image,
+      },
     })
   } else {
     graph.push({
@@ -320,6 +334,7 @@ export function SEO({
     articleTags,
     breadcrumbs,
     projectData,
+    isHome,
   })
 
   const ogPublished = datePublished ? isoDateToOgDateTime(datePublished) : null
@@ -347,7 +362,7 @@ export function SEO({
       <meta property="og:site_name" content={defaultMeta.siteName} />
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+<meta property="og:image" content={type === 'article' && articleImage ? articleImage : image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={pageTitle} />
@@ -362,17 +377,16 @@ export function SEO({
       {type === 'article' && articleSection && (
         <meta property="article:section" content={articleSection} />
       )}
-      {type === 'article' &&
-        articleTags?.map((tag) => (
-          <meta property="article:tag" content={tag} key={tag} />
-        ))}
+      {type === 'article' && articleTags?.map((tag) => (
+        <meta property="article:tag" content={tag} key={tag} />
+      ))}
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={defaultMeta.twitterHandle} />
       <meta name="twitter:creator" content={defaultMeta.twitterHandle} />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={type === 'article' && articleImage ? articleImage : image} />
       <meta name="twitter:image:alt" content={pageTitle} />
 
       <link rel="canonical" href={url} />

@@ -147,7 +147,7 @@ export function LiveProjectShowcase() {
                       className="absolute inset-0"
                     >
                       <iframe
-                        src="https://www.youtube.com/embed/8zJKkf5gcFw?autoplay=1&rel=0&modestbranding=1"
+                        src="https://www.youtube.com/embed/Yo6sKL8CtAE?autoplay=1&rel=0&modestbranding=1"
                         className="w-full h-full border-0"
                         title="EngineerOS — live demo walkthrough"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

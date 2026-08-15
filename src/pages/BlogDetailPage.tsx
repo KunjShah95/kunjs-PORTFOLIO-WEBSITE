@@ -29,6 +29,7 @@ export function BlogDetailPage() {
         keywords={[...tags, blog.category, 'Kunj Shah', 'AI essay']}
         datePublished={blogDateToIsoDate(blog.date)}
         dateModified={blogDateToIsoDate(blog.date)}
+        articleImage={blog.coverImage}
       />
       <header className="py-16 md:py-24 border-b border-rule/10">
         <div className="max-w-manifest mx-auto px-6">
