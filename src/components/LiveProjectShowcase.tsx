@@ -92,7 +92,6 @@ export function LiveProjectShowcase() {
               </a>
             </div>
 
-            {/* Preview area — poster image until user clicks play */}
             <div className="relative overflow-hidden bg-[#0d0f14]" style={{ height: 440 }}>
               <AnimatePresence mode="wait">
                 {!playing ? (
