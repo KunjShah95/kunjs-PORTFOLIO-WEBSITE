@@ -104,14 +104,6 @@ export function LiveProjectShowcase() {
                     transition={{ duration: 0.25 }}
                     className="absolute inset-0"
                   >
-                    {/* Screenshot */}
-                    <img
-                      src="/images/engineeros-preview.png"
-                      alt="EngineerOS — AI-native workspace screenshot"
-                      className="w-full h-full object-cover object-top"
-                      draggable={false}
-                    />
-
                     {/* Dark scrim + play button */}
                     <button
                       onClick={() => setPlaying(true)}
