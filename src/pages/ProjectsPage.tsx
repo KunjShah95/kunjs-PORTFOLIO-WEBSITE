@@ -116,12 +116,6 @@ export function ProjectsPage() {
                       </div>
                     </div>
 
-                    {p.slug === 'offerguard-ai' && (
-                      <a href={p.demo || 'https://offerchecker-pi.vercel.app/'} target="_blank" rel="noopener noreferrer" className="block mb-4 rounded-lg border border-rule/10 overflow-hidden hover:border-accent/30 transition-colors">
-                        <img src="/download.png" alt={`${p.title} demo`} className="w-full h-auto" />
-                      </a>
-                    )}
-
                     <h3 className="display text-xl font-bold tracking-tight mb-3">
                       <Link to={`/projects/${p.slug}`} className="hover:text-accent transition-colors">
                         {p.title}

@@ -31,6 +31,7 @@ export function ProjectDetailPage() {
           url: `${SITE_URL}/projects/${project.slug}`,
           applicationCategory: project.category,
           programmingLanguage: (project.tech ?? []).slice(0, 3).join(', '),
+          codeRepository: project.github,
         }}
       />
       <PageHeader

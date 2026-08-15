@@ -31,14 +31,21 @@ interface SEOProps {
   articleTags?: string[]
   breadcrumbs?: readonly BreadcrumbItem[]
   /** When set, emits SoftwareSourceCode / Project schema for project pages. */
-  projectData?: SEOProps['projectData']
+  projectData?: ProjectData
   /** When set, renders HomePage schema instead of WebPage. */
   isHome?: boolean
   /** When set, overrides the default og:image for article pages. */
   articleImage?: string
 }
-  /** When set, overrides the default og:image for article pages. */
-  articleImage?: string
+
+interface ProjectData {
+  name: string
+  description: string
+  url: string
+  applicationCategory?: string
+  programmingLanguage?: string
+  operatingSystem?: string
+  codeRepository?: string
 }
 
 const defaultMeta = {
@@ -98,7 +105,7 @@ function buildJsonLd(opts: {
   articleSection?: string
   articleTags?: string[]
   breadcrumbs?: readonly BreadcrumbItem[]
-  projectData?: SEOProps['projectData']
+  projectData?: ProjectData
   isHome?: boolean
 }) {
   const {
@@ -115,6 +122,7 @@ function buildJsonLd(opts: {
     articleTags,
     breadcrumbs,
     projectData,
+    isHome,
   } = opts
 
   const person = {
@@ -255,8 +263,7 @@ function buildJsonLd(opts: {
       programmingLanguage: projectData.programmingLanguage || 'TypeScript, Python',
       operatingSystem: projectData.operatingSystem || 'Web',
       author: { '@id': `${SITE_URL}/#person` },
-      offers: projectData.offers || undefined,
-      codeRepository: projectData.url,
+      codeRepository: projectData.codeRepository || projectData.url,
     })
   }
 
@@ -308,6 +315,8 @@ export function SEO({
   articleTags,
   breadcrumbs,
   projectData,
+  isHome,
+  articleImage,
 }: SEOProps) {
   const pageTitle =
     title == null
