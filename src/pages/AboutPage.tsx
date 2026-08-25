@@ -212,7 +212,7 @@ export function AboutPage() {
                           ? 'bg-accent text-accent-ink shadow-accent/20'
                           : 'bg-elevated border border-rule/10 text-ink-tertiary'
                       }`}>
-                        {exp.company === 'PHAZE_AI' ? 'PA' : exp.company === 'Ideabot' ? 'IB' : 'OS'}
+                        {exp.company === 'PHAZE_AI' ? 'PA' : exp.company === 'Ideaboat' ? 'IB' : 'OS'}
                       </div>
                     </div>
 

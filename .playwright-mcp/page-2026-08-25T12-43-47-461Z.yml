@@ -1,0 +1,493 @@
+- generic [ref=e2]:
+  - generic [ref=e3]: Kunj Shah
+  - generic [ref=e5]:
+    - link "Skip to content" [ref=e6] [cursor=pointer]:
+      - /url: "#main"
+    - banner [ref=e7]:
+      - generic [ref=e9]:
+        - link "Home" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e11]: KS
+          - generic [ref=e12]: Kunj Shah
+        - navigation "Primary" [ref=e13]:
+          - link "Work" [ref=e14] [cursor=pointer]:
+            - /url: /projects
+          - link "About" [ref=e15] [cursor=pointer]:
+            - /url: /about
+          - link "Writing" [ref=e16] [cursor=pointer]:
+            - /url: /blogs
+          - link "Contact" [ref=e17] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e18]:
+          - button "Switch to dark theme" [ref=e19] [cursor=pointer]
+          - button "Open command menu" [ref=e22] [cursor=pointer]:
+            - generic [ref=e26]: Ctrl K
+          - link "GitHub" [ref=e27] [cursor=pointer]:
+            - /url: https://github.com/KunjShah95
+    - main [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - heading "I ship production AI systems from agents to full-stack apps." [level=1] [ref=e35]
+            - paragraph [ref=e36]: AI engineer building autonomous agents, LLM pipelines, RAG systems, and the backend infrastructure that makes them production-ready. Open-source at OWASP, Microsoft, and Ollama.
+            - generic [ref=e37]:
+              - generic [ref=e38]:
+                - generic [ref=e39]: 12+
+                - text: Projects shipped
+              - generic [ref=e40]:
+                - generic [ref=e41]: 44+
+                - text: Open-source PRs merged
+              - generic [ref=e42]:
+                - generic [ref=e43]: 4x
+                - text: Hackathon finalist
+              - generic [ref=e44]: Ahmedabad, IN
+            - generic [ref=e48]:
+              - link "View my work" [ref=e50] [cursor=pointer]:
+                - /url: /projects
+              - link "Get in touch" [ref=e56] [cursor=pointer]:
+                - /url: /contact
+          - generic [ref=e57]:
+            - img "Kunj Shah - AI Engineer" [ref=e62]
+            - generic [ref=e63]:
+              - generic [ref=e64]: Currently
+              - generic [ref=e65]: Building multi-agent research workflows
+        - region "Tools and frameworks I work with" [ref=e68]:
+          - generic [ref=e70]:
+            - button [ref=e71]: PyTorch
+            - button [ref=e72]: LangGraph
+            - button [ref=e73]: CrewAI
+            - button [ref=e74]: OpenAI
+            - button [ref=e75]: LLaMA-3
+            - button [ref=e76]: Hugging Face
+            - button [ref=e77]: ChromaDB
+            - button [ref=e78]: Pinecone
+            - button [ref=e79]: FastAPI
+            - button [ref=e80]: Python
+            - button [ref=e81]: PostgreSQL
+            - button [ref=e82]: Redis
+            - button [ref=e83]: React
+            - button [ref=e84]: Next.js
+            - button [ref=e85]: TypeScript
+            - button [ref=e86]: Tailwind
+            - button [ref=e87]: Docker
+            - button [ref=e88]: Vercel
+            - button [ref=e89]: AWS
+            - button [ref=e90]: Supabase
+            - button [ref=e91]: PyTorch
+            - button [ref=e92]: LangGraph
+            - button [ref=e93]: CrewAI
+            - button [ref=e94]: OpenAI
+            - button [ref=e95]: LLaMA-3
+            - button [ref=e96]: Hugging Face
+            - button [ref=e97]: ChromaDB
+            - button [ref=e98]: Pinecone
+            - button [ref=e99]: FastAPI
+            - button [ref=e100]: Python
+            - button [ref=e101]: PostgreSQL
+            - button [ref=e102]: Redis
+            - button [ref=e103]: React
+            - button [ref=e104]: Next.js
+            - button [ref=e105]: TypeScript
+            - button [ref=e106]: Tailwind
+            - button [ref=e107]: Docker
+            - button [ref=e108]: Vercel
+            - button [ref=e109]: AWS
+            - button [ref=e110]: Supabase
+        - generic [ref=e112]:
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - heading "Shipped work." [level=2] [ref=e115]
+              - paragraph [ref=e116]:
+                - text: Production AI systems with real metrics. Open source on
+                - link "GitHub" [ref=e117] [cursor=pointer]:
+                  - /url: https://github.com/KunjShah95
+                - text: .
+            - link "All projects" [ref=e118] [cursor=pointer]:
+              - /url: /projects
+          - generic [ref=e122]:
+            - generic [ref=e126]:
+              - img "EngineerOS preview" [ref=e128]
+              - generic [ref=e129]:
+                - generic [ref=e130]:
+                  - generic [ref=e131]:
+                    - text: Agentic AI
+                    - generic [ref=e132]:
+                      - generic [ref=e133]: /AI Engineer
+                      - generic [ref=e134]: /Software Developer
+                  - generic [ref=e135]: Live
+                - heading [level=3] [ref=e136]:
+                  - link "EngineerOS" [ref=e137] [cursor=pointer]:
+                    - /url: /projects/engineeros
+                - paragraph [ref=e138]: Engineers juggle disconnected tools for notes, tasks, docs, and knowledge — context is lost across tabs and teams.
+                - paragraph [ref=e139]: Unified workspace with semantic search, AI assistant with citations, and agent-based task orchestration. All data stored in user-owned Supabase. Live with 10+ people using it daily.
+                - generic [ref=e140]:
+                  - generic [ref=e141]:
+                    - generic [ref=e142]: 10+
+                    - generic [ref=e143]: Daily active users
+                  - generic [ref=e144]:
+                    - generic [ref=e145]: < 200ms p95
+                    - generic [ref=e146]: Search latency
+                  - generic [ref=e147]:
+                    - generic [ref=e148]: Semantic (pgvector)
+                    - generic [ref=e149]: Search
+                - generic [ref=e150]:
+                  - generic [ref=e151]:
+                    - generic [ref=e152]: NEXT.JS
+                    - generic [ref=e153]: REACT
+                    - generic [ref=e154]: TYPESCRIPT
+                    - generic [ref=e155]: SUPABASE
+                  - generic [ref=e156]:
+                    - link "Live demo" [ref=e157] [cursor=pointer]:
+                      - /url: https://engineeros-delta.vercel.app/
+                    - link "Case study" [ref=e162] [cursor=pointer]:
+                      - /url: /projects/engineeros
+            - generic [ref=e167]:
+              - generic [ref=e171]:
+                - generic [ref=e172]:
+                  - generic [ref=e173]:
+                    - generic [ref=e174]: AI Career Platform
+                    - generic [ref=e175]: Live
+                  - heading [level=3] [ref=e176]:
+                    - link "OfferGuard AI" [ref=e177] [cursor=pointer]:
+                      - /url: /projects/offerguard-ai
+                  - paragraph [ref=e178]: Job seekers receive opaque offer letters and recruiter messages that hide red flags around pay, culture, and ghost hiring risks.
+                  - paragraph [ref=e179]: Reduced offer evaluation time from hours to seconds with multi-provider AI analysis and automated negotiation strategy generation.
+                - generic [ref=e180]:
+                  - generic [ref=e181]:
+                    - generic [ref=e182]: TANSTACK START
+                    - generic [ref=e183]: REACT 19
+                    - generic [ref=e184]: TAILWIND
+                  - link "Details" [ref=e185] [cursor=pointer]:
+                    - /url: /projects/offerguard-ai
+              - generic [ref=e193]:
+                - generic [ref=e194]:
+                  - generic [ref=e195]:
+                    - generic [ref=e196]: AI Ethics
+                    - generic [ref=e197]: Production
+                  - heading [level=3] [ref=e198]:
+                    - link "EquityLens" [ref=e199] [cursor=pointer]:
+                      - /url: /projects/equitylens
+                  - paragraph [ref=e200]: Healthcare AI models often contain hidden biases that lead to unequal patient treatment recommendations.
+                  - paragraph [ref=e201]: Detected a 23% performance gap in commercial triage models and reduced audit overhead significantly.
+                - generic [ref=e202]:
+                  - generic [ref=e203]:
+                    - generic [ref=e204]: REACT
+                    - generic [ref=e205]: FASTAPI
+                    - generic [ref=e206]: POSTGRESQL
+                  - link "Details" [ref=e207] [cursor=pointer]:
+                    - /url: /projects/equitylens
+          - generic [ref=e215]:
+            - generic [ref=e216]: "Hackathon highlights: Autonomous Hacks / Odoo Adani / Odoo Gandhinagar / SIH"
+            - link "View all" [ref=e217] [cursor=pointer]:
+              - /url: /hackathons
+        - generic [ref=e223]:
+          - generic [ref=e224]:
+            - generic [ref=e225]:
+              - text: Live Project
+              - 'heading "EngineerOS: shipped live." [level=2] [ref=e226]'
+              - paragraph [ref=e227]: AI-native workspace for notes, tasks, projects, and a knowledge graph in one connected system. Semantic search. AI assistant with citations. Your data, your Supabase.
+            - link "Open live site" [ref=e228] [cursor=pointer]:
+              - /url: https://engineeros-delta.vercel.app/
+          - generic [ref=e233]:
+            - generic [ref=e234]:
+              - generic [ref=e239]: engineeros-delta.vercel.app
+              - link [ref=e245] [cursor=pointer]:
+                - /url: https://engineeros-delta.vercel.app/
+            - generic [ref=e251]:
+              - button "Interact with EngineerOS live" [ref=e252] [cursor=pointer]:
+                - generic [ref=e256]: CLICK TO INTERACT
+              - generic [ref=e257]: Live on Vercel Edge
+          - generic [ref=e260]:
+            - generic [ref=e261]:
+              - generic [ref=e262]: NEXT.JS
+              - generic [ref=e263]: REACT
+              - generic [ref=e264]: TYPESCRIPT
+              - generic [ref=e265]: SUPABASE
+              - generic [ref=e266]: TAILWIND
+              - generic [ref=e267]: VERCEL
+            - generic [ref=e268]:
+              - link "GitHub →" [ref=e269] [cursor=pointer]:
+                - /url: https://github.com/KunjShah95/EngineerOS
+              - link "Visit EngineerOS" [ref=e270] [cursor=pointer]:
+                - /url: https://engineeros-delta.vercel.app/
+        - generic [ref=e275]:
+          - generic [ref=e277]:
+            - heading "Open source contributions." [level=2] [ref=e278]
+            - paragraph [ref=e279]: Real work in OWASP, Microsoft, Ollama and 13+ more verified on GitHub.
+          - generic [ref=e280]:
+            - generic [ref=e281]:
+              - generic [ref=e282]: "44"
+              - generic [ref=e283]: merged PRs
+            - generic [ref=e284]:
+              - generic [ref=e285]: "45"
+              - generic [ref=e286]: issues opened
+            - generic [ref=e287]:
+              - generic [ref=e288]: "72"
+              - generic [ref=e289]: total PRs
+            - generic [ref=e290]:
+              - generic [ref=e291]: 13+
+              - generic [ref=e292]: external projects
+          - generic [ref=e293]:
+            - generic [ref=e294]:
+              - generic [ref=e295]: Recent contributions
+              - generic [ref=e296]: 7 total
+            - generic [ref=e297]:
+              - link "OWASP Security regression workflow + goal-hijack API-key-extraction scenario for agent testing. merged AI security" [ref=e299] [cursor=pointer]:
+                - /url: https://github.com/OWASP/Agent-Security-Regression-Harness/pull/109
+                - generic [ref=e301]: OWASP
+                - paragraph [ref=e304]: Security regression workflow + goal-hijack API-key-extraction scenario for agent testing.
+                - generic [ref=e305]:
+                  - generic [ref=e306]: merged
+                  - generic [ref=e307]: AI security
+              - link "Microsoft AGENTS.md worker + trust-flow documentation for the AI engineering coach. merged docs" [ref=e309] [cursor=pointer]:
+                - /url: https://github.com/microsoft/AI-Engineering-Coach/pull/50
+                - generic [ref=e311]: Microsoft
+                - paragraph [ref=e314]: AGENTS.md worker + trust-flow documentation for the AI engineering coach.
+                - generic [ref=e315]:
+                  - generic [ref=e316]: merged
+                  - generic [ref=e317]: docs
+              - link "Ollama Proposed token-calculation support with UI display to cut wasted inference. proposed inference" [ref=e319] [cursor=pointer]:
+                - /url: https://github.com/ollama/ollama/issues/15639
+                - generic [ref=e321]: Ollama
+                - paragraph [ref=e324]: Proposed token-calculation support with UI display to cut wasted inference.
+                - generic [ref=e325]:
+                  - generic [ref=e326]: proposed
+                  - generic [ref=e327]: inference
+              - link "Find PR issue-ownership triage gate (CI) + user-feedback loops for person grouping. merged infra" [ref=e329] [cursor=pointer]:
+                - /url: https://github.com/Abhash-Chakraborty/Find/pull/225
+                - generic [ref=e331]: Find
+                - paragraph [ref=e333]: PR issue-ownership triage gate (CI) + user-feedback loops for person grouping.
+                - generic [ref=e334]:
+                  - generic [ref=e335]: merged
+                  - generic [ref=e336]: infra
+              - link "Veridion Auth enhancements, PWA support, and testing infrastructure. merged feature" [ref=e338] [cursor=pointer]:
+                - /url: https://github.com/Adoflabs/Veridion/pull/19
+                - generic [ref=e340]: Veridion
+                - paragraph [ref=e342]: Auth enhancements, PWA support, and testing infrastructure.
+                - generic [ref=e343]:
+                  - generic [ref=e344]: merged
+                  - generic [ref=e345]: feature
+              - link "EduPulse RBAC, real-time messaging, i18n/RTL, global search — 10+ merged PRs. merged feature" [ref=e347] [cursor=pointer]:
+                - /url: https://github.com/Lavina-korani/edupulse-final/pulls?q=author%3AKunjShah95
+                - generic [ref=e349]: EduPulse
+                - paragraph [ref=e351]: RBAC, real-time messaging, i18n/RTL, global search — 10+ merged PRs.
+                - generic [ref=e352]:
+                  - generic [ref=e353]: merged
+                  - generic [ref=e354]: feature
+              - link "VS Code Reported multi-provider model selection gap (OpenAI / Gemini / Ollama). proposed issue" [ref=e356] [cursor=pointer]:
+                - /url: https://github.com/microsoft/vscode/issues?q=author%3AKunjShah95
+                - generic [ref=e358]: VS Code
+                - paragraph [ref=e360]: Reported multi-provider model selection gap (OpenAI / Gemini / Ollama).
+                - generic [ref=e361]:
+                  - generic [ref=e362]: proposed
+                  - generic [ref=e363]: issue
+        - generic [ref=e365]:
+          - generic [ref=e366]:
+            - heading "What I build." [level=2] [ref=e367]
+            - paragraph [ref=e368]: You describe the problem. I ship the system. From autonomous agents to the deployment infrastructure that keeps them alive.
+          - generic [ref=e369]:
+            - generic [ref=e374]:
+              - heading "AI agents & automation" [level=3] [ref=e379]
+              - paragraph [ref=e380]: LLM orchestration, retrieval pipelines, and autonomous multi-agent workflows that run in production, not in a notebook.
+              - generic [ref=e381]:
+                - generic [ref=e382]: LangGraph
+                - generic [ref=e383]: CrewAI
+                - generic [ref=e384]: RAG
+                - generic [ref=e385]: Guardrails
+            - generic [ref=e389]:
+              - heading "Web apps & APIs" [level=3] [ref=e394]
+              - paragraph [ref=e395]: Full-stack products shipped in weeks.
+              - generic [ref=e396]:
+                - generic [ref=e397]: React
+                - generic [ref=e398]: FastAPI
+            - generic [ref=e402]:
+              - heading "Prototypes & MVPs" [level=3] [ref=e406]
+              - paragraph [ref=e407]: Whiteboard to working demo in days.
+              - generic [ref=e408]:
+                - generic [ref=e409]: Next.js
+                - generic [ref=e410]: Supabase
+            - generic [ref=e415]:
+              - heading "Infrastructure & backend" [level=3] [ref=e420]
+              - paragraph [ref=e421]: "The unglamorous systems that keep everything up: databases, containers, queues, CI/CD, and multi-provider LLM fallback."
+              - generic [ref=e422]:
+                - generic [ref=e423]: Postgres
+                - generic [ref=e424]: Docker
+                - generic [ref=e425]: Redis
+                - generic [ref=e426]: CI/CD
+          - link "Have something in mind? Let’s scope it" [ref=e427] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e432]:
+          - generic [ref=e433]:
+            - text: Under the hood
+            - heading "Inside the stack." [level=2] [ref=e434]
+            - paragraph [ref=e435]: How I design the AI systems I ship, from data to deployment.
+          - generic [ref=e436]:
+            - generic [ref=e437]:
+              - generic [ref=e438]: RAG Pipeline
+              - generic [ref=e447]:
+                - generic [ref=e448]:
+                  - generic [ref=e449]:
+                    - generic [ref=e450]: ›
+                    - generic [ref=e451]: Documents / Chunking / Embedding
+                  - generic [ref=e452]:
+                    - generic [ref=e453]: ›
+                    - generic [ref=e454]: Vector store (ChromaDB) / Similarity search
+                  - generic [ref=e455]:
+                    - generic [ref=e456]: ›
+                    - generic [ref=e457]: Retrieved context + Query / LLM generation
+                  - generic [ref=e458]:
+                    - generic [ref=e459]: ›
+                    - generic [ref=e460]: Grounded answer with source citations
+                - generic [ref=e461]: ChromaDB / LangChain / Multi-provider LLM / Hybrid search
+            - generic [ref=e462]:
+              - generic [ref=e463]: Multi-Agent Architecture
+              - generic [ref=e472]:
+                - generic [ref=e473]:
+                  - generic [ref=e474]:
+                    - generic [ref=e475]: ›
+                    - generic [ref=e476]: "Manager agent: decomposes goals into task graph"
+                  - generic [ref=e477]:
+                    - generic [ref=e478]: ›
+                    - generic [ref=e479]: "Worker agents: parallel execution with tool access"
+                  - generic [ref=e480]:
+                    - generic [ref=e481]: ›
+                    - generic [ref=e482]: "Guardrails: eval / HITL gates / fallback"
+                  - generic [ref=e483]:
+                    - generic [ref=e484]: ›
+                    - generic [ref=e485]: Checkpointing + state persistence (Postgres JSONB)
+                - generic [ref=e486]: LangGraph / CrewAI / Supervisor/Worker pattern / Postgres state
+            - generic [ref=e487]:
+              - generic [ref=e488]: Full-Stack AI App
+              - generic [ref=e496]:
+                - generic [ref=e497]:
+                  - generic [ref=e498]:
+                    - generic [ref=e499]: ›
+                    - generic [ref=e500]: React / Next.js frontend / FastAPI / Python backend
+                  - generic [ref=e501]:
+                    - generic [ref=e502]: ›
+                    - generic [ref=e503]: PostgreSQL + Redis for state and caching
+                  - generic [ref=e504]:
+                    - generic [ref=e505]: ›
+                    - generic [ref=e506]: Multi-provider LLM orchestration with fallback chain
+                  - generic [ref=e507]:
+                    - generic [ref=e508]: ›
+                    - generic [ref=e509]: CI/CD deploy on Vercel + Render with Docker
+                - generic [ref=e510]: React / FastAPI / PostgreSQL / Docker / Vercel + Render
+            - generic [ref=e511]:
+              - generic [ref=e512]: "LLM Internals: BPE Tokenizer"
+              - generic [ref=e520]:
+                - generic [ref=e521]:
+                  - generic [ref=e522]:
+                    - generic [ref=e523]: ›
+                    - generic [ref=e524]: "Pre-tokenize: regex split (GPT-2/4 pattern)"
+                  - generic [ref=e525]:
+                    - generic [ref=e526]: ›
+                    - generic [ref=e527]: "BPE merge: learn ~50K merge rules from corpus"
+                  - generic [ref=e528]:
+                    - generic [ref=e529]: ›
+                    - generic [ref=e530]: "Encode: apply merges into token IDs"
+                  - generic [ref=e531]:
+                    - generic [ref=e532]: ›
+                    - generic [ref=e533]: "Decode: token IDs into byte sequences into text"
+                - generic [ref=e534]: Pure Python implementation / 15% token reduction on technical data
+        - generic [ref=e536]:
+          - generic [ref=e537]:
+            - generic [ref=e538]:
+              - heading "Notes from shipping." [level=2] [ref=e539]
+              - paragraph [ref=e540]: Long-form essays on AI engineering, agents, and production systems.
+            - link "All essays →" [ref=e541] [cursor=pointer]:
+              - /url: /blogs
+              - text: All essays
+              - generic [ref=e542]: →
+          - generic [ref=e543]:
+            - generic [ref=e545]:
+              - generic [ref=e546]:
+                - generic [ref=e547]:
+                  - generic [ref=e548]: Building
+                  - generic [ref=e549]: /
+                  - generic [ref=e550]: JUN 2026 · 7 min read
+                - heading [level=3] [ref=e551]:
+                  - link "What Breaking Things Taught Me About Building Them" [ref=e552] [cursor=pointer]:
+                    - /url: /blogs/breaking-things-taught-me
+                - paragraph [ref=e553]: The projects that failed taught me more than the ones that shipped. A honest look at mistakes, recoveries, and what I wish I knew earlier.
+              - link "Read essay →" [ref=e555] [cursor=pointer]:
+                - /url: /blogs/breaking-things-taught-me
+                - text: Read essay
+                - generic [ref=e556]: →
+            - generic [ref=e557]:
+              - generic [ref=e559]:
+                - generic [ref=e560]:
+                  - generic [ref=e561]:
+                    - generic [ref=e562]: Building
+                    - generic [ref=e563]: /
+                    - generic [ref=e564]: MAY 2026
+                  - heading [level=3] [ref=e565]:
+                    - link "Shipping Is Harder Than Building — And That Is Okay" [ref=e566] [cursor=pointer]:
+                      - /url: /blogs/shipping-harder-than-building
+                  - paragraph [ref=e567]: The gap between a working prototype and something real people use is bigger than most people think. Here is what bridging it actually looks like.
+                - link "Read →" [ref=e569] [cursor=pointer]:
+                  - /url: /blogs/shipping-harder-than-building
+                  - text: Read
+                  - generic [ref=e570]: →
+              - generic [ref=e572]:
+                - generic [ref=e573]:
+                  - generic [ref=e574]:
+                    - generic [ref=e575]: Building
+                    - generic [ref=e576]: /
+                    - generic [ref=e577]: APR 2026
+                  - heading [level=3] [ref=e578]:
+                    - link "Why I Build Things That Do Not Exist Yet" [ref=e579] [cursor=pointer]:
+                      - /url: /blogs/why-i-build-things
+                  - paragraph [ref=e580]: A personal reflection on curiosity, frustration, and the quiet joy of making something that only existed in your head a few hours ago.
+                - link "Read →" [ref=e582] [cursor=pointer]:
+                  - /url: /blogs/why-i-build-things
+                  - text: Read
+                  - generic [ref=e583]: →
+        - generic [ref=e586]:
+          - heading "Building something ambitious?" [level=2] [ref=e587]
+          - paragraph [ref=e588]: Available for full-time AI engineering roles, freelance projects, and research collaborations.
+          - generic [ref=e589]:
+            - link "Start a conversation" [ref=e591] [cursor=pointer]:
+              - /url: /contact
+            - button "Resume" [ref=e596] [cursor=pointer]
+          - generic [ref=e601]:
+            - link "GitHub / KunjShah95" [ref=e602] [cursor=pointer]:
+              - /url: https://github.com/KunjShah95
+              - generic [ref=e603]: GitHub
+              - generic [ref=e604]: /
+              - generic [ref=e605]: KunjShah95
+            - link "LinkedIn / kunjshah05" [ref=e606] [cursor=pointer]:
+              - /url: https://linkedin.com/in/kunjshah05
+              - generic [ref=e607]: LinkedIn
+              - generic [ref=e608]: /
+              - generic [ref=e609]: kunjshah05
+            - link "Twitter / @kunjshah_dev" [ref=e610] [cursor=pointer]:
+              - /url: https://twitter.com/kunjshah_dev
+              - generic [ref=e611]: Twitter
+              - generic [ref=e612]: /
+              - generic [ref=e613]: "@kunjshah_dev"
+            - link "Email / kunjkshah05@gmail.com" [ref=e614] [cursor=pointer]:
+              - /url: mailto:kunjkshah05@gmail.com
+              - generic [ref=e615]: Email
+              - generic [ref=e616]: /
+              - generic [ref=e617]: kunjkshah05@gmail.com
+            - link "Medium / @kkshah2005" [ref=e618] [cursor=pointer]:
+              - /url: https://medium.com/@kkshah2005
+              - generic [ref=e619]: Medium
+              - generic [ref=e620]: /
+              - generic [ref=e621]: "@kkshah2005"
+            - link "Peerlist / kunjshah" [ref=e622] [cursor=pointer]:
+              - /url: https://peerlist.io/kunjshah
+              - generic [ref=e623]: Peerlist
+              - generic [ref=e624]: /
+              - generic [ref=e625]: kunjshah
+          - generic [ref=e626]:
+            - generic [ref=e627]: © 2026 Kunj Shah · Ahmedabad, IN
+            - generic [ref=e628]: 12+ projects / 44+ PRs / 4 hackathon finals
+    - button "AI Assistant" [ref=e629] [cursor=pointer]
+    - navigation "Quick navigation" [ref=e633]:
+      - button "Home" [ref=e634] [cursor=pointer]
+      - button "Projects" [ref=e640] [cursor=pointer]
+      - button "About" [ref=e643] [cursor=pointer]
+      - button "Writing" [ref=e647] [cursor=pointer]
+      - button "Labs" [ref=e651] [cursor=pointer]

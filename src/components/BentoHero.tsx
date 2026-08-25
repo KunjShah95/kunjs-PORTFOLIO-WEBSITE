@@ -20,7 +20,7 @@ export function BentoHero() {
         className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 w-screen h-full overflow-hidden pointer-events-none"
         aria-hidden
       >
-        <ShaderBackground className="opacity-[0.55] md:opacity-70" intensity={0.55} />
+        <ShaderBackground className="opacity-70 md:opacity-[0.85]" intensity={0.7} />
         {/* CSS fallback tint (shows if WebGL unavailable) */}
         <div className="absolute top-16 right-[12%] w-72 h-72 rounded-full bg-accent/5 blur-3xl -z-10" />
         {/* Left scrim keeps the headline crisp over the field */}
@@ -33,16 +33,6 @@ export function BentoHero() {
       <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center">
         {/* Left: main statement */}
         <div className="flex flex-col gap-5">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-[11px] font-mono text-accent"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot" />
-            I ship production AI for startups — brief to deployed in weeks
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -142,15 +132,29 @@ export function BentoHero() {
         </motion.div>
       </div>
 
-      {/* Mobile: small accent below */}
+      {/* Mobile: grounding identity row (photo is desktop-only) */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        className="mt-10 flex md:hidden items-center gap-3 text-xs text-ink-tertiary font-mono"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-10 flex md:hidden items-center gap-4 p-4 rounded-xl border border-rule/10 bg-elevated/70"
       >
-        <span className="w-2 h-2 rounded-full bg-accent animate-pulse-dot" />
-        <span>Building multi-agent research workflows</span>
+        <div className="relative shrink-0">
+          <div className="absolute -inset-1 rounded-full bg-accent/20 blur-md" aria-hidden />
+          <img
+            src={IDENTITY.profile_photo}
+            alt={`${IDENTITY.name} - AI Engineer`}
+            className="relative w-14 h-14 rounded-full object-cover object-[center_20%] border border-accent/20"
+            loading="eager"
+          />
+        </div>
+        <div className="min-w-0">
+          <div className="text-sm font-semibold text-ink-primary leading-tight">{IDENTITY.name}</div>
+          <div className="mt-1 flex items-center gap-2 text-xs text-ink-tertiary font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot shrink-0" />
+            <span className="truncate">Building multi-agent research workflows</span>
+          </div>
+        </div>
       </motion.div>
     </section>
   )

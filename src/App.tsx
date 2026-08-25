@@ -56,81 +56,8 @@ function Home() {
       {/* EngineerOS Live Showcase */}
       <LiveProjectShowcase />
 
-      <ServicesSection />
-      {/* How I Build AI Systems */}
-      <section className="relative py-24 md:py-32 border-t border-rule/10">
-        <div className="relative max-w-5xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="mb-12"
-          >
-            <h2 className="display text-4xl md:text-5xl leading-[1.05] max-w-3xl font-semibold">Inside the stack.</h2>
-            <p className="mt-3 text-base text-ink-secondary max-w-2xl leading-relaxed">
-              How I design the AI systems I ship, from data to deployment.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {[
-              {
-                icon: Database,
-                title: 'RAG Pipeline',
-                steps: ['Documents / Chunking / Embedding', 'Vector store (ChromaDB) / Similarity search', 'Retrieved context + Query / LLM generation', 'Grounded answer with source citations'],
-                tags: 'ChromaDB / LangChain / Multi-provider LLM / Hybrid search',
-              },
-              {
-                icon: Workflow,
-                title: 'Multi-Agent Architecture',
-                steps: ['Manager agent: decomposes goals into task graph', 'Worker agents: parallel execution with tool access', 'Guardrails: eval / HITL gates / fallback', 'Checkpointing + state persistence (Postgres JSONB)'],
-                tags: 'LangGraph / CrewAI / Supervisor/Worker pattern / Postgres state',
-              },
-              {
-                icon: Code,
-                title: 'Full-Stack AI App',
-                steps: ['React / Next.js frontend / FastAPI / Python backend', 'PostgreSQL + Redis for state and caching', 'Multi-provider LLM orchestration with fallback chain', 'CI/CD deploy on Vercel + Render with Docker'],
-                tags: 'React / FastAPI / PostgreSQL / Docker / Vercel + Render',
-              },
-              {
-                icon: Code,
-                title: 'LLM Internals: BPE Tokenizer',
-                steps: ['Pre-tokenize: regex split (GPT-2/4 pattern)', 'BPE merge: learn ~50K merge rules from corpus', 'Encode: apply merges into token IDs', 'Decode: token IDs into byte sequences into text'],
-                tags: 'Pure Python implementation / 15% token reduction on technical data',
-              },
-            ].map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.06 }}
-                className="rounded-xl border border-rule/10 bg-elevated p-6 md:p-8 hover:border-accent/25 transition-all group"
-              >
-                <div className="flex items-center gap-2 mb-5">
-                  <item.icon className="w-4 h-4 text-accent" />
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-ink-tertiary">{item.title}</span>
-                </div>
-                <div className="space-y-2.5 font-mono text-[13px] leading-relaxed">
-                  {item.steps.map((step, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <span className="text-accent/40 shrink-0 tabular-nums w-4">{i + 1}.</span>
-                      <span className="text-ink-secondary">{step}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-5 pt-4 border-t border-rule/10">
-                  <span className="font-mono text-[10px] text-ink-tertiary">{item.tags}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Open Source */}
-      <section id="open-source" className="relative py-24 md:py-32 border-t border-rule/10">
+      <section id="open-source" className="relative py-24 md:py-32 border-t border-rule/10 bg-elevated/20">
         <div className="relative max-w-5xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -218,6 +145,89 @@ function Home() {
               ))}
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      <ServicesSection />
+
+      {/* Inside the stack — terminal treatment, distinct from Services cards */}
+      <section className="relative py-24 md:py-32 border-t border-rule/10 bg-sunken/20">
+        <div className="relative max-w-5xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-12"
+          >
+            <span className="kicker text-accent">Under the hood</span>
+            <h2 className="display text-4xl md:text-5xl leading-[1.05] max-w-3xl font-semibold mt-3">Inside the stack.</h2>
+            <p className="mt-3 text-base text-ink-secondary max-w-2xl leading-relaxed">
+              How I design the AI systems I ship, from data to deployment.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {[
+              {
+                icon: Database,
+                title: 'RAG Pipeline',
+                steps: ['Documents / Chunking / Embedding', 'Vector store (ChromaDB) / Similarity search', 'Retrieved context + Query / LLM generation', 'Grounded answer with source citations'],
+                tags: 'ChromaDB / LangChain / Multi-provider LLM / Hybrid search',
+              },
+              {
+                icon: Workflow,
+                title: 'Multi-Agent Architecture',
+                steps: ['Manager agent: decomposes goals into task graph', 'Worker agents: parallel execution with tool access', 'Guardrails: eval / HITL gates / fallback', 'Checkpointing + state persistence (Postgres JSONB)'],
+                tags: 'LangGraph / CrewAI / Supervisor/Worker pattern / Postgres state',
+              },
+              {
+                icon: Code,
+                title: 'Full-Stack AI App',
+                steps: ['React / Next.js frontend / FastAPI / Python backend', 'PostgreSQL + Redis for state and caching', 'Multi-provider LLM orchestration with fallback chain', 'CI/CD deploy on Vercel + Render with Docker'],
+                tags: 'React / FastAPI / PostgreSQL / Docker / Vercel + Render',
+              },
+              {
+                icon: Code,
+                title: 'LLM Internals: BPE Tokenizer',
+                steps: ['Pre-tokenize: regex split (GPT-2/4 pattern)', 'BPE merge: learn ~50K merge rules from corpus', 'Encode: apply merges into token IDs', 'Decode: token IDs into byte sequences into text'],
+                tags: 'Pure Python implementation / 15% token reduction on technical data',
+              },
+            ].map((item, idx) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-xl border border-rule/10 bg-sunken/50 overflow-hidden group hover:border-accent/30 transition-all"
+              >
+                {/* Terminal chrome */}
+                <div className="flex items-center gap-2 px-4 py-2.5 border-b border-rule/10 bg-elevated/60">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rule/25" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-rule/25" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-accent/40" />
+                  <span className="ml-2 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-ink-tertiary">
+                    <item.icon className="w-3 h-3 text-accent" />
+                    {item.title}
+                  </span>
+                </div>
+                <div className="p-5 md:p-6">
+                  <div className="space-y-2.5 font-mono text-[13px] leading-relaxed">
+                    {item.steps.map((step, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <span className="text-accent shrink-0">&rsaquo;</span>
+                        <span className="text-ink-secondary">{step}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-5 pt-4 border-t border-rule/10">
+                    <span className="font-mono text-[10px] text-ink-tertiary">{item.tags}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

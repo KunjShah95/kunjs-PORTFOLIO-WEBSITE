@@ -266,7 +266,7 @@ export const EXPERIENCE: Experience[] = [
     },
     {
         id: 'XP1',
-        company: 'Ideabot',
+        company: 'Ideaboat',
         role: 'PYTHON DEVELOPER & FULL STACK AI/ML INTERN',
         period: 'JUL 2026 — PRESENT',
         description: 'Building backend services and APIs with Python and FastAPI while developing full-stack features across React frontends and Node.js backends. Integrating AI/ML capabilities into production systems, contributing to database design, deployment pipelines, and third-party integrations.',
