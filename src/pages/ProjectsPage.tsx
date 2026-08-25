@@ -32,6 +32,12 @@ const FILTERS = [
 // Pick the single strongest number to surface on the card so substance is
 // visible before a click. Prefer a benchmark, then a metric.
 function getHeadlineStat(p: Project): { value: string; label: string } | null {
+  // Real usage numbers are the strongest proof — lead with them.
+  if (p.liveUsers) {
+    const m = p.liveUsers.match(/^([\d.,+km]+)\s*(.*)$/i)
+    if (m) return { value: m[1], label: m[2] || 'active users' }
+    return { value: p.liveUsers, label: 'users' }
+  }
   const pools = [p.benchmarks, p.metrics]
   for (const pool of pools) {
     if (!pool) continue
