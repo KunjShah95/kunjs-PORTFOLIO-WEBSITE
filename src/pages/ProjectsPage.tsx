@@ -7,6 +7,8 @@ import { SITE_URL } from '../lib/site'
 import { PageHeader } from '../components/ui/PageHeader'
 import { SpotlightCard } from '../components/effects/SpotlightCard'
 import { useReveal } from '../hooks/useReveal'
+import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics'
+import type { Project } from '../types'
 
 const CATEGORY_ORDER = [
   'AI Career Platform',
@@ -26,6 +28,21 @@ const FILTERS = [
   'All',
   ...CATEGORY_ORDER.filter((c) => PROJECTS.some((p) => p.category === c)),
 ]
+
+// Pick the single strongest number to surface on the card so substance is
+// visible before a click. Prefer a benchmark, then a metric.
+function getHeadlineStat(p: Project): { value: string; label: string } | null {
+  const pools = [p.benchmarks, p.metrics]
+  for (const pool of pools) {
+    if (!pool) continue
+    const entries = Object.entries(pool)
+    // Prefer an entry whose value reads like a hard number/result.
+    const numeric = entries.find(([, v]) => /\d/.test(v) && v.length <= 24)
+    const pick = numeric ?? entries[0]
+    if (pick) return { label: pick[0], value: pick[1] }
+  }
+  return null
+}
 
 function getRolesForProject(slug: string): string[] {
   switch (slug) {
@@ -117,20 +134,40 @@ export function ProjectsPage() {
                     </div>
 
                     <h3 className="display text-xl font-bold tracking-tight mb-3">
-                      <Link to={`/projects/${p.slug}`} className="hover:text-accent transition-colors">
+                      <Link
+                        to={`/projects/${p.slug}`}
+                        onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_CARD, { project: p.slug, source: 'projects_title' })}
+                        className="hover:text-accent transition-colors"
+                      >
                         {p.title}
                       </Link>
                     </h3>
 
-                    <p className="text-sm text-ink-secondary leading-relaxed line-clamp-4">
+                    <p className="text-sm text-ink-secondary leading-relaxed line-clamp-3">
                       {p.desc}
                     </p>
+
+                    {(() => {
+                      const stat = getHeadlineStat(p)
+                      if (!stat) return null
+                      return (
+                        <div className="mt-5 flex items-baseline gap-2.5">
+                          <span className="display text-2xl font-bold text-accent tabular-nums leading-none">
+                            {stat.value}
+                          </span>
+                          <span className="font-mono text-[11px] text-ink-tertiary leading-tight">
+                            {stat.label}
+                          </span>
+                        </div>
+                      )
+                    })()}
                   </div>
 
                   <div className="mt-6 pt-4 border-t border-rule/10 flex items-center justify-between">
                     <span className="font-mono text-xs text-ink-tertiary uppercase font-bold tracking-wider">{p.impact}</span>
                     <Link
                       to={`/projects/${p.slug}`}
+                      onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_CARD, { project: p.slug, source: 'projects_grid' })}
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-accent-hover transition-colors shrink-0 group/link"
                     >
                       Case study

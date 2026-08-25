@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { PROJECTS, IDENTITY } from '../data/portfolio'
 import { SpotlightCard } from './effects/SpotlightCard'
+import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics'
 
 function getRolesForProject(slug: string): string[] {
   switch (slug) {
@@ -156,6 +157,7 @@ export function FeaturedProjects() {
                         )}
                         <Link
                           to={`/projects/${hero.slug}`}
+                          onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_CARD, { project: hero.slug, source: 'home_featured_hero' })}
                           className="group inline-flex items-center gap-1.5 text-xs text-accent hover:text-accent-hover font-medium transition-colors"
                         >
                           <span>Case study</span>
@@ -218,6 +220,7 @@ export function FeaturedProjects() {
                       </div>
                       <Link
                         to={`/projects/${p.slug}`}
+                        onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_CARD, { project: p.slug, source: 'home_featured_supporting' })}
                         className="group inline-flex items-center gap-1 text-xs text-accent hover:text-accent-hover font-medium transition-colors shrink-0"
                       >
                         <span>Details</span>

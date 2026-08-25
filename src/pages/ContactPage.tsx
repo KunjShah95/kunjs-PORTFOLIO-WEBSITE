@@ -4,6 +4,7 @@ import { SEO } from '../components/SEO';
 import { SITE_URL } from '../lib/site';
 import { Magnetic } from '../components/effects';
 import { ShaderBackground } from '../components/effects/ShaderBackground';
+import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics';
 
 const METHODS = [
   { label: 'Email', value: 'kunjkshah05@gmail.com', href: 'mailto:kunjkshah05@gmail.com', primary: true },
@@ -49,6 +50,7 @@ export function ContactPage() {
             <Magnetic>
               <a
                 href="mailto:kunjkshah05@gmail.com"
+                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_CONTACT_EMAIL, { source: 'contact_page' })}
                 className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-accent text-accent-ink font-semibold text-base hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 transition-all shadow-[0_10px_28px_rgb(var(--accent)/0.34)]"
               >
                 Email me
@@ -70,6 +72,7 @@ export function ContactPage() {
                     href="/kunjaiml.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackEvent(ANALYTICS_EVENTS.RESUME_DOWNLOAD, { file: 'kunjaiml.pdf', track: 'ai_ml', source: 'contact_page' })}
                     className="w-full px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
                   >
                     <span>AI / ML Roles <span className="block text-[10px] text-ink-tertiary group-hover:text-accent-ink/70 font-mono">kunjaiml.pdf</span></span>
@@ -79,6 +82,7 @@ export function ContactPage() {
                     href="/kunjshah_cv.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackEvent(ANALYTICS_EVENTS.RESUME_DOWNLOAD, { file: 'kunjshah_cv.pdf', track: 'full_stack', source: 'contact_page' })}
                     className="w-full px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
                   >
                     <span>Full Stack Roles <span className="block text-[10px] text-ink-tertiary group-hover:text-accent-ink/70 font-mono">kunjshah_cv.pdf</span></span>

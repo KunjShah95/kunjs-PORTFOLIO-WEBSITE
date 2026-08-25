@@ -16,6 +16,11 @@ export const ANALYTICS_EVENTS = {
   CLICK_STICKY_CONTACT: 'click_sticky_contact',
   CLICK_STICKY_RESUME: 'click_sticky_resume',
   CLICK_PROJECT_CARD: 'click_project_card',
+  CLICK_PROJECT_DEMO: 'click_project_demo',
+  CLICK_PROJECT_GITHUB: 'click_project_github',
+  CLICK_PROJECT_CASE_STUDY: 'click_project_case_study',
   CLICK_NAV_LINK: 'click_nav_link',
   CONTACT_FORM_SUBMIT: 'contact_form_submit',
+  CLICK_CONTACT_EMAIL: 'click_contact_email',
+  RESUME_DOWNLOAD: 'resume_download',
 }

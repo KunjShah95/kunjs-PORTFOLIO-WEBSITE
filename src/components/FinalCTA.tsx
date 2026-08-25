@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight, FileDown } from 'lucide-react'
 import { ShaderBackground } from './effects/ShaderBackground'
 import { Magnetic } from './effects/Magnetic'
+import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics'
 
 const SOCIALS = [
   { label: 'GitHub', value: 'KunjShah95', href: 'https://github.com/KunjShah95' },
@@ -76,7 +77,7 @@ export function FinalCTA() {
                       href="/kunjaiml.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => setResumeOpen(false)}
+                      onClick={() => { trackEvent(ANALYTICS_EVENTS.RESUME_DOWNLOAD, { file: 'kunjaiml.pdf', track: 'ai_ml', source: 'final_cta' }); setResumeOpen(false); }}
                       className="w-full px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
                     >
                       <span>AI / ML Roles</span>
@@ -86,7 +87,7 @@ export function FinalCTA() {
                       href="/kunjshah_cv.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => setResumeOpen(false)}
+                      onClick={() => { trackEvent(ANALYTICS_EVENTS.RESUME_DOWNLOAD, { file: 'kunjshah_cv.pdf', track: 'full_stack', source: 'final_cta' }); setResumeOpen(false); }}
                       className="w-full px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
                     >
                       <span>Full Stack Roles</span>

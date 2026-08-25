@@ -6,6 +6,7 @@ import { SITE_URL } from '../lib/site';
 import { PageHeader } from '../components/ui/PageHeader';
 import { MetaRow } from '../components/ui/MetaRow';
 import { Rule } from '../components/ui/Rule';
+import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics';
 
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -45,12 +46,12 @@ export function ProjectDetailPage() {
             <ArrowLeft className="w-3.5 h-3.5" /> All projects
           </Link>
           {project.demo && (
-            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-primary underline decoration-ink-primary/30 underline-offset-4 hover:decoration-ink-primary/60">
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_DEMO, { project: project.slug })} className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-primary underline decoration-ink-primary/30 underline-offset-4 hover:decoration-ink-primary/60">
               Live demo <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           )}
           {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-ink-secondary hover:text-ink-primary">
+            <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_GITHUB, { project: project.slug })} className="inline-flex items-center gap-1.5 text-sm text-ink-secondary hover:text-ink-primary">
               Source code <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           )}
@@ -178,6 +179,7 @@ export function ProjectDetailPage() {
               <div className="mt-4 mb-20">
                 <Link
                   to={`/blogs/${caseStudy.slug}`}
+                  onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_CASE_STUDY, { project: project.slug, caseStudy: caseStudy.slug })}
                   className="block group no-underline"
                 >
                   <div className="p-[1px] rounded-xl bg-gradient-to-b from-accent/25 to-transparent group-hover:from-accent/40 transition-all duration-500">
