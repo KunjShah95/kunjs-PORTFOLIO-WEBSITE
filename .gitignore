@@ -145,4 +145,4 @@ docs/
 !.dev.vars.example
 !.env.example
 .vercel
-.superpowers/
+.superpowers/.playwright-mcp/
