@@ -52,7 +52,7 @@ const defaultMeta = {
   title: 'Kunj Shah | AI Engineer & Agent Builder — Autonomous Agents, LLMs & Production AI Systems',
   description:
     'Kunj Shah is an AI engineer in Ahmedabad building production AI systems — autonomous agents, LLM orchestration, RAG pipelines, edge computer vision, and full-stack AI applications. 12+ shipped projects, 44+ open-source PRs (OWASP, Microsoft, Ollama), 4 hackathon finals. Available for AI engineering roles.',
-  image: '',
+  image: `${SITE_URL}/og-image.png`,
   siteUrl: SITE_URL,
   twitterHandle: '@kunjshah_dev',
   siteName: 'Kunj Shah — AI Engineer & Agent Builder',

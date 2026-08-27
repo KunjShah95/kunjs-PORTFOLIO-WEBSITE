@@ -25,7 +25,7 @@ export function ProjectDetailPage() {
         title={`${project.title} — Kunj Shah`}
         description={`${project.desc} ${project.outcome ? `Outcome: ${project.outcome}` : ''} Stack: ${(project.tech ?? []).join(', ')}. Full case study with architecture, benchmarks, and lessons learned.`}
         url={`${SITE_URL}/projects/${project.slug}`}
-        image=""
+        image={`${SITE_URL}/og-image.png`}
         projectData={{
           name: project.title,
           description: project.desc,
@@ -34,6 +34,11 @@ export function ProjectDetailPage() {
           programmingLanguage: (project.tech ?? []).slice(0, 3).join(', '),
           codeRepository: project.github,
         }}
+        breadcrumbs={[
+          { name: 'Home', item: SITE_URL },
+          { name: 'Projects', item: `${SITE_URL}/projects` },
+          { name: project.title, item: `${SITE_URL}/projects/${project.slug}` },
+        ]}
       />
       <PageHeader
         kicker={project.category ?? 'Project'}
@@ -176,7 +181,7 @@ export function ProjectDetailPage() {
           {caseStudy && (
             <>
               <Rule label="The Full Story" />
-              <div className="mt-4 mb-20">
+              <div className="mt-4 mb-12">
                 <Link
                   to={`/blogs/${caseStudy.slug}`}
                   onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_CASE_STUDY, { project: project.slug, caseStudy: caseStudy.slug })}
@@ -209,6 +214,35 @@ export function ProjectDetailPage() {
               </div>
             </>
           )}
+
+          {/* Related projects — keep user in session */}
+          {(() => {
+            const related = PROJECTS.filter((p) => p.slug !== project.slug && p.category === project.category).slice(0, 2);
+            const fallback = PROJECTS.filter((p) => p.slug !== project.slug).slice(0, 2);
+            const items = related.length >= 2 ? related : fallback.slice(0, 2);
+            return (
+              <div className="border-t border-rule/10 pt-10">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ink-tertiary">Related projects</span>
+                  <Link to="/projects" className="text-xs font-medium text-ink-tertiary hover:text-accent">All projects &rarr;</Link>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {items.map((p) => (
+                    <Link key={p.slug} to={`/projects/${p.slug}`} className="group p-4 rounded-xl border border-rule/10 bg-elevated hover:border-accent/20 transition-colors">
+                      <div className="font-mono text-[10px] uppercase tracking-wider text-ink-tertiary">{p.category}</div>
+                      <div className="font-display text-base font-semibold text-ink-primary group-hover:text-accent transition-colors mt-1">{p.title}</div>
+                      <div className="text-sm text-ink-secondary line-clamp-2 mt-1 leading-relaxed">{p.desc}</div>
+                      <div className="mt-3 flex gap-1.5 flex-wrap">
+                        {p.tech.slice(0, 3).map((t) => (
+                          <span key={t} className="font-mono text-[9px] px-1.5 py-0.5 rounded-full bg-sunken border border-rule/10 text-ink-tertiary">{t}</span>
+                        ))}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </article>
     </>

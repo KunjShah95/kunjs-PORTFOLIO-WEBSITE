@@ -9,38 +9,42 @@ import { Magnetic } from './effects/Magnetic'
 const TRUST_SIGNALS = [
   { value: '12+', label: 'Projects shipped' },
   { value: `${OSS_STATS.mergedPRs}+`, label: 'Open-source PRs merged' },
-  { value: '4x', label: 'Hackathon finalist' },
+  { value: '4×', label: 'Hackathon finalist' },
 ]
 
 export function BentoHero() {
   return (
-    <section className="relative w-full max-w-5xl mx-auto px-6 pt-16 pb-24 md:pt-24 md:pb-32">
-      {/* Signature layer — full-bleed WebGL aurora, tuned low for text contrast */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 w-screen h-full overflow-hidden pointer-events-none"
-        aria-hidden
-      >
-        <ShaderBackground className="opacity-70 md:opacity-[0.85]" intensity={0.7} />
-        {/* CSS fallback tint (shows if WebGL unavailable) */}
-        <div className="absolute top-16 right-[12%] w-72 h-72 rounded-full bg-accent/5 blur-3xl -z-10" />
-        {/* Left scrim keeps the headline crisp over the field */}
-        <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/70 to-transparent" />
-        {/* Top + bottom fades melt the field into the page */}
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-paper to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent" />
+    <section className="relative w-full max-w-5xl mx-auto px-6 pt-20 pb-20 md:pt-28 md:pb-28">
+      {/* Ambient — single soft radial, no competing shader wash */}
+      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden>
+        <div className="absolute -top-20 right-[8%] w-[520px] h-[520px] rounded-full bg-accent/[0.04] blur-[80px]" />
+        <div className="absolute top-32 left-[-10%] w-[400px] h-[400px] rounded-full bg-accent/[0.025] blur-[60px]" />
+        {/* Keep shader ultra-subtle — texture, not light source */}
+        <ShaderBackground className="opacity-[0.22] md:opacity-[0.30]" intensity={0.35} />
+        <div className="absolute inset-0 bg-gradient-to-b from-paper/0 via-transparent to-paper" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-12 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-[1.35fr_0.9fr] gap-10 md:gap-14 items-center">
         {/* Left: main statement */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex items-center gap-2 self-start"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot" />
+            <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ink-tertiary">Available for new work — Ahmedabad / Remote</span>
+          </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="display text-[clamp(2.8rem,8vw,4.8rem)] leading-[1.02] tracking-tight font-semibold"
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="display text-[clamp(2.6rem,7.2vw,4.4rem)] leading-[0.96] tracking-[-0.04em] font-[650]"
           >
             I ship production{' '}
             <span className="font-serif italic font-normal text-accent">AI systems</span>
+            <br className="hidden md:block" />
             {' '}from agents to full-stack apps.
           </motion.h1>
 
@@ -48,27 +52,34 @@ export function BentoHero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="text-base md:text-lg leading-relaxed text-ink-secondary max-w-[50ch]"
+            className="text-[15px] md:text-[17px] leading-[1.7] text-ink-secondary max-w-[52ch] text-pretty"
           >
-            AI engineer building autonomous agents, LLM pipelines, RAG systems, and the 
-            backend infrastructure that makes them production-ready. Open-source at OWASP, Microsoft, and Ollama.
+            AI engineer building autonomous agents, LLM pipelines, RAG systems, and the
+            backend that makes them production-ready. Open source at OWASP, Microsoft, and Ollama.
           </motion.p>
 
-          {/* Trust signals — inline */}
+          {/* Trust signals — editorial, not pill list */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-ink-tertiary font-mono"
+            className="flex flex-wrap items-center gap-2 text-[11px] font-mono"
           >
-            {TRUST_SIGNALS.map((s) => (
+            {TRUST_SIGNALS.map((s, i) => (
               <span key={s.label} className="inline-flex items-center gap-1.5">
-                <span className="text-accent font-semibold">{s.value}</span>
-                {s.label}
+                {i > 0 && <span className="w-px h-3 bg-rule/20 mx-1 hidden sm:inline-block" aria-hidden />}
+                <span className="text-ink-primary font-semibold tabular-nums">{s.value}</span>
+                <span className="text-ink-tertiary">{s.label}</span>
               </span>
             ))}
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin className="w-3 h-3" />
+            <a href="https://peerlist.io/kunjshah/project/engineeros" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-accent transition-colors">
+              <span className="w-px h-3 bg-rule/20 mx-1 hidden sm:inline-block" aria-hidden />
+              <span className="text-accent font-semibold">Peerlist</span>
+              <span className="text-ink-tertiary">EngineerOS — 11↑</span>
+            </a>
+            <span className="inline-flex items-center gap-1.5 text-ink-tertiary">
+              <span className="w-px h-3 bg-rule/20 mx-1 hidden sm:inline-block" aria-hidden />
+              <MapPin className="w-3 h-3 opacity-60" />
               {IDENTITY.location}
             </span>
           </motion.div>
@@ -100,33 +111,29 @@ export function BentoHero() {
           </motion.div>
         </div>
 
-        {/* Right: photo with premium frame */}
+        {/* Right: photo — quiet frame, no double glow */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:flex flex-col items-center gap-5"
+          className="hidden md:flex flex-col items-start gap-4"
         >
-          <div className="relative w-full max-w-[280px] mx-auto">
-            <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-accent/25 via-accent/5 to-transparent opacity-70 blur-2xl" aria-hidden />
-            <div className="relative p-1.5 rounded-[2rem] bg-elevated/80 border border-accent/15 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
-              <div className="rounded-[calc(2rem-0.375rem)] overflow-hidden bg-sunken">
-                <div className="absolute inset-0 bg-gradient-to-t from-accent/15 via-transparent to-transparent pointer-events-none z-10 rounded-[calc(2rem-0.375rem)]" />
-                <img
-                  src={IDENTITY.profile_photo}
-                  alt={`${IDENTITY.name} - AI Engineer`}
-                  className="w-full aspect-[4/5] object-cover object-[center_20%]"
-                  loading="eager"
-                />
-              </div>
+          <div className="relative w-full max-w-[300px]">
+            <div className="absolute -inset-4 rounded-[1.75rem] bg-accent/[0.06] blur-2xl" aria-hidden />
+            <div className="relative rounded-[1.5rem] overflow-hidden border border-rule/10 bg-elevated shadow-[0_8px_32px_rgb(var(--ink-primary)/0.08)]">
+              <img
+                src={IDENTITY.profile_photo}
+                alt={`${IDENTITY.name} - AI Engineer`}
+                className="w-full aspect-[4/5] object-cover object-[center_18%]"
+                loading="eager"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink-primary/10 to-transparent pointer-events-none" />
             </div>
-          </div>
-
-          <div className="p-4 rounded-xl border border-rule/10 bg-elevated/70 max-w-[260px]">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-ink-tertiary/70 block mb-2">Currently</span>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse-dot shrink-0" />
-              <span className="text-sm text-ink-primary font-medium">Building multi-agent research workflows</span>
+            {/* Caption tucked under, not floating card */}
+            <div className="mt-3 flex items-center gap-2 font-mono text-[10px] leading-none">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot" />
+              <span className="tracking-wide uppercase text-ink-tertiary">Currently</span>
+              <span className="text-ink-secondary">— building multi-agent research workflows</span>
             </div>
           </div>
         </motion.div>

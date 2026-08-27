@@ -30,53 +30,35 @@ export function Navbar({ onOpenCommand }: { onOpenCommand: () => void }) {
     <>
       <header
         className={clsx(
-          'fixed top-0 inset-x-0 z-40 transition-all duration-300',
-          scrolled ? 'py-2' : 'py-4'
+          'fixed top-0 inset-x-0 z-40 border-b transition-colors duration-300',
+          scrolled ? 'bg-paper/80 backdrop-blur-xl border-rule/10 py-2.5' : 'bg-transparent border-transparent py-4'
         )}
       >
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-3 group" aria-label="Home">
-              <span className="relative">
-                <span className="font-display text-lg font-bold tracking-tight text-ink-primary group-hover:text-accent transition-colors duration-200">
-                  KS
-                </span>
-                <span className="absolute -bottom-0.5 left-0 w-0 h-[2px] bg-accent rounded-full group-hover:w-full transition-all duration-300" />
+            <Link to="/" className="flex items-center gap-2.5 group" aria-label="Home">
+              <span className="w-7 h-7 rounded-lg bg-ink-primary text-paper grid place-items-center font-display text-[11px] font-bold tracking-wide group-hover:bg-accent transition-colors">
+                KS
               </span>
-              <span className={clsx(
-                'font-display text-sm tracking-tight text-ink-tertiary transition-all duration-300',
-                scrolled ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto'
-              )}>
+              <span className="font-display text-[13px] font-medium tracking-tight text-ink-primary">
                 Kunj Shah
               </span>
+              <span className="hidden sm:inline font-mono text-[10px] tracking-wide text-ink-quaternary ml-1">— AI Engineer</span>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
+            <nav className="hidden md:flex items-center gap-0.5" aria-label="Primary">
               {NAV.map((item) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   className={({ isActive }) =>
                     clsx(
-                      'relative px-2.5 py-1 font-body text-sm font-medium transition-all duration-200',
-                      isActive
-                        ? 'text-ink-primary'
-                        : 'text-ink-tertiary hover:text-ink-primary'
+                      'relative px-3 py-1.5 rounded-full font-mono text-[12px] tracking-wide transition-colors',
+                      isActive ? 'bg-ink-primary text-paper' : 'text-ink-tertiary hover:text-ink-primary hover:bg-sunken'
                     )
                   }
                 >
-                  {({ isActive }) => (
-                    <span className="relative">
-                      {item.label}
-                      {isActive && (
-                        <motion.span
-                          layoutId="nav-dot"
-                          className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent"
-                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                        />
-                      )}
-                    </span>
-                  )}
+                  {item.label}
                 </NavLink>
               ))}
             </nav>

@@ -57,7 +57,7 @@ function Home() {
       <LiveProjectShowcase />
 
       {/* Open Source */}
-      <section id="open-source" className="relative py-24 md:py-32 border-t border-rule/10 bg-elevated/20">
+      <section id="open-source" className="relative py-20 md:py-24 bg-sunken/30 border-y border-rule/10">
         <div className="relative max-w-5xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -67,9 +67,10 @@ function Home() {
             className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
           >
             <div>
-              <h2 className="display text-4xl md:text-5xl leading-[1.05] max-w-2xl font-semibold">Open source contributions.</h2>
-              <p className="mt-3 text-base text-ink-secondary max-w-2xl leading-relaxed">
-                Real work in {liveStats.orgs.join(', ')} and {liveStats.projects}+ more verified on GitHub.
+              <span className="kicker kicker-accent">Open source — verified on GitHub</span>
+              <h2 className="display text-[2rem] md:text-[2.75rem] leading-[0.96] mt-3">Open source contributions.</h2>
+              <p className="mt-3 text-[15px] text-ink-secondary max-w-xl leading-relaxed text-pretty">
+                Real work in {liveStats.orgs.join(', ')} and {liveStats.projects}+ more.
               </p>
             </div>
           </motion.div>
@@ -90,7 +91,7 @@ function Home() {
                 transition={{ duration: 0.4 }}
                 className="p-5 rounded-xl border border-rule/10 bg-elevated"
               >
-                <div className="display text-3xl text-accent font-bold tabular-nums leading-none">
+                <div className="font-display text-[28px] font-semibold tracking-tight text-ink-primary tabular-nums leading-none">
                   {n}{suffix as string}
                 </div>
                 <div className="mt-2 font-mono text-[11px] text-ink-tertiary">{label}</div>
@@ -151,7 +152,7 @@ function Home() {
       <ServicesSection />
 
       {/* Inside the stack — terminal treatment, distinct from Services cards */}
-      <section className="relative py-24 md:py-32 border-t border-rule/10 bg-sunken/20">
+      <section className="relative py-20 md:py-24 bg-paper">
         <div className="relative max-w-5xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -160,9 +161,9 @@ function Home() {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="mb-12"
           >
-            <span className="kicker text-accent">Under the hood</span>
-            <h2 className="display text-4xl md:text-5xl leading-[1.05] max-w-3xl font-semibold mt-3">Inside the stack.</h2>
-            <p className="mt-3 text-base text-ink-secondary max-w-2xl leading-relaxed">
+            <span className="kicker kicker-accent">Under the hood</span>
+            <h2 className="display text-[2rem] md:text-[2.75rem] leading-[0.96] max-w-3xl mt-3">Inside the stack.</h2>
+            <p className="mt-3 text-[15px] text-ink-secondary max-w-xl leading-relaxed text-pretty">
               How I design the AI systems I ship, from data to deployment.
             </p>
           </motion.div>
@@ -232,7 +233,7 @@ function Home() {
       </section>
 
       {/* Writing */}
-      <section id="writing" className="relative py-24 md:py-32 border-t border-rule/10">
+      <section id="writing" className="relative py-20 md:py-24 border-t border-rule/10">
         <div className="relative max-w-5xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -242,8 +243,9 @@ function Home() {
             className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
           >
             <div>
-              <h2 className="display text-4xl md:text-5xl leading-[1.05] max-w-2xl font-semibold">Notes from shipping.</h2>
-              <p className="mt-3 text-base text-ink-secondary max-w-2xl leading-relaxed">
+              <span className="kicker kicker-accent">Writing</span>
+              <h2 className="display text-[2rem] md:text-[2.75rem] leading-[0.96] max-w-2xl mt-3">Notes from shipping.</h2>
+              <p className="mt-3 text-[15px] text-ink-secondary max-w-xl leading-relaxed text-pretty">
                 Long-form essays on AI engineering, agents, and production systems.
               </p>
             </div>

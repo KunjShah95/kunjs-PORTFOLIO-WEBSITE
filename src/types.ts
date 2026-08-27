@@ -28,6 +28,7 @@ export interface Project {
     tokensProcessed?: string;
     inferenceLatency?: string;
     githubStars?: number;
+    peerlist?: string;
 }
 
 export interface Blog {
