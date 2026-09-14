@@ -53,13 +53,22 @@
     <meta name="twitter:image:alt" content="Kunj Shah — AI engineer building production AI systems" />
 
     <link data-rh="true" rel="canonical" href="https://kunjshah.vercel.app/" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <!-- AI / GEO discovery: llms.txt spec (https://llmstxt.org) -->
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLMs.txt — Kunj Shah" />
+    <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="LLMs Full — Kunj Shah" />
+    <link rel="alternate" type="text/markdown" href="/ai.txt" title="AI.txt — Kunj Shah" />
+    <link rel="alternate" type="text/markdown" href="/pricing.md" title="Pricing — Kunj Shah" />
+    <link rel="alternate" type="text/markdown" href="/services.md" title="Services — Kunj Shah" />
     <link rel="me" href="https://github.com/KunjShah95" />
     <link rel="me" href="https://www.linkedin.com/in/kunjshah05" />
     <link rel="me" href="https://peerlist.io/kunjshah" />
     <link rel="me" href="https://medium.com/@kkshah2005" />
+    <link rel="me" href="https://x.com/kunjshah_dev" />
+    <link rel="me" href="https://huggingface.co/kunjshah01" />
     <meta name="theme-color" content="#10B981" />
 
-    <!-- Static JSON-LD for crawlers that don't execute JS -->
+    <!-- Static JSON-LD for crawlers that don't execute JS (enhanced for GEO/AEO) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -68,7 +77,9 @@
           "@type": "Person",
           "@id": "https://kunjshah.vercel.app/#person",
           "name": "Kunj Shah",
+          "alternateName": ["KunjShah95", "KunjShah01", "kunjshah_dev"],
           "jobTitle": "AI Engineer & Agent Builder",
+          "description": "AI engineer in Ahmedabad building production AI systems — autonomous agents, LLM orchestration, RAG pipelines, edge computer vision (YOLOv8 on Jetson Orin), and full-stack AI apps. 12+ shipped projects, 44+ merged OSS PRs, 4 hackathon finals.",
           "url": "https://kunjshah.vercel.app",
           "image": "https://kunjshah.vercel.app/profile.png",
           "email": "mailto:kunjkshah05@gmail.com",
@@ -78,20 +89,41 @@
             "addressRegion": "Gujarat",
             "addressCountry": "IN"
           },
-          "knowsAbout": ["Generative AI", "Large language models", "Autonomous agents", "RAG", "LangChain", "FastAPI", "React", "PyTorch"],
-          "sameAs": ["https://github.com/KunjShah95", "https://www.linkedin.com/in/kunjshah05", "https://peerlist.io/kunjshah", "https://medium.com/@kkshah2005"],
+          "knowsAbout": ["Generative AI", "Large language models", "Autonomous agents", "Agentic systems", "RAG", "LangChain", "LangGraph", "CrewAI", "FastAPI", "React", "PyTorch", "Computer vision", "YOLOv8", "MLOps", "EU AI Act", "AI safety", "Vector databases", "HNSW"],
+          "sameAs": ["https://github.com/KunjShah95", "https://github.com/KunjShah01", "https://www.linkedin.com/in/kunjshah05", "https://x.com/kunjshah_dev", "https://huggingface.co/kunjshah01", "https://peerlist.io/kunjshah", "https://medium.com/@kkshah2005"],
           "alumniOf": {
             "@type": "CollegeOrUniversity",
-            "name": "Indus University"
+            "name": "Indus University",
+            "address": { "@type": "PostalAddress", "addressLocality": "Ahmedabad", "addressCountry": "IN" }
           }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://kunjshah.vercel.app/#publisher",
+          "name": "Kunj Shah — Portfolio",
+          "url": "https://kunjshah.vercel.app",
+          "logo": { "@type": "ImageObject", "url": "https://kunjshah.vercel.app/og-image.png", "width": 1200, "height": 630 },
+          "sameAs": ["https://github.com/KunjShah95", "https://www.linkedin.com/in/kunjshah05", "https://x.com/kunjshah_dev"]
         },
         {
           "@type": "WebSite",
           "@id": "https://kunjshah.vercel.app/#website",
           "name": "Kunj Shah — Portfolio",
           "url": "https://kunjshah.vercel.app",
-          "publisher": { "@id": "https://kunjshah.vercel.app/#person" },
-          "inLanguage": "en"
+          "description": "Portfolio of Kunj Shah — AI Engineer building production AI systems, agents, and ML pipelines.",
+          "publisher": { "@id": "https://kunjshah.vercel.app/#publisher" },
+          "author": { "@id": "https://kunjshah.vercel.app/#person" },
+          "inLanguage": "en",
+          "potentialAction": { "@type": "SearchAction", "target": "https://kunjshah.vercel.app/blogs/{search_term_string}", "query-input": "required name=search_term_string" }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://kunjshah.vercel.app/#faq",
+          "mainEntity": [
+            { "@type": "Question", "name": "Who is Kunj Shah?", "acceptedAnswer": { "@type": "Answer", "text": "Kunj Shah is an AI engineer in Ahmedabad, India, building production AI systems — LLM apps, autonomous agents, RAG pipelines, edge computer vision, and full-stack AI. 12+ shipped projects, 44+ merged OSS PRs (OWASP, Microsoft, Ollama), 4 hackathon finals." } },
+            { "@type": "Question", "name": "What does Kunj Shah build?", "acceptedAnswer": { "@type": "Answer", "text": "Autonomous agents (LangGraph/CrewAI), RAG with hybrid search + re-ranking, full-stack AI apps (React/Next.js + FastAPI), edge CV (YOLOv8/TensorRT on Jetson, sub-100ms), and MLOps. See https://kunjshah.vercel.app/projects and https://kunjshah.vercel.app/services.md" } },
+            { "@type": "Question", "name": "Is Kunj Shah available for hire?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — freelance (from $500 fixed-scope MVP, $25/hr, $600-1500/mo retainer) and full-time AI/ML roles. Email kunjkshah05@gmail.com or see https://kunjshah.vercel.app/pricing.md and https://kunjshah.vercel.app/contact" } }
+          ]
         }
       ]
     }

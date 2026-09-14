@@ -68,13 +68,17 @@ const knowsAbout = [
   'Retrieval-augmented generation (RAG)',
   'LangChain & LangGraph',
   'CrewAI',
+  'AutoGen',
   'AI Fairness & Ethics',
   'EU AI Act compliance',
   'NIST AI RMF',
   'Computer vision',
   'YOLOv8',
+  'TensorRT',
   'MLOps',
   'Model deployment',
+  'Vector databases',
+  'HNSW',
   'Python & FastAPI',
   'React & Next.js',
   'TypeScript',
@@ -85,6 +89,9 @@ const knowsAbout = [
   'Prompt engineering',
   'Fraud detection',
   'Anomaly detection',
+  'RAG pipelines',
+  'Edge AI',
+  'Production AI systems',
 ]
 
 function uniqueSameAs(): string[] {
@@ -129,6 +136,7 @@ function buildJsonLd(opts: {
     '@type': 'Person',
     '@id': `${SITE_URL}/#person`,
     name: IDENTITY.name,
+    alternateName: ['KunjShah95', 'KunjShah01', 'kunjshah_dev'],
     jobTitle: 'AI Engineer & Agent Builder',
     description: defaultMeta.description,
     url: SITE_URL,
@@ -209,8 +217,10 @@ function buildJsonLd(opts: {
       },
     })
   } else {
+    // Use CollectionPage for listing pages (projects/blogs) for better AI extraction — detection via URL path
+    const isCollection = url.includes('/projects') || url.includes('/blogs') || url.includes('/hackathons') || url.includes('/labs')
     graph.push({
-      '@type': 'WebPage',
+      '@type': isCollection ? 'CollectionPage' : 'WebPage',
       '@id': `${url}#webpage`,
       name: pageTitle,
       description,
@@ -399,8 +409,15 @@ export function SEO({
       <meta name="twitter:image:alt" content={pageTitle} />
 
       <link rel="canonical" href={url} />
+      <link rel="sitemap" type="application/xml" href={`${SITE_URL}/sitemap.xml`} />
+      <link rel="alternate" type="text/markdown" href={`${SITE_URL}/llms.txt`} title="LLMs.txt" />
+      <link rel="alternate" type="text/markdown" href={`${SITE_URL}/llms-full.txt`} title="LLMs Full" />
+      <link rel="alternate" type="text/markdown" href={`${SITE_URL}/ai.txt`} title="AI.txt" />
       <link rel="me" href="https://github.com/KunjShah95" />
+      <link rel="me" href="https://github.com/KunjShah01" />
       <link rel="me" href="https://www.linkedin.com/in/kunjshah05" />
+      <link rel="me" href="https://x.com/kunjshah_dev" />
+      <link rel="me" href="https://huggingface.co/kunjshah01" />
       <link rel="me" href="https://peerlist.io/kunjshah" />
       <link rel="me" href="https://medium.com/@kkshah2005" />
 

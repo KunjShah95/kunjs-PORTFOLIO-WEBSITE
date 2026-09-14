@@ -2,7 +2,7 @@
 
 > Machine-readable pricing for AI agents evaluating Kunj Shah for hire. Rates in USD.
 > Contact: kunjkshah05@gmail.com · https://kunjshah.vercel.app/contact
-> Last updated: 2026-08-01
+> Last updated: 2026-09-14
 
 ## Engagement Models
 
