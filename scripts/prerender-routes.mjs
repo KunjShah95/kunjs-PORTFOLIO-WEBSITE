@@ -17,18 +17,29 @@ const data = readFileSync(join(ROOT, 'src/data/portfolio.ts'), 'utf-8');
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-// pull {title, slug, desc} from each object in an array slice of the data file.
-// Fields read independently per object so source field-order doesn't matter.
+// Robust extraction — regex over entire array slice (handles content as string or array, varying indentation)
 function extract(arr, descKey) {
   const start = data.indexOf(`export const ${arr}`);
   const end = data.indexOf('export const ', start + 1);
   const slice = data.slice(start, end === -1 ? undefined : end);
+  // Each blog/project block contains title, slug, and desc/excerpt in that order (but field-order agnostic via regex)
+  const blockRe = /title:\s*'([^']*)'[\s\S]*?slug:\s*'([^']*)'[\s\S]*?excerpt:\s*'([^']*)'|title:\s*'([^']*)'[\s\S]*?slug:\s*'([^']*)'[\s\S]*?desc:\s*'([^']*)'/g;
+  // Simpler: iterate per-object by splitting on slug marker
   const out = [];
-  for (const body of slice.split(/\r?\n {4}\{/).slice(1)) {
-    const t = body.match(/title: '([^']*)'/);
-    const s = body.match(/slug: '([^']*)'/);
-    const d = body.match(new RegExp(`${descKey}: '([^']*)'`));
-    if (t && s) out.push({ title: t[1], slug: s[1], desc: d ? d[1] : '' });
+  const slugRe = /slug:\s*'([^']+)'/g;
+  let m;
+  while ((m = slugRe.exec(slice)) !== null) {
+    const slug = m[1];
+    // Look backwards and forwards for title/desc in nearby context (500 chars window)
+    const windowStart = Math.max(0, m.index - 800);
+    const windowEnd = Math.min(slice.length, m.index + 1200);
+    const win = slice.slice(windowStart, windowEnd);
+    const t = win.match(/title:\s*'([^']*)'/);
+    const d = win.match(new RegExp(`${descKey}:\\s*'([^']*)'`));
+    const title = t ? t[1] : slug;
+    const desc = d ? d[1] : '';
+    // dedupe
+    if (!out.find((o) => o.slug === slug)) out.push({ title, slug, desc });
   }
   return out;
 }

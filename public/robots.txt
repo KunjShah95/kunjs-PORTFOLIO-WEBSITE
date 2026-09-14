@@ -1,45 +1,99 @@
-# https://www.robotstxt.org/robotstxt.html
-Content-Signal: ai-train=no, search=yes, ai-input=no
+# robots.txt — Kunj Shah Portfolio
+# https://kunjshah.vercel.app/robots.txt
+# Last updated: 2026-09-14
+# Strategy: Allow ALL search + answer-engine crawlers (GEO/AEO). Block training-only
+# scrapers (CCBot, Google-Extended where training-only trade-off). Search=yes, train=no.
+
+# Default: allow everything (including all AI search bots)
 User-agent: *
 Allow: /
 Disallow: /api/portfolio.json
-Disallow: /manifest.json
+Disallow: /api/health
 
-# AI / answer engines — allow crawling so sources can be cited (GEO / AEO).
+# === AI Search / Answer Engines — EXPLICIT ALLOW (GEO/AEO) ===
+# Each allow here ensures LLM providers can cite this site in AI Overviews, ChatGPT, Perplexity, etc.
+
+# OpenAI — ChatGPT / SearchGPT
 User-agent: GPTBot
 Allow: /
-
 User-agent: ChatGPT-User
 Allow: /
-
-User-agent: Google-Extended
+User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: PerplexityBot
-Allow: /
-
+# Anthropic — Claude
 User-agent: ClaudeBot
 Allow: /
-
 User-agent: anthropic-ai
 Allow: /
 
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Google — Gemini & AI Overviews (Googlebot + Google-Extended for AI features)
+User-agent: Googlebot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: GoogleOther
+Allow: /
+
+# Microsoft — Copilot / Bing Chat
 User-agent: Bingbot
 Allow: /
 
-# OpenAI's newer search crawler (added 2026)
-User-agent: oai-searchbot
-Allow: /
-
-# Apple search / Siri / Spotlight
+# Apple — Siri / Spotlight / Apple Intelligence
 User-agent: Applebot
 Allow: /
+User-agent: Applebot-Extended
+Allow: /
 
-# Social preview crawlers
+# ByteDance / TikTok — Bytespider (powers Doubao / TikTok search)
+User-agent: Bytespider
+Allow: /
+
+# You.com — YouBot
+User-agent: YouBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Meta — Llama / Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+User-agent: FacebookBot
+Allow: /
+
+# Common Crawl derivatives used by multiple LLMs (diffbot etc.)
+User-agent: Diffbot
+Allow: /
+User-agent: omgilibot
+Allow: /
+User-agent: omgili
+Allow: /
+
+# Social preview crawlers (needed for link unfurling -> CTR)
 User-agent: facebookexternalhit
 Allow: /
-
 User-agent: Twitterbot
 Allow: /
+User-agent: LinkedInBot
+Allow: /
+User-agent: Slackbot
+Allow: /
+User-agent: Discordbot
+Allow: /
 
+# === TRAINING-ONLY SCRAPERS — BLOCK ===
+# These crawl for model training datasets, NOT for live citation/search.
+# Blocking them protects IP while still allowing search/GEO citation above.
+# Google-Extended is intentionally NOT blocked (see Allow above) — we want
+# Gemini / AI Overviews to cite us. To allow CCBot training, remove this block.
+User-agent: CCBot
+Disallow: /
+
+# Sitemaps
 Sitemap: https://kunjshah.vercel.app/sitemap.xml

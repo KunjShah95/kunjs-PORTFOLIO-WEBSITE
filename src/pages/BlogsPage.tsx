@@ -21,9 +21,9 @@ export function BlogsPage() {
     <>
       <SEO
         title="Writing — Kunj Shah"
-        description={`${BLOGS.length} essays on AI, agents, and shipping. Long-form notes from building production AI systems by Kunj Shah.`}
+        description={`${BLOGS.length} essays on AI, agents, and shipping. Long-form notes from building production AI systems, agentic workflows, edge CV, and fairness by Kunj Shah.`}
         url={`${SITE_URL}/blogs`}
-        isHome={true}
+        keywords={['Kunj Shah writing', 'Kunj Shah blog', 'AI essays', 'agentic systems', 'production AI', 'RAG', 'edge computer vision']}
       />
       <PageHeader
         kicker="Writing"

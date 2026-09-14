@@ -3,6 +3,8 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
+  Content-Signal: ai-train=no, search=yes, ai-input=no
+  Link: </.well-known/api-catalog>; rel="api-catalog", </llms.txt>; rel="alternate"; type="text/markdown", </llms-full.txt>; rel="alternate"; type="text/markdown", </ai.txt>; rel="alternate"; type="text/markdown", </sitemap.xml>; rel="sitemap"
   Cache-Control: public, max-age=0, s-maxage=3600
 
 /*.js
@@ -25,6 +27,34 @@
 
 /sitemap.xml
   Cache-Control: public, max-age=86400
+  Content-Type: application/xml; charset=utf-8
 
 /robots.txt
   Cache-Control: public, max-age=86400
+  Content-Type: text/plain; charset=utf-8
+
+/llms.txt
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: index, follow, max-image-preview:large
+
+/llms-full.txt
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: index, follow, max-image-preview:large
+
+/ai.txt
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  Content-Type: text/markdown; charset=utf-8
+
+/.well-known/ai.txt
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  Content-Type: text/markdown; charset=utf-8
+
+/pricing.md
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  Content-Type: text/markdown; charset=utf-8
+
+/services.md
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  Content-Type: text/markdown; charset=utf-8
