@@ -35,11 +35,11 @@ export default {
         'rule-strong': 'rgb(var(--rule-strong) / <alpha-value>)',
       },
       fontFamily: {
-        display: ['"Outfit"', '"Hanken Grotesk"', 'system-ui', '-apple-system', 'sans-serif'],
-        body:    ['"Geist"', '"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
-        mono:    ['"JetBrains Mono"', '"SF Mono"', 'Menlo', 'monospace'],
-        sans:    ['"Geist"', '"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
-        serif:   ['"PT Serif"', '"Georgia"', 'Cambria', '"Times New Roman"', 'serif'],
+        display: ['"Hanken Grotesk"', '"Avenir Next"', 'system-ui', '-apple-system', 'sans-serif'],
+        body:    ['"Hanken Grotesk"', '"Avenir Next"', 'system-ui', '-apple-system', 'sans-serif'],
+        mono:    ['"JetBrains Mono"', '"SFMono-Regular"', 'Consolas', 'monospace'],
+        sans:    ['"Hanken Grotesk"', '"Avenir Next"', 'system-ui', '-apple-system', 'sans-serif'],
+        serif:   ['Georgia', '"Times New Roman"', 'serif'],
       },
       borderRadius: {
         sm: '4px',

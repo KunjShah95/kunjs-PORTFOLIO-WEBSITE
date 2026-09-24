@@ -46,7 +46,7 @@ export function ProjectDetailPage() {
         lede={project.desc}
         center
       >
-        <div className="mt-6 flex items-center gap-3 flex-wrap justify-center">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm text-ink-secondary hover:text-ink-primary">
             <ArrowLeft className="w-3.5 h-3.5" /> All projects
           </Link>
@@ -63,8 +63,8 @@ export function ProjectDetailPage() {
         </div>
       </PageHeader>
 
-      <article className="max-w-manifest mx-auto px-6 py-16">
-        <div className="max-w-prose mx-auto">
+      <article className="mx-auto max-w-6xl px-5 py-16 sm:px-6">
+        <div className="mx-auto max-w-5xl">
 
           {/* Meta row */}
           <div className="mb-12">
@@ -232,11 +232,7 @@ export function ProjectDetailPage() {
                       <div className="font-mono text-[10px] uppercase tracking-wider text-ink-tertiary">{p.category}</div>
                       <div className="font-display text-base font-semibold text-ink-primary group-hover:text-accent transition-colors mt-1">{p.title}</div>
                       <div className="text-sm text-ink-secondary line-clamp-2 mt-1 leading-relaxed">{p.desc}</div>
-                      <div className="mt-3 flex gap-1.5 flex-wrap">
-                        {p.tech.slice(0, 3).map((t) => (
-                          <span key={t} className="font-mono text-[9px] px-1.5 py-0.5 rounded-full bg-sunken border border-rule/10 text-ink-tertiary">{t}</span>
-                        ))}
-                      </div>
+                      <div className="mt-3 font-mono text-[9px] uppercase tracking-[0.08em] text-ink-tertiary">{p.tech.slice(0, 3).join(' · ')}</div>
                     </Link>
                   ))}
                 </div>

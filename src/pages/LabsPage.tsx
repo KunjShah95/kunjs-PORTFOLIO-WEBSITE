@@ -66,8 +66,8 @@ export function LabsPage() {
         lede="Things I'm tinkering with outside of production work. Most of these will never ship. That's the point."
         center
       />
-      <section className="max-w-manifest mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-6 md:py-24">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {LABS.map((l, i) => (
             <SpotlightCard key={i} className="h-full rounded-xl border border-rule/10 bg-paper hover:border-accent/25 transition-colors hover-lift">
               <article className="p-6 flex flex-col h-full">

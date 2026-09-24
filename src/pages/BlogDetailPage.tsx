@@ -40,35 +40,47 @@ export function BlogDetailPage() {
           { name: blog.title, item: `${SITE_URL}/blogs/${blog.slug}` },
         ]}
       />
-      <header className="py-16 md:py-24 border-b border-rule/10">
-        <div className="max-w-manifest mx-auto px-6">
-          <div className="flex justify-center mb-8">
-            <Link to="/blogs" className="inline-flex items-center gap-1.5 text-sm text-ink-secondary hover:text-ink-primary">
-              <ArrowLeft className="w-3.5 h-3.5" /> All essays
-            </Link>
-          </div>
-          <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mx-auto max-w-3xl text-center">
+      <header className="relative overflow-hidden border-b border-rule/10 bg-paper py-16 md:py-24 lg:py-28">
+        <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--accent)/0.08),transparent_40%)]" />
+          <div className="absolute inset-0 opacity-[0.15] [background-image:radial-gradient(rgb(var(--rule)/0.22)_0.6px,transparent_0.6px)] [background-size:18px_18px] [mask-image:linear-gradient(to_bottom,black,transparent_74%)]" />
+        </div>
+        <div className="mx-auto max-w-4xl px-5 text-center sm:px-6">
+          <Link to="/blogs" className="inline-flex items-center gap-1.5 text-sm text-ink-secondary transition-colors hover:text-ink-primary">
+            <ArrowLeft className="h-3.5 w-3.5" /> All essays
+          </Link>
+          <div className="mt-8">
             <Kicker accent>{blog.category} &middot; {blog.date}</Kicker>
-            <h1 className="display text-4xl md:text-5xl mt-4 leading-tight tracking-tightest">{blog.title}</h1>
-            <p className="mt-6 text-xl text-ink-secondary leading-relaxed font-display italic">{blog.excerpt}</p>
-            <div className="mt-8 pt-6 border-t border-rule/10 flex items-center justify-center gap-4">
-              <div className="kicker">By Kunj Shah</div>
-              <div className="kicker">{blog.readTime ?? '5 min read'}</div>
+            <motion.h1
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              className="mx-auto mt-6 max-w-[20ch] font-display text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[0.94] tracking-[-0.055em]"
+            >
+              {blog.title}
+            </motion.h1>
+            <p className="mx-auto mt-6 max-w-[58ch] text-lg leading-8 text-ink-secondary">{blog.excerpt}</p>
+            <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-6 border-t border-rule/10 pt-6 font-mono text-[10px] uppercase tracking-[0.08em] text-ink-tertiary">
+              <span>Kunj Shah</span>
+              <span className="h-1 w-1 rounded-full bg-rule/30" />
+              <span>{blog.readTime ?? 5} min read</span>
+              <span className="h-1 w-1 rounded-full bg-rule/30" />
+              <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-accent" /> Notes from the build</span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </header>
 
-      <div className="max-w-manifest mx-auto px-6 py-16">
-        <div className="max-w-prose mx-auto prose-editorial">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6">
+        <div className="prose-editorial mx-auto max-w-[68ch]">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ h1: () => null }}>
             {blog.content ?? ''}
           </ReactMarkdown>
         </div>
       </div>
 
       <footer className="border-t border-rule/10 py-12">
-        <div className="max-w-prose mx-auto px-6">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6">
           {/* Prev / Next — session depth */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
             {prev ? (

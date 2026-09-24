@@ -1,126 +1,178 @@
-import { motion } from 'framer-motion';
-import { ArrowUpRight, FileDown } from 'lucide-react';
-import { SEO } from '../components/SEO';
-import { SITE_URL } from '../lib/site';
-import { Magnetic } from '../components/effects';
-import { ShaderBackground } from '../components/effects/ShaderBackground';
-import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics';
+import { ArrowUpRight, FileDown, Mail, MapPin } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { SEO } from '../components/SEO'
+import { SITE_URL } from '../lib/site'
+import { trackEvent, ANALYTICS_EVENTS } from '../lib/analytics'
 
 const METHODS = [
   { label: 'Email', value: 'kunjkshah05@gmail.com', href: 'mailto:kunjkshah05@gmail.com', primary: true },
-  { label: 'YouTube', value: '@kunjshah4158', href: 'https://www.youtube.com/@kunjshah4158' },
   { label: 'GitHub', value: '@KunjShah95', href: 'https://github.com/KunjShah95' },
   { label: 'LinkedIn', value: 'in/kunjshah05', href: 'https://linkedin.com/in/kunjshah05' },
-  { label: 'Twitter', value: '@kunjshah_dev', href: 'https://twitter.com/kunjshah_dev' },
-];
+  { label: 'YouTube', value: '@kunjshah4158', href: 'https://www.youtube.com/@kunjshah4158' },
+  { label: 'X / Twitter', value: '@kunjshah_dev', href: 'https://twitter.com/kunjshah_dev' },
+]
+
+const CHECKLIST = [
+  'What you are trying to make or fix.',
+  'What is already working or failing.',
+  'The deadline, budget, or technical constraint.',
+]
 
 export function ContactPage() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <>
       <SEO
-        title="Contact — Kunj Shah"
-        description="The fastest way to reach Kunj Shah is email. If you're working on something and want an extra set of hands, write. Also find me on GitHub, LinkedIn, and Twitter."
+        title="Contact Kunj Shah | AI Engineering Collaboration"
+        description="Contact Kunj Shah for AI architecture, production AI MVPs, LLM systems, computer vision, and engineering collaborations. Based in Ahmedabad and available remotely."
         url={`${SITE_URL}/contact`}
       />
-      {/* Signature aurora behind the ask */}
-      <div className="absolute inset-x-0 top-0 h-[70vh] -z-10 pointer-events-none" aria-hidden>
-        <ShaderBackground className="opacity-45 md:opacity-[0.6]" intensity={0.5} />
-        <div className="absolute inset-0 bg-gradient-to-b from-paper/30 via-paper/70 to-paper" />
-      </div>
-      <div className="relative max-w-manifest mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center text-center"
-        >
-          <div className="kicker">Get in touch</div>
-          <h1 className="display text-5xl md:text-7xl mt-4 leading-[0.95] tracking-tightest max-w-3xl">
-            Building something ambitious?{' '}
-            <span className="text-accent">Let&rsquo;s make it real.</span>
-          </h1>
-          <p className="mt-8 text-lg text-ink-secondary max-w-2xl leading-relaxed">
-            I build production AI systems — from transformer weights to customer deployment. 
-            If you have an AI product, a hard engineering problem, or an idea that needs a technical founder, 
-            write to me. I usually reply within a day.
-          </p>
 
-          {/* CTA buttons */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Magnetic>
-              <a
-                href="mailto:kunjkshah05@gmail.com"
-                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_CONTACT_EMAIL, { source: 'contact_page' })}
-                className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl bg-accent text-accent-ink font-semibold text-base hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 transition-all shadow-[0_10px_28px_rgb(var(--accent)/0.34)]"
-              >
-                Email me
-                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-            </Magnetic>
-            <div className="relative group">
-              <Magnetic>
-                <button
-                  className="group relative inline-flex items-center gap-2 h-14 px-8 rounded-xl border border-rule/10 text-ink-primary font-semibold text-base bg-elevated hover:bg-sunken hover:-translate-y-0.5 active:scale-95 transition-all w-full md:w-auto"
-                >
-                  <FileDown className="w-5 h-5" />
-                  Download résumé
-                </button>
-              </Magnetic>
-              <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                <div className="w-60 bg-elevated/95 backdrop-blur-xl border border-rule/10 p-1.5 rounded-xl shadow-2xl flex flex-col gap-1 noise-texture text-left">
-                  <a
-                    href="/kunjaiml.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackEvent(ANALYTICS_EVENTS.RESUME_DOWNLOAD, { file: 'kunjaiml.pdf', track: 'ai_ml', source: 'contact_page' })}
-                    className="w-full px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
-                  >
-                    <span>AI / ML Roles <span className="block text-[10px] text-ink-tertiary group-hover:text-accent-ink/70 font-mono">kunjaiml.pdf</span></span>
-                    <span className="text-xs text-ink-tertiary">↗</span>
-                  </a>
-                  <a
-                    href="/kunjshah_cv.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackEvent(ANALYTICS_EVENTS.RESUME_DOWNLOAD, { file: 'kunjshah_cv.pdf', track: 'full_stack', source: 'contact_page' })}
-                    className="w-full px-3 py-2 rounded-lg text-sm hover:bg-accent hover:text-accent-ink transition-colors font-medium flex items-center justify-between text-ink-primary"
-                  >
-                    <span>Full Stack Roles <span className="block text-[10px] text-ink-tertiary group-hover:text-accent-ink/70 font-mono">kunjshah_cv.pdf</span></span>
-                    <span className="text-xs text-ink-tertiary">↗</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+      {/* Hero */}
+      <header className="relative isolate overflow-hidden border-b border-rule/10 bg-paper py-20 md:py-28 lg:py-32">
+        <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgb(var(--accent)/0.10),transparent_55%)]" />
+          <div className="absolute inset-0 opacity-[0.14] [background-image:radial-gradient(rgb(var(--rule)/0.22)_0.6px,transparent_0.6px)] [background-size:18px_18px] [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
+        </div>
 
-        <div className="mt-20 max-w-2xl mx-auto divide-y divide-rule/10 border border-rule/10 rounded-xl overflow-hidden bg-paper/50 backdrop-blur-sm">
-          {METHODS.map((m) => (
+        <div className="mx-auto max-w-4xl px-5 text-center sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+              Contact
+            </span>
+            <h1 className="mx-auto mt-5 font-display text-[clamp(2.4rem,5.5vw,5rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-ink-primary">
+              Bring the problem.<br />
+              We&apos;ll find the first useful move.
+            </h1>
+            <p className="mx-auto mt-6 max-w-[56ch] text-base leading-7 text-ink-secondary sm:text-lg sm:leading-8">
+              AI product, hard engineering problem, or an idea that needs a technical partner — send a rough brief. I usually reply within a day.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-3"
+          >
             <a
-              key={m.label}
-              href={m.href}
-              target={m.href.startsWith('http') ? '_blank' : undefined}
-              rel="noopener noreferrer"
-              className="group flex items-center justify-between gap-4 px-6 py-5 bg-paper hover:bg-elevated transition-colors"
+              href="mailto:kunjkshah05@gmail.com"
+              onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_CONTACT_EMAIL, { source: 'contact_page' })}
+              className="group inline-flex min-h-12 items-center gap-2 rounded-lg bg-ink-primary px-6 text-sm font-semibold text-paper transition-all hover:-translate-y-0.5 hover:bg-accent"
             >
-              <div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-tertiary">{m.label}</div>
-                <div className={`font-mono text-base mt-1.5 ${m.primary ? 'text-accent' : 'text-ink-secondary'}`}>
-                  {m.value}
-                </div>
-              </div>
-              <ArrowUpRight className="w-4 h-4 text-ink-quaternary group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
+              Email me
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
-          ))}
-        </div>
+            <span className="inline-flex min-h-12 items-center gap-2 rounded-lg border border-rule/15 px-4 text-sm text-ink-secondary">
+              <MapPin className="h-4 w-4 shrink-0" />
+              Ahmedabad · Remote
+            </span>
+          </motion.div>
 
-        <div className="mt-24 max-w-2xl mx-auto pt-12 border-t border-rule/10 text-center">
-          <div className="kicker">Currently</div>
-          <p className="mt-3 text-ink-secondary leading-relaxed">
-            Rewriting a research agent for the third time. Reading <em>Designing Data-Intensive Applications</em> again. Usually up for new work. If you have something, write to me.
-          </p>
+          <div className="mt-4 flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.08em] text-ink-tertiary">
+            <Mail className="h-3.5 w-3.5 text-accent" />
+            Usually replies within a day
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </header>
+
+      {/* Info grid */}
+      <section className="mx-auto max-w-5xl px-5 py-16 sm:px-6 md:py-20">
+        <div className="grid gap-8 md:grid-cols-2">
+
+          {/* What to include */}
+          <div className="rounded-2xl border border-rule/10 bg-elevated p-6 sm:p-8">
+            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-tertiary">
+              A good first email includes
+            </span>
+            <ul className="mt-6 space-y-5">
+              {CHECKLIST.map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="mt-0.5 shrink-0 font-mono text-[10px] text-accent">
+                    0{i + 1}
+                  </span>
+                  <span className="text-sm leading-6 text-ink-secondary">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Currently + Resume */}
+          <div className="flex flex-col gap-6">
+            <div className="rounded-2xl border border-rule/10 bg-elevated p-6 sm:p-8">
+              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-tertiary">
+                Currently
+              </span>
+              <p className="mt-4 text-sm leading-7 text-ink-secondary">
+                Rewriting a research agent for the third time and reading{' '}
+                <em>Designing Data-Intensive Applications</em> again.
+              </p>
+            </div>
+
+            <details className="group overflow-hidden rounded-2xl border border-rule/10 bg-elevated">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-6 py-3 text-sm font-medium text-ink-primary [&::-webkit-details-marker]:hidden">
+                <span className="inline-flex items-center gap-2">
+                  <FileDown className="h-4 w-4 text-ink-tertiary" />
+                  Download a tailored résumé
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-ink-tertiary group-open:text-accent">
+                  View files
+                </span>
+              </summary>
+              <div className="grid gap-px border-t border-rule/10 bg-rule/10 sm:grid-cols-2">
+                <a
+                  href="/kunjaiml.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent(ANALYTICS_EVENTS.RESUME_DOWNLOAD, { file: 'kunjaiml.pdf', track: 'ai_ml', source: 'contact_page' })}
+                  className="flex items-center justify-between bg-elevated px-5 py-4 text-sm hover:bg-sunken"
+                >
+                  AI / ML roles
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+                <a
+                  href="/kunjshah_cv.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent(ANALYTICS_EVENTS.RESUME_DOWNLOAD, { file: 'kunjshah_cv.pdf', track: 'full_stack', source: 'contact_page' })}
+                  className="flex items-center justify-between bg-elevated px-5 py-4 text-sm hover:bg-sunken"
+                >
+                  Full-stack roles
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      {/* Social links */}
+      <section className="border-t border-rule/10">
+        <div className="mx-auto max-w-5xl px-5 sm:px-6">
+          <div className="grid gap-px overflow-hidden rounded-none bg-rule/10 sm:grid-cols-3 lg:grid-cols-5">
+            {METHODS.map((method) => (
+              <a
+                key={method.label}
+                href={method.href}
+                target={method.href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="group flex min-h-24 flex-col items-center justify-center gap-3 bg-paper px-4 py-5 text-center transition-colors hover:bg-elevated"
+              >
+                <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-ink-tertiary group-hover:text-accent transition-colors">
+                  {method.label}
+                </span>
+                <span className={`break-all font-mono text-xs ${method.primary ? 'text-accent' : 'text-ink-secondary'}`}>
+                  {method.value}
+                </span>
+                <ArrowUpRight className="h-3 w-3 text-ink-quaternary opacity-0 transition-all group-hover:opacity-100 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  )
 }

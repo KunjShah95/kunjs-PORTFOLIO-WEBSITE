@@ -14,11 +14,10 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
    const { pathname } = useLocation()
-   const isHome = pathname === '/'
    const [isCommandOpen, setIsCommandOpen] = useState(false)
 
    return (
-      <div className="min-h-screen bg-paper text-ink-primary font-body overflow-x-clip">
+      <div className="aceternia-shell min-h-screen text-ink-primary font-body overflow-x-clip">
          <a
             href="#main"
             className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-2 focus:bg-ink-primary focus:text-ink-inverse focus:rounded-sm"
@@ -43,7 +42,7 @@ export function Layout({ children }: LayoutProps) {
             </motion.main>
          </AnimatePresence>
 
-         {!isHome && <Footer />}
+         <Footer />
 
          <CommandMenu open={isCommandOpen} setOpen={setIsCommandOpen} />
          <AIAssistant />

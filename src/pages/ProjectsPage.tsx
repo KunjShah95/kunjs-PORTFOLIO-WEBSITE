@@ -96,9 +96,9 @@ export function ProjectsPage() {
         center
       />
 
-      <section ref={ref} className="max-w-manifest mx-auto px-6 py-16">
+      <section ref={ref} className="mx-auto max-w-6xl px-5 py-16 sm:px-6">
         {/* Dynamic Filter options with hover highlight */}
-        <div className="flex flex-wrap gap-2 mb-12 pb-8 border-b border-rule/10 items-center">
+        <div className="mb-12 flex flex-wrap items-center gap-2 border-b border-rule/10 pb-6">
           {FILTERS.map((f) => (
             <button
               key={f}
@@ -117,21 +117,21 @@ export function ProjectsPage() {
 
         {inView && (
           filtered.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
             {filtered.map((p) => (
               <SpotlightCard
                 key={p.slug}
                 className="group flex flex-col h-full min-h-[320px] rounded-xl border border-rule/10 bg-paper hover:border-accent/25 transition-all duration-300 hover-lift"
               >
-                <div className="p-6 md:p-8 flex flex-col justify-between h-full">
+                <div className="flex h-full flex-col justify-between p-6 text-left md:p-8">
                   <div>
-                    <div className="flex items-start justify-between mb-4">
+                    <div className="mb-4 flex flex-col gap-1">
                       <span className="kicker">{p.category}</span>
-                      <div className="flex flex-col gap-1 items-end">
+                      <div className="flex flex-wrap gap-2 font-mono text-[9px] text-ink-tertiary">
                         {getRolesForProject(p.slug).map((role) => (
                           <span
                             key={role}
-                            className="text-[9px] font-mono text-ink-tertiary bg-paper px-1.5 py-0.5 rounded border border-rule/10 font-semibold transition-colors group-hover:border-accent/20 group-hover:text-ink-secondary"
+                            className="text-[9px] font-mono text-ink-tertiary font-semibold transition-colors group-hover:text-ink-secondary"
                           >
                             {role}
                           </span>
@@ -169,7 +169,7 @@ export function ProjectsPage() {
                     })()}
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-rule/10 flex items-center justify-between">
+                  <div className="mt-6 flex flex-col items-start gap-3 border-t border-rule/10 pt-4">
                     <span className="font-mono text-xs text-ink-tertiary uppercase font-bold tracking-wider">{p.impact}</span>
                     <Link
                       to={`/projects/${p.slug}`}

@@ -64,7 +64,7 @@ export function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
-          className="mb-14 max-w-2xl"
+          className="mx-auto mb-14 max-w-3xl text-center"
         >
           <h2 className="display text-4xl md:text-5xl leading-[1.05] font-semibold">
             What I build.
@@ -93,7 +93,7 @@ export function ServicesSection() {
                       className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-accent/[0.07] via-transparent to-transparent"
                     />
                   )}
-                  <div className="relative flex h-full flex-col p-6 md:p-8">
+                  <div className="relative flex h-full flex-col items-center p-6 text-center md:p-8">
                     <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 border border-accent/20 text-accent">
                       <Icon className="h-4 w-4" strokeWidth={1.5} />
                     </span>
@@ -101,7 +101,7 @@ export function ServicesSection() {
                       {c.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-ink-secondary">{c.desc}</p>
-                    <div className="mt-auto flex flex-wrap gap-1.5 pt-6">
+                    <div className="mt-auto flex flex-wrap justify-center gap-1.5 pt-6">
                       {c.stack.map((t) => (
                         <span
                           key={t}
@@ -124,7 +124,7 @@ export function ServicesSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+          className="group mx-auto mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
         >
           Have something in mind? Let’s scope it
           <ArrowUpRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

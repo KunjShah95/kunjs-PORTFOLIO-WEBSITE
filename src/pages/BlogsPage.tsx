@@ -1,72 +1,26 @@
-import { Link } from 'react-router-dom';
-import { BLOGS } from '../data/portfolio';
-import { SEO } from '../components/SEO';
-import { SITE_URL } from '../lib/site';
-import { PageHeader } from '../components/ui/PageHeader';
-import { Kicker } from '../components/ui/Kicker';
-import { BentoGrid, BentoCard } from '../components/bento';
-import { useReveal } from '../hooks/useReveal';
+import { Link } from 'react-router-dom'
+import { BLOGS } from '../data/portfolio'
+import { SEO } from '../components/SEO'
+import { SITE_URL } from '../lib/site'
+import { PageHeader } from '../components/ui/PageHeader'
+import { Kicker } from '../components/ui/Kicker'
 
 export function BlogsPage() {
-  const byYear = BLOGS.reduce((acc, blog) => {
-    const year = blog.date?.match(/\d{4}/)?.[0] ?? 'Undated';
-    (acc[year] = acc[year] || []).push(blog);
-    return acc;
-  }, {} as Record<string, typeof BLOGS>);
-
-  const years = Object.keys(byYear).sort((a, b) => b.localeCompare(a));
-  const { ref, inView } = useReveal({ amount: 0.1 });
+  const sortedBlogs = [...BLOGS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const byYear = sortedBlogs.reduce((acc, blog) => {
+    const year = blog.date?.match(/\d{4}/)?.[0] ?? 'Undated'
+    ;(acc[year] ||= []).push(blog)
+    return acc
+  }, {} as Record<string, typeof BLOGS>)
+  const years = Object.keys(byYear).sort((a, b) => b.localeCompare(a))
 
   return (
     <>
-      <SEO
-        title="Writing — Kunj Shah"
-        description={`${BLOGS.length} essays on AI, agents, and shipping. Long-form notes from building production AI systems, agentic workflows, edge CV, and fairness by Kunj Shah.`}
-        url={`${SITE_URL}/blogs`}
-        keywords={['Kunj Shah writing', 'Kunj Shah blog', 'AI essays', 'agentic systems', 'production AI', 'RAG', 'edge computer vision']}
-      />
-      <PageHeader
-        kicker="Writing"
-        title={`${BLOGS.length} essays on AI, agents, and shipping.`}
-        lede="Long-form notes from building production systems. No newsletter, no schedule — published when there's something worth saying."
-        center
-      />
-      <section ref={ref} className="max-w-manifest mx-auto px-6 py-16">
-        <div className="max-w-3xl mx-auto">
-          {years.map((year) => (
-            <div key={year} className="mb-16 last:mb-0">
-              <div className="flex items-center gap-4 pb-4 mb-4 border-b border-rule/10">
-                <div className="kicker">{year}</div>
-                <div className="font-mono text-3xl text-ink-primary">{byYear[year].length}</div>
-              </div>
-              {inView && (
-                <BentoGrid cols={1}>
-                  {byYear[year].map((blog) => (
-                    <BentoCard key={blog.id} variant="default" className="py-6">
-                      <Link
-                        to={`/blogs/${blog.slug}`}
-                        className="group flex flex-col md:flex-row gap-4 px-4"
-                      >
-                        <div className="md:w-1/4 shrink-0">
-                          <Kicker>{blog.category}</Kicker>
-                          <div className="font-mono text-xs text-ink-tertiary mt-1">{blog.date}</div>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="display text-2xl group-hover:underline decoration-ink-primary/40 underline-offset-4 leading-tight">{blog.title}</h3>
-                          <p className="mt-2 text-sm text-ink-secondary line-clamp-2">{blog.excerpt}</p>
-                        </div>
-                        <div className="md:w-16 shrink-0 flex md:justify-end items-start">
-                          <div className="kicker">{blog.readTime ?? '5 min'}</div>
-                        </div>
-                      </Link>
-                    </BentoCard>
-                  ))}
-                </BentoGrid>
-              )}
-            </div>
-          ))}
-        </div>
+      <SEO title="Writing — Kunj Shah" description={`${BLOGS.length} essays on AI, agents, and shipping. Long-form notes from building production AI systems.`} url={`${SITE_URL}/blogs`} />
+      <PageHeader kicker="Writing" title={`${BLOGS.length} essays on AI, agents, and shipping.`} lede="Long-form notes from building production systems. No newsletter and no schedule — published when there is something worth saying." center />
+      <section className="mx-auto max-w-5xl px-5 py-16 sm:px-6 md:py-24">
+        {years.map((year) => <section key={year} className="mb-16 last:mb-0"><div className="mb-5 flex items-center gap-4 border-b border-rule/10 pb-4"><span className="kicker">{year}</span><span className="font-mono text-sm text-ink-tertiary">{byYear[year].length} notes</span></div><div className="divide-y divide-rule/10 border-y border-rule/10">{byYear[year].map((blog) => <Link key={blog.id} to={`/blogs/${blog.slug}`} className="group grid gap-4 py-6 transition-colors hover:bg-sunken/40 sm:grid-cols-[9rem_1fr_4rem] sm:items-start sm:gap-6 sm:px-4"><div><Kicker>{blog.category}</Kicker><div className="mt-1 font-mono text-[10px] text-ink-tertiary">{blog.date}</div></div><div><h2 className="font-display text-xl font-semibold tracking-tight text-ink-primary transition-colors group-hover:text-accent sm:text-2xl">{blog.title}</h2><p className="mt-2 max-w-[62ch] text-sm leading-6 text-ink-secondary">{blog.excerpt}</p></div><span className="font-mono text-[10px] text-ink-tertiary sm:text-right">{blog.readTime ?? 5} min</span></Link>)}</div></section>)}
       </section>
     </>
-  );
+  )
 }

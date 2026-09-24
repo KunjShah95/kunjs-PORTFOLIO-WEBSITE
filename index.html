@@ -66,7 +66,7 @@
     <link rel="me" href="https://medium.com/@kkshah2005" />
     <link rel="me" href="https://x.com/kunjshah_dev" />
     <link rel="me" href="https://huggingface.co/kunjshah01" />
-    <meta name="theme-color" content="#10B981" />
+    <meta name="theme-color" content="#FCFAF7" />
 
     <!-- Static JSON-LD for crawlers that don't execute JS (enhanced for GEO/AEO) -->
     <script type="application/ld+json">
@@ -144,7 +144,7 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://va.vercel-scripts.com">
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* Hide fallback static content if JS is enabled to avoid flash */
@@ -161,9 +161,9 @@
         (function () {
             try {
                 var stored = localStorage.getItem('theme');
-                var dark = stored
-                    ? stored === 'dark'
-                    : window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var theme = ['paper', 'midnight', 'violet', 'mono'].indexOf(stored) >= 0 ? stored : 'midnight';
+                var dark = theme === 'midnight' || theme === 'violet';
+                document.documentElement.dataset.theme = theme;
                 document.documentElement.classList.toggle('dark', dark);
                 document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
             } catch (e) {}

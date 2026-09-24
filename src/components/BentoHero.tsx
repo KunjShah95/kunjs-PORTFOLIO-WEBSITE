@@ -3,166 +3,36 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight, MapPin } from 'lucide-react'
 import { IDENTITY } from '../data/portfolio'
 import { OSS_STATS } from '../data/opensource'
-import { ShaderBackground } from './effects/ShaderBackground'
 import { Magnetic } from './effects/Magnetic'
 
-const TRUST_SIGNALS = [
-  { value: '12+', label: 'Projects shipped' },
-  { value: `${OSS_STATS.mergedPRs}+`, label: 'Open-source PRs merged' },
-  { value: '4×', label: 'Hackathon finalist' },
+const SIGNALS = [
+  { value: '12+', label: 'systems shipped' },
+  { value: `${OSS_STATS.mergedPRs}+`, label: 'open-source PRs' },
+  { value: '4×', label: 'hackathon finalist' },
 ]
+
+const USEFUL_WHEN = ['The idea is still a little fuzzy', 'The work needs to survive real users', 'The system has to be explainable']
 
 export function BentoHero() {
   return (
-    <section className="relative w-full max-w-5xl mx-auto px-6 pt-20 pb-20 md:pt-28 md:pb-28">
-      {/* Ambient — single soft radial, no competing shader wash */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden>
-        <div className="absolute -top-20 right-[8%] w-[520px] h-[520px] rounded-full bg-accent/[0.04] blur-[80px]" />
-        <div className="absolute top-32 left-[-10%] w-[400px] h-[400px] rounded-full bg-accent/[0.025] blur-[60px]" />
-        {/* Keep shader ultra-subtle — texture, not light source */}
-        <ShaderBackground className="opacity-[0.22] md:opacity-[0.30]" intensity={0.35} />
-        <div className="absolute inset-0 bg-gradient-to-b from-paper/0 via-transparent to-paper" />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-[1.35fr_0.9fr] gap-10 md:gap-14 items-center">
-        {/* Left: main statement */}
-        <div className="flex flex-col gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 self-start"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot" />
-            <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ink-tertiary">Available for new work — Ahmedabad / Remote</span>
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="display text-[clamp(2.6rem,7.2vw,4.4rem)] leading-[0.96] tracking-[-0.04em] font-[650]"
-          >
-            I ship production{' '}
-            <span className="font-serif italic font-normal text-accent">AI systems</span>
-            <br className="hidden md:block" />
-            {' '}from agents to full-stack apps.
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[15px] md:text-[17px] leading-[1.7] text-ink-secondary max-w-[52ch] text-pretty"
-          >
-            AI engineer building autonomous agents, LLM pipelines, RAG systems, and the
-            backend that makes them production-ready. Open source at OWASP, Microsoft, and Ollama.
-          </motion.p>
-
-          {/* Trust signals — editorial, not pill list */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-wrap items-center gap-2 text-[11px] font-mono"
-          >
-            {TRUST_SIGNALS.map((s, i) => (
-              <span key={s.label} className="inline-flex items-center gap-1.5">
-                {i > 0 && <span className="w-px h-3 bg-rule/20 mx-1 hidden sm:inline-block" aria-hidden />}
-                <span className="text-ink-primary font-semibold tabular-nums">{s.value}</span>
-                <span className="text-ink-tertiary">{s.label}</span>
-              </span>
-            ))}
-            <a href="https://peerlist.io/kunjshah/project/engineeros" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-accent transition-colors">
-              <span className="w-px h-3 bg-rule/20 mx-1 hidden sm:inline-block" aria-hidden />
-              <span className="text-accent font-semibold">Peerlist</span>
-              <span className="text-ink-tertiary">EngineerOS — 11↑</span>
-            </a>
-            <span className="inline-flex items-center gap-1.5 text-ink-tertiary">
-              <span className="w-px h-3 bg-rule/20 mx-1 hidden sm:inline-block" aria-hidden />
-              <MapPin className="w-3 h-3 opacity-60" />
-              {IDENTITY.location}
-            </span>
-          </motion.div>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-wrap gap-3 pt-2"
-          >
-            <Magnetic>
-              <Link
-                to="/projects"
-                className="group inline-flex items-center gap-2 h-11 px-5 rounded-full bg-accent text-accent-ink font-semibold text-sm hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.98] transition-all shadow-[0_4px_20px_rgb(var(--accent)/0.30)]"
-              >
-                <span>View my work</span>
-                <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                  <ArrowUpRight className="w-3 h-3" />
-                </span>
-              </Link>
-            </Magnetic>
-            <Link
-              to="/contact"
-              className="group inline-flex items-center gap-2 h-11 px-5 rounded-full border border-rule/20 text-ink-primary font-medium text-sm hover:bg-elevated hover:-translate-y-0.5 active:scale-[0.98] transition-all"
-            >
-              Get in touch
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Right: photo — quiet frame, no double glow */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden md:flex flex-col items-start gap-4"
-        >
-          <div className="relative w-full max-w-[300px]">
-            <div className="absolute -inset-4 rounded-[1.75rem] bg-accent/[0.06] blur-2xl" aria-hidden />
-            <div className="relative rounded-[1.5rem] overflow-hidden border border-rule/10 bg-elevated shadow-[0_8px_32px_rgb(var(--ink-primary)/0.08)]">
-              <img
-                src={IDENTITY.profile_photo}
-                alt={`${IDENTITY.name} - AI Engineer`}
-                className="w-full aspect-[4/5] object-cover object-[center_18%]"
-                loading="eager"
-              />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink-primary/10 to-transparent pointer-events-none" />
-            </div>
-            {/* Caption tucked under, not floating card */}
-            <div className="mt-3 flex items-center gap-2 font-mono text-[10px] leading-none">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot" />
-              <span className="tracking-wide uppercase text-ink-tertiary">Currently</span>
-              <span className="text-ink-secondary">— building multi-agent research workflows</span>
-            </div>
+    <section className="relative isolate overflow-hidden border-b border-rule/10 bg-paper py-16 sm:px-6 md:py-24 lg:py-28">
+      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden><div className="absolute -right-20 top-[-8rem] h-[32rem] w-[32rem] rounded-full bg-accent/10 blur-3xl" /><div className="absolute inset-0 opacity-[0.14] [background-image:radial-gradient(rgb(var(--rule)/0.22)_0.6px,transparent_0.6px)] [background-size:18px_18px] [mask-image:linear-gradient(to_bottom,black,transparent_75%)]" /></div>
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+        <div className="grid items-start gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:gap-20">
+          <div>
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="flex w-fit items-center gap-2"><span className="signal-chip"><span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-accent" /><strong>Available</strong> for focused AI work</span></motion.div>
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }} className="mt-7 max-w-[12ch] font-display text-[clamp(3rem,7.2vw,6.4rem)] font-semibold leading-[0.92] tracking-[-0.06em] text-ink-primary">I build the part of AI that has to keep <span className="italic text-accent">working.</span></motion.h1>
+            <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.1 }} className="mt-7 max-w-[60ch] text-base leading-7 text-ink-secondary sm:text-lg sm:leading-8">Most of my work sits between the model and the product: agents that know when to stop, retrieval that returns useful context, APIs that do not fall over, and tools that make the next decision easier.</motion.p>
+            <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.14 }} className="mt-4 max-w-[58ch] text-sm leading-6 text-ink-tertiary sm:text-base sm:leading-7">I&apos;m happiest when the brief is still a little fuzzy and the work turns into something another person can actually use.</motion.p>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }} className="mt-8 flex flex-wrap items-center gap-3"><Magnetic><Link to="/projects" className="group inline-flex min-h-11 items-center gap-2 rounded-lg bg-ink-primary px-5 py-3 text-sm font-semibold text-paper transition-transform hover:-translate-y-0.5 active:scale-[0.98]">See the work <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link></Magnetic><Link to="/contact" className="inline-flex min-h-11 items-center rounded-lg border border-rule/15 px-5 py-3 text-sm font-medium text-ink-primary transition-colors hover:border-ink-primary/30 hover:bg-elevated">Tell me what you&apos;re building</Link></motion.div>
+            <div className="mt-8 flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.1em] text-ink-tertiary"><MapPin className="h-3.5 w-3.5 text-accent" /> {IDENTITY.location} <span className="text-rule/30">/</span> <a href="https://peerlist.io/kunjshah/project/engineeros" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">EngineerOS · 11↑</a></div>
           </div>
-        </motion.div>
+          <motion.aside initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.14 }} className="lg:pt-3" aria-label="A little more about Kunj">
+            <div className="relative mx-auto w-full max-w-sm lg:ml-auto lg:mr-0"><div className="absolute -inset-3 rounded-2xl bg-accent/[0.08] blur-2xl" aria-hidden /><div className="relative overflow-hidden rounded-2xl border border-rule/10 bg-elevated shadow-[0_18px_60px_rgb(var(--ink-primary)/0.10)]"><img src={IDENTITY.profile_photo} alt="Kunj Shah working on AI engineering projects" width="420" height="520" className="aspect-[4/5] w-full object-cover object-[center_18%]" fetchPriority="high" /><div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-primary/70 to-transparent" /><div className="absolute inset-x-4 bottom-4 rounded-lg border border-white/20 bg-ink-primary/65 px-4 py-3 text-paper backdrop-blur-md"><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-paper/70">Right now</span><p className="mt-1 text-sm font-medium leading-5">Building multi-agent research workflows and writing down what breaks.</p></div></div><div className="mt-4 rounded-xl border border-rule/10 bg-elevated/80 p-4 backdrop-blur"><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-ink-tertiary">I&apos;m most useful when</span><ul className="mt-3 space-y-2">{USEFUL_WHEN.map((item) => <li key={item} className="flex items-start gap-2 text-xs leading-5 text-ink-secondary"><span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />{item}</li>)}</ul></div></div>
+          </motion.aside>
+        </div>
+        <div className="mt-14 grid max-w-2xl grid-cols-3 divide-x divide-rule/10 border-y border-rule/10 py-4 sm:mt-16">{SIGNALS.map((signal) => <div key={signal.label} className="px-3 first:pl-0 sm:px-5"><div className="font-display text-xl font-semibold tabular-nums text-ink-primary sm:text-2xl">{signal.value}</div><div className="mt-1 font-mono text-[9px] uppercase tracking-[0.08em] text-ink-tertiary">{signal.label}</div></div>)}</div>
       </div>
-
-      {/* Mobile: grounding identity row (photo is desktop-only) */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-10 flex md:hidden items-center gap-4 p-4 rounded-xl border border-rule/10 bg-elevated/70"
-      >
-        <div className="relative shrink-0">
-          <div className="absolute -inset-1 rounded-full bg-accent/20 blur-md" aria-hidden />
-          <img
-            src={IDENTITY.profile_photo}
-            alt={`${IDENTITY.name} - AI Engineer`}
-            className="relative w-14 h-14 rounded-full object-cover object-[center_20%] border border-accent/20"
-            loading="eager"
-          />
-        </div>
-        <div className="min-w-0">
-          <div className="text-sm font-semibold text-ink-primary leading-tight">{IDENTITY.name}</div>
-          <div className="mt-1 flex items-center gap-2 text-xs text-ink-tertiary font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot shrink-0" />
-            <span className="truncate">Building multi-agent research workflows</span>
-          </div>
-        </div>
-      </motion.div>
     </section>
   )
 }

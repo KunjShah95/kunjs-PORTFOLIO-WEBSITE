@@ -2,7 +2,6 @@ import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
-import { Database, Workflow, Code } from 'lucide-react'
 import { Layout } from './components/Layout'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { LoadingSpinner } from './components/LoadingSpinner'
@@ -14,14 +13,12 @@ import { BentoHero } from './components/BentoHero'
 import { TechMarquee } from './components/TechMarquee'
 import { ServicesSection } from './components/ServicesSection'
 import { FeaturedProjects } from './components/FeaturedProjects'
-import { LiveProjectShowcase } from './components/LiveProjectShowcase'
 import { FinalCTA } from './components/FinalCTA'
 import { SEO } from './components/SEO'
 import { SITE_URL } from './lib/site'
 import { InitialLoader } from './components/InitialLoader'
 import { BLOGS } from './data/portfolio'
 import { PORTFOLIO_FAQ } from './data/seo-faq'
-import { useGitHubPRs } from './hooks/useGitHubPRs'
 
 // Lazy load secondary pages
 const BlogsPage = lazy(() => import('./pages/BlogsPage').then(module => ({ default: module.BlogsPage })))
@@ -36,12 +33,110 @@ const SkillsPage = lazy(() => import('./pages/SkillsPage').then(module => ({ def
 const ExperiencePage = lazy(() => import('./pages/ExperiencePage').then(module => ({ default: module.ExperiencePage })))
 const EducationPage = lazy(() => import('./pages/EducationPage').then(module => ({ default: module.EducationPage })))
 
-function Home() {
-  const latestBlogs = BLOGS.slice(0, 3)
-  const { contributions, stats: liveStats } = useGitHubPRs()
+function WritingSection({ blogs }: { blogs: typeof BLOGS }) {
+  const [lead, ...rest] = blogs
+  if (!lead) return null
 
   return (
-    <div className="space-y-0">
+    <section id="writing" className="relative border-t border-rule/10 py-20 md:py-24">
+      <div className="mx-auto max-w-5xl px-5 sm:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mb-12 text-center"
+        >
+          <h2 className="font-display text-4xl font-semibold leading-[0.96] tracking-[-0.05em] text-ink-primary md:text-5xl">
+            Notes from shipping.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-ink-secondary">
+            Long-form essays on AI engineering, agents, and production systems.
+          </p>
+          <Link
+            to="/blogs"
+            className="group mx-auto mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink-secondary transition-colors hover:text-accent"
+          >
+            All essays <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+          </Link>
+        </motion.div>
+
+        <div className="grid gap-6 md:grid-cols-12">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-7"
+          >
+            <div className="flex min-h-[320px] flex-col justify-between rounded-2xl border border-rule/10 bg-elevated p-6 text-center transition-all hover:border-accent/30 hover:-translate-y-0.5 sm:p-8">
+              <div>
+                <div className="flex flex-wrap items-center justify-center gap-2 font-mono text-[10px]">
+                  <span className="uppercase tracking-wider text-accent">{lead.category}</span>
+                  <span className="text-ink-quaternary">/</span>
+                  <span className="text-ink-tertiary">{lead.date} · {lead.readTime} min read</span>
+                </div>
+                <h3 className="mt-5 font-display text-2xl font-semibold leading-tight tracking-[-0.03em] text-ink-primary md:text-3xl">
+                  <Link to={`/blogs/${lead.slug}`} className="transition-colors hover:text-accent">
+                    {lead.title}
+                  </Link>
+                </h3>
+                <p className="mx-auto mt-4 max-w-prose text-sm leading-6 text-ink-secondary">
+                  {lead.excerpt}
+                </p>
+              </div>
+              <Link
+                to={`/blogs/${lead.slug}`}
+                className="mt-6 inline-flex items-center justify-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+              >
+                Read essay →
+              </Link>
+            </div>
+          </motion.div>
+
+          <div className="flex flex-col gap-4 md:col-span-5">
+            {rest.map((blog, i) => (
+              <motion.div
+                key={blog.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-1 flex-col justify-between rounded-2xl border border-rule/10 bg-elevated p-5 text-center transition-all hover:border-accent/30 hover:-translate-y-0.5"
+              >
+                <div>
+                  <div className="flex items-center justify-center gap-2 font-mono text-[10px]">
+                    <span className="uppercase tracking-wider text-accent">{blog.category}</span>
+                    <span className="text-ink-quaternary">/</span>
+                    <span className="text-ink-tertiary">{blog.date}</span>
+                  </div>
+                  <h3 className="mt-3 font-display text-lg font-semibold leading-tight tracking-tight text-ink-primary">
+                    <Link to={`/blogs/${blog.slug}`} className="transition-colors hover:text-accent">
+                      {blog.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-ink-secondary">{blog.excerpt}</p>
+                </div>
+                <Link
+                  to={`/blogs/${blog.slug}`}
+                  className="mt-4 inline-flex items-center justify-center gap-1 border-t border-rule/10 pt-3 text-xs font-medium text-accent transition-colors hover:text-accent-hover"
+                >
+                  Read →
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Home() {
+  const latestBlogs = [...BLOGS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3)
+
+  return (
+    <div>
       <SEO
         title="Kunj Shah | AI Engineer & Agent Builder - Autonomous Agents, LLMs & Production AI Systems"
         description="Kunj Shah is an AI engineer and agent builder in Ahmedabad building production AI systems — autonomous agents, LLM orchestration, RAG pipelines, edge computer vision, and full-stack AI applications. 12+ shipped projects, 44+ open-source PRs, 4 hackathon finals."
@@ -51,284 +146,9 @@ function Home() {
       />
       <BentoHero />
       <TechMarquee />
-<FeaturedProjects />
-
-      {/* EngineerOS Live Showcase */}
-      <LiveProjectShowcase />
-
-      {/* Open Source */}
-      <section id="open-source" className="relative py-20 md:py-24 bg-sunken/30 border-y border-rule/10">
-        <div className="relative max-w-5xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
-          >
-            <div>
-              <span className="kicker kicker-accent">Open source — verified on GitHub</span>
-              <h2 className="display text-[2rem] md:text-[2.75rem] leading-[0.96] mt-3">Open source contributions.</h2>
-              <p className="mt-3 text-[15px] text-ink-secondary max-w-xl leading-relaxed text-pretty">
-                Real work in {liveStats.orgs.join(', ')} and {liveStats.projects}+ more.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Stats row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            {[
-              [liveStats.mergedPRs, 'merged PRs', ''],
-              [liveStats.openedIssues, 'issues opened', ''],
-              [liveStats.totalPRs, 'total PRs', ''],
-              [liveStats.projects, 'external projects', '+'],
-            ].map(([n, label, suffix]) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-                className="p-5 rounded-xl border border-rule/10 bg-elevated"
-              >
-                <div className="font-display text-[28px] font-semibold tracking-tight text-ink-primary tabular-nums leading-none">
-                  {n}{suffix as string}
-                </div>
-                <div className="mt-2 font-mono text-[11px] text-ink-tertiary">{label}</div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Contributions list */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-          >
-            <div className="flex items-center justify-between mb-5">
-              <span className="kicker">Recent contributions</span>
-              <span className="font-mono text-[10px] text-ink-tertiary">{contributions.length} total</span>
-            </div>
-
-            <div className="divide-y divide-rule/10 rounded-xl border border-rule/10 overflow-hidden">
-              {contributions.map((c, i) => (
-                <motion.div
-                  key={c.url}
-                  initial={{ opacity: 0, x: -8 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: i * 0.03 }}
-                >
-                  <a
-                    href={c.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col gap-1.5 py-4 px-5 md:flex-row md:items-center md:gap-5 hover:bg-accent/5 transition-colors relative"
-                  >
-                    <span className="absolute left-0 inset-y-0 w-0.5 bg-accent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                    <div className="flex items-center gap-2.5 md:w-44 md:shrink-0">
-                      {c.notable && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot" />
-                      )}
-                      <span className="display text-sm font-semibold text-ink-primary group-hover:text-accent transition-colors">
-                        {c.label}
-                      </span>
-                    </div>
-                    <p className="flex-1 text-sm text-ink-secondary leading-relaxed group-hover:text-ink-primary transition-colors">{c.title}</p>
-                    <div className="flex items-center gap-2 font-mono text-[10px] text-ink-tertiary md:w-32 md:justify-end shrink-0">
-                      <span className="px-1.5 py-0.5 rounded bg-sunken/60 border border-rule/10">{c.kind}</span>
-                      <span className="text-accent">{c.tag}</span>
-                    </div>
-                  </a>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
+      <FeaturedProjects />
       <ServicesSection />
-
-      {/* Inside the stack — terminal treatment, distinct from Services cards */}
-      <section className="relative py-20 md:py-24 bg-paper">
-        <div className="relative max-w-5xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-12"
-          >
-            <span className="kicker kicker-accent">Under the hood</span>
-            <h2 className="display text-[2rem] md:text-[2.75rem] leading-[0.96] max-w-3xl mt-3">Inside the stack.</h2>
-            <p className="mt-3 text-[15px] text-ink-secondary max-w-xl leading-relaxed text-pretty">
-              How I design the AI systems I ship, from data to deployment.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {[
-              {
-                icon: Database,
-                title: 'RAG Pipeline',
-                steps: ['Documents / Chunking / Embedding', 'Vector store (ChromaDB) / Similarity search', 'Retrieved context + Query / LLM generation', 'Grounded answer with source citations'],
-                tags: 'ChromaDB / LangChain / Multi-provider LLM / Hybrid search',
-              },
-              {
-                icon: Workflow,
-                title: 'Multi-Agent Architecture',
-                steps: ['Manager agent: decomposes goals into task graph', 'Worker agents: parallel execution with tool access', 'Guardrails: eval / HITL gates / fallback', 'Checkpointing + state persistence (Postgres JSONB)'],
-                tags: 'LangGraph / CrewAI / Supervisor/Worker pattern / Postgres state',
-              },
-              {
-                icon: Code,
-                title: 'Full-Stack AI App',
-                steps: ['React / Next.js frontend / FastAPI / Python backend', 'PostgreSQL + Redis for state and caching', 'Multi-provider LLM orchestration with fallback chain', 'CI/CD deploy on Vercel + Render with Docker'],
-                tags: 'React / FastAPI / PostgreSQL / Docker / Vercel + Render',
-              },
-              {
-                icon: Code,
-                title: 'LLM Internals: BPE Tokenizer',
-                steps: ['Pre-tokenize: regex split (GPT-2/4 pattern)', 'BPE merge: learn ~50K merge rules from corpus', 'Encode: apply merges into token IDs', 'Decode: token IDs into byte sequences into text'],
-                tags: 'Pure Python implementation / 15% token reduction on technical data',
-              },
-            ].map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                className="rounded-xl border border-rule/10 bg-sunken/50 overflow-hidden group hover:border-accent/30 transition-all"
-              >
-                {/* Terminal chrome */}
-                <div className="flex items-center gap-2 px-4 py-2.5 border-b border-rule/10 bg-elevated/60">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rule/25" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-rule/25" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-accent/40" />
-                  <span className="ml-2 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-ink-tertiary">
-                    <item.icon className="w-3 h-3 text-accent" />
-                    {item.title}
-                  </span>
-                </div>
-                <div className="p-5 md:p-6">
-                  <div className="space-y-2.5 font-mono text-[13px] leading-relaxed">
-                    {item.steps.map((step, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <span className="text-accent shrink-0">&rsaquo;</span>
-                        <span className="text-ink-secondary">{step}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-5 pt-4 border-t border-rule/10">
-                    <span className="font-mono text-[10px] text-ink-tertiary">{item.tags}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Writing */}
-      <section id="writing" className="relative py-20 md:py-24 border-t border-rule/10">
-        <div className="relative max-w-5xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
-          >
-            <div>
-              <span className="kicker kicker-accent">Writing</span>
-              <h2 className="display text-[2rem] md:text-[2.75rem] leading-[0.96] max-w-2xl mt-3">Notes from shipping.</h2>
-              <p className="mt-3 text-[15px] text-ink-secondary max-w-xl leading-relaxed text-pretty">
-                Long-form essays on AI engineering, agents, and production systems.
-              </p>
-            </div>
-            <Link
-              to="/blogs"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover shrink-0 transition-colors"
-            >
-              All essays
-              <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
-            </Link>
-          </motion.div>
-
-          {latestBlogs.length > 0 && (() => {
-            const [lead, ...rest] = latestBlogs;
-            return (
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                {/* Lead essay */}
-                <div className="md:col-span-7">
-                  <div className="h-full p-6 md:p-8 rounded-xl border border-rule/10 bg-elevated hover:border-accent/30 transition-all group hover-lift flex flex-col justify-between min-h-[340px]">
-                    <div>
-                      <div className="flex flex-wrap items-center gap-3 text-xs">
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-accent">{lead.category}</span>
-                        <span className="text-ink-quaternary">/</span>
-                        <span className="font-mono text-[10px] text-ink-tertiary">{lead.date} &middot; {lead.readTime} min read</span>
-                      </div>
-                      <h3 className="display text-2xl md:text-3xl mt-5 leading-[1.05] font-semibold">
-                        <Link to={`/blogs/${lead.slug}`} className="hover:text-accent transition-colors">
-                          {lead.title}
-                        </Link>
-                      </h3>
-                      <p className="mt-4 text-sm text-ink-secondary leading-relaxed max-w-2xl">
-                        {lead.excerpt}
-                      </p>
-                    </div>
-                    <div className="mt-6">
-                      <Link
-                        to={`/blogs/${lead.slug}`}
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
-                      >
-                        Read essay
-                        <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Supporting essays */}
-                <div className="md:col-span-5 flex flex-col gap-6">
-                  {rest.map((blog) => (
-                    <div key={blog.id} className="flex-1">
-                      <div className="h-full p-5 md:p-6 rounded-xl border border-rule/10 bg-elevated hover:border-accent/30 transition-all group hover-lift flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-center gap-3 text-xs mb-2">
-                            <span className="font-mono text-[10px] uppercase tracking-wider text-accent">{blog.category}</span>
-                            <span className="text-ink-quaternary">/</span>
-                            <span className="font-mono text-[10px] text-ink-tertiary">{blog.date}</span>
-                          </div>
-                          <h3 className="display text-lg md:text-xl leading-tight font-semibold">
-                            <Link to={`/blogs/${blog.slug}`} className="hover:text-accent transition-colors">
-                              {blog.title}
-                            </Link>
-                          </h3>
-                          <p className="mt-2 text-sm text-ink-secondary line-clamp-2 leading-relaxed">{blog.excerpt}</p>
-                        </div>
-                        <div className="mt-4 pt-3 border-t border-rule/10">
-                          <Link
-                            to={`/blogs/${blog.slug}`}
-                            className="inline-flex items-center gap-1 text-xs font-medium text-accent hover:text-accent-hover transition-colors"
-                          >
-                            Read
-                            <span className="inline-block transition-transform group-hover:translate-x-0.5">&rarr;</span>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })()}
-        </div>
-      </section>
-
+      <WritingSection blogs={latestBlogs} />
       <FinalCTA />
     </div>
   )
@@ -336,7 +156,7 @@ function Home() {
 
 function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center space-y-4 pt-20">
+    <div className="flex min-h-[65vh] flex-col items-center justify-center space-y-4 py-20">
       <SEO
         title="Page Not Found - Kunj Shah"
         description="The page you are looking for does not exist or has been moved. Return to the home page or browse projects and writing."
@@ -344,7 +164,7 @@ function NotFound() {
       />
       <h1 className="text-6xl font-bold font-display text-ink-primary">404</h1>
       <p className="text-ink-secondary text-lg">Page not found</p>
-      <Link to="/" className="text-accent hover:underline text-sm font-medium">Return home</Link>
+      <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-medium"><Link to="/" className="text-accent hover:underline">Return home</Link><Link to="/projects" className="text-ink-secondary hover:text-ink-primary">Browse work</Link><Link to="/blogs" className="text-ink-secondary hover:text-ink-primary">Read writing</Link></div>
     </div>
   )
 }

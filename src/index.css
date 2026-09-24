@@ -8,56 +8,56 @@
 
 @layer base {
   :root {
-    /* Light mode — warm off-white */
-    --bg-sunken:       235 237 240;   /* #EBEDF0 */
-    --bg-paper:        248 249 250;   /* #F8F9FA */
-    --bg-elevated:     255 255 255;   /* #FFFFFF */
-    --bg-inverse:      26 28 40;      /* #1A1C28 */
+    /* Canvas — light emerald editorial (default) */
+    --bg-sunken:       236 243 239;
+    --bg-paper:        248 252 249;
+    --bg-elevated:     255 255 255;
+    --bg-inverse:      20 44 36;
 
-    --ink-primary:     30 35 45;      /* #1E232D */
-    --ink-secondary:   100 110 125;   /* #646E7D */
-    --ink-tertiary:    150 155 165;   /* #969BA5 */
-    --ink-quaternary:  180 185 195;   /* #B4B9C3 */
-    --ink-inverse:     240 241 245;
+    --ink-primary:     20 44 36;
+    --ink-secondary:   58 89 78;
+    --ink-tertiary:    102 135 122;
+    --ink-quaternary:  162 190 180;
+    --ink-inverse:     248 252 249;
 
-    --rule:            30 35 45;
-    --rule-strong:     30 35 45;
+    --rule:            20 44 36;
+    --rule-strong:     20 44 36;
 
-    --accent:          12 140 100;     /* #0C8C64 — slightly desaturated premium emerald */
-    --accent-hover:    10 118 84;
-    --accent-soft:     12 140 100;
+    --accent:          5 150 105;
+    --accent-hover:    4 120 87;
+    --accent-soft:     5 150 105;
     --accent-ink:      255 255 255;
 
-    --success:         22 163 74;
-    --warning:         180 83 9;
-    --danger:          225 29 72;
+    --success:         5 150 105;
+    --warning:         217 119 6;
+    --danger:          220 38 38;
     --live:            5 150 105;
 
-    /* Dark mode — cool slate */
     &.dark {
-      --bg-sunken:       12 14 20;
-      --bg-paper:        18 20 30;
-      --bg-elevated:     26 28 40;
-      --bg-inverse:      240 241 245;
+      /* Obsidian — deep navy + sky blue */
+      --bg-sunken:       5 8 14;
+      --bg-paper:        8 11 18;
+      --bg-elevated:     12 16 26;
+      --bg-inverse:      220 235 255;
 
-      --ink-primary:     230 232 240;
-      --ink-secondary:   160 164 176;
-      --ink-tertiary:    110 115 130;
-      --ink-quaternary:  75 80 95;
-      --ink-inverse:     18 20 30;
+      --ink-primary:     220 235 255;
+      --ink-secondary:   156 175 210;
+      --ink-tertiary:    100 120 155;
+      --ink-quaternary:  65 82 108;
+      --ink-inverse:     8 11 18;
 
-      --rule:            230 232 240;
-      --rule-strong:     230 232 240;
+      --rule:            220 235 255;
+      --rule-strong:     220 235 255;
 
-      --accent:          16 185 129;
-      --accent-hover:    52 211 153;
-      --accent-soft:     16 185 129;
-      --accent-ink:      255 255 255;
+      --accent:          56 189 248;
+      --accent-hover:    14 165 233;
+      --accent-soft:     56 189 248;
+      --accent-ink:      8 11 18;
 
-      --success:         34 197 94;
-      --warning:         234 179 8;
-      --danger:          239 68 68;
-      --live:            16 185 129;
+      --success:         52 211 153;
+      --warning:         251 191 36;
+      --danger:          248 113 113;
+      --live:            56 189 248;
     }
 
     /* Shared scale tokens */
@@ -428,4 +428,190 @@
     .animate-float, .animate-ping-soft, .animate-pulse-dot,
     .animate-shimmer { animation: none !important; }
   }
+}
+
+/* Motion-led dark surface system. One accent, one signature idea per surface. */
+@layer components {
+  .aceternia-shell {
+    background:
+      radial-gradient(circle at 50% -20%, rgb(var(--accent) / 0.08), transparent 35rem),
+      rgb(var(--bg-paper));
+  }
+
+  .aceternia-grid {
+    background-image:
+      linear-gradient(rgb(var(--ink-primary) / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--ink-primary) / 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(to bottom, black, transparent 78%);
+  }
+
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+    mix-blend-mode: screen;
+  }
+
+  .gradient-border {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    background: conic-gradient(from var(--border-angle, 0deg), transparent 0 58%, rgb(var(--accent)) 72%, transparent 84% 100%);
+    animation: border-spin 6s linear infinite;
+  }
+
+  .gradient-border::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    z-index: -1;
+    border-radius: inherit;
+    background: rgb(var(--bg-elevated));
+  }
+
+  .signal-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgb(var(--ink-primary) / 0.12);
+    border-radius: 9999px;
+    background: rgb(var(--bg-elevated) / 0.7);
+    padding: 0.5rem 0.75rem;
+    color: rgb(var(--ink-secondary));
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(16px);
+  }
+
+  .signal-chip strong { color: rgb(var(--accent)); font-weight: 500; }
+
+  .glow-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    background: rgb(var(--accent));
+    color: rgb(var(--accent-ink));
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 0 28px rgb(var(--accent) / 0.14);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .glow-button:hover { transform: translateY(-2px); box-shadow: 0 0 42px rgb(var(--accent) / 0.26); }
+  .glow-button:active { transform: translateY(1px) scale(0.99); }
+
+  .dark-card {
+    border: 1px solid rgb(var(--ink-primary) / 0.1);
+    background: rgb(var(--bg-elevated) / 0.72);
+    box-shadow: inset 0 1px 0 rgb(var(--ink-primary) / 0.06);
+    backdrop-filter: blur(18px);
+  }
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-spin {
+  to { --border-angle: 360deg; }
+}
+
+@keyframes beam-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(var(--bx1), var(--by1), 0) scale(1.08); }
+}
+
+.animate-beam-float { animation-name: beam-float; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+
+/* Curated appearance themes. The content and spacing stay constant; only the atmosphere changes. */
+html[data-theme='canvas']:not(.dark) {
+  --bg-sunken: 236 243 239;
+  --bg-paper: 248 252 249;
+  --bg-elevated: 255 255 255;
+  --bg-inverse: 20 44 36;
+  --ink-primary: 20 44 36;
+  --ink-secondary: 58 89 78;
+  --ink-tertiary: 102 135 122;
+  --ink-quaternary: 162 190 180;
+  --ink-inverse: 248 252 249;
+  --rule: 20 44 36;
+  --rule-strong: 20 44 36;
+  --accent: 5 150 105;
+  --accent-hover: 4 120 87;
+  --accent-soft: 5 150 105;
+  --accent-ink: 255 255 255;
+  --success: 5 150 105;
+  --warning: 217 119 6;
+  --danger: 220 38 38;
+  --live: 5 150 105;
+  color-scheme: light;
+}
+
+html[data-theme='obsidian'] {
+  --bg-sunken: 5 8 14;
+  --bg-paper: 8 11 18;
+  --bg-elevated: 12 16 26;
+  --bg-inverse: 220 235 255;
+  --ink-primary: 220 235 255;
+  --ink-secondary: 156 175 210;
+  --ink-tertiary: 100 120 155;
+  --ink-quaternary: 65 82 108;
+  --ink-inverse: 8 11 18;
+  --rule: 220 235 255;
+  --rule-strong: 220 235 255;
+  --accent: 56 189 248;
+  --accent-hover: 14 165 233;
+  --accent-soft: 56 189 248;
+  --accent-ink: 8 11 18;
+  --success: 52 211 153;
+  --warning: 251 191 36;
+  --danger: 248 113 113;
+  --live: 56 189 248;
+}
+
+html[data-theme='obsidian'].dark {
+  color-scheme: dark;
+}
+
+
+html[data-theme='ash']:not(.dark) {
+  --bg-sunken: 228 228 231;
+  --bg-paper: 244 244 245;
+  --bg-elevated: 255 255 255;
+  --bg-inverse: 24 24 27;
+  --ink-primary: 24 24 27;
+  --ink-secondary: 63 63 70;
+  --ink-tertiary: 113 113 122;
+  --ink-quaternary: 161 161 170;
+  --ink-inverse: 244 244 245;
+  --rule: 24 24 27;
+  --rule-strong: 24 24 27;
+  --accent: 245 158 11;
+  --accent-hover: 217 119 6;
+  --accent-soft: 245 158 11;
+  --accent-ink: 24 24 27;
+  --success: 74 222 128;
+  --warning: 245 158 11;
+  --danger: 239 68 68;
+  --live: 245 158 11;
+  color-scheme: light;
 }
