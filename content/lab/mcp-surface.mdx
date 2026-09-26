@@ -1,0 +1,52 @@
+---
+slug: mcp-surface
+number: "09"
+title: MCP Resource Surface
+hypothesis: A portfolio is content, and content is exactly what a machine-readable resource is for. Publishing the same data as an MCP resource costs little and makes the work legible to agents.
+state: active
+stateNote: Live — published on this site, still being extended
+tech:
+  - MCP
+  - JSON
+  - OPENAPI
+  - LLMS TXT
+year: "2026"
+repo: https://github.com/KunjShah95/kunjs-PORTFOLIO-WEBSITE
+---
+
+## What I was testing
+
+I read a lot of the web through assistants rather than through a browser. That
+makes the format of a page a real interface, and most portfolios present
+themselves only as a visual artefact. The question was whether the same
+underlying content could be published as a proper machine-readable resource
+without maintaining two versions of the truth.
+
+## Method
+
+Published the portfolio content at three layers of formality:
+
+- **`/llms.txt` and `/llms-full.txt`** — a flat markdown index and full text
+  summary, for crawlers that want a readable overview.
+- **`/api/portfolio.json`** — the structured record: projects, experience,
+  writing, and the claims attached to each.
+- **An MCP server card** at `/.well-known/mcp/server-card.json` declaring a
+  read-only resource surface over the same content.
+
+All three are generated from the same content layer the pages render from.
+Nothing is maintained by hand, which is the only reason this stays honest.
+
+## Result
+
+It works, and the cost is close to zero once the content layer is separated from
+the interface. The part I did not expect: writing the machine-readable surface
+first changed what I put on the pages. A field that has no honest value in JSON
+is usually a field that has no honest value anywhere, and several claims I had
+been carrying as adjectives turned out to have no number behind them at all.
+
+## Still open
+
+A read-only resource surface is a floor, not a capability. Tool use is disabled
+on the card, and I have not yet built anything worth exposing as a tool —
+because the honest answer is that a portfolio is a thing to read, and the
+resource interface already covers it.

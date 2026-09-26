@@ -1,0 +1,76 @@
+---
+slug: case-study-railway-inspection
+title: Teaching a Computer to Inspect Railway Tracks
+date: "2026-01"
+dateLabel: "JAN 2026"
+category: ENGINEERING
+readTime: 7
+excerpt: A real-time defect detection system on edge hardware. YOLOv8, TensorRT, INT8, and why every millisecond matters when the box has no fans.
+tags:
+  - COMPUTER VISION
+  - EDGE
+  - HARDWARE
+  - CASE STUDY
+featured: true
+projectSlug: railway-inspection
+---
+
+<ProjectLink
+  slug="railway-inspection"
+  label="Railway Inspection"
+  note="The full case study: pipeline architecture, quantisation experiments and performance."
+/>
+
+A railway track inspection system has to find small defects in metal, at speed,
+in daylight and pouring rain, on a computer that fits in a backpack. This is how
+I built one.
+
+## The problem
+
+Manual inspection is slow, dangerous and inconsistent. A human walks miles
+looking for cracks, deformations and wear patterns. From a moving train the
+window to see a defect is milliseconds.
+
+Existing automated systems were expensive and needed specialised hardware. I
+wanted something that would run on affordable edge hardware and still meet the
+accuracy requirement.
+
+## The constraint that decided everything
+
+Sub-100ms end to end — frame ingestion, preprocessing, inference and
+post-processing combined. Not on a workstation. On a fanless Jetson Orin
+sitting at the edge.
+
+That one number determined the architecture. On an A100 the problem is
+uninteresting; on hardware with no fans, the model is the least interesting part.
+
+## What I built
+
+YOLOv8 with a four-stage pipeline: hardware-accelerated GStreamer decode, CUDA
+preprocessing, a TensorRT INT8 engine compiled for the Orin, and post-processing
+on the host.
+
+The moves that mattered:
+
+- **Python out, C++ in.** A per-frame inference loop on an edge device is
+  bottlenecked by the language. TensorRT with a device-specific engine was worth
+  about 3x on its own.
+- **Quantisation-aware training, not post-training quantisation.** Naive INT8
+  quantisation quietly destroys small-defect accuracy — small low-contrast
+  objects are exactly what gets quantised away. Letting the weights adapt to
+  the precision budget during the final epochs held 98.7% while halving
+  inference time.
+- **Fix the environment before blaming the model.** Motion blur and low light
+  both look identical to model failure. Handling them upstream recovered
+  accuracy without touching the weights.
+
+## The result
+
+98.7% detection accuracy, 4.2x faster than manual inspection, under 100ms end
+to end, on affordable edge hardware. INT8 gave 2x over FP16 with accuracy
+intact.
+
+That last number is the difference between a lab demo and something that could
+be deployed.
+
+**The edge is not about the model. It is about every millisecond.**

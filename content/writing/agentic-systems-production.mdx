@@ -1,0 +1,72 @@
+---
+slug: agentic-systems-production
+title: Building Production-Grade Agentic Systems
+date: "2026-01"
+dateLabel: "JAN 2026"
+category: SYSTEMS
+readTime: 12
+excerpt: Autonomy is easy and reliability is hard. A look at state persistence, hierarchical orchestration, and the human-in-the-loop breakpoints that keep agents inside their rails.
+tags:
+  - AI SYSTEMS
+  - ARCHITECTURE
+  - PRODUCTION
+  - AGENTS
+featured: true
+---
+
+We have all seen the demos. A script sends a prompt to an LLM, the LLM emits a
+tool call, and suddenly you have an *autonomous agent*. But if you have ever
+tried to move that agent from a local terminal into a production environment,
+you know exactly where the floor drops out.
+
+The reality is that **autonomy is easy; reliability is hard.**
+
+## The happy-path trap
+
+Most agentic frameworks focus on the happy path. They assume the agent will
+understand the goal, select the right tool, and interpret the output correctly.
+In production, the unhappy path is 80% of the engineering work.
+
+Rate limits change. Tools return malformed JSON. The model gets stuck in a
+repetitive loop — a hallucination spiral. To build something production-grade
+you have to treat agents like distributed systems, not chatbots.
+
+## Three architecture pillars
+
+**1. State persistence and checkpointing.**
+An agent should never be stateless. If a long-running task fails halfway through
+a ten-step chain, the system must be able to restore the exact state of its
+memory and scratchpad. I lean on Postgres with JSONB to track the trace id of
+every reasoning step. Without this, a failure at step eight means paying for
+steps one to eight twice.
+
+**2. Hierarchical orchestration.**
+Flat agents are brittle. I have moved toward a supervisor model: a manager
+agent breaks the goal into a graph of tasks, which are assigned to specialised
+workers with restricted tool access. The restriction is what does the work, not
+the supervision — it limits the blast radius of a single agent's mistake to the
+tools that agent was given.
+
+**3. Human-in-the-loop breakpoints.**
+There are actions — database migrations, bulk email, anything financial — where
+the entropy of a model is unacceptable. I implement breakpoints where the agent
+must pause and wait for a signed approval token. Gate *every* step and you have
+built a click-through; gate the irreversible ones and you have built a control.
+
+## The feedback loop
+
+The most critical part of a production agent is the loop back. I do not just log
+the final output; I log the reasoning trace. By analysing where agents deviate
+from the intended path I can do targeted few-shot prompting, or fine-tune a
+much smaller model to handle that specific sub-task at higher precision and
+lower cost than a frontier one.
+
+## What I have stopped believing
+
+That a smarter model is the answer. Almost every failure I have debugged was
+structural — a missing checkpoint, an unbounded loop, no verification stage.
+A better model hides those failures right up until the day it does not.
+
+Building agents is not really about AI. It is systems engineering. It is
+building the rails that let intelligence run at full speed without leaving the
+track.

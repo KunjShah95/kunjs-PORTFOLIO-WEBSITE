@@ -1,0 +1,257 @@
+.figure {
+  margin-block: clamp(32px, 4vw, 52px);
+  border: 1px solid var(--line);
+  background: var(--ink-050);
+  max-width: 100%;
+}
+
+.caption {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: baseline;
+  gap: var(--sp-3);
+  padding: 12px var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-150);
+}
+
+.captionIndex {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-sm);
+  letter-spacing: 0.14em;
+  color: var(--signal);
+  border: 1px solid var(--line-accent);
+  padding: 2px 6px;
+}
+
+.captionTitle {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.captionNote {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--text-faint);
+  min-width: 0;
+}
+
+/* ----------------------------------------------------------------- rail */
+.rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  position: relative;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: var(--sp-3);
+  padding: 16px 14px 18px;
+  border-right: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  cursor: default;
+  outline-offset: -2px;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.stage:last-child {
+  border-right: 0;
+}
+
+.stage:hover,
+.stage[data-active] {
+  background: var(--signal-wash);
+}
+
+.stage[data-touched] {
+  background: var(--trace-wash);
+}
+
+.tick {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.tick::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--line);
+}
+
+.tick i {
+  position: relative;
+  margin-top: 4px;
+  width: 7px;
+  height: 7px;
+  background: var(--ink-050);
+  border: 1px solid var(--text-ghost);
+  transition: border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.stage:hover .tick i,
+.stage[data-active] .tick i {
+  background: var(--signal);
+  border-color: var(--signal);
+  transform: scale(1.25);
+}
+
+.stage[data-touched] .tick i {
+  border-color: var(--trace);
+}
+
+.body {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.idx {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-sm);
+  letter-spacing: 0.08em;
+  color: var(--text-ghost);
+  font-variant-numeric: tabular-nums;
+}
+
+.stage[data-active] .idx {
+  color: var(--signal);
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  border: 1px solid var(--line);
+  padding: 1px 4px;
+}
+
+.note {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-faint);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out);
+}
+
+.stage:hover .note,
+.stage[data-active] .note,
+.stage:focus-visible .note {
+  max-height: 9em;
+  opacity: 1;
+}
+
+/* On touch and reduced motion there is no hover, so notes stay open. */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .note {
+    max-height: none;
+    opacity: 1;
+  }
+}
+
+/* -------------------------------------------------------------- returns */
+.returns {
+  padding: 14px var(--sp-4) 16px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+}
+
+.returnList {
+  display: grid;
+  gap: 8px;
+}
+
+.return {
+  display: grid;
+  grid-template-columns: minmax(0, auto) 1fr;
+  gap: var(--sp-3) var(--sp-4);
+  align-items: baseline;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  padding-left: 14px;
+  border-left: 1px dashed var(--line-strong);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.return[data-kind='control'] {
+  border-left-color: var(--line-accent);
+}
+
+.return[data-kind='verify'] {
+  border-left-color: rgba(92, 157, 150, 0.5);
+}
+
+.return[data-active] {
+  color: var(--text);
+  border-left-color: var(--signal);
+}
+
+.returnEdge {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.returnArrow {
+  color: var(--signal);
+}
+
+.returnLabel {
+  min-width: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .caption {
+    grid-template-columns: auto 1fr;
+  }
+
+  .captionNote {
+    grid-column: 1 / -1;
+  }
+
+  .rail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stage {
+    border-right: 0;
+  }
+}

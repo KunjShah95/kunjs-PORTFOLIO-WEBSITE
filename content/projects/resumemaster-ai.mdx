@@ -1,0 +1,147 @@
+---
+slug: resumemaster-ai
+number: "08"
+title: ResumeMasterAI 2026
+category: AI Career Platform
+summary: A model-routing gateway in front of an LLM workflow. Classify the task, send it to the cheapest capable model, and gate irreversible steps behind human approval.
+year: "2026"
+status: Architecture
+tech:
+  - PYTHON
+  - LANGGRAPH
+  - LLM ROUTING
+  - CHROMADB
+  - STREAMLIT
+github: https://github.com/KunjShah01/job-snipper
+demo: https://resumemasterai.streamlit.app/
+order: 9
+featured: false
+diagram: router
+related:
+  - offerguard-ai
+  - model-router-lab
+  - archmind-ai
+claims:
+  - label: API cost reduction
+    value: 65%
+  - label: Match precision
+    value: 3x
+  - label: Models routed across
+    value: "4"
+  - label: Routing latency overhead
+    value: < 200ms
+  - label: Vector store
+    value: ChromaDB
+---
+
+<Section n="01" id="overview" title="Overview" kicker="Problem · Context · What I built">
+
+## Problem
+
+Career tooling almost always makes one expensive model call where several cheap
+ones would do. Formatting, extracting, normalising and rewriting are treated as
+a single task, so the whole workflow inherits the cost of its hardest step. The
+result is a 65% cost line that is mostly waste.
+
+## Context
+
+The second problem is trust. Tailoring a CV is a long multi-step workflow, and
+a workflow that finishes with a plausible-looking document is a workflow where
+the user has no idea what changed or why. Every irreversible step in a
+document-producing agent is a step that needs an approval gate.
+
+## What I built
+
+A **routing gateway** in front of a LangGraph workflow.
+
+- **Complexity classification** — each step is classified before dispatch, and
+  routed to the cheapest model capable of doing it well. Formatting and
+  extraction go small; strategic rewriting goes large.
+- **LangGraph orchestration** — multi-step workflow with checkpointing so a
+  long run is resumable rather than restartable.
+- **Human-in-the-loop gates** — steps that produce a document a person will
+  submit require a signed approval before they are allowed to commit.
+- **ChromaDB** for role-description similarity matching.
+
+<RouterDiagram caption="The gateway is the point. Four models, one interface, and a classifier that decides which one a given step deserves." />
+
+</Section>
+
+<Section n="02" id="system" title="System" kicker="Architecture · Data flow · Infrastructure">
+
+## Architecture
+
+Every step in the workflow declares what it needs — format tolerance, reasoning
+depth, context length — and the router satisfies it with the cheapest model on
+the roster that meets the bar. The classification is a small model itself, which
+is why routing overhead stays under 200ms.
+
+## Data flow
+
+Target role → ChromaDB similarity search against role descriptions → step
+decomposition → per-step complexity classification → dispatch to the routed
+model → checkpoint → approval gate before document commit.
+
+</Section>
+
+<Section n="03" id="engineering" title="Engineering" kicker="Decisions · Tradeoffs · Failures">
+
+## Important decisions
+
+**Route on declared requirements, not on vibes.** Steps declare what they need.
+This is more upfront work than letting a model pick, and it is the difference
+between a routing system and a random number generator that happens to be
+cheaper.
+
+**Approval gates on irreversible steps only.** Gating every step turns the
+human into a click-through. Gating only the steps that produce a document the
+user will submit keeps a person in the loop exactly where the consequence is.
+
+**Checkpoint everything.** A multi-step agent workflow that cannot resume is a
+workflow that re-pays for the same tokens every time it fails.
+
+## Tradeoffs
+
+- **Classification accuracy vs. routing cost.** Misclassify in the expensive
+  direction and you lose money; misclassify in the cheap direction and you lose
+  quality. The classifier is tuned to err toward quality, because the cost
+  saving is a ceiling and a bad document is a lost user.
+- **Upfront step declarations vs. flexibility.** Declaring requirements is
+  more work per step and makes the routing auditable. The auditability is worth
+  more — being able to explain why a step got an expensive model is the only
+  way to improve the routing.
+- **Throughput vs. human approval.** Gates are latency. Skipping them is faster
+  and produces documents nobody takes responsibility for.
+
+## Failures
+
+The first classifier routed reasoning steps to a small model because the step's
+text *looked* like a formatting task. Rewriting prompts to describe intent
+helped; passing the step's declared requirements as classifier input fixed it
+properly.
+
+</Section>
+
+<Section n="04" id="result" title="Result" kicker="What worked · What changed · What I learned">
+
+## What worked
+
+65% API cost reduction and 3x match precision, with routing overhead under
+200ms — and the two came from the same decision, because routing to the right
+model improves both the bill and the result.
+
+## What changed
+
+The mental model of the workflow. I was treating the model as the component to
+optimise. The routing was the component to optimise.
+
+## What I learned
+
+- Smart routing across models cuts cost more than any prompt optimisation I
+  have tried.
+- Human-in-the-loop gates prevent expensive automated mistakes, and gating
+  every step prevents the human from reading any of them.
+- A cheap classifier is the highest-leverage component in a multi-model
+  system.
+
+</Section>

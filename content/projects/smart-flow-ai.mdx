@@ -1,0 +1,148 @@
+---
+slug: smart-flow-ai
+number: "11"
+title: SmartFlow AI
+category: Smart Infrastructure
+summary: Real-time crowd monitoring for transit hubs. Density heatmaps over a live map and wait-time prediction, with a hybrid statistical + ML model because the real-time data is noisy.
+year: "2026"
+status: Beta
+tech:
+  - NEXT.JS 15
+  - TYPESCRIPT
+  - FIREBASE
+  - FIRESTORE
+  - TIME SERIES
+github: https://github.com/KunjShah95/Smart-flow-ai
+demo: https://ps-1-eight.vercel.app
+order: 8
+featured: false
+diagram: router
+related:
+  - learnai
+  - upi-fraud-guard
+  - agent-orchestration
+claims:
+  - label: Wait-time prediction accuracy
+    value: 94%
+  - label: Data refresh
+    value: Real-time
+  - label: Forecast window
+    value: 24h
+  - label: Data latency
+    value: < 500ms
+---
+
+<Section n="01" id="overview" title="Overview" kicker="Problem · Context · What I built">
+
+## Problem
+
+Crowd management in transit hubs is reactive. Staff find out about a
+bottleneck when it is already a bottleneck, and then respond to the situation
+rather than to the trend that caused it. Peak-hour congestion is the visible
+symptom of a forecasting problem.
+
+## Context
+
+The operations team is the user, not a passenger. That distinction drives
+everything. A passenger wants an accurate number. An operator wants to know
+where to put two extra staff in the next twenty minutes, and a dashboard that
+requires interpretation to produce that decision is a dashboard that does not
+get used.
+
+## What I built
+
+A real-time monitoring platform for transit hubs:
+
+- **Live density heatmaps** layered onto hub maps, fed by continuous sensor
+  ingestion, so the current state is visible without a page refresh.
+- **Wait-time prediction** across a 24-hour forecast window.
+- **Operational alerting** on predicted rather than observed conditions — the
+  only version of this product that is worth building.
+
+</Section>
+
+<Section n="02" id="system" title="System" kicker="Architecture · Data flow · Infrastructure">
+
+## Architecture
+
+<RouterDiagram caption="Hybrid routing. A statistical estimator handles the quiet hours; the ML model takes over when there is enough signal to justify it." />
+
+## Data flow
+
+Sensor stream → Firestore realtime listener → normalisation and resampling to
+a fixed cadence → model selection by signal density → prediction with a
+confidence band → alert evaluation against operator-configured thresholds →
+map overlay and dashboard.
+
+## Infrastructure
+
+Firebase Firestore as the realtime ingestion layer because the workload is
+write-heavy, append-only, and read by a small number of live dashboards.
+Sub-500ms from sensor to view.
+
+</Section>
+
+<Section n="03" id="engineering" title="Engineering" kicker="Decisions · Tradeoffs · Failures">
+
+## Important decisions
+
+**Hybrid statistical + ML, not pure ML.** A pure ML model on this data
+performs worse than a well-specified statistical estimator during the quiet
+hours, because there is not enough signal to generalise from and the model
+interpolates confidently between two sparse points. The hybrid routes to
+statistics when signal density is low and to the model when it is not. It is
+less elegant and it is right.
+
+**Predict, do not just display.** The first version was a dashboard. It was
+correct and it was ignored, because a dashboard requires the operator to
+interpret a picture in order to make a decision. Alerting on *predicted*
+conditions is what turned it into a tool.
+
+**Resample to a fixed cadence.** Sensor data arrives irregularly. Feeding it
+to a model at its native rate makes the model's input distribution depend on
+the network, which is not something you want in a forecasting system.
+
+## Tradeoffs
+
+- **Hybrid complexity vs. model purity.** Two paths mean two things to get
+  wrong and a routing boundary to get wrong too. Pure ML would have been
+  simpler to explain and worse in production.
+- **Alerting vs. fatigue.** Alerting on every predicted threshold crossing
+  trains operators to ignore alerts. The thresholds are operator-configurable
+  precisely because the right value is site-specific and unknowable in advance.
+- **24-hour window vs. accuracy.** Long horizons are where pure forecasting
+  degrades fastest. The window is capped at what the data can support.
+
+## Failures
+
+Off-peak hours were the persistent failure. The model produced confident
+predictions from almost no data, and the operational consequence was false
+alarms at exactly the times when staff were least inclined to trust the system.
+The statistical fallback for low signal density resolved it.
+
+</Section>
+
+<Section n="04" id="result" title="Result" kicker="What worked · What changed · What I learned">
+
+## What worked
+
+94% wait-time prediction accuracy with a 24-hour window, at under 500ms from
+sensor to view, with alerting on predicted rather than observed state.
+
+## What changed
+
+The definition of the product. It started as a visualisation problem and is an
+operations problem. The visualisation is the output; the decision it supports
+is the product.
+
+## What I learned
+
+- Hybrid statistical and ML models beat pure ML on noisy real-time data, and
+  the hybrid is not a compromise when the data has regime changes.
+- Operations teams need actionable alerts. Dashboards that require
+  interpretation do not get acted on.
+- Confidence has to be part of the prediction, not a separate concern. A system
+  that is confidently wrong during quiet hours loses the operator's trust
+  permanently.
+
+</Section>

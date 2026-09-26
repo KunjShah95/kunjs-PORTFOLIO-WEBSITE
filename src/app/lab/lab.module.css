@@ -1,0 +1,153 @@
+.body {
+  padding-block: clamp(32px, 5vw, 64px) clamp(64px, 9vw, 128px);
+}
+
+/* -------------------------------------------------------------- manifesto */
+.manifesto {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-6) var(--sp-7);
+  padding-bottom: clamp(40px, 5vw, 72px);
+  margin-bottom: clamp(40px, 5vw, 72px);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+.manifestoCol {
+  display: grid;
+  gap: var(--sp-4);
+  align-content: start;
+}
+
+.manifestoCol p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  max-width: 44ch;
+  text-wrap: pretty;
+}
+
+.manifestoCol strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.manifestoCol[data-kind='lab'] {
+  position: relative;
+}
+
+.honesty {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.04em;
+  color: var(--text-ghost);
+  border-left: 2px solid var(--signal);
+  padding-left: var(--sp-4);
+  max-width: 66ch;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------------ open */
+.open,
+.graduate {
+  margin-top: clamp(48px, 6vw, 88px);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+}
+
+.openList {
+  margin-top: var(--sp-4);
+  border-top: 1px solid var(--line-soft);
+}
+
+.openItem {
+  display: grid;
+  grid-template-columns: 90px 220px minmax(0, 1fr);
+  gap: var(--sp-4);
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.openNum {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-sm);
+  letter-spacing: 0.1em;
+  color: var(--signal);
+}
+
+.openTitle {
+  font-size: 0.9375rem;
+  color: var(--text);
+}
+
+.openResult {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-faint);
+}
+
+/* ------------------------------------------------------------- graduate */
+.graduateList {
+  margin-top: var(--sp-4);
+  display: grid;
+  gap: 2px;
+}
+
+.graduateItem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1.1fr);
+  gap: var(--sp-3);
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 0.875rem;
+}
+
+.graduateLab {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-sm);
+  letter-spacing: 0.06em;
+  color: var(--trace);
+}
+
+.graduateArrow {
+  color: var(--text-ghost);
+  text-align: center;
+}
+
+.graduateProject a {
+  color: var(--text);
+  border-bottom: 1px solid var(--line-accent);
+  padding-bottom: 1px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.graduateProject a:hover {
+  color: var(--signal);
+}
+
+.graduateProject span {
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 900px) {
+  .manifesto {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .openItem {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .graduateItem {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .graduateArrow {
+    text-align: left;
+  }
+}

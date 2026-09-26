@@ -1,0 +1,154 @@
+---
+slug: learnai
+number: "09"
+title: LearnAI
+category: EdTech AI
+summary: Adaptive tutoring that estimates proficiency per concept and re-tunes question difficulty in real time, with model-provider fallback so an outage never becomes a dead lesson.
+year: "2026"
+status: Live
+tech:
+  - NEXT.JS
+  - TYPESCRIPT
+  - FIREBASE
+  - SUPABASE
+  - GEMINI
+github: https://github.com/KunjShah95/intelligent-learning-assistant
+demo: https://intelligent-learning-assistant.vercel.app
+order: 7
+featured: false
+diagram: tutor-loop
+related:
+  - resumemaster-ai
+  - offerguard-ai
+  - agent-orchestration
+claims:
+  - label: Quiz completion lift
+    value: 45%
+  - label: Model providers
+    value: "3"
+    note: Gemini, GPT, Claude.
+  - label: Adaptive difficulty levels
+    value: "5"
+  - label: Uptime
+    value: 99.7%
+---
+
+<Section n="01" id="overview" title="Overview" kicker="Problem · Context · What I built">
+
+## Problem
+
+E-learning platforms deliver the same content to everyone. A student who
+already understands it is bored; a student who does not is lost, and neither
+gets a different experience. Completion rates fall, and the content quality is
+not the thing that failed.
+
+## Context
+
+The intervention is not "AI-generated lessons" — that was not the bottleneck.
+The bottleneck is that difficulty is fixed at authoring time. Content is written
+for an imagined median student, so it is simultaneously too easy for the top of
+the distribution and too hard for the bottom.
+
+## What I built
+
+LearnAI estimates a student's proficiency per concept and re-tunes the next
+question's difficulty against it, live.
+
+- **Proficiency estimation** — a per-concept mastery signal derived from the
+  student's response history, not a single aggregate score. Aggregation hides
+  exactly the information an adaptive system needs.
+- **Adaptive difficulty** — five calibrated levels, selected per question from
+  the proficiency signal.
+- **Spaced repetition scheduling** — review intervals computed per student from
+  their own performance history rather than from a global schedule.
+- **Multi-provider inference** — three providers behind one interface, with
+  fallback between them.
+
+</Section>
+
+<Section n="02" id="system" title="System" kicker="Architecture · Data flow · Infrastructure">
+
+## Architecture
+
+<TutorLoopDiagram caption="The loop is closed on the student, not the content. Every answer updates the estimate that chose the next question." />
+
+## Data flow
+
+Response → per-concept proficiency update → difficulty selection for the next
+item → question generation or retrieval at that level → spaced-repetition
+schedule recomputed → Firebase realtime persistence of the session so a
+refresh does not lose progress.
+
+## Infrastructure
+
+Next.js with Supabase for the relational student model and Firebase for
+realtime session state. The split is deliberate: durable relational data and
+ephemeral session state have genuinely different shapes and different
+consistency requirements, and forcing both into one store would have been
+worse at both.
+
+</Section>
+
+<Section n="03" id="engineering" title="Engineering" kicker="Decisions · Tradeoffs · Failures">
+
+## Important decisions
+
+**Proficiency per concept, not per student.** A single mastery number is
+average of a distribution, and averaging a distribution destroys the one
+signal an adaptive system exists to use. Per-concept tracking is more work and
+it is the entire mechanism.
+
+**Fallback is a correctness requirement, not a feature.** A lesson that stops
+because a provider had a bad minute is a broken lesson. The 99.7% uptime figure
+comes from treating provider fallback as part of the critical path rather than
+as an enhancement.
+
+**Difficulty is calibrated, not arbitrary.** Five levels sounds like a
+simplification, and it is — but an uncalibrated continuous scale is harder to
+tune and harder to reason about than five well-chosen bands.
+
+## Tradeoffs
+
+- **Granularity vs. cold start.** Per-concept tracking is better but is empty on
+  day one. The system handles sparse history by falling back to a cohort prior
+  until a student's own signal accumulates.
+- **Challenge vs. discouragement.** Pushing difficulty too aggressively loses
+  students permanently. The pacing curve is deliberately not maximal — this is
+  the single most sensitive constant in the product.
+- **Provider flexibility vs. output consistency.** Three providers means three
+  slightly different output shapes. A normalisation layer absorbs it at the cost
+  of one more thing that can be wrong.
+
+## Failures
+
+The first difficulty curve was too aggressive and produced a steep drop in
+completion partway through a session: students were being promoted past material
+they had not consolidated, hitting questions they could not answer, and leaving.
+Flattening the early curve recovered most of the completion rate. The 45% lift
+is against the tuned system, not the first one.
+
+</Section>
+
+<Section n="04" id="result" title="Result" kicker="What worked · What changed · What I learned">
+
+## What worked
+
+A 45% lift in quiz completion against the fixed-difficulty version, with
+student satisfaction at 4.2/5. The lift came almost entirely from pacing rather
+than from content, which was not the hypothesis when the project started.
+
+## What changed
+
+The assumption that content was the variable. The content was adequate. The
+scheduling was the defect.
+
+## What I learned
+
+- Adaptive pacing matters more than content quality for engagement.
+- Averaging a mastery signal across concepts destroys the information value.
+- Multi-provider fallback is not resilience theatre; it is a correctness
+  requirement for anything a learner is depending on in real time.
+- Under-promise difficulty. A student who is challenged and finishes is worth
+  far more than one who is challenged and quits.
+
+</Section>

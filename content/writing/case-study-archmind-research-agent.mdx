@@ -1,0 +1,74 @@
+---
+slug: case-study-archmind-research-agent
+title: "The Research Agent: From Open-Ended Request to Cited Report"
+date: "2026-06"
+dateLabel: "JUN 2026"
+category: AI
+readTime: 7
+excerpt: A self-planning agent that explores the web, evaluates sources, and writes analysis with verifiable provenance.
+tags:
+  - AGENTS
+  - RAG
+  - CASE STUDY
+featured: true
+projectSlug: archmind-research-agent
+---
+
+<ProjectLink
+  slug="archmind-research-agent"
+  label="ArchMind Research Agent"
+  note="The full case study: the state machine, the loops, and the grounding constraint."
+/>
+
+ArchMind AI needed a brain that could actually *do* research rather than talk
+about it. That brain is a self-planning agent that takes an open-ended request
+and returns structured, cited findings.
+
+## The problem
+
+Internship and market research is repetitive and error-prone. Matching roles,
+companies and requirements by hand wastes days and misses signal.
+
+Generic search does not fix this. It returns forty links and leaves the
+reasoning to the person holding them — deciding which three are credible, what
+they agree on, what they contradict. That reasoning is the actual work, and it
+is exactly the shape an agent is good at, provided the evidence it reasons over
+is real.
+
+## Four stages, two loops
+
+**Plan** — a planner agent decomposes the request into focused sub-queries.
+**Search** — search and scraping agents gather evidence.
+**Read** — an extractor normalises structured fields out of noisy,
+inconsistent, occasionally contradictory sources.
+**Synthesize** — a writer agent produces a report grounded in that evidence.
+
+It is a state machine rather than a linear script because the stages genuinely
+loop. A sub-query that returns thin evidence has to go back to search with a
+rephrased query. Two sources that contradict each other have to be flagged
+before synthesis rather than averaged into mush. A linear pipeline expresses
+neither.
+
+## The one decision that mattered
+
+Refusing to let the synthesis stage free-generate. It answers only from retrieved
+evidence chunks. Free-form generation produces more fluent reports and more of
+them are wrong in ways that are hard to spot.
+
+The secondary decision was constraining the planner tightly. A loose planner is
+the most expensive failure mode in a research agent: it decomposes broadly,
+searches five times more than necessary, and drifts. Bounded sub-queries with
+explicit acceptance criteria keep both cost and topic adherence under control.
+
+## Showing the pipeline
+
+Making each stage visible and steerable turned a black box into a tool people
+finished using — and it made my own debugging dramatically faster, because a
+failure is visible at the stage where it happened.
+
+## The result
+
+Deployed and interactive. Open-ended requests turn into structured, cited
+findings in minutes.
+
+**Autonomy without grounding is just confident guessing.**

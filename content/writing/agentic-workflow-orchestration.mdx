@@ -1,0 +1,68 @@
+---
+slug: agentic-workflow-orchestration
+title: Orchestrating Complex AI Workflows
+date: "2026-02"
+dateLabel: "FEB 2026"
+category: SYSTEMS
+readTime: 12
+excerpt: "Moving beyond single-prompt agents: task delegation, cyclic graphs for self-correction, and designing for the failure case rather than the demo."
+tags:
+  - AI SYSTEMS
+  - ORCHESTRATION
+  - AGENTS
+  - WORKFLOWS
+featured: false
+---
+
+The transition from single-prompt interactions to complex agentic workflows
+represents a real shift in how AI systems are built. A single prompt solves an
+isolated task. A workflow allows persistent reasoning, tool use and
+self-correction — and it fails in completely different ways.
+
+## The limits of single-prompt agents
+
+Single-prompt agents are fire-and-forget. They cannot:
+
+- **Handle multi-step dependencies**, where the output of step A determines the
+  tool selection for step B
+- **Recover from errors.** If a tool call fails, the agent usually terminates or
+  invents a fix
+- **Maintain long-term context.** State is lost between runs
+
+## What orchestration frameworks actually give you
+
+I have moved toward two patterns, for different reasons.
+
+### CrewAI: role-based collaboration
+
+CrewAI lets you define agents with distinct responsibilities and hand work
+between them. Task delegation and memory — short-term and long-term — are
+first-class, which is the right model when the work is genuinely parallelisable
+across specialists.
+
+### LangGraph: cyclic reasoning
+
+LangGraph enables cycles, which is the property I care about most. A graph can
+route control *backwards*. If generated code fails a test, the graph returns to
+the coder with the failure, instead of terminating or hallucinating a fix.
+
+That single capability is the difference between a workflow and a pipeline.
+
+## Designing for the failure case
+
+In production I design for the failure case, not the demo:
+
+- **Fallback models.** If the primary provider rate-limits, the orchestrator
+  switches to a local instance. A provider returning 200 with malformed
+  *content* is a nastier version of the same problem, so every response is
+  shape-validated before it is accepted.
+- **Human-in-the-loop.** Irreversible actions pause the graph for approval.
+- **Bounded steps.** An unbounded agent loop can multiply a token bill by an
+  order of magnitude. An explicit ceiling makes the cost of a run predictable
+  before it starts.
+
+## What this buys you
+
+Orchestration is what turns a chatbot into something you can put in front of a
+user. Not because the reasoning is better — it is the same model — but because
+the failure modes have names, and named failure modes have fixes.

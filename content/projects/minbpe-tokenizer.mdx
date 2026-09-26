@@ -1,0 +1,149 @@
+---
+slug: minbpe-tokenizer
+number: "07"
+title: MinBPE Tokenizer
+category: Core AI
+summary: Byte Pair Encoding written from scratch in pure Python, replicating the tiktoken core. Fifteen percent fewer tokens on technical corpora.
+year: "2025"
+status: Research
+tech:
+  - PYTHON
+  - TIKTOKEN
+  - ALGORITHMS
+github: https://github.com/KunjShah95/TOKENIZER-FROM-SCRATCH
+order: 13
+featured: false
+related:
+  - gpt2-from-scratch
+  - gap-miner
+  - building-gpt2
+claims:
+  - label: Token overhead reduction
+    value: 15%
+    note: On technical corpora, against the stock vocabulary.
+  - label: Vocabulary
+    value: ~50K merges
+  - label: Implementation
+    value: Pure Python
+  - label: Throughput vs tiktoken
+    value: ~2x slower
+---
+
+<Section n="01" id="overview" title="Overview" kicker="Problem · Context · What I built">
+
+## Problem
+
+Tokenizers are treated as preprocessing. They are not. Every token you do not
+spend is context you keep, every token you waste is money and latency, and the
+default vocabulary is trained on general web text — which is the wrong
+distribution for code, formulas and technical prose.
+
+## Context
+
+I wanted to know what the tokeniser was actually costing me and whether it
+could be better. Both questions required being able to change it, which meant
+building one.
+
+## What I built
+
+A from-scratch BPE implementation in pure Python:
+
+- **Byte-level encoding** — every byte maps to a token, so there are no
+  out-of-vocabulary inputs, ever. The tokenizer cannot fail on text it has not
+  seen because there is no such thing as unseen text at the byte level.
+- **Regex pre-tokenisation** following the GPT-2/GPT-4 pattern, splitting on
+  whitespace and punctuation before merges are applied.
+- **Merge-table training** — roughly 50,000 merge rules learned from a
+  technical document corpus.
+- **Encoder and decoder** — text to token ids and back, losslessly.
+
+</Section>
+
+<Section n="02" id="system" title="System" kicker="Architecture · Data flow · Infrastructure">
+
+## Architecture
+
+Byte-level BPE in two stages. Pre-tokenisation partitions the input into words
+and punctuation; within each partition, merges are applied by rank until no
+merge rule applies. The final token is the concatenation of the byte-level
+representation of the merged units.
+
+## Data flow
+
+Training corpus → frequency count over byte pairs → iterative merge selection →
+merge table with ranks → encode: pre-tokenise, apply merges by rank, emit ids →
+decode: map ids back and concatenate bytes.
+
+The merge table is the artefact. It is the entire difference between the stock
+vocabulary and the domain-specific one, and it is small enough to inspect.
+
+## Infrastructure
+
+Pure Python, no dependencies beyond the reference implementation for
+comparison. Roughly 2x slower than `tiktoken`, which is expected and irrelevant
+— this exists to be understood, and the comparison runs are the measurement.
+
+</Section>
+
+<Section n="03" id="engineering" title="Engineering" kicker="Decisions · Tradeoffs · Failures">
+
+## Important decisions
+
+**Byte-level, not word-level.** Word-level tokenizers have a vocabulary that
+cannot represent arbitrary text and fall back badly. Byte-level BPE has no such
+failure mode, at the cost of a longer merge sequence early in training.
+
+**Match the reference exactly.** The goal was to understand tiktoken, and a
+tokenizer that is *almost* compatible teaches you the wrong thing. Two days went
+into aligning behaviour on edge cases: leading whitespace, unusual Unicode, and
+how the pre-tokenisation regex splits.
+
+**Train on the domain, not on the web.** The whole hypothesis was that a
+technical corpus yields fewer tokens for technical text. The merges learned from
+code and mathematical notation are the ones that matter when the input is code
+and mathematical notation.
+
+## Tradeoffs
+
+- **Purity vs. speed.** Pure Python at half the throughput of a native
+  implementation, permanently, in exchange for being able to read every line.
+- **Vocabulary size vs. token count.** More merges means fewer tokens per
+  document and a larger embedding table. 50,000 was chosen as the point where
+  returns flatten for this corpus.
+- **Domain specialisation vs. generality.** A tokenizer tuned for technical
+  content is worse at general prose. For this project that is the correct
+  trade, and it is a trade, not a free win.
+
+## Failures
+
+Every interesting bug was in the pre-tokenisation regex, not in the merge logic.
+My first pattern split differently from GPT-2's on runs of whitespace and on
+certain punctuation sequences, which produced plausible-looking token counts
+that disagreed with the reference by a few percent. A few percent is enough to
+make a 15% improvement claim meaningless, so parity testing against tiktoken
+became the acceptance criterion for every change.
+
+</Section>
+
+<Section n="04" id="result" title="Result" kicker="What worked · What changed · What I learned">
+
+## What worked
+
+A 15% reduction in token overhead on technical corpora against the stock
+vocabulary, at roughly 50,000 merges. On a fixed context window that is 15%
+more actual content, and on an API it is 15% less spend.
+
+## What changed
+
+How I think about tokenisation. I had treated it as plumbing. It is a
+first-order optimisation lever for any domain-specific LLM application, and it
+is one of the few where you can get a double-digit percentage for a day of work.
+
+## What I learned
+
+- Custom tokenizers can reduce token count substantially for technical content.
+- Parity with the reference implementation is the only honest way to evaluate
+  your own tokenizer.
+- The pre-tokenisation regex is where the bugs live, not the merge algorithm.
+
+</Section>

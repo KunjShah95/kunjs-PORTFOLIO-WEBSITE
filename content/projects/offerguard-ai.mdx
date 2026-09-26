@@ -1,0 +1,176 @@
+---
+slug: offerguard-ai
+number: "12"
+title: OfferGuard AI
+category: AI Career Platform
+summary: Paste a job description, offer letter or recruiter chat and get read on toxicity, burnout risk, salary fairness and ghost hiring — with the negotiation angle.
+year: "2026"
+status: Live
+tech:
+  - TANSTACK START
+  - REACT 19
+  - TYPESCRIPT
+  - GROQ
+  - FIREBASE
+github: https://github.com/KunjShah95/reverseinterview
+demo: https://offerchecker-pi.vercel.app/
+order: 4
+featured: true
+diagram: router
+related:
+  - engineer-os
+  - resumemaster-ai
+  - when-ai-gets-it-wrong
+claims:
+  - label: Analysis dimensions
+    value: "5"
+    note: Toxicity, burnout risk, salary fairness, ghost job detection, negotiation strategy.
+  - label: LLM providers in the chain
+    value: "3"
+    note: Scanner, deep analyser, cross-checker.
+  - label: Tokens processed
+    value: 40,000+
+  - label: Full analysis latency
+    value: ~2.1s
+---
+
+<Section n="01" id="overview" title="Overview" kicker="Problem · Context · What I built">
+
+## Problem
+
+Job offers are documents designed to look good. The recruiter is on your side
+right up until they are not. Ghost roles, bait-and-switch titles and burnout
+culture hide behind phrases like *fast-paced* and *wear many hats* — and the
+existing tools either give you anonymous glassdoor sentiment or cost you a
+lawyer. Nobody was reading the actual text of your offer and telling you what
+to look at.
+
+## Context
+
+The request came from a friend who had an offer that looked strong on paper and
+felt wrong in a way they could not articulate. *Can you build something that
+reads this and tells me what to look out for?* I said yes before I knew how.
+
+The consequence of getting this wrong is asymmetric. A missed red flag costs
+someone some caution. A false positive costs someone a job they wanted — and
+that asymmetry dominated every subsequent design decision.
+
+## What I built
+
+OfferGuard accepts three inputs — a job description, an offer letter, and a
+recorder chat transcript — and analyses them together across five dimensions:
+
+- **Toxicity signals** — language patterns correlated with poor environments
+- **Burnout risk** — unreasonable expectations framed as opportunity
+- **Salary fairness** — market comparison on role, location and experience
+- **Ghost job detection** — signals the role may not be real
+- **Negotiation strategy** — specific talking points to actually use
+
+No signup. Nothing stored. Paste, read, leave.
+
+</Section>
+
+<Section n="02" id="system" title="System" kicker="Architecture · Data flow · Infrastructure">
+
+## Architecture
+
+A three-stage model chain rather than one prompt.
+
+The **primary scanner** triages the whole input cheaply and decides which
+regions are worth a second look. The **deep analyser** then extracts structured
+signals from just those regions. The **cross-check model** re-reads the result
+and looks for internal inconsistency — claims that contradict the text they
+claim to summarise.
+
+<RouterDiagram caption="Three stages with different jobs. Triage narrows, extraction structures, cross-check audits. Running all three over the full document is three times the cost for a worse answer." />
+
+## Data flow
+
+Input → cheap triage pass that marks regions of interest → targeted deep
+extraction on those regions only → cross-check pass for consistency → structured
+result rendered with the flagged sentences highlighted in the original text.
+
+Highlighting sentences in context rather than returning a score was a deliberate
+choice. The score is the least useful output; *this phrase, here, because* is
+what a person can act on.
+
+## Infrastructure
+
+TanStack Start with React 19 on Vercel. Firebase for the lightweight
+server-side pieces. Groq for inference — the latency is the product here, and
+this is a use case where a two-second answer is meaningfully different from a
+twelve-second one.
+
+</Section>
+
+<Section n="03" id="engineering" title="Engineering" kicker="Decisions · Tradeoffs · Failures">
+
+## Important decisions
+
+**Cross-model consistency is the hard problem.** Different models disagree on
+subjective signals like toxicity, and a system that silently averages them
+produces a number with no meaning. The cross-check stage exists specifically to
+surface disagreement rather than hide it.
+
+**Highlight, do not score.** A confidence percentage invites people to treat
+the output as a verdict. Highlighting the sentence with its explanation invites
+them to read it. The second is a request; the first is an assertion you cannot
+support.
+
+**Say when you might be wrong.** There is a human disclaimer in the interface,
+not a legal one: *I am a tool, not a judge. Use me as input, not truth.* I
+added it after the incident described in
+[When AI Gets It Wrong](/writing/when-ai-gets-it-wrong), and it should have been
+there from the start.
+
+## Tradeoffs
+
+- **Triage precision vs. recall.** Triage that is too aggressive skips the
+  sentence that mattered. It errs toward reading more than strictly necessary —
+  the cost of a wasted deep pass is far lower than the cost of a missed flag.
+- **Speed vs. depth.** A single deep pass over everything is simpler and slower
+  in aggregate. Triage-then-target is more machinery and a much better p95.
+- **Actionability vs. objectivity.** "This looks toxic" is objective and
+  useless. "This phrase, in this context, may indicate X" is less clean and
+  vastly more useful.
+
+## Failures
+
+The system flagged an offer as toxic that was not. The flagged phrases —
+*fast-paced*, *wear many hats* — genuinely are risk indicators. What the system
+lacked was the context that this particular company was a normal, enthusiastic
+startup. It saw patterns, not people.
+
+The response was not to make the model more conservative. It was to change what
+the system claims. It now returns signals and reasoning, and every output is
+framed as something a person can disagree with.
+
+</Section>
+
+<Section n="04" id="result" title="Result" kicker="What worked · What changed · What I learned">
+
+## What worked
+
+The sentence highlighting. People do not want a verdict, they want to know
+which words to look at — and once you show them the words, most of them
+disagree with the system and that is fine, because the system gave them
+something they can reason about instead of something to obey.
+
+The multi-provider chain proved its worth immediately in consistency terms.
+
+## What changed
+
+The framing, completely. This began as a scoring product and became an
+information product. Accuracy did not change; what the system was willing to
+assert did.
+
+## What I learned
+
+- Accuracy is not sufficient. A system can be 95% accurate and still hurt
+  someone in the 5%, and if it is affecting a real decision the edge cases are
+  people, not bugs.
+- A flag is useful. A verdict is dangerous.
+- Build room for a human to say *I disagree*, or you have built a machine that
+  launders its own uncertainty into false confidence.
+
+</Section>

@@ -1,0 +1,169 @@
+---
+slug: case-study-building-gpt2
+title: Building GPT-2 from First Principles
+date: "2026-07"
+dateLabel: "JUL 2026"
+category: EXPERIMENTS
+readTime: 18
+excerpt: A week-by-week implementation of GPT-2 from scratch — byte-pair tokenisation through multi-head attention to autoregressive generation. No frameworks, just NumPy and PyTorch.
+tags:
+  - GPT-2
+  - TRANSFORMERS
+  - DEEP LEARNING
+  - CASE STUDY
+featured: true
+labSlug: gpt2-from-scratch
+---
+
+I spent weeks building GPT-2 from nothing. No HuggingFace. No `transformers`
+library. Just the paper, the weights, and a lot of debugging.
+
+## Why build it from scratch?
+
+Every AI engineer uses transformer models daily. Using them and understanding
+them are different things. I wanted to go past *attention is all you need* blog
+posts and actually feel the architecture by implementing every component.
+
+The goal: build GPT-2 small (124M) from first principles, match the reference
+implementation's behaviour, and generate coherent text — while understanding
+every line.
+
+## Week 1 — Tokenisation
+
+GPT-2 uses byte-level byte-pair encoding. I implemented it from scratch:
+
+- **Byte-level tokenisation** — every character maps to a byte 0–255, so any
+  Unicode input is handled with no out-of-vocabulary case
+- **Regex pre-tokenisation** — splitting on whitespace and punctuation before
+  merges apply, following the GPT-2 pattern
+- **Merge table construction** — learning around 50,000 merge rules
+- **Encoder and decoder** — text to ids and back, losslessly
+
+The hardest part was matching tiktoken's edge cases: leading whitespace,
+specific Unicode characters, how the regex splits runs. Two full days went into
+parity.
+
+**Insight:** tokenisation feels like preprocessing and dramatically affects
+model quality. A 15% reduction in token count means 15% more actual information
+per context window.
+
+## Week 2 — The embedding layer
+
+GPT-2 sums three embeddings:
+
+1. **Token embeddings** — a learned lookup from token id (vocab 50,257) to a
+   768-dimensional vector
+2. **Position embeddings** — learned per position, up to 1024
+3. **Token type embeddings** — distinguishing segments
+
+I also implemented **weight tying** — the same matrix used for the input
+embedding is reused transposed for the output head. Fewer parameters, and a
+form of regularisation.
+
+**Insight:** the sum of learned embeddings is surprisingly effective. Unlike
+sinusoidal encodings, GPT-2 learns positional information from data, letting
+the model decide how to use position during training.
+
+## Week 3 — Multi-head causal self-attention
+
+The hardest week. Every input token produces Q, K and V:
+
+```
+Attention(Q, K, V) = softmax(Q · Kᵀ / √d_k) · V
+```
+
+The `1/√d_k` scaling is critical — without it the dot products grow large,
+pushing softmax into regions with tiny gradients.
+
+**Causal masking.** GPT-2 is autoregressive: position *i* attends only to
+positions ≤ *i*. Implemented with a lower-triangular mask adding −∞ to the
+upper triangle before softmax. Easy to get subtly wrong, and it fails silently
+by producing plausible text with wrong gradients.
+
+**Multi-head split.** 12 heads of dimension 64 (12 × 64 = 768). Split Q, K, V
+into 12 chunks, attend independently, concatenate.
+
+**Insight:** multiple heads let the model attend to different relationship types
+simultaneously — one for syntax, one for long-range dependency, one for
+coreference. That emergent specialisation is why transformers work.
+
+## Week 4 — Feed-forward and LayerNorm
+
+```
+FFN(x) = GELU(x · W₁ + b₁) · W₂ + b₂
+```
+
+GELU rather than ReLU: it is smooth, with non-zero gradient for small negative
+values, which helps training stability. The inner dimension is 3072 — 4× the
+model dimension — so the FFN holds about two-thirds of parameters.
+
+Per block: attention ≈ 2.36M parameters, FFN ≈ 4.72M.
+
+I used **LayerNorm across the feature dimension**, not BatchNorm, with learned
+γ and β. GPT-2 uses **Pre-LN** — norm before each sub-layer — which is more
+stable than the original transformer's Post-LN and has since become standard.
+
+## Week 5 — The residual stream
+
+```
+x = x + Attention(LayerNorm(x))
+x = x + FFN(LayerNorm(x))
+```
+
+Two additions. The reason deep transformers train at all: information flows
+through the network without passing through transformations. This prevents
+gradient vanishing, lets layers fall back to earlier representations, and
+creates a gradient highway.
+
+I verified it by checking that the hidden state norm grows roughly linearly
+with depth.
+
+## Week 6 — Initialisation and training stability
+
+- Embeddings: `N(0, 0.01)`
+- All other weights: `N(0, 0.02 / √num_layers)`
+- Biases: zero
+
+The `1/√num_layers` scaling prevents activation growth with depth. Without it
+residual variance grows exponentially and training diverges.
+
+Plus: learning rate warmup, cosine decay to zero, AdamW weight decay, and
+gradient clipping at 1.0.
+
+**Insight:** this single line is the most important hyperparameter in the model
+and it appears in most configs as an unexplained number.
+
+## Week 7 — Generation and sampling
+
+```python
+def generate(prompt, max_length=100):
+    tokens = tokenizer.encode(prompt)
+    for _ in range(max_length):
+        logits = model(tokens)
+        probs = softmax(logits[-1, :] / temperature)
+        next_token = sample(probs, top_k=50, top_p=0.95)
+        tokens.append(next_token)
+    return tokenizer.decode(tokens)
+```
+
+- **Temperature** — controls randomness
+- **Top-k** — sample from the K most likely
+- **Top-p (nucleus)** — sample from the smallest set whose cumulative
+  probability exceeds p
+- **Repetition penalty** — reduce probability of already-seen tokens
+
+Temperature 0.8, top-k 50, top-p 0.95 produced the most natural text.
+
+## What I learned
+
+1. **Attention is simple in theory and brutal in practice.** Causal masking in
+   particular is easy to get wrong and hard to detect.
+2. **The residual stream is the hero.** It is what makes depth trainable.
+3. **Weight initialisation is the hidden hyperparameter.** Nobody explains the
+   `1/√num_layers` scaling, and it is essential.
+4. **BPE matters more than most people think.** Domain-specific merge rules can
+   cut token usage 10–15%, directly improving effective context.
+5. **Building from scratch changes how you read papers.** Variants of attention,
+   normalisation and layer ordering become legible rather than trivia.
+
+**You do not truly understand something until you can build it from scratch.**

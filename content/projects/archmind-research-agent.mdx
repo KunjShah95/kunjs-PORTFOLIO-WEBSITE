@@ -1,0 +1,171 @@
+---
+slug: archmind-research-agent
+number: "06"
+title: ArchMind Research Agent
+category: Agentic AI
+summary: The autonomous research agent behind ArchMind — self-planning, evidence-collecting, citation-grounded. Turns an open-ended question into a sourced report.
+year: "2026"
+status: Live
+tech:
+  - PYTHON
+  - LANGGRAPH
+  - STREAMLIT
+  - RAG
+  - WEB SCRAPING
+github: https://github.com/KunjShah01/INTERNSHIP-ASSESSMENT
+demo: https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/
+order: 3
+featured: true
+diagram: research-pipeline
+related:
+  - archmind-ai
+  - gap-miner
+  - high-precision-rag-lab
+claims:
+  - label: Pipeline stages
+    value: Plan → Search → Read → Synthesize
+  - label: Report grounding
+    value: Source-linked
+  - label: Interface
+    value: Interactive, live
+  - label: Deployment
+    value: Streamlit Cloud
+---
+
+<Section n="01" id="overview" title="Overview" kicker="Problem · Context · What I built">
+
+## Problem
+
+Internship and market research is repetitive, slow and error-prone. Matching
+roles, companies and requirements by hand burns days and misses signal. Generic
+search does not fix this — it returns links and makes you do the reasoning.
+
+## Context
+
+The specific failure is not that search is bad. It is that the *reasoning* is
+left to the person holding the results. A generic search engine hands you
+forty links; the actual work is deciding which three are credible, what they
+agree on, what they contradict, and what the disagreement means.
+
+That is exactly the shape of work an agent is good at — provided the evidence
+it reasons over is real.
+
+## What I built
+
+The ArchMind Research Agent takes an open-ended request and runs a four-stage
+pipeline:
+
+1. **Plan** — a planner agent decomposes the request into focused sub-queries.
+2. **Search** — search and scraping agents gather evidence from the web.
+3. **Read** — an extractor normalises structured fields out of sources that are
+   noisy, inconsistent and occasionally self-contradictory.
+4. **Synthesize** — a writer agent produces a report grounded in the collected
+   evidence, with a citation attached to every claim.
+
+The whole flow is exposed through an interactive interface so you can watch the
+agent work and steer it while it runs.
+
+</Section>
+
+<Section n="02" id="system" title="System" kicker="Architecture · Data flow · Infrastructure">
+
+## Architecture
+
+The orchestration is a LangGraph state machine rather than a linear script,
+because the stages genuinely loop. A sub-query that returns thin evidence needs
+to go back to search with a rephrased query. A source that contradicts another
+needs to be flagged before synthesis rather than averaged into mush. A linear
+pipeline cannot express either.
+
+<ResearchPipelineDiagram caption="Four stages with two return edges. The replan loop fires when a sub-query comes back thin; the reconcile loop fires when two sources disagree." />
+
+## Data flow
+
+Request → planner produces a sub-query set → search and scrape agents collect
+candidate sources → extractor pulls structured fields plus a confidence value
+per field → the collected evidence is indexed and retrieved for synthesis →
+the writer agent drafts against retrieved chunks only → citations resolve back
+to the source list.
+
+The RAG step is the load-bearing one. Synthesis reads from the collected
+evidence, not from the model's memory. That is what keeps the report grounded.
+
+## Infrastructure
+
+Deployed as a Streamlit app. Streamlit is a poor fit for most products and an
+excellent fit for this one: the user wants to watch a process and intervene, and
+the whole value of the interface is *legibility of the pipeline*. The framework's
+opinionated model is a feature here.
+
+</Section>
+
+<Section n="03" id="engineering" title="Engineering" kicker="Decisions · Tradeoffs · Failures">
+
+## Important decisions
+
+**Ground the writer, do not prompt it.** The single highest-leverage decision
+was refusing to let the synthesis stage free-generate. It answers only from
+retrieved evidence chunks. Free-form generation produces more fluent reports
+and more of them are wrong in ways that are hard to spot.
+
+**Constrain the planner tightly.** A loose planner is the most expensive failure
+mode in a research agent: it decomposes broadly, searches five times more than
+necessary, and drifts. Constraining the planner to a bounded number of
+sub-queries with explicit acceptance criteria keeps both cost and topic
+adherence under control.
+
+**Surface the pipeline in the UI.** Making the stages visible and steerable
+turns a black box into something a person can trust and correct mid-run. It also
+made my own debugging dramatically faster, because a failure is visible at the
+stage where it happened.
+
+## Tradeoffs
+
+- **Autonomy vs. verifiability.** Every degree of autonomy costs grounding. The
+  grounding is the product, so autonomy is capped at the stages where it is
+  cheap.
+- **Structure vs. fidelity.** Forcing every source into a schema loses
+  nuance. The extractor carries per-field confidence instead of pretending the
+  schema is always right.
+- **Interactive UI vs. shipping speed.** A Streamlit interface is much faster to
+  ship than a custom one and much worse to use at scale. Worth it at this size.
+
+## Failures
+
+Drift on broad queries was the persistent one. The first planner produced
+sub-queries that widened rather than deepened, and the agent spent its budget
+on background and none on the specific question. Tightening the planner
+contract fixed it more effectively than any prompt tuning downstream.
+
+Sources that contradicted each other produced confidently merged nonsense. The
+fix was not better prompting — it was making disagreement a first-class signal
+that reaches the writer instead of being silently resolved during extraction.
+
+</Section>
+
+<Section n="04" id="result" title="Result" kicker="What worked · What changed · What I learned">
+
+## What worked
+
+Grounding. Reports built from retrieved evidence are boring in exactly the way
+that makes them usable. The writer agent's job is synthesis, not knowledge, and
+that division produces the same conclusion independently across runs more often
+than any prompt change did.
+
+Making the pipeline visible turned an agent demo into a tool people actually
+finished using.
+
+## What changed
+
+The assumption that the agent needed to be smarter. It needed to be more
+constrained, and its reasoning needed to be inspectable.
+
+## What I learned
+
+- A tight planner keeps research agents on topic and keeps token costs down.
+- Grounded RAG beats free-form generation for factual reports, every time.
+- An interactive interface is the difference between a black box and something
+  people trust enough to steer.
+- Autonomy without grounding is just confident guessing.
+
+</Section>

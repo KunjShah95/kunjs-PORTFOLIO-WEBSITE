@@ -1,0 +1,180 @@
+---
+slug: railway-inspection
+number: "03"
+title: Railway Inspection
+category: Computer Vision
+summary: Defect detection for railway wagons running on a fanless edge box. YOLOv8 through TensorRT, INT8 quantization-aware, sub-100ms end to end.
+year: "2025"
+status: Deployed
+tech:
+  - "C++"
+  - OPENCV
+  - YOLOV8
+  - TENSORRT
+  - CUDA
+  - JETSON ORIN
+github: https://github.com/KunjShah95/Railway-Inspection
+order: 6
+featured: true
+diagram: edged-vision
+related:
+  - equitylens
+  - upi-fraud-guard
+  - quantisation-lab
+claims:
+  - label: Detection accuracy
+    value: 98.7%
+  - label: Speedup over manual inspection
+    value: 4.2x
+  - label: End-to-end latency
+    value: < 100ms
+    note: Frame ingestion, preprocessing, inference and post-processing combined.
+  - label: INT8 vs FP16
+    value: 2x
+    note: Quantisation-aware training, accuracy held.
+  - label: Hardware
+    value: Jetson Orin, edge
+---
+
+<Section n="01" id="overview" title="Overview" kicker="Problem · Context · What I built">
+
+## Problem
+
+Manual railway inspection is slow, hazardous and inconsistent. A human walks
+miles of track looking for cracks, deformations and wear. From a moving train,
+the window to see a defect is milliseconds, and missing one has serious
+consequences.
+
+Existing automated systems were expensive and demanded specialised hardware.
+
+## Context
+
+The brief I set myself was deliberately unfashionable: run a real vision
+pipeline on a **fanless industrial edge box**, at **sub-100ms end to end**,
+and hit the accuracy a manual inspection achieves. Not a benchmark on a
+workstation. The deployed artefact.
+
+That target changes everything downstream. On an A100 the problem is
+uninteresting. On hardware with no fans, next to a railway line, the model is
+the least interesting part.
+
+## What I built
+
+A computer-vision system that runs YOLOv8 on a Jetson Orin and detects
+railway wagon defects in real time, in four stages:
+
+1. **Hardware-accelerated capture** — multi-threaded GStreamer decode.
+2. **GPU preprocessing** — resize and normalisation executed as CUDA kernels,
+   not in Python.
+3. **TensorRT inference** — the ONNX export compiled to an engine tuned for the
+   Orin's architecture, at INT8.
+4. **Post-processing** — decode, confidence threshold, tracking, and output.
+
+Plus the environment handling that a lab never forces you to build: real-time
+histogram equalisation for low light, and a deblurring kernel for motion blur.
+
+</Section>
+
+<Section n="02" id="system" title="System" kicker="Architecture · Data flow · Infrastructure">
+
+## Architecture
+
+<EdgeVisionDiagram caption="Four stages, three of them on the GPU. The Python that trained the model is nowhere in this picture — which is the point." />
+
+## Data flow
+
+Camera → GStreamer decode (hardware) → CUDA resize and normalise → TensorRT
+INT8 engine → host-side NMS and tracking → frame buffer → display and alert.
+
+The budget is the design constraint: under 100ms total means preprocessing
+cannot be a separate CPU pass and inference cannot be FP16. Both decisions
+below follow from that number rather than from preference.
+
+## Infrastructure
+
+Jetson Orin with a TensorRT engine built specifically for that SoC. The
+engine file is architecture-bound, which means the build is a deployment
+artefact, not a build step — you ship a different binary per device, and the
+pipeline that produces it is part of the release.
+
+</Section>
+
+<Section n="03" id="engineering" title="Engineering" kicker="Decisions · Tradeoffs · Failures">
+
+## Important decisions
+
+**Python is a bottleneck, not a language.** For research this is irrelevant.
+For a per-frame inference loop on an edge device it is decisive. Moving the
+whole pipeline to C++ with TensorRT was worth roughly 3x on its own, before
+any optimisation of the model.
+
+**Quantisation-aware training, not post-training quantisation.** Naive INT8
+quantisation destroys small-defect accuracy, because defects are small and low
+contrast and exactly the kind of signal that gets quantised away. Training with
+quantisation in the loop lets the weights adapt to the lower precision budget,
+which held accuracy above 98% while halving inference time.
+
+**Fix the environment before blaming the model.** Low light and motion blur both
+look like model failure. Handling them upstream — histogram equalisation
+before the frame reaches the network, deblurring on capture — is cheaper and
+more effective than any model-side compensation.
+
+## Tradeoffs
+
+- **INT8 accuracy headroom vs. speed.** A 2x inference win for a small accuracy
+  cost is a good trade at 30fps and a bad one if a single miss is a safety
+  incident. QAT narrowed the cost; it did not eliminate the decision.
+- **TensorRT portability vs. performance.** The engine is tuned to the Orin and
+  will not run elsewhere. Portability would mean giving up most of the gain.
+- **Preprocessing on GPU vs. debuggability.** Offloading resize and
+  normalisation to CUDA is the right production choice and made the pipeline
+  much harder to reason about during development.
+
+## Failures
+
+The first edge attempt degraded badly at dusk and at speed, and it read
+completely as a model problem. It was an input problem. Two fixes — real-time
+histogram equalisation and a deblurring kernel — recovered most of the
+accuracy without touching the weights.
+
+The second failure was subtler: a TensorRT engine built on a desktop GPU
+silently produced poor results on the Orin because the precision calibration
+was wrong for the device. Engine files are device-specific and the build has to
+know which device it is building for.
+
+## Performance considerations
+
+Everything lives or dies on avoiding a CPU round trip. Decode, preprocess,
+inference, and post-processing must run without a single transfer back to
+host in the hot path. Once that is true, the only remaining lever is
+precision, which is why quantisation-aware training was the highest-value
+change in the project.
+
+</Section>
+
+<Section n="04" id="result" title="Result" kicker="What worked · What changed · What I learned">
+
+## What worked
+
+98.7% detection accuracy at 4.2x the speed of manual inspection, under 100ms
+end to end, on a fanless edge box. INT8 quantisation-aware training gave 2x
+inference over FP16 with the accuracy essentially intact — the difference
+between a lab demo and something that could be deployed.
+
+## What changed
+
+My belief that the model was the project. It was the pipeline. Almost every
+significant gain in this system came from moving work off the CPU or from
+fixing the input, not from the network architecture.
+
+## What I learned
+
+- Edge inference is a systems problem wearing a machine-learning costume.
+- Post-training quantisation is a trap for small-object detection. QAT is not
+  optional there.
+- When edge accuracy drops in real conditions, suspect the environment before
+  the weights. Mine did, twice.
+- TensorRT engine files are deployment artefacts, not build outputs. Treat them
+  accordingly.
+
+</Section>

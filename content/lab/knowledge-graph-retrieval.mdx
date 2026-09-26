@@ -1,0 +1,58 @@
+---
+slug: knowledge-graph-retrieval
+number: "07"
+title: Knowledge Graph Retrieval
+hypothesis: For questions of the form "why did I decide X", relationship traversal retrieves what flat similarity cannot.
+state: shipped
+stateNote: Shipped into EngineerOS
+tech:
+  - KNOWLEDGE GRAPH
+  - PG VECTOR
+  - SUPABASE
+  - RAG
+year: "2026"
+repo: https://github.com/KunjShah95/EngineerOS
+graduatedInto:
+  - engineer-os
+---
+
+## What I was testing
+
+Semantic search is good at *what is this about*. It is much worse at *how is
+this related to that*, which is the shape of most engineering questions. A
+decision note and the task it produced are about different subjects. Only the
+edge between them makes the answer findable.
+
+## Method
+
+Modelled notes, tasks and projects as nodes with typed edges in the same
+PostgreSQL instance as the pgvector embeddings, then compared three retrieval
+strategies on real questions:
+
+- **Flat similarity** — nearest neighbours by embedding alone.
+- **Filtered similarity** — nearest neighbours restricted to a type filter.
+- **Graph traversal** — start from high-confidence seeds and expand along edges,
+  combining edge weight with vector similarity at each hop.
+
+## Result
+
+Traversal wins decisively on *why* questions and loses on *where* questions,
+which is roughly the expected shape of the result and still useful.
+
+The finding that changed the design: co-locating the graph and the embeddings in
+one database is what makes this practical. The traversal query needs both, and
+splitting them across two stores means a round trip inside the hot path of
+every retrieval. One constraint, one store.
+
+## What it changed
+
+EngineerOS ships notes, tasks and projects as graph nodes with real edges, and
+the assistant traverses them rather than treating each record as an island. The
+"no source, no claim" constraint only works because traversal produces real
+provenance — the path is the citation.
+
+## Still open
+
+Edge typing is manual, and manual edges rot. Automatic edge inference from
+co-occurrence is an obvious next experiment and an obvious source of wrong
+answers.

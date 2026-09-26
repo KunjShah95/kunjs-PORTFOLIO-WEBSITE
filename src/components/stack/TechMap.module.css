@@ -1,0 +1,218 @@
+.wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: var(--sp-6) var(--sp-7);
+  align-items: start;
+}
+
+.rails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--sp-5) var(--sp-6);
+  min-width: 0;
+}
+
+.group {
+  min-width: 0;
+}
+
+.groupHead {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.groupName {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--signal);
+  margin: 0 0 5px;
+}
+
+.groupBlurb {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--text-ghost);
+  max-width: 30ch;
+}
+
+.items {
+  display: grid;
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  text-align: left;
+  padding: 6px 6px 6px 0;
+  color: var(--text-faint);
+  border-bottom: 1px solid var(--line-soft);
+  transition: color var(--dur-fast) var(--ease-out), padding-left var(--dur-fast) var(--ease-out);
+}
+
+.item:hover,
+.item[data-on] {
+  color: var(--text);
+  padding-left: 4px;
+}
+
+/* Evidence bar: how much shipped work this technology appears in. */
+.itemBar {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 1px;
+  width: calc(var(--fill, 0) * 100%);
+  background: var(--signal);
+  opacity: 0.5;
+  transition: opacity var(--dur-fast) var(--ease-out), width var(--dur) var(--ease-out);
+}
+
+.item[data-on] .itemBar {
+  opacity: 1;
+  height: 2px;
+}
+
+.itemName {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemCount {
+  display: inline-flex;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+.itemCount abbr {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--text-ghost);
+  border: 1px solid var(--line);
+  padding: 1px 3px;
+  line-height: 1.2;
+}
+
+.item[data-on] .itemCount abbr {
+  color: var(--signal);
+  border-color: var(--line-accent);
+}
+
+/* --------------------------------------------------------------- detail */
+.detail {
+  position: sticky;
+  top: 88px;
+  border: 1px solid var(--line);
+  background: var(--ink-150);
+  min-height: 260px;
+}
+
+.detailInner {
+  padding: clamp(18px, 2.2vw, 26px);
+  display: grid;
+  gap: var(--sp-4);
+  align-content: start;
+  animation: detail-in 300ms var(--ease-out) both;
+}
+
+@keyframes detail-in {
+  from {
+    opacity: 0;
+    transform: translate3d(8px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.detailName {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  margin: 0;
+  word-break: break-word;
+}
+
+.detailBlock {
+  display: grid;
+  gap: 8px;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+}
+
+.detailProjects {
+  display: grid;
+  gap: 2px;
+}
+
+.detailProject {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: 6px 0;
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--line-soft);
+  transition: color var(--dur-fast) var(--ease-out), padding-left var(--dur-fast) var(--ease-out);
+}
+
+.detailProject:hover {
+  color: var(--signal);
+  padding-left: 4px;
+}
+
+.detailProject[data-kind='lab']:hover {
+  color: var(--trace);
+}
+
+.detailProject svg {
+  flex: 0 0 auto;
+  opacity: 0.4;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.detailProject:hover svg {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.detailEmpty,
+.detailPrompt {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-ghost);
+  margin: 0;
+}
+
+.detailPrompt {
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 1000px) {
+  .wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail {
+    position: static;
+    min-height: 0;
+  }
+}

@@ -1,8 +1,0 @@
-export { Magnetic } from './Magnetic'
-export { CountUp } from './CountUp'
-export { TextReveal } from './TextReveal'
-export { LiquidGlass } from './LiquidGlass'
-export { TiltCard } from './TiltCard'
-export { SpotlightCard } from './SpotlightCard'
-export { GlowBorder } from './GlowBorder'
-export { ShaderBackground } from './ShaderBackground'

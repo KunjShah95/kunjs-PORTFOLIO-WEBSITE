@@ -1,0 +1,1093 @@
+/* =========================================================================
+   KUNJ SHAH — LAB
+   Design system foundation.
+
+   Tailwind v4 provides the utility layer. The design tokens live in one
+   `@theme` block below and are the single source of truth: the legacy
+   custom-property names (`--signal`, `--ink-100`, `--sp-4`) are aliases
+   that point at the theme variables, so utilities and the remaining
+   CSS Modules read from exactly the same values. Change a token here and
+   the entire site re-tunes.
+
+   Preflight is deliberately NOT imported. The hand-authored reset in
+   section 00 is tuned for this site and is kept as the base layer.
+
+   Contents
+   00  Reset
+   01  Theme tokens (dark default + paper surface)
+   02  Typography
+   03  Spacing, rules, layout primitives
+   04  Surfaces & procedural backgrounds
+   05  Motion
+   06  Focus & accessibility
+   07  Prose (MDX)
+   08  Small shared primitives
+   ========================================================================= */
+
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* --------------------------------------------------------------------- 00 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Offset for the fixed compact masthead on in-page anchors. */
+  scroll-padding-top: 96px;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  background: none;
+  border: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+::selection {
+  background: var(--select-bg);
+  color: var(--select-ink);
+}
+
+/* --------------------------------------------------------------------- 01
+   Colour. Near-black charcoal ground, warm off-white ink, muted neutral
+   greys for metadata, and exactly one technical accent: signal amber.
+   Amber is the colour of equipment indicator lamps and printed warning
+   marks. It reads as instrumentation rather than as "AI".
+
+   These live in @theme, so they generate utilities directly — bg-ink-100,
+   text-signal, border-line, text-dim — and support Tailwind's opacity
+   modifier syntax (bg-signal/10).
+   ---------------------------------------------------------------------- */
+@theme {
+  /* Ground — five deliberate steps. No gradients between them. */
+  --color-ink-000: #08080a; /* deepest wells: command palette, figure voids */
+  --color-ink-050: #0b0b0d;
+  --color-ink-100: #101013; /* page base */
+  --color-ink-150: #15151a; /* raised surface */
+  --color-ink-200: #1b1b21; /* cards, inputs */
+  --color-ink-300: #24242b; /* hover / active surface */
+  --color-ink-400: #33333c;
+
+  /* Warm off-white ink */
+  --color-text: #edeae3;
+  --color-dim: #a6a29a;
+  --color-faint: #6d6a64;
+  --color-ghost: #4a4842;
+
+  /* Hairlines */
+  --color-line: rgba(237, 234, 227, 0.1);
+  --color-line-soft: rgba(237, 234, 227, 0.055);
+  --color-line-strong: rgba(237, 234, 227, 0.2);
+  --color-line-accent: rgba(232, 163, 60, 0.42);
+
+  /* The single technical accent */
+  --color-signal: #e8a33c;
+  --color-signal-bright: #f4c176;
+  --color-signal-deep: #a9701d;
+  --color-signal-wash: rgba(232, 163, 60, 0.09);
+  --color-signal-ink: #1b1205;
+
+  /* Secondary channel: cold technical cyan, used only for diagram
+     "computed" states and data. Never as a brand colour. */
+  --color-trace: #5c9d96;
+  --color-trace-wash: rgba(92, 157, 150, 0.12);
+
+  /* Field / diagram colours */
+  --color-dot: rgba(237, 234, 227, 0.1);
+  --color-grid-line: rgba(237, 234, 227, 0.045);
+  --color-grid-major: rgba(237, 234, 227, 0.075);
+
+  /* Selection */
+  --color-select-bg: #e8a33c;
+  --color-select-ink: #1b1205;
+
+  /* Semantic status for LAB experiment states */
+  --color-state-active: #7fbf7f;
+  --color-state-paused: #6d6a64;
+  --color-state-archived: #4a4842;
+  --color-state-shipped: #e8a33c;
+
+  /* Elevation — used sparingly, only for overlays */
+  --shadow-lift-overlay: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 24px 60px -24px rgba(0, 0, 0, 0.9), 0 2px 10px -4px rgba(0, 0, 0, 0.7);
+}
+
+/* Legacy aliases. The CSS Modules still read these names; pointing them at
+   the theme variables keeps one source of truth in both directions, so a
+   surface override retargets utilities and modules together. */
+:root {
+  color-scheme: dark;
+
+  --ink-000: var(--color-ink-000);
+  --ink-050: var(--color-ink-050);
+  --ink-100: var(--color-ink-100);
+  --ink-150: var(--color-ink-150);
+  --ink-200: var(--color-ink-200);
+  --ink-300: var(--color-ink-300);
+  --ink-400: var(--color-ink-400);
+
+  --text: var(--color-text);
+  --text-dim: var(--color-dim);
+  --text-faint: var(--color-faint);
+  --text-ghost: var(--color-ghost);
+
+  --line: var(--color-line);
+  --line-soft: var(--color-line-soft);
+  --line-strong: var(--color-line-strong);
+  --line-accent: var(--color-line-accent);
+
+  --signal: var(--color-signal);
+  --signal-bright: var(--color-signal-bright);
+  --signal-deep: var(--color-signal-deep);
+  --signal-wash: var(--color-signal-wash);
+  --signal-ink: var(--color-signal-ink);
+
+  --trace: var(--color-trace);
+  --trace-wash: var(--color-trace-wash);
+
+  --dot: var(--color-dot);
+  --grid-line: var(--color-grid-line);
+  --grid-major: var(--color-grid-major);
+
+  --select-bg: var(--color-select-bg);
+  --select-ink: var(--color-select-ink);
+
+  --state-active: var(--color-state-active);
+  --state-paused: var(--color-state-paused);
+  --state-archived: var(--color-state-archived);
+  --state-shipped: var(--color-state-shipped);
+
+  --lift-overlay: var(--shadow-lift-overlay);
+}
+
+/* Paper surface — Writing reads on stock. A deliberate section change,
+   not a theme toggle: the lab is dark, the notebook is not. */
+[data-surface='paper'] {
+  color-scheme: light;
+
+  --color-ink-000: #e6e1d5;
+  --color-ink-050: #eae5da;
+  --color-ink-100: #f2efe7;
+  --color-ink-150: #e9e5da;
+  --color-ink-200: #e2ddd0;
+  --color-ink-300: #d8d2c2;
+  --color-ink-400: #c6bfae;
+
+  --color-text: #16150f;
+  --color-dim: #4d4a41;
+  --color-faint: #7b776c;
+  --color-ghost: #a5a094;
+
+  --color-line: rgba(22, 21, 15, 0.16);
+  --color-line-soft: rgba(22, 21, 15, 0.08);
+  --color-line-strong: rgba(22, 21, 15, 0.32);
+  --color-line-accent: rgba(169, 112, 29, 0.5);
+
+  --color-signal: #a9701d;
+  --color-signal-bright: #c08a2a;
+  --color-signal-deep: #7d5113;
+  --color-signal-wash: rgba(169, 112, 29, 0.1);
+  --color-signal-ink: #fdf8ee;
+
+  --color-trace: #2f6f68;
+  --color-trace-wash: rgba(47, 111, 104, 0.1);
+
+  --color-dot: rgba(22, 21, 15, 0.12);
+  --color-grid-line: rgba(22, 21, 15, 0.05);
+  --color-grid-major: rgba(22, 21, 15, 0.09);
+
+  --color-select-bg: #a9701d;
+  --color-select-ink: #fdf8ee;
+
+  --shadow-lift-overlay: 0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 20px 50px -24px rgba(40, 34, 20, 0.35);
+}
+
+/* --------------------------------------------------------------------- 02
+   Three voices: an expressive high-contrast serif for display, a neutral
+   grotesk engineered for reading, and a mono for technical metadata.
+   ---------------------------------------------------------------------- */
+@theme {
+  /* next/font family names are injected as --font-*-loaded on <html> by
+     layout.tsx. The literal names below are the pre-hydration fallback.
+     --font-* and --ease-* are already the names the CSS Modules read, so
+     no alias is needed for them. */
+  --font-display: var(--font-display-loaded, 'Instrument Serif'), 'Iowan Old Style',
+    Georgia, serif;
+  --font-body: var(--font-body-loaded, 'Geist'), -apple-system, 'Segoe UI', system-ui,
+    sans-serif;
+  --font-mono: var(--font-mono-loaded, 'JetBrains Mono'), ui-monospace, 'SF Mono',
+    Menlo, monospace;
+
+  /* Display scale — fluid, mobile-first */
+  --text-mega: clamp(2.9rem, 9.2vw, 8rem);
+  --text-display: clamp(2.1rem, 5.4vw, 4.4rem);
+  --text-section: clamp(1.75rem, 3.6vw, 2.9rem);
+  --text-lede: clamp(1.15rem, 1.9vw, 1.6rem);
+  --text-title: clamp(1.05rem, 1.5vw, 1.3rem);
+  --text-body: 1rem;
+  --text-lede-body: clamp(1.0625rem, 1.25vw, 1.1875rem);
+  --text-small: 0.875rem;
+  --text-micro: 0.8125rem;
+  --text-mono: 0.75rem;
+  --text-mono-sm: 0.6875rem;
+
+  /* Layout. The --sp-* vertical rhythm coincides with Tailwind's default
+     0.25rem unit, so p-4 / gap-3 are already the right values; these
+     cover the fluid and fixed measurements. */
+  --spacing-gutter: clamp(20px, 4.4vw, 64px);
+  --spacing-masthead: 56px;
+  --spacing-rule: 1px;
+  --container-shell: 1400px;
+  --container-narrow: 940px;
+  --radius-control: 2px; /* controls only. Panels and media stay square. */
+
+  /* Motion — one easing for entrances, one for interactive response */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 160ms;
+  --duration-base: 320ms;
+  --duration-slow: 640ms;
+}
+
+/* Legacy aliases. Only the names that differ from their theme counterpart
+   need one; the rest are already shared with the modules. */
+:root {
+  --t-mega: var(--text-mega);
+  --t-display: var(--text-display);
+  --t-section: var(--text-section);
+  --t-lede: var(--text-lede);
+  --t-title: var(--text-title);
+  --t-body: var(--text-body);
+  --t-lede-body: var(--text-lede-body);
+  --t-small: var(--text-small);
+  --t-micro: var(--text-micro);
+  --t-mono: var(--text-mono);
+  --t-mono-sm: var(--text-mono-sm);
+
+  --shell: var(--container-shell);
+  --shell-narrow: var(--container-narrow);
+  --gutter: var(--spacing-gutter);
+  --rule-w: var(--spacing-rule);
+  --radius: var(--radius-control);
+  --masthead: var(--spacing-masthead);
+
+  --dur-fast: var(--duration-fast);
+  --dur: var(--duration-base);
+  --dur-slow: var(--duration-slow);
+
+  /* Vertical rhythm — not a Tailwind namespace, so these stay literal. */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 128px;
+  --sp-11: 192px;
+}
+
+/* --------------------------------------------------------------------- 03 */
+body {
+  background: var(--ink-100);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'cv11' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+  overflow-x: clip;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.shell-narrow {
+  width: 100%;
+  max-width: var(--shell-narrow);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Hairline rule. The primary structural device of the whole site. */
+.rule {
+  height: var(--rule-w);
+  background: var(--line);
+  border: 0;
+  width: 100%;
+}
+
+.rule--soft {
+  background: var(--line-soft);
+}
+
+.rule--strong {
+  background: var(--line-strong);
+}
+
+.rule--accent {
+  background: var(--signal);
+  width: 40px;
+  height: 2px;
+}
+
+/* Section framing: generous space, hairline above, mono label row. */
+.band {
+  padding-block: clamp(56px, 9vw, 132px);
+  position: relative;
+}
+
+.band--tight {
+  padding-block: clamp(40px, 5.5vw, 76px);
+}
+
+.band--flush {
+  padding-block: 0;
+}
+
+/* --------------------------------------------------------------------- 04
+   Surfaces. Backgrounds are drawn, not decorated: a dot matrix in the
+   hero, a two-level blueprint in the lab, letterpress grain on paper,
+   and nothing at all in Work and About.
+   ---------------------------------------------------------------------- */
+
+/* Hero: a technical field — an instrument screen, not a glow. */
+.surface-field {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--ink-050);
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--dot) 1px,
+    transparent 0
+  );
+  background-size: 30px 30px;
+  background-position: -1px -1px;
+}
+
+/* Concentric instrument rings, extremely low contrast. */
+.surface-field::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: repeating-radial-gradient(
+    circle at 78% 30%,
+    transparent 0,
+    transparent 118px,
+    var(--grid-line) 118px,
+    var(--grid-line) 119px
+  );
+  mask-image: radial-gradient(
+    ellipse 70% 80% at 78% 30%,
+    #000 0%,
+    transparent 78%
+  );
+}
+
+/* Lab: a deeper technical environment — minor and major grid, drifting
+   scan bar, and a vignette so the plane never reads as a flat texture. */
+.surface-blueprint {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--ink-000);
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
+  background-size: 22px 22px, 22px 22px, 132px 132px, 132px 132px;
+  background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+}
+
+.surface-blueprint::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(
+    ellipse 90% 70% at 50% 0%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+[data-surface='paper'] .surface-blueprint::after {
+  background-image: radial-gradient(
+    ellipse 90% 70% at 50% 0%,
+    transparent 0%,
+    rgba(120, 108, 82, 0.16) 100%
+  );
+}
+
+/* Paper: letterpress grain + a faint warm bloom. */
+.surface-grain {
+  position: relative;
+  background-color: var(--ink-100);
+}
+
+.surface-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='0.22'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Work and About: nothing. Hairlines carry the structure. */
+.surface-minimal {
+  background-color: var(--ink-100);
+}
+
+/* --------------------------------------------------------------------- 05
+   Motion. Movement is used to signal hierarchy and state change only.
+   ---------------------------------------------------------------------- */
+@keyframes field-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -30px, 0);
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translate3d(0, -12%, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.7;
+  }
+  88% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(0, 112%, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes signal-blink {
+  0%,
+  62% {
+    opacity: 1;
+  }
+  63%,
+  100% {
+    opacity: 0.28;
+  }
+}
+
+@keyframes wipe-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.mask-line {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+}
+
+.mask-line > * {
+  display: block;
+  will-change: transform;
+}
+
+/* Entrance primitives, applied by JS only when motion is allowed. */
+[data-enter] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-enter='up'] {
+    animation: enter-up var(--dur-slow) var(--ease-out) both;
+  }
+}
+
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* --------------------------------------------------------------------- 06
+   Focus. Always visible, always square, always the accent.
+   ---------------------------------------------------------------------- */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 200;
+  padding: 10px 16px;
+  background: var(--signal);
+  color: var(--signal-ink);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: translateY(-200%);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Custom cursor. <html data-custom-cursor="on"> is set by Cursor.tsx only
+   once the custom cursor is actually live, so the native pointer is hidden
+   exactly as long as a replacement is on screen. Global by necessity: these
+   are bare element and attribute selectors. */
+html[data-custom-cursor='on'] body,
+html[data-custom-cursor='on'] a,
+html[data-custom-cursor='on'] button,
+html[data-custom-cursor='on'] [role='button'],
+html[data-custom-cursor='on'] input,
+html[data-custom-cursor='on'] textarea,
+html[data-custom-cursor='on'] select,
+html[data-custom-cursor='on'] summary {
+  cursor: none;
+}
+
+html[data-custom-cursor='on'] [data-cursor='drag'] {
+  cursor: grab;
+}
+
+/* --------------------------------------------------------------------- 07
+   Prose. Long-form reading measure. Used by MDX on case studies and notes.
+   ---------------------------------------------------------------------- */
+.prose {
+  font-size: var(--t-lede-body);
+  line-height: 1.72;
+  color: var(--text);
+  max-width: 68ch;
+  hanging-punctuation: first last;
+}
+
+.prose > * + * {
+  margin-top: 1.15em;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--text);
+  scroll-margin-top: 120px;
+}
+
+.prose h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  margin-top: 2.4em;
+  padding-top: 1.1em;
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+
+.prose h2::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 44px;
+  height: 2px;
+  background: var(--signal);
+}
+
+.prose h3 {
+  font-size: 1.15rem;
+  margin-top: 2em;
+  color: var(--text);
+}
+
+.prose h4 {
+  font-size: 1rem;
+  margin-top: 1.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  color: var(--text-dim);
+}
+
+.prose p {
+  text-wrap: pretty;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 1px solid var(--line-accent);
+  padding-bottom: 0.06em;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--signal);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+}
+
+.prose a:hover {
+  text-decoration-color: var(--signal-bright);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.1em;
+  list-style: none;
+}
+
+.prose ul > li {
+  position: relative;
+}
+
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1em;
+  top: 0.72em;
+  width: 5px;
+  height: 1px;
+  background: var(--signal);
+}
+
+.prose ol {
+  counter-reset: prose-ol;
+}
+
+.prose ol > li {
+  position: relative;
+  counter-increment: prose-ol;
+}
+
+.prose ol > li::before {
+  content: counter(prose-ol, decimal-leading-zero);
+  position: absolute;
+  left: -2.1em;
+  top: 0.1em;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-sm);
+  color: var(--signal);
+  letter-spacing: 0.02em;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--signal);
+  padding: 0.15em 0 0.15em 1.2em;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.prose blockquote p + p {
+  margin-top: 0.7em;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--ink-200);
+  border: 1px solid var(--line-soft);
+  padding: 0.12em 0.34em;
+  color: var(--signal-bright);
+  letter-spacing: 0;
+}
+
+.prose pre {
+  background: var(--ink-050);
+  border: 1px solid var(--line);
+  padding: var(--sp-4) var(--sp-5);
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  font-family: var(--font-mono);
+  max-width: 100%;
+}
+
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--text-dim);
+  font-size: inherit;
+}
+
+.prose hr {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+  margin-block: 2.6em;
+}
+
+.prose table {
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+}
+
+.prose thead th {
+  text-align: left;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--t-mono-sm);
+  color: var(--signal);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--ink-150);
+}
+
+.prose tbody td,
+.prose tbody th {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--text-dim);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.prose tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.prose tbody td strong {
+  color: var(--text);
+  font-weight: 500;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* --------------------------------------------------------------------- 08
+   Small shared primitives. Deliberately few.
+
+   Declared as @utility rather than plain classes so they are first-class
+   Tailwind utilities: they support variants, are tree-shaken when unused,
+   and — because the names are unchanged — every existing
+   `className="mono-sm faint"` call site across the site keeps working
+   without edits.
+   ---------------------------------------------------------------------- */
+
+/* Monospace technical metadata. */
+@utility mono {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@utility mono-sm {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+@utility dim {
+  color: var(--text-dim);
+}
+
+@utility faint {
+  color: var(--text-faint);
+}
+
+@utility accent {
+  color: var(--signal);
+}
+
+/* Link with a rule that wipes in from the left on hover. */
+@utility link-wipe {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease-out);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Section marker: number + label + hairline, editorial margin note.
+   This is the device the Marker primitive renders. */
+@utility marker {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-4);
+  margin-bottom: clamp(28px, 4vw, 52px);
+}
+
+@utility marker-idx {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-sm);
+  letter-spacing: 0.1em;
+  color: var(--signal);
+  flex: 0 0 auto;
+}
+
+@utility marker-label {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+@utility marker-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  transform: translateY(-0.3em);
+  min-width: 20px;
+}
+
+@utility marker-aside {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-ghost);
+}
+
+/* Hairline CTA that closes a section. The rule wipes in from the left. */
+@utility rule-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2px var(--sp-4);
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  transition: border-color var(--dur) var(--ease-out);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1px;
+    height: 1px;
+    background: var(--signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease-out);
+  }
+
+  &:hover::before,
+  &:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  & > svg {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    color: var(--text-ghost);
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+
+  &:hover > svg {
+    color: var(--signal);
+    transform: translate(3px, -3px);
+  }
+}
+
+@utility rule-link-label {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+
+@utility rule-link-detail {
+  grid-column: 1;
+  font-size: 0.8125rem;
+  color: var(--text-faint);
+  line-height: 1.4;
+}
+
+/* External link with the arrow affordance built in. */
+@utility out-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-dim);
+  transition: color var(--dur-fast) var(--ease-out);
+
+  & > svg {
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  &:hover {
+    color: var(--signal);
+
+    & > svg {
+      transform: translate(2px, -2px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-enter] {
+    opacity: 1 !important;
+  }
+}

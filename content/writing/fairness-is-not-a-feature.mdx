@@ -1,0 +1,74 @@
+---
+slug: fairness-is-not-a-feature
+title: Fairness Is Not a Feature
+date: "2026-02"
+dateLabel: "FEB 2026"
+category: AI
+readTime: 8
+excerpt: I started EquityLens because I was angry. It ended up being an argument about what a model is allowed to decide, and who gets to make that call.
+tags:
+  - AI ETHICS
+  - HEALTHCARE
+  - CASE STUDY
+featured: true
+projectSlug: equitylens
+---
+
+<ProjectLink
+  slug="equitylens"
+  label="EquityLens"
+  note="The full case study: fairness metrics, causal attribution, and the compliance layer."
+/>
+
+I started this project because I was angry.
+
+Healthcare algorithms were making decisions about patient care — who gets
+prioritised, what treatment is recommended, which patients need follow-up. And
+nobody was checking whether those systems were fair.
+
+## Why it is worse here than elsewhere
+
+A model trained mostly on data from one demographic will perform worse for
+others. That is not a bug; it is how learning from skewed data works.
+
+Everywhere else that is a quality problem. In healthcare it is a clinical one. A
+triage system that underestimates severity can delay critical care. A treatment
+recommender that works better for one group produces unequal outcomes, and
+nobody in the loop is in a position to notice.
+
+And the people who could audit these models are not the people who deploy them.
+The tooling gap is the real barrier — a compliance audit is expensive and slow,
+so in practice it does not happen.
+
+## The part I did not expect
+
+I went in thinking fairness was a property to maximise. It is not. Fairness and
+accuracy genuinely conflict, and any product that presents them as
+independently improvable is selling something that does not exist.
+
+The platform shows the Pareto frontier — the actual curve between accuracy and
+each fairness metric — and lets a stakeholder choose a point on it. That choice
+is a governance decision about whose errors are acceptable. Engineering should
+make it visible, not make it.
+
+## Why attribution comes first
+
+The first version mapped raw metrics straight to compliance language. It
+produced confident, specific, and occasionally entirely wrong regulatory
+findings — because the metric was real but the cause was not ours to attribute.
+
+A finding that says *this model is unlawful* is useless if the underlying gap
+turns out to be a sampling artefact in one ward. So the pipeline computes the
+metric, then tests for confounds, and only then maps to an obligation. The
+extra step slowed the tool down and made it considerably more useful.
+
+## What I found
+
+23% performance gap across demographic groups on a public triage dataset. Not
+subtle. A team using that model would have seen bad outcomes and had no way to
+know why.
+
+A manual review that took days now takes under an hour and produces a
+reproducible artefact.
+
+**Fairness is not a feature. It is a requirement.**
