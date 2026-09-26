@@ -1,0 +1,409 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Craft Engineer — design tokens
+   Ported from the Stitch export's tailwind.config theme.extend block.
+   ========================================================================== */
+
+@theme {
+  /* --- Color: surfaces -------------------------------------------------- */
+  --color-surface-tint: #635d5c;
+  --color-text-secondary: #57534e;
+  --color-on-tertiary-container: #e76600;
+  --color-on-surface: #1f1b17;
+  --color-accent-emerald: #10b981;
+  --color-tertiary: #230900;
+  --color-on-secondary-fixed-variant: #004395;
+  --color-outline: #7f7572;
+  --color-on-primary-fixed: #1e1b1a;
+  --color-on-tertiary-fixed: #341100;
+  --color-on-surface-variant: #4e4543;
+  --color-on-secondary: #ffffff;
+  --color-surface-bright: #fff8f5;
+  --color-text-muted: #a8a29e;
+  --color-surface-canvas: #fafaf9;
+  --color-tertiary-container: #441900;
+  --color-on-error: #ffffff;
+  --color-on-primary-container: #928c8a;
+  --color-on-secondary-container: #fefcff;
+  --color-inverse-surface: #342f2b;
+  --color-primary: #141010;
+  --color-on-tertiary: #ffffff;
+  --color-on-secondary-fixed: #001a42;
+  --color-surface-dim: #e2d8d2;
+  --color-surface-container-high: #f0e6e0;
+  --color-background: #fff8f5;
+  --color-primary-container: #292524;
+  --color-surface-variant: #eae1da;
+  --color-secondary-fixed-dim: #adc6ff;
+  --color-on-tertiary-fixed-variant: #783200;
+  --color-tertiary-fixed-dim: #ffb690;
+  --color-surface: #fff8f5;
+  --color-secondary-container: #2170e4;
+  --color-border-hairline: #e7e5e4;
+  --color-surface-container: #f6ece6;
+  --color-surface-container-lowest: #ffffff;
+  --color-primary-fixed-dim: #cdc5c3;
+  --color-tertiary-fixed: #ffdbca;
+  --color-inverse-primary: #cdc5c3;
+  --color-secondary: #0058be;
+  --color-error: #ba1a1a;
+  --color-on-error-container: #93000a;
+  --color-on-primary: #ffffff;
+  --color-inverse-on-surface: #f9efe8;
+  --color-primary-fixed: #e9e1df;
+  --color-surface-card: #ffffff;
+  --color-surface-subtle: #f5f5f4;
+  --color-error-container: #ffdad6;
+  --color-text-primary: #1c1917;
+  --color-surface-container-highest: #eae1da;
+  --color-surface-container-low: #fcf2eb;
+  --color-border-dotted: #d6d3d1;
+  --color-on-background: #1f1b17;
+  --color-on-primary-fixed-variant: #4b4644;
+  --color-outline-variant: #d1c4c1;
+  --color-secondary-fixed: #d8e2ff;
+
+  /* --- Color: raw scale used by the source markup ----------------------- */
+  --color-emerald-600: #059669;
+  --color-white: #ffffff;
+
+  /* --- Typography: families -------------------------------------------- */
+  --font-headline-xl: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-headline-xl-mobile: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-headline-lg: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-headline-md: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body-lg: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body-md: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body-sm: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-label-badge: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-label-section: var(--font-mono), ui-monospace, monospace;
+  --font-label-meta: var(--font-mono), ui-monospace, monospace;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+
+  /* --- Typography: sizes (with per-size companions) --------------------- */
+  --text-headline-xl: 36px;
+  --text-headline-xl--line-height: 44px;
+  --text-headline-xl--letter-spacing: -0.03em;
+  --text-headline-xl--font-weight: 600;
+
+  --text-headline-xl-mobile: 28px;
+  --text-headline-xl-mobile--line-height: 36px;
+  --text-headline-xl-mobile--letter-spacing: -0.025em;
+  --text-headline-xl-mobile--font-weight: 600;
+
+  --text-headline-lg: 22px;
+  --text-headline-lg--line-height: 30px;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 600;
+
+  --text-headline-md: 16px;
+  --text-headline-md--line-height: 24px;
+  --text-headline-md--letter-spacing: -0.015em;
+  --text-headline-md--font-weight: 600;
+
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--letter-spacing: -0.01em;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 14px;
+  --text-body-md--line-height: 22px;
+  --text-body-md--letter-spacing: -0.005em;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 13px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-section: 11px;
+  --text-label-section--line-height: 16px;
+  --text-label-section--letter-spacing: 0.12em;
+  --text-label-section--font-weight: 500;
+
+  --text-label-meta: 12px;
+  --text-label-meta--line-height: 16px;
+  --text-label-meta--letter-spacing: 0;
+  --text-label-meta--font-weight: 400;
+
+  --text-label-badge: 12px;
+  --text-label-badge--line-height: 16px;
+  --text-label-badge--font-weight: 500;
+
+  /* --- Spacing ---------------------------------------------------------- */
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2.5rem;
+  --spacing-margin: 1.25rem;
+  --spacing-margin-tablet: 2rem;
+  --spacing-margin-desktop: auto;
+  --spacing-gutter: 1rem;
+  --spacing-gutter-tablet: 1.5rem;
+  --spacing-gutter-desktop: 2rem;
+}
+
+/* ==========================================================================
+   Responsive type scale — the tokens above are the phone scale; wider
+   viewports get more presence without touching any markup.
+   ========================================================================== */
+
+/* Fluid scale: one clamp per step instead of breakpoint jumps, so type grows
+   continuously from a 360px phone to a 1440px desktop. Line heights are
+   unitless ratios so they track the size. */
+:root {
+  --text-headline-xl-mobile: clamp(2rem, 1.45rem + 2.4vw, 3.5rem);
+  --text-headline-xl-mobile--line-height: 1.06;
+  --text-headline-xl-mobile--letter-spacing: -0.035em;
+  --text-headline-lg: clamp(1.25rem, 1.12rem + 0.55vw, 1.625rem);
+  --text-headline-lg--line-height: 1.25;
+  --text-headline-md: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem);
+  --text-headline-md--line-height: 1.45;
+  --text-body-lg: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  --text-body-lg--line-height: 1.65;
+  --text-body-md: clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem);
+  --text-body-md--line-height: 1.6;
+  --text-body-sm: 0.8125rem;
+  --text-body-sm--line-height: 1.55;
+
+  /* Vertical rhythm: space between page sections and inside them. */
+  --space-section: clamp(4rem, 2.8rem + 5vw, 8rem);
+  --space-block: clamp(1.25rem, 1rem + 1vw, 2rem);
+
+  /* One ease for everything that responds to the user. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    background-color: var(--color-surface);
+    scroll-padding-top: 5.5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 100dvh;
+    font-feature-settings: "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* 16px minimum on form controls stops iOS Safari zooming on focus. */
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1em) !important;
+  }
+
+  button,
+  a {
+    touch-action: manipulation;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-tertiary-fixed);
+    color: var(--color-text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-text-primary);
+    outline-offset: 3px;
+  }
+
+  /* Phones: no scrollbar chrome. Desktop: a quiet, thin one. */
+  @media (pointer: coarse) {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  @media (pointer: fine) {
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-border-dotted) transparent;
+    }
+  }
+
+  /* Grids default to one shrinkable column, so an implicit column can never
+     grow to its content's max width and push the page sideways on phones.
+     Any grid-cols-* utility (utilities layer) still overrides this. */
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Container used by the shell, header and footer so edges always line up. */
+@utility shell-container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+  @media (min-width: 1280px) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Hover lift for interactive cards: transform + tinted shadow only.
+   Keyboard focus gets the same lift, so both inputs read the same way. */
+@utility lift {
+  transition:
+    transform 320ms var(--ease-out),
+    box-shadow 320ms var(--ease-out),
+    background-color 200ms ease,
+    border-color 200ms ease;
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-outline-variant);
+      box-shadow: 0 12px 32px -12px rgb(68 25 0 / 0.14), 0 2px 6px -2px rgb(28 25 23 / 0.06);
+    }
+  }
+  &:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -12px rgb(68 25 0 / 0.14);
+  }
+  &:active {
+    transform: translateY(0) scale(0.99);
+    transition-duration: 120ms;
+  }
+}
+
+/* Page and section rhythm, driven by the fluid spacing tokens. */
+@utility stack-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--space-section);
+}
+
+@utility stack-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-block);
+}
+
+/* Text link whose underline draws in from the left on hover. */
+@utility link-draw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 360ms var(--ease-out), color 200ms ease;
+  padding-bottom: 1px;
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+/* Skeleton block: a soft sweep, not a spinner. */
+@utility skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface-container);
+  border-radius: 8px;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
+    animation: skeleton-sweep 1.4s ease-in-out infinite;
+  }
+}
+
+/* Soft edge fade for horizontally scrolling rows on phones. */
+@utility scroll-fade {
+  mask-image: linear-gradient(90deg, #000 85%, transparent);
+  @media (min-width: 768px) {
+    mask-image: none;
+  }
+}
+
+/* Masked word reveal (see RevealText). */
+@utility mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+@keyframes skeleton-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes check-draw {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
