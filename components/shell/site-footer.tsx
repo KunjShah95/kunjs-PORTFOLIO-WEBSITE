@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { LocalClock } from "@/components/ui/local-clock";
 import { indexItems, site } from "@/lib/site-data";
 
 const social = [
   { label: "GitHub", href: site.links.github },
   { label: "LinkedIn", href: site.links.linkedin },
   { label: "X", href: site.links.x },
+  { label: "Resume", href: "/kunjshah_cv.pdf" },
   { label: "Email", href: `mailto:${site.email}` },
 ] as const;
 
@@ -55,8 +57,11 @@ export function SiteFooter() {
         </ul>
       </div>
 
-      <div className="shell-container py-5 border-t border-border-hairline font-body-sm text-body-sm text-text-muted">
-        &copy; {year} {site.name}
+      <div className="shell-container py-5 border-t border-border-hairline font-body-sm text-body-sm text-text-muted flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+        <span>
+          &copy; {year} {site.name}
+        </span>
+        <LocalClock />
       </div>
     </footer>
   );

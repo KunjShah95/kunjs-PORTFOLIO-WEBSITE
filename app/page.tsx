@@ -5,6 +5,10 @@ import { PageShell } from "@/components/shell/page-shell";
 import { Icon } from "@/components/icon";
 import { Reveal, RevealText } from "@/components/primitives/Reveal";
 import { CopyEmailRow } from "@/components/ui/copy-email";
+import {
+  ContributionGraph,
+  ContributionGraphFallback,
+} from "@/components/ui/contribution-graph";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { PageSection, RailLink } from "@/components/ui/page-intro";
 import { ArrowAffordance, StatusDot } from "@/components/ui/primitives";
@@ -18,6 +22,7 @@ import {
   site,
 } from "@/lib/site-data";
 import { getOpenSourceActivity, timeAgo } from "@/lib/github";
+import { getContributions } from "@/lib/contributions";
 import { MEDIUM_PROFILE, formatMonth, getMediumPosts } from "@/lib/medium";
 import { pageMeta } from "@/lib/seo";
 
@@ -47,7 +52,11 @@ export const metadata: Metadata = pageMeta({
 const [lead, ...others] = projects.slice(0, 4);
 
 export default async function HomePage() {
-  const [activity, posts] = await Promise.all([getOpenSourceActivity(12), getMediumPosts()]);
+  const [activity, posts, contributions] = await Promise.all([
+    getOpenSourceActivity(12),
+    getMediumPosts(),
+    getContributions(),
+  ]);
   /** Only merged work counts as a contribution. Open and closed PRs are dropped. */
   const mergedRecent = (activity?.recent ?? [])
     .filter((pr) => pr.state === "merged")
@@ -270,6 +279,27 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
+        </PageSection>
+
+        {/* ------------------------------------------------- open source year */}
+        <PageSection
+          id="activity"
+          layout="stacked"
+          meta={
+            activity ? (
+              <RailLink href="/open-source">All contributions</RailLink>
+            ) : null
+          }
+          title="A year of commits"
+        >
+          {contributions ? (
+            <ContributionGraph contributions={contributions} />
+          ) : (
+            <ContributionGraphFallback
+              href={site.links.github}
+              total={String(metrics[1].value)}
+            />
+          )}
         </PageSection>
 
         {/* ------------------------------------------------------- services */}

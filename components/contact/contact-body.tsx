@@ -138,7 +138,7 @@ export function ContactBody() {
       <div className="flex flex-col gap-5 lg:col-span-6 lg:sticky lg:top-28 scroll-mt-24" id="inquiryForm">
         <h2 className="font-headline-lg text-headline-lg text-text-primary">Tell me about the project</h2>
 
-        <div className="bg-surface-card rounded-2xl p-5 sm:p-6 md:p-8 shadow-[0_24px_48px_-24px_rgba(68,25,0,0.18)] border border-border-hairline">
+        <div className="bg-surface-card rounded-2xl p-5 sm:p-6 md:p-8 shadow-[0_24px_48px_-24px_var(--color-shadow)] border border-border-hairline">
           <AnimatePresence initial={false} mode="wait">
             {state === "sent" ? (
               <motion.div

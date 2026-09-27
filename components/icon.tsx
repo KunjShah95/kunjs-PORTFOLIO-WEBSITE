@@ -26,11 +26,13 @@ export type IconName =
   | "content_copy"
   | "cottage"
   | "devices"
+  | "dark_mode"
   | "download"
   | "edit_note"
   | "expand_more"
   | "hub"
   | "location_on"
+  | "light_mode"
   | "mail"
   | "mark_email_unread"
   | "memory"
@@ -80,6 +82,7 @@ const PATHS: Record<IconName, string> = {
   content_copy: "M9 9h10v11H9zM15 9V4.5H5V15h4",
   cottage: "M3.5 11.2 12 4.5l8.5 6.7M6 9.7V19.5h12V9.7M10.5 19.5v-5h3v5",
   devices: "M3.5 5.5h12v9h-12zM6 17.5h7M16 9.5h4.5v9H16zM18.25 16.5h.01",
+  dark_mode: "M20.5 14.8A8.8 8.8 0 0 1 9.2 3.5a8.8 8.8 0 1 0 11.3 11.3z",
   download: "M12 4v10M8 10.5l4 4 4-4M4.5 19.5h15",
   edit_note:
     "M4.5 19.5l.8-3.2L15 6.6a1.6 1.6 0 0 1 2.3 0l.6.6a1.6 1.6 0 0 1 0 2.3l-9.7 9.7-3.3.3zM13.8 7.8l2.4 2.4",
@@ -87,6 +90,8 @@ const PATHS: Record<IconName, string> = {
   hub: "M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0M12 9V4.5M14.6 10.4 18 8.6M14.6 13.6 18 15.4",
   location_on:
     "M12 21c4-4.6 6-7.6 6-10a6 6 0 1 0-12 0c0 2.4 2 5.4 6 10zM12 13.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
+  light_mode:
+    "M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4",
   mail: "M3.5 6h17v12h-17zM3.8 6.6l8.2 5.9 8.2-5.9",
   mark_email_unread:
     "M3.5 17.5h12v3.5h-12zM3.5 17.5 5 6.5h14l-1.5 11M3.5 8.5h17M18.5 5h.01",

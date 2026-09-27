@@ -78,7 +78,7 @@ export function HeaderMenu() {
           initial={reduce ? false : { opacity: 0, y: -6, scale: 0.97 }}
           style={{ transformOrigin: "top right" }}
           transition={{ duration: 0.22, ease: EASE_OUT }}
-          className="absolute right-0 top-11 z-50 w-[min(20rem,calc(100vw-2.5rem))] rounded-xl bg-surface-card border border-border-hairline shadow-[0_16px_40px_-12px_rgba(68,25,0,0.18)] overflow-hidden"
+          className="absolute right-0 top-11 z-50 w-[min(20rem,calc(100vw-2.5rem))] rounded-xl bg-surface-card border border-border-hairline shadow-[0_16px_40px_-12px_var(--color-shadow)] overflow-hidden"
           id="site-index"
         >
           <div className="flex items-center justify-between px-3 py-2 border-b border-border-hairline">

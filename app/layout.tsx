@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { BottomNav } from "@/components/shell/bottom-nav";
+import { CommandPalette } from "@/components/shell/command-palette";
 import { SiteFooter } from "@/components/shell/site-footer";
 import { SiteHeader } from "@/components/shell/site-header";
+import { themeScript } from "@/components/shell/theme-toggle";
 import { PersonSiteJsonLd } from "@/components/seo/json-ld";
 import { ORIGIN } from "@/lib/routes";
 import { site } from "@/lib/site-data";
@@ -57,6 +59,12 @@ export const metadata: Metadata = {
   other: {
     "ai-content-declaration": "ai-train=no, search=yes, ai-input=no",
   },
+  // Point readers and aggregators at the writing feed.
+  alternates: {
+    types: {
+      "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} — Writing` }],
+    },
+  },
   openGraph: {
     type: "website",
     url: "/",
@@ -98,7 +106,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fff8f5",
+  // Two entries so the browser/OS chrome follows the theme. The light value
+  // matches --color-surface; the dark value matches the dark surface token.
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fff8f5" },
+    { media: "(prefers-color-scheme: dark)", color: "#141110" },
+  ],
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -108,7 +121,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    // `data-theme` is seeded light so server HTML is self-consistent; the
+    // inline script below upgrades it to the stored/system preference before
+    // the first paint, so there is no flash.
+    <html data-theme="light" lang="en" className={`${sans.variable} ${mono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="bg-surface text-text-primary font-body-md text-body-md antialiased">
         <a
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:px-3 focus:py-2 focus:rounded-lg focus:bg-primary focus:text-on-primary"
@@ -120,6 +139,8 @@ export default function RootLayout({
         {children}
         <SiteFooter />
         <BottomNav />
+        {/* ⌘K search. Mounted last so its trigger sits above the header row. */}
+        <CommandPalette />
         {/* Entity graph: resolves "Kunj Shah" to a canonical person. */}
         <PersonSiteJsonLd />
       </body>

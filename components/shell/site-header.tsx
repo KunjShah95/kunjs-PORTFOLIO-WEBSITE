@@ -11,7 +11,9 @@ import {
   useSpring,
 } from "framer-motion";
 import { LinkPending } from "@/components/primitives/LinkPending";
+import { CommandPaletteTrigger } from "@/components/shell/command-palette";
 import { HeaderMenu } from "@/components/shell/header-menu";
+import { ThemeToggle } from "@/components/shell/theme-toggle";
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/cn";
 import { SPRING } from "@/lib/motion";
@@ -126,6 +128,7 @@ export function SiteHeader() {
 
         {/* ----------------------------------------------------------- right */}
         <div className="flex items-center gap-2 shrink-0">
+          <CommandPaletteTrigger />
           <Link
             className="hidden md:inline-flex items-center gap-1.5 h-10 pl-4 pr-3.5 rounded-full bg-primary text-on-primary font-body-sm text-body-sm font-medium hover:bg-primary-container active:scale-[0.97] transition-all group"
             href="/contact"
@@ -138,6 +141,7 @@ export function SiteHeader() {
             />
           </Link>
           <HeaderMenu />
+          <ThemeToggle />
         </div>
       </div>
 

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
-import { Icon } from "@/components/icon";
+import { StackFilter } from "@/components/skills/stack-filter";
 import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { Tag } from "@/components/ui/primitives";
 import { CtaBand, buttonStyles } from "@/components/ui/blocks";
-import { skillGroups } from "@/lib/site-data";
+import { skillGroups, stackInventory } from "@/lib/site-data";
 import { pageMeta } from "@/lib/seo";
 import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
@@ -59,92 +59,11 @@ export default function SkillsPage() {
         </PageSection>
 
         {/* -------------------------------------------------------- full stack */}
-        <PageSection title="Full inventory">
-          <div className="flex flex-col border-t border-border-hairline">
-            {[
-              {
-                title: "Languages",
-                icon: "code_blocks",
-                items: ["Python", "TypeScript", "JavaScript", "C++"],
-              },
-              {
-                title: "Frontend",
-                icon: "devices",
-                items: ["React", "Next.js 15", "Vite", "Tailwind"],
-              },
-              {
-                title: "Backend",
-                icon: "terminal",
-                items: ["FastAPI", "Node.js", "Flask", "Streamlit"],
-              },
-              {
-                title: "AI &amp; ML",
-                icon: "hub",
-                items: [
-                  "GPT-4",
-                  "Claude",
-                  "Gemini",
-                  "Llama",
-                  "Groq",
-                  "Ollama",
-                  "LangGraph",
-                  "CrewAI",
-                  "PyTorch",
-                  "XGBoost",
-                ],
-              },
-              {
-                title: "Data",
-                icon: "content_copy",
-                items: [
-                  "PostgreSQL",
-                  "pgvector",
-                  "ChromaDB",
-                  "Firebase",
-                  "Supabase",
-                  "Redis",
-                ],
-              },
-              {
-                title: "Infrastructure",
-                icon: "cloud_sync",
-                items: [
-                  "Docker",
-                  "Kubernetes",
-                  "GitHub Actions",
-                  "Vercel",
-                  "Cloudflare",
-                  "Render",
-                ],
-              },
-              {
-                title: "Computer Vision",
-                icon: "memory",
-                items: ["YOLOv8", "CUDA", "TensorRT", "GStreamer", "OpenCV"],
-              },
-            ].map((group) => (
-              <div
-                className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 py-4 border-b border-border-hairline"
-                key={group.title}
-              >
-                <span className="flex items-center gap-2 md:w-48 shrink-0">
-                  <Icon className="text-text-muted" name={group.icon as "code_blocks"} size={16} />
-                  <span className="font-headline-md text-headline-md text-text-primary text-[15px]">
-                    {group.title.replace("&amp;", "&")}
-                  </span>
-                </span>
-                <div className="flex flex-col min-w-0 gap-1.5">
-                  <div className="flex flex-wrap gap-1.5">
-                    {group.items.map((item) => (
-                      <Tag key={item} tone="subtle">
-                        {item}
-                      </Tag>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <PageSection
+          meta={`${stackInventory.length} disciplines`}
+          title="Full inventory"
+        >
+          <StackFilter />
         </PageSection>
 
         <CtaBand

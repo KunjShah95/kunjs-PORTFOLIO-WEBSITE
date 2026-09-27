@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Tailwind's `dark:` variant keys off the OS by default. This site lets the
+   visitor override the theme, so `dark:` is redefined to key off the
+   `data-theme` attribute the pre-paint script writes. Without this, a visitor
+   who forced light mode on a dark OS would still get dark utilities. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* ==========================================================================
    Craft Engineer — design tokens
    Ported from the Stitch export's tailwind.config theme.extend block.
@@ -67,6 +73,21 @@
   /* --- Color: raw scale used by the source markup ----------------------- */
   --color-emerald-600: #059669;
   --color-white: #ffffff;
+
+  /* --- Color: contribution calendar ------------------------------------- */
+  /* Warm ramp on the tertiary hue, so the grid reads as part of the palette
+     rather than a pasted-in GitHub widget. Overridden wholesale in dark. */
+  --color-contrib-0: #ece7e4;
+  --color-contrib-1: #ffd9c2;
+  --color-contrib-2: #ffab7a;
+  --color-contrib-3: #e76600;
+  --color-contrib-4: #441900;
+
+  /* --- Color: shadow ----------------------------------------------------- */
+  /* Tokenised so elevation reads correctly in both themes — a fixed warm
+     brown is nearly invisible against a near-black surface. */
+  --color-shadow: rgb(28 25 23 / 0.16);
+  --color-shadow-soft: rgb(68 25 0 / 0.14);
 
   /* --- Typography: families -------------------------------------------- */
   --font-headline-xl: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
@@ -173,6 +194,111 @@
 
   /* One ease for everything that responds to the user. */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Dark theme
+
+   The palette above is light-only, and every colour on the site is reached
+   through a `--color-*` token rather than a literal, so switching themes is
+   a matter of redefining those tokens. No component or utility changes.
+
+   The dark palette is not a mechanical inversion: the light theme's contrast
+   comes from a very light surface against near-black ink, so the dark theme
+   inverts that relationship (near-black surface, warm off-white ink) and
+   then re-tunes each role for its new background. Surfaces get *lighter* as
+   they rise, which is what makes elevation legible without shadows.
+
+   `:root[data-theme]` rather than `[data-theme]`, to out-specify the `:root`
+   block Tailwind emits from `@theme` without relying on source order.
+   ========================================================================== */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* --- surfaces: near-black, warming as they rise ------------------------ */
+  --color-surface: #141110;
+  --color-background: #141110;
+  --color-surface-card: #1b1715;
+  --color-surface-container-lowest: #0d0b0a;
+  --color-surface-container-low: #171413;
+  --color-surface-container: #221d1a;
+  --color-surface-container-high: #2a2421;
+  --color-surface-container-highest: #332c28;
+  --color-surface-subtle: #1e1a18;
+  --color-surface-variant: #2a2421;
+  --color-surface-dim: #221d1a;
+  --color-surface-bright: #3a322e;
+
+  /* --- ink --------------------------------------------------------------- */
+  --color-text-primary: #f4eee8;
+  --color-text-secondary: #bfb3a9;
+  --color-text-muted: #8f857b;
+  --color-on-surface: #f4eee8;
+  --color-on-background: #f4eee8;
+  --color-on-surface-variant: #bfb3a9;
+  --color-surface-tint: #bfb3a9;
+
+  /* --- borders & outline -------------------------------------------------- */
+  --color-border-hairline: #2e2724;
+  --color-border-dotted: #3c332e;
+  --color-outline: #8f857b;
+  --color-outline-variant: #4b413b;
+
+  /* --- primary: light in dark, because it is used as a button fill -------- */
+  --color-primary: #f4eee8;
+  --color-on-primary: #17110e;
+  --color-primary-container: #3b332e;
+  --color-on-primary-container: #e9dfd7;
+  --color-primary-fixed: #3b332e;
+  --color-primary-fixed-dim: #2b2521;
+  --color-on-primary-fixed: #e9dfd7;
+  --color-on-primary-fixed-variant: #cfc3b9;
+
+  /* --- accent: lifted for contrast on a dark ground ---------------------- */
+  --color-accent-emerald: #34d399;
+  --color-emerald-600: #10b981;
+
+  /* --- error -------------------------------------------------------------- */
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  /* --- secondary / tertiary: same hues, higher-key for dark -------------- */
+  --color-secondary: #adc6ff;
+  --color-on-secondary: #002e69;
+  --color-secondary-container: #004395;
+  --color-on-secondary-container: #d8e2ff;
+  --color-secondary-fixed: #004395;
+  --color-secondary-fixed-dim: #002f68;
+  --color-on-secondary-fixed: #d8e2ff;
+  --color-on-secondary-fixed-variant: #adc6ff;
+
+  --color-tertiary: #ffb690;
+  --color-on-tertiary: #5a1b00;
+  --color-tertiary-container: #7a2f00;
+  --color-on-tertiary-container: #ffdbca;
+  --color-tertiary-fixed: #7a2f00;
+  --color-tertiary-fixed-dim: #5c2200;
+  --color-on-tertiary-fixed: #ffdbca;
+  --color-on-tertiary-fixed-variant: #ffb690;
+
+  /* --- inverse ------------------------------------------------------------ */
+  --color-inverse-surface: #f4eee8;
+  --color-inverse-primary: #342f2b;
+  --color-inverse-on-surface: #342f2b;
+
+  /* --- contribution calendar: reversed ramp, brightest = most ------------ */
+  --color-contrib-0: #241f1c;
+  --color-contrib-1: #4a2a12;
+  --color-contrib-2: #8a4008;
+  --color-contrib-3: #d9630a;
+  --color-contrib-4: #ffab7a;
+
+  /* --- elevation ---------------------------------------------------------- */
+  --color-shadow: rgb(0 0 0 / 0.55);
+  --color-shadow-soft: rgb(0 0 0 / 0.4);
 }
 
 /* ==========================================================================
@@ -309,12 +435,12 @@
     &:hover {
       transform: translateY(-2px);
       border-color: var(--color-outline-variant);
-      box-shadow: 0 12px 32px -12px rgb(68 25 0 / 0.14), 0 2px 6px -2px rgb(28 25 23 / 0.06);
+      box-shadow: 0 12px 32px -12px var(--color-shadow-soft), 0 2px 6px -2px rgb(28 25 23 / 0.06);
     }
   }
   &:focus-visible {
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px -12px rgb(68 25 0 / 0.14);
+    box-shadow: 0 12px 32px -12px var(--color-shadow-soft);
   }
   &:active {
     transform: translateY(0) scale(0.99);
