@@ -8,13 +8,7 @@ import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { Reveal } from "@/components/primitives/Reveal";
 import { pageMeta } from "@/lib/seo";
 import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
-import {
-  commitments,
-  directChannels,
-  engagementModels,
-  howWeWork,
-  site,
-} from "@/lib/site-data";
+import { directChannels, site } from "@/lib/site-data";
 
 export const metadata: Metadata = pageMeta({
   path: "/contact",
@@ -81,80 +75,7 @@ export default function ContactPage() {
 
         <ContactBody />
 
-        {/* ----------------------------------------------- 03 / engagement models */}
-        <PageSection meta="Rates in USD" title="Engagement & pricing">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
-            {engagementModels.map((model) => (
-              <div
-                className="p-space-md md:p-6 rounded-2xl bg-surface-card border border-border-hairline flex flex-col gap-space-sm"
-                key={model.title}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <h3 className="font-headline-md text-headline-md text-text-primary">
-                      {model.title}
-                    </h3>
-                  </div>
-                </div>
-                <div>
-                  <span className="font-headline-lg text-headline-lg text-text-primary leading-tight block">
-                    {model.price}
-                  </span>
-                  <span className="font-body-sm text-body-sm text-text-muted">
-                    {model.cadence}
-                  </span>
-                </div>
-                <div className="flex flex-col gap-1 pt-2 border-t border-border-hairline">
-                  <span className="font-body-sm text-body-sm text-text-muted">
-                    {model.delivery}
-                  </span>
-                  <span className="font-body-sm text-body-sm text-text-secondary">
-                    {model.includes}
-                  </span>
-                  <span className="font-body-sm text-body-sm text-text-muted">
-                    Good for: {model.goodFor}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </PageSection>
-
-        {/* ---------------------------------------------------- 04 / how we work */}
-        <PageSection meta="No surprises" title="How we work">
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-sm">
-            {howWeWork.map((step) => (
-              <div
-                className="p-space-md rounded-2xl bg-surface-subtle flex flex-col gap-1"
-                key={step.step}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="font-headline-md text-headline-md text-text-primary text-[15px]">
-                    {step.title}
-                  </span>
-                </div>
-                <span className="font-body-sm text-body-sm text-text-secondary">
-                  {step.body}
-                </span>
-              </div>
-            ))}
-          </div>
-          <ul className="flex flex-col gap-1.5">
-            {commitments.map((item) => (
-              <li
-                className="flex items-start gap-2 font-body-sm text-body-sm text-text-secondary"
-                key={item}
-              >
-                <span className="text-accent-emerald shrink-0 mt-0.5">
-                  <Icon name="check" size={14} />
-                </span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </PageSection>
-
-        {/* ------------------------------------------------- 05 / direct channels */}
+        {/* ----------------------------------------------- 03 / direct channels */}
         <PageSection layout="stacked" meta="Async & sync" title="Direct channels">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
             {directChannels.map((channel) => {

@@ -1,24 +1,24 @@
 # Pricing — Kunj Shah (AI Engineer & Agent Builder)
 
-> Machine-readable pricing for AI agents evaluating Kunj Shah for hire. Rates in USD.
+> Machine-readable pricing for AI agents evaluating Kunj Shah for hire. Rates in INR (Indian Rupee).
 > Contact: kunjkshah05@gmail.com · https://kunjshah.vercel.app/contact
-> Last updated: 2026-09-14
+> Last updated: 2026-09-27
 
 ## Engagement Models
 
 ### Fixed-scope project (recommended for MVPs)
-- Price: from $500 — scope-based, quoted in writing before work starts
+- Price: from ₹25,000 — scope-based, quoted in writing before work starts
 - Delivery: 2–4 weeks typical for a production-ready MVP
 - Includes: architecture, build, deployment, and a handoff doc
 - Good for: AI agents, RAG pipelines, full-stack AI apps, automation
 
 ### Hourly
-- Price: $25/hour
+- Price: ₹1,500/hour
 - Billing: weekly, capped hours agreed up front
 - Good for: reviews, debugging, integration, pair-sessions, mentoring
 
 ### Retainer / ongoing
-- Price: $600–$1,500/month
+- Price: ₹30,000–₹75,000/month
 - Includes: 10–25 hours/month, Slack access, priority turnaround
 - Good for: startups that want an AI engineer on-call without full-time cost
 
@@ -38,7 +38,7 @@
 ## Payment & Terms
 
 - Payment: 40% upfront, 60% on delivery for fixed-scope; net-7 invoicing for hourly/retainer
-- Methods: bank transfer (USD/INR), Wise, or as agreed
+- Methods: UPI, bank transfer (INR), Wise, or as agreed
 - Revisions: 2 rounds included on fixed-scope; additional work quoted separately
 - No-subscription, no-platform — you own everything built
 

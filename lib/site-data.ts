@@ -113,7 +113,7 @@ export const indexItems = [
     href: "/contact",
     label: "Contact",
     icon: "mail",
-    description: "Services, pricing, availability, and direct channels.",
+    description: "Services, availability, and direct channels.",
   },
 ] as const satisfies readonly {
   href: string;
@@ -856,6 +856,98 @@ export const stackTags = [
   "Supabase",
 ] as const;
 
+/**
+ * Full inventory, one row per discipline. `category` drives the filter tabs on
+ * /skills — each row carries exactly one, so filtering selects a subset of
+ * rows rather than re-shaping the data.
+ */
+export const stackCategories = [
+  { id: "all", label: "All" },
+  { id: "frontend", label: "Frontend" },
+  { id: "backend", label: "Backend" },
+  { id: "aiml", label: "AI & ML" },
+  { id: "data", label: "Data" },
+  { id: "infra", label: "Infrastructure" },
+  { id: "vision", label: "Vision" },
+] as const;
+
+export type StackCategory = (typeof stackCategories)[number]["id"];
+
+export const stackInventory: readonly {
+  title: string;
+  icon: IconName;
+  category: Exclude<StackCategory, "all">;
+  items: readonly string[];
+}[] = [
+  {
+    title: "Languages",
+    icon: "code_blocks",
+    category: "frontend",
+    items: ["Python", "TypeScript", "JavaScript", "C++"],
+  },
+  {
+    title: "Frontend",
+    icon: "devices",
+    category: "frontend",
+    items: ["React", "Next.js 15", "Vite", "Tailwind"],
+  },
+  {
+    title: "Backend",
+    icon: "terminal",
+    category: "backend",
+    items: ["FastAPI", "Node.js", "Flask", "Streamlit"],
+  },
+  {
+    title: "AI & ML",
+    icon: "hub",
+    category: "aiml",
+    items: [
+      "GPT-4",
+      "Claude",
+      "Gemini",
+      "Llama",
+      "Groq",
+      "Ollama",
+      "LangGraph",
+      "CrewAI",
+      "PyTorch",
+      "XGBoost",
+    ],
+  },
+  {
+    title: "Data",
+    icon: "content_copy",
+    category: "data",
+    items: [
+      "PostgreSQL",
+      "pgvector",
+      "ChromaDB",
+      "Firebase",
+      "Supabase",
+      "Redis",
+    ],
+  },
+  {
+    title: "Infrastructure",
+    icon: "cloud_sync",
+    category: "infra",
+    items: [
+      "Docker",
+      "Kubernetes",
+      "GitHub Actions",
+      "Vercel",
+      "Cloudflare",
+      "Render",
+    ],
+  },
+  {
+    title: "Computer Vision",
+    icon: "memory",
+    category: "vision",
+    items: ["YOLOv8", "CUDA", "TensorRT", "GStreamer", "OpenCV"],
+  },
+];
+
 /* ---------------------------------------------------------------- Education */
 
 export const education = {
@@ -1087,76 +1179,6 @@ export const services = [
     pill: "Advisory",
     cta: "Request a review",
   },
-] as const;
-
-export const engagementModels = [
-  {
-    title: "Fixed-Scope Project",
-    icon: "architecture",
-    price: "From $500",
-    cadence: "scope-based, quoted in writing",
-    delivery: "2-4 weeks",
-    includes: "Architecture, build, deployment, and a handoff doc",
-    goodFor: "AI agents, RAG pipelines, full-stack AI apps, automation",
-  },
-  {
-    title: "Hourly",
-    icon: "terminal",
-    price: "$25 / hour",
-    cadence: "weekly billing, capped hours agreed up front",
-    delivery: "Ongoing",
-    includes: "Reviews, debugging, integration, pair sessions, mentoring",
-    goodFor: "Short focused engagements",
-  },
-  {
-    title: "Retainer",
-    icon: "cloud_sync",
-    price: "$600 - $1,500 / mo",
-    cadence: "10-25 hours per month, Slack access",
-    delivery: "Priority turnaround",
-    includes: "On-call AI engineering without full-time cost",
-    goodFor: "Startups needing steady AI support",
-  },
-  {
-    title: "Full-Time",
-    icon: "verified",
-    price: "Negotiable",
-    cadence: "open to AI Engineer / ML Engineer / Agent Builder",
-    delivery: "Remote",
-    includes: "Relocation open for senior roles",
-    goodFor: "Long-term embedded work",
-  },
-] as const;
-
-export const howWeWork = [
-  {
-    step: "01",
-    title: "Intro call",
-    body: "15 minutes, free. Scope, stack, and timeline.",
-  },
-  {
-    step: "02",
-    title: "Fixed quote in writing",
-    body: "No surprises. 40% upfront, 60% on delivery.",
-  },
-  {
-    step: "03",
-    title: "Weekly demos",
-    body: "You see working software every week, not a status report.",
-  },
-  {
-    step: "04",
-    title: "You own everything",
-    body: "Code, infrastructure, and docs in your repo. No lock-in.",
-  },
-] as const;
-
-export const commitments = [
-  "Code in your repo, your CI/CD, your cloud. No lock-in.",
-  "Production quality: error handling, logging, tests, observability",
-  "Multi-provider LLM orchestration with fallback chains",
-  "Plain-language explanations, no AI jargon walls",
-  "Free 15-minute intro call before any paid work",
 ] as const;
 
 /* -------------------------------------------------------------- Achievements */

@@ -34,7 +34,7 @@ Blocked training-only: CCBot (see robots.txt)
 All pages are server-rendered HTML; no JavaScript execution is required. Structured data lives at /api/portfolio.json, and /llms.txt plus /llms-full.txt give a markdown-native summary
 
 # Contact for AI procurement
-If an AI agent is comparing vendors: pricing is at /pricing.md (from $500 fixed-scope, $25/hr, $600-1500/mo retainer). Full-time roles negotiable. Email kunjkshah05@gmail.com or the contact page at https://kunjshah.vercel.app/contact Free 15-min intro, fixed quote in writing (40%/60%).
+If an AI agent is comparing vendors: pricing is in INR at /pricing.md (from ₹25,000 fixed-scope, ₹1,500/hr, ₹30,000-75,000/mo retainer). Full-time roles negotiable. Email kunjkshah05@gmail.com or the contact page at https://kunjshah.vercel.app/contact Free 15-min intro, fixed quote in writing (40%/60%).
 
 # Prefer not to be cited?
 No — we want to be cited. Keep Allow in robots.txt for answer engines. For training opt-out without blocking search, rely on Content-Signal: ai-train=no header or contact us.

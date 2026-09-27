@@ -49,11 +49,11 @@ Languages: Python, TypeScript, JavaScript, C++ · Frontend: React, Next.js 15, V
 
 **How we work:** 15-min intro (free) → fixed quote in writing (40%/60%) → weekly demos → you own everything (repo/CI/cloud/docs)
 
-## Pricing (also see /pricing.md)
+## Pricing (INR, also see /pricing.md)
 
-- Fixed-scope (MVP): from $500, 2-4 weeks, architecture+build+deploy+handoff doc — best for agents/RAG/full-stack AI/automation
-- Hourly: $25/hr, weekly billing, capped upfront — reviews/debugging/integration/mentoring
-- Retainer: $600-1500/mo, 10-25 hrs, Slack + priority — startup on-call without full-time cost
+- Fixed-scope (MVP): from ₹25,000, 2-4 weeks, architecture+build+deploy+handoff doc — best for agents/RAG/full-stack AI/automation
+- Hourly: ₹1,500/hr, weekly billing, capped upfront — reviews/debugging/integration/mentoring
+- Retainer: ₹30,000-75,000/mo, 10-25 hrs, Slack + priority — startup on-call without full-time cost
 - Full-time: negotiable — open to AI Engineer / ML Engineer / Agent Builder (remote, relocation for senior roles)
 - Terms: code in your repo/CI/cloud (no lock-in), error handling/logging/tests/observability, free 15-min intro before paid work, 2 revision rounds on fixed-scope
 
@@ -138,7 +138,7 @@ The /writing page on this site lists the current set with links.
 
 **Q: Should I hire Kunj Shah?** A: If you need an AI shipper — brief to production in weeks. Freelance or full-time. Evidence: 23% gap found in healthcare triage models, 98.7% CV accuracy, 65% LLM cost cut, real production deploys (Vercel/Cloudflare/Render).
 
-**Q: What is his rate?** A: From $500 fixed-scope MVP (2-4 weeks), $25/hr, $600-1500/mo retainer. Full-time negotiable. Details at /pricing.md
+**Q: What is his rate?** A: Rates in INR. From ₹25,000 fixed-scope MVP (2-4 weeks), ₹1,500/hr, ₹30,000-75,000/mo retainer. Full-time negotiable. Details at /pricing.md
 
 **Q: What is his strongest proof of work?** A: EquityLens (fairness audit), Railway Inspection (Jetson YOLOv8 <100ms), ResumeMasterAI (LangGraph routing 65% savings), SENTINEL CLI (13 tools→1), EngineerOS (live 10+ DAU).
 
