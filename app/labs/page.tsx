@@ -8,12 +8,15 @@ import { Tag } from "@/components/ui/primitives";
 import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { cn } from "@/lib/cn";
 import { labs } from "@/lib/site-data";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Labs | Kunj Shah",
-  description:
-    "Research builds and from-scratch infrastructure: a vector database with 9 ANN algorithms, GPT-2 from first principles, and a pure-Python BPE tokenizer.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/labs",
+  title: "AI Labs & Research",
+  description: "Research builds and from-scratch infrastructure: a vector database with 9 ANN algorithms, GPT-2 from first principles, and a pure-Python BPE tokenizer.",
+  keywords: ["build GPT-2 from scratch", "vector database from scratch", "BPE tokenizer", "AI research projects", "from scratch machine learning"],
+});
 
 const STATUS_TONE = {
   Stable: "bg-accent-emerald/15 text-accent-emerald",
@@ -26,6 +29,7 @@ export default function LabsPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("Labs", "/labs")} />
         <PageIntro
           title="Labs"
           lead="Things built to understand how they work, not to ship next quarter, a vector database from scratch, GPT-2 from first principles, a tokenizer in pure Python."

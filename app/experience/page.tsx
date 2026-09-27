@@ -7,12 +7,15 @@ import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { Tag } from "@/components/ui/primitives";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { hackathons, impactMetrics, jobs, site } from "@/lib/site-data";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Experience | Kunj Shah",
-  description:
-    "Work history of Kunj Shah: Python and AI/ML intern at Ideaboat, automation intern at PHAZE_AI, and open-source contributions to OWASP, Microsoft, and Ollama.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/experience",
+  title: "Experience",
+  description: "Work history of Kunj Shah: Python and AI/ML intern at Ideaboat, automation intern at PHAZE_AI, and open-source contributions to OWASP, Microsoft, and Ollama.",
+  keywords: ["AI engineer work experience", "AI internship India", "machine learning intern Ahmedabad", "OWASP contributor"],
+});
 
 const finals = hackathons.filter((h) => h.placement === "Finalist").length;
 
@@ -20,6 +23,7 @@ export default function ExperiencePage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("Experience", "/experience")} />
         <PageIntro
           title="Experience"
           lead="Internships shipping AI into production, alongside continuous upstream open-source work."
@@ -99,7 +103,7 @@ export default function ExperiencePage() {
               className="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
               href="/hackathons"
             >
-              All {hackathons.length} →
+              All {hackathons.length} â†’
             </Link>
           }
           title="Hackathons"

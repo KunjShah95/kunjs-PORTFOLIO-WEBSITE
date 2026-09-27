@@ -19,15 +19,30 @@ import {
 } from "@/lib/site-data";
 import { getOpenSourceActivity, timeAgo } from "@/lib/github";
 import { MEDIUM_PROFILE, formatMonth, getMediumPosts } from "@/lib/medium";
+import { pageMeta } from "@/lib/seo";
 
 /** Live GitHub activity is re-fetched at most hourly. */
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Kunj Shah | AI Engineer",
+export const metadata: Metadata = pageMeta({
+  path: "",
+  title: "AI Engineer & Agent Builder in Ahmedabad",
   description:
-    "Kunj Shah is an AI engineer in Ahmedabad building agents, RAG pipelines and edge computer vision that hold up in production. 12+ shipped systems, 44+ merged open-source PRs.",
-};
+    "Kunj Shah is an AI engineer in Ahmedabad, India building agents, RAG pipelines and edge computer vision that hold up in production. 12+ shipped systems, 44+ merged open-source PRs.",
+  keywords: [
+    "AI engineer Ahmedabad",
+    "AI engineer India",
+    "agent developer",
+    "RAG developer India",
+    "edge computer vision engineer",
+    "freelance AI engineer Ahmedabad",
+    "generative AI consultant India",
+    "machine learning engineer Gujarat",
+  ],
+  ogTitle: "Kunj Shah — AI Engineer & Agent Builder, Ahmedabad",
+  ogDescription:
+    "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 12+ shipped systems, 44+ merged open-source PRs.",
+});
 
 const [lead, ...others] = projects.slice(0, 4);
 

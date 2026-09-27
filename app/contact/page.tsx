@@ -6,6 +6,8 @@ import { CopyEmailButton } from "@/components/ui/copy-email";
 import { StatusDot } from "@/components/ui/primitives";
 import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { Reveal } from "@/components/primitives/Reveal";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 import {
   commitments,
   directChannels,
@@ -14,16 +16,18 @@ import {
   site,
 } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "Contact | Kunj Shah",
-  description:
-    "Advisory and contract engineering for multi-agent systems, edge computer vision, and LLM security. Based in Ahmedabad, India, available for Q2/Q3.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/contact",
+  title: "Contact & Hiring",
+  description: "Advisory and contract engineering for multi-agent systems, edge computer vision, and LLM security. Based in Ahmedabad, India, available for Q2/Q3.",
+  keywords: ["hire AI engineer India", "freelance AI engineer Ahmedabad", "AI consultant India", "hire machine learning developer", "AI engineer contact"],
+});
 
 export default function ContactPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("Contact", "/contact")} />
         <div className="flex flex-col gap-8 md:gap-10">
         <PageIntro
           lead="Whether you need to architect multi-agent systems, optimize edge vision models, or audit LLM security, I'm open for advisory and contract engineering."

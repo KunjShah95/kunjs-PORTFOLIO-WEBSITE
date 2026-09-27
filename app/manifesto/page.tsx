@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
 import { Icon } from "@/components/icon";
@@ -7,18 +7,32 @@ import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { Reveal } from "@/components/primitives/Reveal";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { SectionLabel, Tag } from "@/components/ui/primitives";
+import { JsonLd } from "@/components/seo/json-ld";
 import { evidence, principles, site } from "@/lib/site-data";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Manifesto | Kunj Shah",
-  description:
-    "Three non-negotiable engineering principles for building AI systems in production: determinism over hallucination, edge and cost efficiency, and observability first.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/manifesto",
+  title: "Manifesto",
+  description: "Three non-negotiable engineering principles for building AI systems in production: determinism over hallucination, edge and cost efficiency, and observability first.",
+  keywords: ["AI engineering principles", "production AI best practices", "LLM engineering philosophy"],
+});
 
 export default function ManifestoPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: principles.map((p) => ({
+              "@type": "Question",
+              name: p.title,
+              acceptedAnswer: { "@type": "Answer", text: p.body },
+            })),
+          }}
+        />
         <PageIntro
           title="Manifesto"
           lead="Three non-negotiable engineering principles learned from running inference in high-stakes production."

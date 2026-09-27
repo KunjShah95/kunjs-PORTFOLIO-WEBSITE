@@ -9,12 +9,15 @@ import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { Reveal } from "@/components/primitives/Reveal";
 import { cn } from "@/lib/cn";
 import { hackathons } from "@/lib/site-data";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Hackathons | Kunj Shah",
-  description:
-    "10 hackathons, 4 finals, including a solo finalist spot out of 2000+ teams at Autonomous Hacks 2026, building an autonomous AI system in 48 hours.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/hackathons",
+  title: "Hackathons",
+  description: "10 hackathons, 4 finals, including a solo finalist spot out of 2000+ teams at Autonomous Hacks 2026, building an autonomous AI system in 48 hours.",
+  keywords: ["AI hackathon winner", "Autonomous Hacks 2026", "SIH 2025 finalist", "AI hackathon India"],
+});
 
 export default function HackathonsPage() {
   const finals = hackathons.filter((h) => h.placement === "Finalist");
@@ -23,6 +26,7 @@ export default function HackathonsPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("Hackathons", "/hackathons")} />
         <PageIntro
           title="Hackathons"
           lead="Weekend-built systems under time pressure, the fastest way to find out whether an idea actually works."
@@ -90,7 +94,7 @@ export default function HackathonsPage() {
                               {h.title}
                             </h3>
                             <span className="font-body-sm text-body-sm text-text-muted">
-                              {h.event} · Team of {h.team}
+                              {h.event} Â· Team of {h.team}
                             </span>
                           </div>
                         </div>

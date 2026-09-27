@@ -7,17 +7,21 @@ import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { Tag } from "@/components/ui/primitives";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { education, hackathons, labs, site } from "@/lib/site-data";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Education | Kunj Shah",
-  description:
-    "B.Tech Computer Science at Indus University (2023-2027), specializing in AI/ML integration and automation. Coursework in deep learning, computer vision, NLP, and distributed systems.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/education",
+  title: "Education",
+  description: "B.Tech Computer Science at Indus University (2023-2027), specializing in AI/ML integration and automation. Coursework in deep learning, computer vision, NLP, and distributed systems.",
+  keywords: ["Indus University", "B.Tech Computer Science Ahmedabad", "AI student India", "computer science Ahmedabad"],
+});
 
 export default function EducationPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("Education", "/education")} />
         <PageIntro
           title="Education"
           lead="Focusing on the intersection of full stack development and AI, building automated systems that use distributed intelligence at scale."
@@ -33,7 +37,7 @@ export default function EducationPage() {
                   {education.degree}
                 </h2>
                 <p className="font-body-md text-body-md text-text-secondary">
-                  {education.institution} · {education.location}
+                  {education.institution} Â· {education.location}
                 </p>
               </div>
             </div>
@@ -85,7 +89,7 @@ export default function EducationPage() {
               className="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
               href="/labs"
             >
-              All {labs.length} →
+              All {labs.length} â†’
             </Link>
           }
           title="Learning by building"
@@ -113,7 +117,7 @@ export default function EducationPage() {
                   </span>
                 </span>
                 <span className="font-body-sm text-body-sm text-text-muted">
-                  {lab.status} · {lab.stack.slice(0, 3).join(", ")}
+                  {lab.status} Â· {lab.stack.slice(0, 3).join(", ")}
                 </span>
               </a>
             ))}
@@ -127,7 +131,7 @@ export default function EducationPage() {
               className="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
               href="/hackathons"
             >
-              All {hackathons.length} →
+              All {hackathons.length} â†’
             </Link>
           }
           title="Competitions"

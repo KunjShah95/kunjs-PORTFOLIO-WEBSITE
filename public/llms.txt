@@ -21,7 +21,7 @@
 - Projects: https://kunjshah.vercel.app/projects — 12 projects with case studies, architecture, benchmarks
 - Skills: https://kunjshah.vercel.app/skills — stack: Python/TS/React/FastAPI/LangChain/PyTorch/Docker
 - Labs: https://kunjshah.vercel.app/labs — experiments & prototypes
-- Writing: https://kunjshah.vercel.app/blogs — 15+ essays on agents, RAG, edge CV, fairness
+- Writing: https://kunjshah.vercel.app/writing — 15+ essays on agents, RAG, edge CV, fairness
 - Hackathons: https://kunjshah.vercel.app/hackathons — 4 finals (Autonomous Hacks 2026 ex-2000 teams, Odoo x Adani, SIH 2025)
 - Experience: https://kunjshah.vercel.app/experience
 - Education: https://kunjshah.vercel.app/education — B.Tech CS Indus University 2023-2027
@@ -29,29 +29,29 @@
 - Pricing (machine-readable, for AI agents): https://kunjshah.vercel.app/pricing.md
 - Services (machine-readable): https://kunjshah.vercel.app/services.md
 
-## Projects (summaries — see /projects/<slug> for detail)
+## Projects (summaries — all listed on /projects)
 
-- [EngineerOS](https://kunjshah.vercel.app/projects/engineeros) — AI-native workspace (notes/tasks/graph) — semantic search + multi-agent, Supabase, Live 10+ DAU — https://engineeros-delta.vercel.app/
-- [OfferGuard AI](https://kunjshah.vercel.app/projects/offerguard-ai) — Job offer analysis — Groq multi-provider — 40k+ tokens processed
-- [EquityLens](https://kunjshah.vercel.app/projects/equitylens) — Healthcare fairness auditing — detected 23% gap, audit 3 weeks → 4 hours — EU AI Act / NIST RMF
-- [LearnAI](https://kunjshah.vercel.app/projects/learnai) — Adaptive tutoring — +45% quiz completion via adaptive difficulty
-- [SmartFlow AI](https://kunjshah.vercel.app/projects/smart-flow-ai) — Transit crowd heatmaps — 94% wait-time accuracy — Firebase real-time
-- [ResumeMasterAI 2026](https://kunjshah.vercel.app/projects/resumemaster-ai) — Career intelligence — LangGraph smart routing — 65% API cost cut, 3x match precision
-- [SENTINEL CLI](https://kunjshah.vercel.app/projects/sentinel-cli) — Security CLI — 13+ tools unified — 70% audit overhead cut — https://sentinel-cli.vercel.app/
-- [Railway Inspection](https://kunjshah.vercel.app/projects/railway-inspection) — YOLOv8 on Jetson Orin — 98.7% accuracy, 4.2x speedup, <100ms
-- [ArchMind AI](https://kunjshah.vercel.app/projects/archmind-ai) — Architecture intelligence — 7 agents, 6-provider fallback + heuristic engine
-- [ArchMind Research Agent](https://kunjshah.vercel.app/projects/archmind-research-agent) — Autonomous research — plan→search→read→synthesize with citations
-- [GAP Miner](https://kunjshah.vercel.app/projects/autonomous-research) — Skill-gap → roadmap — Llama-3 — 10 days → 15s, 95% market alignment
-- [UPI Fraud Guard](https://kunjshah.vercel.app/projects/upi-fraud-guard) — XGBoost fraud detection — 88% detection, <0.1% FPR
-- [MinBPE Tokenizer](https://kunjshah.vercel.app/projects/minbpe-tokenizer) — BPE from scratch — 15% token reduction on technical corpora
+- [EngineerOS](https://kunjshah.vercel.app/projects) — AI-native workspace (notes/tasks/graph) — semantic search + multi-agent, Supabase, Live 10+ DAU — https://engineeros-delta.vercel.app/
+- [OfferGuard AI](https://kunjshah.vercel.app/projects) — Job offer analysis — Groq multi-provider — 40k+ tokens processed
+- [EquityLens](https://kunjshah.vercel.app/projects) — Healthcare fairness auditing — detected 23% gap, audit 3 weeks → 4 hours — EU AI Act / NIST RMF
+- [LearnAI](https://kunjshah.vercel.app/projects) — Adaptive tutoring — +45% quiz completion via adaptive difficulty
+- [SmartFlow AI](https://kunjshah.vercel.app/projects) — Transit crowd heatmaps — 94% wait-time accuracy — Firebase real-time
+- [ResumeMasterAI 2026](https://kunjshah.vercel.app/projects) — Career intelligence — LangGraph smart routing — 65% API cost cut, 3x match precision
+- [SENTINEL CLI](https://kunjshah.vercel.app/projects) — Security CLI — 13+ tools unified — 70% audit overhead cut — https://sentinel-cli.vercel.app/
+- [Railway Inspection](https://kunjshah.vercel.app/projects) — YOLOv8 on Jetson Orin — 98.7% accuracy, 4.2x speedup, <100ms
+- [ArchMind AI](https://kunjshah.vercel.app/projects) — Architecture intelligence — 7 agents, 6-provider fallback + heuristic engine
+- [ArchMind Research Agent](https://kunjshah.vercel.app/projects) — Autonomous research — plan→search→read→synthesize with citations
+- [GAP Miner](https://kunjshah.vercel.app/projects) — Skill-gap → roadmap — Llama-3 — 10 days → 15s, 95% market alignment
+- [UPI Fraud Guard](https://kunjshah.vercel.app/projects) — XGBoost fraud detection — 88% detection, <0.1% FPR
+- [MinBPE Tokenizer](https://kunjshah.vercel.app/projects) — BPE from scratch — 15% token reduction on technical corpora
 
 ## Writing Highlights (essays)
 
-- [Building Production-Grade Agentic Systems](https://kunjshah.vercel.app/blogs/agentic-systems-production) — state persistence, hierarchical orchestration, HITL gates
-- [Orchestrating Complex AI Workflows](https://kunjshah.vercel.app/blogs/agentic-workflow-orchestration) — CrewAI vs LangGraph
-- [EquityLens: AI Fairness Auditing Platform](https://kunjshah.vercel.app/blogs/equitylens-case-study) — bias metrics, EU AI Act
-- [Computer Vision at Edge: YOLOv8](https://kunjshah.vercel.app/blogs/cv-edge-optimization) — TensorRT, INT8 QAT, GStreamer
-- [RAG Pipelines & Prompt Engineering](https://kunjshah.vercel.app/blogs/prompt-engineering-reasoning) — ReAct, Tree-of-Thoughts
+- [Building Production-Grade Agentic Systems](https://kunjshah.vercel.app/writing) — state persistence, hierarchical orchestration, HITL gates
+- [Orchestrating Complex AI Workflows](https://kunjshah.vercel.app/writing) — CrewAI vs LangGraph
+- [EquityLens: AI Fairness Auditing Platform](https://kunjshah.vercel.app/writing) — bias metrics, EU AI Act
+- [Computer Vision at Edge: YOLOv8](https://kunjshah.vercel.app/writing) — TensorRT, INT8 QAT, GStreamer
+- [RAG Pipelines & Prompt Engineering](https://kunjshah.vercel.app/writing) — ReAct, Tree-of-Thoughts
 
 ## Profiles (same person — entity consolidation)
 

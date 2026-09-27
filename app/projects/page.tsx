@@ -11,17 +11,32 @@ import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { ArrowAffordance } from "@/components/ui/primitives";
 import { otherBuilds, site } from "@/lib/site-data";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Projects | Kunj Shah",
+export const metadata: Metadata = pageMeta({
+  path: "/projects",
+  title: "AI Projects & Case Studies",
   description:
-    "Case studies for shipped AI systems: OfferGuard AI, EquityLens, LangGraph multi-agent workflows, and an edge vision pipeline on Jetson Orin.",
-};
+    "Case studies for 12+ shipped AI systems: LangGraph multi-agent workflows, RAG pipelines, YOLOv8 edge vision on Jetson Orin, and full-stack AI apps with real production metrics.",
+  keywords: [
+    "AI projects",
+    "machine learning projects",
+    "AI agent projects",
+    "RAG pipeline examples",
+    "LangGraph projects",
+    "edge AI case study",
+    "computer vision project",
+    "AI portfolio India",
+    "gen AI case studies",
+  ],
+});
 
 export default function ProjectsPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("Projects", "/projects")} />
         <div className="flex flex-col gap-8 md:gap-12">
           <PageIntro
             lead="Production AI systems, multi-agent frameworks, edge vision models, and full-stack software, architected from concept to deployment."

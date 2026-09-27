@@ -7,15 +7,18 @@ import { buttonStyles } from "@/components/ui/blocks";
 import { EmptyState } from "@/components/ui/empty-state";
 import { PageIntro } from "@/components/ui/page-intro";
 import { MEDIUM_PROFILE, formatMonth, getMediumPosts } from "@/lib/medium";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
 /** New Medium posts appear within the hour. */
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Writing | Kunj Shah",
-  description:
-    "Essays by Kunj Shah on AI engineering, LLM evaluation, agents and Python, published on Medium.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/writing",
+  title: "Writing",
+  description: "Essays by Kunj Shah on AI engineering, LLM evaluation, agents and Python, published on Medium.",
+  keywords: ["AI engineering blog", "LLM evaluation articles", "AI agent essays", "machine learning writing"],
+});
 
 const external = { rel: "noopener noreferrer", target: "_blank" } as const;
 
@@ -26,6 +29,7 @@ export default async function WritingPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("Writing", "/writing")} />
         <PageIntro
           lead="Essays on AI engineering, evaluation, agents and Python. Published on Medium, collected here."
           title="Writing"

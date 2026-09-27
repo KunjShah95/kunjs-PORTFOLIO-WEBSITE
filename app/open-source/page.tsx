@@ -8,16 +8,19 @@ import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { EmptyState } from "@/components/ui/empty-state";
 import { impactMetrics, mergedContributions, site } from "@/lib/site-data";
 import { getOpenSourceActivity, timeAgo } from "@/lib/github";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
 /** Re-fetch GitHub activity at most once an hour. */
 export const revalidate = 3600;
 
 
-export const metadata: Metadata = {
-  title: "Open Source | Kunj Shah",
-  description:
-    "44 merged pull requests, 45 issues resolved, and 13+ external codebases, including the OWASP agent-security harness, Microsoft AI-Engineering-Coach, and Ollama.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/open-source",
+  title: "Open Source",
+  description: "44 merged pull requests, 45 issues resolved, and 13+ external codebases, including the OWASP agent-security harness, Microsoft AI-Engineering-Coach, and Ollama.",
+  keywords: ["Kunj Shah GitHub", "open source AI contributions", "OWASP contributor", "merged pull requests AI"],
+});
 
 /** Extra profiles beyond the primary GitHub. */
 const profiles = [
@@ -29,7 +32,7 @@ const profiles = [
 
 export default async function OpenSourcePage() {
   const activity = await getOpenSourceActivity(12);
-  /** Only merged PRs — open issues and proposals aren't contributions. */
+  /** Only merged PRs â€” open issues and proposals aren't contributions. */
   const mergedRecent = activity?.recent.filter((pr) => pr.state === "merged") ?? [];
 
   // Live numbers when GitHub answers; the curated figures otherwise.
@@ -43,6 +46,7 @@ export default async function OpenSourcePage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("Open Source", "/open-source")} />
         <PageIntro
           title="Open Source"
           lead="Merged pull requests in codebases I don't own, mostly the agent and inference tooling I use every day."
@@ -166,7 +170,7 @@ export default async function OpenSourcePage() {
                       {item.title}
                     </span>
                     <span className="font-label-meta text-label-meta text-text-muted">
-                      {item.org} · {item.tag}
+                      {item.org} Â· {item.tag}
                     </span>
                   </span>
                 </span>

@@ -84,7 +84,7 @@ Node.js/TS/LLM/Docker. Pluggable analyzers (13+ tools), unified schema, cross-to
 C++ + OpenCV + YOLOv8 + CUDA on Jetson Orin. TensorRT ONNX engine + GStreamer HW decode + CUDA kernels + INT8 QAT. Handles motion blur, low-light histogram eq. 98.7%, 4.2x, <100ms, 2x INT8 vs FP16. https://github.com/KunjShah95/Railway-Inspection
 
 ### ArchMind AI (Architecture Intelligence) — Production
-TS/Python/FastAPI/React/Supabase. Vite React (Vercel) + FastAPI (Render) + Supabase auth/PG. Parses Mermaid/PlantUML/image/PDF (vision) → graph → 7 parallel agents (scalability/security/reliability/perf/cost/maintainability/observability) → scored report + simulation/compliance/redesign. Fallback: Groq→NVIDIA→OpenRouter→Gemini→Ollama→HF → 18-rule heuristic engine (zero keys). 7 dims, 6+ heuristic, keep-warm via GH Actions. https://archmind-ai-topaz.vercel.app/ — https://github.com/KunjShah95/archmind-ai — case study: https://kunjshah.vercel.app/blogs/case-study-archmind-ai
+TS/Python/FastAPI/React/Supabase. Vite React (Vercel) + FastAPI (Render) + Supabase auth/PG. Parses Mermaid/PlantUML/image/PDF (vision) → graph → 7 parallel agents (scalability/security/reliability/perf/cost/maintainability/observability) → scored report + simulation/compliance/redesign. Fallback: Groq→NVIDIA→OpenRouter→Gemini→Ollama→HF → 18-rule heuristic engine (zero keys). 7 dims, 6+ heuristic, keep-warm via GH Actions. https://archmind-ai-topaz.vercel.app/ — https://github.com/KunjShah95/archmind-ai — case study: https://kunjshah.vercel.app/writing
 
 ### ArchMind Research Agent (Agentic AI) — Live
 Python + LangGraph + Streamlit + RAG + scraping. Planner breaks request → search/scrape → extractor normalizes → writer (grounded RAG) → cited report via Streamlit. Challenges: noisy web extraction, drift on broad queries. https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/ — https://github.com/KunjShah01/INTERNSHIP-ASSESSMENT
@@ -104,20 +104,23 @@ Python/PyTorch/React/FastAPI. End-to-end recommender NLP backend. 92% accuracy, 
 ### AETHER AI (AI Systems) — Framework
 Python/Ollama/Gemini/Groq. Multi-model terminal assistant, local-first Ollama zero-leakage. https://github.com/KunjShah95/AETHER-AI
 
-## Writing (full index)
+## Writing (index)
 
-- What Breaking Things Taught Me About Building Them (JUN 2026) — /blogs/breaking-things-taught-me
-- Shipping Is Harder Than Building (MAY 2026) — /blogs/shipping-harder-than-building
-- Why I Build Things That Do Not Exist Yet (APR 2026) — /blogs/why-i-build-things
-- Building Production-Grade Agentic Systems (JAN 2026) — supervisort/subordinate, PG JSONB checkpointing, HITL breakpoints, trace logging — /blogs/agentic-systems-production
-- Orchestrating Complex AI Workflows (FEB 2026) — CrewAI vs LangGraph, fallback models (GPT-4→Llama-3/Ollama), HITL — /blogs/agentic-workflow-orchestration
-- Computer Vision at Edge: Optimizing YOLOv8 for Real-Time Inference (NOV 2025) — C++, TensorRT, GStreamer/CUDA, INT8 QAT, histogram eq — /blogs/cv-edge-optimization
-- EquityLens: Building an AI Fairness Auditing Platform (APR 2026) — /blogs/equitylens-case-study
-- Prompt Engineering for Complex Multi-Step Reasoning (SEP 2025) — ReAct, Tree-of-Thoughts, self-correction, XML/JSON/Pydantic structured outputs — /blogs/prompt-engineering-reasoning
+Essays are published on Medium, not hosted here: https://medium.com/@kkshah2005
+The /writing page on this site lists the current set with links.
+
+- What Breaking Things Taught Me About Building Them (JUN 2026)
+- Shipping Is Harder Than Building (MAY 2026)
+- Why I Build Things That Do Not Exist Yet (APR 2026)
+- Building Production-Grade Agentic Systems (JAN 2026) — supervisor/subordinate, PG JSONB checkpointing, HITL breakpoints, trace logging
+- Orchestrating Complex AI Workflows (FEB 2026) — CrewAI vs LangGraph, fallback models (GPT-4→Llama-3/Ollama), HITL
+- Computer Vision at Edge: Optimizing YOLOv8 for Real-Time Inference (NOV 2025) — C++, TensorRT, GStreamer/CUDA, INT8 QAT, histogram eq
+- EquityLens: Building an AI Fairness Auditing Platform (APR 2026)
+- Prompt Engineering for Complex Multi-Step Reasoning (SEP 2025) — ReAct, Tree-of-Thoughts, self-correction, XML/JSON/Pydantic structured outputs
 - RAG Pipelines (OCT 2025) — chunking, ChromaDB, hybrid search, re-ranking
 - Anomaly Detection in High-Dimensional Data Streams (AUG 2025)
 - MLOps at Scale (DEC 2025) — versioning, canary, quantization in CI/CD
-- Plus case studies: /blogs/case-study-offerguard-ai, /blogs/case-study-equitylens, /blogs/case-study-railway-inspection, /blogs/case-study-upi-fraud-guard — and older essays (messy middle, writing code for humans, starting before ready, when AI gets it wrong)
+- Plus case studies on OfferGuard AI, EquityLens, Railway Inspection, and UPI Fraud Guard — and older essays (messy middle, writing code for humans, starting before ready, when AI gets it wrong)
 
 ## Experience
 

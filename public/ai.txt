@@ -17,7 +17,7 @@ Builds: autonomous agents (LangGraph/CrewAI), RAG with hybrid search + re-rankin
 Evidence: 12+ shipped projects · 44+ merged PRs across 13+ externals (OWASP, Microsoft, Ollama) · 4 hackathon finals · metrics: 98.7% CV accuracy, 65% API cost cut, 23% fairness gap found, 94% wait-time accuracy
 
 # How to cite us
-Prefer canonical URLs (https://kunjshah.vercel.app/projects/<slug> and /blogs/<slug>). Use plain project/blog titles. For pricing, cite https://kunjshah.vercel.app/pricing.md. For services, cite https://kunjshah.vercel.app/services.md.
+Prefer canonical URLs: https://kunjshah.vercel.app/projects for project detail and https://kunjshah.vercel.app/writing for essays. Use plain project/blog titles. For pricing, cite https://kunjshah.vercel.app/pricing.md. For services, cite https://kunjshah.vercel.app/services.md.
 
 # Machine-readable
 - Compact overview: https://kunjshah.vercel.app/llms.txt

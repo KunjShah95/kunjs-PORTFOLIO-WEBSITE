@@ -6,6 +6,8 @@ import { Icon } from "@/components/icon";
 import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { StatStrip } from "@/components/ui/blocks";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 import {
   education,
   focusAreas,
@@ -14,11 +16,12 @@ import {
   skillGroups,
 } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "About | Kunj Shah",
-  description:
-    "Kunj Shah is a 22-year-old AI engineer and agent builder in Ahmedabad, India. B.Tech Computer Science at Indus University, specializing in production agents, RAG, and edge computer vision.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/about",
+  title: "About",
+  description: "Kunj Shah is a 22-year-old AI engineer and agent builder in Ahmedabad, India. B.Tech Computer Science at Indus University, specializing in production agents, RAG, and edge computer vision.",
+  keywords: ["about Kunj Shah", "AI engineer Ahmedabad", "AI engineer biography", "machine learning engineer India", "AI developer profile"],
+});
 
 const portrait = {
   src: "https://kunjshah.vercel.app/profile.png",
@@ -65,6 +68,7 @@ export default function AboutPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("About", "/about")} />
         <PageIntro
           title="About"
           lead="Building end-to-end AI systems: generative AI applications, autonomous agents and orchestration, computer vision, and full-stack prototypes."
@@ -163,7 +167,7 @@ export default function AboutPage() {
               className="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
               href="/skills"
             >
-              All skills →
+              All skills â†’
             </Link>
           }
           title="Disciplines"

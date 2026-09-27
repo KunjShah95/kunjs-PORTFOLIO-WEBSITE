@@ -1,15 +1,39 @@
 {
   "linkset": [
     {
-      "anchor": "https://kunjshah.vercel.app/api",
+      "anchor": "https://kunjshah.vercel.app/llms.txt",
       "service-desc": [
-        {"href": "https://kunjshah.vercel.app/openapi.json", "type": "application/openapi+json"}
+        { "href": "https://kunjshah.vercel.app/llms.txt", "type": "text/markdown" }
       ],
       "service-doc": [
-        {"href": "https://kunjshah.vercel.app/docs/api", "type": "text/html"}
+        { "href": "https://kunjshah.vercel.app/llms-full.txt", "type": "text/markdown" }
+      ]
+    },
+    {
+      "anchor": "https://kunjshah.vercel.app/ai.txt",
+      "service-desc": [
+        { "href": "https://kunjshah.vercel.app/ai.txt", "type": "text/markdown" }
       ],
-      "status": [
-        {"href": "https://kunjshah.vercel.app/api/health", "type": "application/json"}
+      "service-doc": [
+        { "href": "https://kunjshah.vercel.app/.well-known/ai.txt", "type": "text/markdown" }
+      ]
+    },
+    {
+      "anchor": "https://kunjshah.vercel.app/services.md",
+      "service-desc": [
+        { "href": "https://kunjshah.vercel.app/services.md", "type": "text/markdown" }
+      ]
+    },
+    {
+      "anchor": "https://kunjshah.vercel.app/pricing.md",
+      "service-desc": [
+        { "href": "https://kunjshah.vercel.app/pricing.md", "type": "text/markdown" }
+      ]
+    },
+    {
+      "anchor": "https://kunjshah.vercel.app/api/portfolio.json",
+      "service-desc": [
+        { "href": "https://kunjshah.vercel.app/api/portfolio.json", "type": "application/json" }
       ]
     }
   ]

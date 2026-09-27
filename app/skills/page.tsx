@@ -7,17 +7,21 @@ import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { Tag } from "@/components/ui/primitives";
 import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { skillGroups } from "@/lib/site-data";
+import { pageMeta } from "@/lib/seo";
+import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Skills | Kunj Shah",
-  description:
-    "The tools Kunj Shah ships with, Python, FastAPI, LangGraph, CrewAI, PyTorch, CUDA, YOLOv8, React, Next.js, Docker, and the infrastructure underneath.",
-};
+export const metadata: Metadata = pageMeta({
+  path: "/skills",
+  title: "Technical Skills & Stack",
+  description: "The tools Kunj Shah ships with, Python, FastAPI, LangGraph, CrewAI, PyTorch, CUDA, YOLOv8, React, Next.js, Docker, and the infrastructure underneath.",
+  keywords: ["AI engineer skills", "LangGraph", "CrewAI", "PyTorch", "FastAPI", "MLOps stack", "Python AI developer"],
+});
 
 export default function SkillsPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd data={pageBreadcrumb("Skills", "/skills")} />
         <PageIntro
           title="Skills"
           lead="Grouped by discipline rather than by logo, the stack I actually reach for on each kind of problem."
