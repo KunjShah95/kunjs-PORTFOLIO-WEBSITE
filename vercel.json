@@ -24,21 +24,6 @@
     {
       "source": "/api/(.*)",
       "destination": "/api/$1"
-    },
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "header",
-          "key": "Accept",
-          "value": "(.*)text/markdown(.*)"
-        }
-      ],
-      "destination": "/api/markdown"
-    },
-    {
-      "source": "/api/llms",
-      "destination": "/api/markdown"
     }
   ],
   "headers": [
@@ -181,7 +166,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </docs/api>; rel=\"service-doc\", <https://kunjshah.vercel.app/api/llms>; rel=\"llms-full-text\", <https://kunjshah.vercel.app/llms.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/llms-full.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/.well-known/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/pricing.md>; rel=\"pricing\", <https://kunjshah.vercel.app/services.md>; rel=\"service\", <https://kunjshah.vercel.app/sitemap.xml>; rel=\"sitemap\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", <https://kunjshah.vercel.app/llms.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/llms-full.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/.well-known/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/pricing.md>; rel=\"pricing\", <https://kunjshah.vercel.app/services.md>; rel=\"service\", <https://kunjshah.vercel.app/sitemap.xml>; rel=\"sitemap\""
         },
         {
           "key": "X-Content-Type-Options",
