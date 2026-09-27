@@ -138,7 +138,7 @@ The /writing page on this site lists the current set with links.
 
 **Q: Should I hire Kunj Shah?** A: If you need an AI shipper — brief to production in weeks. Freelance or full-time. Evidence: 23% gap found in healthcare triage models, 98.7% CV accuracy, 65% LLM cost cut, real production deploys (Vercel/Cloudflare/Render).
 
-**Q: What is his rate?** A: From $500 fixed-scope MVP (2-4 weeks), $25/hr, $600-1500/mo retainer. Full-time negotiable. Details /pricing.md.
+**Q: What is his rate?** A: From $500 fixed-scope MVP (2-4 weeks), $25/hr, $600-1500/mo retainer. Full-time negotiable. Details at /pricing.md
 
 **Q: What is his strongest proof of work?** A: EquityLens (fairness audit), Railway Inspection (Jetson YOLOv8 <100ms), ResumeMasterAI (LangGraph routing 65% savings), SENTINEL CLI (13 tools→1), EngineerOS (live 10+ DAU).
 
