@@ -66,7 +66,7 @@ function toLevel(raw: string): ContributionLevel {
       return 2;
     case "THIRD_QUARTILE":
       return 3;
-    case "QUARTILE":
+    case "FOURTH_QUARTILE":
       return 4;
     default:
       return 0;
