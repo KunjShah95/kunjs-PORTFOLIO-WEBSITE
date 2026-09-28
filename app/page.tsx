@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { FadeImage } from "@/components/primitives/FadeImage";
 import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
+import { DemoVideo } from "@/components/projects/demo-video";
 import { Icon } from "@/components/icon";
 import { Reveal, RevealText } from "@/components/primitives/Reveal";
 import { CopyEmailRow } from "@/components/ui/copy-email";
@@ -223,6 +224,14 @@ export default async function HomePage() {
             className="group lift grid gap-8 md:grid-cols-5 p-6 md:p-10 rounded-2xl bg-surface-card border border-border-hairline"
             href="/projects"
           >
+            {lead.video && (
+              <DemoVideo
+                className="md:col-span-5"
+                controls={false}
+                src={lead.video}
+                title={lead.title}
+              />
+            )}
             <div className="md:col-span-3 flex flex-col gap-4">
               <span className="font-body-sm text-body-sm text-text-muted">
                 {lead.category}, {lead.status}
@@ -262,9 +271,24 @@ export default async function HomePage() {
             {others.map((project) => (
               <li className="border-b border-border-hairline" key={project.slug}>
                 <Link
-                  className="group grid grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 py-5"
+                  className="group grid grid-cols-[1fr_auto] md:grid-cols-[9rem_1fr_auto] items-baseline gap-x-6 gap-y-1 py-5"
                   href="/projects"
                 >
+                  {/* demo thumbnail, or the project glyph when there is no recording */}
+                  <span className="hidden md:block row-span-2 self-center">
+                    {project.video ? (
+                      <DemoVideo
+                        className="rounded-lg"
+                        controls={false}
+                        src={project.video}
+                        title={project.title}
+                      />
+                    ) : (
+                      <span className="grid place-items-center w-full aspect-[8/5] rounded-lg border border-border-hairline bg-surface-container text-text-muted">
+                        <Icon name={project.icon} size={22} />
+                      </span>
+                    )}
+                  </span>
                   <span className="font-headline-md text-headline-md md:text-headline-lg text-text-primary transition-transform duration-300 group-hover:translate-x-1">
                     {project.title}
                   </span>

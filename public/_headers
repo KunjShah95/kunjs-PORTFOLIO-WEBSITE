@@ -58,3 +58,6 @@
 /services.md
   Cache-Control: public, max-age=3600, s-maxage=86400
   Content-Type: text/markdown; charset=utf-8
+
+/videos/*
+  Cache-Control: public, max-age=31536000, immutable

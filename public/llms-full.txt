@@ -66,7 +66,7 @@ AI-native workspace unifying notes, tasks, projects, knowledge graph + semantic 
 Paste JD/offer/recruiter chat → instant toxicity/burnout/salary-fairness/ghost-hiring/negotiation analysis. TanStack Start + React 19 + Tailwind + Groq + Firebase. Multi-provider orchestration: triage → deep analyzer → cross-check validator + CoT negotiation strategy. Challenges: false positives cost jobs, cross-model disagreement. Impact: hours → seconds, 40k+ tokens, 3 providers, 87% multi-provider agreement, <3s. https://offerchecker-pi.vercel.app/ — https://github.com/KunjShah95/reverseinterview
 
 ### EquityLens (AI Ethics) — Production
-Healthcare fairness audit: demographic parity / equalized odds / calibration across groups + causal inference + Pareto frontier plots + auto drift detection. React + FastAPI + Postgres + TF. Compliance: EU AI Act / NIST AI RMF / ISO 25059. Result: 23% gap on public triage data, 10x audit speedup. https://github.com/KunjShah95/fairness-lens-studio — live: https://fairness-lens-backend-988207147245.us-central1.run.app/
+Healthcare fairness audit: demographic parity / equalized odds / calibration across groups + causal inference + Pareto frontier plots + auto drift detection. React + FastAPI + Postgres + TF. Compliance: EU AI Act / NIST AI RMF / ISO 25059. Result: 23% gap on public triage data, 10x audit speedup. https://github.com/KunjShah95/fairness-lens-studio
 
 ### LearnAI (EdTech AI) — Live
 Next.js + Firebase + Supabase + Gemini. Multi-provider LLM orchestration + proficiency estimation (spaced repetition). +45% quiz completion (5 levels), 4.2/5 satisfaction, 99.7% uptime. https://intelligent-learning-assistant.vercel.app — https://github.com/KunjShah95/intelligent-learning-assistant
@@ -75,7 +75,7 @@ Next.js + Firebase + Supabase + Gemini. Multi-provider LLM orchestration + profi
 Next.js 15 + TS + Firebase Firestore. Real-time ingestion + time-series forecasting + heatmaps. Hybrid statistical+ML beats pure ML on noisy data. 94% accuracy, <500ms latency, 24h window, real-time. https://ps-1-eight.vercel.app — https://github.com/KunjShah95/Smart-flow-ai
 
 ### ResumeMasterAI 2026 (AI Career) — Architecture
-Python + LangGraph + AI Gateway + ChromaDB on Streamlit. Smart routing gateway (cheap/small vs expensive/large via complexity classifier) + checkpointing + human-in-loop. 65% cost cut, 3x precision, <200ms overhead. https://resumemasterai.streamlit.app/ — https://github.com/KunjShah01/job-snipper
+Python + LangGraph + AI Gateway + ChromaDB on Streamlit. Smart routing gateway (cheap/small vs expensive/large via complexity classifier) + checkpointing + human-in-loop. 65% cost cut, 3x precision, <200ms overhead. https://github.com/KunjShah01/job-snipper
 
 ### SENTINEL CLI (Cybersecurity) — Open Source
 Node.js/TS/LLM/Docker. Pluggable analyzers (13+ tools), unified schema, cross-tool correlation, LLM plain-language summary. 70% audit cut, 13+ tools, unified report, ~40% FPR cut. https://sentinel-cli.vercel.app/ — https://github.com/KunjShah95/SENTINEL-CLI

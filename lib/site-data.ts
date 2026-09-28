@@ -160,6 +160,8 @@ export type Project = {
   challenges?: string;
   lessons?: string;
   demo?: string;
+  /** Path prefix for a ~30s muted demo recording (.mp4/.webm/.jpg poster). */
+  video?: string;
   github?: string;
 };
 
@@ -174,6 +176,7 @@ export const projectCategories = [
 export const projects: readonly Project[] = [
   {
     slug: "engineeros",
+    video: "/videos/engineeros",
     title: "EngineerOS",
     category: "Agentic AI",
     status: "Live · 10+ DAU",
@@ -198,6 +201,7 @@ export const projects: readonly Project[] = [
   },
   {
     slug: "offerguard-ai",
+    video: "/videos/offerguard-ai",
     title: "OfferGuard AI",
     category: "AI Career Platform",
     status: "Live",
@@ -238,10 +242,10 @@ export const projects: readonly Project[] = [
     lessons:
       "Audit overhead is the real bottleneck, cutting it from three weeks to four hours is what makes fairness review something teams actually run.",
     github: "https://github.com/KunjShah95/fairness-lens-studio",
-    demo: "https://fairness-lens-backend-988207147245.us-central1.run.app/",
   },
   {
     slug: "learnai",
+    video: "/videos/learnai",
     title: "LearnAI",
     category: "Education AI",
     status: "Live",
@@ -262,6 +266,7 @@ export const projects: readonly Project[] = [
   },
   {
     slug: "smartflow-ai",
+    video: "/videos/smartflow-ai",
     title: "SmartFlow AI",
     category: "Crowd Intelligence",
     status: "Beta",
@@ -297,11 +302,11 @@ export const projects: readonly Project[] = [
       { value: "<200ms", label: "Overhead" },
     ],
     body: "A complexity classifier routes each request to the cheapest model that can handle it, with checkpointing and human-in-the-loop review. Precise routing plus bounded agent steps keeps the token bill predictable instead of open-ended.",
-    demo: "https://resumemasterai.streamlit.app/",
     github: "https://github.com/KunjShah01/job-snipper",
   },
   {
     slug: "sentinel-cli",
+    video: "/videos/sentinel-cli",
     title: "SENTINEL CLI",
     category: "Security Automation",
     status: "Open Source",
@@ -342,6 +347,7 @@ export const projects: readonly Project[] = [
   },
   {
     slug: "archmind-ai",
+    video: "/videos/archmind-ai",
     title: "ArchMind AI",
     category: "Architecture Intelligence",
     status: "Production",

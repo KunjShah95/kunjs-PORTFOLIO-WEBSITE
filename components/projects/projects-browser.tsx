@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Icon } from "@/components/icon";
+import { DemoVideo } from "@/components/projects/demo-video";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Tag } from "@/components/ui/primitives";
 import { cn } from "@/lib/cn";
@@ -103,6 +104,9 @@ export function ProjectsBrowser() {
               layout={reduce ? false : "position"}
               transition={{ duration: 0.35, ease: EASE_OUT }}
             >
+              {project.video && (
+                <DemoVideo className="mb-5" src={project.video} title={project.title} />
+              )}
               <p className="font-body-sm text-body-sm text-text-muted">
                 {project.category}
                 <span className="mx-1.5 text-border-dotted">/</span>
