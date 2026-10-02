@@ -29,6 +29,7 @@ export type IconName =
   | "dark_mode"
   | "download"
   | "edit_note"
+  | "error"
   | "expand_more"
   | "hub"
   | "location_on"
@@ -86,6 +87,8 @@ const PATHS: Record<IconName, string> = {
   download: "M12 4v10M8 10.5l4 4 4-4M4.5 19.5h15",
   edit_note:
     "M4.5 19.5l.8-3.2L15 6.6a1.6 1.6 0 0 1 2.3 0l.6.6a1.6 1.6 0 0 1 0 2.3l-9.7 9.7-3.3.3zM13.8 7.8l2.4 2.4",
+  error:
+    "M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0-18 0M12 7.5v5.5M12 16.2v.01",
   expand_more: "M6 9.5l6 6 6-6",
   hub: "M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0M12 9V4.5M14.6 10.4 18 8.6M14.6 13.6 18 15.4",
   location_on:

@@ -1,18 +1,20 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/cn";
 import { EASE_OUT } from "@/lib/motion";
 import { projectFocusOptions, services, site, timelineOptions } from "@/lib/site-data";
+import { initialContactState } from "@/app/contact/contact-state";
+import { submitInquiry } from "@/app/contact/actions";
 
-type SubmitState = "idle" | "sending" | "sent";
 type Field = "name" | "email" | "details";
 type Errors = Partial<Record<Field, string>>;
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+/** Client-side mirror of the server rules, for instant feedback. */
 function validate(form: HTMLFormElement): Errors {
   const data = new FormData(form);
   const name = String(data.get("name") ?? "").trim();
@@ -33,9 +35,9 @@ const inputBase =
  * Service catalogue plus the project inquiry form, in one client boundary so
  * a service card can prefill the details textarea through a shared ref.
  *
- * There is no backend wired up yet: submit validates, then confirms locally.
- * Swap the timeout in `handleSubmit` for a real POST (or a server action)
- * when a mail provider or CRM is connected.
+ * Submission goes through the `submitInquiry` Server Action, which validates,
+ * runs the spam guards, and emails the message via Resend. The local `validate`
+ * pass below is only a fast pre-check — the server re-validates regardless.
  */
 export function ContactBody() {
   const reduce = useReducedMotion();
@@ -43,9 +45,52 @@ export function ContactBody() {
   const formRef = useRef<HTMLFormElement>(null);
   const [focus, setFocus] = useState<string>(projectFocusOptions[0]);
   const [timeline, setTimeline] = useState<string>(timelineOptions[1]);
-  const [state, setState] = useState<SubmitState>("idle");
-  const [errors, setErrors] = useState<Errors>({});
+  const [state, formAction, pending] = useActionState(submitInquiry, initialContactState);
+  /** Errors from the local pre-check, which runs before the action is sent. */
+  const [localErrors, setLocalErrors] = useState<Errors>({});
+  /** Fields edited since the last submit, so a stale server error clears. */
+  const [edited, setEdited] = useState<Partial<Record<Field, boolean>>>({});
   const [flash, setFlash] = useState(false);
+  /** Timestamp the form was hydrated, for the minimum-fill-time guard. */
+  const [renderedAt] = useState(() => Date.now());
+
+  /**
+   * Server errors, minus any field the visitor has since touched, with the
+   * local pre-check winning where both exist. Derived rather than copied into
+   * state by an effect, so a rejected submit costs one render, not two.
+   */
+  const errors: Errors = useMemo(() => {
+    const merged: Errors = { ...state.errors };
+    for (const [field, message] of Object.entries(localErrors)) {
+      const key = field as Field;
+      merged[key] = edited[key] ? undefined : message;
+    }
+    for (const key of Object.keys(merged) as Field[]) {
+      if (edited[key]) delete merged[key];
+    }
+    return merged;
+  }, [state.errors, localErrors, edited]);
+
+  /** Guards the focus side effect so it runs once per server response. */
+  const handledState = useRef<typeof state | null>(null);
+  useEffect(() => {
+    if (state === handledState.current) return;
+    handledState.current = state;
+    if (state.status !== "idle") return;
+    const first = (Object.keys(errors) as Field[])[0];
+    if (!first) return;
+    formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+  }, [state, errors]);
+
+  /**
+   * `useActionState` has no reset, so dismissing the success panel means
+   * recording that we already showed this particular response. Keying on the
+   * state object rather than a boolean means a second successful send still
+   * shows the panel, because the action returns a new object each time.
+   */
+  const [dismissed, setDismissed] = useState<typeof state | null>(null);
+  const sent = state.status === "success" && dismissed !== state;
+  const errored = state.status === "error" && state.message !== "";
 
   function prefill(serviceTitle: string) {
     const el = detailsRef.current;
@@ -53,7 +98,6 @@ export function ContactBody() {
     el.value = `Hi Kunj, I'm reaching out about "${serviceTitle}".\n\nOur current setup:\nKey goals and timeline: `;
     el.focus();
     el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-    setErrors((e) => ({ ...e, details: undefined }));
     // Brief highlight so the eye follows the jump to the form.
     setFlash(true);
     window.setTimeout(() => setFlash(false), 900);
@@ -62,25 +106,37 @@ export function ContactBody() {
   /** Re-check a single field on blur, but only once it has an error shown. */
   function revalidate(field: Field) {
     if (!errors[field] || !formRef.current) return;
-    setErrors((e) => ({ ...e, [field]: validate(formRef.current!)[field] }));
+    setEdited((e) => ({ ...e, [field]: true }));
+    setLocalErrors((e) => ({ ...e, [field]: validate(formRef.current!)[field] }));
   }
 
+  /** Clear a field's error as soon as the visitor starts fixing it. */
+  function clearError(field: Field) {
+    if (!errors[field]) return;
+    setEdited((e) => ({ ...e, [field]: true }));
+  }
+
+  /**
+   * Local gate before the action runs, so an obviously incomplete form never
+   * costs a round trip. The action re-validates — this is UX, not security.
+   */
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    if (pending) return;
     const found = validate(event.currentTarget);
-    setErrors(found);
-    const first = (Object.keys(found) as Field[])[0];
-    if (first) {
+    if (Object.keys(found).length > 0) {
+      event.preventDefault();
+      setLocalErrors(found);
+      setEdited({});
+      const first = (Object.keys(found) as Field[])[0];
       event.currentTarget.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
-      return;
     }
-    setState("sending");
-    window.setTimeout(() => setState("sent"), 900);
   }
 
   function reset() {
-    setErrors({});
-    setState("idle");
+    formRef.current?.reset();
+    setLocalErrors({});
+    setEdited({});
+    setDismissed(state);
   }
 
   const errorText = (field: Field) =>
@@ -140,7 +196,7 @@ export function ContactBody() {
 
         <div className="bg-surface-card rounded-2xl p-5 sm:p-6 md:p-8 shadow-[0_24px_48px_-24px_var(--color-shadow)] border border-border-hairline">
           <AnimatePresence initial={false} mode="wait">
-            {state === "sent" ? (
+            {sent ? (
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
                 className="flex flex-col items-start gap-4 py-6"
@@ -184,7 +240,8 @@ export function ContactBody() {
             ) : (
               <motion.form
                 animate={{ opacity: 1 }}
-                className="flex flex-col gap-5"
+                action={formAction}
+                className="relative flex flex-col gap-5"
                 exit={{ opacity: 0 }}
                 initial={false}
                 key="form"
@@ -193,6 +250,33 @@ export function ContactBody() {
                 ref={formRef}
                 transition={{ duration: 0.2 }}
               >
+                {/* -- spam guard: hidden from people, irresistible to bots -- */}
+                <div aria-hidden="true" className="absolute h-0 w-0 overflow-hidden opacity-0">
+                  <label htmlFor="companyWebsite">Website</label>
+                  <input
+                    autoComplete="off"
+                    id="companyWebsite"
+                    name="company_website"
+                    tabIndex={-1}
+                    type="text"
+                  />
+                </div>
+                {/* -- spam guard: a human cannot submit this fast -- */}
+                <input name="rendered_at" type="hidden" value={renderedAt} />
+
+                {/* -- selected chips, so the server receives the choice -- */}
+                <input name="focus" type="hidden" value={focus} />
+                <input name="timeline" type="hidden" value={timeline} />
+
+                {errored ? (
+                  <p
+                    className="flex items-start gap-2 rounded-xl bg-error/10 px-3.5 py-3 font-body-sm text-body-sm text-error"
+                    role="alert"
+                  >
+                    <Icon className="mt-0.5 shrink-0" name="error" size={15} />
+                    {state.message}
+                  </p>
+                ) : null}
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="flex flex-col gap-2">
                     <label className="font-body-sm text-body-sm font-medium text-text-primary" htmlFor="userName">
@@ -206,6 +290,7 @@ export function ContactBody() {
                       id="userName"
                       name="name"
                       onBlur={() => revalidate("name")}
+                      onChange={() => clearError("name")}
                       placeholder="Priya Mehta"
                       type="text"
                     />
@@ -225,6 +310,7 @@ export function ContactBody() {
                       inputMode="email"
                       name="email"
                       onBlur={() => revalidate("email")}
+                      onChange={() => clearError("email")}
                       placeholder="name@company.com"
                       type="email"
                     />
@@ -321,6 +407,7 @@ export function ContactBody() {
                     id="projectDetails"
                     name="details"
                     onBlur={() => revalidate("details")}
+                    onChange={() => clearError("details")}
                     placeholder="Your stack, where it breaks today, and what good looks like."
                     ref={detailsRef}
                     rows={5}
@@ -336,10 +423,10 @@ export function ContactBody() {
                   <button
                     aria-live="polite"
                     className="group w-full h-12 px-5 rounded-full bg-primary text-on-primary font-body-md text-body-md font-medium flex items-center justify-center gap-2 hover:bg-primary-container active:scale-[0.99] transition-all disabled:cursor-progress disabled:opacity-80"
-                    disabled={state === "sending"}
+                    disabled={pending}
                     type="submit"
                   >
-                    {state === "sending" ? (
+                    {pending ? (
                       <>
                         <span
                           aria-hidden="true"

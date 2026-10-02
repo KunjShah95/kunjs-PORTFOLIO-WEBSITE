@@ -7,6 +7,12 @@ import { cn } from "@/lib/cn";
  * Row of headline numbers separated by hairlines. Numbers count up once on
  * first view, which is the one place motion carries meaning: it draws the
  * eye to the proof.
+ *
+ * Column count adapts to how many tiles were passed: two or three sit in one
+ * row, and four or more drop to a two-column grid on a phone. Past three, a
+ * single row is narrower than its own labels and they collide. Cells are
+ * `min-w-0` with a wrapping label so nothing can force the row wider than
+ * the viewport.
  */
 export function StatStrip({
   items,
@@ -17,27 +23,39 @@ export function StatStrip({
   tone?: "card" | "plain";
   className?: string;
 }) {
+  const many = items.length > 3;
+  // Phones: one column for a short strip, two once it would crowd.
+  const phoneCols = many ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2";
+  const wideCols =
+    items.length >= 5
+      ? "md:grid-cols-5"
+      : items.length === 4
+        ? "md:grid-cols-4"
+        : items.length === 3
+          ? "sm:grid-cols-3"
+          : "sm:grid-cols-2";
+
   return (
     <div
       className={cn(
-        "grid divide-x divide-border-hairline",
-        tone === "card"
-          ? "rounded-2xl bg-surface-card border border-border-hairline"
-          : "border-y border-border-hairline",
+        "grid",
+        phoneCols,
+        wideCols,
+        "border-y border-border-hairline",
+        tone === "card" && "rounded-2xl bg-surface-card border",
         className,
       )}
-      style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}
     >
       {items.map((item) => (
         <div
-          className="flex flex-col gap-1 py-4 md:py-6 px-3 md:px-6"
+          className="flex min-w-0 flex-col gap-1 px-3 py-4 md:px-6 md:py-6 border-b border-border-hairline last:border-b-0 sm:border-b-0 sm:border-r sm:border-border-hairline sm:last:border-r-0"
           key={item.label}
         >
           <CountUp
             className="font-headline-lg text-headline-lg md:text-[36px] md:leading-none tracking-[-0.03em] text-text-primary font-semibold"
             value={item.value}
           />
-          <span className="font-body-sm text-body-sm text-text-muted">
+          <span className="font-body-sm text-body-sm text-text-muted break-words">
             {item.label}
           </span>
         </div>

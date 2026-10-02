@@ -7,7 +7,7 @@ import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { EmptyState } from "@/components/ui/empty-state";
 import { impactMetrics, mergedContributions, site } from "@/lib/site-data";
-import { getOpenSourceActivity, timeAgo } from "@/lib/github";
+import { getOpenSourceActivity, timeAgo, type PullRequestKind } from "@/lib/github";
 import { pageMeta } from "@/lib/seo";
 import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
@@ -30,16 +30,37 @@ const profiles = [
   { icon: "edit_note", label: "Medium", href: site.links.medium },
 ] as const;
 
+/** Stat-tile wording for each inferred PR category. */
+const KIND_LABELS: Record<PullRequestKind, string> = {
+  feat: "Features",
+  fix: "Fixes",
+  security: "Security",
+  refactor: "Refactors",
+  perf: "Performance",
+  docs: "Docs",
+  test: "Tests",
+  ci: "CI / Infra",
+  chore: "Chores",
+  other: "Other",
+};
+
 export default async function OpenSourcePage() {
+  /** `recent` is already merged-only, newest merge first. */
   const activity = await getOpenSourceActivity(12);
-  /** Only merged PRs â€” open issues and proposals aren't contributions. */
-  const mergedRecent = activity?.recent.filter((pr) => pr.state === "merged") ?? [];
+  const mergedRecent = activity?.recent ?? [];
 
   // Live numbers when GitHub answers; the curated figures otherwise.
   const liveMetrics = activity
     ? [
         { value: String(activity.mergedPullRequests), label: "PRs merged" },
         { value: String(activity.mergedRepos), label: "Repositories" },
+        // Top three categories by count, so the mix is legible without a
+        // second row of numbers. Built from the fetched pages, not just the
+        // twelve shown in the list below.
+        ...activity.kindCounts.slice(0, 3).map((entry) => ({
+          value: String(entry.count),
+          label: KIND_LABELS[entry.kind],
+        })),
       ]
     : impactMetrics;
 
@@ -66,7 +87,7 @@ export default async function OpenSourcePage() {
         <StatStrip items={liveMetrics} tone="plain" />
 
         {/* ------------------------------------------------------ live activity */}
-        {mergedRecent.length > 0 ? (
+        {activity && mergedRecent.length > 0 ? (
           <PageSection
             id="latest"
             meta={
@@ -76,6 +97,9 @@ export default async function OpenSourcePage() {
                   <span className="relative w-1.5 h-1.5 rounded-full bg-accent-emerald" />
                 </span>
                 Live from GitHub
+                <span className="text-text-muted">
+                  · synced {timeAgo(activity.fetchedAt)}
+                </span>
               </span>
             }
             title="Latest merged"
@@ -89,12 +113,22 @@ export default async function OpenSourcePage() {
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    <span className="min-w-0 flex flex-col gap-0.5">
+                    <span className="min-w-0 flex flex-col gap-1">
                       <span className="font-body-md text-body-md text-text-primary font-medium transition-transform duration-300 group-hover:translate-x-1">
                         {pr.title}
                       </span>
-                      <span className="font-label-meta text-label-meta text-text-muted truncate">
-                        {pr.owner}/{pr.repo} #{pr.number}
+                      <span className="flex items-center gap-2 min-w-0">
+                        <span className="font-label-meta text-label-meta text-text-muted truncate">
+                          {pr.owner}/{pr.repo} #{pr.number}
+                        </span>
+                        {pr.kind !== "other" ? (
+                          <span
+                            className="shrink-0 font-label-meta text-label-meta uppercase tracking-wide text-text-muted bg-surface-subtle rounded px-1.5 py-0.5"
+                            title={`${pr.kind} change`}
+                          >
+                            {pr.kind}
+                          </span>
+                        ) : null}
                       </span>
                     </span>
                     <span className="flex items-center gap-2 shrink-0">
@@ -169,8 +203,16 @@ export default async function OpenSourcePage() {
                     <span className="font-body-sm text-body-sm text-text-secondary leading-snug">
                       {item.title}
                     </span>
-                    <span className="font-label-meta text-label-meta text-text-muted">
-                      {item.org} Â· {item.tag}
+                    <span className="flex items-center gap-1.5 min-w-0">
+                      <span className="font-label-meta text-label-meta text-text-muted truncate">
+                        {item.org}
+                      </span>
+                      <span
+                        className="shrink-0 font-label-meta text-label-meta uppercase tracking-wide text-text-muted bg-surface-subtle rounded px-1.5 py-0.5"
+                        title={`${item.tag} change`}
+                      >
+                        {item.tag}
+                      </span>
                     </span>
                   </span>
                 </span>

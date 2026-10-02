@@ -131,7 +131,7 @@ export const homeSubnav = [
 ] as const;
 
 export const metrics = [
-  { value: "12+", label: "Systems Shipped" },
+  { value: "17+", label: "Systems Shipped" },
   { value: "44+", label: "Merged PRs" },
   { value: "4×", label: "Hack Finals" },
 ] as const;
@@ -198,6 +198,60 @@ export const projects: readonly Project[] = [
       "Local-first UX with server-side intelligence is the right default for developer tools. Unifying storage is easy; unifying context is the actual product.",
     demo: "https://engineeros-delta.vercel.app/",
     github: "https://github.com/KunjShah95/EngineerOS",
+  },
+  {
+    slug: "estate360",
+    title: "Estate360",
+    category: "Agentic AI CRM",
+    status: "Production",
+    icon: "architecture",
+    description:
+      "Multi-tenant real-estate CRM for builders and brokerages: lead capture, kanban deals, tower/floor/unit inventory, cost sheets, bookings, milestone payments with UPI reconciliation, and a token-scoped buyer portal.",
+    summary:
+      "Multi-tenant real-estate CRM with three-layer tenant isolation, milestone payment collection, and grounded document Q&A per workspace.",
+    stack: [
+      "Next.js 16",
+      "Prisma 7",
+      "PostgreSQL + pgvector",
+      "NextAuth v5",
+      "Tailwind v4",
+    ],
+    metrics: [
+      { value: "3-Layer", label: "Tenant Isolation", accent: true },
+      { value: "7", label: "AI Surfaces" },
+      { value: "4", label: "LLM Fallbacks" },
+    ],
+    body: "The whole sales lifecycle on a shared schema where every query is scoped by workspaceId: lead → contact → deal → site visit → unit → cost sheet and payment plan → booking → milestone collection → documents → reporting. The AI layer sits on top of that rather than beside it, with next-best-action, call analysis, revenue and collections forecasting, and a workspace-wide /ask grounded in the tenant's own rows and documents.",
+    challenges:
+      "Isolation that survives a forgotten filter, a payment engine where a webhook can arrive twice, and a RAG layer that must answer from one customer's documents without ever seeing another's.",
+    lessons:
+      "Scoping every query by workspaceId is necessary but not sufficient. Postgres RLS underneath is what makes isolation a property of the database instead of a promise in application code. And embeddings from different providers are not comparable, so switching the embedder has to force a reindex.",
+    demo: "https://agentic-crm-henna.vercel.app/",
+    github: "https://github.com/KunjShah95/agentic-crm",
+  },
+  {
+    slug: "lattice",
+    title: "Lattice",
+    category: "AI Infrastructure Index",
+    status: "Live",
+    icon: "tag",
+    description:
+      "A curated, stack-ordered index of the infrastructure behind production AI systems: 112 tools across 9 layers, a page per tool, head-to-head comparisons, and 11 essays on the architectural decisions behind them.",
+    summary:
+      "Stack-ordered index of 112 AI infrastructure tools with per-tool pages, comparisons, essays, and build-time staleness guards.",
+    stack: ["Next.js 16", "React 19", "MDX", "Tailwind v4", "Cloudflare Workers"],
+    metrics: [
+      { value: "112", label: "Tools Indexed", accent: true },
+      { value: "152", label: "Pages Built" },
+      { value: "134", label: "Unit Tests" },
+    ],
+    body: "Ordered by where a tool sits in a real system rather than by popularity: serving, routing, retrieval, fine-tuning, agents, orchestration, guardrails, prompts, evals. The facts about a tool (deployment, licence, cost) live apart from its link, and the build throws if either exists without the other, so a wrong licence can be corrected without touching prose.",
+    challenges:
+      "Reference content rots. Licence, cost, and deployment claims are the fastest-decaying facts in any tool index, and a confident stale one is worse than no entry.",
+    lessons:
+      "The hard part is not rendering 152 prerendered pages, it is making wrong facts impossible to ship. Coverage is asserted in both directions, stale licence data fails the build, and comparisons resolve tools by name against the dataset so a page cannot drift from the index.",
+    demo: "https://lattice.kkshah2005.workers.dev/",
+    github: "https://github.com/KunjShah95/lattice",
   },
   {
     slug: "offerguard-ai",
@@ -715,7 +769,12 @@ export type Contribution = {
   label: string;
   title: string;
   kind: "merged" | "proposed";
-  tag: string;
+  /**
+   * Category badge. Uses the same vocabulary as the inferred live PR types
+   * (`PullRequestKind`) so the two lists read as one system. `issue` is extra,
+   * for reported defects that are not pull requests at all.
+   */
+  tag: "feat" | "fix" | "docs" | "refactor" | "test" | "perf" | "ci" | "security" | "issue";
   url: string;
   notable?: boolean;
 };
@@ -727,7 +786,7 @@ export const contributions: readonly Contribution[] = [
     title:
       "Security regression workflow + goal-hijack API-key-extraction scenario for agent testing.",
     kind: "merged",
-    tag: "AI security",
+    tag: "security",
     url: "https://github.com/OWASP/Agent-Security-Regression-Harness/pull/109",
     notable: true,
   },
@@ -746,7 +805,7 @@ export const contributions: readonly Contribution[] = [
     title:
       "Proposed token-calculation support with UI display to cut wasted inference.",
     kind: "proposed",
-    tag: "inference",
+    tag: "feat",
     url: "https://github.com/ollama/ollama/issues/15639",
     notable: true,
   },
@@ -755,7 +814,7 @@ export const contributions: readonly Contribution[] = [
     label: "EduPulse",
     title: "RBAC, real-time messaging, i18n/RTL, global search, 10+ merged PRs.",
     kind: "merged",
-    tag: "feature",
+    tag: "feat",
     url: "https://github.com/Lavina-korani/edupulse-final/pulls?q=author%3AKunjShah95",
   },
   {
@@ -764,7 +823,7 @@ export const contributions: readonly Contribution[] = [
     title:
       "PR issue-ownership triage gate (CI) + user-feedback loops for person grouping.",
     kind: "merged",
-    tag: "infra",
+    tag: "ci",
     url: "https://github.com/Abhash-Chakraborty/Find/pull/225",
   },
   {
@@ -772,7 +831,7 @@ export const contributions: readonly Contribution[] = [
     label: "Veridion",
     title: "Auth enhancements, PWA support, and testing infrastructure.",
     kind: "merged",
-    tag: "feature",
+    tag: "feat",
     url: "https://github.com/Adoflabs/Veridion/pull/19",
   },
   {
