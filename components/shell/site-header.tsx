@@ -66,7 +66,9 @@ export function SiteHeader() {
           : "bg-surface/0",
       )}
     >
-      <div className="shell-container h-16 md:h-[4.5rem] flex items-center justify-between gap-4">
+      {/* Landscape phones get a shorter bar so the two fixed bars do not eat the
+          390px of height they have to work with. */}
+      <div className="shell-container h-16 md:h-[4.5rem] short-screen:h-14 flex items-center justify-between gap-4">
         {/* ------------------------------------------------------------ brand */}
         <Link
           aria-label={`${site.name}, home`}

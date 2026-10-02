@@ -6,6 +6,12 @@
    who forced light mode on a dark OS would still get dark utilities. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/* A phone held sideways is short rather than narrow (390-430px tall), and the
+   fixed header and tab bar claim ~130px of that. `max-height:` reads as a
+   breakpoint to Tailwind's `max-*` parsing, so the variant is declared here
+   and used as `short-screen:*`. */
+@custom-variant short-screen (@media (max-height: 500px));
+
 /* ==========================================================================
    Craft Engineer — design tokens
    Ported from the Stitch export's tailwind.config theme.extend block.
@@ -191,6 +197,12 @@
   /* Vertical rhythm: space between page sections and inside them. */
   --space-section: clamp(4rem, 2.8rem + 5vw, 8rem);
   --space-block: clamp(1.25rem, 1rem + 1vw, 2rem);
+
+  /* A phone in landscape is short (390-430px tall) rather than narrow, so the
+     width-based scale keeps full-size type and section gaps while the header
+     and tab bar eat most of the screen. Tighten both by height instead. */
+  --space-section-short: 3rem;
+  --space-block-short: 1rem;
 
   /* One ease for everything that responds to the user. */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -454,12 +466,20 @@
   flex-direction: column;
   width: 100%;
   gap: var(--space-section);
+  /* Landscape phones: the fixed header and tab bar claim ~130px of a 390px
+     viewport, so the rhythm collapses to keep content on screen. */
+  @media (max-height: 500px) {
+    gap: var(--space-section-short);
+  }
 }
 
 @utility stack-block {
   display: flex;
   flex-direction: column;
   gap: var(--space-block);
+  @media (max-height: 500px) {
+    gap: var(--space-block-short);
+  }
 }
 
 /* Text link whose underline draws in from the left on hover. */

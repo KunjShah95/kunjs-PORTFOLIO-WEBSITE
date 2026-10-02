@@ -62,7 +62,9 @@ export function StackFilter() {
     <div className="flex flex-col gap-6">
       <div
         aria-label="Filter stack by discipline"
-        className="-mx-1 flex gap-1.5 overflow-x-auto no-scrollbar px-1 pb-1"
+        // `scroll-fade` because the rail is wider than a phone viewport: the mask
+        // is the only cue that there are more tabs off-screen to the right.
+        className="scroll-fade -mx-5 px-5 md:mx-0 md:px-0 flex gap-1.5 overflow-x-auto no-scrollbar py-1"
         onKeyDown={onKeyDown}
         role="radiogroup"
       >

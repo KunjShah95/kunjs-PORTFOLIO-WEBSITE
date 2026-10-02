@@ -88,7 +88,7 @@ export default function ExperiencePage() {
         <PageSection title="Open source impact">
           <StatStrip items={impactMetrics} />
           <Link
-            className="inline-flex items-center gap-1.5 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors w-fit"
+            className="inline-flex items-center gap-1.5 -my-3 py-3 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors w-fit"
             href="/open-source"
           >
             See the actual pull requests

@@ -149,7 +149,7 @@ export default async function WritingPage() {
                 ))}
               </ul>
               <a
-                className="group self-start mt-8 inline-flex items-center gap-1.5 font-body-sm text-body-sm font-medium text-text-primary"
+                className="group self-start mt-8 -my-2 py-3 inline-flex items-center gap-1.5 font-body-sm text-body-sm font-medium text-text-primary"
                 href={MEDIUM_PROFILE}
                 {...external}
               >

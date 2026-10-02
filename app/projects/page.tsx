@@ -96,7 +96,7 @@ export default function ProjectsPage() {
 
         <div className="flex justify-center">
           <Link
-            className="group inline-flex items-center gap-1.5 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
+            className="group inline-flex items-center gap-1.5 -my-3 py-3 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
             href="/labs"
           >
             Research builds live in Labs

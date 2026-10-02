@@ -43,7 +43,7 @@ export function BottomNav() {
       initial={false}
       transition={{ duration: 0.35, ease: EASE_OUT }}
     >
-      <div className="max-w-xl mx-auto h-16 px-1 flex items-center justify-around">
+      <div className="max-w-xl mx-auto h-16 short-screen:h-14 px-1 flex items-center justify-around">
         {navItems.map((item) => {
           const active =
             item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -52,7 +52,7 @@ export function BottomNav() {
             <Link
               aria-current={active ? "page" : undefined}
               className={cn(
-                "relative flex flex-col items-center justify-center gap-0.5 min-w-0 flex-1 h-12 px-1 rounded-xl transition-[color,transform] duration-200 active:scale-95",
+                "relative flex flex-col items-center justify-center gap-0.5 min-w-0 flex-1 h-12 short-screen:h-11 px-1 rounded-xl transition-[color,transform] duration-200 active:scale-95",
                 active ? "text-text-primary" : "text-text-muted hover:text-text-primary",
               )}
               href={item.href}

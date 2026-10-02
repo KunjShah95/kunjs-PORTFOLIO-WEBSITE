@@ -18,7 +18,7 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-16 md:mt-24 pb-24 lg:pb-0 bg-surface-container-low">
+    <footer className="mt-16 md:mt-24 pb-24 short-screen:pb-20 lg:pb-0 bg-surface-container-low">
       <div className="shell-container py-12 md:py-16 grid gap-10 md:grid-cols-12">
         <div className="md:col-span-4">
           <span className="font-headline-md text-headline-md text-text-primary">
@@ -45,7 +45,7 @@ export function SiteFooter() {
           {social.map((link) => (
             <li key={link.label}>
               <a
-                className="inline-flex items-center min-h-11 lg:min-h-0 -mx-1.5 px-1.5 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
+                className="inline-flex items-center justify-center min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 -mx-1.5 px-1.5 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
                 href={link.href}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 target={link.href.startsWith("http") ? "_blank" : undefined}

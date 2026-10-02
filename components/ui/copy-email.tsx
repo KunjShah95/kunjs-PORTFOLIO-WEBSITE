@@ -69,7 +69,9 @@ export function CopyEmailRow({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex items-center justify-between gap-2 h-11 pl-4 pr-1 rounded-full bg-surface-subtle border border-border-hairline",
+        // h-12 rather than h-11: the copy button inside needs a full 44px hit
+        // area, and the row grows to fit it rather than clipping it.
+        "flex items-center justify-between gap-2 h-12 pl-4 pr-1 rounded-full bg-surface-subtle border border-border-hairline",
         className,
       )}
     >
@@ -78,7 +80,7 @@ export function CopyEmailRow({ className }: { className?: string }) {
       </span>
       <button
         aria-label={copied ? "Email copied" : "Copy email address"}
-        className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-surface-card text-text-primary font-body-sm text-body-sm font-medium border border-border-hairline hover:border-text-muted active:scale-95 transition-all shrink-0"
+        className="inline-flex items-center gap-1.5 h-11 px-3.5 rounded-full bg-surface-card text-text-primary font-body-sm text-body-sm font-medium border border-border-hairline hover:border-text-muted active:scale-95 transition-all shrink-0"
         onClick={copy}
         type="button"
       >
@@ -97,7 +99,7 @@ export function CopyEmailButton({ className }: { className?: string }) {
     <button
       aria-label={copied ? "Email copied" : "Copy email address"}
       className={cn(
-        "inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-full bg-surface-card text-text-primary border border-border-hairline hover:border-text-muted active:scale-95 transition-all font-body-sm text-body-sm font-medium shrink-0",
+        "inline-flex items-center justify-center gap-1.5 h-11 px-4 rounded-full bg-surface-card text-text-primary border border-border-hairline hover:border-text-muted active:scale-95 transition-all font-body-sm text-body-sm font-medium shrink-0",
         className,
       )}
       onClick={copy}

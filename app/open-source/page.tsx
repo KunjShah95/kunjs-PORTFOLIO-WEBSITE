@@ -73,7 +73,7 @@ export default async function OpenSourcePage() {
           lead="Merged pull requests in codebases I don't own, mostly the agent and inference tooling I use every day."
         >
           <Link
-            className="inline-flex items-center gap-1.5 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
+            className="inline-flex items-center gap-1.5 h-11 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
             href={site.links.github}
             rel="noopener noreferrer"
             target="_blank"
@@ -150,7 +150,7 @@ export default async function OpenSourcePage() {
               ))}
             </ol>
             <a
-              className="group inline-flex items-center gap-1.5 w-fit font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
+              className="group inline-flex items-center gap-1.5 w-fit -my-3 py-3 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
               href={`https://github.com/pulls?q=${encodeURIComponent("is:pr is:merged author:KunjShah95")}`}
               rel="noopener noreferrer"
               target="_blank"

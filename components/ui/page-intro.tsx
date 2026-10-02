@@ -106,7 +106,7 @@ export function PageSection({
 export function RailLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <Link
-      className="group -my-2 py-2 inline-flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors"
+      className="group -my-3 py-3 inline-flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors"
       href={href}
     >
       <span className="link-draw">{children}</span>

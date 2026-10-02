@@ -8,7 +8,7 @@ import type { ReactNode } from "react";
 export function PageShell({ children }: { children: ReactNode }) {
   return (
     <main
-      className="shell-container flex-1 flex flex-col relative pt-24 md:pt-32 lg:pt-36 pb-12 md:pb-20 min-h-dvh"
+      className="shell-container flex-1 flex flex-col relative pt-24 md:pt-32 lg:pt-36 pb-28 md:pb-20 min-h-dvh short-screen:pt-20 short-screen:pb-24"
       id="main"
     >
       {children}

@@ -141,8 +141,10 @@ export default async function HomePage() {
             <StatStrip items={proof} tone="plain" />
             <p className="font-body-sm text-body-sm text-text-muted">
               Merged work in OWASP, Microsoft and Ollama repositories.{" "}
+              {/* Inline in a sentence, so it stays inline-sized on desktop;
+                  padded out to a 44px target where it lands on its own line. */}
               <Link
-                className="text-text-secondary underline decoration-border-dotted underline-offset-4 hover:text-text-primary"
+                className="inline-block -my-2 py-3 text-text-secondary underline decoration-border-dotted underline-offset-4 hover:text-text-primary"
                 href="/open-source"
               >
                 See the pull requests
@@ -251,10 +253,10 @@ export default async function HomePage() {
                 />
               </span>
             </div>
-            <dl className="md:col-span-2 grid grid-cols-3 md:grid-cols-1 gap-4 md:gap-6 md:border-l md:border-border-hairline md:pl-8 md:self-center">
+            <dl className="md:col-span-2 grid grid-cols-3 md:grid-cols-1 gap-x-3 gap-y-4 md:gap-6 md:border-l md:border-border-hairline md:pl-8 md:self-center">
               {lead.metrics.map((m) => (
-                <div className="flex flex-col-reverse gap-0.5" key={m.label}>
-                  <dt className="font-body-sm text-body-sm text-text-muted">{m.label}</dt>
+                <div className="flex flex-col-reverse gap-0.5 min-w-0" key={m.label}>
+                  <dt className="font-body-sm text-body-sm text-text-muted text-pretty hyphens-auto">{m.label}</dt>
                   <dd
                     className="font-headline-lg text-headline-lg md:text-[32px] md:leading-none tracking-tight text-text-primary"
                     data-numeric
@@ -271,11 +273,11 @@ export default async function HomePage() {
             {others.map((project) => (
               <li className="border-b border-border-hairline" key={project.slug}>
                 <Link
-                  className="group grid grid-cols-[1fr_auto] md:grid-cols-[9rem_1fr_auto] items-baseline gap-x-6 gap-y-1 py-5"
+                  className="group flex gap-x-6 gap-y-1 py-5"
                   href="/projects"
                 >
                   {/* demo thumbnail, or the project glyph when there is no recording */}
-                  <span className="hidden md:block row-span-2 self-center">
+                  <span className="hidden md:block w-36 shrink-0 self-center">
                     {project.video ? (
                       <DemoVideo
                         className="rounded-lg"
@@ -289,16 +291,36 @@ export default async function HomePage() {
                       </span>
                     )}
                   </span>
-                  <span className="font-headline-md text-headline-md md:text-headline-lg text-text-primary transition-transform duration-300 group-hover:translate-x-1">
-                    {project.title}
+
+                  {/* Phones: title and arrow share the first line, then the
+                      metric, then the summary. The desktop grid put the metric
+                      in a second column, which left it colliding with a
+                      wrapped title at 390px. */}
+                  <span className="flex-1 min-w-0 flex flex-col gap-1.5">
+                    <span className="flex items-start justify-between gap-3">
+                      <span className="font-headline-md text-headline-md md:text-headline-lg text-text-primary transition-transform duration-300 group-hover:translate-x-1">
+                        {project.title}
+                      </span>
+                      <ArrowAffordance
+                        className="md:hidden mt-1"
+                        icon="arrow_outward"
+                      />
+                    </span>
+                    <span className="font-label-meta text-label-meta text-text-muted md:hidden" data-numeric>
+                      {project.metrics[0].value} {project.metrics[0].label.toLowerCase()}
+                    </span>
+                    <span className="font-body-sm text-body-sm text-text-secondary max-w-[60ch]">
+                      {project.summary}
+                    </span>
                   </span>
-                  <span className="font-label-meta text-label-meta text-text-muted" data-numeric>
-                    {project.metrics[0].value} {project.metrics[0].label.toLowerCase()}
+
+                  {/* Desktop: metric and arrow in their own right-hand column. */}
+                  <span className="hidden md:flex flex-col items-end gap-1 self-start text-right">
+                    <span className="font-label-meta text-label-meta text-text-muted" data-numeric>
+                      {project.metrics[0].value} {project.metrics[0].label.toLowerCase()}
+                    </span>
+                    <ArrowAffordance className="mt-1" icon="arrow_outward" />
                   </span>
-                  <span className="font-body-sm text-body-sm text-text-secondary max-w-[60ch]">
-                    {project.summary}
-                  </span>
-                  <ArrowAffordance className="justify-self-end" icon="arrow_outward" />
                 </Link>
               </li>
             ))}

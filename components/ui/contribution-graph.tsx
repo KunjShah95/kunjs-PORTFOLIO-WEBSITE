@@ -466,7 +466,7 @@ export function ContributionGraphFallback({
         Contribution calendar is unavailable right now.
       </span>
       <a
-        className="font-body-sm text-body-sm text-text-primary underline decoration-border-dotted underline-offset-4 hover:decoration-text-primary w-fit"
+        className="-my-2 py-3 font-body-sm text-body-sm text-text-primary underline decoration-border-dotted underline-offset-4 hover:decoration-text-primary w-fit"
         href={href}
         rel="noopener noreferrer"
         target="_blank"

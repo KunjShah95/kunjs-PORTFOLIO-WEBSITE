@@ -87,7 +87,7 @@ export default function ManifestoPage() {
                   ))}
                 </ul>
                 <Link
-                  className="group inline-flex items-center gap-1.5 mt-auto font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors w-fit"
+                  className="group inline-flex items-center gap-1.5 mt-auto -my-3 py-3 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors w-fit"
                   href={item.href}
                 >
                   <Tag tone="subtle">

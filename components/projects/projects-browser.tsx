@@ -48,7 +48,7 @@ export function ProjectsBrowser() {
     <>
       <div
         aria-label="Filter projects"
-        className="scroll-fade flex items-center gap-1.5 md:gap-1 overflow-x-auto py-1 -mx-5 px-5 md:mx-0 md:px-1 md:w-fit md:rounded-full md:bg-surface-card md:border md:border-border-hairline no-scrollbar"
+        className="scroll-fade flex items-center gap-1.5 lg:gap-1 overflow-x-auto py-1 -mx-5 px-5 lg:mx-0 lg:px-1 lg:w-fit lg:rounded-full lg:bg-surface-card lg:border lg:border-border-hairline no-scrollbar"
         role="group"
       >
         {projectCategories.map((cat) => {
@@ -61,7 +61,7 @@ export function ProjectsBrowser() {
             <button
               aria-pressed={active}
               className={cn(
-                "relative h-11 md:h-8 px-4 md:px-3.5 rounded-full font-label-badge text-label-badge whitespace-nowrap transition-colors duration-200 active:scale-[0.97]",
+                "relative h-11 lg:h-8 px-4 lg:px-3.5 rounded-full font-label-badge text-label-badge whitespace-nowrap transition-colors duration-200 active:scale-[0.97]",
                 active
                   ? "text-on-primary"
                   : "bg-surface-container md:bg-transparent text-text-secondary hover:text-text-primary",

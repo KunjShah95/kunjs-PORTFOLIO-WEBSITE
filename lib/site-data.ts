@@ -217,7 +217,7 @@ export const projects: readonly Project[] = [
       "Tailwind v4",
     ],
     metrics: [
-      { value: "3-Layer", label: "Tenant Isolation", accent: true },
+      { value: "3", label: "Isolation Layers", accent: true },
       { value: "7", label: "AI Surfaces" },
       { value: "4", label: "LLM Fallbacks" },
     ],
