@@ -84,12 +84,15 @@ export function PageSection({
       )}
       id={id}
     >
-      <div className="flex items-baseline justify-between gap-3 lg:col-span-3 lg:flex-col lg:justify-start lg:gap-1.5 lg:self-start lg:sticky lg:top-28 lg:border-t lg:border-text-primary lg:pt-4">
+      {/* Title and meta sit side by side from `sm` up. Below that they stack:
+          a long meta line beside a wrapped heading squeezes both into a narrow
+          column and reads as neither. */}
+      <div className="flex flex-col gap-1 lg:col-span-3 lg:flex-row lg:items-baseline lg:justify-between lg:gap-3 lg:flex-col lg:justify-start lg:gap-1.5 lg:self-start lg:sticky lg:top-28 lg:border-t lg:border-text-primary lg:pt-4">
         <h2 className="font-headline-lg text-headline-lg text-text-primary">
           {title}
         </h2>
         {meta && (
-          <div className="font-body-sm text-body-sm text-text-muted">{meta}</div>
+          <div className="font-body-sm text-body-sm text-text-muted sm:shrink-0">{meta}</div>
         )}
       </div>
       <Reveal className="stack-block min-w-0 lg:col-span-9">
@@ -103,7 +106,7 @@ export function PageSection({
 export function RailLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <Link
-      className="group inline-flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors"
+      className="group -my-2 py-2 inline-flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors"
       href={href}
     >
       <span className="link-draw">{children}</span>

@@ -177,7 +177,7 @@ export function ContactBody() {
               <div className="flex items-center justify-between gap-2 pt-3 border-t border-border-hairline">
                 <span className="font-body-sm text-body-sm text-text-muted">{service.pill}</span>
                 <button
-                  className="group/cta inline-flex items-center gap-1 h-9 -mr-2 px-2 rounded-full font-body-sm text-body-sm font-medium text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
+                  className="group/cta inline-flex items-center gap-1 h-11 -mr-2 px-2 rounded-full font-body-sm text-body-sm font-medium text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
                   onClick={() => prefill(service.title)}
                   type="button"
                 >

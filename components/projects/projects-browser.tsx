@@ -61,7 +61,7 @@ export function ProjectsBrowser() {
             <button
               aria-pressed={active}
               className={cn(
-                "relative h-10 md:h-8 px-4 md:px-3.5 rounded-full font-label-badge text-label-badge whitespace-nowrap transition-colors duration-200 active:scale-[0.97]",
+                "relative h-11 md:h-8 px-4 md:px-3.5 rounded-full font-label-badge text-label-badge whitespace-nowrap transition-colors duration-200 active:scale-[0.97]",
                 active
                   ? "text-on-primary"
                   : "bg-surface-container md:bg-transparent text-text-secondary hover:text-text-primary",
@@ -116,10 +116,13 @@ export function ProjectsBrowser() {
                 {project.title}
               </h2>
 
-              <dl className="grid grid-cols-3 gap-4 my-5 py-4 border-y border-border-hairline">
+              <dl className="grid grid-cols-3 gap-x-3 gap-y-4 my-5 py-4 border-y border-border-hairline">
                 {project.metrics.map((metric) => (
                   <div className="flex flex-col-reverse gap-0.5 min-w-0" key={metric.label}>
-                    <dt className="font-body-sm text-body-sm text-text-muted truncate">{metric.label}</dt>
+                    {/* Labels wrap rather than truncate: at 390px a three-column
+                        row leaves ~100px per cell, and a clipped label like
+                        "Tenant Isolati…" says less than the full phrase. */}
+                    <dt className="font-body-sm text-body-sm text-text-muted text-pretty hyphens-auto">{metric.label}</dt>
                     <dd
                       className={cn(
                         "font-headline-lg text-headline-lg tracking-tight truncate",
@@ -146,7 +149,7 @@ export function ProjectsBrowser() {
               <div className="flex items-center gap-1 mt-auto -ml-2 flex-wrap">
                 {project.demo && (
                   <a
-                    className="group/btn inline-flex items-center gap-1 h-9 px-2 rounded-full font-body-sm text-body-sm font-semibold text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
+                    className="group/btn inline-flex items-center gap-1 h-11 px-2 rounded-full font-body-sm text-body-sm font-semibold text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
                     href={project.demo}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -157,7 +160,7 @@ export function ProjectsBrowser() {
                 )}
                 {project.github && (
                   <a
-                    className="group/btn inline-flex items-center gap-1 h-9 px-2 rounded-full font-body-sm text-body-sm font-medium text-text-secondary hover:text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
+                    className="group/btn inline-flex items-center gap-1 h-11 px-2 rounded-full font-body-sm text-body-sm font-medium text-text-secondary hover:text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
                     href={project.github}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -168,7 +171,7 @@ export function ProjectsBrowser() {
                 )}
                 <button
                   aria-expanded={isOpen}
-                  className="inline-flex items-center gap-1 h-9 px-2 ml-auto rounded-full font-body-sm text-body-sm font-medium text-text-secondary hover:text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
+                  className="inline-flex items-center gap-1 h-11 px-2 ml-auto rounded-full font-body-sm text-body-sm font-medium text-text-secondary hover:text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
                   onClick={() => setExpanded(isOpen ? null : project.slug)}
                   type="button"
                 >
