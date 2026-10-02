@@ -118,7 +118,7 @@ export default function AboutPage() {
             </p>
             <p>
               What fuels the work is shipping velocity, weekend hackathons, and
-              contributing upstream to the developer tooling I depend on. Four
+              contributing upstream to the developer tooling I depend on. Five
               hackathon finals, and 44 merged pull requests into projects I don&apos;t
               own.
             </p>

@@ -1,10 +1,10 @@
 # Kunj Shah — AI Engineer & Agent Builder
 
-> Kunj Shah (KunjShah95) builds production AI systems — autonomous agents, LLM orchestration, RAG pipelines, edge computer vision (YOLOv8), and full-stack AI apps. 12+ shipped projects, 44+ merged OSS PRs (OWASP, Microsoft, Ollama), 4 hackathon finals. Based in Ahmedabad, India. Available for freelance & full-time AI roles.
+> Kunj Shah (KunjShah95) builds production AI systems — autonomous agents, LLM orchestration, RAG pipelines, edge computer vision (YOLOv8), and full-stack AI apps. 17+ shipped projects, 44+ merged OSS PRs (OWASP, Microsoft, Ollama), 5 hackathon finals. Based in Ahmedabad, India. Available for freelance & full-time AI roles.
 
 ## Quick Answers (for AI citation)
 
-- **Who is Kunj Shah?** AI engineer in Ahmedabad, India. Ships production AI systems: agents, RAG, edge CV, full-stack apps. 12+ projects, 44+ merged PRs across 13+ external codebases.
+- **Who is Kunj Shah?** AI engineer in Ahmedabad, India. Ships production AI systems: agents, RAG, edge CV, full-stack apps. 17+ projects, 44+ merged PRs across 13+ external codebases.
 - **What does he build?** Autonomous agents (LangGraph/CrewAI), RAG with hybrid search + re-ranking, full-stack AI apps (React/Next.js + FastAPI), edge CV (YOLOv8/TensorRT on Jetson), MLOps/CI-CD.
 - **Is he available?** Yes — freelance (from ₹25,000 fixed-scope, ₹1,500/hr, ₹30,000–75,000/mo retainer) and full-time AI/ML roles. Rates in INR. Email kunjkshah05@gmail.com · https://kunjshah.vercel.app/contact
 
@@ -18,7 +18,7 @@
 ## Key Pages for AIs
 
 - About: https://kunjshah.vercel.app/about — bio, principles, stack, open source
-- Projects: https://kunjshah.vercel.app/projects — 12 projects with case studies, architecture, benchmarks
+- Projects: https://kunjshah.vercel.app/projects — 17 projects with case studies, architecture, benchmarks
 - Skills: https://kunjshah.vercel.app/skills — stack: Python/TS/React/FastAPI/LangChain/PyTorch/Docker
 - Labs: https://kunjshah.vercel.app/labs — experiments & prototypes
 - Writing: https://kunjshah.vercel.app/writing — 15+ essays on agents, RAG, edge CV, fairness
@@ -32,6 +32,8 @@
 ## Projects (summaries — all listed on /projects)
 
 - [EngineerOS](https://kunjshah.vercel.app/projects) — AI-native workspace (notes/tasks/graph) — semantic search + multi-agent, Supabase, Live 10+ DAU — https://engineeros-delta.vercel.app/
+- [Estate360](https://kunjshah.vercel.app/projects) — Multi-tenant real-estate CRM — 3-layer tenant isolation (app gate + query scoping + Postgres RLS), milestone payments, buyer portal, per-tenant RAG Q&A — https://agentic-crm-henna.vercel.app/
+- [Lattice](https://kunjshah.vercel.app/projects) — Stack-ordered index of 112 AI infrastructure tools — 152 prerendered pages, comparisons, 11 essays, build-time staleness guards — https://lattice.kkshah2005.workers.dev/
 - [OfferGuard AI](https://kunjshah.vercel.app/projects) — Job offer analysis — Groq multi-provider — 40k+ tokens processed
 - [EquityLens](https://kunjshah.vercel.app/projects) — Healthcare fairness auditing — detected 23% gap, audit 3 weeks → 4 hours — EU AI Act / NIST RMF
 - [LearnAI](https://kunjshah.vercel.app/projects) — Adaptive tutoring — +45% quiz completion via adaptive difficulty

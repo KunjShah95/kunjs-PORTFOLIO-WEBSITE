@@ -31,7 +31,7 @@ export function SiteFooter() {
             {indexItems.map((item) => (
               <li key={item.href}>
                 <Link
-                  className="inline-flex items-center min-h-11 md:min-h-0 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
+                  className="inline-flex items-center min-h-11 lg:min-h-0 -mx-1.5 px-1.5 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
                   href={item.href}
                 >
                   {item.label}
@@ -45,7 +45,7 @@ export function SiteFooter() {
           {social.map((link) => (
             <li key={link.label}>
               <a
-                className="inline-flex items-center min-h-11 md:min-h-0 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
+                className="inline-flex items-center min-h-11 lg:min-h-0 -mx-1.5 px-1.5 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
                 href={link.href}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 target={link.href.startsWith("http") ? "_blank" : undefined}

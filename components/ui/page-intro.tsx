@@ -65,9 +65,11 @@ export function PageSection({
   if (layout === "stacked") {
     return (
       <section className={cn("flex flex-col gap-6 md:gap-8 scroll-mt-24", className)} id={id}>
-        <div className="flex items-baseline justify-between gap-4 border-t border-text-primary pt-4">
+        <div className="flex flex-col gap-1 border-t border-text-primary pt-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <h2 className="font-headline-lg text-headline-lg text-text-primary">{title}</h2>
-          {meta && <div className="font-body-sm text-body-sm text-text-muted">{meta}</div>}
+          {meta && (
+            <div className="font-body-sm text-body-sm text-text-muted sm:text-right">{meta}</div>
+          )}
         </div>
         <Reveal className="stack-block min-w-0">{children}</Reveal>
       </section>

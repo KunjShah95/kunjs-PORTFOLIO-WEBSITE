@@ -28,6 +28,10 @@ const tours = {
     ['hold',3000],['move',900,500],['scroll',2200,8000],['hold',1500],['scroll',2000,7000],['hold',1500],['scroll',1400,5000],['hold',2500]]},
   'archmind-research-agent': { url:'https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/', steps:[
     ['hold',4000],['research'],['hold',3000]]},
+  estate360: { url:'https://agentic-crm-henna.vercel.app/', steps:[
+    ['hold',3500],['move',700,380],['scroll',2000,9000],['hold',1800],['scroll',2000,8000],['hold',1500],['top',4000],['hold',2000]]},
+  lattice: { url:'https://lattice.kkshah2005.workers.dev/', steps:[
+    ['hold',2500],['move',640,500],['scroll',2400,10000],['hold',1500],['top',3600],['goto','/all'],['hold',1800],['scroll',1500,7000],['hold',1500],['goto','/compare'],['hold',1500],['scroll',1000,4000],['hold',1800]]},
 };
 const CURSOR = `(()=>{const add=()=>{if(document.getElementById('__cur'))return;const c=document.createElement('div');c.id='__cur';
 c.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>';

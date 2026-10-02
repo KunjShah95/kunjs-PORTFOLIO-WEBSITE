@@ -34,7 +34,7 @@ export const metadata: Metadata = pageMeta({
   path: "",
   title: "AI Engineer & Agent Builder in Ahmedabad",
   description:
-    "Kunj Shah is an AI engineer in Ahmedabad, India building agents, RAG pipelines and edge computer vision that hold up in production. 12+ shipped systems, 44+ merged open-source PRs.",
+    "Kunj Shah is an AI engineer in Ahmedabad, India building agents, RAG pipelines and edge computer vision that hold up in production. 17+ shipped systems, 44+ merged open-source PRs.",
   keywords: [
     "AI engineer Ahmedabad",
     "AI engineer India",
@@ -47,7 +47,7 @@ export const metadata: Metadata = pageMeta({
   ],
   ogTitle: "Kunj Shah — AI Engineer & Agent Builder, Ahmedabad",
   ogDescription:
-    "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 12+ shipped systems, 44+ merged open-source PRs.",
+    "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, 44+ merged open-source PRs.",
 });
 
 const [lead, ...others] = projects.slice(0, 4);

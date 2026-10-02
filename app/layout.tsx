@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     siteName: `${site.name} — Portfolio`,
     title: `${site.name} — ${site.role} in Ahmedabad, India`,
     description:
-      "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 12+ shipped systems, 44+ merged open-source PRs.",
+      "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, 44+ merged open-source PRs.",
     locale: "en_IN",
     // Absolute URL: relative image paths are dropped by some scrapers, and
     // `metadataBase` alone is not applied to images by every consumer.

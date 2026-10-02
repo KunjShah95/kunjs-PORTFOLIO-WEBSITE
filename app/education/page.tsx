@@ -37,7 +37,7 @@ export default function EducationPage() {
                   {education.degree}
                 </h2>
                 <p className="font-body-md text-body-md text-text-secondary">
-                  {education.institution} Â· {education.location}
+                  {education.institution} · {education.location}
                 </p>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function EducationPage() {
                   </span>
                 </span>
                 <span className="font-body-sm text-body-sm text-text-muted">
-                  {lab.status} Â· {lab.stack.slice(0, 3).join(", ")}
+                  {lab.status} · {lab.stack.slice(0, 3).join(", ")}
                 </span>
               </a>
             ))}

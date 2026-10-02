@@ -166,6 +166,28 @@
       "github": "https://github.com/KunjShah01/job-snipper",
       "slug": "resumemaster-ai",
       "impact": "Product Live"
+    },
+    {
+      "id": "12",
+      "title": "Estate360",
+      "category": "Multi-Tenant AI CRM",
+      "description": "Multi-tenant real-estate CRM for builders and brokerages: lead capture, deal pipeline, unit inventory, cost sheets, bookings, milestone payments with UPI reconciliation, buyer portal, and a tenant-isolated RAG knowledge base over the workspace's own documents.",
+      "tech": ["Next.js 16", "Prisma 7", "PostgreSQL", "pgvector", "NextAuth v5", "Tailwind v4"],
+      "github": "https://github.com/KunjShah95/agentic-crm",
+      "demo": "https://agentic-crm-henna.vercel.app/",
+      "slug": "estate360",
+      "impact": "Production"
+    },
+    {
+      "id": "13",
+      "title": "Lattice",
+      "category": "AI Infrastructure Index",
+      "description": "Curated, stack-ordered index of the infrastructure behind production AI systems: 112 tools across 9 layers with a page per tool, 6 head-to-head comparisons, 11 essays, and build-time guards that fail on stale licence data or a tool missing classification.",
+      "tech": ["Next.js 16", "React 19", "MDX", "Tailwind v4", "Cloudflare Workers"],
+      "github": "https://github.com/KunjShah95/lattice",
+      "demo": "https://lattice.kkshah2005.workers.dev/",
+      "slug": "lattice",
+      "impact": "Live"
     }
   ],
   "blogs": [

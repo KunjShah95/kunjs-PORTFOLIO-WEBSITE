@@ -94,7 +94,7 @@ export default function HackathonsPage() {
                               {h.title}
                             </h3>
                             <span className="font-body-sm text-body-sm text-text-muted">
-                              {h.event} Â· Team of {h.team}
+                              {h.event} · Team of {h.team}
                             </span>
                           </div>
                         </div>

@@ -18,7 +18,7 @@ export const metadata: Metadata = pageMeta({
   path: "/projects",
   title: "AI Projects & Case Studies",
   description:
-    "Case studies for 12+ shipped AI systems: LangGraph multi-agent workflows, RAG pipelines, YOLOv8 edge vision on Jetson Orin, and full-stack AI apps with real production metrics.",
+    "Case studies for 17 shipped AI systems: LangGraph multi-agent workflows, RAG pipelines, YOLOv8 edge vision on Jetson Orin, and full-stack AI apps with real production metrics.",
   keywords: [
     "AI projects",
     "machine learning projects",
