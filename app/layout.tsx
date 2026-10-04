@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { BottomNav } from "@/components/shell/bottom-nav";
 import { CommandPalette } from "@/components/shell/command-palette";
 import { SiteFooter } from "@/components/shell/site-footer";
@@ -141,6 +142,13 @@ export default function RootLayout({
         <BottomNav />
         {/* ⌘K search. Mounted last so its trigger sits above the header row. */}
         <CommandPalette />
+        {/* Cookieless pageview + custom-event analytics. Renders nothing.
+            It reads `useSearchParams()`, so React streams a
+            BAILOUT_TO_CLIENT_SIDE_RENDERING boundary here — correct and cheap:
+            the subtree renders `null`, its Suspense fallback is `null`, and the
+            script can only be injected client-side anyway. Verified to leave
+            all 18 routes statically prerendered. */}
+        <Analytics />
         {/* Entity graph: resolves "Kunj Shah" to a canonical person. */}
         <PersonSiteJsonLd />
       </body>

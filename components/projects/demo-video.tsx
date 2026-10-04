@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { cn } from "@/lib/cn";
 
 /**
@@ -24,20 +25,33 @@ export function DemoVideo({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const reduce = useReducedMotion();
+  /** Latched on the first play that actually succeeds, so one card counts once. */
+  const counted = useRef(false);
 
   useEffect(() => {
     const video = ref.current;
     if (!video || reduce) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) video.play().catch(() => {});
-        else video.pause();
+        if (entry.isIntersecting) {
+          // Counted on fulfilment, not on entry: a rejected autoplay (reduced
+          // data, low power, blocked policy) never reached the visitor, and the
+          // observer fires repeatedly as the card moves through the viewport.
+          video.play().then(
+            () => {
+              if (counted.current) return;
+              counted.current = true;
+              track("Project Demo Played", { project: title });
+            },
+            () => {},
+          );
+        } else video.pause();
       },
       { rootMargin: "200px 0px", threshold: 0.25 },
     );
     observer.observe(video);
     return () => observer.disconnect();
-  }, [reduce]);
+  }, [reduce, title]);
 
   return (
     <video

@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/cn";
 import { EASE_OUT } from "@/lib/motion";
@@ -71,16 +72,28 @@ export function ContactBody() {
     return merged;
   }, [state.errors, localErrors, edited]);
 
-  /** Guards the focus side effect so it runs once per server response. */
+  /**
+   * Runs once per server response: records the outcome once, then moves focus
+   * to the first field the server rejected.
+   *
+   * Keyed on the state *object* rather than `status`, because the action
+   * returns a fresh object each submit — so two consecutive successes each
+   * register, where a `status` comparison would collapse them into one.
+   */
   const handledState = useRef<typeof state | null>(null);
   useEffect(() => {
     if (state === handledState.current) return;
     handledState.current = state;
-    if (state.status !== "idle") return;
-    const first = (Object.keys(errors) as Field[])[0];
-    if (!first) return;
-    formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
-  }, [state, errors]);
+    if (state.status === "idle") {
+      const first = (Object.keys(errors) as Field[])[0];
+      if (first) formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+      return;
+    }
+    // One event, not two: `status` separates a delivered inquiry from a
+    // rejected one in the dashboard, and the selected chips ride along so
+    // lead quality is readable without a second join.
+    track("Contact Form Submitted", { status: state.status, focus, timeline });
+  }, [state, errors, focus, timeline]);
 
   /**
    * `useActionState` has no reset, so dismissing the success panel means

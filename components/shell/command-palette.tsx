@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { Icon } from "@/components/icon";
 import { type Command, type CommandGroup, searchCommands } from "@/lib/commands";
 import { EASE_OUT } from "@/lib/motion";
@@ -64,6 +65,7 @@ export function CommandPalette() {
   const openPalette = useCallback(() => {
     returnFocus.current = document.activeElement as HTMLElement | null;
     setOpen(true);
+    track("Command Palette Opened");
   }, []);
 
   // --- global shortcut, plus the header trigger ------------------------
@@ -124,8 +126,18 @@ export function CommandPalette() {
    * Navigation is left to the element itself: `next/link` intercepts internal
    * routes, and external anchors carry `target`/`rel`. We only need to close
    * the dialog, so nothing here touches `location` directly.
+   *
+   * The command is recorded first: this palette is the only place a visitor
+   * can ask for `/pricing`, `/services.md`, or the CV without scrolling to
+   * find them, so which row gets picked is the clearest intent signal here.
    */
-  function run() {
+  function run(command: Command) {
+    track("Command Palette Result Selected", {
+      command: command.id,
+      label: command.label,
+      group: command.group,
+      external: Boolean(command.external),
+    });
     close();
   }
 
@@ -285,7 +297,7 @@ export function CommandPalette() {
                                   data-active={isActive}
                                   data-row=""
                                   href={command.href}
-                                  onClick={run}
+                                  onClick={() => run(command)}
                                   rel="noopener noreferrer"
                                   target="_blank"
                                 >
@@ -297,7 +309,7 @@ export function CommandPalette() {
                                   data-active={isActive}
                                   data-row=""
                                   href={command.href ?? "/"}
-                                  onClick={run}
+                                  onClick={() => run(command)}
                                 >
                                   {inner}
                                 </Link>

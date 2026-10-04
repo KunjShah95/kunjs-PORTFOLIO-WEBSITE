@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { Icon } from "@/components/icon";
 import { site } from "@/lib/site-data";
 import { cn } from "@/lib/cn";
@@ -17,9 +18,13 @@ function useCopyEmail() {
   useEffect(() => () => clearTimeout(timer.current), []);
 
   async function copy() {
+    // Recorded only on a real copy. The button still confirms either way,
+    // because the address stays visible and selectable when it does not.
+    let copiedOk = false;
     try {
       if (navigator.clipboard) {
         await navigator.clipboard.writeText(site.email);
+        copiedOk = true;
       } else {
         const el = document.createElement("textarea");
         el.value = site.email;
@@ -27,12 +32,13 @@ function useCopyEmail() {
         el.style.opacity = "0";
         document.body.appendChild(el);
         el.select();
-        document.execCommand("copy");
+        copiedOk = document.execCommand("copy");
         document.body.removeChild(el);
       }
     } catch {
       /* clipboard blocked; the address stays selectable on screen */
     }
+    if (copiedOk) track("Email Copied");
     setCopied(true);
     clearTimeout(timer.current);
     timer.current = setTimeout(() => setCopied(false), 2000);
