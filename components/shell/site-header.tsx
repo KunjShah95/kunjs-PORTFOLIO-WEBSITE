@@ -11,7 +11,7 @@ import {
   useSpring,
 } from "framer-motion";
 import { LinkPending } from "@/components/primitives/LinkPending";
-import { CommandPaletteTrigger } from "@/components/shell/command-palette";
+import { CommandPaletteTrigger } from "@/components/shell/command-palette-trigger";
 import { HeaderMenu } from "@/components/shell/header-menu";
 import { ThemeToggle } from "@/components/shell/theme-toggle";
 import { Icon } from "@/components/icon";

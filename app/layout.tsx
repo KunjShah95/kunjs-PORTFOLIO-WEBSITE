@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { BottomNav } from "@/components/shell/bottom-nav";
-import { CommandPalette } from "@/components/shell/command-palette";
+import { LazyCommandPalette } from "@/components/shell/lazy-command-palette";
 import { SiteFooter } from "@/components/shell/site-footer";
 import { SiteHeader } from "@/components/shell/site-header";
 import { themeScript } from "@/components/shell/theme-toggle";
@@ -125,7 +125,27 @@ export default function RootLayout({
     // `data-theme` is seeded light so server HTML is self-consistent; the
     // inline script below upgrades it to the stored/system preference before
     // the first paint, so there is no flash.
-    <html data-theme="light" lang="en" className={`${sans.variable} ${mono.variable}`}>
+    //
+    // `suppressHydrationWarning` covers that script. It mutates <html> during
+    // parsing, so by the time React hydrates, the DOM attribute holds the
+    // visitor's real theme while the RSC payload still says "light" — a
+    // disagreement on the root element, which React reports as error #418
+    // ("the server rendered HTML didn't match the client"). The flag tells
+    // React to keep the DOM and discard its own output here, so the pre-paint
+    // script wins. This is the pattern Next.js documents for exactly this case
+    // (dist/docs/.../preventing-flash-before-hydration.md, "Themes").
+    //
+    // Note: the deployed build was observed throwing #418 on <html> while local
+    // Turbopack and webpack builds did not, so a stale cached shell against
+    // newer chunks may also be involved. This flag is correct and harmless
+    // either way, but if #418 survives a fresh deploy, purge the ISR cache
+    // rather than changing code here.
+    <html
+      className={`${sans.variable} ${mono.variable}`}
+      data-theme="light"
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
@@ -140,8 +160,10 @@ export default function RootLayout({
         {children}
         <SiteFooter />
         <BottomNav />
-        {/* ⌘K search. Mounted last so its trigger sits above the header row. */}
-        <CommandPalette />
+        {/* ⌘K search. Mounted last so its trigger sits above the header row.
+            Deferred until first use: it is reachable only by keyboard or the
+            header button, so keeping it out of the first-load bundle is free. */}
+        <LazyCommandPalette />
         {/* Cookieless pageview + custom-event analytics. Renders nothing.
             It reads `useSearchParams()`, so React streams a
             BAILOUT_TO_CLIENT_SIDE_RENDERING boundary here — correct and cheap:

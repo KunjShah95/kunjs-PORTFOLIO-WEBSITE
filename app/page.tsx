@@ -130,7 +130,7 @@ export default async function HomePage() {
                   fill
                   priority
                   sizes="(min-width: 1024px) 340px, 320px"
-                  src="https://kunjshah.vercel.app/profile.png"
+                  src="/profile.png"
                 />
               </div>
             </Reveal>

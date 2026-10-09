@@ -35,6 +35,12 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["framer-motion"],
+    // `experimental.inlineCss` was tried here and reverted: it inlines the
+    // whole ~66 KiB stylesheet into every document, which took the home page
+    // HTML from 123 KiB to 323 KiB. The browser then has to receive and parse
+    // all of that before it can paint, which measured worse across the board
+    // (FCP 0.9s -> 1.1s, TBT 30ms -> 80ms, perf 90 -> 89). Keeping the
+    // stylesheet as a separate 13 KiB-gzip request is the better trade.
   },
 };
 

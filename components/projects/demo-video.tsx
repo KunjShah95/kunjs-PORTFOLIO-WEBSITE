@@ -64,7 +64,11 @@ export function DemoVideo({
       loop
       muted
       playsInline
-      poster={`${src}.jpg`}
+      // WebP posters: `scripts/record-demos.mjs` still writes the `.jpg`
+      // alongside each recording, but this is the only file the browser ever
+      // fetches, and WebP is ~55% smaller at the same visual quality. The
+      // project already targets Safari 16.4+, where WebP is universal.
+      poster={`${src}.webp`}
       preload="none"
       ref={ref}
     >

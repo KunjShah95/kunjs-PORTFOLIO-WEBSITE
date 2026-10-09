@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { track } from "@vercel/analytics";
 import { Icon } from "@/components/icon";
+import { OPEN_EVENT } from "@/components/shell/command-palette-event";
 import { type Command, type CommandGroup, searchCommands } from "@/lib/commands";
 import { EASE_OUT } from "@/lib/motion";
 
@@ -22,9 +23,6 @@ function group(commands: Command[]): { group: CommandGroup; items: Command[] }[]
     items: commands.filter((c) => c.group === name),
   })).filter((entry) => entry.items.length > 0);
 }
-
-/** Custom event so the header's trigger can open the palette without a provider. */
-const OPEN_EVENT = "open-command-palette";
 
 /**
  * ⌘K site search.
@@ -349,29 +347,5 @@ function Kbd({ children }: { children: React.ReactNode }) {
     <kbd className="inline-flex items-center justify-center min-w-5 h-5 px-1 rounded border border-border-hairline bg-surface-subtle font-label-meta text-label-meta">
       {children}
     </kbd>
-  );
-}
-
-/**
- * Header affordance for the palette. Rendered inside `SiteHeader` rather than
- * beside the dialog, so it occupies a real slot in the header's right cluster.
- *
- * Hidden below `lg`, where the bottom tab bar already owns navigation and a
- * keyboard shortcut is not a discoverable interaction.
- */
-export function CommandPaletteTrigger() {
-  return (
-    <button
-      aria-keyshortcuts="Meta+K Control+K"
-      className="hidden lg:inline-flex items-center gap-2 h-10 pl-3 pr-2 rounded-full bg-surface-card/60 border border-border-hairline backdrop-blur-md text-text-muted hover:text-text-primary hover:bg-surface-subtle transition-colors"
-      onClick={() => window.dispatchEvent(new Event(OPEN_EVENT))}
-      type="button"
-    >
-      <Icon name="hub" size={15} />
-      <span className="font-body-sm text-body-sm">Search</span>
-      <span className="inline-flex items-center h-5 px-1.5 rounded border border-border-hairline bg-surface-subtle font-label-meta text-label-meta">
-        ⌘K
-      </span>
-    </button>
   );
 }

@@ -23,8 +23,12 @@ export const metadata: Metadata = pageMeta({
   keywords: ["about Kunj Shah", "AI engineer Ahmedabad", "AI engineer biography", "machine learning engineer India", "AI developer profile"],
 });
 
+// Served from `public/` rather than the absolute URL this file was ported
+// with. Byte-identical, but a local source lets the image optimizer read it
+// off disk instead of making a second request to a remote origin on a cold
+// cache — which is what was setting the home page's LCP.
 const portrait = {
-  src: "https://kunjshah.vercel.app/profile.png",
+  src: "/profile.png",
   alt: "Portrait of Kunj Shah, AI engineer and agent builder based in Ahmedabad, India.",
 };
 

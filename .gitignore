@@ -16,3 +16,10 @@ docs/
 .kilo
 raw/
 videos/
+# Exception: the published demo posters under public/videos/ are part of the
+# deploy, and the videos/ rule above (meant for scratch recordings) would
+# otherwise drop them. They are deliberately re-included by extension so a new
+# .mp4/.webm in the folder still stays ignored.
+!public/videos/
+public/videos/*
+!public/videos/*.webp
