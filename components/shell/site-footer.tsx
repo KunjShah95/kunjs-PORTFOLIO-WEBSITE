@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LocalClock } from "@/components/ui/local-clock";
+import { legalDocuments } from "@/lib/legal";
 import { indexItems, site } from "@/lib/site-data";
 
 const social = [
@@ -58,9 +59,23 @@ export function SiteFooter() {
       </div>
 
       <div className="shell-container py-5 border-t border-border-hairline font-body-sm text-body-sm text-text-muted flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-        <span>
-          &copy; {year} {site.name}
-        </span>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+          <span>
+            &copy; {year} {site.name}
+          </span>
+          {/* Legal lives here rather than in the index above: these are not
+              sections of the portfolio, but they do need to be reachable from
+              every page. */}
+          {legalDocuments.map((doc) => (
+            <Link
+              className="hover:text-text-primary transition-colors"
+              href={doc.path}
+              key={doc.path}
+            >
+              {doc.label}
+            </Link>
+          ))}
+        </div>
         <LocalClock />
       </div>
     </footer>

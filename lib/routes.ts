@@ -18,4 +18,8 @@ export const PUBLIC_ROUTES = [
   { path: "/manifesto", priority: 0.7, changeFrequency: "yearly" as const },
   { path: "/education", priority: 0.65, changeFrequency: "yearly" as const },
   { path: "/contact", priority: 0.75, changeFrequency: "yearly" as const },
+  // Legal. Indexed deliberately: a client running vendor diligence looks for
+  // these by name, and hiding them makes the site look less trustworthy.
+  { path: "/privacy", priority: 0.2, changeFrequency: "yearly" as const },
+  { path: "/terms", priority: 0.2, changeFrequency: "yearly" as const },
 ];
