@@ -175,6 +175,37 @@ export const projectCategories = [
 
 export const projects: readonly Project[] = [
   {
+    slug: "onramp",
+    video: "/videos/onramp",
+    title: "OnRamp",
+    category: "Agentic AI",
+    status: "Live · v2.0",
+    icon: "rocket_launch",
+    description:
+      "Turns any GitHub repo into a live onboarding program. A nine-step autopilot parses the codebase into a dependency and entity graph, routes every model call free-tier-first, then turns what it finds into issues, tasks, PRs, and senior reviews.",
+    summary:
+      "Repo-to-PR autopilot that parses any codebase, assigns work by role and load, and opens reviewed PRs on its own.",
+    stack: [
+      "FastAPI",
+      "Python 3.12",
+      "React 19",
+      "PostgreSQL 16 + pgvector",
+      "Redis + Celery",
+    ],
+    metrics: [
+      { value: "9", label: "Step Pipeline", accent: true },
+      { value: "20+", label: "Languages Parsed" },
+      { value: "9", label: "Role Tiers" },
+    ],
+    body: "A repository is ingested once into a dependency graph plus an entity graph of classes, functions and API routes, and that index is reused everywhere. The autopilot classifies issues by difficulty, assigns each one to whoever currently holds the fewest active tasks, opens a PR per issue, re-parses the PR head to graph-diff it against the base, and emits a structured senior review. Because a merged PR advances the linked task and closes the originating GitHub issue, the loop closes without anyone touching a board.",
+    challenges:
+      "Keeping LLM cost near zero across a nine-step pipeline, and proving an autonomous PR actually fixed the issue rather than merely claiming it did.",
+    lessons:
+      "Model routing is a cost-control problem before it is a capability problem: free tiers first with a per-query-type fallback chain, backed by exact and semantic Redis caches, kept a full autopilot run cheaper than a single paid call would have been. And a generated PR only counts once the validator re-parses it and diffs the graph, because the agent's own summary is precisely the thing you cannot trust.",
+    demo: "https://developer-onboard.vercel.app",
+    github: "https://github.com/KunjShah95/onramp",
+  },
+  {
     slug: "engineeros",
     video: "/videos/engineeros",
     title: "EngineerOS",
@@ -201,6 +232,7 @@ export const projects: readonly Project[] = [
   },
   {
     slug: "estate360",
+    video: "/videos/estate360",
     title: "Estate360",
     category: "Agentic AI CRM",
     status: "Production",
@@ -231,6 +263,7 @@ export const projects: readonly Project[] = [
   },
   {
     slug: "lattice",
+    video: "/videos/lattice",
     title: "Lattice",
     category: "AI Infrastructure Index",
     status: "Live",
@@ -422,6 +455,7 @@ export const projects: readonly Project[] = [
   },
   {
     slug: "archmind-research-agent",
+    video: "/videos/archmind-research-agent",
     title: "ArchMind Research Agent",
     category: "Agentic AI",
     status: "Live",

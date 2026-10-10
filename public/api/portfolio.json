@@ -188,6 +188,17 @@
       "demo": "https://lattice.kkshah2005.workers.dev/",
       "slug": "lattice",
       "impact": "Live"
+    },
+    {
+      "id": "14",
+      "title": "OnRamp",
+      "category": "Agentic AI Platform",
+      "description": "AI-powered developer onboarding and team acceleration. Turns any GitHub repo into a live onboarding program: a nine-step autopilot parses the codebase into a dependency and entity graph, classifies issues by difficulty, assigns them by role and current load, opens a PR per issue, then re-parses the PR head to graph-diff it and emit a structured senior review.",
+      "tech": ["FastAPI", "Python 3.12", "React 19", "PostgreSQL 16", "pgvector", "Redis", "Celery"],
+      "github": "https://github.com/KunjShah95/onramp",
+      "demo": "https://developer-onboard.vercel.app",
+      "slug": "onramp",
+      "impact": "Live"
     }
   ],
   "blogs": [

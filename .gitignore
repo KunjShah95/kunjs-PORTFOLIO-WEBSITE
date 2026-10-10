@@ -16,10 +16,13 @@ docs/
 .kilo
 raw/
 videos/
-# Exception: the published demo posters under public/videos/ are part of the
+# Exception: the published demo recordings under public/videos/ are part of the
 # deploy, and the videos/ rule above (meant for scratch recordings) would
-# otherwise drop them. They are deliberately re-included by extension so a new
-# .mp4/.webm in the folder still stays ignored.
+# otherwise drop them. DemoVideo resolves `<src>.webm` then `<src>.mp4` with a
+# `<src>.webp` poster, so all three have to be tracked or the card ships broken.
 !public/videos/
 public/videos/*
+!public/videos/*.mp4
+!public/videos/*.webm
 !public/videos/*.webp
+!public/videos/*.jpg
