@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { CountUp } from "@/components/primitives/CountUp";
 import { Reveal } from "@/components/primitives/Reveal";
 import { cn } from "@/lib/cn";
@@ -19,7 +20,8 @@ export function StatStrip({
   tone = "plain",
   className,
 }: {
-  items: readonly { value: string; label: string }[];
+  /** `href` turns a tile into a link to the evidence behind the number. */
+  items: readonly { value: string; label: string; href?: string }[];
   tone?: "card" | "plain";
   className?: string;
 }) {
@@ -46,20 +48,42 @@ export function StatStrip({
         className,
       )}
     >
-      {items.map((item) => (
-        <div
-          className="flex min-w-0 flex-col gap-1 px-3 py-4 md:px-6 md:py-6 border-b border-border-hairline last:border-b-0 sm:border-b-0 sm:border-r sm:border-border-hairline sm:last:border-r-0"
-          key={item.label}
-        >
-          <CountUp
-            className="font-headline-lg text-headline-lg md:text-[36px] md:leading-none tracking-[-0.03em] text-text-primary font-semibold"
-            value={item.value}
-          />
-          <span className="font-body-sm text-body-sm text-text-muted break-words">
-            {item.label}
-          </span>
-        </div>
-      ))}
+      {items.map((item) => {
+        const tile =
+          "flex min-w-0 flex-col gap-1 px-3 py-4 md:px-6 md:py-6 border-b border-border-hairline last:border-b-0 sm:border-b-0 sm:border-r sm:border-border-hairline sm:last:border-r-0";
+        const content = (
+          <>
+            <CountUp
+              className="font-headline-lg text-headline-lg md:text-[36px] md:leading-none tracking-[-0.03em] text-text-primary font-semibold"
+              value={item.value}
+            />
+            <span className="font-body-sm text-body-sm text-text-muted break-words">
+              {item.label}
+              {item.href && (
+                <span
+                  aria-hidden="true"
+                  className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-0.5"
+                >
+                  &rarr;
+                </span>
+              )}
+            </span>
+          </>
+        );
+        return item.href ? (
+          <Link
+            className={cn(tile, "group hover:bg-surface-container/50 transition-colors")}
+            href={item.href}
+            key={item.label}
+          >
+            {content}
+          </Link>
+        ) : (
+          <div className={tile} key={item.label}>
+            {content}
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -9,6 +9,8 @@ import { PageIntro } from "@/components/ui/page-intro";
 import { MEDIUM_PROFILE, formatMonth, getMediumPosts } from "@/lib/medium";
 import { pageMeta } from "@/lib/seo";
 import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import { ORIGIN } from "@/lib/routes";
+import { site } from "@/lib/site-data";
 
 /** New Medium posts appear within the hour. */
 export const revalidate = 3600;
@@ -30,6 +32,32 @@ export default async function WritingPage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Writing", "/writing")} />
+        {posts && posts.length > 0 && (
+          // The essays live on Medium, but the authorship claim belongs here:
+          // each post is tied to the same Person entity as the rest of the
+          // site, so answer engines can attribute the writing to one author.
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              "@id": `${ORIGIN}/writing#blog`,
+              url: `${ORIGIN}/writing`,
+              name: `${site.name} — Writing`,
+              inLanguage: "en",
+              author: { "@id": `${ORIGIN}/#person` },
+              blogPost: posts.map((post) => ({
+                "@type": "BlogPosting",
+                headline: post.title,
+                url: post.url,
+                datePublished: post.date,
+                description: post.excerpt,
+                ...(post.image ? { image: post.image } : {}),
+                ...(post.tags.length ? { keywords: post.tags.join(", ") } : {}),
+                author: { "@id": `${ORIGIN}/#person` },
+              })),
+            }}
+          />
+        )}
         <PageIntro
           lead="Essays on AI engineering, evaluation, agents and Python. Published on Medium, collected here."
           title="Writing"
