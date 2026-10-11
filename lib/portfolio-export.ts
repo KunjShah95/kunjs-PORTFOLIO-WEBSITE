@@ -49,6 +49,7 @@ export function buildPortfolioDocument() {
         site.links.huggingface,
         site.links.peerlist,
         site.links.medium,
+        site.links.producthunt,
       ],
       knowsAbout: [
         "Artificial Intelligence",

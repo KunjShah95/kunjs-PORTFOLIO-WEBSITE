@@ -29,6 +29,7 @@ const sameAs = [
   site.links.huggingface,
   site.links.peerlist,
   site.links.medium,
+  site.links.producthunt,
 ];
 
 /**

@@ -7,6 +7,7 @@ const social = [
   { label: "GitHub", href: site.links.github },
   { label: "LinkedIn", href: site.links.linkedin },
   { label: "X", href: site.links.x },
+  { label: "Product Hunt", href: site.links.producthunt },
   { label: "Resume", href: "/kunjshah_cv.pdf" },
   { label: "Email", href: `mailto:${site.email}` },
 ] as const;

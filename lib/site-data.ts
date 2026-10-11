@@ -26,6 +26,7 @@ export const site = {
     huggingface: "https://huggingface.co/kunjshah01",
     peerlist: "https://peerlist.io/kunjshah",
     medium: "https://medium.com/@kkshah2005",
+    producthunt: "https://www.producthunt.com/@kunj_shah3",
   },
 } as const;
 
@@ -1489,6 +1490,12 @@ export const directChannels = [
     href: site.links.peerlist,
   },
   { icon: "edit_note", label: "Medium", handle: "@kkshah2005", href: site.links.medium },
+  {
+    icon: "rocket_launch",
+    label: "Product Hunt",
+    handle: "@kunj_shah3",
+    href: site.links.producthunt,
+  },
 ] as const;
 
 export const projectFocusOptions = [
