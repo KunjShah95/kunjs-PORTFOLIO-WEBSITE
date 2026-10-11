@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/icon";
+import { legalDocuments } from "@/lib/legal";
 import { articles, indexItems, projects, site } from "@/lib/site-data";
 
 /**
@@ -15,7 +16,7 @@ import { articles, indexItems, projects, site } from "@/lib/site-data";
  * edit-distance matching introduces on words this short.
  */
 
-export type CommandGroup = "Navigate" | "Work" | "Writing" | "Actions";
+export type CommandGroup = "Navigate" | "Work" | "Writing" | "Actions" | "Legal";
 
 export type Command = {
   id: string;
@@ -127,6 +128,18 @@ export const commands: readonly Command[] = [
     href: site.links.huggingface,
     external: true,
   },
+
+  // --- Legal: what a client checks before sending an enquiry -------------
+  ...legalDocuments.map(
+    (doc): Command => ({
+      id: `legal:${doc.path}`,
+      label: doc.title,
+      detail: doc.description,
+      group: "Legal",
+      href: doc.path,
+      icon: doc.icon,
+    }),
+  ),
 ];
 
 /**

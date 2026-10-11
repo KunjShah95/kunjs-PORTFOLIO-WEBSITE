@@ -15,6 +15,7 @@ const GROUP_ORDER: readonly CommandGroup[] = [
   "Work",
   "Writing",
   "Actions",
+  "Legal",
 ];
 
 function group(commands: Command[]): { group: CommandGroup; items: Command[] }[] {

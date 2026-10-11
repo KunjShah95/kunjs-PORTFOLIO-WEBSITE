@@ -24,6 +24,8 @@
    change on one page propagates to every page that links here.
    ========================================================================== */
 
+import type { IconName } from "@/components/icon";
+
 export type LegalBlock =
   /** Body paragraph. */
   | { kind: "p"; text: string }
@@ -49,6 +51,8 @@ export type LegalDocument = {
   title: string;
   /** Short label for footers and cross-links between the two documents. */
   label: string;
+  /** Reused wherever the document is listed outside its own page. */
+  icon: IconName;
   description: string;
   keywords: readonly string[];
   lead: string;
@@ -65,6 +69,7 @@ export const privacyPolicy: LegalDocument = {
   path: "/privacy",
   title: "Privacy Policy",
   label: "Privacy",
+  icon: "shield",
   description:
     "How Kunj Shah collects, uses and protects personal data on this portfolio — the short version: no accounts, no ad tracking, no selling data.",
   keywords: [
@@ -347,6 +352,7 @@ export const termsOfService: LegalDocument = {
   path: "/terms",
   title: "Terms & Conditions",
   label: "Terms",
+  icon: "auto_stories",
   description:
     "The terms that apply when Kunj Shah freelances: scope, fees, revisions, intellectual property, confidentiality, liability, and dispute resolution.",
   keywords: [

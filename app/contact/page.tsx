@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
 import { Icon } from "@/components/icon";
 import { ContactBody } from "@/components/contact/contact-body";
@@ -8,6 +9,7 @@ import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { Reveal } from "@/components/primitives/Reveal";
 import { pageMeta } from "@/lib/seo";
 import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import { legalDocuments } from "@/lib/legal";
 import { directChannels, site } from "@/lib/site-data";
 
 export const metadata: Metadata = pageMeta({
@@ -117,6 +119,41 @@ export default function ContactPage() {
                 </a>
               );
             })}
+          </div>
+        </PageSection>
+
+        {/* ----------------------------------------------- 04 / terms & privacy */}
+        {/* Where a client actually looks for these: before they send the form,
+            not buried in the footer. The forms and channels above come first,
+            then the fine print. */}
+        <PageSection
+          layout="stacked"
+          meta="Worth reading before an enquiry"
+          title="Terms &amp; privacy"
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {legalDocuments.map((doc) => (
+              <Link
+                className="group lift bg-surface-card rounded-2xl p-space-md md:p-5 border border-border-hairline flex flex-col gap-2 min-w-0"
+                href={doc.path}
+                key={doc.path}
+              >
+                <span className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-surface-subtle text-text-secondary group-hover:bg-surface-container group-hover:text-text-primary transition-colors">
+                    <Icon name={doc.icon} size={16} />
+                  </span>
+                  <span className="font-headline-lg text-headline-lg text-text-primary">
+                    {doc.title}
+                  </span>
+                  <span className="ml-auto text-text-muted shrink-0 transition-transform duration-300 group-hover:translate-x-0.5">
+                    <Icon name="arrow_forward" size={18} />
+                  </span>
+                </span>
+                <span className="font-body-sm text-body-sm text-text-secondary">
+                  {doc.description}
+                </span>
+              </Link>
+            ))}
           </div>
         </PageSection>
 

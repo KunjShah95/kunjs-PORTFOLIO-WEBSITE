@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Icon } from "@/components/icon";
 import { EASE_OUT } from "@/lib/motion";
+import { legalDocuments } from "@/lib/legal";
 import { indexItems } from "@/lib/site-data";
 
 /**
@@ -133,6 +134,34 @@ export function HeaderMenu() {
               );
             })}
           </ul>
+          {/* Legal sits outside `indexItems` on purpose — they are not sections
+              of the portfolio, so they stay out of the count and the list
+              above, but they still belong somewhere a visitor looks. */}
+          <div className="border-t border-border-hairline px-3 py-2 flex items-center justify-between gap-2">
+            <span className="font-label-section text-label-section text-text-muted">
+              Legal
+            </span>
+            <div className="flex items-center gap-0.5">
+              {legalDocuments.map((doc) => {
+                const active = pathname.startsWith(doc.path);
+                return (
+                  <Link
+                    aria-current={active ? "page" : undefined}
+                    className={`inline-flex items-center gap-1.5 min-h-9 px-2.5 rounded-lg font-body-sm text-body-sm transition-colors ${
+                      active
+                        ? "bg-primary text-on-primary"
+                        : "text-text-secondary hover:bg-surface-subtle hover:text-text-primary"
+                    }`}
+                    href={doc.path}
+                    key={doc.path}
+                  >
+                    <Icon name={doc.icon} size={14} />
+                    {doc.label}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
         </motion.div>
       )}
       </AnimatePresence>
