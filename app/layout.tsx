@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { ClickTracker } from "@/components/analytics/click-tracker";
 import { BottomNav } from "@/components/shell/bottom-nav";
 import { LazyCommandPalette } from "@/components/shell/lazy-command-palette";
 import { SiteFooter } from "@/components/shell/site-footer";
@@ -179,6 +180,8 @@ export default function RootLayout({
             script can only be injected client-side anyway. Verified to leave
             all 18 routes statically prerendered. */}
         <Analytics />
+        {/* Conversion clicks (resume, contact, demo) marked with data-track. */}
+        <ClickTracker />
         {/* Entity graph: resolves "Kunj Shah" to a canonical person. */}
         <PersonSiteJsonLd />
       </body>

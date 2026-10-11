@@ -159,6 +159,12 @@ export type Project = {
   body: string;
   challenges?: string;
   lessons?: string;
+  /** Who built what: solo, lead, or the slice I owned on a team. */
+  role?: string;
+  /** How the claims above are checked: tests, evals, benchmarks. */
+  evaluation?: string;
+  /** What it does not do yet, or does not do well. */
+  limitations?: string;
   demo?: string;
   /** Path prefix for a ~30s muted demo recording (.mp4/.webm/.jpg poster). */
   video?: string;
@@ -202,6 +208,11 @@ export const projects: readonly Project[] = [
       "Keeping LLM cost near zero across a nine-step pipeline, and proving an autonomous PR actually fixed the issue rather than merely claiming it did.",
     lessons:
       "Model routing is a cost-control problem before it is a capability problem: free tiers first with a per-query-type fallback chain, backed by exact and semantic Redis caches, kept a full autopilot run cheaper than a single paid call would have been. And a generated PR only counts once the validator re-parses it and diffs the graph, because the agent's own summary is precisely the thing you cannot trust.",
+    role: "Lead engineer and primary author: about 350 of the repo's ~370 commits, across the FastAPI backend, the autopilot pipeline, model routing and the React dashboard, with one collaborator.",
+    evaluation:
+      "Generated PRs are not trusted on the agent's word: step nine fetches each PR head, re-parses and re-graphs it, diffs the graph against the base for broken edges and new cycles, and retries unresolved issues a bounded number of times. Model choice was benchmarked on three real tasks from the repo across three OpenRouter models (9/9 solved; gpt-oss-20b about 5.6x cheaper than DeepSeek, gpt-4o-mini fastest at 6.8s average), and those fixes shipped as PRs with 51 passing tests across the touched suites. Backend and frontend CI run on every push.",
+    limitations:
+      "The model benchmark is three tasks, which is enough to pick a default, not to rank models. Graph-diff validation catches structural breakage, not wrong behaviour that keeps the graph intact, so the senior review still assumes a human reads it. Free-tier routing trades latency and rate limits for cost.",
     demo: "https://developer-onboard.vercel.app",
     github: "https://github.com/KunjShah95/onramp",
   },
@@ -227,6 +238,11 @@ export const projects: readonly Project[] = [
       "Local-first UX versus server-side intelligence, multi-agent state sync over Realtime, and predictable LLM costs across multi-step runs.",
     lessons:
       "Local-first UX with server-side intelligence is the right default for developer tools. Unifying storage is easy; unifying context is the actual product.",
+    role: "Solo build: product, schema and row-level security, retrieval, the assistant and the GitHub integration.",
+    evaluation:
+      "Retrieval is measured, not assumed. The retrieval eval runs 20 typed queries (paraphrase, exact, mixed) over a 22-document corpus in which 14 documents are deliberate distractors; the first 8-document version scored 100% recall@3 for every strategy, so it measured nothing. Keyword scored 82.5% recall@1 and 92.5% MRR; equal-weight hybrid scored worse (72.5% and 86.7%) until the semantic leg was down-weighted to 0.35. Regression tests assert those floors, so a ranking change that degrades them fails CI alongside lint, typecheck and Vitest.",
+    limitations:
+      "The eval's semantic leg is a bag-of-words stand-in for a real embedder, so it cannot show what hybrid retrieval is worth; with no API key the product defaults to keyword-only, which is what the numbers support. The assistant answers over retrieved chunks rather than reasoning across the graph, and read-only viewer enforcement for team workspaces is still being swept through.",
     demo: "https://engineeros-delta.vercel.app/",
     github: "https://github.com/KunjShah95/EngineerOS",
   },
@@ -240,7 +256,7 @@ export const projects: readonly Project[] = [
     description:
       "Multi-tenant real-estate CRM for builders and brokerages: lead capture, kanban deals, tower/floor/unit inventory, cost sheets, bookings, milestone payments with UPI reconciliation, and a token-scoped buyer portal.",
     summary:
-      "Multi-tenant real-estate CRM with three-layer tenant isolation, milestone payment collection, and grounded document Q&A per workspace.",
+      "Multi-tenant real-estate CRM with test-enforced tenant isolation, milestone payment collection, and grounded document Q&A per workspace.",
     stack: [
       "Next.js 16",
       "Prisma 7",
@@ -249,7 +265,7 @@ export const projects: readonly Project[] = [
       "Tailwind v4",
     ],
     metrics: [
-      { value: "3", label: "Isolation Layers", accent: true },
+      { value: "3", label: "Tenant-Scope Test Gates", accent: true },
       { value: "7", label: "AI Surfaces" },
       { value: "4", label: "LLM Fallbacks" },
     ],
@@ -257,7 +273,12 @@ export const projects: readonly Project[] = [
     challenges:
       "Isolation that survives a forgotten filter, a payment engine where a webhook can arrive twice, and a RAG layer that must answer from one customer's documents without ever seeing another's.",
     lessons:
-      "Scoping every query by workspaceId is necessary but not sufficient. Postgres RLS underneath is what makes isolation a property of the database instead of a promise in application code. And embeddings from different providers are not comparable, so switching the embedder has to force a reindex.",
+      "Scoping every query by workspaceId is necessary but not sufficient, and RLS that is merely enabled proves nothing: the app connects as a role that owns every table and carries BYPASSRLS, so policies are skipped whether or not they exist. Until a role that respects RLS is in place, the honest backstop is a test that fails the build on any unscoped query. And embeddings from different providers are not comparable, so switching the embedder has to force a reindex.",
+    role: "Solo build: schema, auth and multi-tenancy, the payment and booking engine, the RAG layer and deployment.",
+    evaluation:
+      "Isolation is enforced mechanically rather than by review. A tenant-scope guard test scans every tenant-model call site in app/, lib/ and modules/ and fails if one lacks a workspaceId predicate, with exceptions registered alongside a checkable reason; two more tests assert that every tenant read path has a recorded broker-visibility decision and that the broker predicate actually reaches Prisma. Vitest covers units and Playwright covers end-to-end flows.",
+    limitations:
+      "Query scoping is the only deployed isolation layer. Postgres RLS is enabled and 31 policies are written, but they stay inert until the app moves to a NOBYPASSRLS role, a switch gated by a script that refuses to proceed until its checks pass. Advanced retrieval strategies (HyDE, hierarchical, query expansion) are opt-in and not yet evaluated.",
     demo: "https://agentic-crm-henna.vercel.app/",
     github: "https://github.com/KunjShah95/agentic-crm",
   },
@@ -811,6 +832,16 @@ export type Contribution = {
   tag: "feat" | "fix" | "docs" | "refactor" | "test" | "perf" | "ci" | "security" | "issue";
   url: string;
   notable?: boolean;
+  /** Long-form write-up for the contributions worth explaining. */
+  caseStudy?: {
+    problem: string;
+    change: string;
+    why: string;
+    /** Diff size as merged, e.g. "+127 / -45 across 2 files". */
+    size?: string;
+    /** ISO date the PR merged. */
+    merged?: string;
+  };
 };
 
 export const contributions: readonly Contribution[] = [
@@ -823,6 +854,16 @@ export const contributions: readonly Contribution[] = [
     tag: "security",
     url: "https://github.com/OWASP/Agent-Security-Regression-Harness/pull/109",
     notable: true,
+    caseStudy: {
+      problem:
+        "The harness shipped a GitHub Actions workflow only as a copy-paste example under docs/. The repository's own CI ran pytest and nothing else, so none of its 19 bundled attack scenarios were validated on a pull request.",
+      change:
+        "Split CI into two parallel jobs: the existing pytest job and a new security-regression job that validates every scenario YAML, runs trace-based checks against goal-hijack, outbound-email-exfiltration and cross-session memory-leak scenarios (with both a clean and a leaking trace), and dry-runs the scenarios that have no trace fixtures yet. Artifacts upload on every run, and the docs now describe the committed workflow.",
+      why:
+        "A security harness that never runs its own scenarios can regress silently. The job needs no credentials, since every check uses a recorded trace or a dry run, so it also runs on forks and external PRs.",
+      size: "+127 / -45 across 2 files",
+      merged: "2026-05-17",
+    },
   },
   {
     org: "microsoft/AI-Engineering-Coach",
@@ -832,6 +873,16 @@ export const contributions: readonly Contribution[] = [
     tag: "docs",
     url: "https://github.com/microsoft/AI-Engineering-Coach/pull/50",
     notable: true,
+    caseStudy: {
+      problem:
+        "Coding agents working in the repository had no canonical AGENTS.md notes for its three worker subsystems or for the lifecycle of locally trusted rules, so they had to infer both from scattered source and docs.",
+      change:
+        "Added AGENTS.md notes covering the three workers and the local-rule trust flow, linking out to the existing anti-pattern and rule-editor documentation rather than duplicating it.",
+      why:
+        "AGENTS.md is what an agent reads before touching a codebase. Pointing it at the source material keeps the notes short and stops them drifting from the docs they summarise.",
+      size: "+37 across 1 file",
+      merged: "2026-05-25",
+    },
   },
   {
     org: "ollama/ollama",
@@ -859,6 +910,16 @@ export const contributions: readonly Contribution[] = [
     kind: "merged",
     tag: "ci",
     url: "https://github.com/Abhash-Chakraborty/Find/pull/225",
+    caseStudy: {
+      problem:
+        "During an open-source programme, PRs were arriving without a linked issue, or from someone other than the issue's assignee, and maintainers were triaging ownership by hand.",
+      change:
+        "A GitHub Actions gate that labels every opened or updated PR do-not-merge, keeps needs-linked-issue in sync, and assigns the PR to its author only when a linked issue exists and that same author holds it. Dependabot PRs are exempt and labelled as dependencies; issue lookups are capped and missing references ignored, so the workflow cannot wedge.",
+      why:
+        "It narrows what a maintainer has to check without taking the decision away: the gate never closes a PR and never removes do-not-merge itself. A dry-run checklist ships with it, and the script was syntax-checked with node --check before merge.",
+      size: "+178 / -11 across 2 files",
+      merged: "2026-05-22",
+    },
   },
   {
     org: "Adoflabs/Veridion",

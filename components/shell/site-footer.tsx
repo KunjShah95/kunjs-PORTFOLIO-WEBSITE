@@ -47,6 +47,8 @@ export function SiteFooter() {
             <li key={link.label}>
               <a
                 className="inline-flex items-center justify-center min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 -mx-1.5 px-1.5 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
+                data-track={`${link.label} Clicked`}
+                data-track-from="footer"
                 href={link.href}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 target={link.href.startsWith("http") ? "_blank" : undefined}

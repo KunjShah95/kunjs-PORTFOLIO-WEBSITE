@@ -129,7 +129,12 @@ export default async function HomePage() {
               <Reveal className="flex flex-wrap items-center gap-3" delay={0.4}>
                 {/* Two audiences, two paths: people evaluating the work
                     (hiring, diligence) and people with a project to scope. */}
-                <Link className={`${buttonStyles.primary} group`} href="/projects">
+                <Link
+                  className={`${buttonStyles.primary} group`}
+                  data-track="Explore Work Clicked"
+                  data-track-from="hero"
+                  href="/projects"
+                >
                   Explore engineering work
                   <Icon
                     className="transition-transform duration-300 group-hover:translate-x-0.5"
@@ -137,9 +142,25 @@ export default async function HomePage() {
                     size={16}
                   />
                 </Link>
-                <Link className={buttonStyles.secondary} href="/contact">
+                <Link
+                  className={buttonStyles.secondary}
+                  data-track="Contact CTA Clicked"
+                  data-track-from="hero"
+                  href="/contact"
+                >
                   Discuss a project
                 </Link>
+                {/* Hiring managers want the CV in one click, not a footer hunt. */}
+                <a
+                  className={`${buttonStyles.link} h-11 px-2`}
+                  data-track="Resume Clicked"
+                  data-track-from="hero"
+                  href="/kunjshah_cv.pdf"
+                  rel="noopener"
+                  target="_blank"
+                >
+                  Resume (PDF)
+                </a>
               </Reveal>
             </div>
 
@@ -456,7 +477,12 @@ export default async function HomePage() {
           body="Tell me what you're building, the constraints you're working with, and where it breaks. I reply within a day."
           title="Building something with AI that has to work for real users?"
         >
-          <Link className={buttonStyles.primary} href="/contact">
+          <Link
+            className={buttonStyles.primary}
+            data-track="Contact CTA Clicked"
+            data-track-from="home-cta"
+            href="/contact"
+          >
             Discuss a project
           </Link>
           <CopyEmailRow className="w-full sm:w-auto" />

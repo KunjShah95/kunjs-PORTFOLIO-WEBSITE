@@ -30,6 +30,14 @@ const profiles = [
   { icon: "edit_note", label: "Medium", href: site.links.medium },
 ] as const;
 
+/** Merged contributions with a long-form write-up, in curated order. */
+const caseStudies = mergedContributions.flatMap((c) =>
+  c.caseStudy ? [{ ...c, caseStudy: c.caseStudy }] : [],
+);
+
+/** The rest, as a compact grid, so no PR is listed twice. */
+const otherContributions = mergedContributions.filter((c) => !c.caseStudy);
+
 /** Stat-tile wording for each inferred PR category. */
 const KIND_LABELS: Record<PullRequestKind, string> = {
   feat: "Features",
@@ -182,13 +190,75 @@ export default async function OpenSourcePage() {
           </PageSection>
         )}
 
+        {/* -------------------------------------------------------- case studies */}
+        {/* A count says nothing about judgement. These say what was broken,
+            what changed, and why the change was the right size. */}
+        <PageSection meta={`${caseStudies.length} write-ups`} title="Case studies">
+          <ol className="flex flex-col">
+            {caseStudies.map(({ caseStudy, ...item }) => (
+              <li
+                className="grid gap-4 md:grid-cols-12 md:gap-x-10 py-8 border-b border-border-hairline first:pt-0"
+                key={item.url}
+              >
+                <div className="md:col-span-4 flex flex-col gap-2">
+                  <span className="font-label-meta text-label-meta text-text-muted">
+                    {item.org}
+                  </span>
+                  <h3 className="font-headline-md text-headline-md text-text-primary">
+                    {item.label}
+                  </h3>
+                  <span className="font-body-sm text-body-sm text-text-secondary">
+                    {item.title}
+                  </span>
+                  <span className="font-label-meta text-label-meta text-text-muted" data-numeric>
+                    {[
+                      caseStudy.merged &&
+                        `Merged ${new Date(caseStudy.merged).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })}`,
+                      caseStudy.size,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </span>
+                  <a
+                    className={`${buttonStyles.link} -my-2 py-3 w-fit`}
+                    href={item.url}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Read the pull request
+                    <Icon name="arrow_outward" size={14} />
+                  </a>
+                </div>
+                <dl className="md:col-span-8 flex flex-col gap-5">
+                  {(
+                    [
+                      ["The problem", caseStudy.problem],
+                      ["The change", caseStudy.change],
+                      ["Why it mattered", caseStudy.why],
+                    ] as const
+                  ).map(([term, body]) => (
+                    <div className="flex flex-col gap-1.5" key={term}>
+                      <dt className="font-body-sm text-body-sm font-medium text-text-primary">
+                        {term}
+                      </dt>
+                      <dd className="font-body-md text-body-md text-text-secondary max-w-[68ch]">
+                        {body}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </li>
+            ))}
+          </ol>
+        </PageSection>
+
         {/* -------------------------------------------------------- contributions */}
         <PageSection
-          meta={`${mergedContributions.length} merged`}
-          title={activity ? "Highlights" : "Contributions"}
+          meta={`${otherContributions.length} more merged`}
+          title={activity ? "More highlights" : "More contributions"}
         >
           <div className="grid gap-2 md:grid-cols-2">
-            {mergedContributions.map((item) => (
+            {otherContributions.map((item) => (
               <a
                 className="group lift p-space-sm md:p-4 bg-surface-card rounded-xl border border-border-hairline flex items-start justify-between gap-2"
                 href={item.url}

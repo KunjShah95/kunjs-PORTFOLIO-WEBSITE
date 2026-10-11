@@ -66,9 +66,14 @@ export default async function ProjectCaseStudyPage(
   const prev = i > 0 ? projects[i - 1] : null;
   const next = i < projects.length - 1 ? projects[i + 1] : null;
 
+  // Reads in the order a reviewer checks a claim: who built it, how it works,
+  // what was hard, how it is verified, where it falls short, what it taught.
   const sections = [
+    { title: "My role", body: project.role },
     { title: "How it works", body: project.body },
     { title: "The hard part", body: project.challenges },
+    { title: "How it's tested", body: project.evaluation },
+    { title: "Limitations", body: project.limitations },
     { title: "What I learned", body: project.lessons },
   ].filter((section): section is { title: string; body: string } => Boolean(section.body));
 
@@ -132,7 +137,13 @@ export default async function ProjectCaseStudyPage(
           {(project.demo || project.github) && (
             <div className="flex flex-wrap items-center gap-3 pt-1">
               {project.demo && (
-                <a className={`${buttonStyles.primary} group`} href={project.demo} {...external}>
+                <a
+                  className={`${buttonStyles.primary} group`}
+                  data-track="Project Demo Opened"
+                  data-track-from={project.slug}
+                  href={project.demo}
+                  {...external}
+                >
                   Live demo
                   <Icon
                     className="transition-transform duration-300 group-hover:-translate-y-px group-hover:translate-x-px"
@@ -142,7 +153,13 @@ export default async function ProjectCaseStudyPage(
                 </a>
               )}
               {project.github && (
-                <a className={`${buttonStyles.secondary} group`} href={project.github} {...external}>
+                <a
+                  className={`${buttonStyles.secondary} group`}
+                  data-track="Project Source Opened"
+                  data-track-from={project.slug}
+                  href={project.github}
+                  {...external}
+                >
                   Source code
                   <Icon
                     className="transition-transform duration-300 group-hover:-translate-y-px group-hover:translate-x-px"
@@ -224,7 +241,12 @@ export default async function ProjectCaseStudyPage(
           body="Tell me what you're building, the constraints you're working with, and where it breaks. I reply within a day."
           title={`Need a system like ${project.title}?`}
         >
-          <Link className={buttonStyles.primary} href="/contact">
+          <Link
+            className={buttonStyles.primary}
+            data-track="Contact CTA Clicked"
+            data-track-from={project.slug}
+            href="/contact"
+          >
             Discuss a project
           </Link>
           <CopyEmailRow className="w-full sm:w-auto" />
