@@ -349,7 +349,7 @@ export const projects: readonly Project[] = [
     body: "A production fairness audit across intersectional demographic slices, with Pareto frontier plots and automatic drift detection. Built for EU AI Act, NIST AI RMF, and ISO 25059 compliance review ahead of pre-market clinical evaluation.",
     lessons:
       "Audit overhead is the real bottleneck, cutting it from three weeks to four hours is what makes fairness review something teams actually run.",
-    github: "https://github.com/KunjShah95/fairness-lens-studio",
+    github: "https://github.com/KunjShah95/EquityLens",
   },
   {
     slug: "learnai",
@@ -451,7 +451,7 @@ export const projects: readonly Project[] = [
     body: "TensorRT ONNX engine with INT8 quantization-aware training, GStreamer hardware-accelerated decode, and hand-written CUDA kernels. Histogram equalization handles the low-light and motion-blur conditions on real track footage.",
     lessons:
       "INT8 QAT delivered 2× over the FP16 baseline while holding accuracy, quantization is an accuracy technique here, not a compromise.",
-    github: "https://github.com/KunjShah95/Railway-Inspection",
+    github: "https://github.com/KunjShah95/ai-railway",
   },
   {
     slug: "archmind-ai",
@@ -512,7 +512,7 @@ export const projects: readonly Project[] = [
       { value: "0.92", label: "F1 Score" },
     ],
     body: "A semantic extraction pipeline over ChromaDB-vectorized market data, comparing supply against demand curves to surface the gaps worth closing.",
-    github: "https://github.com/KunjShah95/GAP-Miner",
+    github: "https://github.com/KunjShah95/gapminer",
   },
   {
     slug: "upi-fraud-guard",
@@ -530,7 +530,7 @@ export const projects: readonly Project[] = [
       { value: "<100ms", label: "Scoring" },
     ],
     body: "Feature engineering over transaction velocity and behavioral entropy, paired with a threshold-moving strategy so the classifier stays useful at a fraud rate of one in ten thousand.",
-    github: "https://github.com/KunjShah95/UPI-Fraud-Detection",
+    github: "https://github.com/KunjShah95/UPI-FRAUD-DETECTION-SYSTEM",
   },
   {
     slug: "minbpe-tokenizer",

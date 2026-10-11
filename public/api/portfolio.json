@@ -58,7 +58,7 @@
       "category": "AI Fairness Auditing",
       "description": "Healthcare fairness auditing platform for detecting AI bias. Ensures EU AI Act and NIST AI RMF compliance.",
       "tech": ["React", "FastAPI", "PostgreSQL", "TensorFlow"],
-      "github": "https://github.com/KunjShah95/fairness-lens-studio",
+      "github": "https://github.com/KunjShah95/EquityLens",
       "slug": "equitylens",
       "impact": "Production Ready"
     },
@@ -101,7 +101,7 @@
       "category": "Automated Intelligence",
       "description": "Full-stack skill gap analyzer using semantic extraction for career roadmaps.",
       "tech": ["LLAMA-3", "LangChain", "FastAPI", "React"],
-      "github": "https://github.com/KunjShah95/GAP-Miner",
+      "github": "https://github.com/KunjShah95/gapminer",
       "slug": "gap-miner",
       "impact": "Beta Live"
     },
@@ -111,7 +111,7 @@
       "category": "Computer Vision",
       "description": "Automated defect detection using YOLOv8 for railway safety.",
       "tech": ["C++", "OpenCV", "YOLOv8", "CUDA"],
-      "github": "https://github.com/KunjShah95/Railway-Inspection",
+      "github": "https://github.com/KunjShah95/ai-railway",
       "slug": "railway-inspection",
       "impact": "Field Tested"
     },
@@ -121,7 +121,7 @@
       "category": "Predictive Automation",
       "description": "Real-time fraud detection engine for anomalous transaction vectors.",
       "tech": ["Scikit-learn", "XGBoost", "Pandas", "Flask"],
-      "github": "https://github.com/KunjShah95/UPI-Fraud-Detection",
+      "github": "https://github.com/KunjShah95/UPI-FRAUD-DETECTION-SYSTEM",
       "slug": "upi-fraud-guard",
       "impact": "Algo Stable"
     },

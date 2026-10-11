@@ -75,7 +75,7 @@ Curated, stack-ordered index of the infrastructure behind production AI systems:
 Paste JD/offer/recruiter chat → instant toxicity/burnout/salary-fairness/ghost-hiring/negotiation analysis. TanStack Start + React 19 + Tailwind + Groq + Firebase. Multi-provider orchestration: triage → deep analyzer → cross-check validator + CoT negotiation strategy. Challenges: false positives cost jobs, cross-model disagreement. Impact: hours → seconds, 40k+ tokens, 3 providers, 87% multi-provider agreement, <3s. https://offerchecker-pi.vercel.app/ — https://github.com/KunjShah95/reverseinterview
 
 ### EquityLens (AI Ethics) — Production
-Healthcare fairness audit: demographic parity / equalized odds / calibration across groups + causal inference + Pareto frontier plots + auto drift detection. React + FastAPI + Postgres + TF. Compliance: EU AI Act / NIST AI RMF / ISO 25059. Result: 23% gap on public triage data, 10x audit speedup. https://github.com/KunjShah95/fairness-lens-studio
+Healthcare fairness audit: demographic parity / equalized odds / calibration across groups + causal inference + Pareto frontier plots + auto drift detection. React + FastAPI + Postgres + TF. Compliance: EU AI Act / NIST AI RMF / ISO 25059. Result: 23% gap on public triage data, 10x audit speedup. https://github.com/KunjShah95/EquityLens
 
 ### LearnAI (EdTech AI) — Live
 Next.js + Firebase + Supabase + Gemini. Multi-provider LLM orchestration + proficiency estimation (spaced repetition). +45% quiz completion (5 levels), 4.2/5 satisfaction, 99.7% uptime. https://intelligent-learning-assistant.vercel.app — https://github.com/KunjShah95/intelligent-learning-assistant
@@ -90,7 +90,7 @@ Python + LangGraph + AI Gateway + ChromaDB on Streamlit. Smart routing gateway (
 Node.js/TS/LLM/Docker. Pluggable analyzers (13+ tools), unified schema, cross-tool correlation, LLM plain-language summary. 70% audit cut, 13+ tools, unified report, ~40% FPR cut. https://sentinel-cli.vercel.app/ — https://github.com/KunjShah95/SENTINEL-CLI
 
 ### Railway Inspection (Computer Vision) — Deployed
-C++ + OpenCV + YOLOv8 + CUDA on Jetson Orin. TensorRT ONNX engine + GStreamer HW decode + CUDA kernels + INT8 QAT. Handles motion blur, low-light histogram eq. 98.7%, 4.2x, <100ms, 2x INT8 vs FP16. https://github.com/KunjShah95/Railway-Inspection
+C++ + OpenCV + YOLOv8 + CUDA on Jetson Orin. TensorRT ONNX engine + GStreamer HW decode + CUDA kernels + INT8 QAT. Handles motion blur, low-light histogram eq. 98.7%, 4.2x, <100ms, 2x INT8 vs FP16. https://github.com/KunjShah95/ai-railway
 
 ### ArchMind AI (Architecture Intelligence) — Production
 TS/Python/FastAPI/React/Supabase. Vite React (Vercel) + FastAPI (Render) + Supabase auth/PG. Parses Mermaid/PlantUML/image/PDF (vision) → graph → 7 parallel agents (scalability/security/reliability/perf/cost/maintainability/observability) → scored report + simulation/compliance/redesign. Fallback: Groq→NVIDIA→OpenRouter→Gemini→Ollama→HF → 18-rule heuristic engine (zero keys). 7 dims, 6+ heuristic, keep-warm via GH Actions. https://archmind-ai-topaz.vercel.app/ — https://github.com/KunjShah95/archmind-ai — case study: https://kunjshah.in/writing
@@ -99,10 +99,10 @@ TS/Python/FastAPI/React/Supabase. Vite React (Vercel) + FastAPI (Render) + Supab
 Python + LangGraph + Streamlit + RAG + scraping. Planner breaks request → search/scrape → extractor normalizes → writer (grounded RAG) → cited report via Streamlit. Challenges: noisy web extraction, drift on broad queries. https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/ — https://github.com/KunjShah01/INTERNSHIP-ASSESSMENT
 
 ### GAP Miner (AI Research) — Beta
-Llama-3 + LangChain + FastAPI + React. Semantic extraction pipeline + ChromaDB vectorized market data + gap vs demand curves. 10 days→15s (99.98%), 95% align, F1 0.92. https://github.com/KunjShah95/arros
+Llama-3 + LangChain + FastAPI + React. Semantic extraction pipeline + ChromaDB vectorized market data + gap vs demand curves. 10 days→15s (99.98%), 95% align, F1 0.92. https://github.com/KunjShah95/gapminer
 
 ### UPI Fraud Guard (ML) — Stable
-Scikit-Learn + XGBoost + Pandas + Flask. Amount velocity/merchant diversity/geolocation entropy/time-of-day + threshold-moving for 0.01% fraud rate. 88% detection, <0.1% FPR, ~85% precision, <100ms. https://github.com/KunjShah95/UPI-Fraud-Detection
+Scikit-Learn + XGBoost + Pandas + Flask. Amount velocity/merchant diversity/geolocation entropy/time-of-day + threshold-moving for 0.01% fraud rate. 88% detection, <0.1% FPR, ~85% precision, <100ms. https://github.com/KunjShah95/UPI-FRAUD-DETECTION-SYSTEM
 
 ### MinBPE Tokenizer (Core AI) — Research
 Python + NLP + tiktoken + algorithms. Pure Python BPE replicating tiktoken core, GPT-2/4 regex pre-tokenize, byte fallbacks, custom vocab on technical corpora. 15% reduction, ~50K merges, ~2x slower than tiktoken (Python). https://github.com/KunjShah95/TOKENIZER-FROM-SCRATCH
