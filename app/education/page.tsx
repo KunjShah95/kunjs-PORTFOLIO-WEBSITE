@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
 import { Icon } from "@/components/icon";
-import { PageIntro, PageSection } from "@/components/ui/page-intro";
+import { PageIntro, PageSection, RailLink } from "@/components/ui/page-intro";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { Tag } from "@/components/ui/primitives";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
@@ -84,14 +84,7 @@ export default function EducationPage() {
 
         {/* ---------------------------------------------------- learning by doing */}
         <PageSection
-          meta={
-            <Link
-              className="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
-              href="/labs"
-            >
-              All {labs.length} â†’
-            </Link>
-          }
+          meta={<RailLink href="/labs">All {labs.length}</RailLink>}
           title="Learning by building"
         >
           <p className="font-body-sm text-body-sm text-text-secondary">
@@ -126,14 +119,7 @@ export default function EducationPage() {
 
         {/* ---------------------------------------------------------- hackathons */}
         <PageSection
-          meta={
-            <Link
-              className="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
-              href="/hackathons"
-            >
-              All {hackathons.length} â†’
-            </Link>
-          }
+          meta={<RailLink href="/hackathons">All {hackathons.length}</RailLink>}
           title="Competitions"
         >
           <StatStrip

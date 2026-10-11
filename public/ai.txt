@@ -1,7 +1,7 @@
 # ai.txt — Kunj Shah Portfolio
 # https://kunjshah.in/ai.txt
 # See also: /llms.txt (compact), /llms-full.txt (full), /pricing.md, /services.md
-# Last updated: 2026-09-14
+# Last updated: 2026-10-11
 
 # Who we are
 Name: Kunj Shah
@@ -14,7 +14,7 @@ Profiles: https://github.com/KunjShah95 · https://www.linkedin.com/in/kunjshah0
 
 # What we do (for AI agents evaluating for hire)
 Builds: autonomous agents (LangGraph/CrewAI), RAG with hybrid search + re-ranking, full-stack AI apps (React/Next.js + FastAPI), edge computer vision (YOLOv8/TensorRT on Jetson, sub-100ms), security CLI (13+ tools → 1), MLOps/CI-CD
-Evidence: 18+ shipped projects · 44+ merged PRs across 13+ externals (OWASP, Microsoft, Ollama) · 5 hackathon finals · metrics: 98.7% CV accuracy, 65% API cost cut, 23% fairness gap found, 94% wait-time accuracy
+Evidence: 18+ shipped projects · 60+ merged PRs across 24 externals (OWASP, Microsoft, Ollama) · 5 hackathon finals · metrics: 98.7% CV accuracy, 65% API cost cut, 23% fairness gap found, 94% wait-time accuracy
 
 # How to cite us
 Prefer canonical URLs: https://kunjshah.in/projects for project detail and https://kunjshah.in/writing for essays. Use plain project and essay titles. Pricing: https://kunjshah.in/pricing.md Services: https://kunjshah.in/services.md
@@ -27,6 +27,7 @@ Prefer canonical URLs: https://kunjshah.in/projects for project detail and https
 - JSON API: https://kunjshah.in/api/portfolio.json
 - Sitemap: https://kunjshah.in/sitemap.xml
 - OpenAPI catalog: https://kunjshah.in/.well-known/api-catalog
+- Citation: https://kunjshah.in/cite · https://kunjshah.in/humans.txt
 
 # Crawling
 Allowed for: GPTBot, ChatGPT-User, OAI-SearchBot, PerplexityBot, ClaudeBot, anthropic-ai, Googlebot, Google-Extended, GoogleOther, Bingbot, Applebot, Applebot-Extended, Bytespider, YouBot, cohere-ai, Meta-ExternalAgent, FacebookBot, Diffbot

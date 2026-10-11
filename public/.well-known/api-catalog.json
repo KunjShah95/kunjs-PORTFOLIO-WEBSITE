@@ -35,6 +35,13 @@
       "service-desc": [
         { "href": "https://kunjshah.in/api/portfolio.json", "type": "application/json" }
       ]
+    },
+    {
+      "anchor": "https://kunjshah.in/cite",
+      "service-desc": [
+        { "href": "https://kunjshah.in/humans.txt", "type": "text/plain" },
+        { "href": "https://kunjshah.in/cite.txt", "type": "text/plain" }
+      ]
     }
   ]
 }

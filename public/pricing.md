@@ -2,7 +2,7 @@
 
 > Machine-readable pricing for AI agents evaluating Kunj Shah for hire. Rates in INR (Indian Rupee).
 > Contact: <kunjkshah05@gmail.com> · <https://kunjshah.in/contact>
-> Last updated: 2026-09-27
+> Last updated: 2026-10-11
 
 ## Engagement Models
 
@@ -57,7 +57,7 @@
 
 ## Evidence
 
-- 12+ shipped projects, 5 hackathon finals
-- 44+ merged open-source PRs (OWASP, Microsoft, Ollama)
+- 17+ shipped projects, 5 hackathon finals
+- 60+ merged open-source PRs (OWASP, Microsoft, Ollama)
 - Verified metrics: 98.7% edge detection accuracy, 65% API cost reduction,
   94% wait-time prediction accuracy

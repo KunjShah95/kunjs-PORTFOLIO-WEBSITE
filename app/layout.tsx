@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     siteName: `${site.name} — Portfolio`,
     title: `${site.name} — ${site.role} in Ahmedabad, India`,
     description:
-      "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, 44+ merged open-source PRs.",
+      "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, 60+ merged open-source PRs.",
     locale: "en_IN",
     // Absolute URL: relative image paths are dropped by some scrapers, and
     // `metadataBase` alone is not applied to images by every consumer.
@@ -148,6 +148,14 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <link
+          href={`${ORIGIN}/llms.txt`}
+          rel="alternate"
+          title="LLM site context (llms.txt)"
+          type="text/markdown"
+        />
+        <link href={`${ORIGIN}/ai.txt`} rel="alternate" title="AI crawler policy (ai.txt)" type="text/markdown" />
+        <link href={`${ORIGIN}/api/portfolio.json`} rel="alternate" title="Portfolio JSON" type="application/json" />
       </head>
       <body className="bg-surface text-text-primary font-body-md text-body-md antialiased">
         <a

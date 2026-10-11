@@ -46,14 +46,21 @@ const AI_AND_SEARCH_CRAWLERS = [
   "MistralAI-User",
 ] as const;
 
+/** Training crawl only — search/answer bots stay allowed via other rules. */
+const TRAINING_ONLY_CRAWLERS = ["CCBot"] as const;
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+        allow: ["/", "/api/portfolio.json"],
         disallow: ["/api/"],
       },
+      ...TRAINING_ONLY_CRAWLERS.map((userAgent) => ({
+        userAgent,
+        disallow: "/",
+      })),
       // Named agents, same terms as the wildcard. Redundant with the rule
       // above but makes the policy explicit and self-documenting.
       ...AI_AND_SEARCH_CRAWLERS.map((userAgent) => ({

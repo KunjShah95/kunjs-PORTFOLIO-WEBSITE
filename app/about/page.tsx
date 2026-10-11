@@ -3,7 +3,8 @@ import { FadeImage } from "@/components/primitives/FadeImage";
 import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
 import { Icon } from "@/components/icon";
-import { PageIntro, PageSection } from "@/components/ui/page-intro";
+import { PageIntro, PageSection, RailLink } from "@/components/ui/page-intro";
+import { legalDocuments } from "@/lib/legal";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { StatStrip } from "@/components/ui/blocks";
 import { pageMeta } from "@/lib/seo";
@@ -58,7 +59,7 @@ const related = [
     href: "/open-source",
     icon: "commit",
     title: "Open Source",
-    body: "44+ merged pull requests and 45 resolved issues across 13+ codebases.",
+    body: "60+ merged pull requests and 41 resolved issues across 24 codebases.",
   },
   {
     href: "/manifesto",
@@ -123,7 +124,7 @@ export default function AboutPage() {
             <p>
               What fuels the work is shipping velocity, weekend hackathons, and
               contributing upstream to the developer tooling I depend on. Five
-              hackathon finals, and 44 merged pull requests into projects I don&apos;t
+              hackathon finals, and 60 merged pull requests into projects I don&apos;t
               own.
             </p>
           </div>
@@ -166,14 +167,8 @@ export default function AboutPage() {
 
         {/* -------------------------------------------------- what i work with */}
         <PageSection
-          meta={
-            <Link
-              className="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
-              href="/skills"
-            >
-              All skills â†’
-            </Link>
-          }
+          layout="stacked"
+          meta={<RailLink href="/skills">All skills</RailLink>}
           title="Disciplines"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
@@ -224,6 +219,42 @@ export default function AboutPage() {
                     name="arrow_forward"
                     size={13}
                   />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </PageSection>
+
+        <PageSection
+          layout="stacked"
+          meta="Freelance and contract work"
+          title="Terms & privacy"
+        >
+          <p className="font-body-sm text-body-sm text-text-secondary max-w-2xl">
+            Hiring me for a project or retainer? These are the default terms and
+            how your data is handled — the same documents linked from Contact and
+            the site footer.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {legalDocuments.map((doc) => (
+              <Link
+                className="group lift bg-surface-card rounded-2xl p-space-md md:p-5 border border-border-hairline flex flex-col gap-2 min-w-0"
+                href={doc.path}
+                key={doc.path}
+              >
+                <span className="flex items-center gap-2.5 min-w-0">
+                  <span className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-surface-subtle text-text-secondary group-hover:bg-surface-container group-hover:text-text-primary transition-colors">
+                    <Icon name={doc.icon} size={16} />
+                  </span>
+                  <span className="font-headline-lg text-headline-lg text-text-primary min-w-0">
+                    {doc.title}
+                  </span>
+                  <span className="ml-auto text-text-muted shrink-0 transition-transform duration-300 group-hover:translate-x-0.5">
+                    <Icon name="arrow_forward" size={18} />
+                  </span>
+                </span>
+                <span className="font-body-sm text-body-sm text-text-secondary">
+                  {doc.description}
                 </span>
               </Link>
             ))}

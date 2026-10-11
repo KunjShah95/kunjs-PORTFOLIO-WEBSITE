@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
+import { DISCOVERY_ASSETS, ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
 
 /**
  * The build stamp, so `lastModified` is a genuine content-change signal rather
@@ -13,10 +13,19 @@ const LAST_MODIFIED = new Date(
 );
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return PUBLIC_ROUTES.map((route) => ({
+  const pages = PUBLIC_ROUTES.map((route) => ({
     url: `${ORIGIN}${route.path}`,
     lastModified: LAST_MODIFIED,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));
+
+  const assets = DISCOVERY_ASSETS.map((asset) => ({
+    url: `${ORIGIN}${asset.path}`,
+    lastModified: LAST_MODIFIED,
+    changeFrequency: asset.changeFrequency,
+    priority: asset.priority,
+  }));
+
+  return [...pages, ...assets];
 }

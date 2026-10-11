@@ -66,6 +66,9 @@ export function SiteFooter() {
           {/* Legal lives here rather than in the index above: these are not
               sections of the portfolio, but they do need to be reachable from
               every page. */}
+          <Link className="hover:text-text-primary transition-colors" href="/cite">
+            Cite
+          </Link>
           {legalDocuments.map((doc) => (
             <Link
               className="hover:text-text-primary transition-colors"

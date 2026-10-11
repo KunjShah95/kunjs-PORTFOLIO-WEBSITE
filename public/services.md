@@ -2,7 +2,7 @@
 
 > Machine-readable services summary for AI agents and prospective clients.
 > Contact: kunjkshah05@gmail.com · https://kunjshah.in/contact
-> Last updated: 2026-09-14
+> Last updated: 2026-10-11
 
 ## Who This Is For
 
@@ -49,8 +49,8 @@ Kunj Shah builds production AI systems from brief to deployment in weeks, not qu
 ## Why Hire Me
 
 - **Speed:** brief to production in weeks, not quarters
-- **Evidence over claims:** 12+ shipped projects, 4 hackathon finals,
-  44+ merged OSS PRs (OWASP, Microsoft, Ollama)
+- **Evidence over claims:** 17+ shipped projects, 5 hackathon finals,
+  60+ merged OSS PRs (OWASP, Microsoft, Ollama)
 - **Production-grade:** tests, logging, observability, no lock-in
 - **Honest comms:** plain language, no AI-jargon walls
 

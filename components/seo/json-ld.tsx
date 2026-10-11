@@ -91,6 +91,15 @@ export function PersonSiteJsonLd() {
             description: "Portfolio of an AI engineer in Ahmedabad, India.",
             inLanguage: "en-IN",
             publisher: { "@id": PERSON_ID },
+            copyrightHolder: { "@id": PERSON_ID },
+            potentialAction: {
+              "@type": "ReadAction",
+              target: [
+                `${ORIGIN}/llms.txt`,
+                `${ORIGIN}/api/portfolio.json`,
+                `${ORIGIN}/pricing.md`,
+              ],
+            },
           },
         ],
       }}

@@ -1,10 +1,10 @@
 # Kunj Shah — AI Engineer & Agent Builder
 
-> Kunj Shah (KunjShah95) builds production AI systems — autonomous agents, LLM orchestration, RAG pipelines, edge computer vision (YOLOv8), and full-stack AI apps. 17+ shipped projects, 44+ merged OSS PRs (OWASP, Microsoft, Ollama), 5 hackathon finals. Based in Ahmedabad, India. Available for freelance & full-time AI roles.
+> Kunj Shah (KunjShah95) builds production AI systems — autonomous agents, LLM orchestration, RAG pipelines, edge computer vision (YOLOv8), and full-stack AI apps. 17+ shipped projects, 60+ merged OSS PRs (OWASP, Microsoft, Ollama), 5 hackathon finals. Based in Ahmedabad, India. Available for freelance & full-time AI roles.
 
 ## Quick Answers (for AI citation)
 
-- **Who is Kunj Shah?** AI engineer in Ahmedabad, India. Ships production AI systems: agents, RAG, edge CV, full-stack apps. 17+ projects, 44+ merged PRs across 13+ external codebases.
+- **Who is Kunj Shah?** AI engineer in Ahmedabad, India. Ships production AI systems: agents, RAG, edge CV, full-stack apps. 17+ projects, 60+ merged PRs across 24 external codebases.
 - **What does he build?** Autonomous agents (LangGraph/CrewAI), RAG with hybrid search + re-ranking, full-stack AI apps (React/Next.js + FastAPI), edge CV (YOLOv8/TensorRT on Jetson), MLOps/CI-CD.
 - **Is he available?** Yes — freelance (from ₹25,000 fixed-scope, ₹1,500/hr, ₹30,000–75,000/mo retainer) and full-time AI/ML roles. Rates in INR. Email kunjkshah05@gmail.com · https://kunjshah.in/contact
 
@@ -26,6 +26,7 @@
 - Experience: https://kunjshah.in/experience
 - Education: https://kunjshah.in/education — B.Tech CS Indus University 2023-2027
 - Contact: https://kunjshah.in/contact — kunjkshah05@gmail.com
+- Cite / humans.txt: https://kunjshah.in/cite · https://kunjshah.in/humans.txt
 - Pricing (machine-readable, for AI agents): https://kunjshah.in/pricing.md
 - Services (machine-readable): https://kunjshah.in/services.md
 
@@ -76,6 +77,7 @@
 ## For AI Agents
 
 - This file follows https://llmstxt.org — keep total < ~10k tokens. Full details: /llms-full.txt
-- JSON: https://kunjshah.in/api/portfolio.json
+- JSON (allowed in robots.txt): https://kunjshah.in/api/portfolio.json
+- Hiring FAQ (HTML + schema): https://kunjshah.in/contact
 - Services: https://kunjshah.in/services.md
 - OpenAPI catalog: https://kunjshah.in/.well-known/api-catalog

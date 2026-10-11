@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/cron/indexnow",
+      "schedule": "0 6 * * 1"
+    }
+  ],
   "cleanUrls": true,
   "redirects": [
     {
@@ -59,6 +65,23 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/api/portfolio.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
         }
       ]
     },

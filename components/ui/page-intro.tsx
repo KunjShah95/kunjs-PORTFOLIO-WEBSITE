@@ -65,10 +65,12 @@ export function PageSection({
   if (layout === "stacked") {
     return (
       <section className={cn("flex flex-col gap-6 md:gap-8 scroll-mt-24", className)} id={id}>
-        <div className="flex flex-col gap-1 border-t border-text-primary pt-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-          <h2 className="font-headline-lg text-headline-lg text-text-primary">{title}</h2>
+        <div className="flex min-w-0 flex-col gap-1 border-t border-text-primary pt-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+          <h2 className="min-w-0 font-headline-lg text-headline-lg text-text-primary">{title}</h2>
           {meta && (
-            <div className="font-body-sm text-body-sm text-text-muted sm:text-right">{meta}</div>
+            <div className="min-w-0 shrink-0 font-body-sm text-body-sm text-text-muted sm:text-right">
+              {meta}
+            </div>
           )}
         </div>
         <Reveal className="stack-block min-w-0">{children}</Reveal>
@@ -84,15 +86,16 @@ export function PageSection({
       )}
       id={id}
     >
-      {/* Title and meta sit side by side from `sm` up. Below that they stack:
-          a long meta line beside a wrapped heading squeezes both into a narrow
-          column and reads as neither. */}
-      <div className="flex flex-col gap-1 lg:col-span-3 lg:flex-row lg:items-baseline lg:justify-between lg:gap-3 lg:flex-col lg:justify-start lg:gap-1.5 lg:self-start lg:sticky lg:top-28 lg:border-t lg:border-text-primary lg:pt-4">
+      {/* Title over meta, stacked. The rail is three columns wide, so the two
+          cannot share a row here: a meta line beside the heading squeezes the
+          heading into a two-line sliver and pushes the meta out past the rail
+          into the content column. */}
+      <div className="flex min-w-0 flex-col gap-1.5 lg:col-span-3 lg:self-start lg:sticky lg:top-28 lg:border-t lg:border-text-primary lg:pt-4">
         <h2 className="font-headline-lg text-headline-lg text-text-primary">
           {title}
         </h2>
         {meta && (
-          <div className="font-body-sm text-body-sm text-text-muted sm:shrink-0">{meta}</div>
+          <div className="min-w-0 font-body-sm text-body-sm text-text-muted">{meta}</div>
         )}
       </div>
       <Reveal className="stack-block min-w-0 lg:col-span-9">

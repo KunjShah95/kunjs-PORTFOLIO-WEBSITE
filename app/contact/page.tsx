@@ -10,7 +10,7 @@ import { Reveal } from "@/components/primitives/Reveal";
 import { pageMeta } from "@/lib/seo";
 import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 import { legalDocuments } from "@/lib/legal";
-import { directChannels, site } from "@/lib/site-data";
+import { directChannels, hiringFaqs, site } from "@/lib/site-data";
 
 export const metadata: Metadata = pageMeta({
   path: "/contact",
@@ -24,6 +24,17 @@ export default function ContactPage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Contact", "/contact")} />
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: hiringFaqs.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: { "@type": "Answer", text: item.answer },
+            })),
+          }}
+        />
         <div className="flex flex-col gap-8 md:gap-10">
         <PageIntro
           lead="Whether you need to architect multi-agent systems, optimize edge vision models, or audit LLM security, I'm open for advisory and contract engineering."
@@ -76,6 +87,19 @@ export default function ContactPage() {
 
 
         <ContactBody />
+
+        <PageSection layout="stacked" meta="For search &amp; AI assistants" title="Quick answers">
+          <dl className="stack-block gap-4">
+            {hiringFaqs.map((item) => (
+              <div className="border-b border-border-hairline pb-4 last:border-0" key={item.question}>
+                <dt className="font-headline-md text-headline-md text-text-primary">{item.question}</dt>
+                <dd className="mt-2 font-body-md text-body-md text-text-secondary max-w-[65ch]">
+                  {item.answer}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </PageSection>
 
         {/* ----------------------------------------------- 03 / direct channels */}
         <PageSection layout="stacked" meta="Async & sync" title="Direct channels">

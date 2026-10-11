@@ -18,7 +18,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = pageMeta({
   path: "/open-source",
   title: "Open Source",
-  description: "44 merged pull requests, 45 issues resolved, and 13+ external codebases, including the OWASP agent-security harness, Microsoft AI-Engineering-Coach, and Ollama.",
+  description: "60 merged pull requests, 41 issues resolved, and 24 external codebases, including the OWASP agent-security harness, Microsoft AI-Engineering-Coach, and Ollama.",
   keywords: ["Kunj Shah GitHub", "open source AI contributions", "OWASP contributor", "merged pull requests AI"],
 });
 
@@ -90,15 +90,18 @@ export default async function OpenSourcePage() {
         {activity && mergedRecent.length > 0 ? (
           <PageSection
             id="latest"
+            layout="stacked"
             meta={
-              <span className="inline-flex items-center gap-1.5 font-body-sm text-body-sm text-accent-emerald">
-                <span className="relative flex w-1.5 h-1.5">
-                  <span className="absolute inset-0 rounded-full bg-accent-emerald animate-ping opacity-60" />
-                  <span className="relative w-1.5 h-1.5 rounded-full bg-accent-emerald" />
+              <span className="flex flex-col gap-1 sm:items-end">
+                <span className="inline-flex items-center gap-1.5 text-accent-emerald">
+                  <span className="relative flex w-1.5 h-1.5 shrink-0">
+                    <span className="absolute inset-0 rounded-full bg-accent-emerald animate-ping opacity-60" />
+                    <span className="relative w-1.5 h-1.5 rounded-full bg-accent-emerald" />
+                  </span>
+                  Live from GitHub
                 </span>
-                Live from GitHub
                 <span className="text-text-muted">
-                  · synced {timeAgo(activity.fetchedAt)}
+                  Synced {timeAgo(activity.fetchedAt)}
                 </span>
               </span>
             }

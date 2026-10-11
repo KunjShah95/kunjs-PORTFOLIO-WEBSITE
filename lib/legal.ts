@@ -9,16 +9,22 @@
    ------------------------------------------------------------------------
    BEFORE PUBLISHING — confirm these against how you actually work:
 
-   · Terms § "Fees and payment"  — the advance percentage, payment window,
-     late-payment rate, revision rounds, and warranty window below are
-     reasonable defaults for a solo freelance engagement, not facts about your
-     business. Change any that you do not honour.
-   · Terms § "Governing law"      — change if you contract with a client
-     outside India; a foreign governing law is usually negotiable.
-   · Privacy § "How long I keep" — the retention windows are a starting point.
-   · Both pages              — have a qualified lawyer in your jurisdiction
-     review them once. They are written to be clear, not to be jurisdiction-
-     specific legal advice.
+   · Terms § "Fees, payment, and taxes" — the payment split, windows, late
+     interest and revision rounds mirror `public/pricing.md` on purpose. If you
+     change one, change the other: a contract that contradicts the published
+     rate card is the one clause a client will actually read.
+   · Terms § "How work is engaged" — the hourly rate, the retainer shape and the
+     notice period come from the same rate card. Confirm you honour them as
+     default terms rather than as marketing.
+   · Terms § "Governing law and disputes" — India/Ahmedabad is the default with
+     an overseas tier on top. Choose a seat per client and write it into the
+     statement of work rather than leaning on the default.
+   · Terms § "Ending a project early" — the kill fee is a negotiating position,
+     not a fact about the business, and it is the clause most likely to be
+     challenged. Agree it per project where it matters.
+   · Privacy § "How long I keep it" — the retention windows are a starting point.
+   · Both pages — have a qualified lawyer in your jurisdiction review them once.
+     They are written to be clear, not to be jurisdiction-specific legal advice.
 
    Contact details are pulled from `site` rather than restated, so an address
    change on one page propagates to every page that links here.
@@ -71,16 +77,18 @@ export const privacyPolicy: LegalDocument = {
   label: "Privacy",
   icon: "shield",
   description:
-    "How Kunj Shah collects, uses and protects personal data on this portfolio — the short version: no accounts, no ad tracking, no selling data.",
+    "How Kunj Shah collects, uses and protects personal data — on this portfolio and during a freelance engagement. The short version: no accounts, no ad tracking, no selling data.",
   keywords: [
     "privacy policy",
     "Kunj Shah privacy",
     "freelance developer privacy policy",
+    "data processing agreement",
+    "processor and controller",
     "India DPDP Act 2023",
     "GDPR privacy notice",
   ],
-  lead: "This site has no accounts, no login, and no advertising. The short version is that I collect the least I can get away with, I do not sell it, and you can ask me to delete it.",
-  effective: "Effective 10 October 2026",
+  lead: "This site has no accounts, no login, and no advertising. The short version is that I collect the least I can get away with, I do not sell it, and you can ask me to delete it. Where it covers a freelance engagement, you are the controller and I am your processor.",
+  effective: "Effective 11 October 2026",
   sections: [
     {
       id: "summary",
@@ -217,7 +225,56 @@ export const privacyPolicy: LegalDocument = {
         },
         {
           kind: "p",
-          text: "Please do not paste confidential, personal, or regulated information into any hosted demo. It may be logged on someone else's infrastructure, and that infrastructure is not something I can give you guarantees about.",
+          text: "The providers behind those demos are the ones named throughout the projects section: OpenRouter, Groq, Google, Anthropic, OpenAI, Hugging Face and NVIDIA among them. Whichever one a demo uses, it receives whatever you type into it, for the length of that request, and nothing more.",
+        },
+        {
+          kind: "p",
+          text: "None of them is contacted unless you interact with the demo yourself. Reading a page, scrolling the projects list, or opening this policy sends nothing to any model. Please do not paste confidential, personal, or regulated information into any hosted demo — it may be logged on someone else's infrastructure, and that infrastructure is not something I can give you guarantees about.",
+        },
+      ],
+    },
+    {
+      id: "engagements",
+      title: "When you hire me",
+      blocks: [
+        {
+          kind: "p",
+          text: "Everything above describes the website. Commissioning work is different, and the two are kept apart deliberately: during a project you are normally the controller and I am your processor, and the engagement agreement or a data processing agreement governs it rather than this page.",
+        },
+        {
+          kind: "ul",
+          items: [
+            "I process your personal data only on your documented instructions, for the purpose of delivering the project — never to decide for myself what to do with it.",
+            "A data processing agreement is signed before any personal data is processed, and it names the sub-processors in advance rather than after the fact.",
+            "Where the project needs a sub-processor — a cloud provider, an API vendor, a model host — you are told which one and why before it touches your data, and they are bound to process on your instructions alone.",
+            "Your data is never used to train or fine-tune any model, including mine, and never reused to benefit another client.",
+            "On termination, your data is returned or deleted within 30 days, and I confirm in writing once that is done rather than leaving you to assume it.",
+            "Overseas clients should read this as the same role split: I do not determine the purposes or the means of your processing, which keeps your own obligations under your regulator intact.",
+          ],
+        },
+        {
+          kind: "note",
+          title: "What I need from you",
+          text: "Tell me where the data came from and whether you have the right to share it with me. Under the Terms you warrant that you do, and I rely on that — I cannot audit your lawful basis from here, and a client who sends regulated data without a basis cannot pass that risk down.",
+        },
+      ],
+    },
+    {
+      id: "legal-process",
+      title: "If someone asks for your data",
+      blocks: [
+        {
+          kind: "p",
+          text: "I do not sell, rent, trade or licence personal data to anyone — not to data brokers, not to advertisers, not to other clients. There is no version of this business where your enquiry becomes someone else's asset.",
+        },
+        {
+          kind: "ul",
+          items: [
+            "A valid court order, summons or statutory demand from a competent authority is the only thing that obliges me to disclose data, and I disclose only what it actually requires — no more, in bulk, or on a vague request.",
+            "Where the law permits, I tell you about a request before I comply with it.",
+            "I keep no log of who visited beyond the anonymous aggregate counts described above, so there is frequently nothing to hand over even when asked.",
+            "Under India's IT Act I am bound by lawful orders of a competent authority; under GDPR I am bound by the rules of whichever member state applies to you.",
+          ],
         },
       ],
     },
@@ -230,6 +287,7 @@ export const privacyPolicy: LegalDocument = {
           items: [
             "Enquiries that do not become projects: deleted within 24 months of the last reply.",
             "Enquiries that do become projects: kept for the life of the engagement and up to 7 years after, because tax and contract records need that long in India.",
+            "Client project data itself — code, documents, datasets — returned or deleted within 30 days of the engagement ending. Only the parts that are also invoice or contract records stay for the 7 years above.",
             "Analytics: aggregated on the provider's own schedule. I never export it or join it to anything else.",
             "Server logs: kept by the host for days to weeks for security purposes. I do not set that window and cannot extend it.",
             "Theme preference: stays in your browser until you clear your browser storage.",
@@ -248,6 +306,10 @@ export const privacyPolicy: LegalDocument = {
         {
           kind: "p",
           text: "I am in India, and my hosting and email providers process data on servers outside India, primarily in the United States and the European Union. This is a cross-border transfer under Indian law and under GDPR Chapter V.",
+        },
+        {
+          kind: "p",
+          text: "Engagements move data in both directions. An overseas client may see Indian-hosted tooling, support handled in IST, and invoices administered from India; that is your data, not mine, and it is governed by the engagement agreement rather than by this page.",
         },
         {
           kind: "p",
@@ -354,16 +416,19 @@ export const termsOfService: LegalDocument = {
   label: "Terms",
   icon: "auto_stories",
   description:
-    "The terms that apply when Kunj Shah freelances: scope, fees, revisions, intellectual property, confidentiality, liability, and dispute resolution.",
+    "The terms that apply when Kunj Shah freelances: engagement models, scope, fees, revisions, intellectual property, AI-assisted work, confidentiality, liability, and dispute resolution.",
   keywords: [
     "terms and conditions",
     "freelance developer terms",
-    "software development contract India",
     "independent contractor agreement",
+    "international freelance contract",
+    "retainer agreement",
+    "arbitration clause",
+    "software development contract India",
     "Kunj Shah terms",
   ],
   lead: "These terms cover freelance work: how a project is scoped and paid for, who owns what is built, what each side is responsible for, and how disagreements get settled. Reading them before a project starts is much easier than reading them during a dispute.",
-  effective: "Effective 10 October 2026",
+  effective: "Effective 11 October 2026",
   sections: [
     {
       id: "scope-of-these-terms",
@@ -375,7 +440,7 @@ export const termsOfService: LegalDocument = {
         },
         {
           kind: "p",
-          text: "Browsing this site, reading it, or downloading the résumé accepts nothing — you are agreeing to the Terms only when you commission work. Where a signed statement of work, master services agreement, or non-disclosure agreement exists, that document wins on anything it addresses, and these Terms fill the gaps.",
+          text: "Browsing this site, reading it, or downloading the résumé accepts nothing — you are agreeing to the Terms only when you commission work. Where a signed statement of work, master services agreement, or non-disclosure agreement exists, that document wins on anything it addresses, and these Terms fill the gaps. Where they are all silent, the order of precedence is: the signed engagement document, then these Terms, then the published rate card on this site.",
         },
         {
           kind: "p",
@@ -395,6 +460,10 @@ export const termsOfService: LegalDocument = {
           kind: "p",
           text: "The relationship is that of an independent contractor and a client. I am not your employee, partner, agent, or fiduciary, and I owe you professional services — not a general duty of loyalty to your business.",
         },
+        {
+          kind: "p",
+          text: "In practice that means I work for more than one client at a time unless we agree a retainer that reserves capacity, I use my own equipment and accounts, I carry my own insurance where a project warrants it, and I have no authority to sign, bind or speak for your company. Unless we agree otherwise in writing, I am not exclusive to you.",
+        },
       ],
     },
     {
@@ -409,6 +478,36 @@ export const termsOfService: LegalDocument = {
           kind: "note",
           title: "Technology is not a promise of outcome",
           text: "A project is delivered against defined scope and acceptance criteria. No one — including me — can guarantee a business metric such as revenue, conversion, or model accuracy on unseen data. Where a target genuinely depends on factors inside my control, it is written into the acceptance criteria and is enforceable as such.",
+        },
+      ],
+    },
+    {
+      id: "engagement-models",
+      title: "How work is engaged",
+      blocks: [
+        {
+          kind: "p",
+          text: "Most work runs on one of four models. The proposal says which one applies, and everything below is a default that a statement of work can override.",
+        },
+        { kind: "h3", text: "Fixed scope" },
+        {
+          kind: "p",
+          text: "A defined set of deliverables for a defined price, split across milestones. This is the default for builds, and it is the only model where a fixed price is meaningful — the scope has to be genuinely fixed for the number to mean anything.",
+        },
+        { kind: "h3", text: "Hourly" },
+        {
+          kind: "p",
+          text: "For reviews, debugging, integration, pair sessions and mentoring — work where the shape is genuinely not knowable in advance. Hours are tracked against a written estimate and capped up front; I stop and raise a change request at the cap rather than billing past it. Time is invoiced weekly in arrears on a 7-day payment window.",
+        },
+        { kind: "h3", text: "Retainer" },
+        {
+          kind: "p",
+          text: "Reserved capacity for an agreed monthly fee, typically 10 to 25 hours a month with a shared channel and priority turnaround. Unused hours do not roll over and are not refundable, because the capacity is held whether or not you draw on it. Either of us can end a retainer with 30 days' written notice.",
+        },
+        { kind: "h3", text: "Full-time" },
+        {
+          kind: "p",
+          text: "Available on request for AI engineer, ML engineer or agent builder roles, remote or relocating. That is an employment or long-term contract conversation rather than a freelance engagement, so a separate agreement is drafted for it and these Terms apply only to the parts that still hold.",
         },
       ],
     },
@@ -434,7 +533,7 @@ export const termsOfService: LegalDocument = {
         {
           kind: "ul",
           items: [
-            "A project starts on a signed proposal or statement of work, with the agreed advance paid. Work begins when the advance clears, not when the paperwork is signed.",
+            "A project starts on a signed proposal or statement of work, with the agreed first payment in. Work begins when that payment clears, not when the paperwork is signed.",
             "Work is delivered in milestones. Each milestone is reviewed and accepted before the next begins.",
             "Each milestone is released on payment for the previous one. If a milestone stalls for more than 14 days through no fault of mine, I may pause the project and invoice for work completed to date.",
             "Work in progress is shared continuously in a repository or workspace you own or can access, so you can see progress rather than receive it at the end.",
@@ -455,6 +554,7 @@ export const termsOfService: LegalDocument = {
           items: [
             "Timely feedback and approvals — agreed review windows, and a named person who can give a yes or a no.",
             "Materials, data, credentials, and API access needed to do the work, supplied complete and lawful to use.",
+            "A warranty that you have the right to give me everything you provide: that the data, content, code and trademarks are yours or properly licensed, and that nothing in them obliges me to infringe someone else's rights. I rely on this and cannot verify your lawful basis from my side of the work.",
             "A single point of contact for decisions, so requirements do not contradict each other halfway through a build.",
             "Legal review of anything that must comply with a regulation. I implement requirements; I am not your counsel, and I do not warrant a regulatory outcome.",
           ],
@@ -471,7 +571,7 @@ export const termsOfService: LegalDocument = {
       blocks: [
         {
           kind: "p",
-          text: "Each proposal includes a number of revision rounds against its acceptance criteria. A revision is a change to something that was agreed — not a change of direction. Two rounds of feedback on the same feature is one round with a lot of notes.",
+          text: "Each proposal includes a revision allowance against its acceptance criteria — two rounds is the standard on fixed-scope work, and the proposal states the number. A revision is a change to something that was agreed, not a change of direction. Two rounds of feedback on the same feature is one round with a lot of notes.",
         },
         {
           kind: "ul",
@@ -491,11 +591,12 @@ export const termsOfService: LegalDocument = {
         {
           kind: "ul",
           items: [
-            "Fees are stated in the proposal, in Indian Rupees or US Dollars, and exclude applicable taxes.",
+            "Fees are stated in the proposal, in Indian Rupees or US Dollars, and exclude applicable taxes. The published rate card and these Terms should never contradict each other; where they appear to, the proposal governs that engagement.",
             "Indian GST is charged at the prevailing rate where required. You are responsible for taxes in your own jurisdiction, including withholding tax where it applies.",
-            "The advance is 50% for most projects and 100% for work under two weeks. The remaining balance is due within 14 days of milestone delivery.",
-            "Invoices unpaid after 14 days accrue interest at 1.5% per month, or the maximum rate your law permits, whichever is lower. Work pauses until the account is settled.",
-            "Bank and transfer fees are yours where the payment crosses a border, so the amount received is the amount invoiced.",
+            "On fixed-scope work the split is 40% on signature and 60% on final delivery, unless the proposal states a different split. On hourly and retainer work there is no advance — you are invoiced weekly or monthly in arrears and pay within 7 days.",
+            "Invoices unpaid after 7 days on hourly and retainer work, or 14 days on fixed-scope work, accrue interest at 1.5% per month, or the maximum rate your law permits, whichever is lower. Work pauses until the account is settled.",
+            "Payment is by bank transfer, UPI, or an agreed cross-border service such as Wise. A cross-border payment is received net: bank charges and intermediary fees are yours, so the amount that lands is the amount invoiced.",
+            "Where your law requires you to withhold tax from my fee, the invoice is grossed up so the agreed amount still reaches me, and you provide the withholding documentation I need to claim it back.",
             "A currency change between proposal and invoice is passed through at the rate on the invoice date.",
           ],
         },
@@ -554,6 +655,69 @@ export const termsOfService: LegalDocument = {
       ],
     },
     {
+      id: "ai-assisted-work",
+      title: "AI-assisted work",
+      blocks: [
+        {
+          kind: "p",
+          text: "I build AI systems, and I use AI tooling to build them — code assistants, hosted APIs, local models, and my own agents. Rather than leave you to guess what that means commercially, here is exactly what it does and does not change.",
+        },
+        {
+          kind: "ul",
+          items: [
+            "Your code, data, documents and credentials are never used to train or fine-tune any model, including one I run myself. Where a hosted provider is involved, the project is configured for no-training terms, and I tell you if a given vendor cannot offer that.",
+            "Confidential material goes to a local or self-hosted model wherever the task allows it. If a task genuinely requires sending your material to a third-party model, that is agreed in writing first, with the provider named.",
+            "Everything I deliver is reviewed and tested by me. Model output is a first draft, never an accepted deliverable, and no code reaches your repository that I have not run, read, and stood behind.",
+            "You own the output the same way you own anything else I build for you, subject to the retained-material carve-outs above.",
+            "Third-party providers set their own terms on what their output may be used for. Where a deliverable depends on one — generated assets, a fine-tuned model, a hosted endpoint — the proposal names it, and you accept those terms along with it.",
+            "If your organisation has its own AI policy, a ban on public providers or a required approved-vendor list, tell me at kickoff rather than at review. Retrofitting a compliance requirement into a finished system is the expensive way to discover it.",
+          ],
+        },
+        {
+          kind: "note",
+          title: "What I do not promise",
+          text: "I can promise that a system does what its acceptance criteria say. I cannot promise that a model will behave the same way on data it has never seen, and no clause here pretends otherwise. Accuracy is written as a criterion against a defined evaluation set, never as an open-ended expectation.",
+        },
+      ],
+    },
+    {
+      id: "subcontracting",
+      title: "Subcontracting and specialist help",
+      blocks: [
+        {
+          kind: "p",
+          text: "Occasionally a project needs a specialist I am not — a designer, a security auditor, a data engineer. That is reasonable, but it happens on terms rather than by accident.",
+        },
+        {
+          kind: "ul",
+          items: [
+            "You are told before any subcontractor touches your work, with their name and what they are doing. You may object on reasonable grounds — security clearance, jurisdiction, conflict of interest — and that objection stands.",
+            "Nothing is subcontracted without your written consent where the work involves your production data, your credentials, or your customers' personal data.",
+            "Subcontractors are bound by the same confidentiality, IP and data-protection obligations as me, and their work is my responsibility exactly as if I had done it.",
+            "Subcontracting never changes your point of contact. You deal with me, not with a chain of names to chase when something slips.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "non-solicitation",
+      title: "Non-solicitation",
+      blocks: [
+        {
+          kind: "p",
+          text: "Mutual, narrow, and limited to twelve months after an engagement ends. The purpose is to stop either side pulling the other's project team out mid-build. It is not a general non-compete, and it does not stop either of us working in the same market.",
+        },
+        {
+          kind: "ul",
+          items: [
+            "For twelve months after an engagement ends, neither of us will knowingly solicit for employment the other's named project team members who worked on it.",
+            "This does not apply to general advertising, to a recruiter approaching someone who had no role on your project, to someone who had already left your team, or to anyone approached without either party knowing they were on the project.",
+            "Nothing here prevents either of us from taking work from a competitor, and nothing here prevents you from hiring whoever you like.",
+          ],
+        },
+      ],
+    },
+    {
       id: "portfolio",
       title: "Portfolio and credit",
       blocks: [
@@ -586,6 +750,26 @@ export const termsOfService: LegalDocument = {
             "That warranty covers defects in the delivered work: it does not cover new features, changed requirements, third-party service outages, model behaviour on new inputs, or your own modifications.",
             "Work is performed with reasonable skill and care, and with the professional standards of an experienced engineer. It is not a guarantee that a particular business outcome will follow.",
             "I do not warrant that third-party models, APIs, or platforms will remain available, accurate, or unchanged. That is a dependency, and I flag it in proposals rather than pretending otherwise.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "support-after-launch",
+      title: "Support after launch",
+      blocks: [
+        {
+          kind: "p",
+          text: "A warranty and a support commitment are different things, so they are separate clauses. The warranty fixes defects in what was delivered. Support is what happens once that window has closed, and it is not assumed to be free.",
+        },
+        {
+          kind: "ul",
+          items: [
+            "During the warranty window, defects in the delivered work are fixed free of charge, as set out under Warranties above.",
+            "Beyond it, bug reports and small fixes are billed at the project's standard rate, or absorbed under a retainer if one is in place. Something that only broke because an upstream API changed its behaviour is a maintenance item, not a defect fix, and is not free.",
+            "Ongoing support with a response commitment is a retainer line item, not a default: what hours, what turnaround, and what counts as urgent all get written down.",
+            "I do not hold, monitor or administer production infrastructure after handover unless that was in scope. Handover includes the runbook, the environment inventory, and credentials transferred to you rather than retained by me.",
+            "Advisory and knowledge-transfer sessions are sold as a fixed block of time. A day of handover is far cheaper than indefinite responsibility, and it leaves your team able to run the thing without me.",
           ],
         },
       ],
@@ -634,10 +818,12 @@ export const termsOfService: LegalDocument = {
         {
           kind: "ul",
           items: [
-            "Either of us may terminate with 14 days' written notice.",
-            "On termination, you pay for all completed work and work in progress up to that point. I invoice it, and the advance is not refundable for work already performed.",
+            "Either of us may terminate a fixed-scope engagement with 14 days' written notice. A retainer ends on 30 days' notice from either side.",
+            "Cancelling fixed-scope work after it has started costs a kill fee of 25% of the remaining contracted value, or the value of commitments already made that cannot be unwound, whichever is greater. That is what reserved capacity costs when it can only be sold once.",
+            "On termination, you pay for all completed work and work in progress up to that point, plus the kill fee where one applies. Any advance already paid is set against that invoice rather than refunded.",
             "You receive everything produced to date, in the repository or workspace, within 10 business days of final payment.",
             "I may suspend or terminate immediately for non-payment, for unlawful instructions, or where continuing would put a third party's data at risk.",
+            "If you go quiet for 30 days on an hourly or retainer engagement, the engagement pauses rather than continuing to accrue fees. Resuming restarts the cycle.",
             "Provisions that by their nature should survive — payment, intellectual property, confidentiality, liability, and these terms generally — survive termination.",
           ],
         },
@@ -687,12 +873,45 @@ export const termsOfService: LegalDocument = {
       title: "Governing law and disputes",
       blocks: [
         {
+          kind: "p",
+          text: "These Terms are governed by the laws of India, and the courts at Ahmedabad, Gujarat have jurisdiction, under the Indian Limitation Act. Nothing in this clause removes any mandatory consumer protection you hold under the law of your own country.",
+        },
+        {
+          kind: "p",
+          text: "Most disputes are a misunderstanding about scope or priority, and both of us would rather fix one than litigate it. The process below is in that order, and step three is the only one that involves a third party.",
+        },
+        {
           kind: "ol",
           items: [
-            "Talk first. Most disagreements are a misunderstanding about scope or priority, and both of us would rather fix it than litigate it. Raise it in writing within 14 days of noticing.",
-            "If that fails, attempt good-faith mediation through a mutually agreed mediator, with costs shared.",
-            "Unresolved disputes go to the courts at Ahmedabad, Gujarat, India, under the Indian Limitation Act.",
-            "These terms are governed by the laws of India. Nothing removes any mandatory consumer protection you have under the law of your own country.",
+            "Talk to each other first. Raise it in writing within 14 days of noticing, and put the disagreement in a sentence or two — most of these dissolve once both sides can see the same problem.",
+            "If that fails, attempt good-faith mediation through a mutually agreed mediator, with costs shared equally. Nothing is filed before this step is genuinely tried.",
+            "If mediation does not resolve it, the matter goes to arbitration or to the courts at Ahmedabad, whichever the statement of work specifies. If neither says, the courts apply and the default above governs.",
+            "Either of us may seek urgent injunctive or protective relief from a court at any time without first going through these steps — to stop something irreversible happening to data, credentials, or IP while the argument continues.",
+          ],
+        },
+        {
+          kind: "note",
+          title: "If you are contracting from outside India",
+          text: "Indian law and an Ahmedabad courtroom are workable for most overseas engagements, but they are not always what you need. A foreign governing law, a different seat, or arbitration under the ICC rules can all be agreed in the statement of work before work starts. Raise it in the first conversation — it is much harder to renegotiate a governing law once a project is half-built.",
+        },
+      ],
+    },
+    {
+      id: "notices",
+      title: "Notices and the rest of the legal machinery",
+      blocks: [
+        {
+          kind: "p",
+          text: "The clauses that usually get skipped are here in plain terms, because a term nobody reads is a term that does not protect anyone.",
+        },
+        {
+          kind: "ul",
+          items: [
+            "Notices are valid by email to the address the other side has given for the engagement, and take effect on delivery. A change of contact details is notified the same way.",
+            "Neither of us may assign this agreement to a third party without written consent, though either may do so as part of a genuine sale or merger of the business, on written notice.",
+            "These Terms, together with any signed statement of work, are the entire agreement between us on the subject. Earlier emails, calls, or messages do not form part of it, and nothing here displaces a duty that cannot lawfully be displaced.",
+            "Neither of us may use these Terms or the engagement to imply endorsement, or to name the other as a reference, without written permission — with the one exception already given under Portfolio and credit.",
+            "If you do not enforce a clause once, that is not a waiver of it. Waivers only count in writing.",
           ],
         },
       ],

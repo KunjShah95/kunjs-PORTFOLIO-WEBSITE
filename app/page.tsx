@@ -25,6 +25,7 @@ import {
 import { getOpenSourceActivity, timeAgo } from "@/lib/github";
 import { getContributions } from "@/lib/contributions";
 import { MEDIUM_PROFILE, formatMonth, getMediumPosts } from "@/lib/medium";
+import { JsonLd, webPageJsonLd } from "@/components/seo/json-ld";
 import { pageMeta } from "@/lib/seo";
 
 /** Live GitHub activity is re-fetched at most hourly. */
@@ -34,7 +35,7 @@ export const metadata: Metadata = pageMeta({
   path: "",
   title: "AI Engineer & Agent Builder in Ahmedabad",
   description:
-    "Kunj Shah is an AI engineer in Ahmedabad, India building agents, RAG pipelines and edge computer vision that hold up in production. 17+ shipped systems, 44+ merged open-source PRs.",
+    "Kunj Shah is an AI engineer in Ahmedabad, India building agents, RAG pipelines and edge computer vision that hold up in production. 17+ shipped systems, 60+ merged open-source PRs.",
   keywords: [
     "AI engineer Ahmedabad",
     "AI engineer India",
@@ -47,7 +48,7 @@ export const metadata: Metadata = pageMeta({
   ],
   ogTitle: "Kunj Shah — AI Engineer & Agent Builder, Ahmedabad",
   ogDescription:
-    "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, 44+ merged open-source PRs.",
+    "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, 60+ merged open-source PRs.",
 });
 
 const [lead, ...others] = projects.slice(0, 4);
@@ -78,8 +79,18 @@ export default async function HomePage() {
     { value: metrics[2].value, label: "Hackathon finals" },
   ];
 
+  const homeDescription =
+    "Kunj Shah is an AI engineer in Ahmedabad, India building agents, RAG pipelines and edge computer vision that hold up in production.";
+
   return (
     <PageShell>
+      <JsonLd
+        data={webPageJsonLd({
+          path: "",
+          name: "Kunj Shah — AI Engineer & Agent Builder",
+          description: homeDescription,
+        })}
+      />
       <div className="stack-page">
         {/* ------------------------------------------------------------ hero */}
         <div className="flex flex-col gap-12 md:gap-16">

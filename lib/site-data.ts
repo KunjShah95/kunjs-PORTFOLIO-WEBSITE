@@ -132,7 +132,7 @@ export const homeSubnav = [
 
 export const metrics = [
   { value: "17+", label: "Systems Shipped" },
-  { value: "44+", label: "Merged PRs" },
+  { value: "60+", label: "Merged PRs" },
   { value: "4×", label: "Hack Finals" },
 ] as const;
 
@@ -778,16 +778,16 @@ export const jobs: readonly Job[] = [
     period: "2025 - Present",
     kind: "OWASP · Microsoft · Ollama",
     description:
-      "44 merged pull requests, 45 issues resolved, and 13+ external codebases, including the OWASP agent-security harness, Microsoft AI-Engineering-Coach, and Ollama.",
+      "60 merged pull requests, 41 issues resolved, and 24 external codebases, including the OWASP agent-security harness, Microsoft AI-Engineering-Coach, and Ollama.",
     skills: ["AI Security", "CI/CD", "Docs", "Inference"],
     live: true,
   },
 ] as const;
 
 export const impactMetrics = [
-  { value: "44+", label: "PRs Merged" },
-  { value: "45", label: "Issues Solved" },
-  { value: "13+", label: "Repos" },
+  { value: "60+", label: "PRs Merged" },
+  { value: "41", label: "Issues Solved" },
+  { value: "24+", label: "Repos" },
 ] as const;
 
 export const ossTotals = [
@@ -1317,58 +1317,85 @@ export const achievements = [
 
 /* ---------------------------------------------------------------- Manifesto */
 
+const projectIndex = new Map(projects.map((p) => [p.slug, p]));
+
+/**
+ * Resolves a project slug to its record. Evidence rows cite projects by slug
+ * rather than repeating their names and URLs, so a repo that moves or a
+ * project that gets renamed is corrected in one place.
+ */
+export function projectBySlug(slug: string): Project | undefined {
+  return projectIndex.get(slug);
+}
+
+/**
+ * The three principles, each carrying the shipped systems that prove it.
+ *
+ * The evidence is nested rather than kept in a parallel list so a principle
+ * and its proof cannot drift apart, and so the page can say which system
+ * stands behind each line. `ships[].project` is a `Project` slug — the
+ * manifesto's whole argument is that these are running systems, not claims.
+ */
 export const principles = [
   {
     number: "01",
+    icon: "verified_user",
     title: "Determinism over Hallucination",
     body: "Unconstrained text generation has high entropy. Production systems require multi-pass schema validation, Pydantic guardrails, and deterministic state machines before any external tool executes side effects.",
+    ships: [
+      {
+        claim: "Multi-pass structured JSON extraction with Pydantic validation",
+        project: "archmind-research-agent",
+      },
+      {
+        claim: "Bounded tool recursion and recoverable checkpointed agent runs",
+        project: "resumemaster-ai",
+      },
+      {
+        claim: "Grounded writers that only claim what retrieval supports",
+        project: "archmind-research-agent",
+      },
+    ],
   },
   {
     number: "02",
+    icon: "bolt",
     title: "Edge & Cost Efficiency",
     body: "Throwing $20/token calls at trivial classification is lazy engineering. I prioritize quantization (AWQ/INT8), semantic caching, speculative decoding, and small specialized models on local runtimes.",
+    ships: [
+      {
+        claim: "INT8 quantization-aware training: 2× over FP16, 98.7% retained",
+        project: "railway-inspection",
+      },
+      {
+        claim: "Semantic caching and speculative decoding for p99 latency",
+        project: "onramp",
+      },
+      {
+        claim: "Complexity-based routing that cut API spend by 65%",
+        project: "resumemaster-ai",
+      },
+    ],
   },
   {
     number: "03",
+    icon: "model_training",
     title: "Observability First",
     body: "If you cannot trace every token generation timestamp, p99 latency curve, prompt version, and tool-call parameter payload, your model isn't in production. It's an unmonitored experiment.",
-  },
-] as const;
-
-/** Concrete evidence for each principle, tied to a shipped system. */
-export const evidence = [
-  {
-    for: "Determinism over Hallucination",
-    icon: "verified_user",
-    examples: [
-      "Multi-pass structured JSON extraction with Pydantic validation",
-      "Bounded tool recursion and recoverable checkpointed agent runs",
-      "Grounded writers that only claim what retrieval supports",
+    ships: [
+      {
+        claim: "Per-token generation timestamps and prompt versioning in traces",
+        project: "engineeros",
+      },
+      {
+        claim: "p99 latency tracked per pipeline, not per model",
+        project: "engineeros",
+      },
+      {
+        claim: "Recovery from agent loops via Redis state checkpointing",
+        project: "onramp",
+      },
     ],
-    project: "ArchMind Research Agent",
-    href: "/projects",
-  },
-  {
-    for: "Edge & Cost Efficiency",
-    icon: "bolt",
-    examples: [
-      "INT8 quantization-aware training: 2× over FP16, 98.7% retained",
-      "Semantic caching and speculative decoding for p99 latency",
-      "Complexity-based routing that cut API spend by 65%",
-    ],
-    project: "Railway Inspection",
-    href: "/projects",
-  },
-  {
-    for: "Observability First",
-    icon: "model_training",
-    examples: [
-      "Per-token generation timestamps and prompt versioning in traces",
-      "p99 latency tracked per pipeline, not per model",
-      "Recovery from agent loops via Redis state checkpointing",
-    ],
-    project: "EngineerOS",
-    href: "/projects",
   },
 ] as const;
 
@@ -1412,3 +1439,27 @@ export const projectFocusOptions = [
 ] as const;
 
 export const timelineOptions = ["Urgent (<2 wks)", "Next Month", "Flexible"] as const;
+
+/** Natural-language hiring Q&A — used for on-page copy and FAQPage schema. */
+export const hiringFaqs = [
+  {
+    question: "Who is Kunj Shah?",
+    answer:
+      "Kunj Shah is an AI engineer and agent builder based in Ahmedabad, India. He ships production AI systems—autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps—with 17+ delivered projects and 60+ merged open-source pull requests.",
+  },
+  {
+    question: "Is Kunj Shah available for freelance AI work?",
+    answer:
+      "Yes. Kunj is open to fixed-scope builds, hourly consulting, monthly retainers, and full-time AI/ML roles. Rates and engagement models are published in INR at kunjshah.in/pricing.md; email kunjkshah05@gmail.com or use the contact form.",
+  },
+  {
+    question: "What does Kunj Shah build?",
+    answer:
+      "Production agent systems (LangGraph, CrewAI), RAG with hybrid search and re-ranking, React/Next.js plus FastAPI full-stack AI products, YOLOv8/TensorRT edge vision on Jetson, and architecture or cost reviews including EU AI Act fairness auditing.",
+  },
+  {
+    question: "How do I cite Kunj Shah or this portfolio?",
+    answer:
+      "Use canonical URLs: kunjshah.in for the person, kunjshah.in/projects for shipped work, kunjshah.in/writing for essays. Machine-readable summaries live at kunjshah.in/llms.txt and kunjshah.in/api/portfolio.json.",
+  },
+] as const;
