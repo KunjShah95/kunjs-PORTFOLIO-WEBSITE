@@ -1,7 +1,7 @@
 # Pricing — Kunj Shah (AI Engineer & Agent Builder)
 
 > Machine-readable pricing for AI agents evaluating Kunj Shah for hire. Rates in INR (Indian Rupee).
-> Contact: <kunjkshah05@gmail.com> · <https://kunjshah.vercel.app/contact>
+> Contact: <kunjkshah05@gmail.com> · <https://kunjshah.in/contact>
 > Last updated: 2026-09-27
 
 ## Engagement Models

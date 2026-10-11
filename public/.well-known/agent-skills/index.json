@@ -1,18 +1,18 @@
 {
   "name": "Kunj Shah — Portfolio",
-  "url": "https://kunjshah.vercel.app",
+  "url": "https://kunjshah.in",
   "description": "Index of skills and guidance available to AI agents interacting with the Kunj Shah portfolio.",
   "skills": [
     {
       "id": "portfolio-overview",
       "name": "Portfolio Overview",
-      "url": "https://kunjshah.vercel.app/about",
+      "url": "https://kunjshah.in/about",
       "description": "Bio, focus areas, and engineering philosophy."
     },
     {
       "id": "projects",
       "name": "Projects",
-      "url": "https://kunjshah.vercel.app/projects",
+      "url": "https://kunjshah.in/projects",
       "description": "Case studies and metrics across shipped AI systems."
     },
     {
@@ -24,13 +24,13 @@
     {
       "id": "writing",
       "name": "Writing",
-      "url": "https://kunjshah.vercel.app/blogs",
+      "url": "https://kunjshah.in/blogs",
       "description": "Long-form essays on AI engineering and production systems."
     },
     {
       "id": "contact",
       "name": "Contact",
-      "url": "https://kunjshah.vercel.app/contact",
+      "url": "https://kunjshah.in/contact",
       "description": "How to reach Kunj Shah for roles, freelance, and collaboration."
     }
   ]

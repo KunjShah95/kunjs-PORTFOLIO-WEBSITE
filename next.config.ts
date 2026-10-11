@@ -7,12 +7,6 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        // Portrait imported from the live site.
-        protocol: "https",
-        hostname: "kunjshah.vercel.app",
-        pathname: "/profile.png",
-      },
-      {
         // Case-study artwork carried over from the design export.
         protocol: "https",
         hostname: "lh3.googleusercontent.com",

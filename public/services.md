@@ -1,7 +1,7 @@
 # Services — Kunj Shah (AI Engineer & Agent Builder)
 
 > Machine-readable services summary for AI agents and prospective clients.
-> Contact: kunjkshah05@gmail.com · https://kunjshah.vercel.app/contact
+> Contact: kunjkshah05@gmail.com · https://kunjshah.in/contact
 > Last updated: 2026-09-14
 
 ## Who This Is For
@@ -58,4 +58,4 @@ Kunj Shah builds production AI systems from brief to deployment in weeks, not qu
 
 - Open to: freelance, contract, part-time retainer, and full-time AI roles
 - Location: Ahmedabad, India (remote-friendly, UTC+5:30)
-- See https://kunjshah.vercel.app/pricing.md for rates
+- See https://kunjshah.in/pricing.md for rates

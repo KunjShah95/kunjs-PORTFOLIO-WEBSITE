@@ -1,39 +1,39 @@
 {
   "linkset": [
     {
-      "anchor": "https://kunjshah.vercel.app/llms.txt",
+      "anchor": "https://kunjshah.in/llms.txt",
       "service-desc": [
-        { "href": "https://kunjshah.vercel.app/llms.txt", "type": "text/markdown" }
+        { "href": "https://kunjshah.in/llms.txt", "type": "text/markdown" }
       ],
       "service-doc": [
-        { "href": "https://kunjshah.vercel.app/llms-full.txt", "type": "text/markdown" }
+        { "href": "https://kunjshah.in/llms-full.txt", "type": "text/markdown" }
       ]
     },
     {
-      "anchor": "https://kunjshah.vercel.app/ai.txt",
+      "anchor": "https://kunjshah.in/ai.txt",
       "service-desc": [
-        { "href": "https://kunjshah.vercel.app/ai.txt", "type": "text/markdown" }
+        { "href": "https://kunjshah.in/ai.txt", "type": "text/markdown" }
       ],
       "service-doc": [
-        { "href": "https://kunjshah.vercel.app/.well-known/ai.txt", "type": "text/markdown" }
+        { "href": "https://kunjshah.in/.well-known/ai.txt", "type": "text/markdown" }
       ]
     },
     {
-      "anchor": "https://kunjshah.vercel.app/services.md",
+      "anchor": "https://kunjshah.in/services.md",
       "service-desc": [
-        { "href": "https://kunjshah.vercel.app/services.md", "type": "text/markdown" }
+        { "href": "https://kunjshah.in/services.md", "type": "text/markdown" }
       ]
     },
     {
-      "anchor": "https://kunjshah.vercel.app/pricing.md",
+      "anchor": "https://kunjshah.in/pricing.md",
       "service-desc": [
-        { "href": "https://kunjshah.vercel.app/pricing.md", "type": "text/markdown" }
+        { "href": "https://kunjshah.in/pricing.md", "type": "text/markdown" }
       ]
     },
     {
-      "anchor": "https://kunjshah.vercel.app/api/portfolio.json",
+      "anchor": "https://kunjshah.in/api/portfolio.json",
       "service-desc": [
-        { "href": "https://kunjshah.vercel.app/api/portfolio.json", "type": "application/json" }
+        { "href": "https://kunjshah.in/api/portfolio.json", "type": "application/json" }
       ]
     }
   ]

@@ -1,5 +1,19 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.kunjshah.in" }],
+      "destination": "https://kunjshah.in/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "kunjshah.vercel.app" }],
+      "destination": "https://kunjshah.in/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/.well-known/api-catalog",
@@ -175,7 +189,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", <https://kunjshah.vercel.app/llms.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/llms-full.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/.well-known/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.vercel.app/pricing.md>; rel=\"pricing\", <https://kunjshah.vercel.app/services.md>; rel=\"service\", <https://kunjshah.vercel.app/rss.xml>; rel=\"alternate\"; type=\"application/rss+xml\", <https://kunjshah.vercel.app/sitemap.xml>; rel=\"sitemap\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", <https://kunjshah.in/llms.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/llms-full.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/.well-known/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/pricing.md>; rel=\"pricing\", <https://kunjshah.in/services.md>; rel=\"service\", <https://kunjshah.in/rss.xml>; rel=\"alternate\"; type=\"application/rss+xml\", <https://kunjshah.in/sitemap.xml>; rel=\"sitemap\""
         },
         {
           "key": "X-Content-Type-Options",

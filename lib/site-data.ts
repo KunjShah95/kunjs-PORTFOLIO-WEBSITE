@@ -1,7 +1,7 @@
 import type { IconName } from "@/components/icon";
 
 /* ==========================================================================
-   Content imported from kunjshah.vercel.app
+   Content sourced from the deployed site at kunjshah.in
    Sources: /api/portfolio.json, /llms-full.txt, /services.md, /pricing.md
    ========================================================================== */
 
@@ -16,7 +16,7 @@ export const site = {
   location: "Ahmedabad, India",
   locationLong: "Ahmedabad, Gujarat, India",
   timezone: "UTC +5:30",
-  website: "https://kunjshah.vercel.app",
+  website: "https://kunjshah.in",
   hero: "I build the part of AI that has to keep working.",
   links: {
     github: "https://github.com/KunjShah95",

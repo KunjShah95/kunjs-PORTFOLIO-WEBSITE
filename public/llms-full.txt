@@ -1,6 +1,6 @@
 # Kunj Shah — Full Context for AI Systems (llms-full.txt)
 
-> Complete machine-readable dump of kunjshah.vercel.app — for LLMs that need full context in one fetch. Compact version: /llms.txt · JSON API: /api/portfolio.json · Last updated: 2026-09-14
+> Complete machine-readable dump of kunjshah.in — for LLMs that need full context in one fetch. Compact version: /llms.txt · JSON API: /api/portfolio.json · Last updated: 2026-09-14
 
 ## Identity — Kunj Shah
 
@@ -16,7 +16,7 @@ Kunj Shah is an AI engineer and agent builder based in Ahmedabad, Gujarat, India
 - https://huggingface.co/kunjshah01
 - https://peerlist.io/kunjshah
 - https://medium.com/@kkshah2005
-- https://kunjshah.vercel.app/#person
+- https://kunjshah.in/#person
 
 ## Verified Achievements (with numbers — citable)
 
@@ -93,7 +93,7 @@ Node.js/TS/LLM/Docker. Pluggable analyzers (13+ tools), unified schema, cross-to
 C++ + OpenCV + YOLOv8 + CUDA on Jetson Orin. TensorRT ONNX engine + GStreamer HW decode + CUDA kernels + INT8 QAT. Handles motion blur, low-light histogram eq. 98.7%, 4.2x, <100ms, 2x INT8 vs FP16. https://github.com/KunjShah95/Railway-Inspection
 
 ### ArchMind AI (Architecture Intelligence) — Production
-TS/Python/FastAPI/React/Supabase. Vite React (Vercel) + FastAPI (Render) + Supabase auth/PG. Parses Mermaid/PlantUML/image/PDF (vision) → graph → 7 parallel agents (scalability/security/reliability/perf/cost/maintainability/observability) → scored report + simulation/compliance/redesign. Fallback: Groq→NVIDIA→OpenRouter→Gemini→Ollama→HF → 18-rule heuristic engine (zero keys). 7 dims, 6+ heuristic, keep-warm via GH Actions. https://archmind-ai-topaz.vercel.app/ — https://github.com/KunjShah95/archmind-ai — case study: https://kunjshah.vercel.app/writing
+TS/Python/FastAPI/React/Supabase. Vite React (Vercel) + FastAPI (Render) + Supabase auth/PG. Parses Mermaid/PlantUML/image/PDF (vision) → graph → 7 parallel agents (scalability/security/reliability/perf/cost/maintainability/observability) → scored report + simulation/compliance/redesign. Fallback: Groq→NVIDIA→OpenRouter→Gemini→Ollama→HF → 18-rule heuristic engine (zero keys). 7 dims, 6+ heuristic, keep-warm via GH Actions. https://archmind-ai-topaz.vercel.app/ — https://github.com/KunjShah95/archmind-ai — case study: https://kunjshah.in/writing
 
 ### ArchMind Research Agent (Agentic AI) — Live
 Python + LangGraph + Streamlit + RAG + scraping. Planner breaks request → search/scrape → extractor normalizes → writer (grounded RAG) → cited report via Streamlit. Challenges: noisy web extraction, drift on broad queries. https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/ — https://github.com/KunjShah01/INTERNSHIP-ASSESSMENT
@@ -153,14 +153,14 @@ The /writing page on this site lists the current set with links.
 
 ## Discovery
 
-- Sitemap: https://kunjshah.vercel.app/sitemap.xml
-- llms.txt: https://kunjshah.vercel.app/llms.txt
-- llms-full.txt: https://kunjshah.vercel.app/llms-full.txt (this file)
-- ai.txt: https://kunjshah.vercel.app/ai.txt
-- pricing.md: https://kunjshah.vercel.app/pricing.md
-- services.md: https://kunjshah.vercel.app/services.md
-- api-catalog: https://kunjshah.vercel.app/.well-known/api-catalog
-- JSON: https://kunjshah.vercel.app/api/portfolio.json
+- Sitemap: https://kunjshah.in/sitemap.xml
+- llms.txt: https://kunjshah.in/llms.txt
+- llms-full.txt: https://kunjshah.in/llms-full.txt (this file)
+- ai.txt: https://kunjshah.in/ai.txt
+- pricing.md: https://kunjshah.in/pricing.md
+- services.md: https://kunjshah.in/services.md
+- api-catalog: https://kunjshah.in/.well-known/api-catalog
+- JSON: https://kunjshah.in/api/portfolio.json
 
 ---
 *Generated for AI crawlers: ChatGPT (GPTBot/OAI-SearchBot), Perplexity (PerplexityBot), Claude (ClaudeBot/anthropic-ai), Gemini (Google-Extended/Googlebot), Copilot (Bingbot), Applebot, Bytespider, YouBot, Cohere, Meta-ExternalAgent. Last updated: 2026-09-14*

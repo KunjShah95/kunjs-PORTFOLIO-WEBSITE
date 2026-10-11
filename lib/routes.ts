@@ -3,7 +3,7 @@
  * Generated `.txt` / `.json` endpoints are intentionally excluded — they are
  * discovery helpers for crawlers, not pages.
  */
-export const ORIGIN = "https://kunjshah.vercel.app";
+export const ORIGIN = "https://kunjshah.in";
 
 export const PUBLIC_ROUTES = [
   { path: "", priority: 1, changeFrequency: "weekly" as const },

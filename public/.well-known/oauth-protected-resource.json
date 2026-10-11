@@ -1,7 +1,7 @@
 {
-  "resource": "https://kunjshah.vercel.app/api",
+  "resource": "https://kunjshah.in/api",
   "authorization_servers": [
-    "https://kunjshah.vercel.app"
+    "https://kunjshah.in"
   ],
   "scopes_supported": ["read", "write"]
 }
