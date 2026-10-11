@@ -54,7 +54,7 @@ function HighlightCard({ blurb, animated }: { blurb: string; animated: boolean }
           whileInView={{ scale: 1, opacity: 1 }}
         />
       ) : null}
-      <SectionLabel tone="emerald">Highlight</SectionLabel>
+      <SectionLabel tone="emerald-ink">Highlight</SectionLabel>
       <p className="relative font-body-md text-body-md text-text-secondary leading-relaxed max-w-2xl">
         {blurb}
       </p>
@@ -63,11 +63,16 @@ function HighlightCard({ blurb, animated }: { blurb: string; animated: boolean }
   );
 
   if (!animated) {
-    return <section className={shell}>{inner}</section>;
+    return (
+      <section aria-label="Highlight" className={shell}>
+        {inner}
+      </section>
+    );
   }
 
   return (
     <motion.section
+      aria-label="Highlight"
       className={shell}
       initial={{ y: 20 }}
       transition={{ duration: 0.78, ease: EASE_OUT, delay: 0.12 }}

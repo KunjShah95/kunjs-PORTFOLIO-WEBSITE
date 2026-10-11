@@ -38,17 +38,18 @@ export function BottomNav() {
   return (
     <motion.nav
       animate={{ y: hidden && !reduce ? "110%" : "0%" }}
-      aria-label="Primary"
+      aria-label="Tab bar"
       className="lg:hidden fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_0_0_var(--color-border-hairline)]"
       initial={false}
       transition={{ duration: 0.35, ease: EASE_OUT }}
     >
-      <div className="max-w-xl mx-auto h-16 short-screen:h-14 px-1 flex items-center justify-around">
+      <ul className="max-w-xl mx-auto h-16 short-screen:h-14 px-1 flex items-center justify-around">
         {navItems.map((item) => {
           const active =
             item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
 
           return (
+            <li className="flex min-w-0 flex-1" key={item.href}>
             <Link
               aria-current={active ? "page" : undefined}
               className={cn(
@@ -56,7 +57,6 @@ export function BottomNav() {
                 active ? "text-text-primary" : "text-text-muted hover:text-text-primary",
               )}
               href={item.href}
-              key={item.href}
             >
               {active && (
                 <motion.span
@@ -74,9 +74,10 @@ export function BottomNav() {
               </span>
               <LinkPending className="bottom-1" />
             </Link>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </motion.nav>
   );
 }

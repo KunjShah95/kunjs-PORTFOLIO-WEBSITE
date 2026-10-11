@@ -29,23 +29,31 @@ export function Reveal({
   y = 18,
   className,
   as: Tag = 'div',
+  "aria-labelledby": labelledBy,
 }: {
   children: ReactNode;
   delay?: number;
   y?: number;
   className?: string;
   as?: ElementType;
+  /** Names a landmark-ish wrapper (e.g. `as="section"`) after its heading. */
+  "aria-labelledby"?: string;
 }) {
   const reduce = useReducedMotion();
   const M = Tag === 'div' ? motion.div : (motion as never)[String(Tag)];
 
   if (reduce) {
     const Plain = Tag;
-    return <Plain className={className}>{children}</Plain>;
+    return (
+      <Plain aria-labelledby={labelledBy} className={className}>
+        {children}
+      </Plain>
+    );
   }
 
   return (
     <M
+      aria-labelledby={labelledBy}
       className={className}
       initial={{ y }}
       whileInView={{ y: 0 }}

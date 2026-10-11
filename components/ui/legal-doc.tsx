@@ -70,7 +70,7 @@ export function LegalDoc({ doc, counterpart }: { doc: LegalDocument; counterpart
                   className="flex items-baseline gap-2.5 py-1.5 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
                   href={`#${section.id}`}
                 >
-                  <span className="font-label-meta text-label-meta text-text-muted/70 tabular-nums shrink-0">
+                  <span className="font-label-meta text-label-meta text-text-muted tabular-nums shrink-0">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span>{section.title}</span>
@@ -127,9 +127,16 @@ export function LegalDoc({ doc, counterpart }: { doc: LegalDocument; counterpart
 /** One numbered clause: heading, then its blocks. */
 function LegalClause({ section, order }: { section: LegalSection; order: number }) {
   return (
-    <section className="flex flex-col gap-4 scroll-mt-24" id={section.id}>
-      <h2 className="flex items-baseline gap-3 border-t border-text-primary pt-4">
-        <span className="font-label-meta text-label-meta text-text-muted/70 tabular-nums shrink-0">
+    <section
+      aria-labelledby={`${section.id}-title`}
+      className="flex flex-col gap-4 scroll-mt-24"
+      id={section.id}
+    >
+      <h2
+        className="flex items-baseline gap-3 border-t border-text-primary pt-4"
+        id={`${section.id}-title`}
+      >
+        <span className="font-label-meta text-label-meta text-text-muted tabular-nums shrink-0">
           {String(order).padStart(2, "0")}
         </span>
         <span className="font-headline-lg text-headline-lg text-text-primary">
@@ -203,14 +210,19 @@ function Block({ block }: { block: LegalSection["blocks"][number] }) {
 
     case "note":
       return (
-        <aside className="flex flex-col gap-1.5 p-space-md rounded-2xl bg-surface-subtle/70 border border-border-hairline">
+        // A callout inside a clause, not page-level complementary content, so
+        // it is a note rather than an <aside> landmark.
+        <div
+          className="flex flex-col gap-1.5 p-space-md rounded-2xl bg-surface-subtle/70 border border-border-hairline"
+          role="note"
+        >
           <span className="font-body-sm text-body-sm font-medium text-text-primary">
             {block.title}
           </span>
           <span className="font-body-md text-body-md text-text-secondary">
             {block.text}
           </span>
-        </aside>
+        </div>
       );
   }
 }

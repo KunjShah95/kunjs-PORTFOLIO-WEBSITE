@@ -100,7 +100,7 @@ export default async function HomePage() {
       <div className="stack-page">
         {/* ------------------------------------------------------------ hero */}
         <div className="flex flex-col gap-12 md:gap-16">
-          <section className="grid gap-10 lg:grid-cols-12 lg:gap-x-10 lg:items-center scroll-mt-24" id="about">
+          <section aria-label="Introduction" className="grid gap-10 lg:grid-cols-12 lg:gap-x-10 lg:items-center scroll-mt-24" id="about">
             <div className="flex flex-col gap-6 md:gap-7 lg:col-span-8">
               <Reveal y={8}>
                 <span className="inline-flex items-center gap-2 font-body-sm text-body-sm text-text-secondary">

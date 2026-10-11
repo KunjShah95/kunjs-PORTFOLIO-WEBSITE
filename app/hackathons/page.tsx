@@ -31,7 +31,7 @@ export default function HackathonsPage() {
           title="Hackathons"
           lead="Weekend-built systems under time pressure, the fastest way to find out whether an idea actually works."
         >
-          <span className="inline-flex items-center gap-1 font-body-sm text-body-sm text-accent-emerald font-medium">
+          <span className="inline-flex items-center gap-1 font-body-sm text-body-sm text-accent-emerald-ink font-medium">
             <Icon name="badge" size={14} />
             {finals.length} Finals
           </span>
@@ -47,11 +47,14 @@ export default function HackathonsPage() {
           />
 
         {/* -------------------------------------------------- highlight: solo win */}
-        <Reveal as="section" className="relative overflow-hidden bg-primary text-on-primary rounded-2xl p-space-lg md:p-10 flex flex-col gap-space-sm md:gap-4">
+        <Reveal aria-labelledby="solo-finalist" as="section" className="relative overflow-hidden bg-primary text-on-primary rounded-2xl p-space-lg md:p-10 flex flex-col gap-space-sm md:gap-4">
           <SectionLabel className="block" tone="emerald">
             Solo Finalist
           </SectionLabel>
-          <h2 className="relative font-headline-xl-mobile text-headline-xl-mobile text-on-primary tracking-tight">
+          <h2
+            className="relative font-headline-xl-mobile text-headline-xl-mobile text-on-primary tracking-tight"
+            id="solo-finalist"
+          >
             Autonomous Hacks 2026
           </h2>
           <p className="relative font-body-md text-body-md text-on-primary-container leading-relaxed max-w-2xl">
@@ -102,7 +105,7 @@ export default function HackathonsPage() {
                           className={cn(
                             "px-2 py-0.5 rounded-full font-label-badge text-label-badge shrink-0",
                             isFinal
-                              ? "bg-accent-emerald text-on-primary"
+                              ? "bg-accent-emerald/15 text-accent-emerald-ink"
                               : "bg-surface-subtle text-text-secondary",
                           )}
                         >

@@ -88,6 +88,7 @@ export function ProjectsBrowser() {
       </div>
 
       <motion.section
+        aria-label="Project list"
         className="grid grid-cols-[minmax(0,1fr)] gap-3 md:gap-4 lg:grid-cols-2 pt-space-lg"
         layout={!reduce}
       >
@@ -128,7 +129,7 @@ export function ProjectsBrowser() {
                     <dd
                       className={cn(
                         "font-headline-lg text-headline-lg tracking-tight truncate",
-                        metric.accent ? "text-accent-emerald" : "text-text-primary",
+                        metric.accent ? "text-accent-emerald-ink" : "text-text-primary",
                       )}
                       data-numeric
                     >

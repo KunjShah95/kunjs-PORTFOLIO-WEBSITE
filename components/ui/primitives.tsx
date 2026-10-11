@@ -9,13 +9,15 @@ export function SectionLabel({
 }: {
   children: ReactNode;
   className?: string;
-  tone?: "muted" | "secondary" | "primary" | "emerald";
+  /** `emerald` is for dark grounds; `emerald-ink` keeps 4.5:1 on light cards. */
+  tone?: "muted" | "secondary" | "primary" | "emerald" | "emerald-ink";
 }) {
   const tones = {
     muted: "text-text-muted",
     secondary: "text-text-secondary",
     primary: "text-text-primary",
     emerald: "text-accent-emerald",
+    "emerald-ink": "text-accent-emerald-ink",
   } as const;
 
   return (

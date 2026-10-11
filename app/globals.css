@@ -24,6 +24,8 @@
   --color-on-tertiary-container: #e76600;
   --color-on-surface: #1f1b17;
   --color-accent-emerald: #10b981;
+  /* Emerald for small text on light surfaces: #10b981 is only 2.5:1 there. */
+  --color-accent-emerald-ink: #047857;
   --color-tertiary: #230900;
   --color-on-secondary-fixed-variant: #004395;
   --color-outline: #7f7572;
@@ -32,7 +34,7 @@
   --color-on-surface-variant: #4e4543;
   --color-on-secondary: #ffffff;
   --color-surface-bright: #fff8f5;
-  --color-text-muted: #a8a29e;
+  --color-text-muted: #6f6964; /* 4.6–5.4:1 on every light surface (was #a8a29e, 2.4:1) */
   --color-surface-canvas: #fafaf9;
   --color-tertiary-container: #441900;
   --color-on-error: #ffffff;
@@ -245,7 +247,7 @@
   /* --- ink --------------------------------------------------------------- */
   --color-text-primary: #f4eee8;
   --color-text-secondary: #bfb3a9;
-  --color-text-muted: #8f857b;
+  --color-text-muted: #998f85; /* ≥4.8:1 on every dark surface */
   --color-on-surface: #f4eee8;
   --color-on-background: #f4eee8;
   --color-on-surface-variant: #bfb3a9;
@@ -269,6 +271,7 @@
 
   /* --- accent: lifted for contrast on a dark ground ---------------------- */
   --color-accent-emerald: #34d399;
+  --color-accent-emerald-ink: #34d399;
   --color-emerald-600: #10b981;
 
   /* --- error -------------------------------------------------------------- */

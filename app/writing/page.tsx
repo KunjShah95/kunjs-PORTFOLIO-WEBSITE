@@ -129,9 +129,11 @@ export default async function WritingPage() {
             </Reveal>
 
             {/* everything else as a dated index */}
-            <Reveal as="section" className="flex flex-col">
+            <Reveal aria-labelledby="all-essays" as="section" className="flex flex-col">
               <div className="flex items-baseline justify-between gap-4 pb-3">
-                <h2 className="font-headline-md text-headline-md text-text-primary">All essays</h2>
+                <h2 className="font-headline-md text-headline-md text-text-primary" id="all-essays">
+                  All essays
+                </h2>
                 <span className="font-body-sm text-body-sm text-text-muted">{posts!.length} on Medium</span>
               </div>
               <ul className="flex flex-col border-t border-border-hairline">

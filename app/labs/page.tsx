@@ -19,7 +19,7 @@ export const metadata: Metadata = pageMeta({
 });
 
 const STATUS_TONE = {
-  Stable: "bg-accent-emerald/15 text-accent-emerald",
+  Stable: "bg-accent-emerald/15 text-accent-emerald-ink",
   Beta: "bg-surface-container text-text-primary",
   Experimental: "bg-surface-container text-text-secondary",
   Building: "bg-surface-container text-text-secondary",

@@ -76,14 +76,14 @@ export default function ManifestoPage() {
         />
 
         {/* -------------------------------------------------------- principles */}
-        <section className="flex flex-col border-t border-text-primary">
+        <section aria-label="Principles" className="flex flex-col border-t border-text-primary">
           {principles.map((principle, i) => (
             <Reveal
               className="grid gap-3 md:grid-cols-12 md:gap-x-10 py-space-lg md:py-12 border-b border-border-hairline"
               delay={i * 0.06}
               key={principle.number}
             >
-              <span className="md:col-span-3 font-label-section text-[40px] md:text-[72px] leading-none tracking-tight text-text-muted/60">
+              <span className="md:col-span-3 font-label-section text-[40px] md:text-[72px] leading-none tracking-tight text-text-muted">
                 {principle.number}
               </span>
               <div className="md:col-span-9 flex flex-col gap-2 min-w-0">
@@ -104,7 +104,7 @@ export default function ManifestoPage() {
           meta={
             <span className="flex flex-col gap-0.5">
               <span>Each principle, in shipped systems</span>
-              <span className="text-text-muted/70">
+              <span className="text-text-muted">
                 {shippedSystems.size} systems linked
               </span>
             </span>

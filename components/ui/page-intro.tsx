@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import Link from "next/link";
 import { Reveal } from "@/components/primitives/Reveal";
 import { cn } from "@/lib/cn";
@@ -20,13 +20,20 @@ export function PageIntro({
   children?: ReactNode;
   className?: string;
 }) {
+  // Every section is named after its heading so agents and screen readers
+  // can tell the page's parts apart without reading them.
+  const headingId = useId();
   return (
     <Reveal
+      aria-labelledby={headingId}
       as="section"
       className={cn("flex flex-col gap-4 md:gap-5 pt-space-xs max-w-3xl", className)}
       y={12}
     >
-      <h1 className="font-headline-xl-mobile text-headline-xl-mobile text-text-primary tracking-tight">
+      <h1
+        className="font-headline-xl-mobile text-headline-xl-mobile text-text-primary tracking-tight"
+        id={headingId}
+      >
         {title}
       </h1>
       {lead && (
@@ -62,11 +69,18 @@ export function PageSection({
   className?: string;
   id?: string;
 }) {
+  const headingId = useId();
   if (layout === "stacked") {
     return (
-      <section className={cn("flex flex-col gap-6 md:gap-8 scroll-mt-24", className)} id={id}>
+      <section
+        aria-labelledby={headingId}
+        className={cn("flex flex-col gap-6 md:gap-8 scroll-mt-24", className)}
+        id={id}
+      >
         <div className="flex min-w-0 flex-col gap-1 border-t border-text-primary pt-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-          <h2 className="min-w-0 font-headline-lg text-headline-lg text-text-primary">{title}</h2>
+          <h2 className="min-w-0 font-headline-lg text-headline-lg text-text-primary" id={headingId}>
+            {title}
+          </h2>
           {meta && (
             <div className="min-w-0 shrink-0 font-body-sm text-body-sm text-text-muted sm:text-right">
               {meta}
@@ -80,6 +94,7 @@ export function PageSection({
 
   return (
     <section
+      aria-labelledby={headingId}
       className={cn(
         "flex flex-col gap-5 md:gap-6 lg:grid lg:grid-cols-12 lg:gap-x-10 lg:gap-y-0 scroll-mt-24",
         className,
@@ -91,7 +106,7 @@ export function PageSection({
           heading into a two-line sliver and pushes the meta out past the rail
           into the content column. */}
       <div className="flex min-w-0 flex-col gap-1.5 lg:col-span-3 lg:self-start lg:sticky lg:top-28 lg:border-t lg:border-text-primary lg:pt-4">
-        <h2 className="font-headline-lg text-headline-lg text-text-primary">
+        <h2 className="font-headline-lg text-headline-lg text-text-primary" id={headingId}>
           {title}
         </h2>
         {meta && (

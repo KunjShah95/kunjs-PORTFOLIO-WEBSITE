@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import Link from "next/link";
 import { CountUp } from "@/components/primitives/CountUp";
 import { Reveal } from "@/components/primitives/Reveal";
@@ -104,8 +104,10 @@ export function CtaBand({
   children?: ReactNode;
   className?: string;
 }) {
+  const headingId = useId();
   return (
     <Reveal
+      aria-labelledby={headingId}
       as="section"
       className={cn(
         "border-t border-text-primary pt-8 md:pt-12 grid gap-6 lg:grid-cols-12 lg:gap-x-10 lg:items-end",
@@ -113,7 +115,10 @@ export function CtaBand({
       )}
     >
       <div className="flex flex-col gap-3 lg:col-span-8">
-        <h2 className="font-headline-lg text-headline-lg md:text-[40px] md:leading-[44px] tracking-[-0.03em] text-text-primary max-w-2xl">
+        <h2
+          className="font-headline-lg text-headline-lg md:text-[40px] md:leading-[44px] tracking-[-0.03em] text-text-primary max-w-2xl"
+          id={headingId}
+        >
           {title}
         </h2>
         {body && (

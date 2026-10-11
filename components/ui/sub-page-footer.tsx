@@ -15,9 +15,11 @@ export function SubPageFooter({ current }: { current: string }) {
     "group lift flex-1 flex items-center gap-3 p-space-md md:p-6 rounded-2xl bg-surface-card border border-border-hairline min-w-0";
 
   return (
-    <nav aria-label="Section navigation" className="w-full flex items-stretch gap-2 md:gap-4">
+    <nav aria-label="Section navigation" className="w-full">
+      <ul className="w-full flex items-stretch gap-2 md:gap-4">
       {prev ? (
-        <Link className={`${card} text-left`} href={prev.href}>
+        <li className="flex flex-1 min-w-0">
+        <Link className={`${card} text-left`} href={prev.href} rel="prev">
           <span className="text-text-muted shrink-0 transition-transform duration-300 group-hover:-translate-x-1">
             <Icon className="rotate-180" name="arrow_forward" size={18} />
           </span>
@@ -30,12 +32,14 @@ export function SubPageFooter({ current }: { current: string }) {
             </span>
           </span>
         </Link>
+        </li>
       ) : (
-        <span className="flex-1" />
+        <li aria-hidden="true" className="flex-1" />
       )}
 
       {next && (
-        <Link className={`${card} justify-end text-right`} href={next.href}>
+        <li className="flex flex-1 min-w-0">
+        <Link className={`${card} justify-end text-right`} href={next.href} rel="next">
           <span className="min-w-0">
             <span className="font-body-sm text-body-sm text-text-muted block">
               Next
@@ -48,7 +52,9 @@ export function SubPageFooter({ current }: { current: string }) {
             <Icon name="arrow_forward" size={18} />
           </span>
         </Link>
+        </li>
       )}
+      </ul>
     </nav>
   );
 }

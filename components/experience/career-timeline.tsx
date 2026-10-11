@@ -104,7 +104,7 @@ function JobCard({ job, index, animated }: { job: Job; index: number; animated: 
         <span className="flex flex-wrap items-center gap-2 min-w-0">
           <span
             className={cn(
-              "font-label-meta text-label-meta uppercase tracking-wide tabular-nums text-text-muted/70 hidden sm:inline",
+              "font-label-meta text-label-meta uppercase tracking-wide tabular-nums text-text-muted hidden sm:inline",
             )}
           >
             {String(index + 1).padStart(2, "0")}
@@ -112,13 +112,13 @@ function JobCard({ job, index, animated }: { job: Job; index: number; animated: 
           <span
             className={cn(
               "font-body-sm text-body-sm",
-              job.live ? "text-accent-emerald font-semibold" : "text-text-muted",
+              job.live ? "text-accent-emerald-ink font-semibold" : "text-text-muted",
             )}
           >
             {job.period}
           </span>
           {job.live ? (
-            <span className="inline-flex items-center gap-1.5 font-label-meta text-label-meta uppercase tracking-wide text-accent-emerald">
+            <span className="inline-flex items-center gap-1.5 font-label-meta text-label-meta uppercase tracking-wide text-accent-emerald-ink">
               <StatusDot className="bg-accent-emerald" ping />
               Active
             </span>

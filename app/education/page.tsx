@@ -41,7 +41,7 @@ export default function EducationPage() {
                 </p>
               </div>
             </div>
-            <span className="px-2.5 py-1 rounded-full bg-accent-emerald/15 text-accent-emerald font-label-badge text-label-badge shrink-0">
+            <span className="px-2.5 py-1 rounded-full bg-accent-emerald/15 text-accent-emerald-ink font-label-badge text-label-badge shrink-0">
               {education.year}
             </span>
           </div>

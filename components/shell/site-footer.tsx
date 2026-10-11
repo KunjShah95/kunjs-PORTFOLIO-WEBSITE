@@ -43,7 +43,8 @@ export function SiteFooter() {
           </ul>
         </nav>
 
-        <ul className="md:col-span-2 md:col-start-11 flex md:flex-col gap-x-5 gap-y-2 flex-wrap">
+        <nav aria-label="Profiles and contact" className="md:col-span-2 md:col-start-11">
+        <ul className="flex md:flex-col gap-x-5 gap-y-2 flex-wrap">
           {social.map((link) => (
             <li key={link.label}>
               <a
@@ -59,6 +60,7 @@ export function SiteFooter() {
             </li>
           ))}
         </ul>
+        </nav>
       </div>
 
       <div className="shell-container py-5 border-t border-border-hairline font-body-sm text-body-sm text-text-muted flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
@@ -66,21 +68,25 @@ export function SiteFooter() {
           <span>
             &copy; {year} {site.name}
           </span>
+          <nav aria-label="Legal and citation">
+          <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
           {/* Legal lives here rather than in the index above: these are not
               sections of the portfolio, but they do need to be reachable from
               every page. */}
-          <Link className="hover:text-text-primary transition-colors" href="/cite">
-            Cite
-          </Link>
-          {legalDocuments.map((doc) => (
-            <Link
-              className="hover:text-text-primary transition-colors"
-              href={doc.path}
-              key={doc.path}
-            >
-              {doc.label}
+          <li>
+            <Link className="hover:text-text-primary transition-colors" href="/cite">
+              Cite
             </Link>
+          </li>
+          {legalDocuments.map((doc) => (
+            <li key={doc.path}>
+              <Link className="hover:text-text-primary transition-colors" href={doc.path}>
+                {doc.label}
+              </Link>
+            </li>
           ))}
+          </ul>
+          </nav>
         </div>
         <LocalClock />
       </div>

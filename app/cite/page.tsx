@@ -59,7 +59,7 @@ export default function CitePage() {
             {canonicalUrls.map((item) => (
               <li key={item.url}>
                 <Link
-                  className="font-body-md text-body-md text-text-secondary hover:text-text-primary transition-colors underline-offset-2 hover:underline"
+                  className="font-body-md text-body-md text-text-secondary hover:text-text-primary transition-colors underline underline-offset-2"
                   href={item.url === `${ORIGIN}/` ? "/" : item.url.slice(ORIGIN.length)}
                 >
                   {item.label}
@@ -73,7 +73,7 @@ export default function CitePage() {
         <PageSection layout="stacked" title="Contact">
           <p className="font-body-md text-body-md text-text-secondary max-w-[60ch]">
             Questions about attribution or licensing:{" "}
-            <a className="text-text-primary underline-offset-2 hover:underline" href={`mailto:${site.email}`}>
+            <a className="text-text-primary underline underline-offset-2" href={`mailto:${site.email}`}>
               {site.email}
             </a>
             . You may cite this portfolio; please link to a canonical URL above rather than scraping without

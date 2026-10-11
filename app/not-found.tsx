@@ -14,7 +14,7 @@ export default function NotFound() {
   return (
     <PageShell>
       <div className="stack-page">
-        <section className="flex flex-col gap-5 max-w-2xl">
+        <section aria-label="Page not found" className="flex flex-col gap-5 max-w-2xl">
           <span className="font-label-meta text-label-meta text-text-muted">404</span>
           <h1 className="font-headline-xl-mobile text-headline-xl-mobile text-text-primary tracking-tight">
             This page doesn&apos;t exist.

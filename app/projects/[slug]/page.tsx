@@ -111,7 +111,7 @@ export default async function ProjectCaseStudyPage(
 
       <div className="stack-page">
         {/* ----------------------------------------------------------- intro */}
-        <Reveal as="section" className="flex flex-col gap-4 md:gap-5 pt-space-xs max-w-3xl" y={12}>
+        <Reveal aria-labelledby="case-study-title" as="section" className="flex flex-col gap-4 md:gap-5 pt-space-xs max-w-3xl" y={12}>
           <Link
             className="group -my-3 py-3 inline-flex w-fit items-center gap-1.5 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
             href="/projects"
@@ -128,7 +128,10 @@ export default async function ProjectCaseStudyPage(
             <span className="mx-1.5 text-border-dotted">/</span>
             {project.status}
           </p>
-          <h1 className="font-headline-xl-mobile text-headline-xl-mobile text-text-primary tracking-tight">
+          <h1
+            className="font-headline-xl-mobile text-headline-xl-mobile text-text-primary tracking-tight"
+            id="case-study-title"
+          >
             {project.title}
           </h1>
           <p className="font-body-lg text-body-lg text-text-secondary max-w-[60ch]">
@@ -216,13 +219,15 @@ export default async function ProjectCaseStudyPage(
         )}
 
         {/* ------------------------------------------------- prev / next */}
-        <nav aria-label="More case studies" className="w-full flex items-stretch gap-2 md:gap-4">
+        <nav aria-label="More case studies" className="w-full">
+          <ul className="w-full flex items-stretch gap-2 md:gap-4">
           {[prev, next].map((neighbour, n) =>
             neighbour ? (
+              <li className="flex flex-1 min-w-0" key={neighbour.slug}>
               <Link
                 className={`group lift flex-1 flex flex-col gap-1 p-space-md md:p-6 rounded-2xl bg-surface-card border border-border-hairline min-w-0 ${n === 1 ? "text-right" : "text-left"}`}
                 href={`/projects/${neighbour.slug}`}
-                key={neighbour.slug}
+                rel={n === 0 ? "prev" : "next"}
               >
                 <span className="font-body-sm text-body-sm text-text-muted">
                   {n === 0 ? "Previous" : "Next"} case study
@@ -231,10 +236,12 @@ export default async function ProjectCaseStudyPage(
                   {neighbour.title}
                 </span>
               </Link>
+              </li>
             ) : (
-              <span className="flex-1" key={n} />
+              <li aria-hidden="true" className="flex-1" key={n} />
             ),
           )}
+          </ul>
         </nav>
 
         <CtaBand

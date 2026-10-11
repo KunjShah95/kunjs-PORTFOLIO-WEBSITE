@@ -56,8 +56,7 @@ export function HeaderMenu() {
       <button
         aria-controls="site-index"
         aria-expanded={open}
-        aria-haspopup="true"
-        aria-label="Open site index"
+        aria-label="Site index"
         className="w-10 h-10 rounded-full bg-primary text-on-primary md:bg-surface-card md:text-text-primary md:border md:border-border-hairline flex items-center justify-center hover:bg-primary-container md:hover:bg-surface-subtle active:scale-95 transition-all"
         onClick={() => setOpen((v) => !v)}
         ref={buttonRef}
@@ -90,6 +89,7 @@ export function HeaderMenu() {
               {indexItems.length} sections
             </span>
           </div>
+          <nav aria-label="Site index menu">
           <ul className="max-h-[min(24rem,60dvh)] overflow-y-auto no-scrollbar py-1">
             {indexItems.map((item, index) => {
               const active =
@@ -134,6 +134,7 @@ export function HeaderMenu() {
               );
             })}
           </ul>
+          </nav>
           {/* Legal sits outside `indexItems` on purpose — they are not sections
               of the portfolio, so they stay out of the count and the list
               above, but they still belong somewhere a visitor looks. */}

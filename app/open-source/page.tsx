@@ -101,7 +101,7 @@ export default async function OpenSourcePage() {
             layout="stacked"
             meta={
               <span className="flex flex-col gap-1 sm:items-end">
-                <span className="inline-flex items-center gap-1.5 text-accent-emerald">
+                <span className="inline-flex items-center gap-1.5 text-accent-emerald-ink">
                   <span className="relative flex w-1.5 h-1.5 shrink-0">
                     <span className="absolute inset-0 rounded-full bg-accent-emerald animate-ping opacity-60" />
                     <span className="relative w-1.5 h-1.5 rounded-full bg-accent-emerald" />

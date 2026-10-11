@@ -89,14 +89,15 @@ export function SiteHeader() {
         </Link>
 
         {/* ----------------------------------------------------- desktop nav */}
-        <nav
-          aria-label="Primary"
-          className="hidden lg:flex items-center gap-0.5 p-1 rounded-full bg-surface-card/60 border border-border-hairline backdrop-blur-md"
-          onMouseLeave={() => setHovered(null)}
-        >
+        <nav aria-label="Primary" className="hidden lg:block">
+          <ul
+            className="flex items-center gap-0.5 p-1 rounded-full bg-surface-card/60 border border-border-hairline backdrop-blur-md"
+            onMouseLeave={() => setHovered(null)}
+          >
           {desktopNav.map((item) => {
             const active = isActive(pathname, item.href);
             return (
+              <li key={item.href}>
               <Link
                 aria-current={active ? "page" : undefined}
                 className={cn(
@@ -105,7 +106,6 @@ export function SiteHeader() {
                   hovered && hovered !== item.href && active && "text-text-primary",
                 )}
                 href={item.href}
-                key={item.href}
                 onMouseEnter={() => setHovered(item.href)}
               >
                 {pill === item.href && (
@@ -124,8 +124,10 @@ export function SiteHeader() {
                 <span className="relative">{item.label}</span>
                 <LinkPending className="bottom-0.5" />
               </Link>
+              </li>
             );
           })}
+          </ul>
         </nav>
 
         {/* ----------------------------------------------------------- right */}

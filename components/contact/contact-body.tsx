@@ -29,6 +29,24 @@ function validate(form: HTMLFormElement): Errors {
   return errors;
 }
 
+/**
+ * WebMCP declarative form annotations. Browsers with an in-page agent read
+ * these to expose the form as a callable tool; everyone else ignores them.
+ * Spread from a constant because they are not (yet) in React's DOM types.
+ */
+const webMcpForm: Record<string, string> = {
+  toolname: "send_project_inquiry",
+  tooldescription:
+    "Send a project inquiry to Kunj Shah by email. Requires a name, a work email and at least 20 characters of project details. Kunj replies within one working day.",
+};
+
+/** Chip-styled radio: a real input that agents and assistive tech can operate. */
+const chipBase =
+  "relative h-11 px-3 rounded-xl font-body-sm text-body-sm flex items-center gap-1 border cursor-pointer transition-all duration-200 active:scale-[0.98] has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-text-primary/15";
+const chipOn = "bg-primary-container text-on-primary border-primary-container";
+const chipOff =
+  "bg-surface-subtle text-text-secondary border-transparent hover:border-border-hairline hover:text-text-primary";
+
 const inputBase =
   "w-full px-3.5 py-3 rounded-xl bg-surface-subtle text-text-primary font-body-md text-body-md placeholder:text-text-muted border border-transparent focus:outline-hidden focus:bg-surface-card focus:border-text-primary/25 focus:ring-4 focus:ring-text-primary/5 transition-[background-color,border-color,box-shadow] duration-200 aria-invalid:border-error/60 aria-invalid:bg-surface-card aria-invalid:focus:ring-error/10";
 
@@ -190,6 +208,8 @@ export function ContactBody() {
               <div className="flex items-center justify-between gap-2 pt-3 border-t border-border-hairline">
                 <span className="font-body-sm text-body-sm text-text-muted">{service.pill}</span>
                 <button
+                  aria-controls="projectDetails"
+                  aria-label={`${service.cta}: start an inquiry about ${service.title}`}
                   className="group/cta inline-flex items-center gap-1 h-11 -mr-2 px-2 rounded-full font-body-sm text-body-sm font-medium text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
                   onClick={() => prefill(service.title)}
                   type="button"
@@ -205,7 +225,9 @@ export function ContactBody() {
 
       {/* ---------------------------------------------------- project inquiry */}
       <div className="flex flex-col gap-5 lg:col-span-6 lg:sticky lg:top-28 scroll-mt-24" id="inquiryForm">
-        <h2 className="font-headline-lg text-headline-lg text-text-primary">Tell me about the project</h2>
+        <h2 className="font-headline-lg text-headline-lg text-text-primary" id="inquiry-title">
+          Tell me about the project
+        </h2>
 
         <div className="bg-surface-card rounded-2xl p-5 sm:p-6 md:p-8 shadow-[0_24px_48px_-24px_var(--color-shadow)] border border-border-hairline">
           <AnimatePresence initial={false} mode="wait">
@@ -252,12 +274,16 @@ export function ContactBody() {
               </motion.div>
             ) : (
               <motion.form
+                {...webMcpForm}
                 animate={{ opacity: 1 }}
                 action={formAction}
+                aria-describedby="inquiry-effect"
+                aria-labelledby="inquiry-title"
                 className="relative flex flex-col gap-5"
                 exit={{ opacity: 0 }}
                 initial={false}
                 key="form"
+                name="project-inquiry"
                 noValidate
                 onSubmit={handleSubmit}
                 ref={formRef}
@@ -277,10 +303,6 @@ export function ContactBody() {
                 {/* -- spam guard: a human cannot submit this fast -- */}
                 <input name="rendered_at" type="hidden" value={renderedAt} />
 
-                {/* -- selected chips, so the server receives the choice -- */}
-                <input name="focus" type="hidden" value={focus} />
-                <input name="timeline" type="hidden" value={timeline} />
-
                 {errored ? (
                   <p
                     className="flex items-start gap-2 rounded-xl bg-error/10 px-3.5 py-3 font-body-sm text-body-sm text-error"
@@ -298,10 +320,13 @@ export function ContactBody() {
                     <input
                       aria-describedby={errors.name ? "name-error" : undefined}
                       aria-invalid={Boolean(errors.name)}
+                      aria-required="true"
                       autoComplete="name"
                       className={inputBase}
                       id="userName"
+                      maxLength={120}
                       name="name"
+                      required
                       onBlur={() => revalidate("name")}
                       onChange={() => clearError("name")}
                       placeholder="Priya Mehta"
@@ -317,11 +342,13 @@ export function ContactBody() {
                     <input
                       aria-describedby={errors.email ? "email-error" : undefined}
                       aria-invalid={Boolean(errors.email)}
+                      aria-required="true"
                       autoComplete="email"
                       className={inputBase}
                       id="userEmail"
                       inputMode="email"
                       name="email"
+                      required
                       onBlur={() => revalidate("email")}
                       onChange={() => clearError("email")}
                       placeholder="name@company.com"
@@ -339,6 +366,7 @@ export function ContactBody() {
                     autoComplete="organization"
                     className={inputBase}
                     id="userCompany"
+                    maxLength={160}
                     name="company"
                     placeholder="Startup or lab name"
                     type="text"
@@ -353,18 +381,18 @@ export function ContactBody() {
                     {projectFocusOptions.map((option) => {
                       const active = focus === option;
                       return (
-                        <button
-                          aria-pressed={active}
-                          className={cn(
-                            "h-11 px-3 rounded-xl font-body-sm text-body-sm text-left flex items-center justify-between gap-1 border transition-all duration-200 active:scale-[0.98]",
-                            active
-                              ? "bg-primary-container text-on-primary border-primary-container"
-                              : "bg-surface-subtle text-text-secondary border-transparent hover:border-border-hairline hover:text-text-primary",
-                          )}
+                        <label
+                          className={cn(chipBase, "justify-between text-left", active ? chipOn : chipOff)}
                           key={option}
-                          onClick={() => setFocus(option)}
-                          type="button"
                         >
+                          <input
+                            checked={active}
+                            className="absolute inset-0 z-10 m-0 cursor-pointer appearance-none opacity-0"
+                            name="focus"
+                            onChange={() => setFocus(option)}
+                            type="radio"
+                            value={option}
+                          />
                           <span className="truncate">{option}</span>
                           <span
                             className={cn(
@@ -374,7 +402,7 @@ export function ContactBody() {
                           >
                             <Icon name="check" size={14} />
                           </span>
-                        </button>
+                        </label>
                       );
                     })}
                   </div>
@@ -386,20 +414,20 @@ export function ContactBody() {
                     {timelineOptions.map((option) => {
                       const active = timeline === option;
                       return (
-                        <button
-                          aria-pressed={active}
-                          className={cn(
-                            "h-11 px-3 rounded-xl font-body-sm text-body-sm text-center whitespace-nowrap border transition-all duration-200 active:scale-[0.98]",
-                            active
-                              ? "bg-primary-container text-on-primary border-primary-container"
-                              : "bg-surface-subtle text-text-secondary border-transparent hover:border-border-hairline hover:text-text-primary",
-                          )}
+                        <label
+                          className={cn(chipBase, "justify-center whitespace-nowrap", active ? chipOn : chipOff)}
                           key={option}
-                          onClick={() => setTimeline(option)}
-                          type="button"
                         >
+                          <input
+                            checked={active}
+                            className="absolute inset-0 z-10 m-0 cursor-pointer appearance-none opacity-0"
+                            name="timeline"
+                            onChange={() => setTimeline(option)}
+                            type="radio"
+                            value={option}
+                          />
                           {option}
-                        </button>
+                        </label>
                       );
                     })}
                   </div>
@@ -417,12 +445,16 @@ export function ContactBody() {
                       "resize-none min-h-32",
                       flash && "shadow-[0_0_0_6px_rgb(16_185_129_/_0.18)]",
                     )}
+                    aria-required="true"
                     id="projectDetails"
+                    maxLength={5000}
+                    minLength={20}
                     name="details"
                     onBlur={() => revalidate("details")}
                     onChange={() => clearError("details")}
                     placeholder="Your stack, where it breaks today, and what good looks like."
                     ref={detailsRef}
+                    required
                     rows={5}
                   />
                   {errorText("details") ?? (
@@ -434,6 +466,7 @@ export function ContactBody() {
 
                 <div className="flex flex-col gap-3 pt-1">
                   <button
+                    aria-describedby="inquiry-effect"
                     aria-live="polite"
                     className="group w-full h-12 px-5 rounded-full bg-primary text-on-primary font-body-md text-body-md font-medium flex items-center justify-center gap-2 hover:bg-primary-container active:scale-[0.99] transition-all disabled:cursor-progress disabled:opacity-80"
                     disabled={pending}
@@ -454,8 +487,9 @@ export function ContactBody() {
                       </>
                     )}
                   </button>
-                  <p className="text-center font-body-sm text-body-sm text-text-muted">
-                    Replies within a day. Your details are only used to reply.
+                  <p className="text-center font-body-sm text-body-sm text-text-muted" id="inquiry-effect">
+                    Sends one email to Kunj. Nothing is published or charged. Replies within a
+                    day; your details are only used to reply.
                   </p>
                 </div>
               </motion.form>
