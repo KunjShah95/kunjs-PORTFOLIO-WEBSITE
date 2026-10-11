@@ -1,46 +1,103 @@
 {
   "linkset": [
     {
-      "anchor": "https://kunjshah.in/llms.txt",
+      "anchor": "https://kunjshah.in/mcp",
       "service-desc": [
-        { "href": "https://kunjshah.in/llms.txt", "type": "text/markdown" }
+        {
+          "href": "https://kunjshah.in/.well-known/mcp/server-card.json",
+          "type": "application/json"
+        }
       ],
       "service-doc": [
-        { "href": "https://kunjshah.in/llms-full.txt", "type": "text/markdown" }
+        {
+          "href": "https://kunjshah.in/openapi.json",
+          "type": "application/openapi+json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://kunjshah.in/api/",
+      "service-desc": [
+        {
+          "href": "https://kunjshah.in/openapi.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://kunjshah.in/llms.txt",
+          "type": "text/markdown"
+        }
+      ]
+    },
+    {
+      "anchor": "https://kunjshah.in/llms.txt",
+      "service-desc": [
+        {
+          "href": "https://kunjshah.in/llms.txt",
+          "type": "text/markdown"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://kunjshah.in/llms-full.txt",
+          "type": "text/markdown"
+        }
       ]
     },
     {
       "anchor": "https://kunjshah.in/ai.txt",
       "service-desc": [
-        { "href": "https://kunjshah.in/ai.txt", "type": "text/markdown" }
+        {
+          "href": "https://kunjshah.in/ai.txt",
+          "type": "text/markdown"
+        }
       ],
       "service-doc": [
-        { "href": "https://kunjshah.in/.well-known/ai.txt", "type": "text/markdown" }
+        {
+          "href": "https://kunjshah.in/.well-known/ai.txt",
+          "type": "text/markdown"
+        }
       ]
     },
     {
       "anchor": "https://kunjshah.in/services.md",
       "service-desc": [
-        { "href": "https://kunjshah.in/services.md", "type": "text/markdown" }
+        {
+          "href": "https://kunjshah.in/services.md",
+          "type": "text/markdown"
+        }
       ]
     },
     {
       "anchor": "https://kunjshah.in/pricing.md",
       "service-desc": [
-        { "href": "https://kunjshah.in/pricing.md", "type": "text/markdown" }
+        {
+          "href": "https://kunjshah.in/pricing.md",
+          "type": "text/markdown"
+        }
       ]
     },
     {
       "anchor": "https://kunjshah.in/api/portfolio.json",
       "service-desc": [
-        { "href": "https://kunjshah.in/api/portfolio.json", "type": "application/json" }
+        {
+          "href": "https://kunjshah.in/api/portfolio.json",
+          "type": "application/json"
+        }
       ]
     },
     {
       "anchor": "https://kunjshah.in/cite",
       "service-desc": [
-        { "href": "https://kunjshah.in/humans.txt", "type": "text/plain" },
-        { "href": "https://kunjshah.in/cite.txt", "type": "text/plain" }
+        {
+          "href": "https://kunjshah.in/humans.txt",
+          "type": "text/plain"
+        },
+        {
+          "href": "https://kunjshah.in/cite.txt",
+          "type": "text/plain"
+        }
       ]
     }
   ]

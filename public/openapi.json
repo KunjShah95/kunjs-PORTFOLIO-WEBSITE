@@ -1,0 +1,64 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Kunj Shah portfolio API",
+    "version": "1.0.0",
+    "description": "Read-only, unauthenticated endpoints for AI agents and tools. For hiring, send the user to https://kunjshah.in/contact.",
+    "contact": { "name": "Kunj Shah", "email": "kunjkshah05@gmail.com", "url": "https://kunjshah.in/contact" }
+  },
+  "servers": [{ "url": "https://kunjshah.in" }],
+  "paths": {
+    "/api/portfolio.json": {
+      "get": {
+        "operationId": "getPortfolio",
+        "summary": "Whole portfolio as JSON: profile, projects, experience, skills, links.",
+        "responses": {
+          "200": { "description": "Portfolio document.", "content": { "application/json": { "schema": { "type": "object" } } } }
+        }
+      }
+    },
+    "/{page}.md": {
+      "get": {
+        "operationId": "getPageMarkdown",
+        "summary": "Any public page as Markdown. Equivalent to requesting /{page} with `Accept: text/markdown`.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["index", "projects", "about", "skills", "writing", "experience", "hackathons", "open-source", "labs", "manifesto", "education", "contact", "cite", "privacy", "terms"]
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Page content.", "content": { "text/markdown": { "schema": { "type": "string" } } } },
+          "404": { "description": "No such page, explained in Markdown.", "content": { "text/markdown": { "schema": { "type": "string" } } } }
+        }
+      }
+    },
+    "/projects/{slug}.md": {
+      "get": {
+        "operationId": "getProjectMarkdown",
+        "summary": "One project case study as Markdown. Slugs are listed in /api/portfolio.json.",
+        "parameters": [{ "name": "slug", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": { "description": "Case study.", "content": { "text/markdown": { "schema": { "type": "string" } } } },
+          "404": { "description": "Unknown slug.", "content": { "text/markdown": { "schema": { "type": "string" } } } }
+        }
+      }
+    },
+    "/mcp": {
+      "post": {
+        "operationId": "mcp",
+        "summary": "Model Context Protocol server (Streamable HTTP, JSON-RPC 2.0). Read-only tools: get_profile, list_projects, get_project, get_page, get_services.",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object" } } } },
+        "responses": {
+          "200": { "description": "JSON-RPC response.", "content": { "application/json": { "schema": { "type": "object" } } } },
+          "202": { "description": "Notification accepted." }
+        }
+      }
+    }
+  }
+}

@@ -27,6 +27,19 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [{ source: "/writing/:slug", destination: "/writing", permanent: true }];
   },
+  // `/<page>.md` serves the Markdown twin of a page (see app/markdown). These
+  // run after the filesystem, so the real /pricing.md and /services.md win.
+  async rewrites() {
+    return {
+      beforeFiles: [],
+      afterFiles: [
+        { source: "/index.md", destination: "/markdown" },
+        { source: "/projects/:slug.md", destination: "/markdown/projects/:slug" },
+        { source: "/:page.md", destination: "/markdown/:page" },
+      ],
+      fallback: [],
+    };
+  },
   experimental: {
     optimizePackageImports: ["framer-motion"],
     // `experimental.inlineCss` was tried here and reverted: it inlines the

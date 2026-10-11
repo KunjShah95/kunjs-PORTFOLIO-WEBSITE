@@ -81,4 +81,8 @@
 - JSON (allowed in robots.txt): https://kunjshah.in/api/portfolio.json
 - Hiring FAQ (HTML + schema): https://kunjshah.in/contact
 - Services: https://kunjshah.in/services.md
-- OpenAPI catalog: https://kunjshah.in/.well-known/api-catalog
+- API catalog: https://kunjshah.in/.well-known/api-catalog
+- OpenAPI: https://kunjshah.in/openapi.json
+- MCP server (read-only, Streamable HTTP, no auth): https://kunjshah.in/mcp — tools: get_profile, list_projects, get_project, get_page, get_services
+- Markdown: send `Accept: text/markdown` to any page, or append `.md` (e.g. https://kunjshah.in/about.md, https://kunjshah.in/projects/onramp.md)
+- Contact form is a WebMCP tool (`send_project_inquiry`); submitting sends one email, so confirm with the user first

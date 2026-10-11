@@ -1,16 +1,23 @@
 {
-  "name": "Kunj Shah — Portfolio",
-  "url": "https://kunjshah.in",
-  "description": "MCP server card for the Kunj Shah portfolio. This server is a read-only resource exposing portfolio content, projects, and writing.",
-  "capabilities": {
-    "resources": {
-      "listChanged": false
-    },
-    "tools": {
-      "enabled": false
+  "name": "kunjshah-portfolio",
+  "title": "Kunj Shah — Portfolio",
+  "version": "1.0.0",
+  "description": "Read-only MCP server for Kunj Shah's portfolio: profile, projects and case studies, services, and any public page as Markdown. No authentication.",
+  "websiteUrl": "https://kunjshah.in",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://kunjshah.in/mcp"
     }
+  ],
+  "capabilities": {
+    "tools": { "listChanged": false }
   },
-  "endpoints": {
-    "resourceBase": "https://kunjshah.in/.well-known/mcp/resources/"
-  }
+  "tools": [
+    { "name": "get_profile", "description": "Role, location, contact details, profiles and headline metrics." },
+    { "name": "list_projects", "description": "Every project with slug, title, category, status and summary." },
+    { "name": "get_project", "description": "Full case study for one project as Markdown." },
+    { "name": "get_page", "description": "Any public page of kunjshah.in as Markdown." },
+    { "name": "get_services", "description": "Services offered, outcomes, pricing and contact links." }
+  ]
 }

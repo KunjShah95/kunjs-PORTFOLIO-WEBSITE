@@ -9,25 +9,45 @@
   "redirects": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "www.kunjshah.in" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.kunjshah.in"
+        }
+      ],
       "destination": "https://kunjshah.in/",
       "permanent": true
     },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "kunjshah.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "kunjshah.vercel.app"
+        }
+      ],
       "destination": "https://kunjshah.in/",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.kunjshah.in" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.kunjshah.in"
+        }
+      ],
       "destination": "https://kunjshah.in/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "kunjshah.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "kunjshah.vercel.app"
+        }
+      ],
       "destination": "https://kunjshah.in/:path*",
       "permanent": true
     }
@@ -36,14 +56,6 @@
     {
       "source": "/.well-known/api-catalog",
       "destination": "/.well-known/api-catalog.json"
-    },
-    {
-      "source": "/.well-known/openid-configuration",
-      "destination": "/.well-known/openid-configuration.json"
-    },
-    {
-      "source": "/.well-known/oauth-protected-resource",
-      "destination": "/.well-known/oauth-protected-resource.json"
     },
     {
       "source": "/.well-known/mcp/server-card.json",
@@ -184,24 +196,6 @@
       ]
     },
     {
-      "source": "/.well-known/openid-configuration",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json"
-        }
-      ]
-    },
-    {
-      "source": "/.well-known/oauth-protected-resource",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json"
-        }
-      ]
-    },
-    {
       "source": "/.well-known/mcp/server-card.json",
       "headers": [
         {
@@ -224,7 +218,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", <https://kunjshah.in/llms.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/llms-full.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/.well-known/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/pricing.md>; rel=\"pricing\", <https://kunjshah.in/services.md>; rel=\"service\", <https://kunjshah.in/rss.xml>; rel=\"alternate\"; type=\"application/rss+xml\", <https://kunjshah.in/sitemap.xml>; rel=\"sitemap\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", <https://kunjshah.in/openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\", <https://kunjshah.in/.well-known/mcp/server-card.json>; rel=\"mcp-server-card\", <https://kunjshah.in/llms.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/llms-full.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/.well-known/ai.txt>; rel=\"alternate\"; type=\"text/markdown\", <https://kunjshah.in/pricing.md>; rel=\"pricing\", <https://kunjshah.in/services.md>; rel=\"service\", <https://kunjshah.in/rss.xml>; rel=\"alternate\"; type=\"application/rss+xml\", <https://kunjshah.in/sitemap.xml>; rel=\"sitemap\""
         },
         {
           "key": "X-Content-Type-Options",
@@ -232,7 +226,7 @@
         },
         {
           "key": "Content-Signal",
-          "value": "ai-train=no, search=yes, ai-input=no"
+          "value": "search=yes, ai-input=yes, ai-train=no"
         }
       ]
     }
