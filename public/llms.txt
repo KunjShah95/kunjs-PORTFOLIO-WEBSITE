@@ -32,22 +32,22 @@
 
 ## Projects (summaries — all listed on /projects)
 
-- [EngineerOS](https://kunjshah.in/projects) — AI-native workspace (notes/tasks/graph) — semantic search + multi-agent, Supabase, Live 10+ DAU — https://engineeros-delta.vercel.app/
-- [OnRamp](https://kunjshah.in/projects) — Repo-to-PR onboarding autopilot — 9-step pipeline, 20+ languages parsed AST graph, load-aware task assignment, free-tier-first LLM routing — https://developer-onboard.vercel.app
-- [Estate360](https://kunjshah.in/projects) — Multi-tenant real-estate CRM — 3-layer tenant isolation (app gate + query scoping + Postgres RLS), milestone payments, buyer portal, per-tenant RAG Q&A — https://agentic-crm-henna.vercel.app/
-- [Lattice](https://kunjshah.in/projects) — Stack-ordered index of 112 AI infrastructure tools — 152 prerendered pages, comparisons, 11 essays, build-time staleness guards — https://lattice.kkshah2005.workers.dev/
-- [OfferGuard AI](https://kunjshah.in/projects) — Job offer analysis — Groq multi-provider — 40k+ tokens processed
-- [EquityLens](https://kunjshah.in/projects) — Healthcare fairness auditing — detected 23% gap, audit 3 weeks → 4 hours — EU AI Act / NIST RMF
-- [LearnAI](https://kunjshah.in/projects) — Adaptive tutoring — +45% quiz completion via adaptive difficulty
-- [SmartFlow AI](https://kunjshah.in/projects) — Transit crowd heatmaps — 94% wait-time accuracy — Firebase real-time
-- [ResumeMasterAI 2026](https://kunjshah.in/projects) — Career intelligence — LangGraph smart routing — 65% API cost cut, 3x match precision
-- [SENTINEL CLI](https://kunjshah.in/projects) — Security CLI — 13+ tools unified — 70% audit overhead cut — https://sentinel-cli.vercel.app/
-- [Railway Inspection](https://kunjshah.in/projects) — YOLOv8 on Jetson Orin — 98.7% accuracy, 4.2x speedup, <100ms
-- [ArchMind AI](https://kunjshah.in/projects) — Architecture intelligence — 7 agents, 6-provider fallback + heuristic engine
-- [ArchMind Research Agent](https://kunjshah.in/projects) — Autonomous research — plan→search→read→synthesize with citations
-- [GAP Miner](https://kunjshah.in/projects) — Skill-gap → roadmap — Llama-3 — 10 days → 15s, 95% market alignment
-- [UPI Fraud Guard](https://kunjshah.in/projects) — XGBoost fraud detection — 88% detection, <0.1% FPR
-- [MinBPE Tokenizer](https://kunjshah.in/projects) — BPE from scratch — 15% token reduction on technical corpora
+- [EngineerOS](https://kunjshah.in/projects/engineeros) — AI-native workspace (notes/tasks/graph) — semantic search + multi-agent, Supabase, Live 10+ DAU — https://engineeros-delta.vercel.app/
+- [OnRamp](https://kunjshah.in/projects/onramp) — Repo-to-PR onboarding autopilot — 9-step pipeline, 20+ languages parsed AST graph, load-aware task assignment, free-tier-first LLM routing — https://developer-onboard.vercel.app
+- [Estate360](https://kunjshah.in/projects/estate360) — Multi-tenant real-estate CRM — 3-layer tenant isolation (app gate + query scoping + Postgres RLS), milestone payments, buyer portal, per-tenant RAG Q&A — https://agentic-crm-henna.vercel.app/
+- [Lattice](https://kunjshah.in/projects/lattice) — Stack-ordered index of 112 AI infrastructure tools — 152 prerendered pages, comparisons, 11 essays, build-time staleness guards — https://lattice.kkshah2005.workers.dev/
+- [OfferGuard AI](https://kunjshah.in/projects/offerguard-ai) — Job offer analysis — Groq multi-provider — 40k+ tokens processed
+- [EquityLens](https://kunjshah.in/projects/equitylens) — Healthcare fairness auditing — detected 23% gap, audit 3 weeks → 4 hours — EU AI Act / NIST RMF
+- [LearnAI](https://kunjshah.in/projects/learnai) — Adaptive tutoring — +45% quiz completion via adaptive difficulty
+- [SmartFlow AI](https://kunjshah.in/projects/smartflow-ai) — Transit crowd heatmaps — 94% wait-time accuracy — Firebase real-time
+- [ResumeMasterAI 2026](https://kunjshah.in/projects/resumemaster-ai) — Career intelligence — LangGraph smart routing — 65% API cost cut, 3x match precision
+- [SENTINEL CLI](https://kunjshah.in/projects/sentinel-cli) — Security CLI — 13+ tools unified — 70% audit overhead cut — https://sentinel-cli.vercel.app/
+- [Railway Inspection](https://kunjshah.in/projects/railway-inspection) — YOLOv8 on Jetson Orin — 98.7% accuracy, 4.2x speedup, <100ms
+- [ArchMind AI](https://kunjshah.in/projects/archmind-ai) — Architecture intelligence — 7 agents, 6-provider fallback + heuristic engine
+- [ArchMind Research Agent](https://kunjshah.in/projects/archmind-research-agent) — Autonomous research — plan→search→read→synthesize with citations
+- [GAP Miner](https://kunjshah.in/projects/gap-miner) — Skill-gap → roadmap — Llama-3 — 10 days → 15s, 95% market alignment
+- [UPI Fraud Guard](https://kunjshah.in/projects/upi-fraud-guard) — XGBoost fraud detection — 88% detection, <0.1% FPR
+- [MinBPE Tokenizer](https://kunjshah.in/projects/minbpe-tokenizer) — BPE from scratch — 15% token reduction on technical corpora
 
 ## Writing Highlights (essays)
 

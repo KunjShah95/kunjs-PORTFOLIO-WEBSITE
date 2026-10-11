@@ -1,4 +1,5 @@
 import { DISCOVERY_ASSETS, ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
+import { projects } from "@/lib/site-data";
 
 /**
  * IndexNow key (public). Must match the file at `/{key}.txt` on the origin.
@@ -15,6 +16,7 @@ export function indexNowKeyLocation(): string {
 export function indexNowUrlList(): string[] {
   const paths = [
     ...PUBLIC_ROUTES.map((r) => r.path),
+    ...projects.map((p) => `/projects/${p.slug}`),
     ...DISCOVERY_ASSETS.map((a) => a.path),
   ];
 

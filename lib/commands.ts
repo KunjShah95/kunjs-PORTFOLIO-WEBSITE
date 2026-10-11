@@ -59,7 +59,7 @@ export const commands: readonly Command[] = [
       label: project.title,
       detail: `${project.category} · ${project.metrics[0]?.value ?? ""} ${project.metrics[0]?.label.toLowerCase() ?? ""}`.trim(),
       group: "Work",
-      href: "/projects",
+      href: `/projects/${project.slug}`,
       keywords: project.stack.join(" "),
     }),
   ),

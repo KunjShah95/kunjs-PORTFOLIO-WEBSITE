@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { DISCOVERY_ASSETS, ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
+import { projects } from "@/lib/site-data";
 
 /**
  * The build stamp, so `lastModified` is a genuine content-change signal rather
@@ -20,6 +21,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route.priority,
   }));
 
+  // One case study per shipped project, generated from the same data the
+  // pages are built from so the two cannot drift.
+  const caseStudies = projects.map((project) => ({
+    url: `${ORIGIN}/projects/${project.slug}`,
+    lastModified: LAST_MODIFIED,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   const assets = DISCOVERY_ASSETS.map((asset) => ({
     url: `${ORIGIN}${asset.path}`,
     lastModified: LAST_MODIFIED,
@@ -27,5 +37,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: asset.priority,
   }));
 
-  return [...pages, ...assets];
+  return [...pages, ...caseStudies, ...assets];
 }

@@ -113,7 +113,9 @@ export function ProjectsBrowser() {
                 {project.status}
               </p>
               <h2 className="mt-1.5 font-headline-lg text-headline-lg text-text-primary tracking-tight">
-                {project.title}
+                <Link className="link-draw" href={`/projects/${project.slug}`}>
+                  {project.title}
+                </Link>
               </h2>
 
               <dl className="grid grid-cols-3 gap-x-3 gap-y-4 my-5 py-4 border-y border-border-hairline">
@@ -147,9 +149,16 @@ export function ProjectsBrowser() {
               </div>
 
               <div className="flex items-center gap-1 mt-auto -ml-2 flex-wrap">
+                <Link
+                  className="group/btn inline-flex items-center gap-1 h-11 px-2 rounded-full font-body-sm text-body-sm font-semibold text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
+                  href={`/projects/${project.slug}`}
+                >
+                  Case study
+                  <Icon className="transition-transform duration-300 group-hover/btn:translate-x-0.5" name="arrow_forward" size={15} />
+                </Link>
                 {project.demo && (
                   <a
-                    className="group/btn inline-flex items-center gap-1 h-11 px-2 rounded-full font-body-sm text-body-sm font-semibold text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
+                    className="group/btn inline-flex items-center gap-1 h-11 px-2 rounded-full font-body-sm text-body-sm font-medium text-text-secondary hover:text-text-primary hover:bg-surface-container active:scale-[0.97] transition-all"
                     href={project.demo}
                     rel="noopener noreferrer"
                     target="_blank"

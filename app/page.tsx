@@ -99,7 +99,7 @@ export default async function HomePage() {
               <Reveal y={8}>
                 <span className="inline-flex items-center gap-2 font-body-sm text-body-sm text-text-secondary">
                   <StatusDot className="bg-accent-emerald" ping />
-                  Taking on new projects
+                  Taking on agent, retrieval and AI product work
                 </span>
               </Reveal>
 
@@ -113,22 +113,26 @@ export default async function HomePage() {
 
               <Reveal delay={0.3}>
                 <p className="font-body-lg text-body-lg text-text-secondary max-w-[46ch]">
-                  I&apos;m Kunj, an AI engineer in {site.location}. I ship agents,
-                  retrieval pipelines and edge vision that keep working after launch.
+                  I&apos;m Kunj, an AI engineer in {site.location}. I build agents,
+                  retrieval systems and AI products, with the emphasis on
+                  reliability, evaluation and the engineering decisions that keep
+                  them working after launch.
                 </p>
               </Reveal>
 
               <Reveal className="flex flex-wrap items-center gap-3" delay={0.4}>
-                <Link className={`${buttonStyles.primary} group`} href="/contact">
-                  Get in touch
+                {/* Two audiences, two paths: people evaluating the work
+                    (hiring, diligence) and people with a project to scope. */}
+                <Link className={`${buttonStyles.primary} group`} href="/projects">
+                  Explore engineering work
                   <Icon
                     className="transition-transform duration-300 group-hover:translate-x-0.5"
                     name="arrow_forward"
                     size={16}
                   />
                 </Link>
-                <Link className={buttonStyles.secondary} href="/projects">
-                  View projects
+                <Link className={buttonStyles.secondary} href="/contact">
+                  Discuss a project
                 </Link>
               </Reveal>
             </div>
@@ -235,7 +239,7 @@ export default async function HomePage() {
           {/* lead project: the one piece of work given room to breathe */}
           <Link
             className="group lift grid gap-8 md:grid-cols-5 p-6 md:p-10 rounded-2xl bg-surface-card border border-border-hairline"
-            href="/projects"
+            href={`/projects/${lead.slug}`}
           >
             {lead.video && (
               <DemoVideo
@@ -285,7 +289,7 @@ export default async function HomePage() {
               <li className="border-b border-border-hairline" key={project.slug}>
                 <Link
                   className="group flex gap-x-6 gap-y-1 py-5"
-                  href="/projects"
+                  href={`/projects/${project.slug}`}
                 >
                   {/* demo thumbnail, or the project glyph when there is no recording */}
                   <span className="hidden md:block w-36 shrink-0 self-center">
@@ -443,11 +447,11 @@ export default async function HomePage() {
         </PageSection>
 
         <CtaBand
-          body="Tell me what you're building and where it breaks. I reply within a day."
+          body="Tell me what you're building, the constraints you're working with, and where it breaks. I reply within a day."
           title="Building something with AI that has to work for real users?"
         >
           <Link className={buttonStyles.primary} href="/contact">
-            Get in touch
+            Discuss a project
           </Link>
           <CopyEmailRow className="w-full sm:w-auto" />
         </CtaBand>
