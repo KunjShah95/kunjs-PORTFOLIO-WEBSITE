@@ -33,7 +33,7 @@ const tours = {
     ['hold',2500],['research'],['hold',3000]]},
   estate360: { url:'https://agentic-crm-henna.vercel.app/', steps:[
     ['consent'],['hold',3500],['move',700,380],['scroll',2000,9000],['hold',1800],['scroll',2000,8000],['hold',1500],['top',4000],['hold',2000]]},
-  lattice: { url:'https://lattice.kkshah2005.workers.dev/', steps:[
+  lattice: { url:'https://lattice.kunjshah.in', steps:[
     ['hold',2500],['move',640,500],['scroll',2400,10000],['hold',1500],['top',3600],['goto','/all'],['hold',1800],['scroll',1500,7000],['hold',1500],['goto','/compare'],['hold',1500],['scroll',1000,4000],['hold',1800]]},
   onramp: { url:'https://developer-onboard.vercel.app/', steps:[
     ['hold',3200],['move',660,430],['scroll',2200,7000],['hold',1200],['click','button:has-text("Ask")'],['hold',2600],['scroll',1800,5000],['hold',1200],

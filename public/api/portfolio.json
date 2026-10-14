@@ -185,7 +185,7 @@
       "description": "Curated, stack-ordered index of the infrastructure behind production AI systems: 112 tools across 9 layers with a page per tool, 6 head-to-head comparisons, 11 essays, and build-time guards that fail on stale licence data or a tool missing classification.",
       "tech": ["Next.js 16", "React 19", "MDX", "Tailwind v4", "Cloudflare Workers"],
       "github": "https://github.com/KunjShah95/lattice",
-      "demo": "https://lattice.kkshah2005.workers.dev/",
+      "demo": "https://lattice.kunjshah.in",
       "slug": "lattice",
       "impact": "Live"
     },
@@ -199,6 +199,16 @@
       "demo": "https://developer-onboard.vercel.app",
       "slug": "onramp",
       "impact": "Live"
+    },
+    {
+      "id": "15",
+      "title": "BenchMax",
+      "category": "LLM Serving Benchmark",
+      "description": "Controlled benchmark of vLLM vs llama.cpp under identical workloads, measuring TTFT, ITL, throughput, goodput, memory, and quality across quantization schemes.",
+      "tech": ["Python", "vLLM", "llama.cpp", "CUDA", "WSL2"],
+      "github": "https://github.com/KunjShah95/benchmax",
+      "slug": "benchmax",
+      "impact": "Research Tooling"
     }
   ],
   "blogs": [

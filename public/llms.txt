@@ -35,7 +35,7 @@
 - [EngineerOS](https://kunjshah.in/projects/engineeros) — AI-native workspace (notes/tasks/graph) — semantic search + multi-agent, Supabase, Live 10+ DAU — https://engineeros-delta.vercel.app/
 - [OnRamp](https://kunjshah.in/projects/onramp) — Repo-to-PR onboarding autopilot — 9-step pipeline, 20+ languages parsed AST graph, load-aware task assignment, free-tier-first LLM routing — https://developer-onboard.vercel.app
 - [Estate360](https://kunjshah.in/projects/estate360) — Multi-tenant real-estate CRM — test-enforced tenant isolation (every query scoped by workspaceId, checked by a CI guard), milestone payments, buyer portal, per-tenant RAG Q&A — https://agentic-crm-henna.vercel.app/
-- [Lattice](https://kunjshah.in/projects/lattice) — Stack-ordered index of 112 AI infrastructure tools — 152 prerendered pages, comparisons, 11 essays, build-time staleness guards — https://lattice.kkshah2005.workers.dev/
+- [Lattice](https://kunjshah.in/projects/lattice) — Stack-ordered index of 112 AI infrastructure tools — 152 prerendered pages, comparisons, 11 essays, build-time staleness guards — https://lattice.kunjshah.in
 - [OfferGuard AI](https://kunjshah.in/projects/offerguard-ai) — Job offer analysis — Groq multi-provider — 40k+ tokens processed
 - [EquityLens](https://kunjshah.in/projects/equitylens) — Healthcare fairness auditing — detected 23% gap, audit 3 weeks → 4 hours — EU AI Act / NIST RMF
 - [LearnAI](https://kunjshah.in/projects/learnai) — Adaptive tutoring — +45% quiz completion via adaptive difficulty

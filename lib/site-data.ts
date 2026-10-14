@@ -305,7 +305,7 @@ export const projects: readonly Project[] = [
       "Reference content rots. Licence, cost, and deployment claims are the fastest-decaying facts in any tool index, and a confident stale one is worse than no entry.",
     lessons:
       "The hard part is not rendering 152 prerendered pages, it is making wrong facts impossible to ship. Coverage is asserted in both directions, stale licence data fails the build, and comparisons resolve tools by name against the dataset so a page cannot drift from the index.",
-    demo: "https://lattice.kkshah2005.workers.dev/",
+    demo: "https://lattice.kunjshah.in",
     github: "https://github.com/KunjShah95/lattice",
   },
   {
@@ -552,40 +552,22 @@ export const projects: readonly Project[] = [
     github: "https://github.com/KunjShah95/TOKENIZER-FROM-SCRATCH",
   },
   {
-    slug: "cinepulse",
-    title: "CinePulse",
-    category: "Full Stack ML",
-    status: "Production",
-    icon: "devices",
+    slug: "benchmax",
+    title: "BenchMax",
+    category: "LLM Serving Benchmark",
+    status: "Research",
+    icon: "speed",
     description:
-      "End-to-end movie recommendation system: an NLP-heavy PyTorch backend behind a React and FastAPI product surface.",
-    summary: "Full-stack recommender with sub-50ms inference and 92% accuracy.",
-    stack: ["Python", "PyTorch", "React", "FastAPI"],
+      "Controlled benchmark of vLLM vs llama.cpp under identical workloads, measuring TTFT, ITL, throughput, goodput, memory, and quality across quantization schemes.",
+    summary: "Reproducible serving-backend comparison with latency, throughput, memory, and quality metrics.",
+    stack: ["Python", "vLLM", "llama.cpp", "CUDA", "WSL2"],
     metrics: [
-      { value: "92%", label: "Accuracy" },
-      { value: "<50ms", label: "Inference", accent: true },
-      { value: "E2E", label: "Stack" },
+      { value: "4", label: "Workloads" },
+      { value: "n=3", label: "Replicates" },
+      { value: "TTFT", label: "Latency" },
     ],
-    body: "A complete recommendation pipeline, feature extraction, model training, serving, and a product surface, rather than a notebook that stops at evaluation.",
-    github: "https://github.com/KunjShah95/CinePulse",
-  },
-  {
-    slug: "aether-ai",
-    title: "AETHER AI",
-    category: "AI Systems",
-    status: "Framework",
-    icon: "bolt",
-    description:
-      "Multi-model terminal assistant with a local-first Ollama path for zero data leakage.",
-    summary: "Terminal assistant routing across local and hosted models.",
-    stack: ["Python", "Ollama", "Gemini", "Groq"],
-    metrics: [
-      { value: "4", label: "Model Backends" },
-      { value: "0", label: "Leakage" },
-      { value: "CLI", label: "Interface" },
-    ],
-    body: "A terminal-native assistant that can fall back to a fully local Ollama path when a prompt must not leave the machine.",
-    github: "https://github.com/KunjShah95/AETHER-AI",
+    body: "Backends run as separate server processes under deterministic prompt generation, with client-side timing on a monotonic clock, warmup passes discarded, and unavailable cells recorded as skipped with a reason.",
+    github: "https://github.com/KunjShah95/benchmax",
   },
 ] as const;
 
