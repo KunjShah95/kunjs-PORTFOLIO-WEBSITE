@@ -1,15 +1,7 @@
 "use client";
 
 import { useRef, type PointerEvent as ReactPointerEvent } from "react";
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "@/lib/motion-client";
 import { Icon, type IconName } from "@/components/icon";
 import { StatusDot, Tag } from "@/components/ui/primitives";
 import { cn } from "@/lib/cn";

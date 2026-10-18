@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "@/lib/motion-client";
 import { Icon } from "@/components/icon";
 import { Tag } from "@/components/ui/primitives";
 import {

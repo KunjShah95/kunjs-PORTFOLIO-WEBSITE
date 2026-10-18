@@ -1,6 +1,6 @@
 'use client';
 
-import { animate, useInView, useReducedMotion } from 'framer-motion';
+import { animate, useInView, useReducedMotion } from "@/lib/motion-client";
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { EASE_OUT } from '@/lib/motion';
 

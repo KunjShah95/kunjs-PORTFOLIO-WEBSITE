@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-client";
 import { track } from "@vercel/analytics";
 import { cn } from "@/lib/cn";
 

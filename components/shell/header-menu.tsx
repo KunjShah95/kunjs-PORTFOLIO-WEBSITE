@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "@/lib/motion-client";
 import { Icon } from "@/components/icon";
 import { EASE_OUT } from "@/lib/motion";
 import { legalDocuments } from "@/lib/legal";

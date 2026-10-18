@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "@/lib/motion-client";
 import { track } from "@vercel/analytics";
 import { Icon } from "@/components/icon";
 import { OPEN_EVENT } from "@/components/shell/command-palette-event";

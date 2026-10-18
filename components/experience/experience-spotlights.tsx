@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "@/lib/motion-client";
 import { Icon } from "@/components/icon";
 import { Reveal } from "@/components/primitives/Reveal";
 import { StatStrip } from "@/components/ui/blocks";

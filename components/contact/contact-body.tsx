@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "@/lib/motion-client";
 import { track } from "@vercel/analytics";
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/cn";

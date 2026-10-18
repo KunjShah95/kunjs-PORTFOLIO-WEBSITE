@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "@/lib/motion-client";
 import { Icon } from "@/components/icon";
 import { DemoVideo } from "@/components/projects/demo-video";
 import { EmptyState } from "@/components/ui/empty-state";

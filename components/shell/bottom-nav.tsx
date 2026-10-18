@@ -3,12 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import {
-  motion,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-} from "framer-motion";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "@/lib/motion-client";
 import { Icon } from "@/components/icon";
 import { LinkPending } from "@/components/primitives/LinkPending";
 import { cn } from "@/lib/cn";

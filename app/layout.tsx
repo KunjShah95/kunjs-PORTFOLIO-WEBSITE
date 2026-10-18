@@ -7,6 +7,7 @@ import { LazyCommandPalette } from "@/components/shell/lazy-command-palette";
 import { SiteFooter } from "@/components/shell/site-footer";
 import { SiteHeader } from "@/components/shell/site-header";
 import { themeScript } from "@/components/shell/theme-toggle";
+import { MotionProvider } from "@/components/shell/motion-provider";
 import { PersonSiteJsonLd } from "@/components/seo/json-ld";
 import { ORIGIN } from "@/lib/routes";
 import { site } from "@/lib/site-data";
@@ -165,14 +166,16 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <SiteHeader />
-        {children}
-        <SiteFooter />
-        <BottomNav />
-        {/* ⌘K search. Mounted last so its trigger sits above the header row.
-            Deferred until first use: it is reachable only by keyboard or the
-            header button, so keeping it out of the first-load bundle is free. */}
-        <LazyCommandPalette />
+        <MotionProvider>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+          <BottomNav />
+          {/* ⌘K search. Mounted last so its trigger sits above the header row.
+              Deferred until first use: it is reachable only by keyboard or the
+              header button, so keeping it out of the first-load bundle is free. */}
+          <LazyCommandPalette />
+        </MotionProvider>
         {/* Cookieless pageview + custom-event analytics. Renders nothing.
             It reads `useSearchParams()`, so React streams a
             BAILOUT_TO_CLIENT_SIDE_RENDERING boundary here — correct and cheap:
