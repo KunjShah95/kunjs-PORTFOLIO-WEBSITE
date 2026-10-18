@@ -14,6 +14,7 @@ import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { PageSection, RailLink } from "@/components/ui/page-intro";
 import { ArrowAffordance, StatusDot } from "@/components/ui/primitives";
 import {
+  engagements,
   homeEssays,
   jobs,
   mergedContributions,
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     path: "",
     title: "AI Engineer & Agent Builder in Ahmedabad",
     description:
-      "Kunj Shah is an AI engineer in Ahmedabad, India building agents, RAG pipelines and edge computer vision that hold up in production. 17+ shipped systems, 60+ merged open-source PRs.",
+      "Kunj Shah is an AI engineer focused on inference performance, retrieval systems, and agent infrastructure. Production AI systems, benchmarks, and 60+ merged open-source PRs.",
     keywords: [
       "AI engineer Ahmedabad",
       "AI engineer India",
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     ],
     ogTitle: "Kunj Shah — AI Engineer & Agent Builder, Ahmedabad",
     ogDescription:
-      "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, 60+ merged open-source PRs.",
+      "AI infrastructure and systems engineering: inference benchmarks, retrieval systems, agent infrastructure, and full-stack AI apps. 60+ merged open-source PRs.",
   }),
   // The root `title.template` only applies to child segments, so the home
   // page would otherwise ship a title without the name in it.
@@ -105,7 +106,7 @@ export default async function HomePage() {
               <Reveal y={8}>
                 <span className="inline-flex items-center gap-2 font-body-sm text-body-sm text-text-secondary">
                   <StatusDot className="bg-accent-emerald" ping />
-                  Taking on agent, retrieval and AI product work
+                  Open to AI infra, full-stack AI, and OSS maintainer roles
                 </span>
               </Reveal>
 
@@ -119,11 +120,42 @@ export default async function HomePage() {
 
               <Reveal delay={0.3}>
                 <p className="font-body-lg text-body-lg text-text-secondary max-w-[46ch]">
-                  I&apos;m Kunj, an AI engineer in {site.location}. I build agents,
-                  retrieval systems and AI products, with the emphasis on
-                  reliability, evaluation and the engineering decisions that keep
-                  them working after launch.
+                  I&apos;m Kunj, an AI engineer focused on inference performance,
+                  retrieval systems, and agent infrastructure in {site.location}.
+                  I build, benchmark, and contribute to the systems behind useful
+                  AI products, with the emphasis on reliability, evaluation, and
+                  the engineering decisions that keep them working after launch.
                 </p>
+              </Reveal>
+
+              {/* Three specialties, three concrete problems. A visitor who
+                  spends five seconds here should still know what I do. */}
+              <Reveal delay={0.35}>
+                <ul className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8">
+                  {[
+                    {
+                      label: "Inference",
+                      body: "Benchmark and optimize how models get served",
+                    },
+                    {
+                      label: "Retrieval",
+                      body: "Build search systems that stay measurable",
+                    },
+                    {
+                      label: "Open source",
+                      body: "Improve real codebases upstream",
+                    },
+                  ].map((pillar) => (
+                    <li className="flex flex-col gap-0.5 min-w-0" key={pillar.label}>
+                      <span className="font-body-sm text-body-sm font-medium text-text-primary">
+                        {pillar.label}
+                      </span>
+                      <span className="font-body-sm text-body-sm text-text-muted max-w-[26ch]">
+                        {pillar.body}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </Reveal>
 
               <Reveal className="flex flex-wrap items-center gap-3" delay={0.4}>
@@ -135,7 +167,7 @@ export default async function HomePage() {
                   data-track-from="hero"
                   href="/projects"
                 >
-                  Explore engineering work
+                  See the evidence
                   <Icon
                     className="transition-transform duration-300 group-hover:translate-x-0.5"
                     name="arrow_forward"
@@ -148,7 +180,7 @@ export default async function HomePage() {
                   data-track-from="hero"
                   href="/contact"
                 >
-                  Discuss a project
+                  Let&apos;s work together
                 </Link>
                 {/* Hiring managers want the CV in one click, not a footer hunt. */}
                 <a
@@ -394,17 +426,90 @@ export default async function HomePage() {
         <PageSection
           id="services"
           meta={<RailLink href="/contact">Rates and process</RailLink>}
-          title="How I can help"
+          title="What I fix"
         >
-          <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
+          {/* Problem first, then what lands, then the shipped system that
+              backs it. A prospect should recognise their own situation in the
+              opening line before reading a single word about my stack. */}
+          <div className="grid gap-x-10 gap-y-10 md:grid-cols-2">
             {services.map((service) => (
-              <div className="flex flex-col gap-2 pt-5 border-t border-border-hairline" key={service.title}>
+              <div
+                className="flex flex-col gap-3 pt-5 border-t border-border-hairline"
+                key={service.title}
+              >
+                <p className="font-body-sm text-body-sm text-text-muted max-w-[40ch]">
+                  {service.problem}
+                </p>
                 <h3 className="font-headline-md text-headline-md text-text-primary">
                   {service.title}
                 </h3>
                 <p className="font-body-md text-body-md text-text-secondary max-w-[44ch]">
-                  {service.outcome}
+                  {service.deliverable}
                 </p>
+                <p className="font-body-sm text-body-sm text-text-secondary max-w-[44ch] border-l-2 border-border-hairline pl-3">
+                  {service.proof}
+                </p>
+                <span className="flex flex-wrap gap-1.5 mt-auto pt-1">
+                  {service.stack.map((tech) => (
+                    <span
+                      className="font-label-meta text-label-meta text-text-muted"
+                      key={tech}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </span>
+              </div>
+            ))}
+          </div>
+        </PageSection>
+
+        {/* ------------------------------------------- ways to work together */}
+        {/* One block per buyer, each with the evidence that buyer checks and a
+            single next step. Three audiences, three distinct reasons to reach
+            out, so nobody has to guess which door to knock on. */}
+        <PageSection
+          id="engagements"
+          layout="stacked"
+          meta={<RailLink href="/contact">Rates and process</RailLink>}
+          title="Ways to work together"
+        >
+          <div className="grid gap-10 md:grid-cols-3 md:gap-8">
+            {engagements.map((path) => (
+              <div
+                className="flex flex-col gap-4 pt-5 border-t border-border-hairline"
+                key={path.audience}
+              >
+                <span className="font-label-meta text-label-meta text-text-muted">
+                  {path.audience}
+                </span>
+                <h3 className="font-headline-md text-headline-md text-text-primary">
+                  {path.title}
+                </h3>
+                <p className="font-body-md text-body-md text-text-secondary max-w-[42ch]">
+                  {path.body}
+                </p>
+                <ul className="flex flex-col gap-2">
+                  {path.proof.map((line) => (
+                    <li
+                      className="flex gap-2 font-body-sm text-body-sm text-text-secondary"
+                      key={line}
+                    >
+                      <span aria-hidden="true" className="text-text-muted select-none">
+                        &rarr;
+                      </span>
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  className={`${buttonStyles.secondary} mt-auto self-start`}
+                  data-track="Engagement CTA Clicked"
+                  data-track-from={path.audience}
+                  href={path.href}
+                >
+                  {path.actionLabel}
+                </Link>
               </div>
             ))}
           </div>
@@ -474,8 +579,8 @@ export default async function HomePage() {
         </PageSection>
 
         <CtaBand
-          body="Tell me what you're building, the constraints you're working with, and where it breaks. I reply within a day."
-          title="Building something with AI that has to work for real users?"
+          body="Hiring for AI or full-stack, scoping a build, or looking for a maintainer: tell me which, and I'll answer on that. Recruiting, freelance pilots and OSS conversations all get a reply within a day."
+          title="Hiring, building, or maintaining — start here."
         >
           <Link
             className={buttonStyles.primary}
@@ -483,7 +588,7 @@ export default async function HomePage() {
             data-track-from="home-cta"
             href="/contact"
           >
-            Discuss a project
+            Get in touch
           </Link>
           <CopyEmailRow className="w-full sm:w-auto" />
         </CtaBand>
