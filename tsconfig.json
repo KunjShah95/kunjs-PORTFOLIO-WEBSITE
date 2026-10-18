@@ -15,6 +15,9 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    // `scripts/*.ts` are run directly with `node --experimental-strip-types`,
+    // which requires explicit `.ts` specifiers. Safe here because we never emit.
+    "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
     "incremental": true,
     "types": [

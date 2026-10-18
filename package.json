@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint app components lib",
     "typecheck": "tsc --noEmit",
-    "indexnow": "node scripts/submit-indexnow.mjs"
+    "indexnow": "node scripts/submit-indexnow.mjs",
+    "gen:services": "node --experimental-strip-types scripts/gen-services-md.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

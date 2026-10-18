@@ -18,6 +18,6 @@
     { "name": "list_projects", "description": "Every project with slug, title, category, status and summary." },
     { "name": "get_project", "description": "Full case study for one project as Markdown." },
     { "name": "get_page", "description": "Any public page of kunjshah.in as Markdown." },
-    { "name": "get_services", "description": "Services offered, outcomes, pricing and contact links." }
+    { "name": "get_services", "description": "Services offered with the problem each solves, what ships, and proof, plus pricing and contact links." }
   ]
 }

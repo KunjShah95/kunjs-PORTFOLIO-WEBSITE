@@ -72,7 +72,7 @@ const tools = [
   },
   {
     name: "get_services",
-    description: "Services offered, with expected outcomes, plus where pricing and the contact form live.",
+    description: "Services offered, each with the problem it solves, what ships, and proof from a built system. Plus where pricing and the contact form live.",
     inputSchema: { type: "object", properties: {}, additionalProperties: false },
     annotations: { readOnlyHint: true, openWorldHint: false },
     run: () =>

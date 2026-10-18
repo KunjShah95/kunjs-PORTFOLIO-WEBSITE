@@ -20,11 +20,21 @@ export function portfolioLastUpdated(): string {
 /**
  * Canonical JSON document advertised in llms.txt, ai.txt, and the API catalog.
  * Kept in one module so the route handler stays a thin cache wrapper.
+ *
+ * `schemaVersion` is a plain integer that increments on any breaking change to
+ * the non-schema.org payload. Consumers should treat a version they don't
+ * recognise as "fields may have moved" rather than assuming additive-only
+ * growth. Bump it whenever a key is removed or renamed.
+ *
+ *   2 — services[] restructured: `outcome` removed in favour of `proof`,
+ *       and `problem`/`stack` added. `summary` retained, now carrying the
+ *       deliverable. Consumers on v1 must move `outcome` reads to `proof`.
  */
 export function buildPortfolioDocument() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
+    schemaVersion: 2,
     url: `${ORIGIN}/`,
     dateModified: portfolioLastUpdated(),
     mainEntity: {

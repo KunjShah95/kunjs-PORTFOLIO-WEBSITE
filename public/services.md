@@ -2,7 +2,7 @@
 
 > Machine-readable services summary for AI agents and prospective clients.
 > Contact: kunjkshah05@gmail.com · https://kunjshah.in/contact
-> Last updated: 2026-10-11
+> Last updated: 2026-10-18
 
 ## Who This Is For
 
@@ -11,48 +11,75 @@ Kunj Shah builds production AI systems from brief to deployment in weeks, not qu
 
 ## Services
 
-### 1. AI Agents & Intelligent Automation
-- Autonomous agents and multi-agent workflows (LangGraph, CrewAI)
-- Workflow automation for business operations
-- Tool use, function calling, and guardrails
-- Typical outcome: a process that ran on manual effort now runs itself with human-in-the-loop gates
+Each service leads with the problem a prospect recognises as their own, then
+what actually ships, then the shipped system that backs the claim.
 
-### 2. RAG & Knowledge Systems
-- Retrieval-augmented generation over your documents
-- Hybrid search (vector + keyword) with cross-encoder re-ranking
-- Grounded answers with source citations
-- Typical outcome: your team can ask your own data questions and get cited answers
+### 1. Agents that verify their own work
 
-### 3. Full-Stack AI Applications
-- React/Next.js frontends + FastAPI/Python backends
-- Multi-provider LLM orchestration with fallback chains
-- Auth, state, and deployment included
-- Typical outcome: a polished product your customers can actually use
+- **Problem:** Your AI feature demos well and then fails silently in production
+- **What you get:** An agent pipeline where each step is checked against real application state before it is trusted, with human-in-the-loop gates where confidence drops.
+- **Proof:** Walkcast Lab caught 3 of 4 false successes where an agent claimed success the app's records contradicted.
+- **Stack:** LangGraph, CrewAI, Playwright, Tool use
 
-### 4. Edge Computer Vision
-- YOLOv8, TensorRT, INT8 quantization
-- Jetson-class hardware deployment, sub-100ms inference
-- Typical outcome: real-time defect/object detection running on the edge
+### 2. Search and RAG over your own documents
 
-### 5. AI Strategy & Reviews
-- Architecture reviews of AI systems
-- LLM cost optimization (up to 65% reductions via smart routing)
-- AI fairness auditing for EU AI Act / NIST compliance
+- **Problem:** Your data is already there, but nobody can find anything in it
+- **What you get:** Hybrid retrieval over your documents with citations on every claim, measured against a labelled question set so recall is a number rather than an impression.
+- **Proof:** EngineerOS runs a 20-query retrieval eval in CI that fails the build if recall drops below its floor.
+- **Stack:** pgvector, BM25, Cross-encoder re-ranking
 
-## How We Work
+### 3. Full-stack AI apps, shipped end to end
 
-1. **Intro call (15 min, free)** — scope, stack, timeline
-2. **Fixed quote in writing** — no surprises, 40%/60% payment split
-3. **Weekly demos** — you see working software every week
-4. **You own everything** — code, infra, and docs in your repo
+- **Problem:** You need a working product, not a prototype
+- **What you get:** Database, API and interface designed and deployed together, with model fallback chains so a provider outage degrades quality instead of taking the product down.
+- **Proof:** 17+ systems deployed, including a multi-tenant CRM where tenant isolation is enforced by a test that fails the build.
+- **Stack:** Next.js, FastAPI, PostgreSQL, Multi-provider fallback
 
-## Why Hire Me
+### 4. LLM cost and architecture review
 
-- **Speed:** brief to production in weeks, not quarters
-- **Evidence over claims:** 17+ shipped projects, 5 hackathon finals,
-  60+ merged OSS PRs (OWASP, Microsoft, Ollama)
-- **Production-grade:** tests, logging, observability, no lock-in
-- **Honest comms:** plain language, no AI-jargon walls
+- **Problem:** Your model invoice keeps growing and nobody knows why
+- **What you get:** A review of where the spend actually goes, plus a routing layer that sends easy work to small models and reserves large ones for real reasoning.
+- **Proof:** Complexity-based routing cut API spend 65% with under 200ms added overhead.
+- **Stack:** Model routing, Semantic caching, Quantization
+
+### 5. Computer vision on the edge
+
+- **Problem:** Inspection and defect detection has to happen in the field
+- **What you get:** INT8 quantization-aware training with hardware-accelerated decode, so detection runs on Jetson-class hardware at sub-100ms instead of in the cloud.
+- **Proof:** 98.7% accuracy at 4.2x manual throughput on real railway track footage.
+- **Stack:** YOLOv8, TensorRT, CUDA, GStreamer
+
+## Ways to work together
+
+### Hiring managers — Full-time AI or full-stack role
+
+Final-year B.Tech student at Indus University, currently interning on production AI/ML work. Open to AI engineering and full-stack roles where the systems are real and the evaluation matters.
+
+- 2 internships shipping production AI/ML features
+- 17+ systems built and deployed
+- 60+ PRs merged into OWASP, Microsoft and Ollama
+
+Next step: https://kunjshah.in/contact
+
+### Founders and small businesses — AI product build or workflow automation
+
+A scoped pilot delivered end to end: discovery, build, tests, deployment and handover. Priced per pilot rather than per hour so you know the cost before we start.
+
+- ₹10,000-20,000 — website and lead-capture setup
+- ₹15,000-35,000 — AI workflow automation
+- ₹25,000-60,000+ — AI product or MVP engineering
+
+Next step: https://kunjshah.in/contact
+
+### Open-source maintainers — Contributions and maintainership
+
+Merged work in OWASP, Microsoft and Ollama repositories, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.
+
+- 60+ merged PRs, 41 issues resolved, 24+ repositories
+- CI, security and agent-tooling contributions
+- Onboarding docs written for coding agents
+
+Next step: https://kunjshah.in/open-source
 
 ## Availability
 
