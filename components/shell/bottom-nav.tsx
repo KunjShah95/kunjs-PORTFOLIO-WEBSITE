@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "@/lib/motion-client";
+import { ActiveItemPill } from "@/components/primitives/ActiveItemPill";
 import { Icon } from "@/components/icon";
 import { LinkPending } from "@/components/primitives/LinkPending";
 import { cn } from "@/lib/cn";
-import { EASE_OUT, SPRING } from "@/lib/motion";
+import { EASE_OUT } from "@/lib/motion";
 import { navItems } from "@/lib/site-data";
 
 /**
@@ -19,6 +20,7 @@ export function BottomNav() {
   const pathname = usePathname();
   const reduce = useReducedMotion();
   const [hidden, setHidden] = useState(false);
+  const tabRef = useRef<HTMLUListElement>(null);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (y) => {
@@ -38,7 +40,10 @@ export function BottomNav() {
       initial={false}
       transition={{ duration: 0.35, ease: EASE_OUT }}
     >
-      <ul className="max-w-xl mx-auto h-16 short-screen:h-14 px-1 flex items-center justify-around">
+      <ul
+        className="relative max-w-xl mx-auto h-16 short-screen:h-14 px-1 flex items-center justify-around"
+        ref={tabRef}
+      >
         {navItems.map((item) => {
           const active =
             item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -51,16 +56,9 @@ export function BottomNav() {
                 "relative flex flex-col items-center justify-center gap-0.5 min-w-0 flex-1 h-12 short-screen:h-11 px-1 rounded-xl transition-[color,transform] duration-200 active:scale-95",
                 active ? "text-text-primary" : "text-text-muted hover:text-text-primary",
               )}
+              data-nav-href={item.href}
               href={item.href}
             >
-              {active && (
-                <motion.span
-                  aria-hidden="true"
-                  className="absolute inset-x-1.5 inset-y-0 rounded-xl bg-surface-container"
-                  layoutId="tab-pill"
-                  transition={reduce ? { duration: 0 } : SPRING}
-                />
-              )}
               <span className="relative flex flex-col items-center gap-0.5">
                 <Icon name={item.icon} size={20} />
                 <span className={cn("text-[11px] leading-tight", active ? "font-semibold" : "font-medium")}>
@@ -72,6 +70,15 @@ export function BottomNav() {
             </li>
           );
         })}
+        {/* Matches the pill's former `inset-x-1.5` inside the active item. */}
+        <ActiveItemPill
+          className="rounded-xl bg-surface-container"
+          containerRef={tabRef}
+          insetX={6}
+          targetHref={navItems.find((i) =>
+            i.href === "/" ? pathname === "/" : pathname.startsWith(i.href)
+          )?.href ?? null}
+        />
       </ul>
     </motion.nav>
   );

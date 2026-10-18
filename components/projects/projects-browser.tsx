@@ -1,14 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "@/lib/motion-client";
+import { ActiveItemPill } from "@/components/primitives/ActiveItemPill";
 import { Icon } from "@/components/icon";
 import { DemoVideo } from "@/components/projects/demo-video";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Tag } from "@/components/ui/primitives";
 import { cn } from "@/lib/cn";
-import { EASE_OUT, SPRING } from "@/lib/motion";
+import { EASE_OUT } from "@/lib/motion";
 import { projectCategories, projects } from "@/lib/site-data";
 
 /** Map a project's category onto a filter bucket. */
@@ -33,6 +34,7 @@ function buckets(project: (typeof projects)[number]): string[] {
  */
 export function ProjectsBrowser() {
   const [category, setCategory] = useState<string>("all");
+  const filterRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
   const reduce = useReducedMotion();
 
@@ -48,7 +50,8 @@ export function ProjectsBrowser() {
     <>
       <div
         aria-label="Filter projects"
-        className="scroll-fade flex items-center gap-1.5 lg:gap-1 overflow-x-auto py-1 -mx-5 px-5 lg:mx-0 lg:px-1 lg:w-fit lg:rounded-full lg:bg-surface-card lg:border lg:border-border-hairline no-scrollbar"
+        className="relative scroll-fade flex items-center gap-1.5 lg:gap-1 overflow-x-auto py-1 -mx-5 px-5 lg:mx-0 lg:px-1 lg:w-fit lg:rounded-full lg:bg-surface-card lg:border lg:border-border-hairline no-scrollbar"
+        ref={filterRef}
         role="group"
       >
         {projectCategories.map((cat) => {
@@ -66,18 +69,11 @@ export function ProjectsBrowser() {
                   ? "text-on-primary"
                   : "bg-surface-container md:bg-transparent text-text-secondary hover:text-text-primary",
               )}
+              data-nav-href={cat.id}
               key={cat.id}
               onClick={() => setCategory(cat.id)}
               type="button"
             >
-              {active && (
-                <motion.span
-                  aria-hidden="true"
-                  className="absolute inset-0 rounded-full bg-primary"
-                  layoutId="project-filter"
-                  transition={reduce ? { duration: 0 } : SPRING}
-                />
-              )}
               <span className="relative">
                 {cat.label}{" "}
                 <span className={active ? "opacity-60" : "text-text-muted"}>{count}</span>
@@ -85,14 +81,14 @@ export function ProjectsBrowser() {
             </button>
           );
         })}
+        <ActiveItemPill className="rounded-full bg-primary" containerRef={filterRef} targetHref={category} />
       </div>
 
       <motion.section
         aria-label="Project list"
         className="grid grid-cols-[minmax(0,1fr)] gap-3 md:gap-4 lg:grid-cols-2 pt-space-lg"
-        layout={!reduce}
       >
-        <AnimatePresence initial={false} mode="popLayout">
+        <AnimatePresence initial={false}>
         {visible.map((project) => {
           const isOpen = expanded === project.slug;
           return (
@@ -102,7 +98,6 @@ export function ProjectsBrowser() {
               exit={{ opacity: 0, scale: 0.97 }}
               initial={reduce ? false : { opacity: 0, scale: 0.97 }}
               key={project.slug}
-              layout={reduce ? false : "position"}
               transition={{ duration: 0.35, ease: EASE_OUT }}
             >
               {project.video && (

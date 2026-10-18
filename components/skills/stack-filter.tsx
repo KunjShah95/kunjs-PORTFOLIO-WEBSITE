@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "@/lib/motion-client";
+import { ActiveItemPill } from "@/components/primitives/ActiveItemPill";
 import { Icon } from "@/components/icon";
 import { Tag } from "@/components/ui/primitives";
 import {
@@ -21,6 +22,7 @@ import { cn } from "@/lib/cn";
  */
 export function StackFilter() {
   const [active, setActive] = useState<StackCategory>("all");
+  const railRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
   const rows = useMemo(
@@ -64,8 +66,9 @@ export function StackFilter() {
         aria-label="Filter stack by discipline"
         // `scroll-fade` because the rail is wider than a phone viewport: the mask
         // is the only cue that there are more tabs off-screen to the right.
-        className="scroll-fade -mx-5 px-5 md:mx-0 md:px-0 flex gap-1.5 overflow-x-auto no-scrollbar py-1"
+        className="relative scroll-fade -mx-5 px-5 md:mx-0 md:px-0 flex gap-1.5 overflow-x-auto no-scrollbar py-1"
         onKeyDown={onKeyDown}
+        ref={railRef}
         role="radiogroup"
       >
         {stackCategories.map((category) => {
@@ -79,6 +82,7 @@ export function StackFilter() {
                   ? "text-on-primary"
                   : "bg-surface-card text-text-secondary border border-border-hairline hover:text-text-primary",
               )}
+              data-nav-href={category.id}
               id={`stack-tab-${category.id}`}
               key={category.id}
               onClick={() => setActive(category.id)}
@@ -86,14 +90,6 @@ export function StackFilter() {
               tabIndex={selected ? 0 : -1}
               type="button"
             >
-              {selected && (
-                <motion.span
-                  aria-hidden="true"
-                  className="absolute inset-0 rounded-full bg-primary"
-                  layoutId="stack-filter-pill"
-                  transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 320, damping: 30 }}
-                />
-              )}
               <span className="relative">{category.label}</span>
               <span
                 className={cn(
@@ -106,6 +102,7 @@ export function StackFilter() {
             </button>
           );
         })}
+        <ActiveItemPill className="rounded-full bg-primary" containerRef={railRef} targetHref={active} />
       </div>
 
       <motion.div

@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "@/lib/motion-client";
+import { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useSpring } from "@/lib/motion-client";
+import { ActiveItemPill } from "@/components/primitives/ActiveItemPill";
 import { LinkPending } from "@/components/primitives/LinkPending";
 import { CommandPaletteTrigger } from "@/components/shell/command-palette-trigger";
 import { HeaderMenu } from "@/components/shell/header-menu";
 import { ThemeToggle } from "@/components/shell/theme-toggle";
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/cn";
-import { SPRING } from "@/lib/motion";
 import { site } from "@/lib/site-data";
 
 /** Primary desktop destinations. Everything else lives in the index menu. */
@@ -35,9 +35,9 @@ function isActive(pathname: string, href: string) {
  */
 export function SiteHeader() {
   const pathname = usePathname();
-  const reduce = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
+  const navRef = useRef<HTMLUListElement>(null);
 
   const { scrollY, scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
@@ -85,8 +85,9 @@ export function SiteHeader() {
         {/* ----------------------------------------------------- desktop nav */}
         <nav aria-label="Primary" className="hidden lg:block">
           <ul
-            className="flex items-center gap-0.5 p-1 rounded-full bg-surface-card/60 border border-border-hairline backdrop-blur-md"
+            className="relative flex items-center gap-0.5 p-1 rounded-full bg-surface-card/60 border border-border-hairline backdrop-blur-md"
             onMouseLeave={() => setHovered(null)}
+            ref={navRef}
           >
           {desktopNav.map((item) => {
             const active = isActive(pathname, item.href);
@@ -99,28 +100,27 @@ export function SiteHeader() {
                   active ? "text-on-primary" : "text-text-secondary hover:text-text-primary",
                   hovered && hovered !== item.href && active && "text-text-primary",
                 )}
+                data-nav-href={item.href}
                 href={item.href}
                 onMouseEnter={() => setHovered(item.href)}
               >
-                {pill === item.href && (
-                  <motion.span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute inset-0 rounded-full",
-                      active && (!hovered || hovered === item.href)
-                        ? "bg-primary"
-                        : "bg-surface-container",
-                    )}
-                    layoutId="nav-pill"
-                    transition={reduce ? { duration: 0 } : SPRING}
-                  />
-                )}
                 <span className="relative">{item.label}</span>
                 <LinkPending className="bottom-0.5" />
               </Link>
               </li>
             );
           })}
+          {/* Sits behind whichever item `pill` names - the hovered one, else the
+              current page. Filled only when that item is the current page, so
+              hovering a neighbour mutes the active pill instead of filling it. */}
+          <ActiveItemPill
+            className={cn(
+              "rounded-full",
+              pill && isActive(pathname, pill) ? "bg-primary" : "bg-surface-container",
+            )}
+            containerRef={navRef}
+            targetHref={pill ?? null}
+          />
           </ul>
         </nav>
 
