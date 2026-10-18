@@ -199,9 +199,12 @@ export function ContactBody() {
                   <h3 className="font-headline-md text-headline-md text-text-primary">
                     {service.title}
                   </h3>
-                  <p className="font-body-md text-body-md text-text-secondary">{service.body}</p>
                   <p className="font-body-sm text-body-sm text-text-muted">
-                    <span className="text-text-primary font-medium">Outcome:</span> {service.outcome}
+                    {service.problem}
+                  </p>
+                  <p className="font-body-md text-body-md text-text-secondary">{service.deliverable}</p>
+                  <p className="font-body-sm text-body-sm text-text-muted">
+                    <span className="text-text-primary font-medium">Proof:</span> {service.proof}
                   </p>
                 </div>
               </div>

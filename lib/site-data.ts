@@ -17,7 +17,7 @@ export const site = {
   locationLong: "Ahmedabad, Gujarat, India",
   timezone: "UTC +5:30",
   website: "https://kunjshah.in",
-  hero: "I build the part of AI that has to keep working.",
+  hero: "I build AI systems that are measurable, reliable, and ready for real workloads.",
   links: {
     github: "https://github.com/KunjShah95",
     githubAlt: "https://github.com/KunjShah01",
@@ -182,6 +182,43 @@ export const projectCategories = [
 
 export const projects: readonly Project[] = [
   {
+    slug: "walkcast",
+    title: "Walkcast",
+    category: "Agent Observability",
+    status: "MIT · v0.3.2",
+    icon: "videocam",
+    description:
+      "A browser-agent platform that shows what an agent actually did. Paste a link and get a narrated MP4 walkthrough of the site with captions and a transcript; the same recorder turns a failed agent run into a classified, reproducible regression test that checks the application's real state instead of the agent's claim.",
+    summary:
+      "Recorded walkthroughs with narration and captions, plus a lab that turns failed browser-agent runs into reproducible regression tests checked against real application state.",
+    stack: [
+      "Node.js 22",
+      "TypeScript 5.9",
+      "Playwright 1.56",
+      "Stagehand 4.2",
+      "Tauri 2 + Rust",
+      "PostgreSQL",
+      "React 19",
+    ],
+    metrics: [
+      { value: "75%", label: "False Success Caught", accent: true },
+      { value: "100%", label: "Faults Reproduced" },
+      { value: "129", label: "Test Cases" },
+    ],
+    body: "One engine in packages/core, two apps on top of it: a static marketing site and a Tauri desktop app bundling a Node server. The recorder drives a real browser through sign-in, walks same-origin links breadth-first, and writes narration only from recorded events — the browser pauses after each action for exactly as long as its line takes, so the audio and the screen never drift. Walkcast Lab is the other half: it takes a failed agent run, pins the failure to the step that caused it using before/after application state, classifies the cause from a fixed vocabulary with cited evidence, and replays it as a fixture. Fixtures run as a CI release gate, so a new agent version has to prove it fixed the bug and did not break something else.",
+    challenges:
+      "Judging an agent by its own summary is worthless, so verification had to come from the application's records rather than the agent or an LLM judge. On top of that, recordings have to survive a worker dying mid-job without leaking the credentials that were sealed into the run.",
+    lessons:
+      "Ground truth has to live outside the system under test. Comparing before/after application state on every action turns 'the agent said it worked' into a checkable claim, and it makes the failure attributable to a specific step. The second lesson is about job correctness: fenced finalization, atomic tenant limits, and at-least-once execution with idempotent effects were the only way to keep a worker crash from double-charging or losing a recording. Secrets are replaced with {{secret:name}} placeholders before anything touches disk, and restored only in memory during replay.",
+    role: "Solo build: the recording engine, the lab harness, the desktop app and Tauri shell, the Postgres queue with SKIP LOCKED leases, the S3 and Supabase media layer, the 15-provider model gateway, and the architecture documentation.",
+    evaluation:
+      "The lab reports numbers instead of asserting capability. Across five injected faults it reproduced the original cause 5/5, and the fixed agent passed 5/5 replay trials where the naive baseline passed 0/5 — the deliberate regression (v2, fixed with read-back removed) dropped to 4/5, which is the harness catching a real regression. It also measures what agents get wrong: 3 of 4 success claims were false successes, meaning the agent reported a task complete while the application's records disagreed. 30 test files and 129 test cases run on node:test, covering secrets, jobs, queue leases, auth scoping, and the classifier.",
+    limitations:
+      "The agents under test are deterministic scripts, not LLMs, so the numbers in results/ validate the harness — capture, oracle, classifier, fixtures, replay — and say nothing about LLM agent behaviour. The published run uses one seed per fault, so the confidence intervals are wide and the figures are a harness check rather than a benchmark. Fixtures reproduce failures in an application you control; arbitrary third-party production sessions cannot be reproduced exactly. Installers are not code-signed, and redaction targets harness secrets rather than customer PII, so real customer data should not be recorded.",
+    demo: "https://walkcast.kunjshah.in",
+    github: "https://github.com/KunjShah95/walkcast",
+  },
+  {
     slug: "onramp",
     video: "/videos/onramp",
     title: "OnRamp",
@@ -216,6 +253,60 @@ export const projects: readonly Project[] = [
       "The model benchmark is three tasks, which is enough to pick a default, not to rank models. Graph-diff validation catches structural breakage, not wrong behaviour that keeps the graph intact, so the senior review still assumes a human reads it. Free-tier routing trades latency and rate limits for cost.",
     demo: "https://developer-onboard.vercel.app",
     github: "https://github.com/KunjShah95/onramp",
+  },
+  {
+    slug: "benchmax",
+    title: "BenchMax",
+    category: "LLM Serving Benchmark",
+    status: "Research",
+    icon: "speed",
+    description:
+      "Controlled benchmark of vLLM vs llama.cpp under identical workloads, measuring TTFT, ITL, throughput, goodput, memory, and quality across quantization schemes.",
+    summary: "Reproducible serving-backend comparison with latency, throughput, memory, and quality metrics.",
+    stack: ["Python", "vLLM", "llama.cpp", "CUDA", "WSL2"],
+    metrics: [
+      { value: "4", label: "Workloads" },
+      { value: "n=3", label: "Replicates" },
+      { value: "TTFT", label: "Latency" },
+    ],
+    body: "Backends run as separate server processes under deterministic prompt generation, with client-side timing on a monotonic clock, warmup passes discarded, and unavailable cells recorded as skipped with a reason.",
+    github: "https://github.com/KunjShah95/benchmax",
+  },
+  {
+    slug: "archmind-ai",
+    video: "/videos/archmind-ai",
+    title: "ArchMind AI",
+    category: "Architecture Intelligence",
+    status: "Live · No signup",
+    icon: "smart_toy",
+    description:
+      "An AI staff architect for engineering teams. Submit a Mermaid or PlantUML diagram, an image, a PDF or a URL, and seven specialized agents score it across scalability, security, reliability, performance, cost, maintainability and observability — then simulate component failures, propose redesigns against blueprints like Cost Optimized or Multi-Region, and audit your Terraform, Kubernetes and OpenAPI specs.",
+    summary:
+      "Seven review agents that score, simulate failures, and propose redesigns — and still work with zero API keys.",
+    stack: [
+      "Python 3.12",
+      "FastAPI",
+      "React 18 + Vite",
+      "Supabase",
+      "Tailwind + shadcn/ui",
+    ],
+    metrics: [
+      { value: "80%", label: "Coverage Gate In CI", accent: true },
+      { value: "6", label: "Provider Fallbacks" },
+      { value: "0", label: "Keys To Run" },
+    ],
+    body: "The whole architecture lifecycle in one pipeline: parse the diagram or vision input into a component graph, fan out to seven parallel scoring agents, aggregate severity-ranked findings into an overall score. From there it generates new designs from a plain-English prompt, projects p50/p95/p99 latency and cost across user tiers, traces cascade failures to estimate recovery time, and audits infrastructure-as-code against SOC 2, ISO 27001, GDPR, HIPAA and PCI DSS. A copilot answers questions against your own graph — what happens if Redis fails, can I remove Kafka.",
+    challenges:
+      "Seven agents means seven chances to return nothing when a provider rate-limits, and a review tool that fails on a bad API key is useless the first time someone opens it.",
+    lessons:
+      "Degrade, never fail. A six-provider fallback chain (Groq → NVIDIA → OpenRouter → Gemini → Ollama → Hugging Face) sits in front of an 18-rule heuristic engine, so with no keys configured at all the product still returns a scored baseline rather than an error. That is the difference between a demo and something a team can actually open on a bad network day.",
+    role: "Solo build: the seven-agent analysis pipeline, the Mermaid/PlantUML/vision parsing, the chaos simulator, the IaC and OpenAPI auditors, and the FastAPI and React applications.",
+    evaluation:
+      "CI is the gate, not a badge. Every pull request runs ruff and pytest on the backend with an 80% coverage floor that fails the build, plus ESLint, a tsc type-check, Vitest and a production build on the frontend. The fallback chain is exercised by the tests rather than trusted, which is the part that matters most here.",
+    limitations:
+      "The scoring is only as good as what the seven agents were asked to weigh, so a dimension with no clear rubric produces confident output rather than a refusal. The heuristic engine that keeps the product alive without keys is deliberately shallow — it gives a baseline, not an audit. IaC auditing covers misconfiguration patterns, not whether the architecture itself is right.",
+    github: "https://github.com/KunjShah95/archmind-ai",
+    demo: "https://archmind-ai-topaz.vercel.app/",
   },
   {
     slug: "engineeros",
@@ -455,27 +546,6 @@ export const projects: readonly Project[] = [
     github: "https://github.com/KunjShah95/ai-railway",
   },
   {
-    slug: "archmind-ai",
-    video: "/videos/archmind-ai",
-    title: "ArchMind AI",
-    category: "Architecture Intelligence",
-    status: "Production",
-    icon: "smart_toy",
-    description:
-      "Upload a diagram or a codebase and seven specialized agents score it across scalability, security, reliability, performance, cost, maintainability, and observability, then simulate failures and propose redesigns.",
-    summary:
-      "Seven parallel review agents that score, simulate, and redesign system architectures.",
-    stack: ["Python", "LangGraph", "FastAPI", "React", "Supabase"],
-    metrics: [
-      { value: "7", label: "Review Agents" },
-      { value: "7", label: "Dimensions" },
-      { value: "6", label: "Model Fallbacks" },
-    ],
-    body: "Parses Mermaid, PlantUML, images, and PDFs into a graph, then fans out to seven scoring agents. The fallback chain runs Groq → NVIDIA → OpenRouter → Gemini → Ollama → Hugging Face, backed by an 18-rule heuristic engine that works with zero API keys.",
-    github: "https://github.com/KunjShah95/archmind-ai",
-    demo: "https://archmind-ai-topaz.vercel.app/",
-  },
-  {
     slug: "archmind-research-agent",
     video: "/videos/archmind-research-agent",
     title: "ArchMind Research Agent",
@@ -550,24 +620,6 @@ export const projects: readonly Project[] = [
     ],
     body: "GPT-2/4 regex pre-tokenization, byte-level fallbacks, and a vocabulary retrained on technical text, trading pure-Python speed for a measurable drop in token count on domain corpora.",
     github: "https://github.com/KunjShah95/TOKENIZER-FROM-SCRATCH",
-  },
-  {
-    slug: "benchmax",
-    title: "BenchMax",
-    category: "LLM Serving Benchmark",
-    status: "Research",
-    icon: "speed",
-    description:
-      "Controlled benchmark of vLLM vs llama.cpp under identical workloads, measuring TTFT, ITL, throughput, goodput, memory, and quality across quantization schemes.",
-    summary: "Reproducible serving-backend comparison with latency, throughput, memory, and quality metrics.",
-    stack: ["Python", "vLLM", "llama.cpp", "CUDA", "WSL2"],
-    metrics: [
-      { value: "4", label: "Workloads" },
-      { value: "n=3", label: "Replicates" },
-      { value: "TTFT", label: "Latency" },
-    ],
-    body: "Backends run as separate server processes under deterministic prompt generation, with client-side timing on a monotonic clock, warmup passes discarded, and unavailable cells recorded as skipped with a reason.",
-    github: "https://github.com/KunjShah95/benchmax",
   },
 ] as const;
 
@@ -1276,51 +1328,130 @@ export const labs: readonly Lab[] = [
 
 /* ------------------------------------------------------- Services & pricing */
 
+/**
+ * What I sell, in the buyer's words.
+ *
+ * `problem` is the sentence a prospect recognises as their own situation,
+ * `deliverable` is what actually lands, and `proof` is the shipped system
+ * that backs the claim. Technology lives in `stack` only so it can be
+ * inspected — it never leads, because nobody hires a stack, they hire an
+ * outcome.
+ */
 export const services = [
   {
-    title: "Agents and automation",
+    problem: "Your AI feature demos well and then fails silently in production",
+    title: "Agents that verify their own work",
     icon: "hub",
     iconClass: "text-secondary",
-    body: "Autonomous agents and multi-agent workflows with LangGraph and CrewAI, tool use, function calling, and guardrails.",
-    outcome: "A process that ran on manual effort now runs itself, with human-in-the-loop gates.",
+    deliverable:
+      "An agent pipeline where each step is checked against real application state before it is trusted, with human-in-the-loop gates where confidence drops.",
+    proof: "Walkcast Lab caught 3 of 4 false successes where an agent claimed success the app's records contradicted.",
+    stack: ["LangGraph", "CrewAI", "Playwright", "Tool use"],
     pill: "Agents",
     cta: "Discuss an agent build",
   },
   {
-    title: "Search and RAG over your data",
+    problem: "Your data is already there, but nobody can find anything in it",
+    title: "Search and RAG over your own documents",
     icon: "content_copy",
     iconClass: "text-accent-emerald",
-    body: "Retrieval-augmented generation over your documents with hybrid vector + BM25 search and cross-encoder re-ranking.",
-    outcome: "Your team can ask questions of your own data and get cited answers.",
+    deliverable:
+      "Hybrid retrieval over your documents with citations on every claim, measured against a labelled question set so recall is a number rather than an impression.",
+    proof: "EngineerOS runs a 20-query retrieval eval in CI that fails the build if recall drops below its floor.",
+    stack: ["pgvector", "BM25", "Cross-encoder re-ranking"],
     pill: "RAG",
     cta: "Discuss a RAG system",
   },
   {
-    title: "Full-stack AI apps",
+    problem: "You need a working product, not a prototype",
+    title: "Full-stack AI apps, shipped end to end",
     icon: "devices",
     iconClass: "text-on-tertiary-container",
-    body: "React and Next.js frontends with FastAPI and Python backends, multi-provider LLM orchestration, and fallback chains.",
-    outcome: "A polished product your customers can actually use.",
+    deliverable:
+      "Database, API and interface designed and deployed together, with model fallback chains so a provider outage degrades quality instead of taking the product down.",
+    proof: "17+ systems deployed, including a multi-tenant CRM where tenant isolation is enforced by a test that fails the build.",
+    stack: ["Next.js", "FastAPI", "PostgreSQL", "Multi-provider fallback"],
     pill: "Full Stack",
     cta: "Discuss a build",
   },
   {
+    problem: "Your model invoice keeps growing and nobody knows why",
+    title: "LLM cost and architecture review",
+    icon: "verified_user",
+    iconClass: "text-on-tertiary-container",
+    deliverable:
+      "A review of where the spend actually goes, plus a routing layer that sends easy work to small models and reserves large ones for real reasoning.",
+    proof: "Complexity-based routing cut API spend 65% with under 200ms added overhead.",
+    stack: ["Model routing", "Semantic caching", "Quantization"],
+    pill: "Advisory",
+    cta: "Request a review",
+  },
+  {
+    problem: "Inspection and defect detection has to happen in the field",
     title: "Computer vision on the edge",
     icon: "memory",
     iconClass: "text-primary",
-    body: "YOLOv8 with TensorRT INT8 quantization-aware training and GStreamer on Jetson-class hardware, sub-100ms inference.",
-    outcome: "Real-time defect and object detection running on the edge.",
+    deliverable:
+      "INT8 quantization-aware training with hardware-accelerated decode, so detection runs on Jetson-class hardware at sub-100ms instead of in the cloud.",
+    proof: "98.7% accuracy at 4.2x manual throughput on real railway track footage.",
+    stack: ["YOLOv8", "TensorRT", "CUDA", "GStreamer"],
     pill: "Computer Vision",
     cta: "Discuss a vision pipeline",
   },
+] as const;
+
+/* ------------------------------------------------- Ways to work together */
+
+/**
+ * Three clearly scoped ways to hire me, each aimed at one buyer. The freelance
+ * ranges are starting points for a narrow pilot, not quotes: final numbers come
+ * after scope, milestones, infrastructure cost, and support are agreed.
+ *
+ * Written in the buyer's problem rather than my technology, because that is
+ * what a prospect is actually evaluating.
+ */
+export const engagements = [
   {
-    title: "Architecture and cost reviews",
-    icon: "verified_user",
-    iconClass: "text-on-tertiary-container",
-    body: "Architecture reviews, LLM cost optimization via smart routing (up to 65% reduction), and fairness auditing for EU AI Act and NIST compliance.",
-    outcome: "A system that is cheaper to run and defensible to an auditor.",
-    pill: "Advisory",
-    cta: "Request a review",
+    audience: "Hiring managers",
+    icon: "verified",
+    title: "Full-time AI or full-stack role",
+    body: "Final-year B.Tech student at Indus University, currently interning on production AI/ML work. Open to AI engineering and full-stack roles where the systems are real and the evaluation matters.",
+    proof: [
+      "2 internships shipping production AI/ML features",
+      "17+ systems built and deployed",
+      "60+ PRs merged into OWASP, Microsoft and Ollama",
+    ],
+    action: "Send an opening",
+    href: "/contact",
+    actionLabel: "Get in touch",
+  },
+  {
+    audience: "Founders and small businesses",
+    icon: "rocket_launch",
+    title: "AI product build or workflow automation",
+    body: "A scoped pilot delivered end to end: discovery, build, tests, deployment and handover. Priced per pilot rather than per hour so you know the cost before we start.",
+    proof: [
+      "₹10,000-20,000 — website and lead-capture setup",
+      "₹15,000-35,000 — AI workflow automation",
+      "₹25,000-60,000+ — AI product or MVP engineering",
+    ],
+    action: "Request a pilot",
+    href: "/contact",
+    actionLabel: "Scope a project",
+  },
+  {
+    audience: "Open-source maintainers",
+    icon: "commit",
+    title: "Contributions and maintainership",
+    body: "Merged work in OWASP, Microsoft and Ollama repositories, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.",
+    proof: [
+      "60+ merged PRs, 41 issues resolved, 24+ repositories",
+      "CI, security and agent-tooling contributions",
+      "Onboarding docs written for coding agents",
+    ],
+    action: "Review the pull requests",
+    href: "/open-source",
+    actionLabel: "See contributions",
   },
 ] as const;
 

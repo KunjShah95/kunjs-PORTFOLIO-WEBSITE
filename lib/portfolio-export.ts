@@ -81,10 +81,16 @@ export function buildPortfolioDocument() {
       description: job.description,
       live: job.live ?? false,
     })),
+    // `outcome` is replaced by `proof`, and `problem`/`stack` are new, so
+    // this is a breaking change to the published schema rather than a rename.
+    // `summary` is retained but now carries the deliverable. Any external
+    // consumer reading `services[].outcome` needs to move to `proof`.
     services: services.map((s) => ({
       title: s.title,
-      summary: s.body,
-      outcome: s.outcome,
+      problem: s.problem,
+      summary: s.deliverable,
+      proof: s.proof,
+      stack: s.stack,
     })),
     projects: projects.map((p) => ({
       slug: p.slug,

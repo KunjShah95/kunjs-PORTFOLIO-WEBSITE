@@ -77,7 +77,7 @@ const tools = [
     annotations: { readOnlyHint: true, openWorldHint: false },
     run: () =>
       text(
-        `${services.map((s) => `${s.title}: ${s.body} Outcome: ${s.outcome}`).join("\n")}\n\nPricing: ${ORIGIN}/pricing.md\nContact: ${ORIGIN}/contact or ${site.email}`,
+        `${services.map((s) => `${s.title} (${s.pill}): ${s.problem} ${s.deliverable} Proof: ${s.proof}`).join("\n")}\n\nPricing: ${ORIGIN}/pricing.md\nContact: ${ORIGIN}/contact or ${site.email}`,
       ),
   },
 ] as const;

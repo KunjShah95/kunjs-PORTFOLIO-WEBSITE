@@ -90,7 +90,7 @@ const pages: Record<string, () => Doc> = {
     title: `${site.name} — ${site.role}`,
     body: `${site.hero}\n\n${hiringFaqs[0].answer}\n\n## Selected projects\n\n${list(
       projects.slice(0, 6).map((p) => `[${p.title}](${ORIGIN}/projects/${p.slug}) — ${p.summary}`),
-    )}\n\n## Services\n\n${list(services.map((s) => `**${s.title}.** ${s.body}`))}\n\nPricing: ${ORIGIN}/pricing.md`,
+    )}\n\n## Services\n\n${list(services.map((s) => `**${s.title}.** ${s.problem} ${s.deliverable}`))}\n\nPricing: ${ORIGIN}/pricing.md`,
   }),
   "/projects": () => ({
     title: "Projects",
@@ -145,7 +145,7 @@ const pages: Record<string, () => Doc> = {
   "/contact": () => ({
     title: "Contact and hiring",
     body: `Email ${site.email}, or send the form at ${ORIGIN}/contact (fields: name, email, company optional, focus, timeline, details of 20+ characters). Submitting sends one email; replies within a day.\n\n## Services\n\n${list(
-      services.map((s) => `**${s.title}.** ${s.body} Outcome: ${s.outcome}`),
+      services.map((s) => `**${s.title}.** ${s.problem} ${s.deliverable} Proof: ${s.proof}`),
     )}\n\n## Channels\n\n${list(directChannels.map((c) => `${c.label}: ${c.href}`))}\n\nPricing: ${ORIGIN}/pricing.md · Services: ${ORIGIN}/services.md`,
   }),
   "/cite": () => ({
