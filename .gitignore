@@ -26,3 +26,8 @@ public/videos/*
 !public/videos/*.webm
 !public/videos/*.webp
 !public/videos/*.jpg
+
+# Perf audit output (scripts/perf-audit.mjs). Regenerated per machine and
+# against a localhost URL, so the numbers are only meaningful locally. Run
+# `node scripts/perf-audit.mjs --url <url> --out <label>` to produce one.
+perf-*.json

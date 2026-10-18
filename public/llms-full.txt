@@ -41,11 +41,19 @@ Languages: Python, TypeScript, JavaScript, C++ · Frontend: React, Next.js 15, V
 
 ## Services (also see /services.md for agent-parseable version)
 
-1. AI Agents & Intelligent Automation — LangGraph/CrewAI, tool use, guardrails, HITL gates — manual process → autonomous workflow
-2. RAG & Knowledge Systems — hybrid search (vector + BM25) + cross-encoder re-ranking, grounded citations
-3. Full-Stack AI Apps — React/Next.js + FastAPI/Python, auth/state/deploy included, multi-provider LLM fallback chains
-4. Edge Computer Vision — YOLOv8 + TensorRT INT8 QAT + GStreamer + CUDA on Jetson, sub-100ms
-5. AI Strategy & Reviews — architecture reviews, cost优化 (up to 65% via routing), fairness auditing (EU AI Act/NIST)
+Each service leads with the problem it solves, what ships, and proof from a built system.
+
+1. Agents that verify their own work (Agents) — Your AI feature demos well and then fails silently in production An agent pipeline where each step is checked against real application state before it is trusted, with human-in-the-loop gates where confidence drops. Proof: Walkcast Lab caught 3 of 4 false successes where an agent claimed success the app's records contradicted.
+2. Search and RAG over your own documents (RAG) — Your data is already there, but nobody can find anything in it Hybrid retrieval over your documents with citations on every claim, measured against a labelled question set so recall is a number rather than an impression. Proof: EngineerOS runs a 20-query retrieval eval in CI that fails the build if recall drops below its floor.
+3. Full-stack AI apps, shipped end to end (Full Stack) — You need a working product, not a prototype Database, API and interface designed and deployed together, with model fallback chains so a provider outage degrades quality instead of taking the product down. Proof: 17+ systems deployed, including a multi-tenant CRM where tenant isolation is enforced by a test that fails the build.
+4. LLM cost and architecture review (Advisory) — Your model invoice keeps growing and nobody knows why A review of where the spend actually goes, plus a routing layer that sends easy work to small models and reserves large ones for real reasoning. Proof: Complexity-based routing cut API spend 65% with under 200ms added overhead.
+5. Computer vision on the edge (Computer Vision) — Inspection and defect detection has to happen in the field INT8 quantization-aware training with hardware-accelerated decode, so detection runs on Jetson-class hardware at sub-100ms instead of in the cloud. Proof: 98.7% accuracy at 4.2x manual throughput on real railway track footage.
+
+**Ways to work together:**
+
+- Hiring managers: Full-time AI or full-stack role — Final-year B.Tech student at Indus University, currently interning on production AI/ML work. Open to AI engineering and full-stack roles where the systems are real and the evaluation matters.
+- Founders and small businesses: AI product build or workflow automation — A scoped pilot delivered end to end: discovery, build, tests, deployment and handover. Priced per pilot rather than per hour so you know the cost before we start.
+- Open-source maintainers: Contributions and maintainership — Merged work in OWASP, Microsoft and Ollama repositories, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.
 
 **How we work:** 15-min intro (free) → fixed quote in writing (40%/60%) → weekly demos → you own everything (repo/CI/cloud/docs)
 
