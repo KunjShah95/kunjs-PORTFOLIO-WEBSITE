@@ -101,7 +101,9 @@ const status = response?.status();
 await page.waitForTimeout(SETTLE_MS);
 
 const coverage = (await cdp.send("Profiler.takePreciseCoverage")).result;
-const profile = await cdp.send("Profiler.stop");
+// The stop call is required to tear the profiler down even though the
+// sampling profile is not read; precise coverage above is what we report.
+await cdp.send("Profiler.stop");
 
 const metrics = await cdp.send("Performance.getMetrics");
 const m = Object.fromEntries(metrics.metrics.map((x) => [x.name, x.value]));
