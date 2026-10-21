@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ClickTracker } from "@/components/analytics/click-tracker";
+import { EngagementTracker } from "@/components/analytics/engagement-tracker";
 import { BottomNav } from "@/components/shell/bottom-nav";
 import { LazyCommandPalette } from "@/components/shell/lazy-command-palette";
 import { SiteFooter } from "@/components/shell/site-footer";
@@ -144,6 +145,7 @@ export default function RootLayout({
     // rather than changing code here.
     <html
       className={`${sans.variable} ${mono.variable}`}
+      data-scroll-behavior="smooth"
       data-theme="light"
       lang="en"
       suppressHydrationWarning
@@ -185,6 +187,11 @@ export default function RootLayout({
         <Analytics />
         {/* Conversion clicks (resume, contact, demo) marked with data-track. */}
         <ClickTracker />
+        {/* One engagement event per page view, reported when the visitor
+            leaves: time on page, scroll depth, and whether they opened a
+            proof link. This is what separates a bounce that worked from a
+            bounce that failed. */}
+        <EngagementTracker />
         {/* Entity graph: resolves "Kunj Shah" to a canonical person. */}
         <PersonSiteJsonLd />
       </body>

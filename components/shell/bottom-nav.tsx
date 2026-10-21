@@ -57,6 +57,8 @@ export function BottomNav() {
                 active ? "text-text-primary" : "text-text-muted hover:text-text-primary",
               )}
               data-nav-href={item.href}
+              data-track={item.href === "/contact" ? "Contact CTA Clicked" : undefined}
+              data-track-from="bottom-nav"
               href={item.href}
             >
               <span className="relative flex flex-col items-center gap-0.5">

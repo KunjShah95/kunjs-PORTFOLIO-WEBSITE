@@ -72,6 +72,12 @@ export function ContactBody() {
   const [flash, setFlash] = useState(false);
   /** Timestamp the form was hydrated, for the minimum-fill-time guard. */
   const [renderedAt] = useState(() => Date.now());
+  /**
+   * Reaching the contact page is not the same as starting an inquiry, and
+   * the gap between the two is where the funnel leaks. One event, the first
+   * time the visitor touches a field.
+   */
+  const started = useRef(false);
 
   /**
    * Server errors, minus any field the visitor has since touched, with the
@@ -148,6 +154,16 @@ export function ContactBody() {
   }
 
   /**
+   * The first time the visitor touches a field, the funnel has started.
+   * Reported once per page view — every later keystroke would be noise.
+   */
+  function handleFormFocus() {
+    if (started.current) return;
+    started.current = true;
+    track("Contact Form Started");
+  }
+
+  /**
    * Local gate before the action runs, so an obviously incomplete form never
    * costs a round trip. The action re-validates — this is UX, not security.
    */
@@ -186,7 +202,10 @@ export function ContactBody() {
   return (
     <div className="grid gap-16 lg:grid-cols-12 lg:gap-10 items-start">
       {/* ----------------------------------------------------------- services */}
-      <div className="flex flex-col gap-5 lg:col-span-6">
+      {/* On a phone the form comes first: the catalogue is reference material
+          for someone who already wants to write, and the services below can
+          still prefill the textarea. Desktop keeps them side by side. */}
+      <div className="flex flex-col gap-5 lg:col-span-6 order-last lg:order-first">
         <h2 className="font-headline-lg text-headline-lg text-text-primary">Services</h2>
         <div className="flex flex-col gap-3">
           {services.map((service) => (
@@ -227,7 +246,10 @@ export function ContactBody() {
       </div>
 
       {/* ---------------------------------------------------- project inquiry */}
-      <div className="flex flex-col gap-5 lg:col-span-6 lg:sticky lg:top-28 scroll-mt-24" id="inquiryForm">
+      {/* The anchor target for every "get in touch" link on the site. The
+          scroll offset comes from `scroll-padding-top` on <html>, so the
+          form lands directly under the fixed header. */}
+      <div className="flex flex-col gap-5 lg:col-span-6 lg:sticky lg:top-28 order-first lg:order-last" id="inquiryForm">
         <h2 className="font-headline-lg text-headline-lg text-text-primary" id="inquiry-title">
           Tell me about the project
         </h2>
@@ -288,6 +310,7 @@ export function ContactBody() {
                 key="form"
                 name="project-inquiry"
                 noValidate
+                onFocus={handleFormFocus}
                 onSubmit={handleSubmit}
                 ref={formRef}
                 transition={{ duration: 0.2 }}

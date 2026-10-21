@@ -34,6 +34,8 @@ export function SiteFooter() {
               <li key={item.href}>
                 <Link
                   className="inline-flex items-center min-h-11 lg:min-h-0 -mx-1.5 px-1.5 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
+                  data-track={item.href === "/contact" ? "Contact CTA Clicked" : undefined}
+                  data-track-from="footer-index"
                   href={item.href}
                 >
                   {item.label}

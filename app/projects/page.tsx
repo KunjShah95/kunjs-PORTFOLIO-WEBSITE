@@ -85,12 +85,14 @@ export default function ProjectsPage() {
           body="I consult on multi-agent system design, production LLM latency optimization, and edge computer vision deployments."
           title="Have a complex AI project or agent architecture in mind?"
         >
-          <a
+          <Link
             className={buttonStyles.primary}
-            href={`mailto:${site.email}?subject=Architecture%20Call`}
+            data-track="Contact CTA Clicked"
+            data-track-from="projects-cta"
+            href="/contact#inquiryForm"
           >
             Get in touch
-          </a>
+          </Link>
           <CopyEmailRow className="bg-surface-card" />
         </CtaBand>
 

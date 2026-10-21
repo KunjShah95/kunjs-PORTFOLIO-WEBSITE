@@ -1422,7 +1422,7 @@ export const engagements = [
       "60+ PRs merged into OWASP, Microsoft and Ollama",
     ],
     action: "Send an opening",
-    href: "/contact",
+    href: "/contact#inquiryForm",
     actionLabel: "Get in touch",
   },
   {
@@ -1436,7 +1436,7 @@ export const engagements = [
       "₹25,000-60,000+ — AI product or MVP engineering",
     ],
     action: "Request a pilot",
-    href: "/contact",
+    href: "/contact#inquiryForm",
     actionLabel: "Scope a project",
   },
   {

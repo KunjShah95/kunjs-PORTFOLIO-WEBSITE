@@ -6,6 +6,7 @@ import { DemoVideo } from "@/components/projects/demo-video";
 import { Icon } from "@/components/icon";
 import { Reveal, RevealText } from "@/components/primitives/Reveal";
 import { CopyEmailRow } from "@/components/ui/copy-email";
+import { ProofLinks } from "@/components/ui/proof-links";
 import {
   ContributionGraph,
   ContributionGraphFallback,
@@ -178,21 +179,13 @@ export default async function HomePage() {
                   className={buttonStyles.secondary}
                   data-track="Contact CTA Clicked"
                   data-track-from="hero"
-                  href="/contact"
+                  href="/contact#inquiryForm"
                 >
                   Let&apos;s work together
                 </Link>
-                {/* Hiring managers want the CV in one click, not a footer hunt. */}
-                <a
-                  className={`${buttonStyles.link} h-11 px-2`}
-                  data-track="Resume Clicked"
-                  data-track-from="hero"
-                  href="/kunjshah_cv.pdf"
-                  rel="noopener"
-                  target="_blank"
-                >
-                  Resume (PDF)
-                </a>
+                {/* Hiring managers want the CV and the commit history in one
+                    click, not a footer hunt. */}
+                <ProofLinks from="hero" githubHint="60+ merged PRs" />
               </Reveal>
             </div>
 
@@ -586,7 +579,7 @@ export default async function HomePage() {
             className={buttonStyles.primary}
             data-track="Contact CTA Clicked"
             data-track-from="home-cta"
-            href="/contact"
+            href="/contact#inquiryForm"
           >
             Get in touch
           </Link>

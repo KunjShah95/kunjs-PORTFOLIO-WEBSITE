@@ -6,6 +6,7 @@ import { DemoVideo } from "@/components/projects/demo-video";
 import { Icon } from "@/components/icon";
 import { Reveal } from "@/components/primitives/Reveal";
 import { CopyEmailRow } from "@/components/ui/copy-email";
+import { ProofLinks } from "@/components/ui/proof-links";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { PageSection } from "@/components/ui/page-intro";
 import { Tag } from "@/components/ui/primitives";
@@ -137,42 +138,65 @@ export default async function ProjectCaseStudyPage(
           <p className="font-body-lg text-body-lg text-text-secondary max-w-[60ch]">
             {project.description}
           </p>
-          {(project.demo || project.github) && (
-            <div className="flex flex-wrap items-center gap-3 pt-1">
-              {project.demo && (
-                <a
-                  className={`${buttonStyles.primary} group`}
-                  data-track="Project Demo Opened"
-                  data-track-from={project.slug}
-                  href={project.demo}
-                  {...external}
-                >
-                  Live demo
-                  <Icon
-                    className="transition-transform duration-300 group-hover:-translate-y-px group-hover:translate-x-px"
-                    name="arrow_outward"
-                    size={15}
-                  />
-                </a>
-              )}
-              {project.github && (
-                <a
-                  className={`${buttonStyles.secondary} group`}
-                  data-track="Project Source Opened"
-                  data-track-from={project.slug}
-                  href={project.github}
-                  {...external}
-                >
-                  Source code
-                  <Icon
-                    className="transition-transform duration-300 group-hover:-translate-y-px group-hover:translate-x-px"
-                    name="arrow_outward"
-                    size={15}
-                  />
-                </a>
-              )}
+          {/* Everything a visitor needs in the first ten seconds: the live
+              thing, the source, the proof about the person, and the way to
+              reach them. The case study below is for whoever wants the
+              detail — nobody should have to scroll to the bottom of it to
+              find out how to get in touch. */}
+          <div className="flex flex-col gap-3 pt-1">
+            {(project.demo || project.github) && (
+              <div className="flex flex-wrap items-center gap-3">
+                {project.demo && (
+                  <a
+                    className={`${buttonStyles.primary} group`}
+                    data-track="Project Demo Opened"
+                    data-track-from={project.slug}
+                    href={project.demo}
+                    {...external}
+                  >
+                    Live demo
+                    <Icon
+                      className="transition-transform duration-300 group-hover:-translate-y-px group-hover:translate-x-px"
+                      name="arrow_outward"
+                      size={15}
+                    />
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    className={`${buttonStyles.secondary} group`}
+                    data-track="Project Source Opened"
+                    data-track-from={project.slug}
+                    href={project.github}
+                    {...external}
+                  >
+                    Source code
+                    <Icon
+                      className="transition-transform duration-300 group-hover:-translate-y-px group-hover:translate-x-px"
+                      name="arrow_outward"
+                      size={15}
+                    />
+                  </a>
+                )}
+              </div>
+            )}
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+              <ProofLinks from="case-study" />
+              <Link
+                className={`${buttonStyles.primary} group`}
+                data-track="Contact CTA Clicked"
+                data-track-from={project.slug}
+                href="/contact#inquiryForm"
+              >
+                Discuss a project
+                <Icon
+                  className="transition-transform duration-300 group-hover:translate-x-0.5"
+                  name="arrow_forward"
+                  size={15}
+                />
+              </Link>
             </div>
-          )}
+          </div>
         </Reveal>
 
         {project.video && <DemoVideo src={project.video} title={project.title} />}
@@ -252,7 +276,7 @@ export default async function ProjectCaseStudyPage(
             className={buttonStyles.primary}
             data-track="Contact CTA Clicked"
             data-track-from={project.slug}
-            href="/contact"
+            href="/contact#inquiryForm"
           >
             Discuss a project
           </Link>

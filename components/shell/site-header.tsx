@@ -129,7 +129,9 @@ export function SiteHeader() {
           <CommandPaletteTrigger />
           <Link
             className="hidden md:inline-flex items-center gap-1.5 h-10 pl-4 pr-3.5 rounded-full bg-primary text-on-primary font-body-sm text-body-sm font-medium hover:bg-primary-container active:scale-[0.97] transition-all group"
-            href="/contact"
+            data-track="Contact CTA Clicked"
+            data-track-from="header"
+            href="/contact#inquiryForm"
           >
             Get in touch
             <Icon
