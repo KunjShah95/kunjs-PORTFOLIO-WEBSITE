@@ -1147,6 +1147,8 @@ export const stackInventory: readonly {
 
 export const education = {
   institution: "Indus University",
+  /** The university's own site, linked from the education pages. */
+  url: "https://indusuni.ac.in",
   degree: "B.Tech Computer Science",
   year: "4th Year",
   period: "2023 - 2027",
@@ -1491,6 +1493,19 @@ export const achievements = [
 ] as const;
 
 /* ---------------------------------------------------------------- Manifesto */
+
+/**
+ * One line of the manifesto's second principle, used as a pull quote.
+ *
+ * It is his own writing, lifted rather than written for the occasion: a
+ * quote invented to fill a pull-quote slot is exactly the kind of thing
+ * that makes a portfolio read as filler.
+ */
+export const pullQuote = {
+  text: "Throwing $20/token calls at trivial classification is lazy engineering.",
+  source: "Principle 02: Edge & Cost Efficiency",
+  href: "/manifesto",
+} as const;
 
 const projectIndex = new Map(projects.map((p) => [p.slug, p]));
 

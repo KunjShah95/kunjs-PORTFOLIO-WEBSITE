@@ -523,6 +523,43 @@
   }
 }
 
+/* ==========================================================================
+   One-line pull quote
+   The pull quote is a single sentence set on one line at every viewport.
+   Sizing the type against its container rather than against a fixed
+   breakpoint is what makes that possible: the sentence is 73 characters
+   wide, so the font size has to be a function of the space it has to
+   fill, not a step chosen by hand.
+
+   The divisor is the widest serif the stack can resolve to (Georgia, at
+   29.8 characters per 1px of font size at this tracking). Dividing by a
+   slightly larger number leaves a margin, so the line fits rather than
+   touching the edge — and a narrower face falls short of the margin
+   instead of overflowing past it.
+   ========================================================================== */
+
+@utility quote-line {
+  container-type: inline-size;
+}
+
+@utility quote-line-text {
+  /* 100cqw is the container's content width; dividing by the character
+     ratio gives the size at which the sentence fits on one line. */
+  font-size: calc(100cqw / 30.1);
+  line-height: 1.15;
+  white-space: nowrap;
+  letter-spacing: -0.015em;
+}
+
+/* The caption, sized against the same container.
+   The quote shrinks as the column narrows, so a fixed caption size would
+   end up larger than the quote on a phone — the label would outrank the
+   line it is labelling. Scaling it from the same unit keeps the two in
+   proportion at every width. */
+@utility quote-line-caption {
+  font-size: max(9px, calc(100cqw / 92));
+}
+
 /* Masked word reveal (see RevealText). */
 @utility mask {
   display: inline-block;

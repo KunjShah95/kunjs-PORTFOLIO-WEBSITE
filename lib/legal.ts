@@ -204,9 +204,10 @@ export const privacyPolicy: LegalDocument = {
         {
           kind: "ul",
           items: [
-            "Vercel — hosts the site, serves it over CDN, and runs the cookieless analytics. It sees the IP address and request metadata described above.",
-            "Resend — delivers contact-form messages and replies. It processes your message content and address purely to send the email.",
-            "GitHub, LinkedIn, X, Hugging Face, Peerlist and Medium — I link to these profiles. Nothing is loaded from them unless you click; once you do, their own privacy policies and cookies apply.",
+            "Vercel: hosts the site, serves it over CDN, and runs the cookieless analytics. It sees the IP address and request metadata described above.",
+            "Resend: delivers contact-form messages and replies. It processes your message content and address purely to send the email.",
+            "Cloudflare: if the contact form's bot verification is enabled, Cloudflare runs the Turnstile challenge and confirms the result. It processes the challenge response and your IP address, not the message.",
+            "GitHub, LinkedIn, X, Hugging Face, Peerlist and Medium: I link to these profiles. Nothing is loaded from them unless you click; once you do, their own privacy policies and cookies apply.",
           ],
         },
         {
@@ -353,7 +354,8 @@ export const privacyPolicy: LegalDocument = {
           kind: "ul",
           items: [
             "All traffic is encrypted in transit over HTTPS.",
-            "Inquiries are validated server-side, rate-limited per IP, and filtered by a honeypot field and a minimum fill-time check before delivery.",
+            "Inquiries are validated server-side, rate-limited per IP and per sender address, and filtered by a honeypot field, a minimum fill-time check, and a content check that refuses abusive and automated-sales messages before they are delivered.",
+            "Where bot verification is enabled, a Cloudflare Turnstile challenge runs in the browser and the result is verified on the server. Cloudflare processes the challenge as a sub-processor and does not see the message itself.",
             "Contact submissions are transmitted, not stored: there is no enquiry database to breach.",
             "Project credentials are never committed to a repository, and secrets belong in environment variables.",
             "Client data is excluded from training any model, including mine.",

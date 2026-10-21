@@ -1,9 +1,11 @@
 "use client";
 
 import { useActionState, useEffect, useMemo, useRef, useState } from "react";
+import type { ComponentProps, ForwardRefExoticComponent, RefAttributes } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "@/lib/motion-client";
 import { track } from "@vercel/analytics";
 import { Icon } from "@/components/icon";
+import { TurnstileField } from "@/components/contact/turnstile";
 import { cn } from "@/lib/cn";
 import { EASE_OUT } from "@/lib/motion";
 import { projectFocusOptions, services, site, timelineOptions } from "@/lib/site-data";
@@ -32,16 +34,38 @@ function validate(form: HTMLFormElement): Errors {
 /**
  * WebMCP declarative form annotations. Browsers with an in-page agent read
  * these to expose the form as a callable tool; everyone else ignores them.
- * Spread from a constant because they are not (yet) in React's DOM types.
+ *
+ * `toolname` and `tooldescription` are not in React's DOM types yet, so the
+ * form element is widened to accept them. They are passed one by one rather
+ * than spread from a constant: a spread makes the JSX transform treat the
+ * element's children as a dynamic list, and React then demands a key on
+ * every one of them — which puts a warning in every visitor's console.
  */
-const webMcpForm: Record<string, string> = {
+const webMcpForm = {
   toolname: "send_project_inquiry",
   tooldescription:
     "Send a project inquiry to Kunj Shah by email. Requires a name, a work email and at least 20 characters of project details. Kunj replies within one working day.",
+} as const;
+
+/**
+ * The form element, widened to accept the WebMCP annotations.
+ *
+ * `toolname` and `tooldescription` are not in React's DOM types yet, so
+ * the props are intersected rather than cast — a cast would hide the real
+ * shape of the element from anyone reading it.
+ */
+type WebMcpFormProps = {
+  toolname: string;
+  tooldescription: string;
 };
 
-/** Chip-styled radio: a real input that agents and assistive tech can operate. */
-const chipBase =
+const MotionForm = motion.form as ForwardRefExoticComponent<
+  Omit<ComponentProps<typeof motion.form>, "ref"> &
+    WebMcpFormProps &
+    RefAttributes<HTMLFormElement>
+>;
+
+/** Chip-styled radio: a real input that agents and assistive tech can operate. */const chipBase =
   "relative h-11 px-3 rounded-xl font-body-sm text-body-sm flex items-center gap-1 border cursor-pointer transition-all duration-200 active:scale-[0.98] has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-text-primary/15";
 const chipOn = "bg-primary-container text-on-primary border-primary-container";
 const chipOff =
@@ -72,6 +96,12 @@ export function ContactBody() {
   const [flash, setFlash] = useState(false);
   /** Timestamp the form was hydrated, for the minimum-fill-time guard. */
   const [renderedAt] = useState(() => Date.now());
+  /**
+   * Turnstile token, when the widget is configured. Submitted as a hidden
+   * field so the server action can verify it; empty and ignored when
+   * Turnstile is not set up.
+   */
+  const [turnstileToken, setTurnstileToken] = useState("");
   /**
    * Reaching the contact page is not the same as starting an inquiry, and
    * the gap between the two is where the funnel leaks. One event, the first
@@ -186,6 +216,13 @@ export function ContactBody() {
     setDismissed(state);
   }
 
+  /**
+   * The error message under one field, or null.
+   *
+   * The `key` is not decoration. This element is built inside a function
+   * call, so React cannot statically tell it is the only child, and it
+   * warns about a missing key wherever it lands among its siblings.
+   */
   const errorText = (field: Field) =>
     errors[field] ? (
       <motion.p
@@ -193,6 +230,7 @@ export function ContactBody() {
         className="flex items-center gap-1.5 font-body-sm text-body-sm text-error"
         id={`${field}-error`}
         initial={reduce ? false : { opacity: 0, y: -4 }}
+        key={field}
         transition={{ duration: 0.2, ease: EASE_OUT }}
       >
         {errors[field]}
@@ -298,8 +336,15 @@ export function ContactBody() {
                 </button>
               </motion.div>
             ) : (
-              <motion.form
-                {...webMcpForm}
+              <MotionForm
+                /* Passed one by one rather than spread from a constant.
+                   A spread makes the JSX transform treat the element's
+                   children as a dynamic list, and React then demands a key
+                   on every one of them. Naming them explicitly keeps the
+                   children statically analysable, so the warning (and the
+                   noise it puts in every browser console) goes away. */
+                toolname={webMcpForm.toolname}
+                tooldescription={webMcpForm.tooldescription}
                 animate={{ opacity: 1 }}
                 action={formAction}
                 aria-describedby="inquiry-effect"
@@ -328,6 +373,9 @@ export function ContactBody() {
                 </div>
                 {/* -- spam guard: a human cannot submit this fast -- */}
                 <input name="rendered_at" type="hidden" value={renderedAt} />
+                {/* -- spam guard: bot verification token (only sent when
+                       Turnstile is configured) -- */}
+                <input name="cf-turnstile-response" type="hidden" value={turnstileToken} />
 
                 {errored ? (
                   <p
@@ -491,6 +539,20 @@ export function ContactBody() {
                 </div>
 
                 <div className="flex flex-col gap-3 pt-1">
+                  {/* Bot check. Renders nothing when Turnstile is not
+                      configured, so the form looks and behaves the same as
+                      before in that case.
+
+                      The reset key is the action's response object, which
+                      is a fresh object on every server response. A Turnstile
+                      token is single-use, so the widget has to hand out a new
+                      one after each submit — and keying on the response
+                      does exactly that, without a second piece of state to
+                      keep in sync. */}
+                  <TurnstileField
+                    onToken={setTurnstileToken}
+                    resetKey={state}
+                  />
                   <button
                     aria-describedby="inquiry-effect"
                     aria-live="polite"
@@ -518,7 +580,7 @@ export function ContactBody() {
                     day; your details are only used to reply.
                   </p>
                 </div>
-              </motion.form>
+              </MotionForm>
             )}
           </AnimatePresence>
         </div>

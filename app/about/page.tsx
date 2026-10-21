@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
 import { Icon } from "@/components/icon";
 import { PageIntro, PageSection, RailLink } from "@/components/ui/page-intro";
+import { PullQuote } from "@/components/ui/pull-quote";
 import { legalDocuments } from "@/lib/legal";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { StatStrip } from "@/components/ui/blocks";
@@ -128,6 +129,11 @@ export default function AboutPage() {
               own.
             </p>
           </div>
+
+          {/* The one opinion, said once. A manifesto page for all three
+              principles is too much for this page; one line is enough to
+              tell a reader what the work stands for. */}
+          <PullQuote />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-5">
             {facts.map((fact) => (

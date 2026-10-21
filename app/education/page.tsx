@@ -37,7 +37,24 @@ export default function EducationPage() {
                   {education.degree}
                 </h2>
                 <p className="font-body-md text-body-md text-text-secondary">
-                  {education.institution} · {education.location}
+                  {/* Linked: a degree a visitor cannot verify is a claim, and
+                      one they can check in a click is evidence. */}
+                  <a
+                    className="group inline-flex items-center gap-1 hover:text-text-primary transition-colors"
+                    href={education.url}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <span className="underline decoration-border-dotted underline-offset-4 group-hover:decoration-text-primary">
+                      {education.institution}
+                    </span>
+                    <Icon
+                      className="transition-transform duration-300 group-hover:-translate-y-px group-hover:translate-x-px"
+                      name="arrow_outward"
+                      size={13}
+                    />
+                  </a>
+                  <span className="text-text-muted"> · {education.location}</span>
                 </p>
               </div>
             </div>

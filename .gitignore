@@ -31,3 +31,7 @@ public/videos/*
 # against a localhost URL, so the numbers are only meaningful locally. Run
 # `node scripts/perf-audit.mjs --url <url> --out <label>` to produce one.
 perf-*.json
+
+# Screenshot scratch (scripts/shoot.mjs). Regenerated per run against a
+# local server, so the images are only meaningful locally.
+tmp-shots/

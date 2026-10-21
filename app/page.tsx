@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/contribution-graph";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { PageSection, RailLink } from "@/components/ui/page-intro";
+import { PullQuote } from "@/components/ui/pull-quote";
 import { ArrowAffordance, StatusDot } from "@/components/ui/primitives";
 import {
   engagements,
@@ -109,6 +110,28 @@ export default async function HomePage() {
                   <StatusDot className="bg-accent-emerald" ping />
                   Open to AI infra, full-stack AI, and OSS maintainer roles
                 </span>
+              </Reveal>
+
+              {/* The name, age and role, in the order a visitor reads them.
+                  Without it the hero opens with a claim about the work and
+                  never says whose work it is — the header carries the name,
+                  but the header is not the thing the eye lands on. */}
+              <Reveal delay={0.1} y={6}>
+                <p className="font-label-meta text-label-meta text-text-muted">
+                  <span className="text-text-secondary">{site.name}</span>
+                  <span aria-hidden="true" className="mx-1.5 text-border-dotted">
+                    &middot;
+                  </span>
+                  {site.age}
+                  <span aria-hidden="true" className="mx-1.5 text-border-dotted">
+                    &middot;
+                  </span>
+                  {site.role}
+                  <span aria-hidden="true" className="mx-1.5 text-border-dotted">
+                    &middot;
+                  </span>
+                  {site.location}
+                </p>
               </Reveal>
 
               <RevealText
@@ -218,6 +241,71 @@ export default async function HomePage() {
               </Link>
             </p>
           </Reveal>
+
+          {/* ------------------------------------------------------ about me */}
+          {/* Prose, on purpose, and not a grid of cards. Every other section
+              on this page is a titled band of tiles, so this one is written
+              the way a person would introduce themselves: it breaks the
+              rhythm, and it answers "who is this" in the first screenful
+              rather than the fourth. */}
+          <section aria-label="About" className="flex flex-col gap-5 border-t border-text-primary pt-8 md:pt-12">
+            <h2 className="font-label-section text-label-section text-text-muted">
+              About
+            </h2>
+            <div className="grid gap-8 lg:grid-cols-12 lg:gap-x-10">
+              <div className="flex flex-col gap-4 lg:col-span-7">
+                <p className="font-body-lg text-body-lg text-text-primary text-pretty">
+                  I&apos;m Kunj — {site.age}, final-year Computer Science at
+                  Indus University in {site.location}, and I build the parts
+                  of an AI product that have to keep working once the demo
+                  ends.
+                </p>
+                <p className="font-body-md text-body-md text-text-secondary max-w-[58ch]">
+                  Agents that know when to stop. Retrieval that returns what
+                  actually exists. Pipelines that are still observable six
+                  months later. My rule is measurable engineering over demos:
+                  deterministic boundaries, schema enforcement, latency budgets
+                  and cost governance, rather than an unconstrained reasoning
+                  loop and a hopeful README.
+                </p>
+                <p className="font-body-md text-body-md text-text-secondary max-w-[58ch]">
+                  Most of it ships solo, most of it is open source, and the
+                  parts I am proudest of are the ones somebody else merged.
+                </p>
+                <Link
+                  className="group inline-flex items-center gap-1.5 w-fit -my-2 py-2 font-body-sm text-body-sm font-medium text-text-primary"
+                  href="/about"
+                >
+                  <span className="link-draw">More about me</span>
+                  <Icon
+                    className="transition-transform duration-300 group-hover:translate-x-0.5"
+                    name="arrow_forward"
+                    size={14}
+                  />
+                </Link>
+              </div>
+
+              {/* The facts, as a column beside the prose rather than a row
+                  of tiles under it. */}
+              <dl className="flex flex-col gap-4 lg:col-span-5 lg:border-l lg:border-border-hairline lg:pl-8">
+                {[
+                  { label: "Studying", value: "B.Tech Computer Science, Indus University" },
+                  { label: "Building", value: "Agents, RAG pipelines, edge vision" },
+                  { label: "Open source", value: "OWASP, Microsoft, Ollama" },
+                  { label: "Based in", value: `${site.location} · ${site.timezone}` },
+                ].map((fact) => (
+                  <div className="flex flex-col gap-0.5" key={fact.label}>
+                    <dt className="font-label-meta text-label-meta text-text-muted">
+                      {fact.label}
+                    </dt>
+                    <dd className="font-body-md text-body-md text-text-primary">
+                      {fact.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </section>
         </div>
 
 
@@ -570,6 +658,11 @@ export default async function HomePage() {
             </div>
           )}
         </PageSection>
+
+        {/* --------------------------------------------------- the one opinion */}
+        {/* Between the work and the ask: what the work stands for, in one
+            line, in the author's own words. */}
+        <PullQuote className="border-t border-text-primary pt-8 md:pt-12" />
 
         <CtaBand
           body="Hiring for AI or full-stack, scoping a build, or looking for a maintainer: tell me which, and I'll answer on that. Recruiting, freelance pilots and OSS conversations all get a reply within a day."
