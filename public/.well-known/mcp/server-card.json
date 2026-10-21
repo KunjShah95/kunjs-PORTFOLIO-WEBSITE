@@ -1,6 +1,6 @@
 {
   "name": "kunjshah-portfolio",
-  "title": "Kunj Shah — Portfolio",
+  "title": "Kunj Shah | Portfolio",
   "version": "1.0.0",
   "description": "Read-only MCP server for Kunj Shah's portfolio: profile, projects and case studies, services, and any public page as Markdown. No authentication.",
   "websiteUrl": "https://kunjshah.in",

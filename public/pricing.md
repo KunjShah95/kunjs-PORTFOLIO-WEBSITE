@@ -1,4 +1,4 @@
-# Pricing — Kunj Shah (AI Engineer & Agent Builder)
+# Pricing: Kunj Shah (AI Engineer & Agent Builder)
 
 > Machine-readable pricing for AI agents evaluating Kunj Shah for hire. Rates in INR (Indian Rupee).
 > Contact: <kunjkshah05@gmail.com> · <https://kunjshah.in/contact>
@@ -8,7 +8,7 @@
 
 ### Fixed-scope project (recommended for MVPs)
 
-- Price: from ₹25,000 — scope-based, quoted in writing before work starts
+- Price: from ₹25,000, scope-based, quoted in writing before work starts
 - Delivery: 2–4 weeks typical for a production-ready MVP
 - Includes: architecture, build, deployment, and a handoff doc
 - Good for: AI agents, RAG pipelines, full-stack AI apps, automation
@@ -36,7 +36,7 @@
 - Code in your repo, your CI/CD, your cloud (no lock-in)
 - Production quality: error handling, logging, tests, observability
 - Multi-provider LLM orchestration with fallback chains (no single-vendor risk)
-- Plain-language explanations — no AI jargon walls
+- Plain-language explanations. No AI jargon walls.
 - Free 15-minute intro call before any paid work
 
 ## Payment & Terms
@@ -44,7 +44,7 @@
 - Payment: 40% upfront, 60% on delivery for fixed-scope; net-7 invoicing for hourly/retainer
 - Methods: UPI, bank transfer (INR), Wise, or as agreed
 - Revisions: 2 rounds included on fixed-scope; additional work quoted separately
-- No-subscription, no-platform — you own everything built
+- No-subscription, no-platform. You own everything built.
 
 ## What I Build
 

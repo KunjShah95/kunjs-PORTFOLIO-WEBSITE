@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMeta({
   path: "/manifesto",
   title: "Manifesto",
   description:
-    "Three non-negotiable engineering principles for building AI systems in production — determinism over hallucination, edge and cost efficiency, and observability first — each tied to the shipped systems that prove it.",
+    "Three non-negotiable engineering principles for building AI systems in production: determinism over hallucination, edge and cost efficiency, and observability first, each tied to the shipped systems that prove it.",
   keywords: [
     "AI engineering principles",
     "production AI best practices",
@@ -54,7 +54,7 @@ const faq = principles.map((principle) => ({
   acceptedAnswer: {
     "@type": "Answer",
     text: `${principle.body} Shipped in: ${principle.ships
-      .map((ship) => `${attribution(ship.project).name} — ${ship.claim}`)
+      .map((ship) => `${attribution(ship.project).name}: ${ship.claim}`)
       .join("; ")}.`,
   },
 }));
@@ -72,7 +72,7 @@ export default function ManifestoPage() {
         />
         <PageIntro
           title="Manifesto"
-          lead="Three non-negotiable engineering principles learned from running inference in high-stakes production. Each one is stated below with the shipped systems that hold it up — a principle nothing runs on is a preference, not a practice."
+          lead="Three non-negotiable engineering principles learned from running inference in high-stakes production. Each one is stated below with the shipped systems that hold it up. A principle nothing runs on is a preference, not a practice."
         />
 
         {/* -------------------------------------------------------- principles */}

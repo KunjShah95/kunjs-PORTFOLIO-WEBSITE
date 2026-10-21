@@ -65,61 +65,22 @@ export function Reveal({
   );
 }
 
-/**
- * Masked text reveal — each word rises out of its own overflow clip.
- * Text stays in the DOM as real text, so it remains crawlable and selectable.
- */
-export function RevealText({
-  text,
-  as: Tag = 'h2',
-  className,
-  wordClassName,
-  delay = 0,
-  each = 0.035,
-}: {
-  text: string;
-  as?: ElementType;
-  className?: string;
-  wordClassName?: string;
-  delay?: number;
-  each?: number;
-}) {
-  const reduce = useReducedMotion();
-  const words = text.split(' ');
+/*
+   A masked, per-word text reveal used to live here. It was removed on
+   purpose.
 
-  if (reduce) {
-    const Plain = Tag;
-    return <Plain className={className}>{text}</Plain>;
-  }
+   The per-word clip meant the server HTML shipped the text translated out
+   of view, so an unhydrated page showed no heading at all, and a render
+   caught mid-animation showed the words sliced through the middle. On the
+   home page that was the h1 — the largest text on the site and the string
+   most likely to be quoted — and it read as a font rendering test gone
+   wrong.
 
-  const M = (motion as unknown as Record<string, typeof motion.div>)[String(Tag)] ?? motion.p;
-
-  return (
-    <M
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={inView}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: each, delayChildren: delay } } }}
-    >
-      {words.map((word, i) => (
-        <span className="mask" key={`${word}-${i}`} aria-hidden={false}>
-          <motion.span
-            className={wordClassName}
-            style={{ display: 'inline-block' }}
-            variants={{
-              hidden: { y: '110%' },
-              show: { y: '0%', transition: { duration: 0.78, ease: EASE_OUT } },
-            }}
-          >
-            {word}
-            {i < words.length - 1 ? ' ' : ''}
-          </motion.span>
-        </span>
-      ))}
-    </M>
-  );
-}
+   Use `Reveal` instead: it animates transform only, so the text is present
+   and legible in the first paint. If a word-level effect is ever wanted
+   again, it has to be built so the server HTML contains the whole heading
+   as ordinary text and the motion is layered on top of it after mount.
+   */
 
 /** Hairline that draws itself. Used to close a section, never mid-flow. */
 export function DrawRule({ className, delay = 0 }: { className?: string; delay?: number }) {

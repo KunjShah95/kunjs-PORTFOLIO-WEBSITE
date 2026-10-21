@@ -205,16 +205,16 @@ export const projects: readonly Project[] = [
       { value: "100%", label: "Faults Reproduced" },
       { value: "129", label: "Test Cases" },
     ],
-    body: "One engine in packages/core, two apps on top of it: a static marketing site and a Tauri desktop app bundling a Node server. The recorder drives a real browser through sign-in, walks same-origin links breadth-first, and writes narration only from recorded events — the browser pauses after each action for exactly as long as its line takes, so the audio and the screen never drift. Walkcast Lab is the other half: it takes a failed agent run, pins the failure to the step that caused it using before/after application state, classifies the cause from a fixed vocabulary with cited evidence, and replays it as a fixture. Fixtures run as a CI release gate, so a new agent version has to prove it fixed the bug and did not break something else.",
+    body: "One engine in packages/core, two apps on top of it: a static marketing site and a Tauri desktop app bundling a Node server. The recorder drives a real browser through sign-in, walks same-origin links breadth-first, and writes narration only from recorded events. The browser pauses after each action for exactly as long as its line takes, so the audio and the screen never drift. Walkcast Lab is the other half: it takes a failed agent run, pins the failure to the step that caused it using before/after application state, classifies the cause from a fixed vocabulary with cited evidence, and replays it as a fixture. Fixtures run as a CI release gate, so a new agent version has to prove it fixed the bug and did not break something else.",
     challenges:
       "Judging an agent by its own summary is worthless, so verification had to come from the application's records rather than the agent or an LLM judge. On top of that, recordings have to survive a worker dying mid-job without leaking the credentials that were sealed into the run.",
     lessons:
       "Ground truth has to live outside the system under test. Comparing before/after application state on every action turns 'the agent said it worked' into a checkable claim, and it makes the failure attributable to a specific step. The second lesson is about job correctness: fenced finalization, atomic tenant limits, and at-least-once execution with idempotent effects were the only way to keep a worker crash from double-charging or losing a recording. Secrets are replaced with {{secret:name}} placeholders before anything touches disk, and restored only in memory during replay.",
     role: "Solo build: the recording engine, the lab harness, the desktop app and Tauri shell, the Postgres queue with SKIP LOCKED leases, the S3 and Supabase media layer, the 15-provider model gateway, and the architecture documentation.",
     evaluation:
-      "The lab reports numbers instead of asserting capability. Across five injected faults it reproduced the original cause 5/5, and the fixed agent passed 5/5 replay trials where the naive baseline passed 0/5 — the deliberate regression (v2, fixed with read-back removed) dropped to 4/5, which is the harness catching a real regression. It also measures what agents get wrong: 3 of 4 success claims were false successes, meaning the agent reported a task complete while the application's records disagreed. 30 test files and 129 test cases run on node:test, covering secrets, jobs, queue leases, auth scoping, and the classifier.",
+      "The lab reports numbers instead of asserting capability. Across five injected faults it reproduced the original cause 5/5, and the fixed agent passed 5/5 replay trials where the naive baseline passed 0/5, while the deliberate regression (v2, fixed with read-back removed) dropped to 4/5, which is the harness catching a real regression. It also measures what agents get wrong: 3 of 4 success claims were false successes, meaning the agent reported a task complete while the application's records disagreed. 30 test files and 129 test cases run on node:test, covering secrets, jobs, queue leases, auth scoping, and the classifier.",
     limitations:
-      "The agents under test are deterministic scripts, not LLMs, so the numbers in results/ validate the harness — capture, oracle, classifier, fixtures, replay — and say nothing about LLM agent behaviour. The published run uses one seed per fault, so the confidence intervals are wide and the figures are a harness check rather than a benchmark. Fixtures reproduce failures in an application you control; arbitrary third-party production sessions cannot be reproduced exactly. Installers are not code-signed, and redaction targets harness secrets rather than customer PII, so real customer data should not be recorded.",
+      "The agents under test are deterministic scripts, not LLMs, so the numbers in results/ validate the harness (capture, oracle, classifier, fixtures, replay) and say nothing about LLM agent behaviour. The published run uses one seed per fault, so the confidence intervals are wide and the figures are a harness check rather than a benchmark. Fixtures reproduce failures in an application you control; arbitrary third-party production sessions cannot be reproduced exactly. Installers are not code-signed, and redaction targets harness secrets rather than customer PII, so real customer data should not be recorded.",
     demo: "https://walkcast.kunjshah.in",
     github: "https://github.com/KunjShah95/walkcast",
   },
@@ -280,9 +280,9 @@ export const projects: readonly Project[] = [
     status: "Live · No signup",
     icon: "smart_toy",
     description:
-      "An AI staff architect for engineering teams. Submit a Mermaid or PlantUML diagram, an image, a PDF or a URL, and seven specialized agents score it across scalability, security, reliability, performance, cost, maintainability and observability — then simulate component failures, propose redesigns against blueprints like Cost Optimized or Multi-Region, and audit your Terraform, Kubernetes and OpenAPI specs.",
+      "An AI staff architect for engineering teams. Submit a Mermaid or PlantUML diagram, an image, a PDF or a URL, and seven specialized agents score it across scalability, security, reliability, performance, cost, maintainability and observability, then simulate component failures, propose redesigns against blueprints like Cost Optimized or Multi-Region, and audit your Terraform, Kubernetes and OpenAPI specs.",
     summary:
-      "Seven review agents that score, simulate failures, and propose redesigns — and still work with zero API keys.",
+      "Seven review agents that score, simulate failures, and propose redesigns, and still work with zero API keys.",
     stack: [
       "Python 3.12",
       "FastAPI",
@@ -295,7 +295,7 @@ export const projects: readonly Project[] = [
       { value: "6", label: "Provider Fallbacks" },
       { value: "0", label: "Keys To Run" },
     ],
-    body: "The whole architecture lifecycle in one pipeline: parse the diagram or vision input into a component graph, fan out to seven parallel scoring agents, aggregate severity-ranked findings into an overall score. From there it generates new designs from a plain-English prompt, projects p50/p95/p99 latency and cost across user tiers, traces cascade failures to estimate recovery time, and audits infrastructure-as-code against SOC 2, ISO 27001, GDPR, HIPAA and PCI DSS. A copilot answers questions against your own graph — what happens if Redis fails, can I remove Kafka.",
+    body: "The whole architecture lifecycle in one pipeline: parse the diagram or vision input into a component graph, fan out to seven parallel scoring agents, aggregate severity-ranked findings into an overall score. From there it generates new designs from a plain-English prompt, projects p50/p95/p99 latency and cost across user tiers, traces cascade failures to estimate recovery time, and audits infrastructure-as-code against SOC 2, ISO 27001, GDPR, HIPAA and PCI DSS. A copilot answers questions against your own graph: what happens if Redis fails, can I remove Kafka.",
     challenges:
       "Seven agents means seven chances to return nothing when a provider rate-limits, and a review tool that fails on a bad API key is useless the first time someone opens it.",
     lessons:
@@ -304,7 +304,7 @@ export const projects: readonly Project[] = [
     evaluation:
       "CI is the gate, not a badge. Every pull request runs ruff and pytest on the backend with an 80% coverage floor that fails the build, plus ESLint, a tsc type-check, Vitest and a production build on the frontend. The fallback chain is exercised by the tests rather than trusted, which is the part that matters most here.",
     limitations:
-      "The scoring is only as good as what the seven agents were asked to weigh, so a dimension with no clear rubric produces confident output rather than a refusal. The heuristic engine that keeps the product alive without keys is deliberately shallow — it gives a baseline, not an audit. IaC auditing covers misconfiguration patterns, not whether the architecture itself is right.",
+      "The scoring is only as good as what the seven agents were asked to weigh, so a dimension with no clear rubric produces confident output rather than a refusal. The heuristic engine that keeps the product alive without keys is deliberately shallow. It gives a baseline, not an audit. IaC auditing covers misconfiguration patterns, not whether the architecture itself is right.",
     github: "https://github.com/KunjShah95/archmind-ai",
     demo: "https://archmind-ai-topaz.vercel.app/",
   },
@@ -643,158 +643,15 @@ export const otherBuilds = [
 
 /* ----------------------------------------------------------------- Writing */
 
-export type Article = {
-  slug: string;
-  title: string;
-  category: "agents" | "edge" | "security" | "mlops" | "genai" | "ml";
-  categoryLabel: string;
-  readTime: string;
-  date: string;
-  excerpt: string;
-  cta: string;
-  featured?: boolean;
-};
+/* The essay archive lives in lib/essays.ts, not here.
 
-export const writingCategories = [
-  { id: "all", label: "All" },
-  { id: "agents", label: "Agents" },
-  { id: "edge", label: "Edge & Vision" },
-  { id: "genai", label: "Generative AI" },
-  { id: "mlops", label: "MLOps" },
-  { id: "ml", label: "Machine Learning" },
-  { id: "security", label: "Fairness & Safety" },
-] as const;
+   It used to be a list of eleven titles in this file, but none of those
+   posts were ever published: the Medium profile does not contain them, so
+   every page that linked to one resolved to a redirect and no crawler
+   could find a single citable article. The archive is now a committed
+   snapshot of the essays that exist, with their full bodies, refreshed
+   from the feed with `npm run sync:essays`. */
 
-export const articles: readonly Article[] = [
-  {
-    slug: "what-breaking-things-taught-me",
-    title: "What Breaking Things Taught Me About Building Them",
-    category: "agents",
-    categoryLabel: "Engineering",
-    readTime: "9 min read",
-    date: "Jun 2026",
-    excerpt:
-      "The systems that taught me the most were the ones that failed in production, in front of real users.",
-    cta: "Read essay",
-    featured: true,
-  },
-  {
-    slug: "shipping-harder-than-building",
-    title: "Shipping Is Harder Than Building",
-    category: "mlops",
-    categoryLabel: "Shipping",
-    readTime: "8 min read",
-    date: "May 2026",
-    excerpt:
-      "Anyone can build a prototype. Keeping it alive, observable, and cheap to run is the actual work.",
-    cta: "Read essay",
-  },
-  {
-    slug: "why-i-build-things",
-    title: "Why I Build Things That Do Not Exist Yet",
-    category: "agents",
-    categoryLabel: "Motivation",
-    readTime: "7 min read",
-    date: "Apr 2026",
-    excerpt:
-      "A vector database from scratch, a GPT-2 from first principles, a tokenizer in pure Python, why bother?",
-    cta: "Read essay",
-  },
-  {
-    slug: "equitylens-case-study",
-    title: "EquityLens: Building an AI Fairness Auditing Platform",
-    category: "security",
-    categoryLabel: "Case Study",
-    readTime: "8 min read",
-    date: "Apr 2026",
-    excerpt:
-      "Finding a 23% performance gap in clinical triage models, and turning a three-week audit into four hours.",
-    cta: "Read case study",
-  },
-  {
-    slug: "agentic-workflow-orchestration",
-    title: "Orchestrating Complex AI Workflows",
-    category: "agents",
-    categoryLabel: "Agents",
-    readTime: "11 min read",
-    date: "Feb 2026",
-    excerpt:
-      "CrewAI versus LangGraph, fallback model chains, and where human-in-the-loop gates actually belong.",
-    cta: "Read guide",
-  },
-  {
-    slug: "agentic-systems-production",
-    title: "Building Production-Grade Agentic Systems",
-    category: "agents",
-    categoryLabel: "Architecture",
-    readTime: "12 min read",
-    date: "Jan 2026",
-    excerpt:
-      "Supervisor/subordinate topologies, Postgres JSONB checkpointing, HITL breakpoints, and trace logging that survives a 3am page.",
-    cta: "Read deep dive",
-  },
-  {
-    slug: "mlops-scale-deployments",
-    title: "MLOps at Scale: Lessons from High-Frequency Model Deployments",
-    category: "mlops",
-    categoryLabel: "Infrastructure",
-    readTime: "10 min read",
-    date: "Dec 2025",
-    excerpt:
-      "Versioning, canary rollout, and quantization as CI/CD stages rather than one-off scripts.",
-    cta: "Read guide",
-  },
-  {
-    slug: "rag-semantic-search",
-    title: "RAG Pipelines: Semantic Search and Contextual Retrieval",
-    category: "genai",
-    categoryLabel: "RAG",
-    readTime: "11 min read",
-    date: "Oct 2025",
-    excerpt:
-      "Chunking strategies, hybrid retrieval, and re-ranking that measurably improves grounded answers.",
-    cta: "Read guide",
-  },
-  {
-    slug: "prompt-engineering-reasoning",
-    title: "Prompt Engineering for Complex Multi-Step Reasoning",
-    category: "genai",
-    categoryLabel: "Prompting",
-    readTime: "9 min read",
-    date: "Sep 2025",
-    excerpt:
-      "ReAct, Tree-of-Thoughts, self-correction loops, and structured outputs with XML, JSON, and Pydantic.",
-    cta: "Read guide",
-  },
-  {
-    slug: "cv-edge-optimization",
-    title: "Computer Vision at Edge: Optimizing YOLOv8 for Real-Time Inference",
-    category: "edge",
-    categoryLabel: "Computer Vision",
-    readTime: "14 min read",
-    date: "Nov 2025",
-    excerpt:
-      "C++ and TensorRT, GStreamer with CUDA, INT8 quantization-aware training, and histogram equalization for low-light track footage.",
-    cta: "Read benchmarks",
-  },
-  {
-    slug: "anomaly-detection-streams",
-    title: "Anomaly Detection in High-Dimensional Data Streams",
-    category: "ml",
-    categoryLabel: "Machine Learning",
-    readTime: "13 min read",
-    date: "Aug 2025",
-    excerpt:
-      "Building robust streaming anomaly detection that stays useful when the data distribution keeps moving.",
-    cta: "Read writeup",
-  },
-] as const;
-
-export const homeEssays = [
-  { title: "What Breaking Things Taught Me About Building Them", year: "2026" },
-  { title: "Building Production-Grade Agentic Systems", year: "2026" },
-  { title: "Computer Vision at Edge: Optimizing YOLOv8", year: "2025" },
-] as const;
 
 /* -------------------------------------------------------------- Experience */
 
@@ -1433,9 +1290,9 @@ export const engagements = [
     title: "AI product build or workflow automation",
     body: "A scoped pilot delivered end to end: discovery, build, tests, deployment and handover. Priced per pilot rather than per hour so you know the cost before we start.",
     proof: [
-      "₹10,000-20,000 — website and lead-capture setup",
-      "₹15,000-35,000 — AI workflow automation",
-      "₹25,000-60,000+ — AI product or MVP engineering",
+      "₹10,000-20,000: website and lead-capture setup",
+      "₹15,000-35,000: AI workflow automation",
+      "₹25,000-60,000+: AI product or MVP engineering",
     ],
     action: "Request a pilot",
     href: "/contact#inquiryForm",
@@ -1641,7 +1498,7 @@ export const hiringFaqs = [
   {
     question: "Who is Kunj Shah?",
     answer:
-      "Kunj Shah is an AI engineer and agent builder based in Ahmedabad, India. He ships production AI systems—autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps—with 17+ delivered projects and 60+ merged open-source pull requests.",
+      "Kunj Shah is an AI engineer and agent builder based in Ahmedabad, India. He ships production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps, with 17+ delivered projects and 60+ merged open-source pull requests.",
   },
   {
     question: "Is Kunj Shah available for freelance AI work?",

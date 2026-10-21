@@ -33,13 +33,13 @@ export const metadata: Metadata = {
   // cannot resolve against an unknown host.
   metadataBase: new URL(ORIGIN),
   title: {
-    default: `${site.name} — ${site.role} in Ahmedabad, India`,
+    default: `${site.name} | ${site.role} in Ahmedabad, India`,
     // Child pages supply a bare title and get the brand appended.
     template: `%s | ${site.name}`,
   },
   description:
     "Kunj Shah is an AI engineer in Ahmedabad, India building production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI applications.",
-  applicationName: `${site.name} — Portfolio`,
+  applicationName: `${site.name} | Portfolio`,
   authors: [{ name: site.name, url: `${ORIGIN}/` }],
   creator: site.name,
   publisher: site.name,
@@ -66,14 +66,14 @@ export const metadata: Metadata = {
   // Point readers and aggregators at the writing feed.
   alternates: {
     types: {
-      "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} — Writing` }],
+      "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} | Writing` }],
     },
   },
   openGraph: {
     type: "website",
     url: "/",
-    siteName: `${site.name} — Portfolio`,
-    title: `${site.name} — ${site.role} in Ahmedabad, India`,
+    siteName: `${site.name} | Portfolio`,
+    title: `${site.name} | ${site.role} in Ahmedabad, India`,
     description:
       "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, 60+ merged open-source PRs.",
     locale: "en_IN",
@@ -84,14 +84,14 @@ export const metadata: Metadata = {
         url: `${ORIGIN}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: `${site.name} — ${site.role}`,
+        alt: `${site.name} | ${site.role}`,
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.role} in Ahmedabad, India`,
+    title: `${site.name} | ${site.role} in Ahmedabad, India`,
     description:
       "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps.",
     images: [`${ORIGIN}/og-image.png`],

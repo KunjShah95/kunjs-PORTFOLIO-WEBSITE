@@ -1,6 +1,7 @@
 import type { IconName } from "@/components/icon";
 import { legalDocuments } from "@/lib/legal";
-import { articles, indexItems, projects, site } from "@/lib/site-data";
+import { essayCategoryLabel, essayDateLabel, essaysByDate } from "@/lib/essays";
+import { indexItems, projects, site } from "@/lib/site-data";
 
 /**
  * Command model behind the ⌘K palette.
@@ -65,14 +66,16 @@ export const commands: readonly Command[] = [
   ),
 
   // --- Writing: essays, newest first ------------------------------------
-  ...articles.map(
-    (article): Command => ({
-      id: `article:${article.slug}`,
-      label: article.title,
-      detail: `${article.categoryLabel} · ${article.date}`,
+  // Each entry points at the article page on this site, so a search result
+  // can be opened directly.
+  ...essaysByDate.map(
+    (essay): Command => ({
+      id: `article:${essay.slug}`,
+      label: essay.title,
+      detail: `${essayCategoryLabel(essay.category)} · ${essayDateLabel(essay.date)}`,
       group: "Writing",
-      href: "/writing",
-      keywords: article.category,
+      href: `/writing/${essay.slug}`,
+      keywords: essay.tags.join(" "),
     }),
   ),
 

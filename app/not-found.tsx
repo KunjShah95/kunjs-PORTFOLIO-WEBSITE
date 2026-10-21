@@ -30,6 +30,11 @@ export default function NotFound() {
             <Link className={buttonStyles.secondary} href="/projects">
               View projects
             </Link>
+            {/* The likeliest way here is a stale essay link, so the archive
+                is one click away. */}
+            <Link className={buttonStyles.secondary} href="/writing">
+              Read the essays
+            </Link>
           </div>
         </section>
 

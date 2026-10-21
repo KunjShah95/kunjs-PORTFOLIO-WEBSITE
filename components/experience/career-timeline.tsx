@@ -356,7 +356,7 @@ export function CareerTimeline({ jobs }: { jobs: readonly Job[] }) {
         className="max-w-xl font-body-sm text-body-sm text-text-muted"
         {...enter()}
       >
-        {jobs.length} roles from automation intern to production AI —{" "}
+        {jobs.length} roles from automation intern to production AI:{" "}
         <span className="text-text-secondary">{active} active now</span>.
       </motion.p>
 

@@ -13,11 +13,11 @@ import type { ReactNode } from "react";
  * transforms and opacity. `m` instead reads its renderer from this provider,
  * so the bundle only carries the feature bundle we ask for and nothing else.
  *
- * `domMax` rather than `domAnimation`: the header and bottom-bar pills use
- * `layoutId` to slide between items, and layout/projection animations only
- * exist in the `domMax` bundle. If those pills are ever reworked to position
- * themselves with plain `x`/`width` values, this can drop to `domAnimation`
- * and skip the projection runtime entirely.
+ * `domAnimation` rather than `domMax`: `domMax` adds the projection runtime,
+ * which exists to animate layout and shared-element transitions. The site has
+ * none left - every pill that used a `layoutId` now measures its target and
+ * animates `x`/`width` directly (see `components/primitives/ActiveItemPill.tsx`)
+ * - so loading projection would be paying for an engine nothing calls.
  *
  * `strict` makes any component that still reaches for `motion` throw instead
  * of silently pulling the full engine back into the bundle.

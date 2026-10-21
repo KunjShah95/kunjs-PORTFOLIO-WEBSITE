@@ -1,45 +1,20 @@
 import { ORIGIN } from "@/lib/routes";
-import { articles, site } from "@/lib/site-data";
+import { essayCategoryLabel, essaysByDate } from "@/lib/essays";
+import { site } from "@/lib/site-data";
 
 /**
  * RSS 2.0 feed for the writing archive.
  *
- * Built from the static `articles` array rather than the live Medium feed, so
- * the feed is a pure function of the build: it cannot be empty because a
- * third-party request failed, and it needs no revalidation window.
+ * Items point at the article pages on this site, not at the original posts:
+ * the essays are served here in full, so this is the URL a reader can open
+ * and a crawler can quote. The original post stays reachable from each
+ * article page.
  *
- * The essays themselves live on Medium — `/writing/:slug` redirects there — so
- * each item links out to the canonical post rather than to a route on this
- * site.
+ * Built from the committed archive rather than a live feed request, so the
+ * feed cannot come back empty because a third party was slow.
  */
 
 export const revalidate = 3600;
-
-const MONTHS: Record<string, number> = {
-  jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
-  jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
-};
-
-/**
- * `"Jun 2026"` -> `2026-06-01T00:00:00Z`.
- *
- * The archive stores human-readable month strings, which carry no day. Any
- * parse failure falls back to the build date so an item is never dropped from
- * the feed for a formatting reason.
- */
-function toIsoDate(value: string): string {
-  const match = /^([A-Za-z]{3,})\s+(\d{4})$/.exec(value.trim());
-  if (match) {
-    const month = MONTHS[match[1].slice(0, 3).toLowerCase()];
-    if (month !== undefined) {
-      return new Date(Date.UTC(Number(match[2]), month, 1)).toISOString();
-    }
-  }
-  const parsed = Date.parse(value);
-  return Number.isNaN(parsed)
-    ? new Date().toISOString()
-    : new Date(parsed).toISOString();
-}
 
 /** Escape the five characters that are not legal in XML character data. */
 function escapeXml(value: string): string {
@@ -57,29 +32,26 @@ function toRfc822(iso: string): string {
 }
 
 export async function GET() {
-  const items = [...articles]
-    .sort((a, b) => toIsoDate(b.date).localeCompare(toIsoDate(a.date)))
-    .map((article) => {
-      const link = `${ORIGIN}/writing`;
-      return `    <item>
-      <title>${escapeXml(article.title)}</title>
-      <link>${link}</link>
-      <guid isPermaLink="false">${ORIGIN}/writing#${escapeXml(article.slug)}</guid>
-      <pubDate>${toRfc822(toIsoDate(article.date))}</pubDate>
-      <category>${escapeXml(article.categoryLabel)}</category>
-      <description>${escapeXml(article.excerpt)}</description>
-    </item>`;
-    })
+  const items = essaysByDate
+    .map(
+      (essay) => `    <item>
+      <title>${escapeXml(essay.title)}</title>
+      <link>${ORIGIN}/writing/${essay.slug}</link>
+      <guid isPermaLink="true">${ORIGIN}/writing/${essay.slug}</guid>
+      <pubDate>${toRfc822(essay.date)}</pubDate>
+      <category>${escapeXml(essayCategoryLabel(essay.category))}</category>
+      <description>${escapeXml(essay.excerpt)}</description>
+      <dc:creator>${escapeXml(site.name)}</dc:creator>
+    </item>`,
+    )
     .join("\n");
 
-  const lastBuildDate = items
-    ? toRfc822(toIsoDate([...articles].sort((a, b) => toIsoDate(b.date).localeCompare(toIsoDate(a.date)))[0].date))
-    : new Date().toUTCString();
+  const lastBuildDate = essaysByDate.length ? toRfc822(essaysByDate[0].date) : new Date().toUTCString();
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>${escapeXml(site.name)} — Writing</title>
+    <title>${escapeXml(site.name)}: Writing</title>
     <link>${ORIGIN}/writing</link>
     <description>Essays on AI engineering, agent systems, and shipping machine learning that survives production.</description>
     <language>en-in</language>

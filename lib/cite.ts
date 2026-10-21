@@ -42,7 +42,7 @@ export const canonicalUrls = [
 /** Plain-text body for /humans.txt and /cite.txt. */
 export function renderHumansTxt(): string {
   const lines = [
-    `# humans.txt — ${site.name}`,
+    `# humans.txt: ${site.name}`,
     `# ${ORIGIN}/humans.txt`,
     `# Last updated: ${citeMeta.lastUpdated}`,
     "",

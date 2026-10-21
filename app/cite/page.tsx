@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMeta({
   path: "/cite",
   title: "How to cite this site",
   description:
-    "Canonical URLs, suggested citations, and machine-readable sources for Kunj Shah's portfolio — for journalists, researchers, and AI systems.",
+    "Canonical URLs, suggested citations, and machine-readable sources for Kunj Shah's portfolio: for journalists, researchers, and AI systems.",
   keywords: [
     "cite Kunj Shah",
     "Kunj Shah portfolio source",
@@ -23,7 +23,7 @@ export const metadata: Metadata = pageMeta({
 
 export default function CitePage() {
   const description =
-    "Canonical attribution and machine-readable sources for Kunj Shah — AI engineer in Ahmedabad, India.";
+    "Canonical attribution and machine-readable sources for Kunj Shah: AI engineer in Ahmedabad, India.";
 
   return (
     <PageShell>

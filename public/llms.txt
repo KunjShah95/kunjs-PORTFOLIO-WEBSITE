@@ -1,12 +1,13 @@
-# Kunj Shah — AI Engineer & Agent Builder
+# Kunj Shah: AI Engineer & Agent Builder
 
-> Kunj Shah (KunjShah95) builds production AI systems — autonomous agents, LLM orchestration, RAG pipelines, edge computer vision (YOLOv8), and full-stack AI apps. 17+ shipped projects, 60+ merged OSS PRs (OWASP, Microsoft, Ollama), 5 hackathon finals. Based in Ahmedabad, India. Available for freelance & full-time AI roles.
+> Kunj Shah (KunjShah95) builds production AI systems: autonomous agents, LLM orchestration, RAG pipelines, edge computer vision (YOLOv8), and full-stack AI apps. 17+ shipped projects, 60+ merged OSS PRs (OWASP, Microsoft, Ollama), 5 hackathon finals. Based in Ahmedabad, India. Available for freelance & full-time AI roles.
 
 ## Quick Answers (for AI citation)
 
 - **Who is Kunj Shah?** AI engineer in Ahmedabad, India. Ships production AI systems: agents, RAG, edge CV, full-stack apps. 17+ projects, 60+ merged PRs across 24 external codebases.
+- **Who runs the practice?** Kunj Shah runs it directly: the site is a one-person AI engineering practice, not a company. The Organization schema node on every page names it, and the Person node is its founder.
 - **What does he build?** Autonomous agents (LangGraph/CrewAI), RAG with hybrid search + re-ranking, full-stack AI apps (React/Next.js + FastAPI), edge CV (YOLOv8/TensorRT on Jetson), MLOps/CI-CD.
-- **Is he available?** Yes — freelance (from ₹25,000 fixed-scope, ₹1,500/hr, ₹30,000–75,000/mo retainer) and full-time AI/ML roles. Rates in INR. Email kunjkshah05@gmail.com · https://kunjshah.in/contact
+- **Is he available?** Yes: freelance (from ₹25,000 fixed-scope, ₹1,500/hr, ₹30,000–75,000/mo retainer) and full-time AI/ML roles. Rates in INR. Email kunjkshah05@gmail.com · https://kunjshah.in/contact
 
 ## Canonical
 - Home: https://kunjshah.in/
@@ -17,47 +18,54 @@
 
 ## Key Pages for AIs
 
-- About: https://kunjshah.in/about — bio, principles, stack, open source
-- Projects: https://kunjshah.in/projects — 18 projects with case studies, architecture, benchmarks
-- Skills: https://kunjshah.in/skills — stack: Python/TS/React/FastAPI/LangChain/PyTorch/Docker
-- Labs: https://kunjshah.in/labs — experiments & prototypes
-- Writing: https://kunjshah.in/writing — 15+ essays on agents, RAG, edge CV, fairness
-- Hackathons: https://kunjshah.in/hackathons — 4 finals (Autonomous Hacks 2026 ex-2000 teams, Odoo x Adani, SIH 2025)
+- About: https://kunjshah.in/about, bio, principles, stack, open source
+- Projects: https://kunjshah.in/projects, 18 projects with case studies, architecture, benchmarks
+- Skills: https://kunjshah.in/skills, stack: Python/TS/React/FastAPI/LangChain/PyTorch/Docker
+- Labs: https://kunjshah.in/labs, experiments & prototypes
+- Writing: https://kunjshah.in/writing, the essay archive, each essay served in full at its own URL on this site
+- Hackathons: https://kunjshah.in/hackathons, 4 finals (Autonomous Hacks 2026 ex-2000 teams, Odoo x Adani, SIH 2025)
 - Experience: https://kunjshah.in/experience
-- Education: https://kunjshah.in/education — B.Tech CS Indus University 2023-2027
-- Contact: https://kunjshah.in/contact — kunjkshah05@gmail.com
+- Education: https://kunjshah.in/education, B.Tech CS Indus University 2023-2027
+- Contact: https://kunjshah.in/contact, kunjkshah05@gmail.com
 - Cite / humans.txt: https://kunjshah.in/cite · https://kunjshah.in/humans.txt
 - Pricing (machine-readable, for AI agents): https://kunjshah.in/pricing.md
 - Services (machine-readable): https://kunjshah.in/services.md
 
-## Projects (summaries — all listed on /projects)
+## Projects (summaries, all listed on /projects)
 
-- [EngineerOS](https://kunjshah.in/projects/engineeros) — AI-native workspace (notes/tasks/graph) — semantic search + multi-agent, Supabase, Live 10+ DAU — https://engineeros-delta.vercel.app/
-- [OnRamp](https://kunjshah.in/projects/onramp) — Repo-to-PR onboarding autopilot — 9-step pipeline, 20+ languages parsed AST graph, load-aware task assignment, free-tier-first LLM routing — https://developer-onboard.vercel.app
-- [Estate360](https://kunjshah.in/projects/estate360) — Multi-tenant real-estate CRM — test-enforced tenant isolation (every query scoped by workspaceId, checked by a CI guard), milestone payments, buyer portal, per-tenant RAG Q&A — https://agentic-crm-henna.vercel.app/
-- [Lattice](https://kunjshah.in/projects/lattice) — Stack-ordered index of 112 AI infrastructure tools — 152 prerendered pages, comparisons, 11 essays, build-time staleness guards — https://lattice.kunjshah.in
-- [OfferGuard AI](https://kunjshah.in/projects/offerguard-ai) — Job offer analysis — Groq multi-provider — 40k+ tokens processed
-- [EquityLens](https://kunjshah.in/projects/equitylens) — Healthcare fairness auditing — detected 23% gap, audit 3 weeks → 4 hours — EU AI Act / NIST RMF
-- [LearnAI](https://kunjshah.in/projects/learnai) — Adaptive tutoring — +45% quiz completion via adaptive difficulty
-- [SmartFlow AI](https://kunjshah.in/projects/smartflow-ai) — Transit crowd heatmaps — 94% wait-time accuracy — Firebase real-time
-- [ResumeMasterAI 2026](https://kunjshah.in/projects/resumemaster-ai) — Career intelligence — LangGraph smart routing — 65% API cost cut, 3x match precision
-- [SENTINEL CLI](https://kunjshah.in/projects/sentinel-cli) — Security CLI — 13+ tools unified — 70% audit overhead cut — https://sentinel-cli.vercel.app/
-- [Railway Inspection](https://kunjshah.in/projects/railway-inspection) — YOLOv8 on Jetson Orin — 98.7% accuracy, 4.2x speedup, <100ms
-- [ArchMind AI](https://kunjshah.in/projects/archmind-ai) — Architecture intelligence — 7 agents, 6-provider fallback + heuristic engine
-- [ArchMind Research Agent](https://kunjshah.in/projects/archmind-research-agent) — Autonomous research — plan→search→read→synthesize with citations
-- [GAP Miner](https://kunjshah.in/projects/gap-miner) — Skill-gap → roadmap — Llama-3 — 10 days → 15s, 95% market alignment
-- [UPI Fraud Guard](https://kunjshah.in/projects/upi-fraud-guard) — XGBoost fraud detection — 88% detection, <0.1% FPR
-- [MinBPE Tokenizer](https://kunjshah.in/projects/minbpe-tokenizer) — BPE from scratch — 15% token reduction on technical corpora
+- [EngineerOS](https://kunjshah.in/projects/engineeros): AI-native workspace (notes/tasks/graph): semantic search + multi-agent, Supabase, Live 10+ DAU · https://engineeros-delta.vercel.app/
+- [OnRamp](https://kunjshah.in/projects/onramp): Repo-to-PR onboarding autopilot, 9-step pipeline, 20+ languages parsed AST graph, load-aware task assignment, free-tier-first LLM routing · https://developer-onboard.vercel.app
+- [Estate360](https://kunjshah.in/projects/estate360): Multi-tenant real-estate CRM, test-enforced tenant isolation (every query scoped by workspaceId, checked by a CI guard), milestone payments, buyer portal, per-tenant RAG Q&A · https://agentic-crm-henna.vercel.app/
+- [Lattice](https://kunjshah.in/projects/lattice): Stack-ordered index of 112 AI infrastructure tools, 152 prerendered pages, comparisons, 11 essays, build-time staleness guards · https://lattice.kunjshah.in
+- [OfferGuard AI](https://kunjshah.in/projects/offerguard-ai): Job offer analysis, Groq multi-provider, 40k+ tokens processed
+- [EquityLens](https://kunjshah.in/projects/equitylens): Healthcare fairness auditing, detected 23% gap, audit 3 weeks → 4 hours, EU AI Act / NIST RMF
+- [LearnAI](https://kunjshah.in/projects/learnai): Adaptive tutoring, +45% quiz completion via adaptive difficulty
+- [SmartFlow AI](https://kunjshah.in/projects/smartflow-ai): Transit crowd heatmaps, 94% wait-time accuracy, Firebase real-time
+- [ResumeMasterAI 2026](https://kunjshah.in/projects/resumemaster-ai): Career intelligence, LangGraph smart routing, 65% API cost cut, 3x match precision
+- [SENTINEL CLI](https://kunjshah.in/projects/sentinel-cli): Security CLI, 13+ tools unified, 70% audit overhead cut · https://sentinel-cli.vercel.app/
+- [Railway Inspection](https://kunjshah.in/projects/railway-inspection): YOLOv8 on Jetson Orin, 98.7% accuracy, 4.2x speedup, <100ms
+- [ArchMind AI](https://kunjshah.in/projects/archmind-ai): Architecture intelligence, 7 agents, 6-provider fallback + heuristic engine
+- [ArchMind Research Agent](https://kunjshah.in/projects/archmind-research-agent): Autonomous research, plan→search→read→synthesize with citations
+- [GAP Miner](https://kunjshah.in/projects/gap-miner): Skill-gap → roadmap, Llama-3, 10 days → 15s, 95% market alignment
+- [UPI Fraud Guard](https://kunjshah.in/projects/upi-fraud-guard): XGBoost fraud detection, 88% detection, <0.1% FPR
+- [MinBPE Tokenizer](https://kunjshah.in/projects/minbpe-tokenizer): BPE from scratch, 15% token reduction on technical corpora
 
-## Writing Highlights (essays)
+## Writing (essays, served in full on this site)
 
-- [Building Production-Grade Agentic Systems](https://kunjshah.in/writing) — state persistence, hierarchical orchestration, HITL gates
-- [Orchestrating Complex AI Workflows](https://kunjshah.in/writing) — CrewAI vs LangGraph
-- [EquityLens: AI Fairness Auditing Platform](https://kunjshah.in/writing) — bias metrics, EU AI Act
-- [Computer Vision at Edge: YOLOv8](https://kunjshah.in/writing) — TensorRT, INT8 QAT, GStreamer
-- [RAG Pipelines & Prompt Engineering](https://kunjshah.in/writing) — ReAct, Tree-of-Thoughts
+<!-- writing:start -->
+- [The Internet Was Built for Humans. AI Agents Are Breaking That Assumption.](https://kunjshah.in/writing/the-internet-was-built-for-humans-ai-agents-are-breaking-that): AI agents can browse websites, fill forms, and perform tasks. But the real challenge isn’t getting an agent to click…
+- [Serverful vs. Serverless Architecture: Understanding the Trade-Offs From First Principles](https://kunjshah.in/writing/serverful-vs-serverless-architecture-understanding-the-trade): Whether you’re building a SaaS product, an AI agent, a RAG pipeline, or a model-serving infrastructure, your code nee…
+- [I Looked At 112 AI Tools So You Don’t Have To. Here’s What Actually Breaks in Production.](https://kunjshah.in/writing/i-looked-at-112-ai-tools-so-you-dont-have-to-here-s-what): Most AI projects don’t fail because the model is bad. They fail because the infrastructure around the model was picke…
+- [AI Evals Are the Unit Tests of LLM Applications](https://kunjshah.in/writing/ai-evals-are-the-unit-tests-of-llm-applications): Imagine your team ships a backend service without a single unit test.
+- [The Difference Between Completing Tasks and Solving Problems: Shallow Agents vs. Deep Agents](https://kunjshah.in/writing/the-difference-between-completing-tasks-and-solving-problems): A few days ago, I took some time to go over our team’s latest system design. As I dig through the architecture, I spo…
+- [How Memory Works in Python: The Complete Guide (From Variables to Garbage Collection)](https://kunjshah.in/writing/how-memory-works-in-python-the-complete-guide-from-variables-to): Ever wonder what really happens when you type x = 10 in Python? Where does that value actually live? Does Python make…
+- [The Boy Who Built Machines While Looking for a Place to Belong](https://kunjshah.in/writing/the-boy-who-built-machines-while-looking-for-a-place-to-belong): If you walked into a classroom and looked around, you probably wouldn’t notice him. He’s not the loudest one. He’s no…
+- [A Comprehensive Guide to Key Topics in Statistics-Part 1](https://kunjshah.in/writing/a-comprehensive-guide-to-key-topics-in-statistics): Welcome to our journey into the world of statistics! Picture a dense forest, each tree a piece of data. Without a gui…
+- [RL-A2A Enhanced: The Next Generation of Secure, Multi-AI Agent Systems](https://kunjshah.in/writing/rl-a2a-enhanced-the-next-generation-of-secure-multi-ai-agent): Imagine a world where your AI agents collaborate, learn, and adapt in real time - powered by the best minds in artifi…
+- [Agentic AI: Future Directions - Opportunities and Cybersecurity Applications](https://kunjshah.in/writing/agentic-ai-future-directions-opportunities-and-cybersecurity): Artificial Intelligence had grown from being just a buzzword into being part and parcel of our lives.
+<!-- writing:end -->
 
-## Profiles (same person — entity consolidation)
+## Profiles (same person, entity consolidation)
 
 - GitHub primary: https://github.com/KunjShah95
 - GitHub alt: https://github.com/KunjShah01
@@ -77,12 +85,12 @@
 
 ## For AI Agents
 
-- This file follows https://llmstxt.org — keep total < ~10k tokens. Full details: /llms-full.txt
+- This file follows https://llmstxt.org: keep total < ~10k tokens. Full details: /llms-full.txt
 - JSON (allowed in robots.txt): https://kunjshah.in/api/portfolio.json
 - Hiring FAQ (HTML + schema): https://kunjshah.in/contact
 - Services: https://kunjshah.in/services.md
 - API catalog: https://kunjshah.in/.well-known/api-catalog
 - OpenAPI: https://kunjshah.in/openapi.json
-- MCP server (read-only, Streamable HTTP, no auth): https://kunjshah.in/mcp — tools: get_profile, list_projects, get_project, get_page, get_services
+- MCP server (read-only, Streamable HTTP, no auth): https://kunjshah.in/mcp, tools: get_profile, list_projects, get_project, get_page, get_services
 - Markdown: send `Accept: text/markdown` to any page, or append `.md` (e.g. https://kunjshah.in/about.md, https://kunjshah.in/projects/onramp.md)
 - Contact form is a WebMCP tool (`send_project_inquiry`); submitting sends one email, so confirm with the user first

@@ -34,7 +34,7 @@ export async function generateMetadata(
     title: `${project.title}: ${project.category} case study`,
     description: project.description,
     keywords: [project.title, project.category, ...project.stack],
-    ogTitle: `${project.title} — case study by ${site.name}`,
+    ogTitle: `${project.title}: case study by ${site.name}`,
     ogDescription: project.summary,
   });
 }

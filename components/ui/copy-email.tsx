@@ -52,7 +52,11 @@ function CopyGlyph({ copied, size = 15 }: { copied: boolean; size?: number }) {
   const reduce = useReducedMotion();
   return (
     <span className="relative inline-flex" style={{ width: size, height: size }}>
-      <AnimatePresence initial={false} mode="popLayout">
+      {/* Default `sync` presence, not `popLayout`: the glyph is absolutely
+          positioned inside a fixed-size box, so it never affects flow and
+          popping it out would change nothing. `popLayout` needs the projection
+          runtime, which the site no longer loads. */}
+      <AnimatePresence initial={false}>
         <motion.span
           animate={{ opacity: 1, scale: 1 }}
           className={cn("absolute inset-0 inline-flex", copied && "text-accent-emerald")}

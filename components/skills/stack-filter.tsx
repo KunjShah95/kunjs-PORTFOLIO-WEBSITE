@@ -77,7 +77,7 @@ export function StackFilter() {
             <button
               aria-checked={selected}
               className={cn(
-                "relative inline-flex items-center gap-1.5 h-11 px-3.5 rounded-full font-body-sm text-body-sm whitespace-nowrap transition-colors",
+                "relative z-10 inline-flex items-center gap-1.5 h-11 px-3.5 rounded-full font-body-sm text-body-sm whitespace-nowrap transition-colors",
                 selected
                   ? "text-on-primary"
                   : "bg-surface-card text-text-secondary border border-border-hairline hover:text-text-primary",

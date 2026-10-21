@@ -560,13 +560,169 @@
   font-size: max(9px, calc(100cqw / 92));
 }
 
-/* Masked word reveal (see RevealText). */
-@utility mask {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+/* --- Long-form article body --------------------------------------------
+   The rules for a served essay. The body is rebuilt from the published
+   markup as React elements (components/writing/article-body), so these
+   selectors are the whole of the styling: every tag the allowlist permits
+   gets a rule here, and nothing is styled from an inline style attribute. */
+@utility article-body {
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-lg);
+  line-height: 1.75;
+
+  > * + * {
+    margin-top: 1.35em;
+  }
+
+  > p {
+    max-width: 68ch;
+    text-wrap: pretty;
+  }
+
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6 {
+    color: var(--color-text-primary);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin-top: 2.2em;
+    text-wrap: balance;
+  }
+
+  > h2 {
+    font-size: 1.5rem;
+  }
+  > h3 {
+    font-size: 1.25rem;
+  }
+  > h4 {
+    font-size: 1.0625rem;
+  }
+
+  > a {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-hairline);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 200ms ease;
+  }
+
+  > a:hover {
+    text-decoration-color: currentColor;
+  }
+
+  > strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  > ul,
+  > ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55em;
+    max-width: 64ch;
+    padding-left: 1.4em;
+  }
+
+  > ul {
+    list-style: disc;
+  }
+
+  > ol {
+    list-style: decimal;
+  }
+
+  > li::marker {
+    color: var(--color-text-muted);
+  }
+
+  > li > ul,
+  > li > ol {
+    margin-top: 0.55em;
+  }
+
+  > blockquote {
+    border-left: 2px solid var(--color-border-hairline);
+    color: var(--color-text-muted);
+    font-style: italic;
+    padding: 0.2em 0 0.2em 1.1em;
+  }
+
+  > pre {
+    background: var(--color-surface-container);
+    border: 1px solid var(--color-border-hairline);
+    border-radius: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    padding: 1.1rem 1.25rem;
+    white-space: pre;
+  }
+
+  > pre code {
+    background: none;
+    font-size: inherit;
+    padding: 0;
+  }
+
+  > code {
+    background: var(--color-surface-container);
+    border-radius: 5px;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 0.15em 0.4em;
+  }
+
+  > figure {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  > figure img,
+  > img {
+    border-radius: 12px;
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  > figcaption {
+    color: var(--color-text-muted);
+    font-size: var(--text-body-sm);
+    line-height: 1.55;
+    margin-top: 0.75em;
+  }
+
+  > hr {
+    border: 0;
+    border-top: 1px solid var(--color-border-hairline);
+    margin-block: 2.5em;
+  }
+
+  > table {
+    border-collapse: collapse;
+    display: block;
+    font-size: var(--text-body-sm);
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  > th,
+  > td {
+    border-bottom: 1px solid var(--color-border-hairline);
+    padding: 0.6em 0.9em 0.6em 0;
+    text-align: left;
+  }
+
+  > th {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
 }
 
 /* --- Contribution calendar -------------------------------------------- */

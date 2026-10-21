@@ -77,7 +77,7 @@ export const privacyPolicy: LegalDocument = {
   label: "Privacy",
   icon: "shield",
   description:
-    "How Kunj Shah collects, uses and protects personal data — on this portfolio and during a freelance engagement. The short version: no accounts, no ad tracking, no selling data.",
+    "How Kunj Shah collects, uses and protects personal data: on this portfolio and during a freelance engagement. The short version: no accounts, no ad tracking, no selling data.",
   keywords: [
     "privacy policy",
     "Kunj Shah privacy",
@@ -102,13 +102,13 @@ export const privacyPolicy: LegalDocument = {
             "Nothing is sold, rented, or shared for anyone else's profit.",
             "If you email me or use the contact form, I keep your message so I can reply.",
             "Reading the site collects anonymous pageview counts, not an identity.",
-            "You can ask me to show you, correct, or delete what I hold — one email.",
+            "You can ask me to show you, correct, or delete what I hold. One email.",
           ],
         },
         {
           kind: "note",
           title: "What this means in practice",
-          text: "Visiting these pages does not create a profile of you. There is no cookie banner because there are no cookies to consent to — the only thing stored in your browser is your light/dark theme choice.",
+          text: "Visiting these pages does not create a profile of you. There is no cookie banner because there are no cookies to consent to. The only thing stored in your browser is your light/dark theme choice.",
         },
       ],
     },
@@ -122,7 +122,7 @@ export const privacyPolicy: LegalDocument = {
         },
         {
           kind: "p",
-          text: "I am an individual, not a company. There is no legal entity behind this site, and no data protection officer — the person to contact is the person who runs it.",
+          text: "I am an individual, not a company. There is no legal entity behind this site, and no data protection officer. The person to contact is the person who runs it.",
         },
       ],
     },
@@ -140,7 +140,7 @@ export const privacyPolicy: LegalDocument = {
           items: [
             "Contact form: your name, email address, company (optional), area of interest, timeline, and the message body.",
             "Direct email: whatever you put in it, plus the email headers your provider attaches.",
-            "Client work: documents, credentials, and data you share for a project — governed separately by the engagement agreement, not just this policy.",
+            "Client work: documents, credentials, and data you share for a project, governed separately by the engagement agreement, not just this policy.",
           ],
         },
         {
@@ -162,7 +162,7 @@ export const privacyPolicy: LegalDocument = {
           items: [
             "No advertising or cross-site tracking identifiers.",
             "No data bought from brokers or appended to your record by a third party.",
-            "No special category data — health, biometrics, political views, religion, or sexual orientation — unless you deliberately include it in a message, in which case please do not.",
+            "No special category data (health, biometrics, political views, religion, or sexual orientation), unless you deliberately include it in a message, in which case please do not.",
             "No credentials or payment details. Payments are handled by a payment provider; card numbers never touch this site.",
           ],
         },
@@ -179,11 +179,11 @@ export const privacyPolicy: LegalDocument = {
         {
           kind: "ul",
           items: [
-            "To reply to an enquiry and, if it turns into a project, to run that project — necessary to take steps at your request, and to perform the resulting contract.",
-            "To keep the site secure and working — legitimate interest in protecting my service from abuse.",
-            "To understand which pages are useful — legitimate interest in improving the site, carried out on cookieless, aggregated counts.",
+            "To reply to an enquiry and, if it turns into a project, to run that project, necessary to take steps at your request, and to perform the resulting contract.",
+            "To keep the site secure and working: legitimate interest in protecting my service from abuse.",
+            "To understand which pages are useful: legitimate interest in improving the site, carried out on cookieless, aggregated counts.",
             "To meet a legal obligation if one genuinely applies, such as Indian tax record-keeping for invoices.",
-            "Marketing by email, if you ever ask for it — consent, which you can withdraw at any time.",
+            "Marketing by email, if you ever ask for it: consent, which you can withdraw at any time.",
           ],
         },
         {
@@ -222,7 +222,7 @@ export const privacyPolicy: LegalDocument = {
       blocks: [
         {
           kind: "p",
-          text: "Some projects linked from this site are live applications that call external model providers — for example a browser tool that sends your pasted text to a hosted LLM API. Those requests leave this site and are handled by the provider under their terms, not by this policy.",
+          text: "Some projects linked from this site are live applications that call external model providers, for example a browser tool that sends your pasted text to a hosted LLM API. Those requests leave this site and are handled by the provider under their terms, not by this policy.",
         },
         {
           kind: "p",
@@ -230,7 +230,7 @@ export const privacyPolicy: LegalDocument = {
         },
         {
           kind: "p",
-          text: "None of them is contacted unless you interact with the demo yourself. Reading a page, scrolling the projects list, or opening this policy sends nothing to any model. Please do not paste confidential, personal, or regulated information into any hosted demo — it may be logged on someone else's infrastructure, and that infrastructure is not something I can give you guarantees about.",
+          text: "None of them is contacted unless you interact with the demo yourself. Reading a page, scrolling the projects list, or opening this policy sends nothing to any model. Please do not paste confidential, personal, or regulated information into any hosted demo. It may be logged on someone else's infrastructure, and that infrastructure is not something I can give you guarantees about.",
         },
       ],
     },
@@ -245,9 +245,9 @@ export const privacyPolicy: LegalDocument = {
         {
           kind: "ul",
           items: [
-            "I process your personal data only on your documented instructions, for the purpose of delivering the project — never to decide for myself what to do with it.",
+            "I process your personal data only on your documented instructions, for the purpose of delivering the project, never to decide for myself what to do with it.",
             "A data processing agreement is signed before any personal data is processed, and it names the sub-processors in advance rather than after the fact.",
-            "Where the project needs a sub-processor — a cloud provider, an API vendor, a model host — you are told which one and why before it touches your data, and they are bound to process on your instructions alone.",
+            "Where the project needs a sub-processor (a cloud provider, an API vendor, a model host), you are told which one and why before it touches your data, and they are bound to process on your instructions alone.",
             "Your data is never used to train or fine-tune any model, including mine, and never reused to benefit another client.",
             "On termination, your data is returned or deleted within 30 days, and I confirm in writing once that is done rather than leaving you to assume it.",
             "Overseas clients should read this as the same role split: I do not determine the purposes or the means of your processing, which keeps your own obligations under your regulator intact.",
@@ -256,7 +256,7 @@ export const privacyPolicy: LegalDocument = {
         {
           kind: "note",
           title: "What I need from you",
-          text: "Tell me where the data came from and whether you have the right to share it with me. Under the Terms you warrant that you do, and I rely on that — I cannot audit your lawful basis from here, and a client who sends regulated data without a basis cannot pass that risk down.",
+          text: "Tell me where the data came from and whether you have the right to share it with me. Under the Terms you warrant that you do, and I rely on that. I cannot audit your lawful basis from here, and a client who sends regulated data without a basis cannot pass that risk down.",
         },
       ],
     },
@@ -266,12 +266,12 @@ export const privacyPolicy: LegalDocument = {
       blocks: [
         {
           kind: "p",
-          text: "I do not sell, rent, trade or licence personal data to anyone — not to data brokers, not to advertisers, not to other clients. There is no version of this business where your enquiry becomes someone else's asset.",
+          text: "I do not sell, rent, trade or licence personal data to anyone, not to data brokers, not to advertisers, not to other clients. There is no version of this business where your enquiry becomes someone else's asset.",
         },
         {
           kind: "ul",
           items: [
-            "A valid court order, summons or statutory demand from a competent authority is the only thing that obliges me to disclose data, and I disclose only what it actually requires — no more, in bulk, or on a vague request.",
+            "A valid court order, summons or statutory demand from a competent authority is the only thing that obliges me to disclose data, and I disclose only what it actually requires, no more, in bulk, or on a vague request.",
             "Where the law permits, I tell you about a request before I comply with it.",
             "I keep no log of who visited beyond the anonymous aggregate counts described above, so there is frequently nothing to hand over even when asked.",
             "Under India's IT Act I am bound by lawful orders of a competent authority; under GDPR I am bound by the rules of whichever member state applies to you.",
@@ -288,7 +288,7 @@ export const privacyPolicy: LegalDocument = {
           items: [
             "Enquiries that do not become projects: deleted within 24 months of the last reply.",
             "Enquiries that do become projects: kept for the life of the engagement and up to 7 years after, because tax and contract records need that long in India.",
-            "Client project data itself — code, documents, datasets — returned or deleted within 30 days of the engagement ending. Only the parts that are also invoice or contract records stay for the 7 years above.",
+            "Client project data itself (code, documents, datasets), returned or deleted within 30 days of the engagement ending. Only the parts that are also invoice or contract records stay for the 7 years above.",
             "Analytics: aggregated on the provider's own schedule. I never export it or join it to anything else.",
             "Server logs: kept by the host for days to weeks for security purposes. I do not set that window and cannot extend it.",
             "Theme preference: stays in your browser until you clear your browser storage.",
@@ -314,7 +314,7 @@ export const privacyPolicy: LegalDocument = {
         },
         {
           kind: "p",
-          text: "Where it applies, these transfers are covered by the providers' standard contractual clauses and their own data processing agreements. The alternative — running the site from an Indian region only — would cost you nothing, but it would also mean giving up access to most of the site.",
+          text: "Where it applies, these transfers are covered by the providers' standard contractual clauses and their own data processing agreements. The alternative, running the site from an Indian region only, would cost you nothing, but it would also mean giving up access to most of the site.",
         },
       ],
     },
@@ -330,7 +330,7 @@ export const privacyPolicy: LegalDocument = {
           kind: "ol",
           items: [
             "Email me. One message is enough; there is no form and no portal.",
-            "I may ask for enough information to confirm the request is really from you — for example that the email you are writing from matches the one you wrote to.",
+            "I may ask for enough information to confirm the request is really from you, for example that the email you are writing from matches the one you wrote to.",
             "I answer within 30 days, sooner in practice, and I tell you plainly if I cannot comply and why.",
             "There is no fee unless a request is manifestly unfounded or excessive.",
           ],
@@ -397,7 +397,7 @@ export const privacyPolicy: LegalDocument = {
       blocks: [
         {
           kind: "p",
-          text: "I will update this page when what I do changes, and the effective date at the top always reflects the current wording. Material changes — a new processor, a new purpose — are announced on the contact page rather than made quietly.",
+          text: "I will update this page when what I do changes, and the effective date at the top always reflects the current wording. Material changes (a new processor, a new purpose) are announced on the contact page rather than made quietly.",
         },
         {
           kind: "p",
@@ -442,7 +442,7 @@ export const termsOfService: LegalDocument = {
         },
         {
           kind: "p",
-          text: "Browsing this site, reading it, or downloading the résumé accepts nothing — you are agreeing to the Terms only when you commission work. Where a signed statement of work, master services agreement, or non-disclosure agreement exists, that document wins on anything it addresses, and these Terms fill the gaps. Where they are all silent, the order of precedence is: the signed engagement document, then these Terms, then the published rate card on this site.",
+          text: "Browsing this site, reading it, or downloading the résumé accepts nothing. You are agreeing to the Terms only when you commission work. Where a signed statement of work, master services agreement, or non-disclosure agreement exists, that document wins on anything it addresses, and these Terms fill the gaps. Where they are all silent, the order of precedence is: the signed engagement document, then these Terms, then the published rate card on this site.",
         },
         {
           kind: "p",
@@ -460,7 +460,7 @@ export const termsOfService: LegalDocument = {
         },
         {
           kind: "p",
-          text: "The relationship is that of an independent contractor and a client. I am not your employee, partner, agent, or fiduciary, and I owe you professional services — not a general duty of loyalty to your business.",
+          text: "The relationship is that of an independent contractor and a client. I am not your employee, partner, agent, or fiduciary, and I owe you professional services, not a general duty of loyalty to your business.",
         },
         {
           kind: "p",
@@ -479,7 +479,7 @@ export const termsOfService: LegalDocument = {
         {
           kind: "note",
           title: "Technology is not a promise of outcome",
-          text: "A project is delivered against defined scope and acceptance criteria. No one — including me — can guarantee a business metric such as revenue, conversion, or model accuracy on unseen data. Where a target genuinely depends on factors inside my control, it is written into the acceptance criteria and is enforceable as such.",
+          text: "A project is delivered against defined scope and acceptance criteria. No one, including me, can guarantee a business metric such as revenue, conversion, or model accuracy on unseen data. Where a target genuinely depends on factors inside my control, it is written into the acceptance criteria and is enforceable as such.",
         },
       ],
     },
@@ -494,12 +494,12 @@ export const termsOfService: LegalDocument = {
         { kind: "h3", text: "Fixed scope" },
         {
           kind: "p",
-          text: "A defined set of deliverables for a defined price, split across milestones. This is the default for builds, and it is the only model where a fixed price is meaningful — the scope has to be genuinely fixed for the number to mean anything.",
+          text: "A defined set of deliverables for a defined price, split across milestones. This is the default for builds, and it is the only model where a fixed price is meaningful: the scope has to be genuinely fixed for the number to mean anything.",
         },
         { kind: "h3", text: "Hourly" },
         {
           kind: "p",
-          text: "For reviews, debugging, integration, pair sessions and mentoring — work where the shape is genuinely not knowable in advance. Hours are tracked against a written estimate and capped up front; I stop and raise a change request at the cap rather than billing past it. Time is invoiced weekly in arrears on a 7-day payment window.",
+          text: "For reviews, debugging, integration, pair sessions and mentoring, work where the shape is genuinely not knowable in advance. Hours are tracked against a written estimate and capped up front; I stop and raise a change request at the cap rather than billing past it. Time is invoiced weekly in arrears on a 7-day payment window.",
         },
         { kind: "h3", text: "Retainer" },
         {
@@ -554,7 +554,7 @@ export const termsOfService: LegalDocument = {
         {
           kind: "ul",
           items: [
-            "Timely feedback and approvals — agreed review windows, and a named person who can give a yes or a no.",
+            "Timely feedback and approvals: agreed review windows, and a named person who can give a yes or a no.",
             "Materials, data, credentials, and API access needed to do the work, supplied complete and lawful to use.",
             "A warranty that you have the right to give me everything you provide: that the data, content, code and trademarks are yours or properly licensed, and that nothing in them obliges me to infringe someone else's rights. I rely on this and cannot verify your lawful basis from my side of the work.",
             "A single point of contact for decisions, so requirements do not contradict each other halfway through a build.",
@@ -573,7 +573,7 @@ export const termsOfService: LegalDocument = {
       blocks: [
         {
           kind: "p",
-          text: "Each proposal includes a revision allowance against its acceptance criteria — two rounds is the standard on fixed-scope work, and the proposal states the number. A revision is a change to something that was agreed, not a change of direction. Two rounds of feedback on the same feature is one round with a lot of notes.",
+          text: "Each proposal includes a revision allowance against its acceptance criteria. Two rounds is the standard on fixed-scope work, and the proposal states the number. A revision is a change to something that was agreed, not a change of direction. Two rounds of feedback on the same feature is one round with a lot of notes.",
         },
         {
           kind: "ul",
@@ -595,7 +595,7 @@ export const termsOfService: LegalDocument = {
           items: [
             "Fees are stated in the proposal, in Indian Rupees or US Dollars, and exclude applicable taxes. The published rate card and these Terms should never contradict each other; where they appear to, the proposal governs that engagement.",
             "Indian GST is charged at the prevailing rate where required. You are responsible for taxes in your own jurisdiction, including withholding tax where it applies.",
-            "On fixed-scope work the split is 40% on signature and 60% on final delivery, unless the proposal states a different split. On hourly and retainer work there is no advance — you are invoiced weekly or monthly in arrears and pay within 7 days.",
+            "On fixed-scope work the split is 40% on signature and 60% on final delivery, unless the proposal states a different split. On hourly and retainer work there is no advance. You are invoiced weekly or monthly in arrears and pay within 7 days.",
             "Invoices unpaid after 7 days on hourly and retainer work, or 14 days on fixed-scope work, accrue interest at 1.5% per month, or the maximum rate your law permits, whichever is lower. Work pauses until the account is settled.",
             "Payment is by bank transfer, UPI, or an agreed cross-border service such as Wise. A cross-border payment is received net: bank charges and intermediary fees are yours, so the amount that lands is the amount invoiced.",
             "Where your law requires you to withhold tax from my fee, the invoice is grossed up so the agreed amount still reaches me, and you provide the withholding documentation I need to claim it back.",
@@ -605,7 +605,7 @@ export const termsOfService: LegalDocument = {
         {
           kind: "note",
           title: "Expenses",
-          text: "Third-party costs that are necessary and pre-approved — API usage at volume, cloud infrastructure, licensed software, model or data fees — are billed at cost. I will flag any expected overrun before it happens, not after.",
+          text: "Third-party costs that are necessary and pre-approved (API usage at volume, cloud infrastructure, licensed software, model or data fees) are billed at cost. I will flag any expected overrun before it happens, not after.",
         },
       ],
     },
@@ -622,7 +622,7 @@ export const termsOfService: LegalDocument = {
           kind: "ul",
           items: [
             "Background and pre-existing material: tools, libraries, internal utilities, code fragments, and generic know-how I had before the project or developed independently of it.",
-            "Anything listed in the proposal as retained, and any general reusable component not specific to your business — which stays mine and is licensed to you, perpetually and royalty-free, for use in the delivered work.",
+            "Anything listed in the proposal as retained, and any general reusable component not specific to your business, which stays mine and is licensed to you, perpetually and royalty-free, for use in the delivered work.",
             "Third-party and open-source components, which are governed by their own licences and remain subject to them.",
           ],
         },
@@ -662,7 +662,7 @@ export const termsOfService: LegalDocument = {
       blocks: [
         {
           kind: "p",
-          text: "I build AI systems, and I use AI tooling to build them — code assistants, hosted APIs, local models, and my own agents. Rather than leave you to guess what that means commercially, here is exactly what it does and does not change.",
+          text: "I build AI systems, and I use AI tooling to build them: code assistants, hosted APIs, local models, and my own agents. Rather than leave you to guess what that means commercially, here is exactly what it does and does not change.",
         },
         {
           kind: "ul",
@@ -671,7 +671,7 @@ export const termsOfService: LegalDocument = {
             "Confidential material goes to a local or self-hosted model wherever the task allows it. If a task genuinely requires sending your material to a third-party model, that is agreed in writing first, with the provider named.",
             "Everything I deliver is reviewed and tested by me. Model output is a first draft, never an accepted deliverable, and no code reaches your repository that I have not run, read, and stood behind.",
             "You own the output the same way you own anything else I build for you, subject to the retained-material carve-outs above.",
-            "Third-party providers set their own terms on what their output may be used for. Where a deliverable depends on one — generated assets, a fine-tuned model, a hosted endpoint — the proposal names it, and you accept those terms along with it.",
+            "Third-party providers set their own terms on what their output may be used for. Where a deliverable depends on one (generated assets, a fine-tuned model, a hosted endpoint), the proposal names it, and you accept those terms along with it.",
             "If your organisation has its own AI policy, a ban on public providers or a required approved-vendor list, tell me at kickoff rather than at review. Retrofitting a compliance requirement into a finished system is the expensive way to discover it.",
           ],
         },
@@ -688,12 +688,12 @@ export const termsOfService: LegalDocument = {
       blocks: [
         {
           kind: "p",
-          text: "Occasionally a project needs a specialist I am not — a designer, a security auditor, a data engineer. That is reasonable, but it happens on terms rather than by accident.",
+          text: "Occasionally a project needs a specialist I am not: a designer, a security auditor, a data engineer. That is reasonable, but it happens on terms rather than by accident.",
         },
         {
           kind: "ul",
           items: [
-            "You are told before any subcontractor touches your work, with their name and what they are doing. You may object on reasonable grounds — security clearance, jurisdiction, conflict of interest — and that objection stands.",
+            "You are told before any subcontractor touches your work, with their name and what they are doing. You may object on reasonable grounds (security clearance, jurisdiction, conflict of interest), and that objection stands.",
             "Nothing is subcontracted without your written consent where the work involves your production data, your credentials, or your customers' personal data.",
             "Subcontractors are bound by the same confidentiality, IP and data-protection obligations as me, and their work is my responsibility exactly as if I had done it.",
             "Subcontracting never changes your point of contact. You deal with me, not with a chain of names to chase when something slips.",
@@ -725,7 +725,7 @@ export const termsOfService: LegalDocument = {
       blocks: [
         {
           kind: "p",
-          text: "Unless we agree otherwise in writing, I may show finished work on this site and professional networks — the shape of the system, the stack, and non-confidential metrics — once it is publicly launched. This is how the site you are reading was built.",
+          text: "Unless we agree otherwise in writing, I may show finished work on this site and professional networks (the shape of the system, the stack, and non-confidential metrics) once it is publicly launched. This is how the site you are reading was built.",
         },
         {
           kind: "ul",
@@ -788,14 +788,14 @@ export const termsOfService: LegalDocument = {
           kind: "ul",
           items: [
             "Neither of us is liable for indirect or consequential loss: lost profit, lost revenue, lost data, lost opportunity, or business interruption.",
-            "Nothing here limits liability that cannot be limited by law — fraud, wilful misconduct, death or personal injury caused by negligence, or your own confidentiality obligations.",
+            "Nothing here limits liability that cannot be limited by law (fraud, wilful misconduct, death or personal injury caused by negligence, or your own confidentiality obligations).",
             "These limits apply equally to my subcontractors, employees, and agents.",
           ],
         },
         {
           kind: "note",
           title: "Practical read",
-          text: "If a project involves data you cannot afford to lose, the right protection is insurance, backups, and a recovery plan — not a liability clause. I will say so if that is what your project needs.",
+          text: "If a project involves data you cannot afford to lose, the right protection is insurance, backups, and a recovery plan, not a liability clause. I will say so if that is what your project needs.",
         },
       ],
     },
@@ -805,11 +805,11 @@ export const termsOfService: LegalDocument = {
       blocks: [
         {
           kind: "p",
-          text: "You indemnify me against claims, damages, and reasonable legal costs arising from materials you supply — content, data, code, or trademarks — or from your use of the delivered work in a way that infringes someone else's rights or breaks the law.",
+          text: "You indemnify me against claims, damages, and reasonable legal costs arising from materials you supply (content, data, code, or trademarks) or from your use of the delivered work in a way that infringes someone else's rights or breaks the law.",
         },
         {
           kind: "p",
-          text: "I indemnify you the same way against third-party claims that the custom deliverables, as delivered and used as agreed, infringe intellectual property rights — excluding anything traceable to materials you supplied or to modifications you or a third party made.",
+          text: "I indemnify you the same way against third-party claims that the custom deliverables, as delivered and used as agreed, infringe intellectual property rights, excluding anything traceable to materials you supplied or to modifications you or a third party made.",
         },
       ],
     },
@@ -826,7 +826,7 @@ export const termsOfService: LegalDocument = {
             "You receive everything produced to date, in the repository or workspace, within 10 business days of final payment.",
             "I may suspend or terminate immediately for non-payment, for unlawful instructions, or where continuing would put a third party's data at risk.",
             "If you go quiet for 30 days on an hourly or retainer engagement, the engagement pauses rather than continuing to accrue fees. Resuming restarts the cycle.",
-            "Provisions that by their nature should survive — payment, intellectual property, confidentiality, liability, and these terms generally — survive termination.",
+            "Provisions that by their nature should survive (payment, intellectual property, confidentiality, liability, and these terms generally) survive termination.",
           ],
         },
       ],
@@ -844,7 +844,7 @@ export const termsOfService: LegalDocument = {
           items: [
             "Your data is used only to deliver the project. It is never used to train or fine-tune any model, including mine, and never used for another client's benefit.",
             "Access is limited to people working on the project, under the same confidentiality obligations.",
-            "Where the project requires a sub-processor — a cloud provider, an API vendor, a model host — I tell you which one and why, and they are bound to process data on your instructions.",
+            "Where the project requires a sub-processor (a cloud provider, an API vendor, a model host), I tell you which one and why, and they are bound to process data on your instructions.",
             "On termination, your data is deleted or handed back as agreed, within 30 days.",
             "A data processing agreement is available on request and is signed before any personal data is processed.",
           ],
@@ -885,16 +885,16 @@ export const termsOfService: LegalDocument = {
         {
           kind: "ol",
           items: [
-            "Talk to each other first. Raise it in writing within 14 days of noticing, and put the disagreement in a sentence or two — most of these dissolve once both sides can see the same problem.",
+            "Talk to each other first. Raise it in writing within 14 days of noticing, and put the disagreement in a sentence or two, most of these dissolve once both sides can see the same problem.",
             "If that fails, attempt good-faith mediation through a mutually agreed mediator, with costs shared equally. Nothing is filed before this step is genuinely tried.",
             "If mediation does not resolve it, the matter goes to arbitration or to the courts at Ahmedabad, whichever the statement of work specifies. If neither says, the courts apply and the default above governs.",
-            "Either of us may seek urgent injunctive or protective relief from a court at any time without first going through these steps — to stop something irreversible happening to data, credentials, or IP while the argument continues.",
+            "Either of us may seek urgent injunctive or protective relief from a court at any time without first going through these steps, to stop something irreversible happening to data, credentials, or IP while the argument continues.",
           ],
         },
         {
           kind: "note",
           title: "If you are contracting from outside India",
-          text: "Indian law and an Ahmedabad courtroom are workable for most overseas engagements, but they are not always what you need. A foreign governing law, a different seat, or arbitration under the ICC rules can all be agreed in the statement of work before work starts. Raise it in the first conversation — it is much harder to renegotiate a governing law once a project is half-built.",
+          text: "Indian law and an Ahmedabad courtroom are workable for most overseas engagements, but they are not always what you need. A foreign governing law, a different seat, or arbitration under the ICC rules can all be agreed in the statement of work before work starts. Raise it in the first conversation. It is much harder to renegotiate a governing law once a project is half-built.",
         },
       ],
     },
@@ -912,7 +912,7 @@ export const termsOfService: LegalDocument = {
             "Notices are valid by email to the address the other side has given for the engagement, and take effect on delivery. A change of contact details is notified the same way.",
             "Neither of us may assign this agreement to a third party without written consent, though either may do so as part of a genuine sale or merger of the business, on written notice.",
             "These Terms, together with any signed statement of work, are the entire agreement between us on the subject. Earlier emails, calls, or messages do not form part of it, and nothing here displaces a duty that cannot lawfully be displaced.",
-            "Neither of us may use these Terms or the engagement to imply endorsement, or to name the other as a reference, without written permission — with the one exception already given under Portfolio and credit.",
+            "Neither of us may use these Terms or the engagement to imply endorsement, or to name the other as a reference, without written permission, with the one exception already given under Portfolio and credit.",
             "If you do not enforce a clause once, that is not a waiver of it. Waivers only count in writing.",
           ],
         },

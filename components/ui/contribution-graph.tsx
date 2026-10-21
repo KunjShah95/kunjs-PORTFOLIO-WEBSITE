@@ -212,7 +212,7 @@ export function ContributionGraph({
         />
         <Stat
           label="Best day"
-          sub={stats.best ? formatDay(stats.best.date) : "—"}
+          sub={stats.best ? formatDay(stats.best.date) : "-"}
           value={stats.best ? formatCount(stats.best.count) : "0"}
         />
       </dl>

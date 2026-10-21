@@ -107,11 +107,11 @@ export default function AboutPage() {
 
           <div className="flex flex-col gap-space-md text-text-secondary font-body-lg text-body-lg max-w-2xl">
             <p>
-              My work sits between the model and the product: agents that know
-              when to stop, retrieval that returns what actually exists, and
-              pipelines that stay observable after they ship. Most of what I
-              build has to survive real users, which is a different problem than
-              making it work once.
+              I&apos;m Kunj, {site.age}, in {site.location}, and I build the
+              unglamorous half of an AI product: the parts that have to keep
+              working after the demo ends. Agents that know when to stop,
+              retrieval that returns what actually exists, and pipelines that
+              are still observable six months later.
             </p>
             <p>
               My core philosophy is simple:{" "}
@@ -238,7 +238,7 @@ export default function AboutPage() {
         >
           <p className="font-body-sm text-body-sm text-text-secondary max-w-2xl">
             Hiring me for a project or retainer? These are the default terms and
-            how your data is handled — the same documents linked from Contact and
+            how your data is handled: the same documents linked from Contact and
             the site footer.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">

@@ -110,14 +110,14 @@ export function LegalDoc({ doc, counterpart }: { doc: LegalDocument; counterpart
       <Reveal className="border-t border-border-hairline pt-6 flex flex-col gap-2">
         <p className="font-body-sm text-body-sm text-text-muted max-w-[70ch]">
           Written in plain English so it can actually be read. It is not a
-          substitute for advice from a lawyer in your jurisdiction — if any part
+          substitute for advice from a lawyer in your jurisdiction. If any part
           of it matters to a decision you are making, get that part checked.
         </p>
         <a
           className="link-draw font-body-sm text-body-sm text-text-secondary w-fit"
           href={`mailto:${site.email}?subject=${encodeURIComponent(doc.title)} question`}
         >
-          Questions about this document — {site.email}
+          Questions about this document: {site.email}
         </a>
       </Reveal>
     </>

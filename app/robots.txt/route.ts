@@ -55,7 +55,7 @@ const allowRules = [CONTENT_SIGNAL, "Allow: /", "Allow: /api/portfolio.json", "D
 
 export function GET() {
   const body = [
-    "# Kunj Shah — crawler and AI usage policy",
+    "# Kunj Shah: crawler and AI usage policy",
     "# Content Signals: https://contentsignals.org",
     group(["*"], allowRules),
     group(AI_AND_SEARCH_CRAWLERS, allowRules),

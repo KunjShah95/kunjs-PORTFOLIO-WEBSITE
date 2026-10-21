@@ -96,7 +96,7 @@ export function SiteHeader() {
               <Link
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative px-3.5 py-1.5 rounded-full font-body-sm text-body-sm font-medium transition-colors duration-200",
+                  "relative z-10 px-3.5 py-1.5 rounded-full font-body-sm text-body-sm font-medium transition-colors duration-200",
                   active ? "text-on-primary" : "text-text-secondary hover:text-text-primary",
                   hovered && hovered !== item.href && active && "text-text-primary",
                 )}

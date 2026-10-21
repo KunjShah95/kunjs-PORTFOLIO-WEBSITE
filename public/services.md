@@ -1,12 +1,12 @@
-# Services — Kunj Shah (AI Engineer & Agent Builder)
+# Services: Kunj Shah (AI Engineer & Agent Builder)
 
 > Machine-readable services summary for AI agents and prospective clients.
 > Contact: kunjkshah05@gmail.com · https://kunjshah.in/contact
-> Last updated: 2026-10-18
+> Last updated: 2026-10-21
 
 ## Who This Is For
 
-Founders, startups, and engineering teams that need AI shipped — not a slide deck.
+Founders, startups, and engineering teams that need AI shipped, not a slide deck.
 Kunj Shah builds production AI systems from brief to deployment in weeks, not quarters.
 
 ## Services
@@ -51,7 +51,7 @@ what actually ships, then the shipped system that backs the claim.
 
 ## Ways to work together
 
-### Hiring managers — Full-time AI or full-stack role
+### Hiring managers: Full-time AI or full-stack role
 
 Final-year B.Tech student at Indus University, currently interning on production AI/ML work. Open to AI engineering and full-stack roles where the systems are real and the evaluation matters.
 
@@ -59,19 +59,19 @@ Final-year B.Tech student at Indus University, currently interning on production
 - 17+ systems built and deployed
 - 60+ PRs merged into OWASP, Microsoft and Ollama
 
-Next step: https://kunjshah.in/contact
+Next step: https://kunjshah.in/contact#inquiryForm
 
-### Founders and small businesses — AI product build or workflow automation
+### Founders and small businesses: AI product build or workflow automation
 
 A scoped pilot delivered end to end: discovery, build, tests, deployment and handover. Priced per pilot rather than per hour so you know the cost before we start.
 
-- ₹10,000-20,000 — website and lead-capture setup
-- ₹15,000-35,000 — AI workflow automation
-- ₹25,000-60,000+ — AI product or MVP engineering
+- ₹10,000-20,000: website and lead-capture setup
+- ₹15,000-35,000: AI workflow automation
+- ₹25,000-60,000+: AI product or MVP engineering
 
-Next step: https://kunjshah.in/contact
+Next step: https://kunjshah.in/contact#inquiryForm
 
-### Open-source maintainers — Contributions and maintainership
+### Open-source maintainers: Contributions and maintainership
 
 Merged work in OWASP, Microsoft and Ollama repositories, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.
 

@@ -17,6 +17,10 @@ export function pageMeta({
   keywords,
   ogTitle,
   ogDescription,
+  image,
+  publishedTime,
+  authors,
+  type = "website",
 }: {
   /** Route path with a leading slash; `""` for the home page. */
   path: string;
@@ -26,33 +30,48 @@ export function pageMeta({
   keywords?: string[];
   ogTitle?: string;
   ogDescription?: string;
+  /** Social image. Defaults to the site-wide card. */
+  image?: { url: string; width: number; height: number; alt: string };
+  /** ISO date, for article pages. */
+  publishedTime?: string;
+  authors?: { name: string; url: string }[];
+  /** Open Graph type. Articles use "article". */
+  type?: "website" | "article";
 }): Metadata {
   const url = `${ORIGIN}${path}`;
   const socialTitle = ogTitle ?? title;
   const socialDescription = ogDescription ?? description;
+  const socialImage = image ?? {
+    url: `${ORIGIN}/og-image.png`,
+    width: 1200,
+    height: 630,
+    alt: socialTitle,
+  };
 
   return {
     title,
     description,
     keywords,
+    authors,
     alternates: {
       canonical: path === "" ? "/" : path,
     },
     openGraph: {
-      type: "website",
+      type,
       url,
-      siteName: `${site.name} — Portfolio`,
+      siteName: `${site.name} | Portfolio`,
       title: socialTitle,
       description: socialDescription,
       locale: "en_IN",
+      ...(publishedTime ? { publishedTime, modifiedTime: publishedTime } : {}),
       // Absolute URL: relative image paths are dropped by some scrapers, and
       // `metadataBase` alone is not applied to images by every consumer.
       images: [
         {
-          url: `${ORIGIN}/og-image.png`,
-          width: 1200,
-          height: 630,
-          alt: socialTitle,
+          url: socialImage.url,
+          width: socialImage.width,
+          height: socialImage.height,
+          alt: socialImage.alt,
           type: "image/png",
         },
       ],
@@ -61,7 +80,7 @@ export function pageMeta({
       card: "summary_large_image",
       title: socialTitle,
       description: socialDescription,
-      images: [`${ORIGIN}/og-image.png`],
+      images: [socialImage.url],
     },
   };
 }

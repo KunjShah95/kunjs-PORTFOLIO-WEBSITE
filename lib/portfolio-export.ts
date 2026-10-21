@@ -1,6 +1,6 @@
 import { ORIGIN } from "@/lib/routes";
+import { essayCategoryLabel, essaysByDate } from "@/lib/essays";
 import {
-  articles,
   education,
   hackathons,
   jobs,
@@ -70,9 +70,60 @@ export function buildPortfolioDocument() {
         "MLOps",
       ],
     },
-    headline: `${site.name} — ${site.role}`,
+    headline: `${site.name} | ${site.role}`,
     description:
       "AI engineer in Ahmedabad, India building production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI applications.",
+    // The practice behind the person. An answer engine asking "who runs this?"
+    // needs a node that says what the organisation is, that it exists, and
+    // what it sells — not only a human name.
+    organization: {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": `${ORIGIN}/#organization`,
+      name: site.name,
+      legalName: site.name,
+      url: `${ORIGIN}/`,
+      logo: `${ORIGIN}/logo.png`,
+      email: site.email,
+      description:
+        "AI engineering practice building production agent systems, RAG pipelines, edge computer vision, and full-stack AI applications for teams shipping real products.",
+      founder: { "@id": `${ORIGIN}/#person` },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Ahmedabad",
+        addressRegion: "Gujarat",
+        addressCountry: "IN",
+      },
+      areaServed: ["Ahmedabad, India", "India", "Worldwide (remote)"],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: site.email,
+        url: `${ORIGIN}/contact`,
+        availableLanguage: ["English", "Gujarati", "Hindi"],
+      },
+      sameAs: [
+        site.links.github,
+        site.links.linkedin,
+        site.links.x,
+        site.links.huggingface,
+        site.links.peerlist,
+        site.links.medium,
+        site.links.producthunt,
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "AI engineering services",
+        itemListElement: services.map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.title,
+            description: service.deliverable,
+            serviceType: service.pill,
+          },
+        })),
+      },
+    },
     location: site.locationLong,
     timezone: site.timezone,
     availability: "Open to freelance, contract, retainer, and full-time AI roles",
@@ -122,13 +173,19 @@ export function buildPortfolioDocument() {
       team: h.team,
       description: h.description,
     })),
-    writing: articles.map((a) => ({
-      slug: a.slug,
-      title: a.title,
-      date: a.date,
-      category: a.categoryLabel,
-      excerpt: a.excerpt,
-      url: `${ORIGIN}/writing#${a.slug}`,
+    // Every entry points at a page on this site that can be fetched and
+    // quoted. This used to list eleven essays that were never published, so
+    // a consumer had nothing it could cite.
+    writing: essaysByDate.map((essay) => ({
+      slug: essay.slug,
+      title: essay.title,
+      date: essay.date,
+      category: essayCategoryLabel(essay.category),
+      excerpt: essay.excerpt,
+      wordCount: essay.wordCount,
+      readMinutes: essay.readMinutes,
+      url: `${ORIGIN}/writing/${essay.slug}`,
+      sameAs: essay.mediumUrl,
     })),
     machineReadable: {
       llmsTxt: `${ORIGIN}/llms.txt`,

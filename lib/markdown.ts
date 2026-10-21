@@ -1,8 +1,9 @@
 import { citationFormats, canonicalUrls } from "@/lib/cite";
 import { legalDocuments, type LegalDocument } from "@/lib/legal";
 import { ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
+import { nodesToMarkdown, parseArticleHtml } from "@/lib/article-html";
+import { essayBySlug, essayCategoryLabel, essayDateLabel, essaysByDate } from "@/lib/essays";
 import {
-  articles,
   contributions,
   directChannels,
   education,
@@ -87,9 +88,9 @@ function legal(doc: LegalDocument): Doc {
 
 const pages: Record<string, () => Doc> = {
   "": () => ({
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} | ${site.role}`,
     body: `${site.hero}\n\n${hiringFaqs[0].answer}\n\n## Selected projects\n\n${list(
-      projects.slice(0, 6).map((p) => `[${p.title}](${ORIGIN}/projects/${p.slug}) — ${p.summary}`),
+      projects.slice(0, 6).map((p) => `[${p.title}](${ORIGIN}/projects/${p.slug}): ${p.summary}`),
     )}\n\n## Services\n\n${list(services.map((s) => `**${s.title}.** ${s.problem} ${s.deliverable}`))}\n\nPricing: ${ORIGIN}/pricing.md`,
   }),
   "/projects": () => ({
@@ -106,18 +107,23 @@ const pages: Record<string, () => Doc> = {
   }),
   "/writing": () => ({
     title: "Writing",
-    body: `${list(articles.map((a) => `**${a.title}** (${a.date}, ${a.readTime}) — ${a.excerpt}`))}\n\nAll essays: ${site.links.medium}`,
+    body: `${list(
+      essaysByDate.map(
+        (essay) =>
+          `[${essay.title}](${ORIGIN}/writing/${essay.slug}): ${essayDateLabel(essay.date)}, ${essay.readMinutes} min read. ${essay.excerpt}`,
+      ),
+    )}\n\nAll essays: ${site.links.medium}`,
   }),
   "/experience": () => ({
     title: "Experience",
     body: jobs
-      .map((j) => `## ${j.role} — ${j.company}\n\n${j.period} · ${j.kind}\n\n${j.description}\n\nSkills: ${j.skills.join(", ")}`)
+      .map((j) => `## ${j.role} | ${j.company}\n\n${j.period} · ${j.kind}\n\n${j.description}\n\nSkills: ${j.skills.join(", ")}`)
       .join("\n\n"),
   }),
   "/hackathons": () => ({
     title: "Hackathons",
     body: hackathons
-      .map((h) => `## ${h.title} — ${h.event} ${h.year}\n\n${h.placement} · ${h.team}\n\n${h.description}`)
+      .map((h) => `## ${h.title} | ${h.event} ${h.year}\n\n${h.placement} · ${h.team}\n\n${h.description}`)
       .join("\n\n"),
   }),
   "/open-source": () => ({
@@ -140,7 +146,7 @@ const pages: Record<string, () => Doc> = {
   }),
   "/education": () => ({
     title: "Education",
-    body: `## ${education.degree} — ${education.institution}\n\n${education.period} · ${education.year} · ${education.location}\n\nSpecialization: ${education.specialization}\n\n${education.summary}\n\nCoursework:\n\n${list(education.coursework)}`,
+    body: `## ${education.degree} | ${education.institution}\n\n${education.period} · ${education.year} · ${education.location}\n\nSpecialization: ${education.specialization}\n\n${education.summary}\n\nCoursework:\n\n${list(education.coursework)}`,
   }),
   "/contact": () => ({
     title: "Contact and hiring",
@@ -162,6 +168,18 @@ export function renderMarkdown(path: string): string | null {
   if (project) {
     const p = projectBySlug(project[1]);
     return p ? frame(clean, { title: p.title, body: projectSection(p, "") }) : null;
+  }
+  const essay = clean.match(/^\/writing\/([^/]+)$/);
+  if (essay) {
+    const entry = essayBySlug(essay[1]);
+    if (!entry) return null;
+    // The full text, not a summary: an agent asking for an essay should get
+    // the essay.
+    const body = nodesToMarkdown(parseArticleHtml(entry.body));
+    return frame(clean, {
+      title: entry.title,
+      body: `${essayDateLabel(entry.date)} · ${essayCategoryLabel(entry.category)} · ${entry.readMinutes} min read\n\n${entry.excerpt}\n\n${body}\n\nOriginal: ${entry.mediumUrl}`,
+    });
   }
   const page = pages[clean];
   return page ? frame(clean, page()) : null;

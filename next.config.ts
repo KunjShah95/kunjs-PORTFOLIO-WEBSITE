@@ -22,11 +22,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Essays moved to Medium (listed on /writing). The old placeholder essay
-  // URLs redirect there so existing links keep working.
-  async redirects() {
-    return [{ source: "/writing/:slug", destination: "/writing", permanent: true }];
-  },
   // `/<page>.md` serves the Markdown twin of a page (see app/markdown). These
   // run after the filesystem, so the real /pricing.md and /services.md win.
   async rewrites() {
@@ -35,6 +30,7 @@ const nextConfig: NextConfig = {
       afterFiles: [
         { source: "/index.md", destination: "/markdown" },
         { source: "/projects/:slug.md", destination: "/markdown/projects/:slug" },
+        { source: "/writing/:slug.md", destination: "/markdown/writing/:slug" },
         { source: "/:page.md", destination: "/markdown/:page" },
       ],
       fallback: [],

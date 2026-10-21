@@ -110,7 +110,13 @@ export function ActiveItemPill({
     <motion.span
       animate={{ x: rect.x, y: rect.y, width: rect.width, height: rect.height }}
       aria-hidden="true"
-      className={cn("absolute left-0 top-0", className)}
+      // `z-0` keeps the pill behind the labels it is meant to sit under. It is
+      // an absolutely positioned element, so without an explicit z-index it
+      // paints above every positioned sibling — and since it is the last
+      // child of its container, that meant painting over the item's own text.
+      // On the header this left the active item as a solid black pill with no
+      // visible label. Every item in a strip is `z-10` to sit above it.
+      className={cn("absolute left-0 top-0 z-0", className)}
       // The first measured rect is the resting state, not a transition in.
       initial={false}
       transition={reduce ? { duration: 0 } : SPRING}

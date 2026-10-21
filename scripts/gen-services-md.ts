@@ -28,7 +28,7 @@ const h2 = (text: string) => `## ${text}`;
 const h3 = (text: string) => `### ${text}`;
 
 const lines: string[] = [
-  "# Services — Kunj Shah (AI Engineer & Agent Builder)",
+  "# Services: Kunj Shah (AI Engineer & Agent Builder)",
   "",
   "> Machine-readable services summary for AI agents and prospective clients.",
   `> Contact: ${site.email} · ${ORIGIN}/contact`,
@@ -36,7 +36,7 @@ const lines: string[] = [
   "",
   "## Who This Is For",
   "",
-  "Founders, startups, and engineering teams that need AI shipped — not a slide deck.",
+  "Founders, startups, and engineering teams that need AI shipped, not a slide deck.",
   "Kunj Shah builds production AI systems from brief to deployment in weeks, not quarters.",
   "",
   "## Services",
@@ -62,7 +62,7 @@ lines.push(h2("Ways to work together"), "");
 
 engagements.forEach((path) => {
   lines.push(
-    h3(`${path.audience} — ${path.title}`),
+    h3(`${path.audience}: ${path.title}`),
     "",
     path.body,
     "",
@@ -122,12 +122,12 @@ const block = [
   "",
   ...services.map(
     (service, i) =>
-      `${i + 1}. ${service.title} (${service.pill}) — ${service.problem} ${service.deliverable} Proof: ${service.proof}`,
+      `${i + 1}. ${service.title} (${service.pill}): ${service.problem} ${service.deliverable} Proof: ${service.proof}`,
   ),
   "",
   "**Ways to work together:**",
   "",
-  ...engagements.map((path) => `- ${path.audience}: ${path.title} — ${path.body}`),
+  ...engagements.map((path) => `- ${path.audience}: ${path.title}. ${path.body}`),
   "",
   "**How we work:** 15-min intro (free) → fixed quote in writing (40%/60%) → weekly demos → you own everything (repo/CI/cloud/docs)",
   "",

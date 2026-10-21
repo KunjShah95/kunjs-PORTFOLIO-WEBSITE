@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { DISCOVERY_ASSETS, ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
+import { essaysByDate } from "@/lib/essays";
 import { projects } from "@/lib/site-data";
 
 /**
@@ -30,6 +31,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // The essays themselves. These were missing entirely, which is why a
+  // crawler found no content to cite: the archive existed as a list of
+  // titles, but no page was ever served for one.
+  const essays = essaysByDate.map((essay) => ({
+    url: `${ORIGIN}/writing/${essay.slug}`,
+    lastModified: new Date(essay.date),
+    changeFrequency: "yearly" as const,
+    priority: 0.7,
+  }));
+
   const assets = DISCOVERY_ASSETS.map((asset) => ({
     url: `${ORIGIN}${asset.path}`,
     lastModified: LAST_MODIFIED,
@@ -37,5 +48,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: asset.priority,
   }));
 
-  return [...pages, ...caseStudies, ...assets];
+  return [...pages, ...caseStudies, ...essays, ...assets];
 }

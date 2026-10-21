@@ -64,7 +64,7 @@ export function ProjectsBrowser() {
             <button
               aria-pressed={active}
               className={cn(
-                "relative h-11 lg:h-8 px-4 lg:px-3.5 rounded-full font-label-badge text-label-badge whitespace-nowrap transition-colors duration-200 active:scale-[0.97]",
+                "relative z-10 h-11 lg:h-8 px-4 lg:px-3.5 rounded-full font-label-badge text-label-badge whitespace-nowrap transition-colors duration-200 active:scale-[0.97]",
                 active
                   ? "text-on-primary"
                   : "bg-surface-container md:bg-transparent text-text-secondary hover:text-text-primary",

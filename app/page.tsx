@@ -4,7 +4,7 @@ import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
 import { DemoVideo } from "@/components/projects/demo-video";
 import { Icon } from "@/components/icon";
-import { Reveal, RevealText } from "@/components/primitives/Reveal";
+import { Reveal } from "@/components/primitives/Reveal";
 import { CopyEmailRow } from "@/components/ui/copy-email";
 import { ProofLinks } from "@/components/ui/proof-links";
 import {
@@ -17,7 +17,6 @@ import { PullQuote } from "@/components/ui/pull-quote";
 import { ArrowAffordance, StatusDot } from "@/components/ui/primitives";
 import {
   engagements,
-  homeEssays,
   jobs,
   mergedContributions,
   metrics,
@@ -25,9 +24,9 @@ import {
   services,
   site,
 } from "@/lib/site-data";
+import { essayDateLabel, essaysByDate } from "@/lib/essays";
 import { getOpenSourceActivity, timeAgo } from "@/lib/github";
 import { getContributions } from "@/lib/contributions";
-import { MEDIUM_PROFILE, formatMonth, getMediumPosts } from "@/lib/medium";
 import { JsonLd, webPageJsonLd } from "@/components/seo/json-ld";
 import { pageMeta } from "@/lib/seo";
 
@@ -50,21 +49,20 @@ export const metadata: Metadata = {
       "generative AI consultant India",
       "machine learning engineer Gujarat",
     ],
-    ogTitle: "Kunj Shah — AI Engineer & Agent Builder, Ahmedabad",
+    ogTitle: "Kunj Shah | AI Engineer & Agent Builder, Ahmedabad",
     ogDescription:
       "AI infrastructure and systems engineering: inference benchmarks, retrieval systems, agent infrastructure, and full-stack AI apps. 60+ merged open-source PRs.",
   }),
   // The root `title.template` only applies to child segments, so the home
   // page would otherwise ship a title without the name in it.
-  title: { absolute: "Kunj Shah — AI Engineer & Agent Builder in Ahmedabad" },
+  title: { absolute: "Kunj Shah | AI Engineer & Agent Builder in Ahmedabad" },
 };
 
 const [lead, ...others] = projects.slice(0, 4);
 
 export default async function HomePage() {
-  const [activity, posts, contributions] = await Promise.all([
+  const [activity, contributions] = await Promise.all([
     getOpenSourceActivity(12),
-    getMediumPosts(),
     getContributions(),
   ]);
   /** Only merged work counts as a contribution. Open and closed PRs are dropped. */
@@ -74,7 +72,7 @@ export default async function HomePage() {
 
   // "Right now": what I'm doing this month, from live sources where possible.
   const job = jobs.find((j) => j.live) ?? jobs[0];
-  const essay = posts?.[0];
+  const essay = essaysByDate[0];
   const merge = mergedRecent[0];
   const fallbackMerge = mergedContributions[0];
 
@@ -96,7 +94,7 @@ export default async function HomePage() {
       <JsonLd
         data={webPageJsonLd({
           path: "",
-          name: "Kunj Shah — AI Engineer & Agent Builder",
+          name: "Kunj Shah | AI Engineer & Agent Builder",
           description: homeDescription,
         })}
       />
@@ -134,13 +132,20 @@ export default async function HomePage() {
                 </p>
               </Reveal>
 
-              <RevealText
-                as="h1"
-                className="text-[clamp(2.25rem,1.55rem+3vw,3.625rem)] leading-[1.05] font-semibold tracking-[-0.04em] text-text-primary max-w-[18ch] md:max-w-none"
-                delay={0.05}
-                each={0.045}
-                text={site.hero}
-              />
+              {/* The headline ships as plain text in one node.
+                  It was previously a per-word masked reveal: each word was
+                  wrapped in an overflow-clipping box and animated up from
+                  110%, so the server HTML contained the h1 translated out of
+                  view, and any render that caught it mid-animation showed
+                  the words sliced in half. A crawler screenshotting the page
+                  captured exactly that. This is the largest text on the site
+                  and the string most likely to be quoted, so it is visible
+                  from the first paint and animates as a whole instead. */}
+              <Reveal y={8}>
+                <h1 className="text-[clamp(2.25rem,1.55rem+3vw,3.625rem)] leading-[1.05] font-semibold tracking-[-0.04em] text-text-primary max-w-[18ch] md:max-w-none text-balance">
+                  {site.hero}
+                </h1>
+              </Reveal>
 
               <Reveal delay={0.3}>
                 <p className="font-body-lg text-body-lg text-text-secondary max-w-[46ch]">
@@ -255,7 +260,7 @@ export default async function HomePage() {
             <div className="grid gap-8 lg:grid-cols-12 lg:gap-x-10">
               <div className="flex flex-col gap-4 lg:col-span-7">
                 <p className="font-body-lg text-body-lg text-text-primary text-pretty">
-                  I&apos;m Kunj — {site.age}, final-year Computer Science at
+                  I&apos;m Kunj, {site.age}, final-year Computer Science at
                   Indus University in {site.location}, and I build the parts
                   of an AI product that have to keep working once the demo
                   ends.
@@ -330,19 +335,14 @@ export default async function HomePage() {
 
             <div className="flex flex-col gap-2">
               <span className="font-body-sm text-body-sm text-text-muted">Last wrote</span>
-              <a
-                className="group flex flex-col gap-1"
-                href={essay?.url ?? MEDIUM_PROFILE}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
+              <Link className="group flex flex-col gap-1" href={`/writing/${essay.slug}`}>
                 <span className="font-headline-md text-headline-md text-text-primary">
-                  <span className="link-draw">{essay?.title ?? homeEssays[0].title}</span>
+                  <span className="link-draw">{essay.title}</span>
                 </span>
                 <span className="font-body-sm text-body-sm text-text-secondary">
-                  {essay ? `On Medium, ${formatMonth(essay.date)}` : "On Medium"}
+                  {essayDateLabel(essay.date)} · {essay.readMinutes} min read
                 </span>
-              </a>
+              </Link>
             </div>
 
             <div className="flex flex-col gap-2">
@@ -603,60 +603,39 @@ export default async function HomePage() {
           meta={<RailLink href="/writing">All essays</RailLink>}
           title="Writing"
         >
-          {posts ? (
-            <div className="grid gap-8 md:grid-cols-3 md:gap-6">
-              {posts.slice(1, 4).map((post) => (
-                <a
-                  className="group flex flex-col gap-4"
-                  href={post.url}
-                  key={post.url}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <span className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-surface-container">
-                    {post.image && (
-                      <FadeImage
-                        alt=""
-                        className="object-cover group-hover:scale-[1.03]"
-                        fill
-                        sizes="(min-width: 768px) 300px, 100vw"
-                        src={post.image}
-                      />
-                    )}
+          <div className="grid gap-8 md:grid-cols-3 md:gap-6">
+            {essaysByDate.slice(0, 3).map((post) => (
+              <Link
+                className="group flex flex-col gap-4"
+                href={`/writing/${post.slug}`}
+                key={post.slug}
+              >
+                <span className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-surface-container">
+                  {post.image && (
+                    <FadeImage
+                      alt=""
+                      className="object-cover group-hover:scale-[1.03]"
+                      fill
+                      sizes="(min-width: 768px) 300px, 100vw"
+                      src={post.image}
+                    />
+                  )}
+                </span>
+                <span className="flex flex-col gap-1.5">
+                  <span className="font-body-sm text-body-sm text-text-muted">
+                    <time className="font-label-meta text-label-meta text-text-secondary" dateTime={post.date}>
+                      {essayDateLabel(post.date)}
+                    </time>
+                    <span className="mx-2 text-border-dotted">/</span>
+                    {post.readMinutes} min read
                   </span>
-                  <span className="flex flex-col gap-1.5">
-                    <span className="font-body-sm text-body-sm text-text-muted">
-                      <time className="font-label-meta text-label-meta text-text-secondary" dateTime={post.date}>
-                        {formatMonth(post.date)}
-                      </time>
-                      <span className="mx-2 text-border-dotted">/</span>
-                      {post.readMinutes} min read
-                    </span>
-                    <span className="font-headline-md text-headline-md text-text-primary transition-colors group-hover:text-text-secondary">
-                      {post.title}
-                    </span>
+                  <span className="font-headline-md text-headline-md text-text-primary transition-colors group-hover:text-text-secondary">
+                    {post.title}
                   </span>
-                </a>
-              ))}
-            </div>
-          ) : (
-            <div className="grid gap-8 md:grid-cols-3 md:gap-6">
-              {homeEssays.map((essay) => (
-                <a
-                  className="group flex flex-col gap-3 pt-4 border-t border-border-hairline hover:border-text-primary transition-colors"
-                  href={MEDIUM_PROFILE}
-                  key={essay.title}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <span className="font-label-meta text-label-meta text-text-muted">{essay.year}</span>
-                  <span className="font-headline-md text-headline-md text-text-primary group-hover:underline decoration-border-dotted underline-offset-4">
-                    {essay.title}
-                  </span>
-                </a>
-              ))}
-            </div>
-          )}
+                </span>
+              </Link>
+            ))}
+          </div>
         </PageSection>
 
         {/* --------------------------------------------------- the one opinion */}
@@ -666,7 +645,7 @@ export default async function HomePage() {
 
         <CtaBand
           body="Hiring for AI or full-stack, scoping a build, or looking for a maintainer: tell me which, and I'll answer on that. Recruiting, freelance pilots and OSS conversations all get a reply within a day."
-          title="Hiring, building, or maintaining — start here."
+          title="Hiring, building, or maintaining: start here."
         >
           <Link
             className={buttonStyles.primary}
