@@ -89,19 +89,22 @@ export function StatStrip({
 }
 
 /**
- * Closing call to action. One headline, one line of support, the actions.
- * Deliberately not a coloured box: it closes the page in the page's own
- * surface, separated by a rule.
+ * Closing call to action: an inverted panel, the one dark surface on a
+ * light page. Every page ends here, so the ask always looks the same and is
+ * never mistaken for another section of content.
  */
 export function CtaBand({
   title,
   body,
   children,
+  footnote,
   className,
 }: {
   title: ReactNode;
   body?: ReactNode;
   children?: ReactNode;
+  /** Small line under the actions, e.g. the recruiter path. */
+  footnote?: ReactNode;
   className?: string;
 }) {
   const headingId = useId();
@@ -110,28 +113,37 @@ export function CtaBand({
       aria-labelledby={headingId}
       as="section"
       className={cn(
-        "border-t border-text-primary pt-8 md:pt-12 grid gap-6 lg:grid-cols-12 lg:gap-x-10 lg:items-end",
+        "theme-ink relative isolate overflow-hidden rounded-3xl bg-surface text-text-primary border border-border-hairline px-6 py-12 md:px-14 md:py-20",
         className,
       )}
     >
-      <div className="flex flex-col gap-3 lg:col-span-8">
+      <div
+        aria-hidden="true"
+        className="bg-grid absolute inset-0 -z-10"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -z-10 -top-40 left-1/2 -translate-x-1/2 h-80 w-[36rem] rounded-full bg-signal/25 blur-[120px]"
+      />
+      <div className="flex flex-col items-start gap-6 max-w-3xl">
         <h2
-          className="font-headline-lg text-headline-lg md:text-[40px] md:leading-[44px] tracking-[-0.03em] text-text-primary max-w-2xl"
+          className="text-[clamp(2rem,1.3rem+2.8vw,3.5rem)] leading-[1.02] tracking-[-0.04em] font-semibold text-balance"
           id={headingId}
         >
           {title}
         </h2>
         {body && (
-          <p className="font-body-md text-body-md text-text-secondary max-w-[60ch]">
+          <p className="font-body-lg text-body-lg text-text-secondary max-w-[56ch]">
             {body}
           </p>
         )}
+        {children && (
+          <div className="flex flex-wrap items-center gap-3 pt-2">{children}</div>
+        )}
+        {footnote && (
+          <div className="font-body-sm text-body-sm text-text-muted">{footnote}</div>
+        )}
       </div>
-      {children && (
-        <div className="flex flex-wrap items-center gap-3 lg:col-span-4 lg:justify-end">
-          {children}
-        </div>
-      )}
     </Reveal>
   );
 }
@@ -142,9 +154,9 @@ export function CtaBand({
  */
 export const buttonStyles = {
   primary:
-    "inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-primary text-on-primary font-body-sm text-body-sm font-medium whitespace-nowrap hover:bg-primary-container active:scale-[0.98] transition-all",
+    "inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-primary text-on-primary font-body-sm text-body-sm font-medium whitespace-nowrap shadow-[inset_0_1px_0_rgb(255_255_255/0.14),0_1px_2px_rgb(0_0_0/0.2)] hover:bg-primary-container active:scale-[0.98] transition-all",
   secondary:
-    "inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-surface-card text-text-primary font-body-sm text-body-sm font-medium whitespace-nowrap border border-border-hairline hover:border-text-muted active:scale-[0.98] transition-all",
+    "inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-surface-card text-text-primary font-body-sm text-body-sm font-medium whitespace-nowrap border border-border-hairline shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-text-muted active:scale-[0.98] transition-all",
   link:
-    "inline-flex items-center gap-1.5 font-body-sm text-body-sm font-medium text-text-primary underline decoration-border-dotted underline-offset-4 hover:decoration-text-primary transition-colors",
+    "inline-flex items-center gap-1.5 min-h-11 -my-1 py-1 font-body-sm text-body-sm font-medium text-text-primary underline decoration-border-dotted underline-offset-4 hover:decoration-text-primary transition-colors",
 } as const;

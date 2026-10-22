@@ -39,8 +39,9 @@ export default function ProjectsPage() {
         <JsonLd data={pageBreadcrumb("Projects", "/projects")} />
         <div className="flex flex-col gap-8 md:gap-12">
           <PageIntro
-            lead="Production AI systems, multi-agent frameworks, edge vision models, and full-stack software, architected from concept to deployment."
-            title="Projects & case studies"
+            lead="Agents, search, edge vision and full-stack AI products. Most case studies state how the system was tested and what it still gets wrong."
+            eyebrow="Work"
+            title="Shipped, measured, and public."
           >
             <ShippedStatus />
           </PageIntro>
@@ -82,8 +83,8 @@ export default function ProjectsPage() {
 
         {/* ------------------------------------------------- collaboration CTA */}
         <CtaBand
-          body="I consult on multi-agent system design, production LLM latency optimization, and edge computer vision deployments."
-          title="Have a complex AI project or agent architecture in mind?"
+          body="Agents, document search, full-stack AI apps and edge vision. Fixed price, quoted in writing after a free 15-minute call."
+          title="Want something like this built for you?"
         >
           <Link
             className={buttonStyles.primary}

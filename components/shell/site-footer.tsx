@@ -22,10 +22,22 @@ export function SiteFooter() {
   return (
     <footer className="mt-16 md:mt-24 pb-24 short-screen:pb-20 lg:pb-0 bg-surface-container-low">
       <div className="shell-container py-12 md:py-16 grid gap-10 md:grid-cols-12">
-        <div className="md:col-span-4">
+        <div className="md:col-span-4 flex flex-col gap-3">
           <span className="font-headline-md text-headline-md text-text-primary">
             {site.name}
           </span>
+          <p className="font-body-sm text-body-sm text-text-secondary max-w-[32ch]">
+            AI engineer in {site.location}. I build agents, document search and
+            full-stack AI apps, with the tests that prove they work.
+          </p>
+          <Link
+            className="w-fit inline-flex items-center min-h-11 -my-1 py-1 font-body-sm text-body-sm font-medium text-text-primary underline decoration-border-dotted underline-offset-4 hover:decoration-text-primary"
+            data-track="Contact CTA Clicked"
+            data-track-from="footer"
+            href="/contact#inquiryForm"
+          >
+            Start a project
+          </Link>
         </div>
 
         <nav aria-label="Site index" className="md:col-span-5 md:col-start-6">
@@ -76,13 +88,19 @@ export function SiteFooter() {
               sections of the portfolio, but they do need to be reachable from
               every page. */}
           <li>
-            <Link className="hover:text-text-primary transition-colors" href="/cite">
+            <Link
+              className="inline-flex items-center min-h-11 -mx-1.5 px-1.5 hover:text-text-primary transition-colors"
+              href="/cite"
+            >
               Cite
             </Link>
           </li>
           {legalDocuments.map((doc) => (
             <li key={doc.path}>
-              <Link className="hover:text-text-primary transition-colors" href={doc.path}>
+              <Link
+                className="inline-flex items-center min-h-11 -mx-1.5 px-1.5 hover:text-text-primary transition-colors"
+                href={doc.path}
+              >
                 {doc.label}
               </Link>
             </li>

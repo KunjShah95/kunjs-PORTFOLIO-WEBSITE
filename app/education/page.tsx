@@ -23,8 +23,9 @@ export default function EducationPage() {
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Education", "/education")} />
         <PageIntro
-          title="Education"
-          lead="Focusing on the intersection of full stack development and AI, building automated systems that use distributed intelligence at scale."
+          eyebrow="Education"
+          title="B.Tech Computer Science, final year."
+          lead="Indus University, Ahmedabad, 2023 to 2027. Specialising in AI/ML integration and automation, with coursework in deep learning, computer vision, NLP and distributed systems."
         />
 
         {/* ------------------------------------------------------ degree card */}
@@ -152,7 +153,7 @@ export default function EducationPage() {
 
         <CtaBand
           body={`Open to freelance, contract, part-time retainer, and full-time AI roles, remote-friendly from ${site.location}.`}
-          title="Looking for an AI engineer who ships?"
+          title="Need an AI engineer for a project or a role?"
         >
           <Link className={buttonStyles.primary} href="/contact">
             <Icon name="mail" size={18} />

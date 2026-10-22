@@ -102,7 +102,7 @@ export function OpenSourceImpact({
           className="inline-flex items-center gap-1.5 -my-3 py-3 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors w-fit group"
           href="/open-source"
         >
-          See the actual pull requests
+          See the pull requests
           <Icon
             className="transition-transform group-hover:translate-x-0.5"
             name="arrow_forward"
@@ -120,7 +120,7 @@ export function OpenSourceImpact({
             className="inline-flex items-center gap-1.5 -my-3 py-3 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors w-fit group"
             href="/open-source"
           >
-            <span className="link-draw">See the actual pull requests</span>
+            <span className="link-draw">See the pull requests</span>
             <Icon
               className="transition-transform group-hover:translate-x-0.5"
               name="arrow_forward"

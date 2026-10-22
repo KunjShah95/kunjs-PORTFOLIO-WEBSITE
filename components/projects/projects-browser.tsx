@@ -100,15 +100,30 @@ export function ProjectsBrowser() {
               key={project.slug}
               transition={{ duration: 0.35, ease: EASE_OUT }}
             >
-              {project.video && (
+              {project.video ? (
                 <DemoVideo className="mb-5" src={project.video} title={project.title} />
+              ) : (
+                /* No recording: the lead metric, typeset, in the same frame a
+                   video would take, so every card in the grid has a picture. */
+                <div className="relative mb-5 grid aspect-video place-items-center overflow-hidden rounded-xl border border-border-hairline bg-surface-container">
+                  <div aria-hidden="true" className="bg-grid absolute inset-0" />
+                  <div className="relative flex flex-col items-center gap-2 px-6 text-center">
+                    <span
+                      className="text-[clamp(2.5rem,2rem+2.5vw,4rem)] leading-none font-semibold tracking-[-0.05em] text-text-primary"
+                      data-numeric
+                    >
+                      {project.metrics[0].value}
+                    </span>
+                    <span className="eyebrow text-text-muted">{project.metrics[0].label}</span>
+                  </div>
+                </div>
               )}
-              <p className="font-body-sm text-body-sm text-text-muted">
+              <p className="eyebrow text-text-muted">
                 {project.category}
-                <span className="mx-1.5 text-border-dotted">/</span>
+                <span className="mx-1.5">&middot;</span>
                 {project.status}
               </p>
-              <h2 className="mt-1.5 font-headline-lg text-headline-lg text-text-primary tracking-tight">
+              <h2 className="mt-2 text-[1.625rem] leading-tight font-semibold tracking-[-0.03em] text-text-primary">
                 <Link className="link-draw" href={`/projects/${project.slug}`}>
                   {project.title}
                 </Link>
@@ -124,7 +139,7 @@ export function ProjectsBrowser() {
                     <dd
                       className={cn(
                         "font-headline-lg text-headline-lg tracking-tight truncate",
-                        metric.accent ? "text-accent-emerald-ink" : "text-text-primary",
+                        metric.accent ? "text-signal-ink" : "text-text-primary",
                       )}
                       data-numeric
                     >
@@ -135,7 +150,7 @@ export function ProjectsBrowser() {
               </dl>
 
               <p className="font-body-md text-body-md text-text-secondary">
-                {project.body}
+                {project.summary}
               </p>
 
               <div className="flex flex-wrap gap-1.5 mt-4 mb-5">
@@ -197,6 +212,14 @@ export function ProjectsBrowser() {
                 transition={{ duration: reduce ? 0 : 0.35, ease: EASE_OUT }}
               >
               <div className="flex flex-col gap-3 mt-3 bg-surface-container-low p-4 rounded-xl">
+                <div>
+                  <span className="font-body-sm text-body-sm text-text-primary">
+                    How it works
+                  </span>
+                  <p className="font-body-sm text-body-sm text-text-secondary mt-1">
+                    {project.body}
+                  </p>
+                </div>
                 {project.challenges && (
                   <div>
                     <span className="font-body-sm text-body-sm text-text-primary">
@@ -216,11 +239,6 @@ export function ProjectsBrowser() {
                       {project.lessons}
                     </p>
                   </div>
-                )}
-                {!project.challenges && !project.lessons && (
-                  <p className="font-body-sm text-body-sm text-text-secondary">
-                    {project.summary}
-                  </p>
                 )}
               </div>
               </motion.div>

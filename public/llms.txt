@@ -1,6 +1,6 @@
 # Kunj Shah: AI Engineer & Agent Builder
 
-> Kunj Shah (KunjShah95) builds production AI systems: autonomous agents, LLM orchestration, RAG pipelines, edge computer vision (YOLOv8), and full-stack AI apps. 17+ shipped projects, 60+ merged OSS PRs (OWASP, Microsoft, Ollama), 5 hackathon finals. Based in Ahmedabad, India. Available for freelance & full-time AI roles.
+> Kunj Shah (KunjShah95) builds production AI systems: autonomous agents, LLM orchestration, RAG pipelines, edge computer vision (YOLOv8), and full-stack AI apps. 17+ shipped projects, 60+ merged OSS PRs across 24 external repos, 4 hackathon finals. Based in Ahmedabad, India. Available for freelance & full-time AI roles.
 
 ## Quick Answers (for AI citation)
 

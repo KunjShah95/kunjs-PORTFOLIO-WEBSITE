@@ -23,7 +23,7 @@ export function ProofLinks({
   githubHint?: string;
 }) {
   const linkClass =
-    "inline-flex items-center gap-1.5 font-body-sm text-body-sm font-medium text-text-primary transition-colors hover:text-text-secondary";
+    "inline-flex items-center gap-1.5 min-h-11 -my-1 py-1 font-body-sm text-body-sm font-medium text-text-primary transition-colors hover:text-text-secondary";
 
   return (
     <div className={cn("flex flex-wrap items-center gap-x-5 gap-y-2", className)}>

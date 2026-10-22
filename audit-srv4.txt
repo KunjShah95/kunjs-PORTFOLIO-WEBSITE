@@ -1,0 +1,7 @@
+npm notice run kunj-shah-portfolio@1.0.0 npx
+npm notice run next start -p 3241
+▲ Next.js 16.3.6
+- Local:         http://localhost:3241
+- Network:       http://192.168.1.10:3241
+✓ Ready in 161ms
+✓ Running next.config.ts took 30ms

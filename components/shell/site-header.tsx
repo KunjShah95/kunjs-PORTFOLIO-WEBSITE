@@ -15,10 +15,10 @@ import { site } from "@/lib/site-data";
 
 /** Primary desktop destinations. Everything else lives in the index menu. */
 const desktopNav = [
-  { href: "/projects", label: "Projects" },
-  { href: "/experience", label: "Experience" },
+  { href: "/projects", label: "Work" },
+  { href: "/#services", label: "Services" },
+  { href: "/#pricing", label: "Pricing" },
   { href: "/writing", label: "Writing" },
-  { href: "/open-source", label: "Open Source" },
   { href: "/about", label: "About" },
 ] as const;
 
@@ -55,6 +55,8 @@ export function SiteHeader() {
     <header
       className={cn(
         "fixed top-0 inset-x-0 z-50 pt-safe transition-[background-color,box-shadow] duration-300",
+        // Home opens on a dark set; the bar plays in the same key there.
+        pathname === "/" && "theme-ink text-text-primary",
         scrolled
           ? "bg-surface/80 backdrop-blur-xl shadow-[0_1px_0_0_var(--color-border-hairline)]"
           : "bg-surface/0",
@@ -133,7 +135,7 @@ export function SiteHeader() {
             data-track-from="header"
             href="/contact#inquiryForm"
           >
-            Get in touch
+            Start a project
             <Icon
               className="transition-transform duration-300 group-hover:translate-x-0.5"
               name="arrow_forward"

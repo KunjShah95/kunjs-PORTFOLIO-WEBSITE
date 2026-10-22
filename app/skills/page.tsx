@@ -23,8 +23,9 @@ export default function SkillsPage() {
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Skills", "/skills")} />
         <PageIntro
-          title="Skills"
-          lead="Grouped by discipline rather than by logo, the stack I actually reach for on each kind of problem."
+          eyebrow="Skills"
+          title="The stack I reach for, by problem."
+          lead="Grouped by discipline, so you can see which tools I use for which kind of work."
         />
 
         {/* --------------------------------------------------------- discipline */}

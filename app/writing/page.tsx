@@ -58,8 +58,9 @@ export default function WritingPage() {
         />
 
         <PageIntro
-          lead="Essays on AI engineering, agent systems, retrieval, evaluation, and edge machine learning. Written by me, published in full here."
-          title="Writing"
+          lead="Essays on agents, retrieval, evaluation and edge ML. Written by me, published in full here."
+          eyebrow="Writing"
+          title="Notes from building AI systems."
         >
           <a className={`${buttonStyles.secondary} group`} href={site.links.medium} {...external}>
             Also on Medium

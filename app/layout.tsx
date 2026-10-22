@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ClickTracker } from "@/components/analytics/click-tracker";
 import { EngagementTracker } from "@/components/analytics/engagement-tracker";
@@ -25,6 +25,16 @@ const sans = Geist({
 const mono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
+});
+
+/* One display accent: Instrument Serif, italic only, for the few words a
+   headline leans on. Static font, so the weight and style are named. */
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -113,8 +123,8 @@ export const viewport: Viewport = {
   // Two entries so the browser/OS chrome follows the theme. The light value
   // matches --color-surface; the dark value matches the dark surface token.
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fff8f5" },
-    { media: "(prefers-color-scheme: dark)", color: "#141110" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f5f1" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0c0b" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -144,7 +154,7 @@ export default function RootLayout({
     // either way, but if #418 survives a fresh deploy, purge the ISR cache
     // rather than changing code here.
     <html
-      className={`${sans.variable} ${mono.variable}`}
+      className={`${sans.variable} ${mono.variable} ${serif.variable}`}
       data-scroll-behavior="smooth"
       data-theme="light"
       lang="en"
@@ -161,7 +171,7 @@ export default function RootLayout({
         <link href={`${ORIGIN}/ai.txt`} rel="alternate" title="AI crawler policy (ai.txt)" type="text/markdown" />
         <link href={`${ORIGIN}/api/portfolio.json`} rel="alternate" title="Portfolio JSON" type="application/json" />
       </head>
-      <body className="bg-surface text-text-primary font-body-md text-body-md antialiased">
+      <body className="bg-surface text-text-primary font-body-md text-body-md antialiased overflow-x-clip">
         <a
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:px-3 focus:py-2 focus:rounded-lg focus:bg-primary focus:text-on-primary"
           href="#main"

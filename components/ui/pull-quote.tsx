@@ -40,7 +40,7 @@ export function PullQuote({ className }: { className?: string }) {
       <figcaption className="quote-line-caption flex items-center gap-2 font-label-meta text-label-meta text-text-muted">
         <span aria-hidden="true" className="h-px w-6 bg-border-dotted" />
         <Link
-          className="group inline-flex items-center gap-1 transition-colors hover:text-text-primary"
+          className="group inline-flex items-center gap-1 min-h-11 -my-1 py-1 transition-colors hover:text-text-primary"
           href={pullQuote.href}
         >
           {pullQuote.source}

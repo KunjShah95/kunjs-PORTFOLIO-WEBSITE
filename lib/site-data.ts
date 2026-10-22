@@ -17,7 +17,10 @@ export const site = {
   locationLong: "Ahmedabad, Gujarat, India",
   timezone: "UTC +5:30",
   website: "https://kunjshah.in",
-  hero: "I build AI systems that are measurable, reliable, and ready for real workloads.",
+  hero: "I build the AI feature, then prove it works.",
+  /** One-sentence offer, used under the headline and in meta descriptions. */
+  offer:
+    "Founders and small teams hire me to ship agents, document search and full-stack AI apps in two to four weeks, with the tests that show exactly where they hold and where they break.",
   links: {
     github: "https://github.com/KunjShah95",
     githubAlt: "https://github.com/KunjShah01",
@@ -54,7 +57,7 @@ export const indexItems = [
     href: "/about",
     label: "About",
     icon: "person",
-    description: "Bio, focus areas, and engineering philosophy.",
+    description: "Who I am, what I work on, and how I work.",
   },
   {
     href: "/experience",
@@ -96,7 +99,7 @@ export const indexItems = [
     href: "/manifesto",
     label: "Manifesto",
     icon: "verified_user",
-    description: "Three non-negotiable principles for building AI systems.",
+    description: "The three rules every system I ship follows.",
   },
   {
     href: "/hackathons",
@@ -188,7 +191,7 @@ export const projects: readonly Project[] = [
     status: "MIT · v0.3.2",
     icon: "videocam",
     description:
-      "A browser-agent platform that shows what an agent actually did. Paste a link and get a narrated MP4 walkthrough of the site with captions and a transcript; the same recorder turns a failed agent run into a classified, reproducible regression test that checks the application's real state instead of the agent's claim.",
+      "A browser-agent platform that records what an agent did, step by step. Paste a link and get a narrated MP4 walkthrough of the site with captions and a transcript; the same recorder turns a failed agent run into a classified, reproducible regression test that checks the application's real state instead of the agent's claim.",
     summary:
       "Recorded walkthroughs with narration and captions, plus a lab that turns failed browser-agent runs into reproducible regression tests checked against real application state.",
     stack: [
@@ -207,12 +210,12 @@ export const projects: readonly Project[] = [
     ],
     body: "One engine in packages/core, two apps on top of it: a static marketing site and a Tauri desktop app bundling a Node server. The recorder drives a real browser through sign-in, walks same-origin links breadth-first, and writes narration only from recorded events. The browser pauses after each action for exactly as long as its line takes, so the audio and the screen never drift. Walkcast Lab is the other half: it takes a failed agent run, pins the failure to the step that caused it using before/after application state, classifies the cause from a fixed vocabulary with cited evidence, and replays it as a fixture. Fixtures run as a CI release gate, so a new agent version has to prove it fixed the bug and did not break something else.",
     challenges:
-      "Judging an agent by its own summary is worthless, so verification had to come from the application's records rather than the agent or an LLM judge. On top of that, recordings have to survive a worker dying mid-job without leaking the credentials that were sealed into the run.",
+      "An agent's own summary can't be trusted, so verification had to come from the application's records, not from the agent or an LLM judge. On top of that, recordings have to survive a worker dying mid-job without leaking the credentials that were sealed into the run.",
     lessons:
-      "Ground truth has to live outside the system under test. Comparing before/after application state on every action turns 'the agent said it worked' into a checkable claim, and it makes the failure attributable to a specific step. The second lesson is about job correctness: fenced finalization, atomic tenant limits, and at-least-once execution with idempotent effects were the only way to keep a worker crash from double-charging or losing a recording. Secrets are replaced with {{secret:name}} placeholders before anything touches disk, and restored only in memory during replay.",
+      "I stopped trusting the agent's report and started checking the app. Comparing the application's state before and after every action turns 'the agent said it worked' into something I can verify, and it points at the step that failed. Background jobs taught me the rest: fenced finalization, atomic tenant limits, and at-least-once execution with idempotent effects were the only way to keep a worker crash from double-charging or losing a recording. Secrets are replaced with {{secret:name}} placeholders before anything touches disk, and restored only in memory during replay.",
     role: "Solo build: the recording engine, the lab harness, the desktop app and Tauri shell, the Postgres queue with SKIP LOCKED leases, the S3 and Supabase media layer, the 15-provider model gateway, and the architecture documentation.",
     evaluation:
-      "The lab reports numbers instead of asserting capability. Across five injected faults it reproduced the original cause 5/5, and the fixed agent passed 5/5 replay trials where the naive baseline passed 0/5, while the deliberate regression (v2, fixed with read-back removed) dropped to 4/5, which is the harness catching a real regression. It also measures what agents get wrong: 3 of 4 success claims were false successes, meaning the agent reported a task complete while the application's records disagreed. 30 test files and 129 test cases run on node:test, covering secrets, jobs, queue leases, auth scoping, and the classifier.",
+      "The lab reports numbers. Across five injected faults it reproduced the original cause 5/5, and the fixed agent passed 5/5 replay trials where the naive baseline passed 0/5, while the deliberate regression (v2, fixed with read-back removed) dropped to 4/5, which is the harness catching a real regression. It also measures what agents get wrong: 3 of 4 success claims were false successes, meaning the agent reported a task complete while the application's records disagreed. 30 test files and 129 test cases run on node:test, covering secrets, jobs, queue leases, auth scoping, and the classifier.",
     limitations:
       "The agents under test are deterministic scripts, not LLMs, so the numbers in results/ validate the harness (capture, oracle, classifier, fixtures, replay) and say nothing about LLM agent behaviour. The published run uses one seed per fault, so the confidence intervals are wide and the figures are a harness check rather than a benchmark. Fixtures reproduce failures in an application you control; arbitrary third-party production sessions cannot be reproduced exactly. Installers are not code-signed, and redaction targets harness secrets rather than customer PII, so real customer data should not be recorded.",
     demo: "https://walkcast.kunjshah.in",
@@ -243,9 +246,9 @@ export const projects: readonly Project[] = [
     ],
     body: "A repository is ingested once into a dependency graph plus an entity graph of classes, functions and API routes, and that index is reused everywhere. The autopilot classifies issues by difficulty, assigns each one to whoever currently holds the fewest active tasks, opens a PR per issue, re-parses the PR head to graph-diff it against the base, and emits a structured senior review. Because a merged PR advances the linked task and closes the originating GitHub issue, the loop closes without anyone touching a board.",
     challenges:
-      "Keeping LLM cost near zero across a nine-step pipeline, and proving an autonomous PR actually fixed the issue rather than merely claiming it did.",
+      "Keeping LLM cost near zero across a nine-step pipeline, and proving that an autonomous PR fixed the issue it says it fixed.",
     lessons:
-      "Model routing is a cost-control problem before it is a capability problem: free tiers first with a per-query-type fallback chain, backed by exact and semantic Redis caches, kept a full autopilot run cheaper than a single paid call would have been. And a generated PR only counts once the validator re-parses it and diffs the graph, because the agent's own summary is precisely the thing you cannot trust.",
+      "Most of the cost work was routing. Free tiers go first, with a fallback chain per query type and exact and semantic Redis caches behind it, and a full autopilot run ends up cheaper than one paid call. A generated PR only counts once the validator re-parses it and diffs the graph, because the agent's own summary is the one thing I can't trust.",
     role: "Lead engineer and primary author: about 350 of the repo's ~370 commits, across the FastAPI backend, the autopilot pipeline, model routing and the React dashboard, with one collaborator.",
     evaluation:
       "Generated PRs are not trusted on the agent's word: step nine fetches each PR head, re-parses and re-graphs it, diffs the graph against the base for broken edges and new cycles, and retries unresolved issues a bounded number of times. Model choice was benchmarked on three real tasks from the repo across three OpenRouter models (9/9 solved; gpt-oss-20b about 5.6x cheaper than DeepSeek, gpt-4o-mini fastest at 6.8s average), and those fixes shipped as PRs with 51 passing tests across the touched suites. Backend and frontend CI run on every push.",
@@ -299,10 +302,10 @@ export const projects: readonly Project[] = [
     challenges:
       "Seven agents means seven chances to return nothing when a provider rate-limits, and a review tool that fails on a bad API key is useless the first time someone opens it.",
     lessons:
-      "Degrade, never fail. A six-provider fallback chain (Groq → NVIDIA → OpenRouter → Gemini → Ollama → Hugging Face) sits in front of an 18-rule heuristic engine, so with no keys configured at all the product still returns a scored baseline rather than an error. That is the difference between a demo and something a team can actually open on a bad network day.",
+      "Every failure path should end in a weaker answer, never an error page. A six-provider fallback chain (Groq, NVIDIA, OpenRouter, Gemini, Ollama, Hugging Face) sits in front of an 18-rule heuristic engine, so even with no API keys configured the product returns a scored baseline. A team can open it on a bad network day and still get something useful.",
     role: "Solo build: the seven-agent analysis pipeline, the Mermaid/PlantUML/vision parsing, the chaos simulator, the IaC and OpenAPI auditors, and the FastAPI and React applications.",
     evaluation:
-      "CI is the gate, not a badge. Every pull request runs ruff and pytest on the backend with an 80% coverage floor that fails the build, plus ESLint, a tsc type-check, Vitest and a production build on the frontend. The fallback chain is exercised by the tests rather than trusted, which is the part that matters most here.",
+      "Every pull request runs ruff and pytest on the backend with an 80% coverage floor that fails the build, plus ESLint, a tsc type-check, Vitest and a production build on the frontend. The tests exercise the fallback chain directly, because that is the part most likely to break.",
     limitations:
       "The scoring is only as good as what the seven agents were asked to weigh, so a dimension with no clear rubric produces confident output rather than a refusal. The heuristic engine that keeps the product alive without keys is deliberately shallow. It gives a baseline, not an audit. IaC auditing covers misconfiguration patterns, not whether the architecture itself is right.",
     github: "https://github.com/KunjShah95/archmind-ai",
@@ -329,10 +332,10 @@ export const projects: readonly Project[] = [
     challenges:
       "Local-first UX versus server-side intelligence, multi-agent state sync over Realtime, and predictable LLM costs across multi-step runs.",
     lessons:
-      "Local-first UX with server-side intelligence is the right default for developer tools. Unifying storage is easy; unifying context is the actual product.",
+      "Putting notes, tasks and projects in one database was the easy part. Most of the work went into giving the assistant the links between them, and keeping the interface fast by doing the AI work on the server.",
     role: "Solo build: product, schema and row-level security, retrieval, the assistant and the GitHub integration.",
     evaluation:
-      "Retrieval is measured, not assumed. The retrieval eval runs 20 typed queries (paraphrase, exact, mixed) over a 22-document corpus in which 14 documents are deliberate distractors; the first 8-document version scored 100% recall@3 for every strategy, so it measured nothing. Keyword scored 82.5% recall@1 and 92.5% MRR; equal-weight hybrid scored worse (72.5% and 86.7%) until the semantic leg was down-weighted to 0.35. Regression tests assert those floors, so a ranking change that degrades them fails CI alongside lint, typecheck and Vitest.",
+      "The retrieval eval runs 20 typed queries (paraphrase, exact, mixed) over a 22-document corpus in which 14 documents are deliberate distractors; the first 8-document version scored 100% recall@3 for every strategy, so it measured nothing. Keyword scored 82.5% recall@1 and 92.5% MRR; equal-weight hybrid scored worse (72.5% and 86.7%) until the semantic leg was down-weighted to 0.35. Regression tests assert those floors, so a ranking change that degrades them fails CI alongside lint, typecheck and Vitest.",
     limitations:
       "The eval's semantic leg is a bag-of-words stand-in for a real embedder, so it cannot show what hybrid retrieval is worth; with no API key the product defaults to keyword-only, which is what the numbers support. The assistant answers over retrieved chunks rather than reasoning across the graph, and read-only viewer enforcement for team workspaces is still being swept through.",
     demo: "https://engineeros-delta.vercel.app/",
@@ -368,7 +371,7 @@ export const projects: readonly Project[] = [
       "Scoping every query by workspaceId is necessary but not sufficient, and RLS that is merely enabled proves nothing: the app connects as a role that owns every table and carries BYPASSRLS, so policies are skipped whether or not they exist. Until a role that respects RLS is in place, the honest backstop is a test that fails the build on any unscoped query. And embeddings from different providers are not comparable, so switching the embedder has to force a reindex.",
     role: "Solo build: schema, auth and multi-tenancy, the payment and booking engine, the RAG layer and deployment.",
     evaluation:
-      "Isolation is enforced mechanically rather than by review. A tenant-scope guard test scans every tenant-model call site in app/, lib/ and modules/ and fails if one lacks a workspaceId predicate, with exceptions registered alongside a checkable reason; two more tests assert that every tenant read path has a recorded broker-visibility decision and that the broker predicate actually reaches Prisma. Vitest covers units and Playwright covers end-to-end flows.",
+      "A test enforces tenant isolation, so it doesn't depend on someone catching it in review. The tenant-scope guard test scans every tenant-model call site in app/, lib/ and modules/ and fails if one lacks a workspaceId predicate, with exceptions registered alongside a checkable reason; two more tests assert that every tenant read path has a recorded broker-visibility decision and that the broker predicate actually reaches Prisma. Vitest covers units and Playwright covers end-to-end flows.",
     limitations:
       "Query scoping is the only deployed isolation layer. Postgres RLS is enabled and 31 policies are written, but they stay inert until the app moves to a NOBYPASSRLS role, a switch gated by a script that refuses to proceed until its checks pass. Advanced retrieval strategies (HyDE, hierarchical, query expansion) are opt-in and not yet evaluated.",
     demo: "https://agentic-crm-henna.vercel.app/",
@@ -395,7 +398,7 @@ export const projects: readonly Project[] = [
     challenges:
       "Reference content rots. Licence, cost, and deployment claims are the fastest-decaying facts in any tool index, and a confident stale one is worse than no entry.",
     lessons:
-      "The hard part is not rendering 152 prerendered pages, it is making wrong facts impossible to ship. Coverage is asserted in both directions, stale licence data fails the build, and comparisons resolve tools by name against the dataset so a page cannot drift from the index.",
+      "Rendering 152 pages was easy. Most of the work went into making wrong facts fail the build. Coverage is asserted in both directions, stale licence data fails the build, and comparisons resolve tools by name against the dataset so a page cannot drift from the index.",
     demo: "https://lattice.kunjshah.in",
     github: "https://github.com/KunjShah95/lattice",
   },
@@ -440,7 +443,7 @@ export const projects: readonly Project[] = [
     ],
     body: "A production fairness audit across intersectional demographic slices, with Pareto frontier plots and automatic drift detection. Built for EU AI Act, NIST AI RMF, and ISO 25059 compliance review ahead of pre-market clinical evaluation.",
     lessons:
-      "Audit overhead is the real bottleneck, cutting it from three weeks to four hours is what makes fairness review something teams actually run.",
+      "Teams skip a fairness review that takes three weeks. At four hours, they run it.",
     github: "https://github.com/KunjShah95/EquityLens",
   },
   {
@@ -542,7 +545,7 @@ export const projects: readonly Project[] = [
     ],
     body: "TensorRT ONNX engine with INT8 quantization-aware training, GStreamer hardware-accelerated decode, and hand-written CUDA kernels. Histogram equalization handles the low-light and motion-blur conditions on real track footage.",
     lessons:
-      "INT8 QAT delivered 2× over the FP16 baseline while holding accuracy, quantization is an accuracy technique here, not a compromise.",
+      "INT8 quantization-aware training ran 2× faster than the FP16 baseline and kept the accuracy.",
     github: "https://github.com/KunjShah95/ai-railway",
   },
   {
@@ -561,7 +564,7 @@ export const projects: readonly Project[] = [
       { value: "100%", label: "Cited Claims" },
       { value: "Live", label: "Status" },
     ],
-    body: "A planner breaks the request into searches, an extractor normalizes noisy pages, and a grounded writer only claims what retrieval actually supports, every statement carries its source.",
+    body: "A planner breaks the request into searches, an extractor normalizes noisy pages, and a grounded writer only states what retrieval supports, with a source on every statement.",
     challenges:
       "Noisy web extraction and topic drift on broad queries, both addressed by constraining the writer to retrieved evidence.",
     demo: "https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/",
@@ -689,9 +692,9 @@ export const jobs: readonly Job[] = [
     company: "Open Source",
     role: "Contributor",
     period: "2025 - Present",
-    kind: "OWASP · Microsoft · Ollama",
+    kind: "OWASP · Microsoft · 24 repos",
     description:
-      "60 merged pull requests, 41 issues resolved, and 24 external codebases, including the OWASP agent-security harness, Microsoft AI-Engineering-Coach, and Ollama.",
+      "60 merged pull requests, 43 issues resolved, and 24 external codebases, including merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach.",
     skills: ["AI Security", "CI/CD", "Docs", "Inference"],
     live: true,
   },
@@ -699,14 +702,8 @@ export const jobs: readonly Job[] = [
 
 export const impactMetrics = [
   { value: "60+", label: "PRs Merged" },
-  { value: "41", label: "Issues Solved" },
+  { value: "43", label: "Issues Resolved" },
   { value: "24+", label: "Repos" },
-] as const;
-
-export const ossTotals = [
-  { value: "72", label: "Total PRs" },
-  { value: "15K+", label: "Lines Changed" },
-  { value: "18", label: "Code Reviews" },
 ] as const;
 
 /* ------------------------------------------------------- Open source detail */
@@ -792,7 +789,9 @@ export const contributions: readonly Contribution[] = [
     title: "RBAC, real-time messaging, i18n/RTL, global search, 10+ merged PRs.",
     kind: "merged",
     tag: "feat",
-    url: "https://github.com/Lavina-korani/edupulse-final/pulls?q=author%3AKunjShah95",
+    // A list URL would work, but a reviewer checking "10+ merged PRs" wants a
+    // single PR they can open and read, so the link points at one of them.
+    url: "https://github.com/Lavina-korani/edupulse-final/pull/29",
   },
   {
     org: "Abhash-Chakraborty/Find",
@@ -812,14 +811,6 @@ export const contributions: readonly Contribution[] = [
       size: "+178 / -11 across 2 files",
       merged: "2026-05-22",
     },
-  },
-  {
-    org: "Adoflabs/Veridion",
-    label: "Veridion",
-    title: "Auth enhancements, PWA support, and testing infrastructure.",
-    kind: "merged",
-    tag: "feat",
-    url: "https://github.com/Adoflabs/Veridion/pull/19",
   },
   {
     org: "microsoft/vscode",
@@ -1012,7 +1003,7 @@ export const education = {
   specialization: "AI/ML Integration & Automation",
   location: "Ahmedabad, India",
   summary:
-    "Focusing on the intersection of full stack development and AI, building automated systems that use distributed intelligence at scale.",
+    "Final-year B.Tech in Computer Science, specialising in AI/ML integration and automation.",
   coursework: [
     "Deep Learning",
     "Computer Vision",
@@ -1137,7 +1128,7 @@ export const labs: readonly Lab[] = [
     title: "Synthetic Memory",
     status: "Stable",
     description:
-      "Architecture for recursive state persistence in non-deterministic agent clusters. Episodic memory buffers with decay-aware consolidation, semantic compression of long-running agent state, and checkpoint-based recovery.",
+      "Memory for long-running agents. Recent events sit in a buffer that fades over time, older state is compressed into summaries, and checkpoints let a crashed run pick up where it stopped.",
     stack: ["Redis", "Vector DB", "pgvector", "LLM"],
   },
   {
@@ -1145,7 +1136,7 @@ export const labs: readonly Lab[] = [
     title: "Neural Protocol",
     status: "Beta",
     description:
-      "Standardized handshake and task-routing protocol for multi-agent systems. Capability advertisement, task decomposition contracts, result aggregation, and failure escalation across heterogeneous runtimes.",
+      "A shared protocol for agents to work together. Each agent says what it can do, tasks are split into explicit contracts, results are merged, and failures are passed up the chain so they don't get lost.",
     stack: ["gRPC", "Protobuf", "Python", "asyncio"],
   },
   {
@@ -1153,7 +1144,7 @@ export const labs: readonly Lab[] = [
     title: "Context Window Optimizer",
     status: "Experimental",
     description:
-      "Memory compression that prioritises relevant context for long agent sessions. Semantic chunking with recency-relevance scoring, sliding-window eviction, and compressed summaries to stay under budget without losing signal.",
+      "Keeps long agent sessions under the context limit. Text is chunked by meaning and scored on how recent and relevant it is; the lowest-scoring parts are dropped or summarised first.",
     stack: ["llama.cpp", "Semantic Chunking", "Python"],
   },
   {
@@ -1161,7 +1152,7 @@ export const labs: readonly Lab[] = [
     title: "Building My Own Vector DB",
     status: "Building",
     description:
-      "A full vector database from scratch: 9 ANN algorithms (HNSW, IVF, PQ, Int8, LSH, KD-Tree, VP-Tree, BM25, Hybrid RRF), a cost-based query planner, WAL with fsync durability, background compaction, distributed scatter-gather, and row-level RBAC. Multimodal ingestion, cross-encoder RAG, OpenAI-compatible endpoints, and GPU-accelerated indexing via CuPy and Numba.",
+      "A vector database written from scratch: 9 ANN algorithms (HNSW, IVF, PQ, Int8, LSH, KD-Tree, VP-Tree, BM25, Hybrid RRF), a cost-based query planner, WAL with fsync durability, background compaction, distributed scatter-gather, and row-level RBAC. Multimodal ingestion, cross-encoder RAG, OpenAI-compatible endpoints, and GPU-accelerated indexing via CuPy and Numba.",
     stack: ["FastAPI", "HNSW", "PostgreSQL", "CLIP", "gRPC", "Kubernetes"],
     url: "https://github.com/KunjShah01/BUILDING-MY-OWN-VECTOR-DB",
   },
@@ -1198,64 +1189,157 @@ export const labs: readonly Lab[] = [
  */
 export const services = [
   {
-    problem: "Your AI feature demos well and then fails silently in production",
-    title: "Agents that verify their own work",
+    problem: "Your agent says the task is done. Your database disagrees.",
+    title: "Agents that check their own work",
     icon: "hub",
     iconClass: "text-secondary",
     deliverable:
-      "An agent pipeline where each step is checked against real application state before it is trusted, with human-in-the-loop gates where confidence drops.",
-    proof: "Walkcast Lab caught 3 of 4 false successes where an agent claimed success the app's records contradicted.",
+      "An agent pipeline that compares every step against your app's real state before trusting it, and hands the task to a person when its confidence drops.",
+    proof: "In the published Walkcast Lab run, 3 of 4 agent success claims were false. The harness flagged all three.",
     stack: ["LangGraph", "CrewAI", "Playwright", "Tool use"],
     pill: "Agents",
     cta: "Discuss an agent build",
   },
   {
-    problem: "Your data is already there, but nobody can find anything in it",
+    problem: "The answer is somewhere in your documents. Nobody can find it.",
     title: "Search and RAG over your own documents",
     icon: "content_copy",
     iconClass: "text-accent-emerald",
     deliverable:
-      "Hybrid retrieval over your documents with citations on every claim, measured against a labelled question set so recall is a number rather than an impression.",
-    proof: "EngineerOS runs a 20-query retrieval eval in CI that fails the build if recall drops below its floor.",
+      "Search across your files that cites a source for every answer, scored against a set of real questions so you know the recall before launch.",
+    proof: "EngineerOS runs a 20-question retrieval test in CI. If recall drops below its floor, the build fails.",
     stack: ["pgvector", "BM25", "Cross-encoder re-ranking"],
     pill: "RAG",
     cta: "Discuss a RAG system",
   },
   {
-    problem: "You need a working product, not a prototype",
-    title: "Full-stack AI apps, shipped end to end",
+    problem: "You have a prototype. You need a product people can log into.",
+    title: "Full-stack AI apps, built and deployed",
     icon: "devices",
     iconClass: "text-on-tertiary-container",
     deliverable:
-      "Database, API and interface designed and deployed together, with model fallback chains so a provider outage degrades quality instead of taking the product down.",
-    proof: "17+ systems deployed, including a multi-tenant CRM where tenant isolation is enforced by a test that fails the build.",
+      "Database, API, interface and deployment in one build, with backup model providers so one provider's outage never takes your product offline.",
+    proof: "17+ systems shipped, including a multi-tenant CRM where a test fails the build if any query could read another customer's data.",
     stack: ["Next.js", "FastAPI", "PostgreSQL", "Multi-provider fallback"],
     pill: "Full Stack",
     cta: "Discuss a build",
   },
   {
-    problem: "Your model invoice keeps growing and nobody knows why",
+    problem: "Your model bill grows every month and nobody can say why.",
     title: "LLM cost and architecture review",
     icon: "verified_user",
     iconClass: "text-on-tertiary-container",
     deliverable:
-      "A review of where the spend actually goes, plus a routing layer that sends easy work to small models and reserves large ones for real reasoning.",
-    proof: "Complexity-based routing cut API spend 65% with under 200ms added overhead.",
+      "A read of where the spend goes, then a router that sends easy requests to small models and saves the large ones for hard reasoning.",
+    proof: "Complexity-based routing cut API spend 65% and added under 200ms per request.",
     stack: ["Model routing", "Semantic caching", "Quantization"],
     pill: "Advisory",
     cta: "Request a review",
   },
   {
-    problem: "Inspection and defect detection has to happen in the field",
-    title: "Computer vision on the edge",
+    problem: "Defect detection has to run in the field, on the device.",
+    title: "Computer vision on edge hardware",
     icon: "memory",
     iconClass: "text-primary",
     deliverable:
-      "INT8 quantization-aware training with hardware-accelerated decode, so detection runs on Jetson-class hardware at sub-100ms instead of in the cloud.",
-    proof: "98.7% accuracy at 4.2x manual throughput on real railway track footage.",
+      "Detection models quantized to INT8 and tuned for Jetson-class hardware, so inference runs on the device in under 100ms.",
+    proof: "98.7% accuracy at 4.2x manual inspection speed on real railway track footage.",
     stack: ["YOLOv8", "TensorRT", "CUDA", "GStreamer"],
     pill: "Computer Vision",
     cta: "Discuss a vision pipeline",
+  },
+] as const;
+
+/* ------------------------------------------------------- How a pilot runs */
+
+/**
+ * The four steps of a fixed-scope project, in the order a client meets them.
+ * Every term here is the published one from /pricing.md, so the page and the
+ * rate card cannot disagree.
+ */
+export const pilotSteps = [
+  {
+    number: "01",
+    title: "Intro call",
+    meta: "15 minutes, free",
+    body: "You explain the problem and what done looks like. I ask about your data, your users and your deadline.",
+  },
+  {
+    number: "02",
+    title: "Written scope",
+    meta: "Fixed price in INR",
+    body: "Deliverables, timeline and price, quoted in writing. Nothing starts until you approve it.",
+  },
+  {
+    number: "03",
+    title: "Build",
+    meta: "2 to 4 weeks",
+    body: "Code goes into your repository and your cloud from the first commit. 40% upfront, the rest on delivery.",
+  },
+  {
+    number: "04",
+    title: "Handover",
+    meta: "2 revision rounds",
+    body: "Deployed, tested and logged, with a handoff doc your team can run it from.",
+  },
+] as const;
+
+/** Fixed-scope price bands for a first project. Quotes come after scoping. */
+export const pricingTiers = [
+  {
+    name: "Website and lead capture",
+    price: "₹10,000–20,000",
+    body: "A site and lead-capture setup for a business that needs to start collecting inquiries.",
+    featured: false,
+  },
+  {
+    name: "AI workflow automation",
+    price: "₹15,000–35,000",
+    body: "One manual workflow your team repeats every week, handled by an agent that checks its own output.",
+    featured: false,
+  },
+  {
+    name: "AI product or MVP",
+    price: "₹25,000–60,000+",
+    body: "A full-stack AI product from database to deployment, with agents, search or both, ready for real users.",
+    featured: true,
+  },
+] as const;
+
+/** What every fixed-scope project includes, whatever the tier. */
+export const pricingIncludes = [
+  "Free 15-minute intro call",
+  "Code in your repo, owned by you",
+  "Tests, logging and a handoff doc",
+  "2 rounds of revisions",
+] as const;
+
+/** The objections a client raises before writing, answered plainly. */
+export const clientFaqs = [
+  {
+    question: "You're still a student. Why hire you?",
+    answer:
+      "I'm in the final year of a CS degree, with two internships, 17+ shipped systems and 60+ merged open-source pull requests behind me. Every project on this site links to its code and its tests, so you can check the work before paying for any of it. You also talk directly to the person writing the code.",
+  },
+  {
+    question: "Who owns the code?",
+    answer:
+      "You do. Everything lives in your repository, your CI and your cloud account from the first commit. There is no platform or subscription to keep paying for.",
+  },
+  {
+    question: "How does payment work?",
+    answer:
+      "Fixed-scope projects are 40% upfront and 60% on delivery. Hourly work (₹1,500/hour) is billed weekly against capped hours, and retainers (₹30,000–75,000/month) are invoiced net 7. UPI, bank transfer and Wise all work.",
+  },
+  {
+    question: "What if the result isn't right?",
+    answer:
+      "Two rounds of revisions are included in every fixed-scope project. The scope you approved in writing defines done, so we both measure the result against the same list.",
+  },
+  {
+    question: "Can I hire you full-time instead?",
+    answer:
+      "Yes. I'm open to AI engineer, ML engineer and full-stack roles, remote or relocating for senior roles. The resume and GitHub are linked at the bottom of this page.",
   },
 ] as const;
 
@@ -1274,11 +1358,11 @@ export const engagements = [
     audience: "Hiring managers",
     icon: "verified",
     title: "Full-time AI or full-stack role",
-    body: "Final-year B.Tech student at Indus University, currently interning on production AI/ML work. Open to AI engineering and full-stack roles where the systems are real and the evaluation matters.",
+    body: "Final-year B.Tech student at Indus University, interning on production AI/ML work at Ideaboat. Open to AI engineering and full-stack roles on teams that measure what they ship.",
     proof: [
       "2 internships shipping production AI/ML features",
       "17+ systems built and deployed",
-      "60+ PRs merged into OWASP, Microsoft and Ollama",
+      "60+ PRs merged across 24 external repositories",
     ],
     action: "Send an opening",
     href: "/contact#inquiryForm",
@@ -1288,7 +1372,7 @@ export const engagements = [
     audience: "Founders and small businesses",
     icon: "rocket_launch",
     title: "AI product build or workflow automation",
-    body: "A scoped pilot delivered end to end: discovery, build, tests, deployment and handover. Priced per pilot rather than per hour so you know the cost before we start.",
+    body: "A scoped pilot delivered end to end: discovery, build, tests, deployment and handover. Each pilot has a fixed price, agreed in writing before work starts.",
     proof: [
       "₹10,000-20,000: website and lead-capture setup",
       "₹15,000-35,000: AI workflow automation",
@@ -1302,9 +1386,9 @@ export const engagements = [
     audience: "Open-source maintainers",
     icon: "commit",
     title: "Contributions and maintainership",
-    body: "Merged work in OWASP, Microsoft and Ollama repositories, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.",
+    body: "Merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.",
     proof: [
-      "60+ merged PRs, 41 issues resolved, 24+ repositories",
+      "60+ merged PRs, 43 issues resolved, 24+ repositories",
       "CI, security and agent-tooling contributions",
       "Onboarding docs written for coding agents",
     ],
@@ -1345,7 +1429,7 @@ export const achievements = [
   {
     value: "10+",
     label: "Daily Active Users",
-    detail: "EngineerOS: a workspace people actually rely on",
+    detail: "EngineerOS: more than 10 people open it every day",
   },
 ] as const;
 
@@ -1388,7 +1472,7 @@ export const principles = [
     number: "01",
     icon: "verified_user",
     title: "Determinism over Hallucination",
-    body: "Unconstrained text generation has high entropy. Production systems require multi-pass schema validation, Pydantic guardrails, and deterministic state machines before any external tool executes side effects.",
+    body: "Model output is unpredictable. Before any tool does something with side effects, the output goes through several passes of Pydantic schema validation and moves through a fixed state machine.",
     ships: [
       {
         claim: "Multi-pass structured JSON extraction with Pydantic validation",
@@ -1428,7 +1512,7 @@ export const principles = [
     number: "03",
     icon: "model_training",
     title: "Observability First",
-    body: "If you cannot trace every token generation timestamp, p99 latency curve, prompt version, and tool-call parameter payload, your model isn't in production. It's an unmonitored experiment.",
+    body: "If you can't trace token timestamps, p99 latency, prompt versions and tool-call payloads, you can't explain why a model got slower or wrong. I wire that tracing in before launch.",
     ships: [
       {
         claim: "Per-token generation timestamps and prompt versioning in traces",

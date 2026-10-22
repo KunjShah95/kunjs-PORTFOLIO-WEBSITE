@@ -9,11 +9,14 @@ import { cn } from "@/lib/cn";
  * message instead of two competing columns.
  */
 export function PageIntro({
+  eyebrow,
   title,
   lead,
   children,
   className,
 }: {
+  /** Mono label above the title: what kind of page this is. */
+  eyebrow?: ReactNode;
   title: ReactNode;
   lead?: ReactNode;
   /** Optional slot under the lead, e.g. a count or a source link. */
@@ -27,31 +30,31 @@ export function PageIntro({
     <Reveal
       aria-labelledby={headingId}
       as="section"
-      className={cn("flex flex-col gap-4 md:gap-5 pt-space-xs max-w-3xl", className)}
+      className={cn("flex flex-col items-center text-center gap-4 md:gap-6 pt-space-xs pb-4 md:pb-8 max-w-4xl mx-auto", className)}
       y={12}
     >
+      {eyebrow && <p className="eyebrow text-text-muted">{eyebrow}</p>}
       <h1
-        className="font-headline-xl-mobile text-headline-xl-mobile text-text-primary tracking-tight"
+        className="font-headline-xl-mobile text-headline-xl-mobile font-semibold text-text-primary text-balance"
         id={headingId}
       >
         {title}
       </h1>
       {lead && (
-        <p className="font-body-lg text-body-lg text-text-secondary max-w-[60ch]">
+        <p className="font-body-lg text-body-lg text-text-secondary max-w-[60ch] text-balance">
           {lead}
         </p>
       )}
-      {children && <div className="flex items-center gap-3 flex-wrap">{children}</div>}
+      {children && <div className="flex items-center justify-center gap-3 flex-wrap">{children}</div>}
     </Reveal>
   );
 }
 
 /**
- * Titled block.
- * - `rail` (default): on desktop the heading sits in a sticky left rail and
- *   content fills the remaining nine columns.
- * - `stacked`: heading and meta share one ruled row above full-width
- *   content. Used to break the rail rhythm where content wants the width.
+ * Titled block. The heading is centred and set large, with its meta line
+ * (a count or a "view all" link) under it, then the content at full width.
+ *
+ * `layout` is kept for callers; both values render the same centred head.
  */
 export function PageSection({
   title,
@@ -59,7 +62,6 @@ export function PageSection({
   children,
   className,
   id,
-  layout = "rail",
 }: {
   layout?: "rail" | "stacked";
   title: ReactNode;
@@ -70,52 +72,24 @@ export function PageSection({
   id?: string;
 }) {
   const headingId = useId();
-  if (layout === "stacked") {
-    return (
-      <section
-        aria-labelledby={headingId}
-        className={cn("flex flex-col gap-6 md:gap-8 scroll-mt-24", className)}
-        id={id}
-      >
-        <div className="flex min-w-0 flex-col gap-1 border-t border-text-primary pt-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-          <h2 className="min-w-0 font-headline-lg text-headline-lg text-text-primary" id={headingId}>
-            {title}
-          </h2>
-          {meta && (
-            <div className="min-w-0 shrink-0 font-body-sm text-body-sm text-text-muted sm:text-right">
-              {meta}
-            </div>
-          )}
-        </div>
-        <Reveal className="stack-block min-w-0">{children}</Reveal>
-      </section>
-    );
-  }
-
   return (
     <section
       aria-labelledby={headingId}
-      className={cn(
-        "flex flex-col gap-5 md:gap-6 lg:grid lg:grid-cols-12 lg:gap-x-10 lg:gap-y-0 scroll-mt-24",
-        className,
-      )}
+      className={cn("flex flex-col gap-8 md:gap-12 scroll-mt-24", className)}
       id={id}
     >
-      {/* Title over meta, stacked. The rail is three columns wide, so the two
-          cannot share a row here: a meta line beside the heading squeezes the
-          heading into a two-line sliver and pushes the meta out past the rail
-          into the content column. */}
-      <div className="flex min-w-0 flex-col gap-1.5 lg:col-span-3 lg:self-start lg:sticky lg:top-28 lg:border-t lg:border-text-primary lg:pt-4">
-        <h2 className="font-headline-lg text-headline-lg text-text-primary" id={headingId}>
+      <div className="flex min-w-0 flex-col items-center gap-3 text-center">
+        <h2
+          className="text-[clamp(2rem,1.3rem+2.8vw,3.5rem)] leading-[1.02] font-semibold tracking-[-0.045em] text-text-primary text-balance"
+          id={headingId}
+        >
           {title}
         </h2>
         {meta && (
-          <div className="min-w-0 font-body-sm text-body-sm text-text-muted">{meta}</div>
+          <div className="min-w-0 font-body-md text-body-md text-text-muted">{meta}</div>
         )}
       </div>
-      <Reveal className="stack-block min-w-0 lg:col-span-9">
-        {children}
-      </Reveal>
+      <Reveal className="stack-block min-w-0">{children}</Reveal>
     </section>
   );
 }

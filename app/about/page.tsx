@@ -38,7 +38,7 @@ const portrait = {
 const facts = [
   { icon: "location_on", label: "Location", value: site.locationLong },
   { icon: "psychology", label: "Focus", value: "Agents, RAG & Edge CV" },
-  { icon: "hub", label: "Open Source", value: "OWASP, Microsoft, Ollama" },
+  { icon: "hub", label: "Open Source", value: "OWASP, Microsoft, 24 repos" },
   { icon: "verified", label: "Status", value: "Available for new work" },
   {
     icon: "architecture",
@@ -66,7 +66,7 @@ const related = [
     href: "/manifesto",
     icon: "architecture",
     title: "Manifesto",
-    body: "Three non-negotiable principles for running AI in production.",
+    body: "The three rules every system I ship follows.",
   },
 ] as const;
 
@@ -76,8 +76,9 @@ export default function AboutPage() {
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("About", "/about")} />
         <PageIntro
-          title="About"
-          lead="Building end-to-end AI systems: generative AI applications, autonomous agents and orchestration, computer vision, and full-stack prototypes."
+          eyebrow="About"
+          title="I build the half of an AI product that has to keep working."
+          lead="I'm Kunj Shah, 22, a final-year Computer Science student in Ahmedabad. I write the code that runs after the demo: agents with a check on every step, search that cites its sources, and pipelines you can still debug six months later."
         >
         </PageIntro>
 
@@ -105,28 +106,25 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-space-md text-text-secondary font-body-lg text-body-lg max-w-2xl">
+          <div className="flex flex-col gap-space-md text-text-secondary font-body-lg text-body-lg w-full">
             <p>
-              I&apos;m Kunj, {site.age}, in {site.location}, and I build the
-              unglamorous half of an AI product: the parts that have to keep
-              working after the demo ends. Agents that know when to stop,
-              retrieval that returns what actually exists, and pipelines that
-              are still observable six months later.
+              Most AI features fail quietly. The agent reports success, the
+              search returns something plausible, and nobody notices until a
+              customer does. My work is the part that notices: a check on every
+              agent step, an eval set for every search system, and logs that
+              say which step broke.
             </p>
             <p>
-              My core philosophy is simple:{" "}
-              <strong className="text-text-primary font-semibold">
-                measurable engineering over demos
-              </strong>
-              . Generative models in production require deterministic boundaries,
-              strict schema enforcement, latency budgets, and cost governance,
-              not unconstrained reasoning loops.
+              I&apos;ve shipped 17+ systems this way, from a multi-tenant real
+              estate CRM to railway defect detection that runs in under 100ms
+              on a Jetson. Two internships put that work into production
+              codebases, and 60+ pull requests went into projects I don&apos;t
+              own, including OWASP&apos;s agent-security harness.
             </p>
             <p>
-              What fuels the work is shipping velocity, weekend hackathons, and
-              contributing upstream to the developer tooling I depend on. Five
-              hackathon finals, and 60 merged pull requests into projects I don&apos;t
-              own.
+              I&apos;m in my final year at {education.institution} and based
+              in {site.location}. I take on freelance projects for founders and
+              small teams, and I&apos;m open to full-time AI engineering roles.
             </p>
           </div>
 

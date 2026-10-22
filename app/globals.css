@@ -20,9 +20,9 @@
 @theme {
   /* --- Color: surfaces -------------------------------------------------- */
   --color-surface-tint: #635d5c;
-  --color-text-secondary: #57534e;
+  --color-text-secondary: #4a4944;
   --color-on-tertiary-container: #e76600;
-  --color-on-surface: #1f1b17;
+  --color-on-surface: #0d0d0c;
   --color-accent-emerald: #10b981;
   /* Emerald for small text on light surfaces: #10b981 is only 2.5:1 there. */
   --color-accent-emerald-ink: #047857;
@@ -31,34 +31,34 @@
   --color-outline: #7f7572;
   --color-on-primary-fixed: #1e1b1a;
   --color-on-tertiary-fixed: #341100;
-  --color-on-surface-variant: #4e4543;
+  --color-on-surface-variant: #4a4944;
   --color-on-secondary: #ffffff;
-  --color-surface-bright: #fff8f5;
-  --color-text-muted: #6f6964; /* 4.6–5.4:1 on every light surface (was #a8a29e, 2.4:1) */
-  --color-surface-canvas: #fafaf9;
+  --color-surface-bright: #fbfaf7;
+  --color-text-muted: #6b6a63; /* 4.6–5.4:1 on every light surface (was #a8a29e, 2.4:1) */
+  --color-surface-canvas: #f6f5f1;
   --color-tertiary-container: #441900;
   --color-on-error: #ffffff;
   --color-on-primary-container: #928c8a;
   --color-on-secondary-container: #fefcff;
-  --color-inverse-surface: #342f2b;
-  --color-primary: #141010;
+  --color-inverse-surface: #1a1a18;
+  --color-primary: #0d0d0c;
   --color-on-tertiary: #ffffff;
   --color-on-secondary-fixed: #001a42;
-  --color-surface-dim: #e2d8d2;
-  --color-surface-container-high: #f0e6e0;
-  --color-background: #fff8f5;
-  --color-primary-container: #292524;
-  --color-surface-variant: #eae1da;
+  --color-surface-dim: #dedad2;
+  --color-surface-container-high: #e6e3dc;
+  --color-background: #f6f5f1;
+  --color-primary-container: #2a2a27;
+  --color-surface-variant: #e6e3dc;
   --color-secondary-fixed-dim: #adc6ff;
   --color-on-tertiary-fixed-variant: #783200;
   --color-tertiary-fixed-dim: #ffb690;
-  --color-surface: #fff8f5;
+  --color-surface: #f6f5f1;
   --color-secondary-container: #2170e4;
-  --color-border-hairline: #e7e5e4;
-  --color-surface-container: #f6ece6;
+  --color-border-hairline: #e2dfd8;
+  --color-surface-container: #eceae4;
   --color-surface-container-lowest: #ffffff;
   --color-primary-fixed-dim: #cdc5c3;
-  --color-tertiary-fixed: #ffdbca;
+  --color-tertiary-fixed: #ffd9c7;
   --color-inverse-primary: #cdc5c3;
   --color-secondary: #0058be;
   --color-error: #ba1a1a;
@@ -67,29 +67,36 @@
   --color-inverse-on-surface: #f9efe8;
   --color-primary-fixed: #e9e1df;
   --color-surface-card: #ffffff;
-  --color-surface-subtle: #f5f5f4;
+  --color-surface-subtle: #efede8;
   --color-error-container: #ffdad6;
-  --color-text-primary: #1c1917;
-  --color-surface-container-highest: #eae1da;
-  --color-surface-container-low: #fcf2eb;
-  --color-border-dotted: #d6d3d1;
-  --color-on-background: #1f1b17;
+  --color-text-primary: #0d0d0c;
+  --color-surface-container-highest: #dedad2;
+  --color-surface-container-low: #f1efea;
+  --color-border-dotted: #d0ccc3;
+  --color-on-background: #0d0d0c;
   --color-on-primary-fixed-variant: #4b4644;
-  --color-outline-variant: #d1c4c1;
+  --color-outline-variant: #cbc7bd;
   --color-secondary-fixed: #d8e2ff;
 
   /* --- Color: raw scale used by the source markup ----------------------- */
   --color-emerald-600: #059669;
   --color-white: #ffffff;
 
+  /* --- Color: signal ---------------------------------------------------- */
+  /* The one saturated colour on the site. Used for the things that carry
+     meaning (a check that passed, a failure caught, the live dot), never
+     for decoration. `-ink` keeps 4.5:1 for small text on paper. */
+  --color-signal: #ff5a1f;
+  --color-signal-ink: #c2410c;
+
   /* --- Color: contribution calendar ------------------------------------- */
   /* Warm ramp on the tertiary hue, so the grid reads as part of the palette
      rather than a pasted-in GitHub widget. Overridden wholesale in dark. */
-  --color-contrib-0: #ece7e4;
-  --color-contrib-1: #ffd9c2;
-  --color-contrib-2: #ffab7a;
-  --color-contrib-3: #e76600;
-  --color-contrib-4: #441900;
+  --color-contrib-0: #e8e5de;
+  --color-contrib-1: #ffd5c2;
+  --color-contrib-2: #ff9f73;
+  --color-contrib-3: #ff5a1f;
+  --color-contrib-4: #8a2a06;
 
   /* --- Color: shadow ----------------------------------------------------- */
   /* Tokenised so elevation reads correctly in both themes — a fixed warm
@@ -108,7 +115,7 @@
   --font-label-badge: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --font-label-section: var(--font-mono), ui-monospace, monospace;
   --font-label-meta: var(--font-mono), ui-monospace, monospace;
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  --font-serif: var(--font-display), ui-serif, Georgia, Cambria, "Times New Roman", serif;
 
   /* --- Typography: sizes (with per-size companions) --------------------- */
   --text-headline-xl: 36px;
@@ -182,11 +189,12 @@
    continuously from a 360px phone to a 1440px desktop. Line heights are
    unitless ratios so they track the size. */
 :root {
-  --text-headline-xl-mobile: clamp(2rem, 1.45rem + 2.4vw, 3.5rem);
-  --text-headline-xl-mobile--line-height: 1.06;
-  --text-headline-xl-mobile--letter-spacing: -0.035em;
-  --text-headline-lg: clamp(1.25rem, 1.12rem + 0.55vw, 1.625rem);
-  --text-headline-lg--line-height: 1.25;
+  --text-headline-xl-mobile: clamp(2.5rem, 1.55rem + 3.6vw, 4.5rem);
+  --text-headline-xl-mobile--line-height: 1.02;
+  --text-headline-xl-mobile--letter-spacing: -0.045em;
+  --text-headline-lg: clamp(1.375rem, 1.15rem + 0.9vw, 1.875rem);
+  --text-headline-lg--line-height: 1.15;
+  --text-headline-lg--letter-spacing: -0.03em;
   --text-headline-md: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem);
   --text-headline-md--line-height: 1.45;
   --text-body-lg: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
@@ -231,38 +239,38 @@
   color-scheme: dark;
 
   /* --- surfaces: near-black, warming as they rise ------------------------ */
-  --color-surface: #141110;
-  --color-background: #141110;
-  --color-surface-card: #1b1715;
-  --color-surface-container-lowest: #0d0b0a;
-  --color-surface-container-low: #171413;
-  --color-surface-container: #221d1a;
-  --color-surface-container-high: #2a2421;
-  --color-surface-container-highest: #332c28;
-  --color-surface-subtle: #1e1a18;
-  --color-surface-variant: #2a2421;
-  --color-surface-dim: #221d1a;
-  --color-surface-bright: #3a322e;
+  --color-surface: #0c0c0b;
+  --color-background: #0c0c0b;
+  --color-surface-card: #141413;
+  --color-surface-container-lowest: #080807;
+  --color-surface-container-low: #111110;
+  --color-surface-container: #1a1a18;
+  --color-surface-container-high: #222220;
+  --color-surface-container-highest: #2b2b28;
+  --color-surface-subtle: #161615;
+  --color-surface-variant: #222220;
+  --color-surface-dim: #1a1a18;
+  --color-surface-bright: #2f2f2c;
 
   /* --- ink --------------------------------------------------------------- */
-  --color-text-primary: #f4eee8;
-  --color-text-secondary: #bfb3a9;
-  --color-text-muted: #998f85; /* ≥4.8:1 on every dark surface */
-  --color-on-surface: #f4eee8;
-  --color-on-background: #f4eee8;
-  --color-on-surface-variant: #bfb3a9;
-  --color-surface-tint: #bfb3a9;
+  --color-text-primary: #f2f1ec;
+  --color-text-secondary: #b4b2aa;
+  --color-text-muted: #8f8d85; /* ≥4.8:1 on every dark surface */
+  --color-on-surface: #f2f1ec;
+  --color-on-background: #f2f1ec;
+  --color-on-surface-variant: #b4b2aa;
+  --color-surface-tint: #b4b2aa;
 
   /* --- borders & outline -------------------------------------------------- */
-  --color-border-hairline: #2e2724;
-  --color-border-dotted: #3c332e;
+  --color-border-hairline: #262624;
+  --color-border-dotted: #36352f;
   --color-outline: #8f857b;
-  --color-outline-variant: #4b413b;
+  --color-outline-variant: #3f3e39;
 
   /* --- primary: light in dark, because it is used as a button fill -------- */
-  --color-primary: #f4eee8;
-  --color-on-primary: #17110e;
-  --color-primary-container: #3b332e;
+  --color-primary: #f2f1ec;
+  --color-on-primary: #0c0c0b;
+  --color-primary-container: #d8d6cf;
   --color-on-primary-container: #e9dfd7;
   --color-primary-fixed: #3b332e;
   --color-primary-fixed-dim: #2b2521;
@@ -273,6 +281,9 @@
   --color-accent-emerald: #34d399;
   --color-accent-emerald-ink: #34d399;
   --color-emerald-600: #10b981;
+
+  --color-signal: #ff6a33;
+  --color-signal-ink: #ff8a5c;
 
   /* --- error -------------------------------------------------------------- */
   --color-error: #ffb4ab;
@@ -305,15 +316,183 @@
   --color-inverse-on-surface: #342f2b;
 
   /* --- contribution calendar: reversed ramp, brightest = most ------------ */
-  --color-contrib-0: #241f1c;
-  --color-contrib-1: #4a2a12;
-  --color-contrib-2: #8a4008;
-  --color-contrib-3: #d9630a;
-  --color-contrib-4: #ffab7a;
+  --color-contrib-0: #1c1c1a;
+  --color-contrib-1: #4a1e0c;
+  --color-contrib-2: #93360f;
+  --color-contrib-3: #e3561c;
+  --color-contrib-4: #ff9f73;
 
   /* --- elevation ---------------------------------------------------------- */
   --color-shadow: rgb(0 0 0 / 0.55);
   --color-shadow-soft: rgb(0 0 0 / 0.4);
+}
+
+/* Justified body copy, site-wide.
+   Unlayered on purpose, so it wins over any text-left/center utility on a
+   paragraph. Hyphenation keeps narrow cards from opening wide gaps between
+   words, and inside centred blocks the last line stays centred so a short
+   lead does not hang off to the left. Single-line paragraphs are
+   unaffected: justification never touches a last line. */
+p,
+dd,
+li > p,
+summary + p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  /* Balanced wrapping shortens lines on purpose, and justification then
+     stretches them back out into wide gaps. Pretty wrapping fills lines. */
+  text-wrap: pretty;
+}
+
+.text-center p,
+.text-center dd,
+p.text-center,
+.items-center > p {
+  text-align-last: center;
+}
+
+/* An ink scope: the dark palette applied to one panel on a light page.
+   Every token-driven child (buttons, the copy-email row, links) re-themes
+   itself inside it, so the closing panel needs no per-caller overrides. */
+.theme-ink {
+  --color-surface: #0d0d0c;
+  --color-surface-card: #1a1a18;
+  --color-surface-container: #222220;
+  --color-surface-container-low: #141413;
+  --color-surface-container-high: #2a2a27;
+  --color-surface-subtle: #161615;
+  --color-outline-variant: #4a4944;
+  --color-text-primary: #f2f1ec;
+  --color-text-secondary: #b4b2aa;
+  --color-text-muted: #8f8d85;
+  --color-border-hairline: #2c2c29;
+  --color-border-dotted: #3d3c37;
+  --color-primary: #f2f1ec;
+  --color-on-primary: #0d0d0c;
+  --color-primary-container: #ffffff;
+  --color-signal-ink: #ff8a5c;
+  --grid-line: rgb(242 241 236 / 0.07);
+  color-scheme: dark;
+}
+
+/* The light palette, restored inside an ink scope. Used for the ID badge
+   in the dark opening scene: a lit card under a spotlight. */
+.theme-paper {
+  --color-surface: #f6f5f1;
+  --color-surface-card: #ffffff;
+  --color-surface-container: #eceae4;
+  --color-surface-container-low: #f1efea;
+  --color-surface-container-high: #e6e3dc;
+  --color-surface-subtle: #efede8;
+  --color-text-primary: #0d0d0c;
+  --color-text-secondary: #4a4944;
+  --color-text-muted: #6b6a63;
+  --color-border-hairline: #e2dfd8;
+  --color-border-dotted: #d0ccc3;
+  --color-outline-variant: #cbc7bd;
+  --color-primary: #0d0d0c;
+  --color-on-primary: #ffffff;
+  --color-signal-ink: #c2410c;
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Cinema
+   The dark scenes that open and close the home page: letterbox bars,
+   film grain, a title-card headline and a film strip of the work.
+   Every animation here is CSS, so the global reduced-motion rule at the
+   bottom of this file freezes all of it on its final frame.
+   ========================================================================== */
+
+/* Break out of the page column to the full viewport width. The body clips
+   horizontal overflow, so 100vw (which includes the scrollbar) never
+   produces a sideways scroll. */
+@utility full-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+/* Film grain: SVG turbulence, stepped around so it shimmers like stock. */
+@utility film-grain {
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  inset: -50%;
+  animation: grain 0.9s steps(6) infinite;
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Letterbox bars: closed like a curtain on load, then open to a thin
+   widescreen frame that stays. */
+@utility letterbox-top {
+  height: clamp(44px, 7vh, 72px);
+  animation: letterbox-open 1.6s cubic-bezier(0.7, 0, 0.2, 1) 0.15s backwards;
+}
+@utility letterbox-bottom {
+  height: clamp(44px, 7vh, 72px);
+  animation: letterbox-open 1.6s cubic-bezier(0.7, 0, 0.2, 1) 0.15s backwards;
+}
+@keyframes letterbox-open {
+  from { height: 50%; }
+}
+
+/* Title-card entrance. Starts blurred and slightly low but painted, so the
+   headline (the LCP element) is visible on the first frame. */
+@utility title-card {
+  animation: title-card 1.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+@keyframes title-card {
+  from {
+    filter: blur(14px);
+    transform: translateY(14px);
+    letter-spacing: 0.02em;
+  }
+}
+
+/* A soft cone of light falling from above. */
+@utility spotlight-beam {
+  background: linear-gradient(to bottom, rgb(255 244 230 / 0.22), rgb(255 244 230 / 0.06) 55%, transparent 85%);
+  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+  filter: blur(18px);
+  animation: beam-on 2.2s ease-out 0.9s backwards;
+}
+@keyframes beam-on {
+  0% { opacity: 0; }
+  30% { opacity: 0.6; }
+  38% { opacity: 0.15; }
+  55% { opacity: 1; }
+}
+
+/* Home ends on the dark credits scene; the footer follows it directly,
+   with no strip of page colour in between. */
+main:has(#credits-title) + footer {
+  margin-top: 0;
+}
+
+/* Film strip: sprocket holes along both edges, frames sliding past. */
+@utility sprockets {
+  height: 14px;
+  background-image: repeating-linear-gradient(90deg, transparent 0 10px, rgb(242 241 236 / 0.85) 10px 22px, transparent 22px 34px);
+  mask-image: linear-gradient(to bottom, transparent 3px, #000 3px, #000 11px, transparent 11px);
+}
+@utility reel {
+  animation: reel 60s linear infinite;
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+@keyframes reel {
+  to { transform: translateX(-50%); }
 }
 
 /* ==========================================================================
@@ -483,6 +662,33 @@
   @media (max-height: 500px) {
     gap: var(--space-block-short);
   }
+}
+
+/* Mono metadata label. One style for every eyebrow, date and count. */
+@utility eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* The italic display accent a headline leans on. */
+@utility display-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Hairline grid that fades out toward the edges. Used behind the hero
+   artifact and inside the closing panel, nowhere else. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line, rgb(13 13 12 / 0.06)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line, rgb(13 13 12 / 0.06)) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
 }
 
 /* Text link whose underline draws in from the left on hover. */

@@ -10,12 +10,12 @@ import { Reveal } from "@/components/primitives/Reveal";
 import { pageMeta } from "@/lib/seo";
 import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 import { legalDocuments } from "@/lib/legal";
-import { directChannels, hiringFaqs, site } from "@/lib/site-data";
+import { clientFaqs, directChannels, hiringFaqs, site } from "@/lib/site-data";
 
 export const metadata: Metadata = pageMeta({
   path: "/contact",
   title: "Contact & Hiring",
-  description: "Advisory and contract engineering for multi-agent systems, edge computer vision, and LLM security. Based in Ahmedabad, India, available for Q2/Q3.",
+  description: "Start an AI project with Kunj Shah: agents, document search and full-stack AI apps for founders and small teams. Free 15-minute intro call, fixed price in writing, reply within one working day.",
   keywords: ["hire AI engineer India", "freelance AI engineer Ahmedabad", "AI consultant India", "hire machine learning developer", "AI engineer contact"],
 });
 
@@ -28,7 +28,7 @@ export default function ContactPage() {
           data={{
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: hiringFaqs.map((item) => ({
+            mainEntity: [...clientFaqs, ...hiringFaqs].map((item) => ({
               "@type": "Question",
               name: item.question,
               acceptedAnswer: { "@type": "Answer", text: item.answer },
@@ -37,72 +37,67 @@ export default function ContactPage() {
         />
         <div className="flex flex-col gap-8 md:gap-10">
         <PageIntro
-          lead="Whether you need to architect multi-agent systems, optimize edge vision models, or audit LLM security, I'm open for advisory and contract engineering."
-          title="Let's build something"
+          lead="Two or three sentences is enough: what the product does, where it breaks, and when you need it. I reply within one working day, and the 15-minute intro call is free."
+          eyebrow="Contact"
+          title="Tell me what you're building."
         />
 
-        {/* ------------------------------------------------- availability card */}
-        <Reveal className="bg-surface-container rounded-2xl p-space-md md:p-8 relative overflow-hidden" delay={0.25}>
-          <div className="flex flex-col space-y-space-md">
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-subtle shadow-xs">
-                <StatusDot className="bg-accent-emerald" ping />
-                <span className="font-body-sm text-body-sm text-text-primary font-semibold">
-                  Available for advisory
-                </span>
-              </div>
-              <span className="font-body-sm text-body-sm text-text-muted flex items-center gap-1">
-                <Icon name="schedule" size={14} />
-                Replies within a day
-              </span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm pt-space-xs">
-              <div className="min-w-0 flex-1">
-                <span className="font-body-sm text-body-sm text-text-muted block">
-                  Email
-                </span>
-                <span className="font-label-section text-headline-md md:text-headline-lg text-text-primary font-medium select-all truncate block">
-                  {site.email}
-                </span>
-              </div>
-              <CopyEmailButton />
-            </div>
-
-            <div className="flex flex-col gap-1.5 pt-2 bg-surface-container-low/60 -mx-space-md -mb-space-md md:-mx-8 md:-mb-8 p-space-md md:px-8 mt-2 md:flex-row md:gap-8">
-              <div className="flex items-center gap-2 text-text-secondary font-body-sm text-body-sm">
-                <Icon className="text-text-muted" name="location_on" size={16} />
-                <span>
-                  {site.location} ({site.timezone}), remote worldwide
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-text-secondary font-body-sm text-body-sm">
-                <Icon className="text-text-muted" name="bolt" size={16} />
-                <span>Open to fractional CTO &amp; specialized research sprints</span>
-              </div>
-            </div>
+        {/* --------------------------------------------- the direct line */}
+        {/* One row: status, the address, the copy button. The form below is
+            the main path; this is for people who would rather email. */}
+        <Reveal
+          className="mx-auto w-full max-w-3xl flex flex-col gap-4 rounded-2xl border border-border-hairline bg-surface-card p-5 md:p-6 sm:flex-row sm:items-center sm:justify-between"
+          delay={0.2}
+        >
+          <div className="flex min-w-0 flex-col gap-1.5">
+            <span className="inline-flex items-center gap-2 font-body-sm text-body-sm text-text-secondary">
+              <StatusDot className="bg-accent-emerald" ping />
+              Booking new projects &middot; {site.location} ({site.timezone}), working remotely
+            </span>
+            <span className="font-mono text-[clamp(1rem,0.9rem+0.6vw,1.375rem)] font-medium text-text-primary select-all truncate">
+              {site.email}
+            </span>
           </div>
+          <CopyEmailButton />
         </Reveal>
         </div>
 
 
         <ContactBody />
 
-        <PageSection layout="stacked" meta="For search &amp; AI assistants" title="Quick answers">
-          <dl className="stack-block gap-4">
+        <PageSection meta="What clients ask before sending the first message." title="Fair questions.">
+          <div className="mx-auto w-full max-w-3xl border-t border-border-hairline">
+            {clientFaqs.map((faq) => (
+              <details className="group border-b border-border-hairline" key={faq.question}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-body-lg text-body-lg font-medium text-text-primary [&::-webkit-details-marker]:hidden">
+                  {faq.question}
+                  <span
+                    aria-hidden="true"
+                    className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-border-hairline text-text-muted transition-transform duration-300 group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="pb-6 pr-12 font-body-md text-body-md text-text-secondary">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+          {/* Short third-person facts, kept on the page because the FAQPage
+              schema above lists them and schema must match visible text. */}
+          <dl className="mx-auto w-full max-w-3xl grid gap-5 pt-6 sm:grid-cols-2">
             {hiringFaqs.map((item) => (
-              <div className="border-b border-border-hairline pb-4 last:border-0" key={item.question}>
-                <dt className="font-headline-md text-headline-md text-text-primary">{item.question}</dt>
-                <dd className="mt-2 font-body-md text-body-md text-text-secondary max-w-[65ch]">
-                  {item.answer}
-                </dd>
+              <div className="flex flex-col gap-1" key={item.question}>
+                <dt className="eyebrow text-text-muted">{item.question}</dt>
+                <dd className="font-body-sm text-body-sm text-text-secondary">{item.answer}</dd>
               </div>
             ))}
           </dl>
         </PageSection>
 
         {/* ----------------------------------------------- 03 / direct channels */}
-        <PageSection layout="stacked" meta="Async & sync" title="Direct channels">
+        <PageSection layout="stacked" meta="Prefer to look around first? The code, the writing and the profiles." title="Everywhere else I am.">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
             {directChannels.map((channel) => {
               const external = channel.href.startsWith("http");
@@ -152,7 +147,7 @@ export default function ContactPage() {
             then the fine print. */}
         <PageSection
           layout="stacked"
-          meta="Worth reading before an enquiry"
+          meta="The default agreement for any project without its own contract."
           title="Terms &amp; privacy"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">

@@ -29,8 +29,9 @@ export default function ExperiencePage() {
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Experience", "/experience")} />
         <PageIntro
-          title="Experience"
-          lead="Internships shipping AI into production, alongside continuous upstream open-source work."
+          eyebrow="Experience"
+          title="Two internships and a public commit history."
+          lead="Production AI/ML work at Ideaboat and PHAZE_AI, alongside 60+ pull requests merged into codebases I don't own."
         >
         </PageIntro>
 
@@ -57,8 +58,8 @@ export default function ExperiencePage() {
         </PageSection>
 
         <CtaBand
-          body="Currently partnering with teams building agent orchestration layers, edge vision platforms, and high-throughput LLM architectures."
-          title="Have an AI pipeline to build or optimize?"
+          body="Agents, document search, a full-stack AI app or a cost review. Tell me what it needs to do and I'll reply within one working day."
+          title="Have an AI feature to build or fix?"
         >
           <Link className={buttonStyles.primary} href="/contact">
             Get in touch

@@ -31,8 +31,9 @@ export default function LabsPage() {
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Labs", "/labs")} />
         <PageIntro
-          title="Labs"
-          lead="Things built to understand how they work, not to ship next quarter, a vector database from scratch, GPT-2 from first principles, a tokenizer in pure Python."
+          eyebrow="Labs"
+          title="Things I built to understand them."
+          lead="A vector database from scratch, GPT-2 from first principles, a tokenizer in pure Python. None of these are products. They are how I learn what the libraries hide."
         >
           <span className="font-body-sm text-body-sm text-text-muted">
             {labs.length} builds
@@ -111,12 +112,12 @@ export default function LabsPage() {
         })}
 
         <CtaBand
-          body="Reimplementing a vector index or a transformer block is the fastest way to find the assumptions a library hides from you. The knowledge transfers directly into the systems I ship for clients."
-          title="I build things that don't exist yet."
+          body="Writing a vector index or a transformer block myself is how I learn what a library assumes. It's also why I can tell you where your retrieval or serving setup will break."
+          title="Want this depth on your system?"
         >
           <Link className={buttonStyles.primary} href="/writing">
             <Icon name="edit_note" size={18} />
-            Read why I build
+            Read the essays
           </Link>
         </CtaBand>
 

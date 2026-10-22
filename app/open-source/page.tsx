@@ -18,7 +18,8 @@ export const revalidate = 3600;
 export const metadata: Metadata = pageMeta({
   path: "/open-source",
   title: "Open Source",
-  description: "60 merged pull requests, 41 issues resolved, and 24 external codebases, including the OWASP agent-security harness, Microsoft AI-Engineering-Coach, and Ollama.",
+  description:
+    "60 merged pull requests, 43 issues resolved, and 24 external codebases, including the OWASP agent-security harness and Microsoft AI-Engineering-Coach.",
   keywords: ["Kunj Shah GitHub", "open source AI contributions", "OWASP contributor", "merged pull requests AI"],
 });
 
@@ -77,8 +78,9 @@ export default async function OpenSourcePage() {
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Open Source", "/open-source")} />
         <PageIntro
-          title="Open Source"
-          lead="Merged pull requests in codebases I don't own, mostly the agent and inference tooling I use every day."
+          eyebrow="Open source"
+          title="Code other engineers chose to merge."
+          lead="Pull requests merged into codebases I don't own, mostly the agent and inference tooling I use every day."
         >
           <Link
             className="inline-flex items-center gap-1.5 h-11 font-body-sm text-body-sm text-text-secondary hover:text-text-primary transition-colors"
@@ -322,7 +324,7 @@ export default async function OpenSourcePage() {
         </PageSection>
 
         <CtaBand
-          body="I'm happy to review issues, benchmark patches, and evaluation harness contributions across the agent runtime ecosystem."
+          body="I review issues, benchmark patches and write evaluation tests for agent and inference projects. Open an issue and mention @KunjShah95, or email me."
           title="Working on agent security or inference tooling?"
         >
           <a

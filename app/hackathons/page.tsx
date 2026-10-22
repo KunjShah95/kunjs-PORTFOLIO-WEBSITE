@@ -28,8 +28,9 @@ export default function HackathonsPage() {
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Hackathons", "/hackathons")} />
         <PageIntro
-          title="Hackathons"
-          lead="Weekend-built systems under time pressure, the fastest way to find out whether an idea actually works."
+          eyebrow="Hackathons"
+          title="Ten hackathons, four finals."
+          lead="48-hour builds against a deadline. The fastest way I know to find out whether an idea works."
         >
           <span className="inline-flex items-center gap-1 font-body-sm text-body-sm text-accent-emerald-ink font-medium">
             <Icon name="badge" size={14} />
@@ -124,8 +125,8 @@ export default function HackathonsPage() {
         })}
 
         <CtaBand
-          body="I take the prototypes that survive their weekend and turn them into systems with tests, observability, and a bill that makes sense."
-          title="The 48-hour version is the demo. The production version is the job."
+          body="I take weekend prototypes and add the tests, logging and deployment they need to hold up with real users."
+          title="Built something at a hackathon that should be a product?"
         >
           <Link className={buttonStyles.primary} href="/projects">
             <Icon name="code_blocks" size={18} />

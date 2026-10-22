@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMeta({
   path: "/manifesto",
   title: "Manifesto",
   description:
-    "Three non-negotiable engineering principles for building AI systems in production: determinism over hallucination, edge and cost efficiency, and observability first, each tied to the shipped systems that prove it.",
+    "Three engineering rules for production AI systems: determinism over hallucination, edge and cost efficiency, and observability first, each tied to the shipped systems that prove it.",
   keywords: [
     "AI engineering principles",
     "production AI best practices",
@@ -71,8 +71,9 @@ export default function ManifestoPage() {
           }}
         />
         <PageIntro
-          title="Manifesto"
-          lead="Three non-negotiable engineering principles learned from running inference in high-stakes production. Each one is stated below with the shipped systems that hold it up. A principle nothing runs on is a preference, not a practice."
+          eyebrow="Manifesto"
+          title="Three rules every system I ship follows."
+          lead="Each rule is listed with the shipped systems that hold it up, so you can check that I follow it."
         />
 
         {/* -------------------------------------------------------- principles */}
@@ -109,7 +110,7 @@ export default function ManifestoPage() {
               </span>
             </span>
           }
-          title="Applied, not aspirational"
+          title="Where each rule shows up"
         >
           <div className="flex flex-col gap-space-xl">
             {principles.map((principle, i) => (
@@ -211,8 +212,8 @@ export default function ManifestoPage() {
         </PageSection>
 
         <CtaBand
-          body="I take on advisory and contract work where determinism, latency budgets, and cost governance actually matter."
-          title="Want an engineer who argues with the hype?"
+          body="I take on contract work where predictable output, latency and model cost matter to the business."
+          title="Want these rules applied to your system?"
         >
           <Link className={buttonStyles.primary} href="/contact">
             Get in touch

@@ -244,7 +244,7 @@ export function ContactBody() {
           for someone who already wants to write, and the services below can
           still prefill the textarea. Desktop keeps them side by side. */}
       <div className="flex flex-col gap-5 lg:col-span-6 order-last lg:order-first">
-        <h2 className="font-headline-lg text-headline-lg text-text-primary">Services</h2>
+        <h2 className="text-[clamp(1.75rem,1.3rem+1.6vw,2.5rem)] leading-[1.05] font-semibold tracking-[-0.04em] text-text-primary">What I can build for you</h2>
         <div className="flex flex-col gap-3">
           {services.map((service) => (
             <div
@@ -288,7 +288,7 @@ export function ContactBody() {
           scroll offset comes from `scroll-padding-top` on <html>, so the
           form lands directly under the fixed header. */}
       <div className="flex flex-col gap-5 lg:col-span-6 lg:sticky lg:top-28 order-first lg:order-last" id="inquiryForm">
-        <h2 className="font-headline-lg text-headline-lg text-text-primary" id="inquiry-title">
+        <h2 className="text-[clamp(1.75rem,1.3rem+1.6vw,2.5rem)] leading-[1.05] font-semibold tracking-[-0.04em] text-text-primary" id="inquiry-title">
           Tell me about the project
         </h2>
 
