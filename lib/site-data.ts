@@ -319,7 +319,7 @@ export const projects: readonly Project[] = [
     status: "Live · 10+ DAU",
     icon: "hub",
     description:
-      "AI-native workspace unifying notes, tasks, projects, and a knowledge graph, with semantic search and a citation-backed multi-agent assistant.",
+      "One workspace for notes, tasks, projects and a knowledge graph, with semantic search and a multi-agent assistant that cites its sources.",
     summary:
       "AI-native workspace with a knowledge graph, pgvector semantic search, and a citation-backed multi-agent assistant.",
     stack: ["Next.js 14 RSC", "Supabase", "pgvector", "LangGraph", "Vercel Edge"],
@@ -410,7 +410,7 @@ export const projects: readonly Project[] = [
     status: "Live",
     icon: "shield_person",
     description:
-      "Paste a JD, offer, or recruiter chat and get instant toxicity, burnout, salary-fairness, ghost-hiring, and negotiation analysis.",
+      "Paste a JD, offer, or recruiter chat and get toxicity, burnout, salary-fairness, ghost-hiring, and negotiation analysis in under three seconds.",
     summary:
       "Multi-provider offer analysis across toxicity, burnout, salary fairness, and negotiation leverage.",
     stack: ["TanStack Start", "React 19", "Groq", "Firebase", "Tailwind"],
@@ -475,7 +475,7 @@ export const projects: readonly Project[] = [
     status: "Beta",
     icon: "cloud_sync",
     description:
-      "Real-time crowd monitoring with live heatmaps, wait-time prediction, and AI-powered routing recommendations.",
+      "Real-time crowd monitoring with live heatmaps, wait-time prediction, and routing recommendations.",
     summary:
       "Real-time crowd monitoring: heatmaps, wait-time forecasting, and routing advice.",
     stack: ["Next.js 15", "TypeScript", "Firebase", "Firestore"],
@@ -495,7 +495,7 @@ export const projects: readonly Project[] = [
     status: "Architecture",
     icon: "architecture",
     description:
-      "Career intelligence platform with a smart model-routing gateway, a complexity classifier sends cheap work to small models and reserves large models for real reasoning.",
+      "Career platform built on a model-routing gateway: a complexity classifier sends cheap work to small models and saves large ones for real reasoning.",
     summary:
       "Smart routing gateway that cut LLM spend 65% by matching model size to task complexity.",
     stack: ["Python", "LangGraph", "ChromaDB", "Streamlit"],
@@ -1598,5 +1598,38 @@ export const hiringFaqs = [
     question: "How do I cite Kunj Shah or this portfolio?",
     answer:
       "Use canonical URLs: kunjshah.in for the person, kunjshah.in/projects for shipped work, kunjshah.in/writing for essays. Machine-readable summaries live at kunjshah.in/llms.txt and kunjshah.in/api/portfolio.json.",
+  },
+] as const;
+
+/**
+ * Questions people type when looking for a developer nearby, answered from
+ * the same facts as /pricing.md and the FAQ above. Shown on
+ * /ai-developer-ahmedabad and emitted as FAQPage schema there.
+ */
+export const localFaqs = [
+  {
+    question: "Is there an AI developer near me in Ahmedabad?",
+    answer:
+      "Kunj Shah is an AI engineer based in Ahmedabad, Gujarat (IST, UTC+5:30). He builds AI agents, document search (RAG), full-stack AI apps and edge computer vision for founders and small teams in Ahmedabad, across India, and remotely for clients abroad.",
+  },
+  {
+    question: "How much does it cost to hire an AI developer in Ahmedabad?",
+    answer:
+      "Kunj Shah quotes fixed-scope projects in INR after a free 15-minute call: ₹10,000–20,000 for a website with lead capture, ₹15,000–35,000 for an AI workflow automation, and ₹25,000–60,000+ for an AI product or MVP. Hourly work is ₹1,500/hour.",
+  },
+  {
+    question: "How long does it take to build an AI MVP?",
+    answer:
+      "A fixed-scope build typically takes 2 to 4 weeks, from written scope to a deployed, tested product with a handoff doc. Payment is 40% upfront and 60% on delivery, with two rounds of revisions included.",
+  },
+  {
+    question: "Do you work with clients outside Ahmedabad?",
+    answer:
+      "Yes. Most work runs remotely: code goes into the client's own repository and cloud from the first commit, so location does not change how a project is delivered. Clients across India and abroad are welcome.",
+  },
+  {
+    question: "Who owns the code after the project?",
+    answer:
+      "The client does. Everything lives in the client's repository, CI and cloud account from the first commit, with no platform or subscription to keep paying for.",
   },
 ] as const;

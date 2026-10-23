@@ -82,6 +82,17 @@ export default async function HomePage() {
   return (
     <PageShell>
       <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: clientFaqs.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }}
+      />
+      <JsonLd
         data={webPageJsonLd({
           path: "",
           name: "Kunj Shah | AI Engineer & Agent Builder",
@@ -391,8 +402,8 @@ export default async function HomePage() {
                       {project.metrics[0].value} {project.metrics[0].label}
                     </span>
                   </div>
-                  <p className="font-body-md text-body-md text-text-secondary">
-                    {project.summary}
+                  <p className="font-body-md text-body-md text-text-secondary text-pretty">
+                    {project.description}
                   </p>
                 </div>
               </Link>

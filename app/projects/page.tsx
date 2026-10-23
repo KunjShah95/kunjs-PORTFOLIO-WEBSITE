@@ -59,7 +59,7 @@ export default function ProjectsPage() {
           <div className="grid gap-2 md:grid-cols-2">
             {otherBuilds.map((build) => (
               <a
-                className="group lift flex items-center justify-between gap-3 p-space-sm md:p-4 bg-surface-card rounded-xl border border-border-hairline"
+                className="group lift flex items-start justify-between gap-3 p-space-sm md:p-4 bg-surface-card rounded-xl border border-border-hairline"
                 href={site.links.github}
                 key={build.title}
                 rel="noopener noreferrer"
@@ -70,7 +70,7 @@ export default function ProjectsPage() {
                     <span className="font-headline-md text-headline-md text-text-primary truncate">
                       {build.title}
                     </span>
-                    <span className="font-body-sm text-body-sm text-text-muted truncate">
+                    <span className="font-body-sm text-body-sm text-text-muted text-pretty">
                       {build.body}
                     </span>
                   </span>

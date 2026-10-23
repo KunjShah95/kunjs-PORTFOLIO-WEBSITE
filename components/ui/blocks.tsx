@@ -158,5 +158,5 @@ export const buttonStyles = {
   secondary:
     "inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-surface-card text-text-primary font-body-sm text-body-sm font-medium whitespace-nowrap border border-border-hairline shadow-[0_1px_2px_rgb(0_0_0/0.04)] hover:border-text-muted active:scale-[0.98] transition-all",
   link:
-    "inline-flex items-center gap-1.5 min-h-11 -my-1 py-1 font-body-sm text-body-sm font-medium text-text-primary underline decoration-border-dotted underline-offset-4 hover:decoration-text-primary transition-colors",
+    "inline-flex items-center gap-1.5 min-h-11 -my-1 py-1 font-body-sm text-body-sm font-medium text-text-primary link-dots link-dots-mid",
 } as const;

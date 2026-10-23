@@ -204,7 +204,7 @@ function EssayRow({ essay }: { essay: Essay }) {
             <span>{essayCategoryLabel(essay.category)}</span>
             <span className="text-border-dotted">·</span>
             <a
-              className="underline decoration-border-dotted underline-offset-4 hover:text-text-primary"
+              className="link-dots hover:text-text-primary"
               href={essay.mediumUrl}
               {...external}
             >

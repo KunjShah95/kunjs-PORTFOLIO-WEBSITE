@@ -126,6 +126,9 @@ export function PersonSiteJsonLd() {
               addressRegion: "Gujarat",
               addressCountry: "IN",
             },
+            // City centroid, not a street address: enough for local results
+            // to place the practice in Ahmedabad without publishing a home.
+            geo: { "@type": "GeoCoordinates", latitude: 23.0225, longitude: 72.5714 },
             areaServed: [
               { "@type": "City", name: "Ahmedabad" },
               { "@type": "Country", name: "India" },

@@ -17,6 +17,7 @@ export const PUBLIC_ROUTES = [
   { path: "/labs", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/manifesto", priority: 0.7, changeFrequency: "yearly" as const },
   { path: "/education", priority: 0.65, changeFrequency: "yearly" as const },
+  { path: "/ai-developer-ahmedabad", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.75, changeFrequency: "yearly" as const },
   { path: "/cite", priority: 0.55, changeFrequency: "yearly" as const },
   // Legal. Indexed deliberately: a client running vendor diligence looks for

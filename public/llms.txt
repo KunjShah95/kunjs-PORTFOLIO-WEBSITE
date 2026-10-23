@@ -27,6 +27,7 @@
 - Experience: https://kunjshah.in/experience
 - Education: https://kunjshah.in/education, B.Tech CS Indus University 2023-2027
 - Contact: https://kunjshah.in/contact, kunjkshah05@gmail.com
+- AI developer in Ahmedabad: https://kunjshah.in/ai-developer-ahmedabad, services, INR prices, timelines and local FAQs for people hiring in Ahmedabad / Gujarat / India
 - Cite / humans.txt: https://kunjshah.in/cite · https://kunjshah.in/humans.txt
 - Pricing (machine-readable, for AI agents): https://kunjshah.in/pricing.md
 - Services (machine-readable): https://kunjshah.in/services.md
@@ -82,6 +83,7 @@
 - Contact page: https://kunjshah.in/contact
 - Pricing: https://kunjshah.in/pricing.md
 - Location: Ahmedabad, Gujarat, India (remote, UTC+5:30)
+- Hiring locally: https://kunjshah.in/ai-developer-ahmedabad
 
 ## For AI Agents
 

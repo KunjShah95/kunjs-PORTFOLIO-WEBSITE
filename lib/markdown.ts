@@ -11,6 +11,9 @@ import {
   hiringFaqs,
   jobs,
   labs,
+  localFaqs,
+  pilotSteps,
+  pricingTiers,
   principles,
   projectBySlug,
   projects,
@@ -86,6 +89,23 @@ function legal(doc: LegalDocument): Doc {
   return { title: doc.title, body: `${doc.lead}\n\nEffective: ${doc.effective}\n\n${sections.join("\n\n")}` };
 }
 
+function localPage(): Doc {
+  const steps = pilotSteps
+    .map((step, i) => `${i + 1}. **${step.title}** (${step.meta}). ${step.body}`)
+    .join("\n");
+  return {
+    title: "AI developer in Ahmedabad",
+    body: [
+      `${site.name} is an AI engineer in ${site.locationLong} (${site.timezone}) building AI agents, RAG search, full-stack AI apps and edge computer vision for founders and small teams in Ahmedabad, across India, and remotely.`,
+      `## What I build\n\n${list(services.map((s) => `**${s.title}.** ${s.deliverable} Proof: ${s.proof}`))}`,
+      `## Prices (INR, fixed scope)\n\n${list(pricingTiers.map((t) => `${t.name}: ${t.price}. ${t.body}`))}`,
+      `## How a project runs\n\n${steps}`,
+      ...localFaqs.map((f) => `## ${f.question}\n\n${f.answer}`),
+      `Start a project: ${ORIGIN}/contact · Pricing: ${ORIGIN}/pricing.md`,
+    ].join("\n\n"),
+  };
+}
+
 const pages: Record<string, () => Doc> = {
   "": () => ({
     title: `${site.name} | ${site.role}`,
@@ -154,6 +174,7 @@ const pages: Record<string, () => Doc> = {
       services.map((s) => `**${s.title}.** ${s.problem} ${s.deliverable} Proof: ${s.proof}`),
     )}\n\n## Channels\n\n${list(directChannels.map((c) => `${c.label}: ${c.href}`))}\n\nPricing: ${ORIGIN}/pricing.md · Services: ${ORIGIN}/services.md`,
   }),
+  "/ai-developer-ahmedabad": () => localPage(),
   "/cite": () => ({
     title: `How to cite ${site.name}`,
     body: `${citationFormats.map((f) => `## ${f.label}\n\n${f.text}`).join("\n\n")}\n\n## Canonical URLs\n\n${list(canonicalUrls.map((u) => `${u.label}: ${u.url}`))}`,

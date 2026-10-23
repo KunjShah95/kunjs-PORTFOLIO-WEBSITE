@@ -213,14 +213,14 @@ export default async function EssayPage(props: PageProps<"/writing/[slug]">) {
               in {site.location}, building agents, retrieval systems, and edge vision that hold
               up in production.{" "}
               <Link
-                className="underline decoration-border-dotted underline-offset-4 hover:text-text-primary"
+                className="link-dots hover:text-text-primary"
                 href="/about"
               >
                 More about the work
               </Link>
               , or{" "}
               <Link
-                className="underline decoration-border-dotted underline-offset-4 hover:text-text-primary"
+                className="link-dots hover:text-text-primary"
                 href="/contact"
               >
                 get in touch

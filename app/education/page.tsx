@@ -46,7 +46,7 @@ export default function EducationPage() {
                     rel="noopener noreferrer"
                     target="_blank"
                   >
-                    <span className="underline decoration-border-dotted underline-offset-4 group-hover:decoration-text-primary">
+                    <span className="link-dots">
                       {education.institution}
                     </span>
                     <Icon

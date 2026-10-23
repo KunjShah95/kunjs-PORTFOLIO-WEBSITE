@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Signature } from "@/components/shell/signature";
 import { LocalClock } from "@/components/ui/local-clock";
 import { legalDocuments } from "@/lib/legal";
 import { indexItems, site } from "@/lib/site-data";
@@ -26,12 +27,17 @@ export function SiteFooter() {
           <span className="font-headline-md text-headline-md text-text-primary">
             {site.name}
           </span>
+          <Signature className="-ml-1 text-text-primary" />
           <p className="font-body-sm text-body-sm text-text-secondary max-w-[32ch]">
-            AI engineer in {site.location}. I build agents, document search and
+            AI engineer in{" "}
+            <Link className="link-dots" href="/ai-developer-ahmedabad">
+              {site.location}
+            </Link>
+            . I build agents, document search and
             full-stack AI apps, with the tests that prove they work.
           </p>
           <Link
-            className="w-fit inline-flex items-center min-h-11 -my-1 py-1 font-body-sm text-body-sm font-medium text-text-primary underline decoration-border-dotted underline-offset-4 hover:decoration-text-primary"
+            className="w-fit inline-flex items-center min-h-11 -my-1 py-1 font-body-sm text-body-sm font-medium text-text-primary link-dots link-dots-mid"
             data-track="Contact CTA Clicked"
             data-track-from="footer"
             href="/contact#inquiryForm"

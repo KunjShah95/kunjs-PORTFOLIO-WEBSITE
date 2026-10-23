@@ -4,8 +4,8 @@ import { projects } from "@/lib/site-data";
 
 /**
  * "Now showing": every project with a demo reel, as frames on a strip of
- * film sliding past. Each frame is the reel's poster and links to the case
- * study. The list is rendered twice so the loop is seamless; the copy is
+ * film sliding past. Each frame is the reel's poster and opens the live
+ * product in a new tab; a reel with no live build falls back to its case study. The list is rendered twice so the loop is seamless; the copy is
  * hidden from assistive tech and the keyboard so nothing is announced or
  * focused twice. Hover pauses the reel; reduced motion freezes it.
  */
@@ -17,9 +17,14 @@ export function FilmStrip() {
       <li className="shrink-0" key={`${p.slug}-${copy ? "b" : "a"}`}>
         <Link
           aria-hidden={copy || undefined}
+          aria-label={copy ? undefined : p.demo ? `${p.title}, live site (opens in a new tab)` : undefined}
           className="group block w-[260px] md:w-[340px]"
-          href={`/projects/${p.slug}`}
+          data-track={p.demo ? "Live Demo Clicked" : undefined}
+          data-track-from="film-strip"
+          href={p.demo ?? `/projects/${p.slug}`}
+          rel={p.demo ? "noopener noreferrer" : undefined}
           tabIndex={copy ? -1 : undefined}
+          target={p.demo ? "_blank" : undefined}
         >
           <span className="relative block aspect-video overflow-hidden rounded-[4px] bg-[#1a1a18]">
             <Image
@@ -34,7 +39,17 @@ export function FilmStrip() {
             </span>
           </span>
           <span className="mt-2 flex items-baseline justify-between gap-3 px-0.5">
-            <span className="font-body-sm text-body-sm font-medium text-[#f2f1ec]">{p.title}</span>
+            <span className="inline-flex items-center gap-1.5 font-body-sm text-body-sm font-medium text-[#f2f1ec]">
+              {p.title}
+              {p.demo && (
+                <span
+                  aria-hidden="true"
+                  className="text-signal opacity-0 -translate-x-1 transition duration-300 group-hover:opacity-100 group-hover:translate-x-0"
+                >
+                  ↗
+                </span>
+              )}
+            </span>
             <span className="eyebrow text-[#8f8d85] truncate">
               {p.metrics[0].value} {p.metrics[0].label}
             </span>

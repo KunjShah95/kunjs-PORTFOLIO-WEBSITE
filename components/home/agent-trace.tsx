@@ -122,7 +122,7 @@ export function AgentTrace({ className }: { className?: string }) {
         <span>
           Illustrative run. In the{" "}
           <Link
-            className="underline decoration-border-dotted underline-offset-4 hover:text-text-primary"
+            className="link-dots hover:text-text-primary"
             href="/projects/walkcast"
           >
             published Walkcast Lab results

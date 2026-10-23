@@ -36,7 +36,7 @@ export function ProofLinks({
         target="_blank"
       >
         <Icon className="text-text-muted" name="download" size={15} />
-        <span className="underline decoration-border-dotted underline-offset-4">
+        <span className="link-dots">
           Resume (PDF)
         </span>
       </a>
@@ -49,7 +49,7 @@ export function ProofLinks({
         target="_blank"
       >
         <Icon className="text-text-muted" name="code_blocks" size={15} />
-        <span className="underline decoration-border-dotted underline-offset-4">
+        <span className="link-dots">
           GitHub
         </span>
         {githubHint ? (

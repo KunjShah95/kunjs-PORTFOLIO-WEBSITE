@@ -149,8 +149,8 @@ export function ProjectsBrowser() {
                 ))}
               </dl>
 
-              <p className="font-body-md text-body-md text-text-secondary">
-                {project.summary}
+              <p className="font-body-md text-body-md text-text-secondary text-pretty">
+                {project.description}
               </p>
 
               <div className="flex flex-wrap gap-1.5 mt-4 mb-5">

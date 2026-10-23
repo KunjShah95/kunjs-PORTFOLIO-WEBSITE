@@ -705,6 +705,47 @@ main:has(#credits-title) + footer {
   }
 }
 
+/* Dotted underline drawn as round dots, not `text-decoration: dotted` (which
+   renders as squares in Chromium). Background-based, so it follows wrapped
+   lines. On hover the dots warm to the signal colour and march one step. */
+@utility link-dots {
+  --dots: var(--color-border-dotted);
+  background-image: radial-gradient(circle, var(--dots) 0.75px, transparent 1.1px);
+  background-size: 5px 2px;
+  background-position: 0 var(--dots-y, 100%);
+  background-repeat: repeat-x;
+  padding-bottom: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: color 200ms ease;
+  &:hover,
+  &:focus-visible,
+  :where(.group):hover & {
+    --dots: var(--color-signal);
+    color: var(--color-text-primary);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    &:hover,
+    &:focus-visible,
+    :where(.group):hover & {
+      animation: dots-march 600ms linear infinite;
+    }
+  }
+}
+
+@keyframes dots-march {
+  to {
+    background-position: 5px var(--dots-y, 100%);
+  }
+}
+
+/* For links padded out to a 44px tap target: the box bottom sits well below
+   the text, so pin the dots to the baseline of the centred line instead. */
+@utility link-dots-mid {
+  --dots-y: calc(50% + 0.5lh + 1px);
+  padding-bottom: 0;
+}
+
 /* Skeleton block: a soft sweep, not a spinner. */
 @utility skeleton {
   position: relative;
@@ -809,15 +850,8 @@ main:has(#credits-title) + footer {
   }
 
   > a {
+    @apply link-dots;
     color: var(--color-text-primary);
-    text-decoration: underline;
-    text-decoration-color: var(--color-border-hairline);
-    text-underline-offset: 3px;
-    transition: text-decoration-color 200ms ease;
-  }
-
-  > a:hover {
-    text-decoration-color: currentColor;
   }
 
   > strong {
