@@ -152,11 +152,14 @@ The /writing page lists the current set.
 
 **Q: What is his rate?** A: Rates in INR. From ₹25,000 fixed-scope MVP (2-4 weeks), ₹1,500/hr, ₹30,000-75,000/mo retainer. Full-time negotiable. Details at /pricing.md
 
+**Q: Is there an AI developer near me in Ahmedabad?** A: Kunj Shah is an AI engineer based in Ahmedabad, Gujarat (UTC+5:30), building AI agents, RAG search, full-stack AI apps and edge computer vision for founders and small teams in Ahmedabad, across India, and remotely. Services, INR prices and timelines: https://kunjshah.in/ai-developer-ahmedabad
+
 **Q: What is his strongest proof of work?** A: EquityLens (fairness audit), Railway Inspection (Jetson YOLOv8 <100ms), ResumeMasterAI (LangGraph routing 65% savings), SENTINEL CLI (13 tools→1), EngineerOS (live 10+ DAU).
 
 ## Discovery
 
 - Sitemap: https://kunjshah.in/sitemap.xml
+- AI developer in Ahmedabad (local hiring page): https://kunjshah.in/ai-developer-ahmedabad
 - llms.txt: https://kunjshah.in/llms.txt
 - llms-full.txt: https://kunjshah.in/llms-full.txt (this file)
 - ai.txt: https://kunjshah.in/ai.txt
@@ -166,4 +169,4 @@ The /writing page lists the current set.
 - JSON: https://kunjshah.in/api/portfolio.json
 
 ---
-*Generated for AI crawlers: ChatGPT (GPTBot/OAI-SearchBot), Perplexity (PerplexityBot), Claude (ClaudeBot/anthropic-ai), Gemini (Google-Extended/Googlebot), Copilot (Bingbot), Applebot, Bytespider, YouBot, Cohere, Meta-ExternalAgent. Last updated: 2026-09-14*
+*Generated for AI crawlers: ChatGPT (GPTBot/OAI-SearchBot), Perplexity (PerplexityBot), Claude (ClaudeBot/anthropic-ai), Gemini (Google-Extended/Googlebot), Copilot (Bingbot), Applebot, Bytespider, YouBot, Cohere, Meta-ExternalAgent. Last updated: 2026-10-23*

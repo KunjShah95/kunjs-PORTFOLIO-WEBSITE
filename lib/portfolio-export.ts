@@ -196,6 +196,7 @@ export function buildPortfolioDocument() {
       pricingMd: `${ORIGIN}/pricing.md`,
       servicesMd: `${ORIGIN}/services.md`,
       sitemap: `${ORIGIN}/sitemap.xml`,
+      localHiringPage: `${ORIGIN}/ai-developer-ahmedabad`,
       rss: `${ORIGIN}/rss.xml`,
     },
     contact: {
