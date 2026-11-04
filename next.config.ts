@@ -36,6 +36,19 @@ const nextConfig: NextConfig = {
       fallback: [],
     };
   },
+  // Content Signals (https://contentsignals.org) as a response header, the
+  // channel the spec treats as authoritative. The same policy is in robots.txt
+  // and in the <meta name="Content-Signal"> tag in the root layout.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "Content-Signal", value: "search=yes, ai-input=yes, ai-train=no" },
+        ],
+      },
+    ];
+  },
   experimental: {
     optimizePackageImports: ["framer-motion"],
     // `experimental.inlineCss` was tried here and reverted: it inlines the

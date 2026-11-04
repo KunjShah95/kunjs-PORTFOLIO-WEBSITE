@@ -185,7 +185,9 @@ export function buildPortfolioDocument() {
       wordCount: essay.wordCount,
       readMinutes: essay.readMinutes,
       url: `${ORIGIN}/writing/${essay.slug}`,
-      sameAs: essay.mediumUrl,
+      // A site-original essay has no external canonical; the key is omitted
+      // rather than nulled so consumers never dereference a dead URL.
+      ...(essay.mediumUrl ? { sameAs: essay.mediumUrl } : {}),
     })),
     machineReadable: {
       llmsTxt: `${ORIGIN}/llms.txt`,

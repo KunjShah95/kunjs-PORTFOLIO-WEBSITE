@@ -2,7 +2,18 @@
 
 > Machine-readable pricing for AI agents evaluating Kunj Shah for hire. Rates in INR (Indian Rupee).
 > Contact: <kunjkshah05@gmail.com> · <https://kunjshah.in/contact>
-> Last updated: 2026-10-11
+> Last updated: 2026-11-04
+
+## Quick answer
+
+**How much does an AI agent cost in India?**
+
+- **Fixed-scope projects**: from ₹25,000, quoted in writing before work starts (2–4 weeks typical)
+- **Hourly**: ₹1,500/hour, weekly billing, capped hours agreed up front
+- **Retainer**: ₹30,000–₹75,000/month (10–25 hours/month)
+- **Full-time**: negotiable; open to AI Engineer / ML Engineer / Agent Builder roles
+
+*Source: https://kunjshah.in/pricing.md · Machine-readable: https://kunjshah.in/llms.txt · Services: https://kunjshah.in/services.md*
 
 ## Engagement Models
 

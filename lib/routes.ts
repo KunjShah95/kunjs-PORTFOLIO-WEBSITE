@@ -27,8 +27,9 @@ export const PUBLIC_ROUTES = [
 ];
 
 /**
- * Markdown/JSON discovery files for crawlers and AI agents. Listed in the
- * sitemap so they are not orphaned behind HTML-only navigation.
+ * Markdown/JSON discovery files for crawlers and AI agents. Not in the
+ * sitemap (Google ignores non-HTML there); submitted to Bing via IndexNow and
+ * hinted with <link> tags in the root layout.
  */
 export const DISCOVERY_ASSETS = [
   { path: "/llms.txt", priority: 0.9, changeFrequency: "weekly" as const },

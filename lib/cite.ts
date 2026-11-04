@@ -3,7 +3,7 @@ import { site } from "@/lib/site-data";
 
 /** Shared copy for /cite, /humans.txt, and machine-readable discovery files. */
 export const citeMeta = {
-  lastUpdated: "2026-10-11",
+  lastUpdated: "2026-11-04",
   preferredName: site.name,
   legalName: site.name,
   role: site.role,
@@ -52,6 +52,17 @@ export function renderHumansTxt(): string {
     `Location: ${citeMeta.location}`,
     `Contact: ${site.email}`,
     `Site: ${citeMeta.canonicalSite}`,
+    "",
+    "/* PROFILES (same person) */",
+    // The same identity the JSON-LD sameAs and portfolio.json advertise, so a
+    // crawler reading either file resolves the same set of profiles.
+    `- GitHub: ${site.links.github}`,
+    `- LinkedIn: ${site.links.linkedin}`,
+    `- X (Twitter): ${site.links.x}`,
+    `- Hugging Face: ${site.links.huggingface}`,
+    `- Peerlist: ${site.links.peerlist}`,
+    `- Medium: ${site.links.medium}`,
+    `- Product Hunt: ${site.links.producthunt}`,
     "",
     "/* THANKS */",
     "Open-source maintainers across OWASP, Microsoft, Ollama, and the wider AI tooling ecosystem.",

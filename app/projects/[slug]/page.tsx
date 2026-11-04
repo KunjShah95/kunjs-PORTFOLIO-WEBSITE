@@ -10,7 +10,9 @@ import { ProofLinks } from "@/components/ui/proof-links";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { PageSection } from "@/components/ui/page-intro";
 import { Tag } from "@/components/ui/primitives";
-import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
+import { JsonLd, breadcrumbJsonLd, faqPageJsonLd } from "@/components/seo/json-ld";
+import { PeopleAlsoAsk } from "@/components/people-also-ask";
+import { projectPaa } from "@/lib/paa";
 import { ORIGIN } from "@/lib/routes";
 import { pageMeta } from "@/lib/seo";
 import { principles, projectBySlug, projects, site } from "@/lib/site-data";
@@ -29,9 +31,16 @@ export async function generateMetadata(
   const project = projectBySlug(slug);
   if (!project) return {};
 
+  // A title that already contains its category (e.g. "Computer Vision for
+  // Railway Inspection") would stutter as "Computer Vision for Railway
+  // Inspection: Computer Vision case study", so it ships alone.
+  const metaTitle = project.title.toLowerCase().includes(project.category.toLowerCase())
+    ? project.title
+    : `${project.title}: ${project.category} case study`;
+
   return pageMeta({
     path: `/projects/${project.slug}`,
-    title: `${project.title}: ${project.category} case study`,
+    title: metaTitle,
     description: project.description,
     keywords: [project.title, project.category, ...project.stack],
     ogTitle: `${project.title}: case study by ${site.name}`,
@@ -66,6 +75,7 @@ export default async function ProjectCaseStudyPage(
   const i = projects.findIndex((p) => p.slug === project.slug);
   const prev = i > 0 ? projects[i - 1] : null;
   const next = i < projects.length - 1 ? projects[i + 1] : null;
+  const paa = projectPaa(project);
 
   // Reads in the order a reviewer checks a claim: who built it, how it works,
   // what was hard, how it is verified, where it falls short, what it taught.
@@ -87,6 +97,7 @@ export default async function ProjectCaseStudyPage(
           { name: project.title, path },
         ])}
       />
+      {paa.length > 0 && <JsonLd data={faqPageJsonLd(paa)} />}
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -241,6 +252,8 @@ export default async function ProjectCaseStudyPage(
             </ul>
           </PageSection>
         )}
+
+        <PeopleAlsoAsk items={paa} />
 
         {/* ------------------------------------------------- prev / next */}
         <nav aria-label="More case studies" className="w-full">

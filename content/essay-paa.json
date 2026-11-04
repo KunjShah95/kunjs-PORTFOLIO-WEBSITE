@@ -1,0 +1,285 @@
+{
+  "$schema": "https://kunjshah.in/content/essay-paa.json",
+  "paa": {
+    "ai-agent-development-guide": [
+      {
+        "question": "How much does it cost to build an AI agent?",
+        "answer": "Fixed-scope agent work starts from ₹25,000 for a 2-4 week delivery, with hourly work at ₹1,500 and retainers at ₹30,000-75,000 per month. Model API usage is billed separately by the provider. The exact figure depends on integrations, eval surface and scope, which is why a written fixed quote follows a free 15-minute call."
+      },
+      {
+        "question": "Why do AI agent projects fail?",
+        "answer": "The four common causes are no evals against real cases, trusting the agent's self-reported success instead of checking real system state, provider lock-in that blocks model swaps, and unbounded scope. Fixed scope, a verification gate and CI-gated evals address all four."
+      },
+      {
+        "question": "How long does it take to build an AI agent?",
+        "answer": "A fixed-scope pilot typically takes 2 to 4 weeks. That covers narrowed scope, tool contracts, state machine, evals and a human-in-the-loop deployment. Larger multi-agent systems take longer, and scale-up should be a separate decision made on pilot evidence."
+      }
+    ],
+    "rag-implementation-best-practices": [
+      {
+        "question": "What is the best chunk size for RAG?",
+        "answer": "There is no universal number, but a documented working point is roughly 380-word chunks with a 50-word overlap, split on document structure rather than fixed character counts. Pick a value, document it, and re-measure recall when you change it."
+      },
+      {
+        "question": "Why does pure vector search fail on exact identifiers in RAG?",
+        "answer": "Embeddings capture semantic similarity and blur exact strings like product codes, ticket IDs and error messages. Hybrid retrieval fuses vector search with keyword search (such as Postgres full-text) and then re-ranks the fused list, which restores recall on exact identifiers while keeping paraphrase matching."
+      },
+      {
+        "question": "How do you evaluate a RAG system in production?",
+        "answer": "Use a fixed set of real questions with known-good answers and run it in CI, failing the build below a recall floor (EngineerOS gates on 20 questions). Also gate faithfulness, the degree to which answers stay grounded in retrieved context; Estate360 degrades to \"I don't know\" below 0.8 faithfulness and 0.65 confidence rather than guess."
+      }
+    ],
+    "langgraph-vs-crewai": [
+      {
+        "question": "Is LangGraph better than CrewAI?",
+        "answer": "LangGraph is better when the flow has hard invariants, needs auditability or human-in-the-loop interrupts, because edges and state are explicit. CrewAI is better for fast role-based prototypes and content or research workflows. Neither replaces evals and verification gates, which predict success more than framework choice."
+      },
+      {
+        "question": "Can CrewAI handle production workloads?",
+        "answer": "CrewAI can run production workloads, but enforcing hard invariants like verify-before-write or tenant scoping is harder to express and audit than in LangGraph. For high-stakes systems, teams usually end up wanting LangGraph's explicit graph and checkpointing, or CrewAI with significant manual wiring."
+      },
+      {
+        "question": "What is the main difference between LangGraph and CrewAI?",
+        "answer": "LangGraph is graph-first: you own nodes, edges and a typed state schema, which enforces explicit control flow and invariants. CrewAI is role-first: agents with goals and tasks collaborate via sequential or hierarchical processes, which scaffolds quickly but gives less granular control over edges and state."
+      }
+    ],
+    "yolov8-vs-tensorrt": [
+      {
+        "question": "Is YOLOv8 or TensorRT better for edge inference?",
+        "answer": "They are not alternatives. YOLOv8 is the model you train; TensorRT is the runtime that executes it fast on a specific NVIDIA GPU. On a fixed NVIDIA target like Jetson Orin with a latency or power budget, exporting YOLOv8 to a TensorRT INT8 engine is the standard path."
+      },
+      {
+        "question": "How much faster is TensorRT INT8 vs FP16?",
+        "answer": "On the deployed railway inspection system on Jetson Orin, INT8 delivered roughly 2x the throughput of FP16, with under 100ms inference and 98.7% accuracy, using quantization-aware training to protect accuracy. Results are workload-specific and should be re-measured on your own footage."
+      },
+      {
+        "question": "When should you avoid TensorRT?",
+        "answer": "Avoid it when the model retrains frequently, when you are CPU-only, when you are still in exploration, or when you lack representative calibration data for INT8. Each retrain forces ONNX export, engine rebuild and revalidation, and the engine is tied to a specific GPU architecture and TensorRT version."
+      }
+    ],
+    "how-much-does-an-ai-agent-cost-india": [
+      {
+        "question": "How much does an AI agent cost in India?",
+        "answer": "Fixed-scope agent projects start from ₹25,000 and typically take 2 to 4 weeks. AI workflow automations run ₹15,000-35,000, an AI product or MVP runs ₹25,000-60,000+, hourly work is ₹1,500, and retainers are ₹30,000-75,000 per month. Model API usage is billed separately by the provider."
+      },
+      {
+        "question": "What is included in a ₹25,000 AI agent project?",
+        "answer": "The starting band covers architecture, the build, deployment to your cloud, a handoff document, two revision rounds and the code in your repo. It excludes model API bills (usage-based, provider-billed), third-party SaaS subscriptions and hosting costs."
+      },
+      {
+        "question": "Is a fixed-scope or hourly engagement better for an AI agent?",
+        "answer": "Fixed-scope is better when the task and definition of done are nameable; you get a known maximum cost, 40% upfront and 60% on delivery, and typical 2 to 4 week delivery. Hourly at ₹1,500 fits open-ended exploration, and retainers at ₹30,000-75,000 per month fit post-launch maintenance and priority support."
+      }
+    ],
+    "how-long-does-it-take-to-build-an-ai-agent": [
+      {
+        "question": "How long does it take to build an AI agent?",
+        "answer": "A narrow automation can land inside a week or two; a production agent with tools, guardrails and an eval suite typically runs the full two to four weeks. Multi-tenant products with roles and admin surfaces run longer."
+      },
+      {
+        "question": "What slows down an AI agent project?",
+        "answer": "The usual culprits are auth and permissions, messy or missing data, third-party API instability and rate limits, compliance review loops, an unclear definition of done and scope creep."
+      },
+      {
+        "question": "Should I buy a SaaS agent or build one?",
+        "answer": "Buy when the workflow is generic; build when the workflow, the data or the definition of quality is specific to your business. When unsure, start with the eval set, then decide."
+      }
+    ],
+    "why-agent-success-claims-fail-verification": [
+      {
+        "question": "Why do AI agent success claims fail?",
+        "answer": "The agent narrates success without checking consequences; in a published lab run, three of four success claims were false when checked against application state."
+      },
+      {
+        "question": "Is LLM-as-judge enough to verify an AI agent?",
+        "answer": "No. A judge reads the transcript where the false claim lives and has no access to ground truth. Verification must come from the application's own records: database rows, DOM state and API responses."
+      },
+      {
+        "question": "How do you make an agent failure permanent as a test?",
+        "answer": "Turn the failed run into a classified, reproducible regression fixture and run it as a CI release gate, so a new agent version must prove the fix and break nothing else."
+      }
+    ],
+    "building-ai-agents-that-handle-captchas": [
+      {
+        "question": "Can AI agents solve CAPTCHAs?",
+        "answer": "They encounter them, but anti-bot measures exist to stop exactly what agents do. When a CAPTCHA appears, the correct behavior is to stop and escalate to the human, not to solve it covertly."
+      },
+      {
+        "question": "How do browser agents handle login walls and MFA?",
+        "answer": "Use scoped test accounts or service identities with least-privilege access, keep secrets in a vault, and let the human complete the MFA step while the agent handles the repetitive work around it."
+      },
+      {
+        "question": "How do you stop layout drift from breaking a web agent?",
+        "answer": "Pre-flight checks before the task starts, state verification after every step, drift alerting instead of improvisation, and replay fixtures per flow in CI."
+      }
+    ],
+    "my-owasp-journey": [
+      {
+        "question": "What is the security-regression CI pattern?",
+        "answer": "Encode a vulnerability class as a test and make the pipeline fail when it reappears, so a fix becomes permanent prevention rather than a one-time patch."
+      },
+      {
+        "question": "What is AGENTS.md and why does it matter for security?",
+        "answer": "It moves security rules into the repository where coding agents actually read them, acting as an access control written in prose for AI contributors."
+      },
+      {
+        "question": "What do 60+ merged PRs across 24 repos say about shipping secure agents?",
+        "answer": "Reviewers merge what they can verify: small reviewable diffs, a stated threat model, tests encoding the vulnerability class and CI that fails on regression."
+      }
+    ],
+    "edge-computer-vision-realized": [
+      {
+        "question": "How accurate is edge computer vision on real track footage?",
+        "answer": "The deployment reached 98.7% detection accuracy on held-out track footage, using YOLOv8 compiled to a custom TensorRT INT8 engine on an NVIDIA Jetson Orin."
+      },
+      {
+        "question": "Why use INT8 quantization for edge inference?",
+        "answer": "INT8 delivers roughly 2x the throughput of FP16, and with quantization-aware training the accuracy you keep is real rather than forcibly truncated into 8-bit precision."
+      },
+      {
+        "question": "What does edge computer vision still get wrong?",
+        "answer": "Extreme low-light, novel defect classes absent from the training data and camera misalignment. Histogram equalization helps with blur and low light but cannot create photons."
+      }
+    ],
+    "model-routing-65-percent-cheaper": [
+      {
+        "question": "How do you cut LLM API costs without hurting quality?",
+        "answer": "Route each request by measured complexity instead of sending everything to a flagship model. In my ResumeMasterAI gateway, a classifier reads input length, task type, retrieval need and output structure, easy requests go to small cheap models, and large models are reserved for hard reasoning; API spend dropped 65% while match precision improved 3x with under 200ms added latency per request."
+      },
+      {
+        "question": "What is an LLM model routing gateway?",
+        "answer": "A routing layer between product logic and model providers that classifies every request and picks the cheapest model that clears the quality bar for it. In practice it means a complexity classifier, an explicit versioned routing policy, checkpointing with human-in-the-loop review for high-stakes outputs, and a log of every routing decision so quality drift can be caught."
+      },
+      {
+        "question": "When is model routing not worth it?",
+        "answer": "Skip it when traffic is low, when it is a single-use internal tool, when it is a prototype, or when you have no eval suite to detect wrong answers. If you cannot say what your wrong-route rate is this week, routing is a cost lottery rather than a control."
+      }
+    ],
+    "test-enforced-tenant-isolation": [
+      {
+        "question": "How do you enforce tenant isolation in multi-tenant SaaS?",
+        "answer": "Scope every query by workspaceId at the application layer, then add a CI guard that fails the build if any tenant-model call site lacks the predicate. Estate360 runs three tenant-scope test gates: a static scan of app/, lib/ and modules/, a check that every tenant read path records a broker-visibility decision, and a check that the broker predicate reaches Prisma."
+      },
+      {
+        "question": "Does Postgres RLS protect multi-tenant data if it is enabled?",
+        "answer": "Only if the app connects as a role that does not own the tables and does not carry BYPASSRLS. Enabled is not enforced: Estate360 has RLS enabled with 31 policies written, but they stay inert because the app role owns the tables and bypasses RLS, so role separation, not the policies themselves, is the real control."
+      },
+      {
+        "question": "How do you test tenant isolation?",
+        "answer": "Seed two test tenants with different data and assert invisibility in both directions on every tenant read path, on every pull request. Estate360 adds companion gates for broker-scoped reads inside a tenant, and an escape hatch only via registered exceptions with a checkable reason."
+      }
+    ],
+    "building-a-research-agent-that-cites-its-sources": [
+      {
+        "question": "How do you make a research agent cite its sources?",
+        "answer": "Ground every claim in a fetched document with the URL attached, and never let the writer state what retrieval did not support. The ArchMind Research Agent decomposes the request into sub-questions, retrieves and scrapes per sub-question, normalizes sources, and writes a report where each sourced statement carries its source and unverifiable claims are flagged rather than smoothed over."
+      },
+      {
+        "question": "Why do research agents hallucinate?",
+        "answer": "Mostly because retrieval returns noisy or broad results and the writer fills the gaps with parametric memory. The fixes are decomposition into answerable sub-questions, readability extraction with dedup and source scoring, dropping login-walled and JS-only shells, and constraining the writer to retrieved evidence."
+      },
+      {
+        "question": "Can an AI research agent replace a human researcher?",
+        "answer": "No. It assists: it gathers, normalizes and drafts, but paywalled sources, fast-moving topics and citation rot still need human judgment. The practical posture is agent-gathered evidence plus human-owned verification, with the report marking what is sourced versus inferred."
+      }
+    ],
+    "semantic-vs-exact-caching-llm": [
+      {
+        "question": "What is semantic caching for LLMs?",
+        "answer": "Serving the nearest prior answer to a semantically similar prompt above a similarity threshold instead of calling the model again. Estate360 requires 0.85 cosine similarity over hashed n-grams of the prompt, keeps semantic hits for 24 hours, and layers the feature on top of its exact cache, never instead of it."
+      },
+      {
+        "question": "Exact caching vs semantic caching: which should you use?",
+        "answer": "Start with exact caching: hash the normalized prompt plus model plus temperature, and Estate360 keeps those hits for about an hour. Add semantic caching only on top, for rephrasings of the same question, with a high threshold like 0.85 and continuous spot checks for wrong-hit rate."
+      },
+      {
+        "question": "How do you measure whether an LLM cache is working?",
+        "answer": "Ship cache hits as first-class telemetry and track hit rate, cost saved and wrong-hit rate via spot checks on served hits. If you cannot measure the wrong-hit rate, the semantic cache is on probation, because a near-miss answer served confidently is the exact failure this layer creates."
+      }
+    ],
+    "multi-provider-llm-fallback-playbook": [
+      {
+        "question": "How do you handle LLM provider outages?",
+        "answer": "Run a fallback chain ordered by cost, latency and capability, with per-query-type chains, health checks, circuit breakers and timeout budgets, then terminate the chain in a degraded-but-useful floor like ArchMind's 18-rule heuristic engine that needs zero API keys. And test the failover path by actually pulling the plug, the way you test backups."
+      },
+      {
+        "question": "What is a free-tier-first LLM router?",
+        "answer": "A routing layer that sends easy queries to free or cheap tiers first and reserves paid or frontier models for hard reasoning. OnRamp leads with OpenRouter, Gemini, Groq and NVIDIA and routes per query type; ArchMind runs Groq to NVIDIA to OpenRouter to Gemini to Ollama to HuggingFace with the heuristic engine behind all of them."
+      },
+      {
+        "question": "When should you not build LLM fallback?",
+        "answer": "Skip the chain for internal tools, for a single provider with an SLA you actually trust, or for an MVP where speed beats resilience, but abstract the provider interface anyway so fallback can be added later as a config change."
+      }
+    ],
+    "upi-fraud-detection-001-base-rate": [
+      {
+        "question": "Why is accuracy misleading for fraud detection?",
+        "answer": "At a 0.01% base rate, a model that predicts never fraud is 99.99% accurate and catches nothing. Accuracy is dominated by the legitimate majority, so judge a fraud model on precision and recall at the operating point and on PR-AUC."
+      },
+      {
+        "question": "How do you choose a fraud detection threshold?",
+        "answer": "Price the two errors: a missed fraud versus a false block. Sweep the threshold on labeled validation data, plot precision and recall against it, and pick the cost-minimizing point with the people who absorb the consequences. Recalibrate as the base rate drifts."
+      },
+      {
+        "question": "What metrics matter for imbalanced fraud datasets?",
+        "answer": "PR-AUC over ROC-AUC, precision and recall at the operating point, and false positives per day at your real volume. Add drift monitoring of alert rate, sampled precision and score distribution, because the base rate is not stationary."
+      }
+    ],
+    "lattice-152-pages-static": [
+      {
+        "question": "What is Lattice (the AI tools index)?",
+        "answer": "Lattice is a curated, stack-ordered index of the 112 tools behind production AI systems, organized into 9 layers from inference/serving to evals plus an off-stack learning section. All 152 routes are prerendered at build time and served as a Cloudflare Worker via OpenNext."
+      },
+      {
+        "question": "How do you keep a tools directory from going stale?",
+        "answer": "Make staleness a build failure. Licence or cost data older than 6 months fails the build, a tool without classification throws, and a comparison naming an unknown tool throws, so maintenance is scheduled instead of remembered."
+      },
+      {
+        "question": "Why prerender a content site instead of using a CMS?",
+        "answer": "For reference content with no personalization, static pages are cacheable, fast and have no runtime failure mode or CMS attack surface. The trade-offs are rebuilds on every change and no per-request logic, which is correct for a reference index."
+      }
+    ],
+    "repo-to-pr-9-step-pipeline": [
+      {
+        "question": "What is OnRamp (repo-to-PR onboarding)?",
+        "answer": "OnRamp is a repo-to-PR onboarding autopilot: it ingests a repository, builds an AST dependency and entity graph, classifies and assigns work, opens one PR per issue with a coding agent, validates by re-parsing and graph-diffing, and advances tasks on merge."
+      },
+      {
+        "question": "Why re-parse a PR instead of trusting the agent?",
+        "answer": "The agent's summary is optimizing for completion, not honesty about what it broke. Re-parsing the head branch and diffing the two graphs catches broken edges and new cycles structurally, which no report from the agent can substitute for."
+      },
+      {
+        "question": "How does load-aware task assignment work?",
+        "answer": "The member with the fewest active non-terminal tasks wins, round-robin breaks ties, and overloaded members are skipped. It distributes work by capacity rather than evenly, so your fastest contributors are not silently overloaded."
+      }
+    ],
+    "rebuilding-bpe-from-scratch": [
+      {
+        "question": "How does BPE tokenization work?",
+        "answer": "Start from bytes, count adjacent token pairs, merge the most frequent pair, and repeat. The merge list is the vocabulary: encoding replays the merges in the order they were learned, and decoding reverses the expansion."
+      },
+      {
+        "question": "Why is the GPT-2/GPT-4 regex pre-tokenizer important?",
+        "answer": "It splits text into linguistically sane chunks before merging so merges never cross word boundaries. It explains why leading spaces change tokens and why rephrasing a prompt can change its token cost."
+      },
+      {
+        "question": "Is a custom tokenizer worth training on technical text?",
+        "answer": "For heavy code and ML workloads, yes: about 15% fewer tokens on technical text, cheaper calls and denser context. It performs worse on general text, so it is a bet on the workload, and it is about 2x slower than tiktoken in pure Python."
+      }
+    ],
+    "how-to-hire-an-ai-engineer": [
+      {
+        "question": "How do you interview an AI engineer?",
+        "answer": "Skip model-name bingo and ask five questions: a production incident they caused, the eval set for a shipped system, what their last system got wrong, how they verify an agent's work, and what they would refuse to build. Listen for brief, concrete, owned answers."
+      },
+      {
+        "question": "What is the artifact test in hiring?",
+        "answer": "Ask the finalist for a written one-page approach to your actual problem: what they would build, in what order, what they would measure, and what they would not do yet. It costs them an hour and reveals how they think before any contract exists."
+      },
+      {
+        "question": "Is a paid trial better than interview rounds?",
+        "answer": "Yes. A fixed-scope paid pilot, roughly 15,000-35,000 for a workflow automation or 25,000+ for a product slice, shows commit quality, estimation honesty and whether they finish. Interviews show how someone talks; a pilot shows how they work."
+      }
+    ]
+  }
+}

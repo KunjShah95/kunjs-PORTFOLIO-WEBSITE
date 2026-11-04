@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { DISCOVERY_ASSETS, ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
+import { ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
 import { essaysByDate } from "@/lib/essays";
 import { projects } from "@/lib/site-data";
 
@@ -41,12 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const assets = DISCOVERY_ASSETS.map((asset) => ({
-    url: `${ORIGIN}${asset.path}`,
-    lastModified: LAST_MODIFIED,
-    changeFrequency: asset.changeFrequency,
-    priority: asset.priority,
-  }));
+  // Non-HTML discovery files (llms.txt, portfolio.json, rss.xml, ...) are
+  // deliberately not listed: Google ignores them in a sitemap, and sitemaps
+  // are for indexable pages. They stay reachable — linked via <link> hints in
+  // the root layout and submitted to Bing through IndexNow — and listed in
+  // lib/routes.ts DISCOVERY_ASSETS.
 
-  return [...pages, ...caseStudies, ...essays, ...assets];
+  return [...pages, ...caseStudies, ...essays];
 }

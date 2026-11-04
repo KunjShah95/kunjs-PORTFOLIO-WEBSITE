@@ -1,19 +1,23 @@
 import archive from "@/content/essays.json";
+import localArchive from "@/content/essays-local.json";
+import paaArchive from "@/content/essay-paa.json";
 import { ORIGIN } from "@/lib/routes";
+import { nodesToText, parseArticleHtml } from "@/lib/article-html";
 
 /* ==========================================================================
    The essay archive.
 
-   A committed, build-time snapshot of the essays that actually exist. It used
-   to be a hand-written list of eleven titles in lib/site-data.ts, but none of
-   those posts were ever published — the Medium profile does not contain them,
-   so every page that linked to them resolved to a redirect and no crawler
-   could find a single citable article.
+   Two committed sources, merged at module load:
 
-   The archive is refreshed from the Medium feed with `npm run sync:essays`.
-   Because it is committed, the site never depends on a third party being up
-   to serve a page, and the article pages, the markdown twins, the RSS feed,
-   portfolio.json and the command palette all read the same records.
+   1. `content/essays.json` - the snapshot of the Medium feed, refreshed with
+      `npm run sync:essays`.
+   2. `content/essays-local.json` - original essays written for this site,
+      never posted anywhere else. They carry `mediumUrl: null`: there is no
+      external original, and the page says so instead of linking nowhere.
+
+   Because both are committed, the site never depends on a third party being
+   up to serve a page, and the article pages, the markdown twins, the RSS
+   feed, portfolio.json and the command palette all read the same records.
    ========================================================================== */
 
 export type Essay = {
@@ -28,8 +32,10 @@ export type Essay = {
   image: string | null;
   readMinutes: number;
   wordCount: number;
-  /** The original post, kept as the sameAs target for the article schema. */
-  mediumUrl: string;
+  /** The original post, kept as the sameAs target for the article schema.
+   *  `null` for essays written for this site; the page and schema then omit
+   *  the Medium link and the sameAs entirely. */
+  mediumUrl: string | null;
   /** The body as published. Rendered through lib/article-html, never as raw HTML. */
   body: string;
 };
@@ -58,7 +64,21 @@ export const ESSAY_CATEGORIES: readonly EssayCategory[] = [
   { id: "security", label: "Fairness & Safety" },
 ];
 
-const essays = archive.essays as Essay[];
+type LocalEssay = Omit<Essay, "wordCount" | "readMinutes">;
+
+/** Word count and reading time for site-original essays, computed from the
+ *  body through the same allowlist parser the page uses — so the number on
+ *  the page always matches what the page renders. */
+const localEssays: Essay[] = (localArchive.essays as LocalEssay[]).map((essay) => {
+  const words = nodesToText(parseArticleHtml(essay.body)).split(" ").filter(Boolean).length;
+  return {
+    ...essay,
+    wordCount: words,
+    readMinutes: Math.max(1, Math.round(words / 230)),
+  };
+});
+
+const essays = [...(archive.essays as Essay[]), ...localEssays];
 
 /** Newest first. */
 export const essaysByDate: readonly Essay[] = [...essays].sort((a, b) => b.date.localeCompare(a.date));
@@ -89,4 +109,19 @@ export function essayDateLong(iso: string): string {
     year: "numeric",
     timeZone: "UTC",
   });
+}
+
+/* ---------------------------------------------------- people also ask (AEO) */
+
+export type EssayPaa = { question: string; answer: string };
+
+/**
+ * "People also ask" entries for an essay, keyed by slug in
+ * content/essay-paa.json. Empty for an essay with no authored entries — the
+ * page then renders no section and emits no FAQPage schema, rather than
+ * padding the page with generic filler.
+ */
+export function essayPaa(slug: string): EssayPaa[] {
+  const table = paaArchive.paa as Record<string, EssayPaa[]>;
+  return table[slug] ?? [];
 }

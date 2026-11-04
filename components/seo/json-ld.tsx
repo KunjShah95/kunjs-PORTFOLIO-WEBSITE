@@ -222,6 +222,26 @@ export function webPageJsonLd({
   };
 }
 
+/**
+ * `FAQPage` from a flat list of question/answer pairs.
+ *
+ * Used for the "People also ask" sections on case studies and essays, where
+ * the questions come from the page's own content: for a project, its
+ * description/evaluation/limitations; for an essay, entries authored in
+ * content/essay-paa.json. Answers are plain text, not markup.
+ */
+export function faqPageJsonLd(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+}
+
 /** `BreadcrumbList` for subpages; omitted on the home page. */
 export function breadcrumbJsonLd(trail: { name: string; path: string }[]) {
   return {
@@ -304,7 +324,8 @@ export function blogPostingJsonLd({
   wordCount: number;
   keywords: string[];
   section: string;
-  mediumUrl: string;
+  /** The external original, or `null` for site-original essays. */
+  mediumUrl: string | null;
 }) {
   const url = `${ORIGIN}/writing/${slug}`;
   return {
@@ -327,6 +348,8 @@ export function blogPostingJsonLd({
     author: { "@id": PERSON_ID },
     publisher: { "@id": ORGANIZATION_ID },
     isPartOf: { "@id": BLOG_ID },
-    sameAs: mediumUrl,
+    // A site-original essay has no external canonical; claiming one would
+    // point answer engines at a page that does not exist.
+    ...(mediumUrl ? { sameAs: mediumUrl } : {}),
   };
 }

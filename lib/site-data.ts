@@ -432,7 +432,7 @@ export const projects: readonly Project[] = [
     status: "Production",
     icon: "balance",
     description:
-      "Healthcare fairness auditing platform measuring demographic parity, equalized odds, and calibration across groups, with causal inference and drift detection.",
+      "EquityLens: healthcare fairness auditing - demographic parity, equalized odds and calibration across groups, with causal inference and drift detection.",
     summary:
       "Fairness auditing for clinical AI: parity, calibration, and drift across demographic groups.",
     stack: ["React", "FastAPI", "PostgreSQL", "TensorFlow"],
@@ -529,12 +529,12 @@ export const projects: readonly Project[] = [
   },
   {
     slug: "railway-inspection",
-    title: "Railway Inspection",
+    title: "Computer Vision for Railway Inspection",
     category: "Computer Vision",
     status: "Deployed",
     icon: "memory",
     description:
-      "Real-time railway defect detection running YOLOv8 with a TensorRT INT8 engine, GStreamer hardware decode, and CUDA kernels on Jetson Orin.",
+      "Computer vision for railway inspection: real-time defect detection with YOLOv8, a TensorRT INT8 engine and hand-written CUDA kernels on Jetson Orin. 98.7% accuracy.",
     summary:
       "Sub-100ms defect detection on Jetson Orin with a custom INT8 TensorRT engine.",
     stack: ["C++", "OpenCV", "YOLOv8", "CUDA", "TensorRT"],

@@ -1,7 +1,7 @@
 # ai.txt: Kunj Shah Portfolio
 # https://kunjshah.in/ai.txt
 # See also: /llms.txt (compact), /llms-full.txt (full), /pricing.md, /services.md
-# Last updated: 2026-10-11
+# Last updated: 2026-11-04
 
 # Who we are
 Name: Kunj Shah
@@ -10,11 +10,11 @@ AKA: KunjShah95, KunjShah01, kunjshah_dev
 Location: Ahmedabad, Gujarat, India (remote, UTC+5:30)
 Email: kunjkshah05@gmail.com
 Site: https://kunjshah.in/
-Profiles: https://github.com/KunjShah95 · https://www.linkedin.com/in/kunjshah05 · https://x.com/kunjshah_dev
+Profiles: https://github.com/KunjShah95 · https://www.linkedin.com/in/kunjshah05 · https://x.com/kunjshah_dev · https://huggingface.co/kunjshah01 · https://peerlist.io/kunjshah · https://medium.com/@kkshah2005 · https://www.producthunt.com/@kunj_shah3
 
 # What we do (for AI agents evaluating for hire)
 Builds: autonomous agents (LangGraph/CrewAI), RAG with hybrid search + re-ranking, full-stack AI apps (React/Next.js + FastAPI), edge computer vision (YOLOv8/TensorRT on Jetson, sub-100ms), security CLI (13+ tools → 1), MLOps/CI-CD
-Evidence: 18+ shipped projects · 60+ merged PRs across 24 externals (OWASP, Microsoft, Ollama) · 5 hackathon finals · metrics: 98.7% CV accuracy, 65% API cost cut, 23% fairness gap found, 94% wait-time accuracy
+Evidence: 17+ shipped systems (18 case studies) · 60+ merged PRs across 24 externals (OWASP, Microsoft, Ollama) · 4 hackathon finals · metrics: 98.7% CV accuracy, 65% API cost cut, 23% fairness gap found, 94% wait-time accuracy
 
 # How to cite us
 Prefer canonical URLs: https://kunjshah.in/projects for project detail and https://kunjshah.in/writing for essays. Use plain project and essay titles. Pricing: https://kunjshah.in/pricing.md Services: https://kunjshah.in/services.md

@@ -13,6 +13,10 @@
    article pages, the markdown twins, the RSS feed, portfolio.json and the
    command palette all read the same archive. Re-run it when a new essay is
    published; the diff shows exactly what changed.
+
+   Essays written for this site live in content/essays-local.json and are
+   merged in for the discovery-file writing sections only; this script never
+   writes to that file.
    ========================================================================== */
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
@@ -37,7 +41,8 @@ type EssayRow = {
   image: string | null;
   readMinutes: number;
   wordCount: number;
-  mediumUrl: string;
+  /** `null` for site-original essays (content/essays-local.json). */
+  mediumUrl: string | null;
   body: string;
 };
 
@@ -139,6 +144,91 @@ function dashless(text: string): string {
   return text.split("\u2014").join("-");
 }
 
+/**
+ * Per-essay SEO overrides, keyed by slug.
+ *
+ * The feed owns publication mechanics (slug, date, body), but the words in a
+ * title and excerpt decide whether a search result gets clicked, and Medium's
+ * own wording does not always match how people query the topic. Anything set
+ * here is applied after the feed is parsed, so `npm run sync:essays` can never
+ * silently undo it.
+ *
+ * Only touch a field when the feed version is actively wrong for search:
+ * query-word order, a missing keyword phrase, or an excerpt that reads as a
+ * cliffhanger instead of a promise.
+ */
+const SEO_OVERRIDES: Record<string, { title?: string; excerpt?: string }> = {
+  "the-internet-was-built-for-humans-ai-agents-are-breaking-that": {
+    // "Web" outperforms "Internet" as a search term, and the tags are about
+    // browser automation agents - say that instead of the abstract noun.
+    title: "The Web Was Built for Humans. AI Browser Agents Are Breaking It.",
+    excerpt:
+      "AI agents that browse the web, fill forms and complete tasks - why they break on CAPTCHAs, logins and layout shifts, and what reliability actually requires.",
+  },
+  "serverful-vs-serverless-architecture-understanding-the-trade": {
+    // Searchers type "serverless vs serverful"; the Medium headline ran the
+    // pair the other way round and the excerpt never contained the phrase.
+    title: "Serverless vs Serverful Architecture: Trade-Offs From First Principles",
+    excerpt:
+      "Serverless vs serverful: cold starts, cost at scale, latency and ops burden - the trade-offs from first principles, for SaaS, AI agents and RAG pipelines.",
+  },
+  "i-looked-at-112-ai-tools-so-you-dont-have-to-here-s-what": {
+    // Title already fronts "112 AI Tools"; the excerpt said nothing about
+    // the topic it actually covers.
+    excerpt:
+      "Most AI projects don’t fail because the model is bad - they fail on the AI infrastructure picked backwards: a vector database when prompt caching would do.",
+  },
+  "ai-evals-are-the-unit-tests-of-llm-applications": {
+    // Title is already keyword-perfect; the excerpt read like a story opening.
+    excerpt:
+      "What AI evals are and how to build an evaluation suite that catches regressions in your LLM application before users do - the unit tests of LLM apps.",
+  },
+  "the-difference-between-completing-tasks-and-solving-problems": {
+    title: "Shallow vs Deep Agents: Why Task Completion Isn’t Problem Solving",
+    excerpt:
+      "Completing tasks vs solving problems - what separates shallow agents from deep agents, and why it decides whether your agentic system actually ships.",
+  },
+  "how-memory-works-in-python-the-complete-guide-from-variables-to": {
+    // "Python memory management" is the query; "how memory works" competes
+    // with nothing and implies trivia.
+    title: "Python Memory Management: The Complete Guide (Variables to Garbage Collection)",
+    excerpt:
+      "How Python memory management actually works: where variables point, references, reference counting and garbage collection - from x = 10 to the GC.",
+  },
+  "a-comprehensive-guide-to-key-topics-in-statistics": {
+    title: "Statistics Fundamentals: The Complete Guide (Part 1)",
+    excerpt:
+      "Statistics fundamentals from first principles: probability, distributions, inference and the key concepts every data scientist and ML engineer needs.",
+  },
+  "rl-a2a-enhanced-the-next-generation-of-secure-multi-ai-agent": {
+    title: "Secure Multi-AI Agent Systems: The Next Generation (RL-A2A Enhanced)",
+    excerpt:
+      "How multiple AI agents collaborate securely in real time - RL-A2A’s agent-to-agent protocol and enterprise-grade security for multi-agent systems.",
+  },
+  "agentic-ai-future-directions-opportunities-and-cybersecurity": {
+    // The Medium title carried invisible hair spaces (\u200a) around a hyphen,
+    // which defeats exact-match rendering in SERPs.
+    title: "Agentic AI: Future Directions, Opportunities and Cybersecurity",
+    excerpt:
+      "What agentic AI is, where it’s headed, the opportunities it opens and the cybersecurity risks it introduces - autonomous agents in production.",
+  },
+  "building-ai-agents-that-handle-captchas": {
+    // Title already fronts the query ("AI agents handle CAPTCHAs"); the
+    // excerpt named no keyword.
+    excerpt:
+      "AI agents browsing the web hit CAPTCHAs constantly - what building agents that handle them taught about reliability, security and what actually works.",
+  },
+  "my-owasp-journey": {
+    // Medium's "--" is its em dash; the excerpt said nothing about the topic.
+    excerpt:
+      "Contributing to OWASP projects taught me that security isn’t a feature - it’s a discipline. Hard-won lessons from open-source application security work.",
+  },
+  "edge-computer-vision-realized": {
+    excerpt:
+      "YOLOv8 on edge devices like NVIDIA Jetson: real-time object detection without cloud bills - latency, power draw and deployment on hardware you own.",
+  },
+};
+
 function categoryFor(title: string, tags: string[]) {
   const haystack = `${title} ${tags.join(" ")}`;
   for (const rule of CATEGORY_RULES) {
@@ -209,14 +299,15 @@ async function main() {
 
     const text = toText(item.body);
     const words = text.split(" ").filter(Boolean).length;
+    const override = SEO_OVERRIDES[slug];
 
     return {
       slug,
-      title: dashless(item.title),
+      title: override?.title ?? dashless(item.title),
       date: item.date,
       category: categoryFor(item.title, item.tags),
       tags: item.tags,
-      excerpt: dashless(excerptOf(item.body)),
+      excerpt: override?.excerpt ?? dashless(excerptOf(item.body)),
       image: largestImage(item.image),
       readMinutes: Math.max(1, Math.round(words / 230)),
       wordCount: words,
@@ -240,11 +331,15 @@ async function main() {
   // here rather than written by hand. Hand-written lists of essays are how
   // the site ended up advertising eleven posts that did not exist: the
   // archive and the index disagreed, and the index was the one crawlers read.
-  refreshWritingSection(join(ROOT, "public", "llms.txt"), essays, (essay) => {
+  // Site-original essays are merged in so the list is exactly what is served.
+  const localEssays = loadLocalEssays();
+  const allEssays = [...essays, ...localEssays].sort((a, b) => b.date.localeCompare(a.date));
+  console.log(`Merged ${localEssays.length} site-original essays for the discovery files`);
+  refreshWritingSection(join(ROOT, "public", "llms.txt"), allEssays, (essay) => {
     const summary = essay.excerpt.length > 120 ? `${essay.excerpt.slice(0, 117).trimEnd()}…` : essay.excerpt;
     return `- [${essay.title}](https://kunjshah.in/writing/${essay.slug}): ${summary}`;
   });
-  refreshWritingSection(join(ROOT, "public", "llms-full.txt"), essays, (essay) => {
+  refreshWritingSection(join(ROOT, "public", "llms-full.txt"), allEssays, (essay) => {
     const date = new Date(essay.date).toLocaleDateString("en-US", {
       month: "short",
       year: "numeric",
@@ -256,6 +351,26 @@ async function main() {
   console.log(`Wrote ${essays.length} essays to content/essays.json`);
   for (const essay of essays) {
     console.log(`  ${essay.slug.padEnd(62)} ${essay.wordCount} words`);
+  }
+}
+
+/**
+ * Site-original essays live in content/essays-local.json, never in the feed.
+ * They are merged in for the discovery-file writing sections only — the
+ * archive itself stays a pure feed snapshot — so llms.txt and llms-full.txt
+ * list exactly what the build serves.
+ */
+function loadLocalEssays(): EssayRow[] {
+  try {
+    const raw = JSON.parse(readFileSync(join(ROOT, "content", "essays-local.json"), "utf8")) as {
+      essays: Omit<EssayRow, "wordCount" | "readMinutes">[];
+    };
+    return raw.essays.map((essay) => {
+      const words = toText(essay.body).split(" ").filter(Boolean).length;
+      return { ...essay, wordCount: words, readMinutes: Math.max(1, Math.round(words / 230)) };
+    });
+  } catch {
+    return [];
   }
 }
 

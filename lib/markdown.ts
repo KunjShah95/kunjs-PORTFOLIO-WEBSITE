@@ -199,7 +199,7 @@ export function renderMarkdown(path: string): string | null {
     const body = nodesToMarkdown(parseArticleHtml(entry.body));
     return frame(clean, {
       title: entry.title,
-      body: `${essayDateLabel(entry.date)} · ${essayCategoryLabel(entry.category)} · ${entry.readMinutes} min read\n\n${entry.excerpt}\n\n${body}\n\nOriginal: ${entry.mediumUrl}`,
+      body: `${essayDateLabel(entry.date)} · ${essayCategoryLabel(entry.category)} · ${entry.readMinutes} min read\n\n${entry.excerpt}\n\n${body}\n\n${entry.mediumUrl ? `Original: ${entry.mediumUrl}` : "Originally published on this site."}`,
     });
   }
   const page = pages[clean];

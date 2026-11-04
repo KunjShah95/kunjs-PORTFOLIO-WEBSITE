@@ -70,7 +70,11 @@ export const metadata: Metadata = {
   // child route and mark all twelve pages as duplicates of the home page. Each
   // page sets its own canonical via `pageMeta()` in lib/seo.ts.
   // Lets crawlers discover the human-readable markdown/JSON mirrors.
+  // Content Signals (https://contentsignals.org): search and AI-input allowed,
+  // training declined. Same policy as robots.txt and the Content-Signal HTTP
+  // header set in next.config.ts.
   other: {
+    "Content-Signal": "search=yes, ai-input=yes, ai-train=no",
     "ai-content-declaration": "search=yes, ai-input=yes, ai-train=no",
   },
   // Point readers and aggregators at the writing feed.

@@ -203,13 +203,17 @@ function EssayRow({ essay }: { essay: Essay }) {
           <span className="flex flex-wrap items-center gap-2 font-body-sm text-body-sm text-text-muted">
             <span>{essayCategoryLabel(essay.category)}</span>
             <span className="text-border-dotted">·</span>
-            <a
-              className="link-dots hover:text-text-primary"
-              href={essay.mediumUrl}
-              {...external}
-            >
-              Original on Medium
-            </a>
+            {essay.mediumUrl ? (
+              <a
+                className="link-dots hover:text-text-primary"
+                href={essay.mediumUrl}
+                {...external}
+              >
+                Original on Medium
+              </a>
+            ) : (
+              <span>First published on this site</span>
+            )}
           </span>
         </span>
         {essay.image && (

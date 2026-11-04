@@ -15,6 +15,7 @@ import {
   ContributionGraphFallback,
 } from "@/components/ui/contribution-graph";
 import { buttonStyles } from "@/components/ui/blocks";
+import { QuickAnswer } from "@/components/quick-answer";
 import { ArrowAffordance } from "@/components/ui/primitives";
 import {
   clientFaqs,
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     path: "",
     title: "AI Engineer & Agent Builder in Ahmedabad",
     description:
-      "Kunj Shah builds AI agents, document search and full-stack AI apps for founders and small teams in two to four weeks, with the tests that prove they work. Fixed-price pilots from ₹10,000.",
+      "Kunj Shah, AI engineer in Ahmedabad, India. Production AI agents, RAG pipelines and edge computer vision. 17+ shipped systems, 60+ merged open-source PRs.",
     keywords: [
       "AI engineer Ahmedabad",
       "AI engineer India",
@@ -462,6 +463,16 @@ export default async function HomePage() {
             Starting ranges for a first project, in INR. You get an exact,
             fixed quote in writing after the intro call.
           </SectionHead>
+
+          <QuickAnswer
+            source={[
+              { label: "/pricing.md", href: "/pricing.md" },
+              { label: "/llms.txt", href: "/llms.txt" },
+            ]}
+          >
+            <strong>Fixed-scope AI projects from ₹25,000</strong> (2 to 4 weeks),{" "}
+            <strong>₹1,500/hour</strong>, retainers <strong>₹30,000-75,000/month</strong>.
+          </QuickAnswer>
 
           <div className="grid gap-3 md:grid-cols-3">
             {pricingTiers.map((tier) => (

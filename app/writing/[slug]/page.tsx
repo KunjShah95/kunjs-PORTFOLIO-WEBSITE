@@ -8,7 +8,8 @@ import { FadeImage } from "@/components/primitives/FadeImage";
 import { Reveal } from "@/components/primitives/Reveal";
 import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { Tag } from "@/components/ui/primitives";
-import { JsonLd, blogPostingJsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
+import { JsonLd, blogPostingJsonLd, breadcrumbJsonLd, faqPageJsonLd } from "@/components/seo/json-ld";
+import { PeopleAlsoAsk } from "@/components/people-also-ask";
 import { ORIGIN } from "@/lib/routes";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site-data";
@@ -17,6 +18,7 @@ import {
   essayCategoryLabel,
   essayDateLabel,
   essayDateLong,
+  essayPaa,
   essaysByDate,
 } from "@/lib/essays";
 
@@ -88,6 +90,7 @@ export default async function EssayPage(props: PageProps<"/writing/[slug]">) {
   const index = essaysByDate.findIndex((entry) => entry.slug === essay.slug);
   const newer = index > 0 ? essaysByDate[index - 1] : null;
   const older = index < essaysByDate.length - 1 ? essaysByDate[index + 1] : null;
+  const paa = essayPaa(essay.slug);
 
   // Same category first, then whatever else is recent — so the "read next"
   // rail always has something in it.
@@ -109,6 +112,7 @@ export default async function EssayPage(props: PageProps<"/writing/[slug]">) {
           { name: essay.title, path },
         ])}
       />
+      {paa.length > 0 && <JsonLd data={faqPageJsonLd(paa)} />}
       <JsonLd
         data={blogPostingJsonLd({
           slug: essay.slug,
@@ -162,21 +166,23 @@ export default async function EssayPage(props: PageProps<"/writing/[slug]">) {
             {essay.excerpt}
           </p>
 
-          {/* The original is one click away, but this page is the canonical
-              copy: it is the one that is crawlable and quotable. */}
+          {/* The original is one click away when there is one; a site-original
+              essay is its own canonical copy and says so instead. */}
           <div className="flex flex-wrap items-center gap-3 pt-1">
-            <a
-              className={`${buttonStyles.secondary} group`}
-              href={essay.mediumUrl}
-              {...external}
-            >
-              Read the original on Medium
-              <Icon
-                className="transition-transform duration-300 group-hover:translate-x-0.5"
-                name="arrow_outward"
-                size={15}
-              />
-            </a>
+            {essay.mediumUrl && (
+              <a
+                className={`${buttonStyles.secondary} group`}
+                href={essay.mediumUrl}
+                {...external}
+              >
+                Read the original on Medium
+                <Icon
+                  className="transition-transform duration-300 group-hover:translate-x-0.5"
+                  name="arrow_outward"
+                  size={15}
+                />
+              </a>
+            )}
             {essay.tags.slice(0, 4).map((tag) => (
               <Tag key={tag}>{tag}</Tag>
             ))}
@@ -201,7 +207,7 @@ export default async function EssayPage(props: PageProps<"/writing/[slug]">) {
 
         {/* ----------------------------------------------------------- body */}
         <Reveal className="mx-auto w-full max-w-[68ch]" y={12}>
-          <ArticleBody html={essay.body} />
+          <ArticleBody html={essay.body || ''} />
 
           <footer className="mt-12 flex flex-col gap-6 border-t border-border-hairline pt-6">
             <p className="font-body-sm text-body-sm text-text-muted">
@@ -229,6 +235,13 @@ export default async function EssayPage(props: PageProps<"/writing/[slug]">) {
             </p>
           </footer>
         </Reveal>
+
+        {/* ----------------------------------------------------- people also ask */}
+        {paa.length > 0 && (
+          <div className="mx-auto w-full max-w-[68ch]">
+            <PeopleAlsoAsk items={paa} />
+          </div>
+        )}
 
         {/* ------------------------------------------------------ read next */}
         {(newer || older) && (

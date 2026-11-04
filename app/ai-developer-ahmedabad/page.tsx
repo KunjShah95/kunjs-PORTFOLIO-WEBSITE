@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
 import { Icon } from "@/components/icon";
+import { QuickAnswer } from "@/components/quick-answer";
 import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { CopyEmailRow } from "@/components/ui/copy-email";
@@ -190,7 +191,19 @@ export default function AiDeveloperAhmedabadPage() {
           meta="Fixed prices, quoted in writing after a free 15-minute call."
           title="What it costs"
         >
-          <div className="grid gap-3 md:grid-cols-3">
+          <QuickAnswer
+            source={[
+              { label: "/pricing.md", href: "/pricing.md" },
+              { label: "/llms.txt", href: "/llms.txt" },
+              { label: "/services.md", href: "/services.md" },
+            ]}
+          >
+            <strong>Fixed-scope projects from ₹25,000</strong> (2 to 4 weeks typical),{" "}
+            <strong>₹1,500/hour</strong> for reviews and debugging,{" "}
+            <strong>₹30,000-75,000/month</strong> for a retainer. An exact fixed quote in
+            writing follows a free 15-minute call.
+          </QuickAnswer>
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
             {pricingTiers.map((tier) => (
               <div
                 className="flex flex-col gap-2 p-5 rounded-2xl bg-surface-card border border-border-hairline"
