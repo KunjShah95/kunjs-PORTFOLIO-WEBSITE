@@ -17,6 +17,12 @@
    Essays written for this site live in content/essays-local.json and are
    merged in for the discovery-file writing sections only; this script never
    writes to that file.
+
+     npm run sync:essays -- --offline
+
+   skips the feed and leaves content/essays.json untouched: it only rebuilds
+   the discovery-file writing sections from the committed archives. Run it
+   after editing content/essays-local.json.
    ========================================================================== */
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
@@ -286,6 +292,12 @@ function parseFeed(xml: string): FeedItem[] {
   });
 }
 async function main() {
+  if (process.argv.includes("--offline")) {
+    const archive = JSON.parse(readFileSync(OUTPUT, "utf8")) as { essays: EssayRow[] };
+    refreshDiscoveryFiles(archive.essays);
+    return;
+  }
+
   const response = await fetch(FEED_URL, { headers: { "User-Agent": "Mozilla/5.0 (portfolio archive sync)" } });
   if (!response.ok) throw new Error(`Feed request failed: ${response.status}`);
   const items = parseFeed(await response.text());
@@ -326,7 +338,15 @@ async function main() {
 
   mkdirSync(dirname(OUTPUT), { recursive: true });
   writeFileSync(OUTPUT, `${JSON.stringify(document, null, 2)}\n`, "utf8");
+  refreshDiscoveryFiles(essays);
 
+  console.log(`Wrote ${essays.length} essays to content/essays.json`);
+  for (const essay of essays) {
+    console.log(`  ${essay.slug.padEnd(62)} ${essay.wordCount} words`);
+  }
+}
+
+function refreshDiscoveryFiles(essays: EssayRow[]) {
   // The discovery files are static, so their writing sections are generated
   // here rather than written by hand. Hand-written lists of essays are how
   // the site ended up advertising eleven posts that did not exist: the
@@ -347,11 +367,6 @@ async function main() {
     });
     return `- [${essay.title}](https://kunjshah.in/writing/${essay.slug}) (${date}): ${essay.readMinutes} min read, ${essay.wordCount} words. ${essay.excerpt}`;
   });
-
-  console.log(`Wrote ${essays.length} essays to content/essays.json`);
-  for (const essay of essays) {
-    console.log(`  ${essay.slug.padEnd(62)} ${essay.wordCount} words`);
-  }
 }
 
 /**
