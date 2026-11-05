@@ -15,8 +15,20 @@
    ========================================================================== */
 
 const USERNAME = "KunjShah95";
-const REVALIDATE_SECONDS = 3600;
+/**
+ * Fifteen minutes. The calendar is the "am I actually shipping?" proof on the
+ * home page, and GitHub's authenticated budget (5,000 points/hour) makes a
+ * tighter refresh essentially free.
+ */
+const REVALIDATE_SECONDS = 900;
 const DAYS = 365;
+/**
+ * GitHub refuses a collection window much longer than a year: it accepted 373
+ * days and rejected 374. Staying under that lets the window start on the
+ * Monday of the week the rolling year lands in, which is at most six days
+ * earlier.
+ */
+const MAX_WINDOW_DAYS = 373;
 
 /** GitHub's own 5-step scale. */
 export type ContributionLevel = 0 | 1 | 2 | 3 | 4;
@@ -73,10 +85,26 @@ function toLevel(raw: string): ContributionLevel {
   }
 }
 
-/** ISO timestamp `DAYS` ago, for the collection window. */
-function windowStart(): string {
-  const d = new Date();
+/**
+ * ISO timestamp for the start of the window: the Monday on or before the
+ * rolling year, so every column is a full week.
+ *
+ * Why Monday and not "365 days ago": the calendar is drawn column-per-week
+ * with the rows running Monday to Sunday, so a mid-week start pads the first
+ * column with blanks. Anchoring to the same boundary the grid uses means the
+ * headline total covers exactly the days the reader can see, and no column is
+ * a stub.
+ */
+function windowStart(now = new Date()): string {
+  const d = new Date(now);
   d.setUTCDate(d.getUTCDate() - DAYS);
+  // Back up to Monday of that week (UTC day 1).
+  d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
+  const span = Math.round((now.getTime() - d.getTime()) / 86_400_000);
+  // Never ask for a window GitHub will reject. Shifting forward a week trades
+  // one column for a valid request, which is the right way round.
+  if (span > MAX_WINDOW_DAYS) d.setUTCDate(d.getUTCDate() + 7);
+  d.setUTCHours(0, 0, 0, 0);
   return d.toISOString();
 }
 
@@ -159,8 +187,13 @@ export async function getContributions(): Promise<Contributions | null> {
 
     if (days.length === 0) return null;
 
+    // Sum the days we are about to draw rather than trusting the API's own
+    // total. The two agree today, but the grid is what the reader checks the
+    // number against, so the header has to be derived from the same rows.
+    const total = days.reduce((sum, day) => sum + day.count, 0);
+
     return {
-      total: calendar.totalContributions,
+      total,
       days,
       fetchedAt: new Date().toISOString(),
     };

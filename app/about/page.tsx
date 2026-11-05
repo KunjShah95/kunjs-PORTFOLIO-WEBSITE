@@ -13,6 +13,8 @@ import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 import {
   education,
   focusAreas,
+  githubClaimFloors,
+  githubClaimFloorsLabel,
   metrics,
   site,
   skillGroups,
@@ -38,7 +40,11 @@ const portrait = {
 const facts = [
   { icon: "location_on", label: "Location", value: site.locationLong },
   { icon: "psychology", label: "Focus", value: "Agents, RAG & Edge CV" },
-  { icon: "hub", label: "Open Source", value: "OWASP, Microsoft, 24 repos" },
+  {
+    icon: "hub",
+    label: "Open Source",
+    value: `OWASP, Microsoft, ${githubClaimFloors.externalRepos} repos`,
+  },
   { icon: "verified", label: "Status", value: "Available for new work" },
   {
     icon: "architecture",
@@ -60,7 +66,7 @@ const related = [
     href: "/open-source",
     icon: "commit",
     title: "Open Source",
-    body: "60+ merged pull requests and 41 resolved issues across 24 codebases.",
+    body: `${githubClaimFloorsLabel()} merged pull requests and ${githubClaimFloors.resolvedIssues} resolved issues across ${githubClaimFloors.externalRepos} codebases.`,
   },
   {
     href: "/manifesto",

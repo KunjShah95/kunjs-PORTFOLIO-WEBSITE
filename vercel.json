@@ -89,7 +89,7 @@
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=86400"
+          "value": "public, max-age=300, s-maxage=900, stale-while-revalidate=3600"
         },
         {
           "key": "X-Robots-Tag",

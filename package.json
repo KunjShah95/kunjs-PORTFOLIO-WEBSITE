@@ -11,7 +11,8 @@
     "test": "tsx --test tests/*.test.ts",
     "indexnow": "node scripts/submit-indexnow.mjs",
     "gen:services": "node --experimental-strip-types scripts/gen-services-md.ts",
-    "sync:essays": "node --experimental-strip-types scripts/sync-essays.ts"
+    "sync:essays": "node --experimental-strip-types scripts/sync-essays.ts",
+    "sync:github": "node --experimental-strip-types scripts/sync-github-claims.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

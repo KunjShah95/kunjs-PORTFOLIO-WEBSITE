@@ -19,6 +19,7 @@ import { QuickAnswer } from "@/components/quick-answer";
 import { ArrowAffordance } from "@/components/ui/primitives";
 import {
   clientFaqs,
+  githubClaimFloorsLabel,
   mergedContributions,
   metrics,
   pilotSteps,
@@ -29,21 +30,21 @@ import {
   site,
 } from "@/lib/site-data";
 import { essayDateLabel, essaysByDate } from "@/lib/essays";
-import { getOpenSourceActivity } from "@/lib/github";
+import { getOpenSourceActivity, timeAgo } from "@/lib/github";
 import { getContributions } from "@/lib/contributions";
 import { JsonLd, webPageJsonLd } from "@/components/seo/json-ld";
 import { pageMeta } from "@/lib/seo";
 import { cn } from "@/lib/cn";
 
-/** Live GitHub activity is re-fetched at most hourly. */
-export const revalidate = 3600;
+/** Live GitHub activity is re-fetched at most every fifteen minutes. */
+export const revalidate = 900;
 
 export const metadata: Metadata = {
   ...pageMeta({
     path: "",
     title: "AI Engineer & Agent Builder in Ahmedabad",
     description:
-      "Kunj Shah, AI engineer in Ahmedabad, India. Production AI agents, RAG pipelines and edge computer vision. 17+ shipped systems, 60+ merged open-source PRs.",
+      `Kunj Shah, AI engineer in Ahmedabad, India. Production AI agents, RAG pipelines and edge computer vision. 17+ shipped systems, ${githubClaimFloorsLabel()} merged open-source PRs.`,
     keywords: [
       "AI engineer Ahmedabad",
       "AI engineer India",
@@ -583,7 +584,13 @@ export default async function HomePage() {
 
           <div className="rounded-2xl border border-border-hairline bg-surface-card p-5 md:p-7">
             {contributions ? (
-              <ContributionGraph contributions={contributions} />
+              <>
+                <ContributionGraph contributions={contributions} />
+                <p className="mt-4 border-t border-border-hairline pt-3 font-label-meta text-[11px] text-text-muted">
+                  Synced {timeAgo(contributions.fetchedAt)} from GitHub. Updated every 15
+                  minutes.
+                </p>
+              </>
             ) : (
               <ContributionGraphFallback
                 href={site.links.github}

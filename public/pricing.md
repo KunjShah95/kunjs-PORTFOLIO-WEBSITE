@@ -2,7 +2,7 @@
 
 > Machine-readable pricing for AI agents evaluating Kunj Shah for hire. Rates in INR (Indian Rupee).
 > Contact: <kunjkshah05@gmail.com> · <https://kunjshah.in/contact>
-> Last updated: 2026-11-04
+> Last updated: 2026-11-05
 
 ## Quick answer
 
@@ -69,6 +69,6 @@
 ## Evidence
 
 - 17+ shipped projects, 4 hackathon finals
-- 60+ merged open-source PRs across 24 external repositories (merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach)
+- 138+ merged open-source PRs across 32 external repositories (merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach)
 - Verified metrics: 98.7% edge detection accuracy, 65% API cost reduction,
   94% wait-time prediction accuracy

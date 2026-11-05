@@ -34,6 +34,7 @@ export type IconName =
   | "hub"
   | "location_on"
   | "light_mode"
+  | "lock"
   | "mail"
   | "mark_email_unread"
   | "memory"
@@ -95,6 +96,7 @@ const PATHS: Record<IconName, string> = {
     "M12 21c4-4.6 6-7.6 6-10a6 6 0 1 0-12 0c0 2.4 2 5.4 6 10zM12 13.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
   light_mode:
     "M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0-8 0M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4",
+  lock: "M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5M5.5 10.5h13v9h-13zM12 14v2.5",
   mail: "M3.5 6h17v12h-17zM3.8 6.6l8.2 5.9 8.2-5.9",
   mark_email_unread:
     "M3.5 17.5h12v3.5h-12zM3.5 17.5 5 6.5h14l-1.5 11M3.5 8.5h17M18.5 5h.01",

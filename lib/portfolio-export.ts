@@ -1,10 +1,12 @@
 import { ORIGIN } from "@/lib/routes";
 import { essayCategoryLabel, essaysByDate } from "@/lib/essays";
+import type { ClaimNumbers } from "@/lib/github";
 import {
   education,
   hackathons,
   jobs,
   metrics,
+  openSourceSummary,
   projects,
   services,
   site,
@@ -30,7 +32,7 @@ export function portfolioLastUpdated(): string {
  *       and `problem`/`stack` added. `summary` retained, now carrying the
  *       deliverable. Consumers on v1 must move `outcome` reads to `proof`.
  */
-export function buildPortfolioDocument() {
+export function buildPortfolioDocument(claims?: ClaimNumbers) {
   return {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
@@ -139,7 +141,13 @@ export function buildPortfolioDocument() {
       role: job.role,
       period: job.period,
       kind: job.kind,
-      description: job.description,
+      // The open-source row is the one description that carries live counts.
+      // Rebuilt from the caller's numbers so the JSON export never quotes a
+      // total the site has already moved past.
+      description:
+        claims && job.company === "Open Source"
+          ? openSourceSummary(claims)
+          : job.description,
       live: job.live ?? false,
     })),
     // `outcome` is replaced by `proof`, and `problem`/`stack` are new, so

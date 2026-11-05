@@ -11,7 +11,7 @@ import { themeScript } from "@/components/shell/theme-toggle";
 import { MotionProvider } from "@/components/shell/motion-provider";
 import { PersonSiteJsonLd } from "@/components/seo/json-ld";
 import { ORIGIN } from "@/lib/routes";
-import { site } from "@/lib/site-data";
+import { githubClaimFloorsLabel, site } from "@/lib/site-data";
 import "./globals.css";
 
 /* Geist for everything readable; Geist Mono only for data (dates, numbers,
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     siteName: `${site.name} | Portfolio`,
     title: `${site.name} | ${site.role} in Ahmedabad, India`,
     description:
-      "Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, 60+ merged open-source PRs.",
+      `Production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps. 17+ shipped systems, ${githubClaimFloorsLabel()} merged open-source PRs.`,
     locale: "en_IN",
     // Absolute URL: relative image paths are dropped by some scrapers, and
     // `metadataBase` alone is not applied to images by every consumer.

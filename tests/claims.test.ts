@@ -6,6 +6,7 @@ import { join } from "node:path";
 import {
   contributions,
   engagements,
+  githubClaimFloors,
   hackathons,
   impactMetrics,
   metrics,
@@ -66,7 +67,6 @@ test("merged-upstream claims only name projects with merged PRs", () => {
     }
   }
 });
-
 test("the ollama contribution is recorded as a proposal, not a merge", () => {
   const ollama = contributions.find((c) => c.org === "ollama/ollama");
   assert.ok(ollama, "the ollama contribution should still be listed");
@@ -173,6 +173,63 @@ test("the static PR metric is a lower bound, never a contradiction", () => {
     /^\d+\+$/,
     "the static merged-PR figure should be a floor ('60+'), not a rival exact count.",
   );
+});
+
+/**
+ * The bug this guards against: /open-source advertised "60 merged pull
+ * requests ... 24 external codebases" in its metadata while the page body,
+ * reading GitHub live, said 67 and 25. A reader could catch the contradiction
+ * in one click, and search snippets kept quoting the older number for weeks.
+ *
+ * Every static surface now derives from `githubClaimFloors`, and
+ * `npm run sync:github` refreshes those floors. This test fails the moment a
+ * hardcoded literal creeps back in.
+ */
+test("every published GitHub count matches the verified floors", () => {
+  const prs = `${githubClaimFloors.mergedPullRequests}`;
+  const issues = `${githubClaimFloors.resolvedIssues}`;
+  const repos = `${githubClaimFloors.externalRepos}`;
+
+  /**
+   * Sentence shapes that quote the owner-wide totals. A project description
+   * saying "10+ merged PRs" is a claim about that project, not about this
+   * body of work, so the patterns stay narrow on purpose.
+   */
+  const PR_PATTERNS = [
+    /\b(\d+)\+? merged pull requests\b/,
+    /\b(\d+)\+? merged open-source (?:PR|pull request)/,
+    /\b(\d+)\+? merged OSS PRs?\b/,
+    /\b(\d+)\+? merged PRs, \d+ issues\b/,
+    /\b(\d+)\+? merged PRs across\b/,
+    /\b(\d+) PRs merged across\b/,
+  ];
+  const REPO_PATTERN =
+    /\b(\d+)\+? (?:external (?:repos|repositories|codebases|projects|externals)|codebases|repositories|repos)\b/;
+  const ISSUE_PATTERNS = [
+    /\b(\d+) (?:resolved )?issues\b/,
+    /\b(\d+) resolved issues\b/,
+  ];
+
+  const check = (file: string, line: string, pattern: RegExp, expected: string) => {
+    const match = line.match(pattern);
+    if (!match) return;
+    assert.equal(
+      match[1],
+      expected,
+      `${file} quotes "${match[0].trim()}" but the verified floor is ${expected}. Run npm run sync:github.`,
+    );
+  };
+
+  for (const { file, text } of published) {
+    for (const line of text.split("\n")) {
+      // Essay titles and excerpts quote the count the essay was written with.
+      if (/kunjshah\.in\/writing\//.test(line)) continue;
+
+      for (const pattern of PR_PATTERNS) check(file, line, pattern, prs);
+      check(file, line, REPO_PATTERN, repos);
+      for (const pattern of ISSUE_PATTERNS) check(file, line, pattern, issues);
+    }
+  }
 });
 
 test("the generated services file is in sync with the source data", () => {

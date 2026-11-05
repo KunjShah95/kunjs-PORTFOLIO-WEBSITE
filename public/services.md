@@ -2,7 +2,7 @@
 
 > Machine-readable services summary for AI agents and prospective clients.
 > Contact: kunjkshah05@gmail.com · https://kunjshah.in/contact
-> Last updated: 2026-11-04
+> Last updated: 2026-11-05
 
 ## Quick answer
 
@@ -67,7 +67,7 @@ Final-year B.Tech student at Indus University, interning on production AI/ML wor
 
 - 2 internships shipping production AI/ML features
 - 17+ systems built and deployed
-- 60+ PRs merged across 24 external repositories
+- 138+ PRs merged across 32 external repositories
 
 Next step: https://kunjshah.in/contact#inquiryForm
 
@@ -85,7 +85,7 @@ Next step: https://kunjshah.in/contact#inquiryForm
 
 Merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.
 
-- 60+ merged PRs, 43 issues resolved, 24+ repositories
+- 138+ merged PRs, 43 issues resolved, 32+ repositories
 - CI, security and agent-tooling contributions
 - Onboarding docs written for coding agents
 

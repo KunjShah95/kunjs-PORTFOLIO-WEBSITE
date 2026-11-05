@@ -34,6 +34,18 @@ const lines: string[] = [
   `> Contact: ${site.email} · ${ORIGIN}/contact`,
   "> Last updated: " + TODAY,
   "",
+  // Hand-written once, then dropped by the first regeneration because it only
+  // existed in the output file. Keeping it here makes it durable.
+  "## Quick answer",
+  "",
+  "**What does it cost to hire Kunj Shah, and how fast?**",
+  "",
+  "- **Fixed-scope AI projects**: from ₹25,000, 2–4 weeks typical, fixed quote in writing before work starts",
+  "- **Reviews and debugging**: ₹1,500/hour · **Retainer**: ₹30,000–₹75,000/month",
+  "- **Process**: free 15-minute intro call, then an exact fixed quote in writing (40% upfront / 60% on delivery)",
+  "",
+  `*Source: ${ORIGIN}/pricing.md · Machine-readable: ${ORIGIN}/llms.txt*`,
+  "",
   "## Who This Is For",
   "",
   "Founders, startups, and engineering teams that need AI shipped, not a slide deck.",

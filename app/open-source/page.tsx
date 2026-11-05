@@ -6,22 +6,40 @@ import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { EmptyState } from "@/components/ui/empty-state";
-import { impactMetrics, mergedContributions, site } from "@/lib/site-data";
-import { getOpenSourceActivity, timeAgo, type PullRequestKind } from "@/lib/github";
+import {
+  impactMetrics,
+  mergedContributions,
+  site,
+} from "@/lib/site-data";
+import {
+  getOpenSourceActivity,
+  getOpenSourceClaims,
+  resolveClaims,
+  timeAgo,
+  type LivePullRequest,
+  type PullRequestKind,
+} from "@/lib/github";
 import { pageMeta } from "@/lib/seo";
 import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 
-/** Re-fetch GitHub activity at most once an hour. */
-export const revalidate = 3600;
+/** Re-fetch GitHub activity at most once every fifteen minutes. */
+export const revalidate = 900;
 
+/**
+ * Metadata quotes the same counts the page body shows, so a search snippet or
+ * a shared link can never advertise an older number than the page it opens.
+ * Falls back to the verified floors when GitHub is unreachable.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const claims = resolveClaims(await getOpenSourceClaims());
 
-export const metadata: Metadata = pageMeta({
-  path: "/open-source",
-  title: "Open Source",
-  description:
-    "60 merged pull requests, 43 issues resolved, and 24 external codebases, including the OWASP agent-security harness and Microsoft AI-Engineering-Coach.",
-  keywords: ["Kunj Shah GitHub", "open source AI contributions", "OWASP contributor", "merged pull requests AI"],
-});
+  return pageMeta({
+    path: "/open-source",
+    title: "Open Source",
+    description: `${claims.mergedPullRequests} merged pull requests, ${claims.resolvedIssues} issues resolved, and ${claims.externalRepos} external codebases, including the OWASP agent-security harness and Microsoft AI-Engineering-Coach.`,
+    keywords: ["Kunj Shah GitHub", "open source AI contributions", "OWASP contributor", "merged pull requests AI"],
+  });
+}
 
 /** Extra profiles beyond the primary GitHub. */
 const profiles = [
@@ -53,25 +71,69 @@ const KIND_LABELS: Record<PullRequestKind, string> = {
   other: "Other",
 };
 
+/**
+ * Title, repository and category badge for one activity row.
+ *
+ * Split out because the same body is rendered inside an `<a>` for public
+ * merges and inside a plain `<div>` for private ones (where a link would 404).
+ */
+function PrBody({ pr }: { pr: LivePullRequest }) {
+  return (
+    <span className="min-w-0 flex flex-col gap-1">
+      <span className="font-body-md text-body-md text-text-primary font-medium transition-transform duration-300 group-hover:translate-x-1">
+        {pr.title}
+      </span>
+      <span className="flex items-center gap-2 min-w-0">
+        <span className="font-label-meta text-label-meta text-text-muted truncate">
+          {pr.owner}/{pr.repo} #{pr.number}
+        </span>
+        {pr.kind !== "other" ? (
+          <span
+            className="shrink-0 font-label-meta text-label-meta uppercase tracking-wide text-text-muted bg-surface-subtle rounded px-1.5 py-0.5"
+            title={`${pr.kind} change`}
+          >
+            {pr.kind}
+          </span>
+        ) : null}
+      </span>
+    </span>
+  );
+}
+
 export default async function OpenSourcePage() {
   /** `recent` is already merged-only, newest merge first. */
-  const activity = await getOpenSourceActivity(12);
+  const [activity, claims] = await Promise.all([
+    getOpenSourceActivity(12),
+    getOpenSourceClaims(),
+  ]);
   const mergedRecent = activity?.recent ?? [];
+  const numbers = resolveClaims(claims);
 
-  // Live numbers when GitHub answers; the curated figures otherwise.
+  // Live numbers when GitHub answers; the verified floors otherwise. The three
+  // totals come from `numbers` rather than `activity` so the strip, the
+  // metadata and the JSON export all report the same figures.
   const liveMetrics = activity
     ? [
-        { value: String(activity.mergedPullRequests), label: "PRs merged" },
-        { value: String(activity.mergedRepos), label: "Repositories" },
-        // Top three categories by count, so the mix is legible without a
-        // second row of numbers. Built from the fetched pages, not just the
-        // twelve shown in the list below.
-        ...activity.kindCounts.slice(0, 3).map((entry) => ({
+        { value: String(numbers.mergedPullRequests), label: "PRs merged" },
+        { value: String(numbers.externalRepos), label: "Repositories" },
+        { value: String(numbers.resolvedIssues), label: "Issues resolved" },
+        // Top two categories by count, so the mix is legible without a second
+        // row of numbers. Built from the fetched pages, not just the twelve
+        // shown in the list below.
+        ...activity.kindCounts.slice(0, 2).map((entry) => ({
           value: String(entry.count),
           label: KIND_LABELS[entry.kind],
         })),
       ]
     : impactMetrics;
+
+  /** Merges in repositories a visitor cannot open. Counted, never linked. */
+  const privateMerges = activity
+    ? Math.max(0, activity.mergedPullRequests - activity.publicPullRequests)
+    : 0;
+
+  /** True when the private rows are actually in the list, so no note is due. */
+  const showingPrivate = mergedRecent.some((pr) => pr.visibility === "private");
 
   return (
     <PageShell>
@@ -118,49 +180,57 @@ export default async function OpenSourcePage() {
             title="Latest merged"
           >
             <ol className="flex flex-col border-t border-border-hairline">
-              {mergedRecent.map((pr) => (
-                <li key={pr.url}>
-                  <a
-                    className="group grid grid-cols-[1fr_auto] items-start gap-3 md:gap-4 py-3.5 md:py-4 border-b border-border-hairline"
-                    href={pr.url}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <span className="min-w-0 flex flex-col gap-1">
-                      <span className="font-body-md text-body-md text-text-primary font-medium transition-transform duration-300 group-hover:translate-x-1">
-                        {pr.title}
-                      </span>
-                      <span className="flex items-center gap-2 min-w-0">
-                        <span className="font-label-meta text-label-meta text-text-muted truncate">
-                          {pr.owner}/{pr.repo} #{pr.number}
-                        </span>
-                        {pr.kind !== "other" ? (
-                          <span
-                            className="shrink-0 font-label-meta text-label-meta uppercase tracking-wide text-text-muted bg-surface-subtle rounded px-1.5 py-0.5"
-                            title={`${pr.kind} change`}
+              {mergedRecent.map((pr) => {
+                const isPrivate = pr.visibility === "private";
+                return (
+                  <li key={pr.url}>
+                    {isPrivate ? (
+                      <div className="grid grid-cols-[1fr_auto] items-start gap-3 md:gap-4 py-3.5 md:py-4 border-b border-border-hairline">
+                        <PrBody pr={pr} />
+                        <span className="flex items-center gap-2 shrink-0">
+                          <time
+                            className="font-label-meta text-label-meta text-text-muted"
+                            dateTime={pr.date}
+                            title={new Date(pr.date).toUTCString()}
                           >
-                            {pr.kind}
+                            {timeAgo(pr.date)}
+                          </time>
+                          <span
+                            className="inline-flex items-center gap-1 font-label-meta text-label-meta uppercase tracking-wide text-text-muted bg-surface-subtle rounded px-1.5 py-0.5"
+                            title="Merged into a private repository — the link would not open for you"
+                          >
+                            <Icon name="lock" size={11} />
+                            private
                           </span>
-                        ) : null}
-                      </span>
-                    </span>
-                    <span className="flex items-center gap-2 shrink-0">
-                      <time
-                        className="font-label-meta text-label-meta text-text-muted"
-                        dateTime={pr.date}
-                        title={new Date(pr.date).toUTCString()}
+                        </span>
+                      </div>
+                    ) : (
+                      <a
+                        className="group grid grid-cols-[1fr_auto] items-start gap-3 md:gap-4 py-3.5 md:py-4 border-b border-border-hairline"
+                        href={pr.url}
+                        rel="noopener noreferrer"
+                        target="_blank"
                       >
-                        {timeAgo(pr.date)}
-                      </time>
-                      <Icon
-                        className="text-text-muted opacity-0 group-hover:opacity-100 transition-opacity"
-                        name="arrow_outward"
-                        size={14}
-                      />
-                    </span>
-                  </a>
-                </li>
-              ))}
+                        <PrBody pr={pr} />
+                        <span className="flex items-center gap-2 shrink-0">
+                          <time
+                            className="font-label-meta text-label-meta text-text-muted"
+                            dateTime={pr.date}
+                            title={new Date(pr.date).toUTCString()}
+                          >
+                            {timeAgo(pr.date)}
+                          </time>
+                          <Icon
+                            className="text-text-muted opacity-0 group-hover:opacity-100 transition-opacity"
+                            name="arrow_outward"
+                            size={14}
+                          />
+                        </span>
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
             </ol>
             <a
               className="group inline-flex items-center gap-1.5 w-fit -my-3 py-3 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
@@ -171,6 +241,13 @@ export default async function OpenSourcePage() {
               All {activity?.mergedPullRequests ?? "merged"} merged pull requests on GitHub
               <Icon className="transition-transform group-hover:translate-x-0.5" name="arrow_forward" size={13} />
             </a>
+            {privateMerges > 0 && !showingPrivate ? (
+              <p className="font-label-meta text-label-meta text-text-muted max-w-[60ch]">
+                {privateMerges} of those merges are in private client repositories. They count
+                towards the totals above but are not listed, because their links would not open
+                for you.
+              </p>
+            ) : null}
           </PageSection>
         ) : (
           <PageSection title="Latest merged">

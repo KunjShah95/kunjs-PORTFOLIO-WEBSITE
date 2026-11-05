@@ -134,9 +134,39 @@ export const homeSubnav = [
   { href: "#contact", label: "Contact" },
 ] as const;
 
+/**
+ * Verified floors for every GitHub figure the site quotes.
+ *
+ * These are the numbers the *static* copy is allowed to claim: page metadata,
+ * llms.txt, ai.txt, services.md and the JSON export. They are floors (never
+ * above the real count) because GitHub is the source of truth and this file
+ * is only a cache of it.
+ *
+ * The counts are what an authenticated token sees, which is the honest total:
+ * merges into private client repositories are real work. Only the *listed*
+ * pull requests are restricted to public ones, because a private URL 404s for
+ * every visitor.
+ *
+ * Live numbers come from `getOpenSourceClaims()` in `lib/github.ts` and are
+ * used wherever the surface is server-rendered. Refresh these floors with
+ * `npm run sync:github`, which queries the API and rewrites this block plus
+ * the static copy in `public/`. `tests/claims.test.ts` fails if the copy and
+ * these floors ever disagree.
+ */
+export const githubClaimFloors = {
+  mergedPullRequests: 138,
+  resolvedIssues: 43,
+  externalRepos: 32,
+} as const;
+
+/** `67+ merged PRs` — the floor, phrased so it can never overstate. */
+export function githubClaimFloorsLabel(): string {
+  return `${githubClaimFloors.mergedPullRequests}+`;
+}
+
 export const metrics = [
   { value: "17+", label: "Systems Shipped" },
-  { value: "60+", label: "Merged PRs" },
+  { value: githubClaimFloorsLabel(), label: "Merged PRs" },
   { value: "4×", label: "Hack Finals" },
 ] as const;
 
@@ -692,19 +722,35 @@ export const jobs: readonly Job[] = [
     company: "Open Source",
     role: "Contributor",
     period: "2025 - Present",
-    kind: "OWASP · Microsoft · 24 repos",
-    description:
-      "60 merged pull requests, 43 issues resolved, and 24 external codebases, including merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach.",
+    kind: `OWASP · Microsoft · ${githubClaimFloors.externalRepos} repos`,
+    description: openSourceSummary(),
     skills: ["AI Security", "CI/CD", "Docs", "Inference"],
     live: true,
   },
 ] as const;
 
 export const impactMetrics = [
-  { value: "60+", label: "PRs Merged" },
-  { value: "43", label: "Issues Resolved" },
-  { value: "24+", label: "Repos" },
+  { value: githubClaimFloorsLabel(), label: "PRs Merged" },
+  { value: String(githubClaimFloors.resolvedIssues), label: "Issues Resolved" },
+  { value: `${githubClaimFloors.externalRepos}+`, label: "Repos" },
 ] as const;
+
+/**
+ * The one sentence the site uses to describe the open-source body of work.
+ *
+ * Takes live numbers when a caller has them, so the same sentence in the JSON
+ * export and in page metadata can never quote a different count than the page
+ * body. Called with no argument it falls back to the verified floors.
+ */
+export function openSourceSummary(
+  claims: {
+    mergedPullRequests: number;
+    resolvedIssues: number;
+    externalRepos: number;
+  } = githubClaimFloors,
+): string {
+  return `${claims.mergedPullRequests} merged pull requests, ${claims.resolvedIssues} issues resolved, and ${claims.externalRepos} external codebases, including merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach.`;
+}
 
 /* ------------------------------------------------------- Open source detail */
 
@@ -1319,7 +1365,7 @@ export const clientFaqs = [
   {
     question: "You're still a student. Why hire you?",
     answer:
-      "I'm in the final year of a CS degree, with two internships, 17+ shipped systems and 60+ merged open-source pull requests behind me. Every project on this site links to its code and its tests, so you can check the work before paying for any of it. You also talk directly to the person writing the code.",
+      `I'm in the final year of a CS degree, with two internships, 17+ shipped systems and ${githubClaimFloorsLabel()} merged open-source pull requests behind me. Every project on this site links to its code and its tests, so you can check the work before paying for any of it. You also talk directly to the person writing the code.`,
   },
   {
     question: "Who owns the code?",
@@ -1362,7 +1408,7 @@ export const engagements = [
     proof: [
       "2 internships shipping production AI/ML features",
       "17+ systems built and deployed",
-      "60+ PRs merged across 24 external repositories",
+      `${githubClaimFloorsLabel()} PRs merged across ${githubClaimFloors.externalRepos} external repositories`,
     ],
     action: "Send an opening",
     href: "/contact#inquiryForm",
@@ -1388,7 +1434,7 @@ export const engagements = [
     title: "Contributions and maintainership",
     body: "Merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.",
     proof: [
-      "60+ merged PRs, 43 issues resolved, 24+ repositories",
+      `${githubClaimFloorsLabel()} merged PRs, ${githubClaimFloors.resolvedIssues} issues resolved, ${githubClaimFloors.externalRepos}+ repositories`,
       "CI, security and agent-tooling contributions",
       "Onboarding docs written for coding agents",
     ],
@@ -1582,7 +1628,7 @@ export const hiringFaqs = [
   {
     question: "Who is Kunj Shah?",
     answer:
-      "Kunj Shah is an AI engineer and agent builder based in Ahmedabad, India. He ships production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps, with 17+ delivered projects and 60+ merged open-source pull requests.",
+      `Kunj Shah is an AI engineer and agent builder based in Ahmedabad, India. He ships production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps, with 17+ delivered projects and ${githubClaimFloorsLabel()} merged open-source pull requests.`,
   },
   {
     question: "Is Kunj Shah available for freelance AI work?",
