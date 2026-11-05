@@ -7,6 +7,7 @@ import { StatusDot, Tag } from "@/components/ui/primitives";
 import { cn } from "@/lib/cn";
 import { EASE_OUT } from "@/lib/motion";
 import type { Job } from "@/lib/site-data";
+import { roleAnchor } from "@/lib/site-data";
 
 const COMPANY_ICON: Record<string, IconName> = {
   Ideaboat: "architecture",
@@ -310,7 +311,10 @@ function JobEntry({
   const open = span === null;
 
   return (
-    <li className="relative grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-3 lg:grid-cols-[9rem_1.5rem_minmax(0,1fr)] lg:gap-x-6">
+    <li
+      className="relative grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-3 lg:grid-cols-[9rem_1.5rem_minmax(0,1fr)] lg:gap-x-6 scroll-mt-28"
+      id={roleAnchor(job.company)}
+    >
       {/* Meta rail: the period lives out here now rather than inside the card,
           which is what makes this a timeline instead of a stack of cards. */}
       <div className="col-span-2 mb-3 flex items-baseline gap-2 lg:col-span-1 lg:col-start-1 lg:row-start-1 lg:mb-0 lg:flex-col lg:items-end lg:gap-0.5 lg:pt-5 lg:text-right">

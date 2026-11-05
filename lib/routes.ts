@@ -39,6 +39,7 @@ export const DISCOVERY_ASSETS = [
   { path: "/pricing.md", priority: 0.75, changeFrequency: "monthly" as const },
   { path: "/services.md", priority: 0.75, changeFrequency: "monthly" as const },
   { path: "/api/portfolio.json", priority: 0.9, changeFrequency: "weekly" as const },
+  { path: "/.well-known/agent-card.json", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/rss.xml", priority: 0.7, changeFrequency: "weekly" as const },
   { path: "/humans.txt", priority: 0.5, changeFrequency: "yearly" as const },
   { path: "/cite.txt", priority: 0.5, changeFrequency: "yearly" as const },

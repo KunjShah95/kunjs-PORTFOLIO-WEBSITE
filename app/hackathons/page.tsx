@@ -10,7 +10,11 @@ import { Reveal } from "@/components/primitives/Reveal";
 import { cn } from "@/lib/cn";
 import { hackathons } from "@/lib/site-data";
 import { pageMeta } from "@/lib/seo";
-import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import {
+  JsonLd,
+  pageBreadcrumb,
+  webPageJsonLd,
+} from "@/components/seo/json-ld";
 
 export const metadata: Metadata = pageMeta({
   path: "/hackathons",
@@ -27,6 +31,14 @@ export default function HackathonsPage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Hackathons", "/hackathons")} />
+        <JsonLd
+          data={webPageJsonLd({
+            path: "/hackathons",
+            name: "Hackathons",
+            description:
+              "Ten hackathons and four finals, including a solo finalist spot out of 2000+ teams at Autonomous Hacks 2026.",
+          })}
+        />
         <PageIntro
           eyebrow="Hackathons"
           title="Ten hackathons, four finals."

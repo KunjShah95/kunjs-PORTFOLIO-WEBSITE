@@ -8,7 +8,11 @@ import { Tag } from "@/components/ui/primitives";
 import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { skillGroups, stackInventory } from "@/lib/site-data";
 import { pageMeta } from "@/lib/seo";
-import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import {
+  JsonLd,
+  pageBreadcrumb,
+  webPageJsonLd,
+} from "@/components/seo/json-ld";
 
 export const metadata: Metadata = pageMeta({
   path: "/skills",
@@ -22,6 +26,14 @@ export default function SkillsPage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Skills", "/skills")} />
+        <JsonLd
+          data={webPageJsonLd({
+            path: "/skills",
+            name: "Technical skills and stack",
+            description:
+              "The tools Kunj Shah ships with: Python, FastAPI, LangGraph, CrewAI, PyTorch, CUDA, YOLOv8, React, Next.js and Docker.",
+          })}
+        />
         <PageIntro
           eyebrow="Skills"
           title="The stack I reach for, by problem."

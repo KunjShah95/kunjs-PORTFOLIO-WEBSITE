@@ -1,0 +1,74 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "Kunj Shah Portfolio Agent",
+  "description": "Read-only agent over kunjshah.in: answers questions about Kunj Shah's shipped AI systems, services and rates, open-source contributions, and writing, and can return any public page as Markdown. Every answer links to a page a human can open.",
+  "version": "1.0.0",
+  "url": "https://kunjshah.in/mcp",
+  "preferredTransport": "JSONRPC",
+  "provider": {
+    "organization": "Kunj Shah",
+    "url": "https://kunjshah.in"
+  },
+  "documentationUrl": "https://kunjshah.in/llms.txt",
+  "iconUrl": "https://kunjshah.in/logo.png",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/plain", "text/markdown", "application/json"],
+  "skills": [
+    {
+      "id": "profile",
+      "name": "Profile and availability",
+      "description": "Who Kunj Shah is, where he is based, what he builds, and whether he is available for work.",
+      "tags": ["profile", "bio", "availability", "hiring"],
+      "examples": [
+        "Who is Kunj Shah?",
+        "Is Kunj Shah available for freelance AI work in India?",
+        "What does Kunj Shah build?"
+      ]
+    },
+    {
+      "id": "projects",
+      "name": "Shipped AI systems",
+      "description": "Case studies for shipped projects with architecture, measured results, limitations, and how each system was tested.",
+      "tags": ["projects", "case-study", "ai-agents", "rag", "computer-vision"],
+      "examples": [
+        "Which AI agents has Kunj Shah shipped?",
+        "What RAG systems has he built and how were they evaluated?"
+      ]
+    },
+    {
+      "id": "services",
+      "name": "Services and pricing",
+      "description": "Engagement types with fixed-scope pricing in INR, hourly review rates, retainers, and delivery timelines.",
+      "tags": ["pricing", "services", "engagement", "rates"],
+      "examples": [
+        "How much does it cost to hire Kunj Shah to build an AI agent?",
+        "What are his hourly and retainer rates?"
+      ]
+    },
+    {
+      "id": "open-source",
+      "name": "Open-source contributions",
+      "description": "Merged pull requests into projects he does not own, including the OWASP agent-security harness and Microsoft AI-Engineering-Coach.",
+      "tags": ["open-source", "contributions", "owasp", "github"],
+      "examples": [
+        "What has Kunj Shah contributed to OWASP?",
+        "How many pull requests has he had merged upstream?"
+      ]
+    },
+    {
+      "id": "writing",
+      "name": "Essays and technical writing",
+      "description": "Full-text essays on agent architecture, retrieval, evaluation, inference cost, and edge machine learning.",
+      "tags": ["writing", "essays", "articles", "research"],
+      "examples": [
+        "What has Kunj Shah written about cutting LLM inference cost?",
+        "Explain Kunj Shah's argument about citations in research agents."
+      ]
+    }
+  ]
+}

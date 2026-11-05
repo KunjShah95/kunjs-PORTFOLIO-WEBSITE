@@ -1,5 +1,6 @@
 import { services, site } from "@/lib/site-data";
 import { ORIGIN } from "@/lib/routes";
+import { contentUpdated } from "@/lib/freshness";
 
 /**
  * JSON-LD emitter. Renders a single `<script type="application/ld+json">`.
@@ -219,6 +220,102 @@ export function webPageJsonLd({
     isPartOf: { "@id": SITE_ID },
     about: { "@id": PERSON_ID },
     inLanguage: "en-IN",
+    dateModified: contentUpdated(),
+  };
+}
+
+/**
+ * `ProfilePage` for the home page.
+ *
+ * This is the type Google documents for a page whose subject is a person, and
+ * it is stronger than `WebPage` here: `mainEntity` states outright that the
+ * page is *about* the `Person` node, so an answer engine resolving "who is
+ * Kunj Shah" has a machine-readable answer rather than an inference.
+ */
+export function profilePageJsonLd({
+  path,
+  name,
+  description,
+}: {
+  path: string;
+  name: string;
+  description: string;
+}) {
+  const url = `${ORIGIN}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    isPartOf: { "@id": SITE_ID },
+    mainEntity: { "@id": PERSON_ID },
+    about: { "@id": PERSON_ID },
+    inLanguage: "en-IN",
+    dateModified: contentUpdated(),
+  };
+}
+
+/**
+ * `CollectionPage` wrapping an `ItemList`.
+ *
+ * Archive pages used to emit a breadcrumb and nothing else, so an engine that
+ * landed on /projects or /open-source could enumerate nothing — it had to
+ * parse the rendered list. `ItemList` gives it the same set as structured
+ * data, in order, with a URL per item.
+ */
+export function collectionPageJsonLd({
+  path,
+  name,
+  description,
+  items,
+  order = "descending",
+}: {
+  path: string;
+  name: string;
+  description: string;
+  /** Name and URL are required; `type` adds a typed `item` node per entry. */
+  items: { name: string; url: string; description?: string; type?: string }[];
+  order?: "ascending" | "descending";
+}) {
+  const url = `${ORIGIN}${path}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${url}#collection`,
+    url,
+    name,
+    description,
+    isPartOf: { "@id": SITE_ID },
+    about: { "@id": PERSON_ID },
+    inLanguage: "en-IN",
+    dateModified: contentUpdated(),
+    mainEntity: {
+      "@type": "ItemList",
+      "@id": `${url}#list`,
+      numberOfItems: items.length,
+      itemListOrder:
+        order === "ascending"
+          ? "https://schema.org/ItemListOrderAscending"
+          : "https://schema.org/ItemListOrderDescending",
+      itemListElement: items.map((item, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.name,
+        url: item.url,
+        ...(item.type
+          ? {
+              item: {
+                "@type": item.type,
+                "@id": item.url,
+                name: item.name,
+                ...(item.description ? { description: item.description } : {}),
+              },
+            }
+          : {}),
+      })),
+    },
   };
 }
 

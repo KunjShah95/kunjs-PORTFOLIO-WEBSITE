@@ -10,9 +10,14 @@ import {
 import { PageIntro, PageSection, RailLink } from "@/components/ui/page-intro";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { CtaBand, buttonStyles } from "@/components/ui/blocks";
-import { hackathons, impactMetrics, jobs, site } from "@/lib/site-data";
+import { hackathons, githubClaimFloorsLabel, impactMetrics, jobs, roleAnchor, site } from "@/lib/site-data";
+import { ORIGIN } from "@/lib/routes";
 import { pageMeta } from "@/lib/seo";
-import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import {
+  JsonLd,
+  collectionPageJsonLd,
+  pageBreadcrumb,
+} from "@/components/seo/json-ld";
 
 export const metadata: Metadata = pageMeta({
   path: "/experience",
@@ -28,10 +33,25 @@ export default function ExperiencePage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Experience", "/experience")} />
+        {/* Roles as data, each anchored to the card it describes. */}
+        <JsonLd
+          data={collectionPageJsonLd({
+            path: "/experience",
+            name: "Work history",
+            description:
+              "Internships and open-source contribution history: production AI/ML work at Ideaboat and PHAZE_AI, plus merged upstream contributions.",
+            items: jobs.map((job) => ({
+              name: `${job.role} at ${job.company}`,
+              url: `${ORIGIN}/experience#${roleAnchor(job.company)}`,
+              description: job.description,
+              type: "OrganizationRole",
+            })),
+          })}
+        />
         <PageIntro
           eyebrow="Experience"
           title="Two internships and a public commit history."
-          lead="Production AI/ML work at Ideaboat and PHAZE_AI, alongside 60+ pull requests merged into codebases I don't own."
+          lead={`Production AI/ML work at Ideaboat and PHAZE_AI, alongside ${githubClaimFloorsLabel()} pull requests merged into codebases I don't own.`}
         >
         </PageIntro>
 

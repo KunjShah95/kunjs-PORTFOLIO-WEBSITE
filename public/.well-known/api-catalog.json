@@ -99,6 +99,21 @@
           "type": "text/plain"
         }
       ]
+    },
+    {
+      "anchor": "https://kunjshah.in/.well-known/agent-card.json",
+      "service-desc": [
+        {
+          "href": "https://kunjshah.in/.well-known/agent-card.json",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://kunjshah.in/llms.txt",
+          "type": "text/markdown"
+        }
+      ]
     }
   ]
 }

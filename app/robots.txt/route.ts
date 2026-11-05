@@ -43,10 +43,21 @@ const AI_AND_SEARCH_CRAWLERS = [
   "Bytespider",
   "Amazonbot",
   "MistralAI-User",
+  // Second tier, but each one is a channel that cannot cite a site it cannot
+  // read: DuckDuckGo's assistant, iAsk, Kakao, Naver, Seznam, Sogou, Timpi,
+  // and the image indexers that feed multimodal answers.
+  "DuckAssistBot",
+  "iaskspider",
+  "Yeti",
+  "Kangaroo Bot",
+  "PanguBot",
+  "Timpibot",
+  "ImagesiftBot",
+  "Sogou web spider",
 ] as const;
 
 /** Training crawl only — search/answer bots stay allowed via the rules above. */
-const TRAINING_ONLY_CRAWLERS = ["CCBot"] as const;
+const TRAINING_ONLY_CRAWLERS = ["CCBot", "AI2Bot", "AI2Bot-Dolma", "Omgilibot"] as const;
 
 const group = (agents: readonly string[], lines: string[]) =>
   [...agents.map((a) => `User-agent: ${a}`), ...lines].join("\n");

@@ -8,7 +8,11 @@ import { Tag } from "@/components/ui/primitives";
 import { CtaBand, StatStrip, buttonStyles } from "@/components/ui/blocks";
 import { education, hackathons, labs, site } from "@/lib/site-data";
 import { pageMeta } from "@/lib/seo";
-import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import {
+  JsonLd,
+  pageBreadcrumb,
+  webPageJsonLd,
+} from "@/components/seo/json-ld";
 
 export const metadata: Metadata = pageMeta({
   path: "/education",
@@ -22,6 +26,14 @@ export default function EducationPage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Education", "/education")} />
+        <JsonLd
+          data={webPageJsonLd({
+            path: "/education",
+            name: "Education",
+            description:
+              "B.Tech Computer Science at Indus University, 2023-2027, with coursework in deep learning, computer vision, NLP and distributed systems.",
+          })}
+        />
         <PageIntro
           eyebrow="Education"
           title="B.Tech Computer Science, final year."

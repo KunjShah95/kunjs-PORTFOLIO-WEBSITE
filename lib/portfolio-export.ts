@@ -1,5 +1,6 @@
 import { ORIGIN } from "@/lib/routes";
 import { essayCategoryLabel, essaysByDate } from "@/lib/essays";
+import { contentUpdated } from "@/lib/freshness";
 import type { ClaimNumbers } from "@/lib/github";
 import {
   education,
@@ -14,9 +15,7 @@ import {
 
 /** ISO date for machine-readable freshness signals (build day in UTC). */
 export function portfolioLastUpdated(): string {
-  const stamp = Number(process.env.NEXT_PUBLIC_BUILD_TIME);
-  if (stamp > 0) return new Date(stamp).toISOString().slice(0, 10);
-  return "2026-10-11";
+  return contentUpdated();
 }
 
 /**

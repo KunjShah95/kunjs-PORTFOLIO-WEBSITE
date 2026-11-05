@@ -9,7 +9,11 @@ import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { cn } from "@/lib/cn";
 import { labs } from "@/lib/site-data";
 import { pageMeta } from "@/lib/seo";
-import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import {
+  JsonLd,
+  pageBreadcrumb,
+  webPageJsonLd,
+} from "@/components/seo/json-ld";
 
 export const metadata: Metadata = pageMeta({
   path: "/labs",
@@ -30,6 +34,14 @@ export default function LabsPage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Labs", "/labs")} />
+        <JsonLd
+          data={webPageJsonLd({
+            path: "/labs",
+            name: "AI labs and research",
+            description:
+              "Research builds and from-scratch infrastructure: a vector database with nine ANN algorithms, GPT-2 from first principles, and a pure-Python BPE tokenizer.",
+          })}
+        />
         <PageIntro
           eyebrow="Labs"
           title="Things I built to understand them."

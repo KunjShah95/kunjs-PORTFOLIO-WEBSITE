@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // One timestamp per deploy, inlined at build so `dateModified` in JSON-LD and
+  // /api/portfolio.json is a real freshness signal instead of a guess.
+  env: {
+    NEXT_PUBLIC_BUILD_TIME: String(Date.now()),
+  },
   pageExtensions: ["ts", "tsx", "mdx"],
   images: {
     remotePatterns: [

@@ -6,7 +6,7 @@ import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { Reveal } from "@/components/primitives/Reveal";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
-import { JsonLd } from "@/components/seo/json-ld";
+import { JsonLd, webPageJsonLd } from "@/components/seo/json-ld";
 import { principles, projectBySlug, site } from "@/lib/site-data";
 import { pageMeta } from "@/lib/seo";
 
@@ -63,6 +63,14 @@ export default function ManifestoPage() {
   return (
     <PageShell>
       <div className="stack-page">
+        <JsonLd
+          data={webPageJsonLd({
+            path: "/manifesto",
+            name: "Manifesto",
+            description:
+              "Three engineering rules for production AI systems: determinism over hallucination, edge and cost efficiency, and observability first.",
+          })}
+        />
         <JsonLd
           data={{
             "@context": "https://schema.org",

@@ -729,6 +729,19 @@ export const jobs: readonly Job[] = [
   },
 ] as const;
 
+/**
+ * Stable anchor for a role on /experience.
+ *
+ * Used by both the timeline and the page's JSON-LD, so a machine-readable
+ * `OrganizationRole` and the visible card point at the same fragment.
+ */
+export function roleAnchor(company: string): string {
+  return `role-${company
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")}`;
+}
+
 export const impactMetrics = [
   { value: githubClaimFloorsLabel(), label: "PRs Merged" },
   { value: String(githubClaimFloors.resolvedIssues), label: "Issues Resolved" },

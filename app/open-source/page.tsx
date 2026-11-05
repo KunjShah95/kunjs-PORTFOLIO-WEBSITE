@@ -20,7 +20,11 @@ import {
   type PullRequestKind,
 } from "@/lib/github";
 import { pageMeta } from "@/lib/seo";
-import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import {
+  JsonLd,
+  collectionPageJsonLd,
+  pageBreadcrumb,
+} from "@/components/seo/json-ld";
 
 /** Re-fetch GitHub activity at most once every fifteen minutes. */
 export const revalidate = 900;
@@ -139,6 +143,31 @@ export default async function OpenSourcePage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Open Source", "/open-source")} />
+        {/* The merged work as data. Public-only by construction: a private
+            pull request URL is a 404 for anyone reading the markup. */}
+        <JsonLd
+          data={collectionPageJsonLd({
+            path: "/open-source",
+            name: "Merged open-source contributions",
+            description:
+              "Pull requests merged into projects the owner does not own, including the OWASP agent-security harness and Microsoft AI-Engineering-Coach.",
+            items: [
+              ...mergedContributions.map((item) => ({
+                name: `${item.org}: ${item.title}`,
+                url: item.url,
+                type: "CreativeWork",
+              })),
+              ...mergedRecent
+                .filter((pr) => pr.visibility === "public")
+                .filter((pr) => !mergedContributions.some((c) => c.url === pr.url))
+                .map((pr) => ({
+                  name: `${pr.owner}/${pr.repo} #${pr.number}: ${pr.title}`,
+                  url: pr.url,
+                  type: "CreativeWork",
+                })),
+            ],
+          })}
+        />
         <PageIntro
           eyebrow="Open source"
           title="Code other engineers chose to merge."

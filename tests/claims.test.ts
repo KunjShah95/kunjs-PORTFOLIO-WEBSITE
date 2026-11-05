@@ -197,6 +197,7 @@ test("every published GitHub count matches the verified floors", () => {
    */
   const PR_PATTERNS = [
     /\b(\d+)\+? merged pull requests\b/,
+    /\b(\d+)\+? pull requests merged\b/,
     /\b(\d+)\+? merged open-source (?:PR|pull request)/,
     /\b(\d+)\+? merged OSS PRs?\b/,
     /\b(\d+)\+? merged PRs, \d+ issues\b/,

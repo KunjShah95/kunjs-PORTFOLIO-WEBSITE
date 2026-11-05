@@ -32,7 +32,7 @@ import {
 import { essayDateLabel, essaysByDate } from "@/lib/essays";
 import { getOpenSourceActivity, timeAgo } from "@/lib/github";
 import { getContributions } from "@/lib/contributions";
-import { JsonLd, webPageJsonLd } from "@/components/seo/json-ld";
+import { JsonLd, profilePageJsonLd } from "@/components/seo/json-ld";
 import { pageMeta } from "@/lib/seo";
 import { cn } from "@/lib/cn";
 
@@ -95,7 +95,7 @@ export default async function HomePage() {
         }}
       />
       <JsonLd
-        data={webPageJsonLd({
+        data={profilePageJsonLd({
           path: "",
           name: "Kunj Shah | AI Engineer & Agent Builder",
           description: `${site.hero} ${site.offer}`,

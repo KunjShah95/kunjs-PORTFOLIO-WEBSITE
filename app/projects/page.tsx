@@ -10,9 +10,14 @@ import {
 import { CtaBand, buttonStyles } from "@/components/ui/blocks";
 import { PageIntro, PageSection } from "@/components/ui/page-intro";
 import { ArrowAffordance } from "@/components/ui/primitives";
-import { otherBuilds, site } from "@/lib/site-data";
+import { otherBuilds, projects, site } from "@/lib/site-data";
+import { ORIGIN } from "@/lib/routes";
 import { pageMeta } from "@/lib/seo";
-import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import {
+  JsonLd,
+  collectionPageJsonLd,
+  pageBreadcrumb,
+} from "@/components/seo/json-ld";
 
 export const metadata: Metadata = pageMeta({
   path: "/projects",
@@ -37,6 +42,22 @@ export default function ProjectsPage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("Projects", "/projects")} />
+        {/* The archive as data: an engine can enumerate every case study
+            without parsing the rendered list. */}
+        <JsonLd
+          data={collectionPageJsonLd({
+            path: "/projects",
+            name: "AI projects and case studies",
+            description:
+              "Shipped AI systems with production metrics: agents, RAG pipelines, edge computer vision, and full-stack AI apps.",
+            items: projects.map((project) => ({
+              name: project.title,
+              url: `${ORIGIN}/projects/${project.slug}`,
+              description: project.summary,
+              type: "SoftwareApplication",
+            })),
+          })}
+        />
         <div className="flex flex-col gap-8 md:gap-12">
           <PageIntro
             lead="Agents, search, edge vision and full-stack AI products. Most case studies state how the system was tested and what it still gets wrong."

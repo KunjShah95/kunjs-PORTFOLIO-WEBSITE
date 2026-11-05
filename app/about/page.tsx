@@ -9,7 +9,11 @@ import { legalDocuments } from "@/lib/legal";
 import { SubPageFooter } from "@/components/ui/sub-page-footer";
 import { StatStrip } from "@/components/ui/blocks";
 import { pageMeta } from "@/lib/seo";
-import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
+import {
+  JsonLd,
+  pageBreadcrumb,
+  webPageJsonLd,
+} from "@/components/seo/json-ld";
 import {
   education,
   focusAreas,
@@ -81,6 +85,14 @@ export default function AboutPage() {
     <PageShell>
       <div className="stack-page">
         <JsonLd data={pageBreadcrumb("About", "/about")} />
+        <JsonLd
+          data={webPageJsonLd({
+            path: "/about",
+            name: "About Kunj Shah",
+            description:
+              "Kunj Shah is an AI engineer and agent builder in Ahmedabad, India, specialising in production agents, RAG and edge computer vision.",
+          })}
+        />
         <PageIntro
           eyebrow="About"
           title="I build the half of an AI product that has to keep working."
