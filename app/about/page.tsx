@@ -252,7 +252,10 @@ export default function AboutPage() {
           meta="Freelance and contract work"
           title="Terms & privacy"
         >
-          <p className="font-body-sm text-body-sm text-text-secondary max-w-2xl">
+          {/* One line on desktop by design: the constraint here is the
+              available width, not a max-width, so the sentence only wraps
+              when the viewport genuinely cannot hold it. */}
+          <p className="font-body-sm text-body-sm text-text-secondary">
             Hiring me for a project or retainer? These are the default terms and
             how your data is handled: the same documents linked from Contact and
             the site footer.
