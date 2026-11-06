@@ -20,6 +20,7 @@ import { ArrowAffordance } from "@/components/ui/primitives";
 import {
   clientFaqs,
   githubClaimFloorsLabel,
+  indexItems,
   mergedContributions,
   metrics,
   pilotSteps,
@@ -129,7 +130,7 @@ export default async function HomePage() {
 
           <div className="shell-container relative z-10 w-full grid gap-12 lg:grid-cols-12 lg:gap-x-12 lg:items-center pt-28 pb-24 md:pt-28 md:pb-24">
             <div className="flex flex-col gap-7 lg:col-span-7">
-              <p className="eyebrow text-text-muted title-card [animation-delay:0.9s]">
+              <p className="eyebrow text-text-muted title-card [animation-delay:0.1s]">
                 Kunj Shah presents &middot; an applied AI engineer
               </p>
 
@@ -139,19 +140,19 @@ export default async function HomePage() {
                 className="text-[clamp(2.75rem,1.5rem+4.6vw,5rem)] leading-[0.96] font-semibold tracking-[-0.05em] text-text-primary text-balance"
                 id="hero-title"
               >
-                <span className="title-card block [animation-delay:1.05s]">I build the AI</span>
-                <span className="title-card block [animation-delay:1.2s]">feature, then</span>
-                <span className="title-card block [animation-delay:1.4s] display-accent text-[1.08em] tracking-[-0.03em] text-signal-ink">
+                <span className="title-card block [animation-delay:0.15s]">I build the AI</span>
+                <span className="title-card block [animation-delay:0.22s]">feature, then</span>
+                <span className="title-card block [animation-delay:0.3s] display-accent text-[1.08em] tracking-[-0.03em] text-signal-ink">
                   prove it works.
                 </span>
               </h1>
 
-              <p className="title-card [animation-delay:1.6s] font-body-lg text-body-lg text-text-secondary max-w-[52ch]">
+              <p className="title-card [animation-delay:0.38s] font-body-lg text-body-lg text-text-secondary max-w-[52ch]">
                 I&apos;m {site.name}, an AI engineer in Ahmedabad.{" "}
                 {site.offer}
               </p>
 
-              <div className="title-card [animation-delay:1.75s] flex flex-col gap-5">
+              <div className="title-card [animation-delay:0.45s] flex flex-col gap-5">
                 <div className="flex flex-wrap items-center gap-3">
                   <Link
                     className={`${buttonStyles.primary} group h-12 px-6`}
@@ -659,6 +660,50 @@ export default async function HomePage() {
                 </Link>
               </li>
             ))}
+          </ul>
+        </section>
+
+        {/* ---------------------------------------------------------- explore */}
+        {/* Nine in ten visitors arrive here, and most used to leave from here:
+            the deeper sections were only reachable from the header or the
+            footer index. This lays the whole site out once, with a line on
+            what each section proves, right before the closing ask. */}
+        <section aria-labelledby="explore-title" className="flex flex-col gap-6 scroll-mt-24" id="explore">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="eyebrow text-text-muted" id="explore-title">
+              Explore the rest
+            </h2>
+            <Link className={buttonStyles.link} href="/about">
+              Who I am
+            </Link>
+          </div>
+          <ul className="grid gap-px overflow-hidden rounded-2xl border border-border-hairline bg-border-hairline grid-cols-2 lg:grid-cols-4">
+            {indexItems
+              // Home is here, Contact is the closing ask below, and Projects
+              // and Writing already have full sections on this page.
+              .filter((item) => !["/", "/contact", "/projects", "/writing"].includes(item.href))
+              .map((item) => (
+                <li className="flex bg-surface" key={item.href}>
+                  <Link
+                    className="group flex flex-1 items-center sm:items-start gap-3 sm:gap-4 p-4 sm:p-5 md:p-6 hover:bg-surface-card transition-colors"
+                    data-track="Explore Section Clicked"
+                    data-track-from={item.href}
+                    href={item.href}
+                  >
+                    <span className="grid h-9 w-9 sm:h-10 sm:w-10 shrink-0 place-items-center rounded-xl bg-surface-container text-text-secondary transition-colors group-hover:text-text-primary">
+                      <Icon name={item.icon} size={20} />
+                    </span>
+                    <span className="flex min-w-0 flex-col gap-1">
+                      <span className="font-body-md sm:font-body-lg text-body-md sm:text-body-lg font-medium text-text-primary transition-transform duration-300 group-hover:translate-x-1">
+                        {item.label}
+                      </span>
+                      <span className="hidden sm:block font-body-sm text-body-sm text-text-secondary">
+                        {item.description}
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
           </ul>
         </section>
 

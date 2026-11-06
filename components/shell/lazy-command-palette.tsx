@@ -56,7 +56,11 @@ export function LazyCommandPalette() {
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener(OPEN_EVENT, onOpen);
 
-    // Warm the chunk while the browser is idle, but do not open anything.
+    // Warm the chunk once the page has fully loaded and the browser is idle,
+    // so it never competes with the scripts that hydrate the page. On a slow
+    // phone the old 2s idle timeout fired mid-hydration and spent bandwidth
+    // the first paint needed. Skipped entirely on Data Saver or 2G/3G: there
+    // the palette loads on first use instead, which is one short round trip.
     const idleWindow = window as Window & {
       requestIdleCallback?: (
         cb: () => void,
@@ -64,15 +68,31 @@ export function LazyCommandPalette() {
       ) => number;
       cancelIdleCallback?: (id: number) => void;
     };
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+    const constrained =
+      connection?.saveData === true ||
+      /(^|-)(2g|3g)$/.test(connection?.effectiveType ?? "");
 
-    const idleHandle: number | undefined =
-      idleWindow.requestIdleCallback?.(() => load(false), { timeout: 2000 }) ??
-      window.setTimeout(() => load(false), 1200);
+    let idleHandle: number | undefined;
+    function warm() {
+      idleHandle =
+        idleWindow.requestIdleCallback?.(() => load(false), { timeout: 8000 }) ??
+        window.setTimeout(() => load(false), 3000);
+    }
+    if (!constrained) {
+      if (document.readyState === "complete") warm();
+      else window.addEventListener("load", warm, { once: true });
+    }
 
     return () => {
       cancelled = true;
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener(OPEN_EVENT, onOpen);
+      window.removeEventListener("load", warm);
       if (idleWindow.cancelIdleCallback && idleHandle !== undefined) {
         idleWindow.cancelIdleCallback(idleHandle as number);
       } else if (idleHandle !== undefined) {

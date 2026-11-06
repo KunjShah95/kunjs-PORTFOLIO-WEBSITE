@@ -1,37 +1,17 @@
-import type { IconName } from "@/components/icon";
+import type { Command } from "@/lib/command-search";
 import { legalDocuments } from "@/lib/legal";
 import { essayCategoryLabel, essayDateLabel, essaysByDate } from "@/lib/essays";
 import { indexItems, projects, site } from "@/lib/site-data";
 
 /**
- * Command model behind the ⌘K palette.
+ * Command list behind the ⌘K palette, derived from `site-data` and the essay
+ * archive at build time: adding a page, project or essay makes it searchable
+ * with no extra wiring.
  *
- * Kept in `lib/` rather than inside the palette component so the list is
- * derived from `site-data` at build time: adding a page or a project to the
- * data file makes it searchable with no extra wiring.
- *
- * Ranking is a small hand-rolled scorer rather than a fuzzy-match dependency.
- * The corpus is a few dozen short strings, so a subsequence match over
- * word-initial characters is both faster and more predictable than
- * Levenshtein — it rewards "pjs" -> "Projects" without the noise that
- * edit-distance matching introduces on words this short.
+ * Server-only in practice: it is served as static JSON by
+ * `app/api/commands/route.ts`. Client code imports `lib/command-search`
+ * instead, so this module's data never lands in a browser bundle.
  */
-
-export type CommandGroup = "Navigate" | "Work" | "Writing" | "Actions" | "Legal";
-
-export type Command = {
-  id: string;
-  label: string;
-  /** Secondary line: a description, a date, or a hint. */
-  detail?: string;
-  group: CommandGroup;
-  href?: string;
-  /** External links open in a new tab. */
-  external?: boolean;
-  /** Keywords that match but do not appear in the label. */
-  keywords?: string;
-  icon?: IconName;
-};
 
 const RESUME = {
   label: "Resume",
@@ -144,60 +124,3 @@ export const commands: readonly Command[] = [
     }),
   ),
 ];
-
-/**
- * Score a command against a lowercased query. Higher is better; `null` means
- * no match at all.
- *
- * Three passes, each stronger than the next:
- *   1. label starts with the query        -> 100
- *   2. label contains the query           ->  60
- *   3. keywords / detail contain it       ->  25
- * A subsequence match over word initials gets 40, which is what makes
- * "pjs" resolve to "Projects" and "cv" to "Resume".
- */
-export function scoreCommand(command: Command, query: string): number | null {
-  if (!query) return 0;
-
-  const label = command.label.toLowerCase();
-  const haystack = `${command.detail ?? ""} ${command.keywords ?? ""}`.toLowerCase();
-
-  if (label.startsWith(query)) return 100;
-  if (label.includes(query)) return 60;
-  if (haystack.includes(query)) return 25;
-  if (matchesInitials(label, query)) return 40;
-
-  return null;
-}
-
-/** `pjs` matches "projects"; `cv` matches "resume" only via keywords. */
-function matchesInitials(label: string, query: string): boolean {
-  if (query.length < 2) return false;
-  let i = 0;
-  for (const char of label) {
-    if (char === " " || char === "-") {
-      i = 0;
-      continue;
-    }
-    if (char === query[i]) i += 1;
-    if (i === query.length) return true;
-  }
-  return false;
-}
-
-/** Filter and order the corpus for a query. */
-export function searchCommands(query: string, limit = 12): Command[] {
-  const trimmed = query.trim().toLowerCase();
-
-  if (!trimmed) {
-    // Empty query: show the navigation spine so the palette is never blank.
-    return commands.filter((c) => c.group === "Navigate").slice(0, limit);
-  }
-
-  return commands
-    .map((command) => ({ command, score: scoreCommand(command, trimmed) }))
-    .filter((entry): entry is { command: Command; score: number } => entry.score !== null)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
-    .map((entry) => entry.command);
-}

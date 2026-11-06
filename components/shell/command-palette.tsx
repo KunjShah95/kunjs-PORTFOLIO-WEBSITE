@@ -6,7 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "@/lib/motion-client";
 import { track } from "@vercel/analytics";
 import { Icon } from "@/components/icon";
 import { OPEN_EVENT } from "@/components/shell/command-palette-event";
-import { type Command, type CommandGroup, searchCommands } from "@/lib/commands";
+import { type Command, type CommandGroup, searchCommands } from "@/lib/command-search";
 import { EASE_OUT } from "@/lib/motion";
 
 /** Group render order — a fixed spine reads better than alphabetical. */
@@ -23,6 +23,23 @@ function group(commands: Command[]): { group: CommandGroup; items: Command[] }[]
     group: name,
     items: commands.filter((c) => c.group === name),
   })).filter((entry) => entry.items.length > 0);
+}
+
+/**
+ * The search corpus, fetched once per page session from the static
+ * `/api/commands` file rather than bundled (see lib/command-search.ts). Kept
+ * at module scope so reopening the palette never refetches.
+ */
+let corpusRequest: Promise<Command[]> | null = null;
+function loadCorpus(): Promise<Command[]> {
+  corpusRequest ??= fetch("/api/commands")
+    .then((response) => (response.ok ? (response.json() as Promise<Command[]>) : []))
+    .catch(() => {
+      // Let the next open try again instead of caching the failure.
+      corpusRequest = null;
+      return [];
+    });
+  return corpusRequest;
 }
 
 /**
@@ -48,7 +65,18 @@ export function CommandPalette() {
   /** Where focus came from, so Escape can hand it back. */
   const returnFocus = useRef<HTMLElement | null>(null);
 
-  const results = useMemo(() => searchCommands(query), [query]);
+  const [corpus, setCorpus] = useState<Command[]>([]);
+  useEffect(() => {
+    let live = true;
+    void loadCorpus().then((list) => {
+      if (live) setCorpus(list);
+    });
+    return () => {
+      live = false;
+    };
+  }, [open]);
+
+  const results = useMemo(() => searchCommands(corpus, query), [corpus, query]);
   const sections = useMemo(() => group(results), [results]);
 
   /** Flat list in visual order, so arrow keys match what the eye sees. */
@@ -239,7 +267,7 @@ export function CommandPalette() {
               >
                 {flat.length === 0 ? (
                   <p className="px-4 py-8 text-center font-body-sm text-body-sm text-text-muted">
-                    Nothing matches “{query}”.
+                    {corpus.length === 0 ? "Loading…" : <>Nothing matches “{query}”.</>}
                   </p>
                 ) : (
                   sections.map((section) => (

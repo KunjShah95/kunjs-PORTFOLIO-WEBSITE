@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "@/lib/motion-client";
 import { ActiveItemPill } from "@/components/primitives/ActiveItemPill";
@@ -32,6 +32,10 @@ function buckets(project: (typeof projects)[number]): string[] {
  * Filterable project archive. Category pills filter the grid, and each card
  * expands a detail panel with the build's challenges and lessons.
  */
+/** Nothing to subscribe to: `useSyncExternalStore` is used only for its
+ *  server (false) vs client (true) snapshot. */
+const noopSubscribe = () => () => {};
+
 export function ProjectsBrowser() {
   const [category, setCategory] = useState<string>("all");
   const filterRef = useRef<HTMLDivElement>(null);
@@ -44,6 +48,15 @@ export function ProjectsBrowser() {
         ? projects
         : projects.filter((p) => buckets(p).includes(category)),
     [category],
+  );
+
+  // The highlight pill is measured and placed by JavaScript, so until the
+  // page hydrates the active chip paints its own background. Without it the
+  // server HTML showed "All 18" as white text on the page background.
+  const hydrated = useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false,
   );
 
   return (
@@ -66,7 +79,7 @@ export function ProjectsBrowser() {
               className={cn(
                 "relative z-10 h-11 lg:h-8 px-4 lg:px-3.5 rounded-full font-label-badge text-label-badge whitespace-nowrap transition-colors duration-200 active:scale-[0.97]",
                 active
-                  ? "text-on-primary"
+                  ? cn("text-on-primary", !hydrated && "bg-primary")
                   : "bg-surface-container md:bg-transparent text-text-secondary hover:text-text-primary",
               )}
               data-nav-href={cat.id}

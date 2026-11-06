@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
 import { essaysByDate } from "@/lib/essays";
 import { projects } from "@/lib/site-data";
+import { projectVideo, xmlEscape } from "@/lib/project-video";
 
 /**
  * `lastModified` only where the date is real.
@@ -28,11 +29,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // One case study per shipped project, generated from the same data the
   // pages are built from so the two cannot drift.
-  const caseStudies = projects.map((project) => ({
-    url: `${ORIGIN}/projects/${project.slug}`,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
+  // A case study with a demo recording is that video's watch page, so its
+  // entry carries the video too (Google's video sitemap extension).
+  const caseStudies = projects.map((project) => {
+    const video = projectVideo(project);
+    return {
+      url: `${ORIGIN}/projects/${project.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      ...(video
+        ? {
+            videos: [
+              {
+                title: xmlEscape(video.title),
+                description: xmlEscape(video.description),
+                thumbnail_loc: video.thumbnailUrl,
+                content_loc: video.contentUrl,
+                duration: video.seconds,
+                publication_date: video.uploaded,
+                family_friendly: "yes" as const,
+              },
+            ],
+          }
+        : {}),
+    };
+  });
 
   // The essays themselves. These were missing entirely, which is why a
   // crawler found no content to cite: the archive existed as a list of

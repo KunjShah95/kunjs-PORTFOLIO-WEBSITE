@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   animate,
   motion,
@@ -21,14 +21,14 @@ import { site } from "@/lib/site-data";
  * on one: a strap, a clip, and an ID card. Three layers of motion, each
  * driven by a separate motion value so they add up rather than fight:
  *
- * 1. Pendulum. The card drops in, overshoots and swings to rest like a
- *    real badge on a strap, then keeps a slow idle sway.
+ * 1. Pendulum. The card gets a small nudge on load, swings briefly to rest
+ *    like a real badge on a strap, then keeps a slow idle sway.
  * 2. Tilt. Over the card, it leans toward the cursor in 3D and a soft
  *    glare follows the pointer across the laminate.
  * 3. Throw. It can be grabbed (mouse or touch) and pulled; the rotation
  *    follows the pull and it springs back on release.
  *
- * Reduced motion drops only the motion nobody asked for (drop-in and idle
+ * Reduced motion drops only the motion nobody asked for (settle swing and idle
  * sway). Tilt and throw are user-driven and stay.
  *
  * The drag is hand-rolled on pointer events: the site loads Motion's
@@ -40,24 +40,22 @@ export function HeroBadge({ className }: { className?: string }) {
 
   /* ---- 1. pendulum ------------------------------------------------- */
   const sway = useMotionValue(0);
-  const drop = useMotionValue(0);
 
-  // Layout effect: the card is lifted before the first paint, so it never
-  // flashes at rest and then jumps up to start its fall.
-  useLayoutEffect(() => {
+  // No drop-in. The card is server-rendered at rest and painted before any
+  // JavaScript runs, so lifting it for a fall made it vanish and then swing
+  // in across the headline at ~1-2s: on a PC the whole intro read as a slow
+  // site. Instead it starts where it hangs and gets a small nudge, a quick
+  // underdamped settle, then the idle sway. No jump, because a velocity
+  // impulse starts from the painted position.
+  useEffect(() => {
     if (reduce) return;
     let idle: { stop: () => void } | undefined;
-    drop.set(-460);
-    sway.set(-14);
-    const fall = animate(drop, 0, { type: "spring", stiffness: 90, damping: 13, delay: 0.2 });
-    // Underdamped on purpose: it should visibly swing back and forth a few
-    // times before it settles, the way a badge does when you let go of it.
     const settle = animate(sway, 0, {
       type: "spring",
-      stiffness: 26,
-      damping: 2.4,
+      stiffness: 40,
+      damping: 4,
+      velocity: -28,
       restDelta: 0.15,
-      delay: 0.35,
       onComplete: () => {
         idle = animate(sway, [0, 2.2, 0, -2.2, 0], {
           duration: 6,
@@ -67,11 +65,10 @@ export function HeroBadge({ className }: { className?: string }) {
       },
     });
     return () => {
-      fall.stop();
       settle.stop();
       idle?.stop();
     };
-  }, [reduce, drop, sway]);
+  }, [reduce, sway]);
 
   /* ---- 2. tilt + glare ----------------------------------------------- */
   const tiltX = useMotionValue(0);
@@ -92,7 +89,7 @@ export function HeroBadge({ className }: { className?: string }) {
     mass: 0.6,
   });
   const rotate = useTransform(() => sway.get() + pullRotate.get());
-  const y = useTransform(() => drop.get() + pullY.get());
+  const y = pullY;
   const start = useRef<{ px: number; py: number } | null>(null);
 
   // Resistance grows with distance, like a strap pulling back.
