@@ -1,6 +1,6 @@
 import { services, site } from "@/lib/site-data";
 import { ORIGIN } from "@/lib/routes";
-import { contentUpdated } from "@/lib/freshness";
+import { contentUpdatedAt } from "@/lib/freshness";
 
 /**
  * JSON-LD emitter. Renders a single `<script type="application/ld+json">`.
@@ -220,7 +220,7 @@ export function webPageJsonLd({
     isPartOf: { "@id": SITE_ID },
     about: { "@id": PERSON_ID },
     inLanguage: "en-IN",
-    dateModified: contentUpdated(),
+    dateModified: contentUpdatedAt(),
   };
 }
 
@@ -253,7 +253,7 @@ export function profilePageJsonLd({
     mainEntity: { "@id": PERSON_ID },
     about: { "@id": PERSON_ID },
     inLanguage: "en-IN",
-    dateModified: contentUpdated(),
+    dateModified: contentUpdatedAt(),
   };
 }
 
@@ -290,7 +290,7 @@ export function collectionPageJsonLd({
     isPartOf: { "@id": SITE_ID },
     about: { "@id": PERSON_ID },
     inLanguage: "en-IN",
-    dateModified: contentUpdated(),
+    dateModified: contentUpdatedAt(),
     mainEntity: {
       "@type": "ItemList",
       "@id": `${url}#list`,
