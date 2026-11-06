@@ -93,7 +93,7 @@
         },
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow"
+          "value": "noindex, follow"
         }
       ]
     },
@@ -110,7 +110,7 @@
         },
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow, max-image-preview:large"
+          "value": "noindex, follow"
         }
       ]
     },
@@ -127,7 +127,7 @@
         },
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow, max-image-preview:large"
+          "value": "noindex, follow"
         }
       ]
     },
@@ -144,7 +144,7 @@
         },
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow, max-image-preview:large"
+          "value": "noindex, follow"
         }
       ]
     },
@@ -161,7 +161,7 @@
         },
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow, max-image-preview:large"
+          "value": "noindex, follow"
         }
       ]
     },
@@ -178,7 +178,7 @@
         },
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow, max-image-preview:large"
+          "value": "noindex, follow"
         }
       ]
     },
@@ -192,6 +192,10 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600, s-maxage=86400"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
         }
       ]
     },
@@ -201,6 +205,10 @@
         {
           "key": "Content-Type",
           "value": "application/json"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
         }
       ]
     },
@@ -210,6 +218,10 @@
         {
           "key": "Content-Type",
           "value": "application/json"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
         }
       ]
     },

@@ -5,20 +5,24 @@ import { projects } from "@/lib/site-data";
 import { projectVideo, xmlEscape } from "@/lib/project-video";
 
 /**
- * The build stamp, so `lastModified` is a genuine content-change signal rather
- * than `Date.now()` at request time. A fresh build means the content may have
- * changed, which is exactly what a crawler wants to know.
+ * `lastModified` only where the date is real.
  *
- * Set at build time: every route in one deployment shares the same stamp.
+ * This used to be the build stamp on every route and case study, so each
+ * deploy told crawlers that 34 pages had all changed in the same millisecond.
+ * Google uses `lastmod` only when it proves accurate over time, and a stamp
+ * that moves on every deploy teaches it to ignore the field for the whole
+ * site, essays included. Now: essays carry their publish date, the home page
+ * and the writing index carry the newest essay's date (the content that
+ * actually changes them), and everything else omits the field, which is the
+ * honest answer when no per-page date exists.
  */
-const LAST_MODIFIED = new Date(
-  Number(process.env.NEXT_PUBLIC_BUILD_TIME) || Date.parse("2026-09-27T00:00:00Z"),
-);
+const NEWEST_ESSAY = essaysByDate[0] ? new Date(essaysByDate[0].date) : undefined;
+const DATED_BY_NEWEST_ESSAY = new Set(["", "/writing"]);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = PUBLIC_ROUTES.map((route) => ({
     url: `${ORIGIN}${route.path}`,
-    lastModified: LAST_MODIFIED,
+    ...(DATED_BY_NEWEST_ESSAY.has(route.path) && NEWEST_ESSAY ? { lastModified: NEWEST_ESSAY } : {}),
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));
@@ -31,7 +35,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const video = projectVideo(project);
     return {
       url: `${ORIGIN}/projects/${project.slug}`,
-      lastModified: LAST_MODIFIED,
       changeFrequency: "monthly" as const,
       priority: 0.8,
       ...(video
@@ -63,10 +66,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Non-HTML discovery files (llms.txt, portfolio.json, rss.xml, ...) are
-  // deliberately not listed: Google ignores them in a sitemap, and sitemaps
-  // are for indexable pages. They stay reachable — linked via <link> hints in
-  // the root layout and submitted to Bing through IndexNow — and listed in
-  // lib/routes.ts DISCOVERY_ASSETS.
+  // deliberately not listed: sitemaps are for indexable pages, and those files
+  // are served `noindex` so Google does not weigh them as thin pages of the
+  // site. AI agents still find them through the <link> hints in the root
+  // layout and the Link header; they are listed in lib/routes.ts
+  // DISCOVERY_ASSETS.
 
   return [...pages, ...caseStudies, ...essays];
 }

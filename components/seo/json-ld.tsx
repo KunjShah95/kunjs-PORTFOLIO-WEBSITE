@@ -27,6 +27,7 @@ const BLOG_ID = `${ORIGIN}/writing#blog`;
 /** Social profiles, deduplicated and kept in the order AI agents prefer. */
 const sameAs = [
   site.links.github,
+  site.links.githubAlt,
   site.links.linkedin,
   site.links.x,
   site.links.huggingface,

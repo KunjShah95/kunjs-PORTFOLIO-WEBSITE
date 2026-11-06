@@ -4,14 +4,28 @@ import { LocalClock } from "@/components/ui/local-clock";
 import { legalDocuments } from "@/lib/legal";
 import { indexItems, site } from "@/lib/site-data";
 
-const social = [
-  { label: "GitHub", href: site.links.github },
-  { label: "LinkedIn", href: site.links.linkedin },
-  { label: "X", href: site.links.x },
-  { label: "Product Hunt", href: site.links.producthunt },
+/**
+ * Every public profile, each marked `rel="me"` so search engines and identity
+ * checkers (Mastodon, IndieAuth, Google's entity resolution) can confirm the
+ * accounts belong to the person this site is about. The same list feeds the
+ * JSON-LD `sameAs`, so the visible links and the structured data agree.
+ *
+ * Lattice is linked from every page because it is the other site to be
+ * indexed: a sitewide link from here is the cheapest path a crawler has to it.
+ */
+const social: readonly { label: string; href: string; me?: boolean }[] = [
+  { label: "GitHub", href: site.links.github, me: true },
+  { label: "GitHub (alt)", href: site.links.githubAlt, me: true },
+  { label: "LinkedIn", href: site.links.linkedin, me: true },
+  { label: "X", href: site.links.x, me: true },
+  { label: "Hugging Face", href: site.links.huggingface, me: true },
+  { label: "Peerlist", href: site.links.peerlist, me: true },
+  { label: "Medium", href: site.links.medium, me: true },
+  { label: "Product Hunt", href: site.links.producthunt, me: true },
+  { label: "Lattice", href: site.links.lattice },
   { label: "Resume", href: "/kunjshah_cv.pdf" },
   { label: "Email", href: `mailto:${site.email}` },
-] as const;
+];
 
 /**
  * Global footer, mounted once in the root layout. Pages own their closing
@@ -72,7 +86,11 @@ export function SiteFooter() {
                 data-track={`${link.label} Clicked`}
                 data-track-from="footer"
                 href={link.href}
-                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                rel={
+                  link.href.startsWith("http")
+                    ? `${link.me ? "me " : ""}noopener noreferrer`
+                    : undefined
+                }
                 target={link.href.startsWith("http") ? "_blank" : undefined}
               >
                 {link.label}

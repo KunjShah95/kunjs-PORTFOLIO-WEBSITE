@@ -27,9 +27,11 @@ export const PUBLIC_ROUTES = [
 ];
 
 /**
- * Markdown/JSON discovery files for crawlers and AI agents. Not in the
- * sitemap (Google ignores non-HTML there); submitted to Bing via IndexNow and
- * hinted with <link> tags in the root layout.
+ * Markdown/JSON discovery files for AI agents. Served `noindex, follow`
+ * (vercel.json and their route handlers): agents read them, but a search
+ * engine that indexed them would weigh a dozen thin text files as pages of the
+ * site. Not in the sitemap and not submitted to IndexNow, for the same reason;
+ * hinted with <link> tags in the root layout and the Link header.
  */
 export const DISCOVERY_ASSETS = [
   { path: "/llms.txt", priority: 0.9, changeFrequency: "weekly" as const },
