@@ -13,6 +13,7 @@ import { Tag } from "@/components/ui/primitives";
 import { JsonLd, breadcrumbJsonLd, faqPageJsonLd } from "@/components/seo/json-ld";
 import { PeopleAlsoAsk } from "@/components/people-also-ask";
 import { projectPaa } from "@/lib/paa";
+import { projectVideo, videoObjectJsonLd } from "@/lib/project-video";
 import { ORIGIN } from "@/lib/routes";
 import { pageMeta } from "@/lib/seo";
 import { principles, projectBySlug, projects, site } from "@/lib/site-data";
@@ -76,6 +77,7 @@ export default async function ProjectCaseStudyPage(
   const prev = i > 0 ? projects[i - 1] : null;
   const next = i < projects.length - 1 ? projects[i + 1] : null;
   const paa = projectPaa(project);
+  const video = projectVideo(project);
 
   // Reads in the order a reviewer checks a claim: who built it, how it works,
   // what was hard, how it is verified, where it falls short, what it taught.
@@ -98,6 +100,9 @@ export default async function ProjectCaseStudyPage(
         ])}
       />
       {paa.length > 0 && <JsonLd data={faqPageJsonLd(paa)} />}
+      {/* Marks this case study as the demo's watch page, so Google indexes the
+          recording here rather than flagging it as a preview elsewhere. */}
+      {video && <JsonLd data={videoObjectJsonLd(video)} />}
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -111,6 +116,7 @@ export default async function ProjectCaseStudyPage(
           keywords: project.stack.join(", "),
           author: { "@id": `${ORIGIN}/#person` },
           isPartOf: { "@id": `${ORIGIN}/#website` },
+          ...(video ? { video: { "@id": `${url}#demo-video` } } : {}),
           about: {
             "@type": "SoftwareApplication",
             name: project.title,
