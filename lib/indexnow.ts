@@ -1,4 +1,5 @@
-import { DISCOVERY_ASSETS, ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
+import { essaysByDate } from "@/lib/essays";
+import { ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
 import { projects } from "@/lib/site-data";
 
 /**
@@ -12,12 +13,20 @@ export function indexNowKeyLocation(): string {
   return `${ORIGIN}/${INDEXNOW_KEY}.txt`;
 }
 
-/** URLs we want search engines to refresh (pages + discovery assets). */
+/**
+ * URLs we want search engines to refresh: exactly the indexable pages the
+ * sitemap lists (routes, case studies and essays).
+ *
+ * The essays were missing, so Bing was never told about the pages most worth
+ * citing. The discovery files (llms.txt, portfolio.json, ...) are left out on
+ * purpose: they are served `noindex`, and submitting a URL that asks not to be
+ * indexed spends the crawl on nothing.
+ */
 export function indexNowUrlList(): string[] {
   const paths = [
     ...PUBLIC_ROUTES.map((r) => r.path),
     ...projects.map((p) => `/projects/${p.slug}`),
-    ...DISCOVERY_ASSETS.map((a) => a.path),
+    ...essaysByDate.map((e) => `/writing/${e.slug}`),
   ];
 
   return paths.map((path) => {
