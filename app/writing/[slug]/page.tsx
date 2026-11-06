@@ -12,7 +12,8 @@ import { JsonLd, blogPostingJsonLd, breadcrumbJsonLd, faqPageJsonLd } from "@/co
 import { PeopleAlsoAsk } from "@/components/people-also-ask";
 import { ORIGIN } from "@/lib/routes";
 import { pageMeta } from "@/lib/seo";
-import { site } from "@/lib/site-data";
+import { projects, site } from "@/lib/site-data";
+import { projectsForEssay } from "@/lib/related";
 import {
   essayBySlug,
   essayCategoryLabel,
@@ -102,6 +103,12 @@ export default async function EssayPage(props: PageProps<"/writing/[slug]">) {
       return aMatch - bMatch;
     })
     .slice(0, 3);
+
+  // The systems this essay is about. Search visitors arrive on an essay and
+  // used to leave from it; this hands them the working version of the idea.
+  // Essays with no close match (pricing, hiring) show the two lead projects.
+  const matched = projectsForEssay(essay);
+  const builtProjects = matched.length > 0 ? matched : projects.slice(0, 2);
 
   return (
     <PageShell>
@@ -242,6 +249,50 @@ export default async function EssayPage(props: PageProps<"/writing/[slug]">) {
             <PeopleAlsoAsk items={paa} />
           </div>
         )}
+
+        {/* ------------------------------------------------- built, not just written */}
+        <section aria-labelledby="built-title" className="flex flex-col gap-5">
+          <div className="flex items-baseline justify-between gap-4 border-t border-text-primary pt-4">
+            <h2 className="font-headline-lg text-headline-lg text-text-primary" id="built-title">
+              {matched.length > 0 ? "See it running" : "Systems I've shipped"}
+            </h2>
+            <Link
+              className="font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
+              href="/projects"
+            >
+              All projects
+            </Link>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {builtProjects.map((project) => (
+              <Link
+                className="group lift flex flex-col gap-2 p-space-md md:p-6 rounded-2xl bg-surface-card border border-border-hairline"
+                data-track="Related Project Clicked"
+                data-track-from={essay.slug}
+                href={`/projects/${project.slug}`}
+                key={project.slug}
+              >
+                <span className="font-label-meta text-label-meta text-text-muted">
+                  {project.category} · {project.status}
+                </span>
+                <span className="font-headline-md text-headline-md text-text-primary">
+                  {project.title}
+                </span>
+                <span className="font-body-sm text-body-sm text-text-secondary">
+                  {project.summary}
+                </span>
+                <span className="mt-1 inline-flex items-center gap-1 font-body-sm text-body-sm font-medium text-text-primary">
+                  Read the case study
+                  <Icon
+                    className="transition-transform duration-300 group-hover:translate-x-0.5"
+                    name="arrow_forward"
+                    size={14}
+                  />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* ------------------------------------------------------ read next */}
         {(newer || older) && (

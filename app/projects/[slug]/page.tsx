@@ -14,6 +14,8 @@ import { JsonLd, breadcrumbJsonLd, faqPageJsonLd } from "@/components/seo/json-l
 import { PeopleAlsoAsk } from "@/components/people-also-ask";
 import { projectPaa } from "@/lib/paa";
 import { projectVideo, videoObjectJsonLd } from "@/lib/project-video";
+import { essaysForProject } from "@/lib/related";
+import { essayDateLabel } from "@/lib/essays";
 import { ORIGIN } from "@/lib/routes";
 import { pageMeta } from "@/lib/seo";
 import { principles, projectBySlug, projects, site } from "@/lib/site-data";
@@ -78,6 +80,7 @@ export default async function ProjectCaseStudyPage(
   const next = i < projects.length - 1 ? projects[i + 1] : null;
   const paa = projectPaa(project);
   const video = projectVideo(project);
+  const writing = essaysForProject(project);
 
   // Reads in the order a reviewer checks a claim: who built it, how it works,
   // what was hard, how it is verified, where it falls short, what it taught.
@@ -253,6 +256,34 @@ export default async function ProjectCaseStudyPage(
                       {claim}
                     </span>
                   ))}
+                </li>
+              ))}
+            </ul>
+          </PageSection>
+        )}
+
+        {/* The essays that explain the ideas this system is built on. */}
+        {writing.length > 0 && (
+          <PageSection
+            meta={<Link className={buttonStyles.link} href="/writing">All essays</Link>}
+            title="Writing behind it"
+          >
+            <ul className="flex flex-col border-t border-border-hairline">
+              {writing.map((essay) => (
+                <li className="border-b border-border-hairline" key={essay.slug}>
+                  <Link
+                    className="group flex flex-col gap-1.5 py-5"
+                    data-track="Related Essay Clicked"
+                    data-track-from={project.slug}
+                    href={`/writing/${essay.slug}`}
+                  >
+                    <span className="font-label-meta text-label-meta text-text-muted">
+                      {essayDateLabel(essay.date)} · {essay.readMinutes} min read
+                    </span>
+                    <span className="font-headline-md text-headline-md text-text-primary transition-transform duration-300 group-hover:translate-x-1">
+                      {essay.title}
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>
