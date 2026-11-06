@@ -433,28 +433,32 @@ p.text-center,
 }
 
 /* Letterbox bars: closed like a curtain on load, then open to a thin
-   widescreen frame that stays. */
+   widescreen frame that stays. Kept short: the curtain used to stay shut
+   for ~1s and open over 1.6s, so on a PC that had the page ready in 0.3s a
+   visitor saw a black screen and read it as a slow site. */
 @utility letterbox-top {
   height: clamp(44px, 7vh, 72px);
-  animation: letterbox-open 1.6s cubic-bezier(0.7, 0, 0.2, 1) 0.15s backwards;
+  animation: letterbox-open 0.7s cubic-bezier(0.7, 0, 0.2, 1) backwards;
 }
 @utility letterbox-bottom {
   height: clamp(44px, 7vh, 72px);
-  animation: letterbox-open 1.6s cubic-bezier(0.7, 0, 0.2, 1) 0.15s backwards;
+  animation: letterbox-open 0.7s cubic-bezier(0.7, 0, 0.2, 1) backwards;
 }
 @keyframes letterbox-open {
   from { height: 50%; }
 }
 
 /* Title-card entrance. Starts blurred and slightly low but painted, so the
-   headline (the LCP element) is visible on the first frame. */
+   headline (the LCP element) is visible on the first frame. The whole hero
+   is readable by ~0.8s: it used to stagger to 1.75s with a 1.4s, 14px blur,
+   so the headline was not legible until ~3s. */
 @utility title-card {
-  animation: title-card 1.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation: title-card 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 @keyframes title-card {
   from {
-    filter: blur(14px);
-    transform: translateY(14px);
+    filter: blur(6px);
+    transform: translateY(10px);
     letter-spacing: 0.02em;
   }
 }
@@ -464,7 +468,7 @@ p.text-center,
   background: linear-gradient(to bottom, rgb(255 244 230 / 0.22), rgb(255 244 230 / 0.06) 55%, transparent 85%);
   clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
   filter: blur(18px);
-  animation: beam-on 2.2s ease-out 0.9s backwards;
+  animation: beam-on 1.4s ease-out 0.3s backwards;
 }
 @keyframes beam-on {
   0% { opacity: 0; }

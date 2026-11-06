@@ -130,7 +130,7 @@ export default async function HomePage() {
 
           <div className="shell-container relative z-10 w-full grid gap-12 lg:grid-cols-12 lg:gap-x-12 lg:items-center pt-28 pb-24 md:pt-28 md:pb-24">
             <div className="flex flex-col gap-7 lg:col-span-7">
-              <p className="eyebrow text-text-muted title-card [animation-delay:0.9s]">
+              <p className="eyebrow text-text-muted title-card [animation-delay:0.1s]">
                 Kunj Shah presents &middot; an applied AI engineer
               </p>
 
@@ -140,19 +140,19 @@ export default async function HomePage() {
                 className="text-[clamp(2.75rem,1.5rem+4.6vw,5rem)] leading-[0.96] font-semibold tracking-[-0.05em] text-text-primary text-balance"
                 id="hero-title"
               >
-                <span className="title-card block [animation-delay:1.05s]">I build the AI</span>
-                <span className="title-card block [animation-delay:1.2s]">feature, then</span>
-                <span className="title-card block [animation-delay:1.4s] display-accent text-[1.08em] tracking-[-0.03em] text-signal-ink">
+                <span className="title-card block [animation-delay:0.15s]">I build the AI</span>
+                <span className="title-card block [animation-delay:0.22s]">feature, then</span>
+                <span className="title-card block [animation-delay:0.3s] display-accent text-[1.08em] tracking-[-0.03em] text-signal-ink">
                   prove it works.
                 </span>
               </h1>
 
-              <p className="title-card [animation-delay:1.6s] font-body-lg text-body-lg text-text-secondary max-w-[52ch]">
+              <p className="title-card [animation-delay:0.38s] font-body-lg text-body-lg text-text-secondary max-w-[52ch]">
                 I&apos;m {site.name}, an AI engineer in Ahmedabad.{" "}
                 {site.offer}
               </p>
 
-              <div className="title-card [animation-delay:1.75s] flex flex-col gap-5">
+              <div className="title-card [animation-delay:0.45s] flex flex-col gap-5">
                 <div className="flex flex-wrap items-center gap-3">
                   <Link
                     className={`${buttonStyles.primary} group h-12 px-6`}
