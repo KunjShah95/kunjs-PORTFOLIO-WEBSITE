@@ -30,6 +30,8 @@ export const site = {
     peerlist: "https://peerlist.io/kunjshah",
     medium: "https://medium.com/@kkshah2005",
     producthunt: "https://www.producthunt.com/@kunj_shah3",
+    /** Lattice, the AI infrastructure index: a project site, not a profile. */
+    lattice: "https://lattice.kunjshah.in",
   },
 } as const;
 

@@ -55,6 +55,7 @@ export function buildPortfolioDocument(claims?: ClaimNumbers) {
       },
       sameAs: [
         site.links.github,
+        site.links.githubAlt,
         site.links.linkedin,
         site.links.x,
         site.links.huggingface,
@@ -104,6 +105,7 @@ export function buildPortfolioDocument(claims?: ClaimNumbers) {
       },
       sameAs: [
         site.links.github,
+        site.links.githubAlt,
         site.links.linkedin,
         site.links.x,
         site.links.huggingface,

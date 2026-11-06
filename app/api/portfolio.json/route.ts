@@ -23,7 +23,7 @@ export async function GET() {
       // while it regenerates. A day-long s-maxage meant a morning fix was
       // invisible to crawlers until the next day.
       "Cache-Control": "public, max-age=300, s-maxage=900, stale-while-revalidate=3600",
-      "X-Robots-Tag": "index, follow",
+      "X-Robots-Tag": "noindex, follow",
     },
   });
 }
