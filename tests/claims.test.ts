@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 import {
+  systemCounts,
   contributions,
   engagements,
   githubClaimFloors,
@@ -39,6 +40,12 @@ const published = [
   { file: "public/llms-full.txt", text: read("public/llms-full.txt") },
   { file: "public/pricing.md", text: read("public/pricing.md") },
   { file: "public/services.md", text: read("public/services.md") },
+  { file: "public/ai.txt", text: read("public/ai.txt") },
+  { file: "public/.well-known/ai.txt", text: read("public/.well-known/ai.txt") },
+  { file: "app/layout.tsx", text: read("app/layout.tsx") },
+  { file: "app/experience/page.tsx", text: read("app/experience/page.tsx") },
+  { file: "app/projects/page.tsx", text: read("app/projects/page.tsx") },
+  { file: "components/projects/projects-browser.tsx", text: read("components/projects/projects-browser.tsx") },
 ];
 
 /* --------------------------------------------------------------- upstream */
@@ -203,6 +210,8 @@ test("every published GitHub count matches the verified floors", () => {
     /\b(\d+)\+? merged PRs, \d+ issues\b/,
     /\b(\d+)\+? merged PRs across\b/,
     /\b(\d+) PRs merged across\b/,
+    // How "60+ pull requests went into projects I don't own" slipped past.
+    /\b(\d+)\+? (?:merged )?pull requests (?:went|merged) into\b/,
   ];
   const REPO_PATTERN =
     /\b(\d+)\+? (?:external (?:repos|repositories|codebases|projects|externals)|codebases|repositories|repos)\b/;
@@ -240,5 +249,62 @@ test("the generated services file is in sync with the source data", () => {
       servicesMd.includes(engagement.audience),
       `public/services.md is missing the "${engagement.audience}" path — regenerate it with npm run gen:services.`,
     );
+  }
+});
+
+/**
+ * An outside audit found the site quoting "17-plus shipped" on most pages and
+ * "18 systems shipped" on /projects, and merged PRs as 60+, 67 and 138+. The
+ * numbers now come from `systemCounts` and `githubClaimFloors`; these tests
+ * keep every published surface on them.
+ */
+test("system counts match the project data everywhere", () => {
+  const { built, shipped } = systemCounts;
+  assert.ok(shipped <= built);
+  const SHIPPED = [/\b(\d+)\+? (?:systems |projects )?shipped\b/i, /\b(\d+)\+? shipped (?:AI )?(?:systems|projects)\b/i];
+  const BUILT = [/\b(\d+)\+? systems built\b/i, /\b(\d+) case studies\b/i];
+  for (const { file, text } of published) {
+    for (const line of text.split("\n")) {
+      if (/kunjshah\.in\/writing\//.test(line)) continue;
+      assert.doesNotMatch(line, /\b1[0-9]\+ (?:shipped |delivered )?(?:systems|projects)\b/, `${file}: "N+" system counts are retired; use systemCounts.`);
+      for (const pattern of SHIPPED) {
+        const m = line.match(pattern);
+        if (m) assert.equal(Number(m[1]), shipped, `${file} says "${m[0]}" but ${shipped} projects are shipped.`);
+      }
+      for (const pattern of BUILT) {
+        const m = line.match(pattern);
+        if (m) assert.equal(Number(m[1]), built, `${file} says "${m[0]}" but there are ${built} case studies.`);
+      }
+    }
+  }
+});
+
+test("the total merged-PR figure always carries the public count", () => {
+  const total = `${githubClaimFloors.mergedPullRequests}`;
+  const pub = `(${githubClaimFloors.publicMergedPullRequests} public)`;
+  for (const { file, text } of published) {
+    if (!file.startsWith("public/")) continue;
+    for (const line of text.split("\n")) {
+      if (/kunjshah\.in\/writing\//.test(line)) continue;
+      for (const m of line.matchAll(/\(\d+ public\)/g)) {
+        assert.equal(m[0], pub, `${file} quotes ${m[0]}; the verified floor is ${pub}. Run npm run sync:github.`);
+      }
+      if (new RegExp(`\\b${total}\\+? (?:merged )?PRs|\\b${total}\\+? merged`).test(line)) {
+        assert.ok(line.includes(pub), `${file} quotes the ${total} total without "${pub}": ${line.slice(0, 120)}`);
+      }
+    }
+  }
+});
+
+test("merges into private repos are never called open source", () => {
+  for (const { file, text } of published) {
+    for (const line of text.split("\n")) {
+      if (/kunjshah\.in\/writing\//.test(line)) continue;
+      assert.doesNotMatch(
+        line,
+        /\b(?:\$\{githubClaimFloorsLabel\(\)\}|\d+\+?) (?:merged )?(?:open-source|OSS) (?:PRs|pull requests)/,
+        `${file}: most merges are into private client repos; say "merged PRs", not "open-source PRs".`,
+      );
+    }
   }
 });

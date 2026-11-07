@@ -68,7 +68,7 @@
 
 ## Evidence
 
-- 17+ shipped projects, 4 hackathon finals
-- 138+ merged open-source PRs across 32 external repositories (merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach)
+- 18 systems built, 15 shipped to users, 4 hackathon finals
+- 138+ merged PRs (67 public) across 32 external repositories (merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach)
 - Verified metrics: 98.7% edge detection accuracy, 65% API cost reduction,
   94% wait-time prediction accuracy

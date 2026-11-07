@@ -23,6 +23,8 @@ import {
   indexItems,
   mergedContributions,
   metrics,
+  publicMergedLabel,
+  systemCounts,
   pilotSteps,
   pricingIncludes,
   pricingTiers,
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
     path: "",
     title: "AI Engineer & Agent Builder in Ahmedabad",
     description:
-      `Kunj Shah, AI engineer in Ahmedabad, India. Production AI agents, RAG pipelines and edge computer vision. 17+ shipped systems, ${githubClaimFloorsLabel()} merged open-source PRs.`,
+      `Kunj Shah, AI engineer in Ahmedabad, India. Production AI agents, RAG pipelines and edge computer vision. ${systemCounts.shipped} shipped systems, ${githubClaimFloorsLabel()} merged PRs ${publicMergedLabel()}.`,
     keywords: [
       "AI engineer Ahmedabad",
       "AI engineer India",
@@ -76,6 +78,10 @@ export default async function HomePage() {
   const mergedCount = activity
     ? String(activity.mergedPullRequests)
     : metrics[1].value;
+  // Beside every headline PR figure: the subset a visitor can open on GitHub.
+  const publicNote = activity
+    ? `(${activity.publicPullRequests} public)`
+    : publicMergedLabel();
 
   const [lead, ...rest] = featured.map(
     (slug) => projects.find((p) => p.slug === slug)!,
@@ -199,8 +205,8 @@ export default async function HomePage() {
         <section aria-label="Track record">
           <dl className="grid grid-cols-2 md:grid-cols-4 border-y border-border-hairline">
             {[
-              { value: metrics[0].value, label: "systems shipped", href: "/projects" },
-              { value: mergedCount, label: "open-source PRs merged", href: "/open-source" },
+              { value: String(systemCounts.built), label: `systems built, ${systemCounts.shipped} shipped`, href: "/projects" },
+              { value: mergedCount, label: `PRs merged ${publicNote}`, href: "/open-source" },
               { value: "2", label: "AI/ML internships", href: "/experience" },
               { value: "4", label: "hackathon finals", href: "/hackathons" },
             ].map((item, i) => (
@@ -551,8 +557,8 @@ export default async function HomePage() {
               </>
             }
           >
-            {mergedCount} pull requests merged into projects I don&apos;t own,
-            each one reviewed by that project&apos;s maintainers.
+            {mergedCount} pull requests merged into projects I don&apos;t own{" "}
+            {publicNote}, each one reviewed by that project&apos;s maintainers.
           </SectionHead>
 
           <div className="grid gap-3 md:grid-cols-2">
