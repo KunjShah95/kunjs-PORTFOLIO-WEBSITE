@@ -1,6 +1,7 @@
 import { citationFormats, canonicalUrls } from "@/lib/cite";
 import { legalDocuments, type LegalDocument } from "@/lib/legal";
 import { ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
+import { resolveServicePage, servicePages, type ServicePage } from "@/lib/service-pages";
 import { nodesToMarkdown, parseArticleHtml } from "@/lib/article-html";
 import { essayBySlug, essayCategoryLabel, essayDateLabel, essaysByDate } from "@/lib/essays";
 import {
@@ -106,6 +107,23 @@ function localPage(): Doc {
   };
 }
 
+/** The service landing pages: same evidence, same order as the HTML. */
+function servicePage(entry: ServicePage): Doc {
+  const page = resolveServicePage(entry);
+  return {
+    title: page.metaTitle,
+    body: [
+      `**${page.service.problem}** ${page.service.deliverable}`,
+      `## How I build it\n\n${page.approach.map((step, i) => `${i + 1}. **${step.title}.** ${step.body} Proof: ${ORIGIN}/projects/${step.slug}`).join("\n")}`,
+      `## Systems I've shipped\n\n${list(page.projects.map((p) => `[${p.title}](${ORIGIN}/projects/${p.slug}): ${p.summary} (${p.metrics.map((m) => `${m.value} ${m.label.toLowerCase()}`).join(", ")})`))}`,
+      `## Prices (INR, fixed scope)\n\n${list(page.tiers.map((t) => `${t.name}: ${t.price}. ${t.body}`))}`,
+      page.essays.length ? `## Essays\n\n${list(page.essays.map((e) => `[${e.title}](${ORIGIN}/writing/${e.slug})`))}` : "",
+      ...page.faqs.map((f) => `## ${f.question}\n\n${f.answer}`),
+      `Start a project: ${ORIGIN}/contact · Pricing: ${ORIGIN}/pricing.md`,
+    ].filter(Boolean).join("\n\n"),
+  };
+}
+
 const pages: Record<string, () => Doc> = {
   "": () => ({
     title: `${site.name} | ${site.role}`,
@@ -175,6 +193,7 @@ const pages: Record<string, () => Doc> = {
     )}\n\n## Channels\n\n${list(directChannels.map((c) => `${c.label}: ${c.href}`))}\n\nPricing: ${ORIGIN}/pricing.md · Services: ${ORIGIN}/services.md`,
   }),
   "/ai-developer-ahmedabad": () => localPage(),
+  ...Object.fromEntries(servicePages.map((entry) => [entry.path, () => servicePage(entry)])),
   "/cite": () => ({
     title: `How to cite ${site.name}`,
     body: `${citationFormats.map((f) => `## ${f.label}\n\n${f.text}`).join("\n\n")}\n\n## Canonical URLs\n\n${list(canonicalUrls.map((u) => `${u.label}: ${u.url}`))}`,
