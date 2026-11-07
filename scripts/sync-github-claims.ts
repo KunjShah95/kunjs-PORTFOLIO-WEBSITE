@@ -111,6 +111,8 @@ async function externalRepos(): Promise<number> {
 
 const next = {
   mergedPullRequests: await totalCount(MERGED),
+  // The subset a visitor can open: printed beside the total as "(N public)".
+  publicMergedPullRequests: await totalCount(`${MERGED} is:public`),
   resolvedIssues: await totalCount(
     `author:${AUTHOR} type:issue is:closed ${EXCLUDE_OWN}`.trim(),
   ),
@@ -142,6 +144,7 @@ data = data.replace(
   block,
   `export const githubClaimFloors = {\n` +
     `  mergedPullRequests: ${next.mergedPullRequests},\n` +
+    `  publicMergedPullRequests: ${next.publicMergedPullRequests},\n` +
     `  resolvedIssues: ${next.resolvedIssues},\n` +
     `  externalRepos: ${next.externalRepos},\n` +
     `} as const;`,
@@ -171,6 +174,9 @@ function substitutions(): [string, string][] {
   add(`${pr[0]} PRs`, `${pr[1]} PRs`);
 
   add(`${issues[0]} issues`, `${issues[1]} issues`);
+
+  const pub = [previous.publicMergedPullRequests, next.publicMergedPullRequests] as const;
+  add(`(${pub[0]} public)`, `(${pub[1]} public)`);
 
   for (const suffix of [
     "external repositories",

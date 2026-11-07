@@ -19,7 +19,7 @@ export function ProofLinks({
   /** Placement label, so hero and case-study clicks stay separable. */
   from: string;
   className?: string;
-  /** Optional context beside the GitHub label, e.g. "60+ merged PRs". */
+  /** Optional context beside the GitHub label, e.g. "138 merged PRs". */
   githubHint?: string;
 }) {
   const linkClass =

@@ -20,7 +20,9 @@ import {
   githubClaimFloors,
   githubClaimFloorsLabel,
   metrics,
+  publicMergedLabel,
   site,
+  systemCounts,
   skillGroups,
 } from "@/lib/site-data";
 
@@ -70,7 +72,7 @@ const related = [
     href: "/open-source",
     icon: "commit",
     title: "Open Source",
-    body: `${githubClaimFloorsLabel()} merged pull requests and ${githubClaimFloors.resolvedIssues} resolved issues across ${githubClaimFloors.externalRepos} codebases.`,
+    body: `${githubClaimFloorsLabel()} merged pull requests ${publicMergedLabel()} and ${githubClaimFloors.resolvedIssues} resolved issues across ${githubClaimFloors.externalRepos} codebases.`,
   },
   {
     href: "/manifesto",
@@ -133,11 +135,13 @@ export default function AboutPage() {
               say which step broke.
             </p>
             <p>
-              I&apos;ve shipped 17+ systems this way, from a multi-tenant real
+              I&apos;ve built {systemCounts.built} systems this way and shipped{" "}
+              {systemCounts.shipped} of them to users, from a multi-tenant real
               estate CRM to railway defect detection that runs in under 100ms
               on a Jetson. Two internships put that work into production
-              codebases, and 60+ pull requests went into projects I don&apos;t
-              own, including OWASP&apos;s agent-security harness.
+              codebases, and {githubClaimFloorsLabel()} merged pull requests{" "}
+              {publicMergedLabel()} went into projects I don&apos;t own,
+              including OWASP&apos;s agent-security harness.
             </p>
             <p>
               I&apos;m in my final year at {education.institution} and based

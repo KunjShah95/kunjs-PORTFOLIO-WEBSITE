@@ -157,20 +157,27 @@ export const homeSubnav = [
  */
 export const githubClaimFloors = {
   mergedPullRequests: 138,
+  publicMergedPullRequests: 67,
   resolvedIssues: 43,
   externalRepos: 32,
 } as const;
 
-/** `67+ merged PRs` — the floor, phrased so it can never overstate. */
+/** `138+`: the merged-PR floor, phrased so it can never overstate. */
 export function githubClaimFloorsLabel(): string {
   return `${githubClaimFloors.mergedPullRequests}+`;
 }
 
-export const metrics = [
-  { value: "17+", label: "Systems Shipped" },
-  { value: githubClaimFloorsLabel(), label: "Merged PRs" },
-  { value: "4×", label: "Hack Finals" },
-] as const;
+/**
+ * `(67 public)`. Most merges are into private client repositories, so a
+ * reader who checks GitHub sees the public subset only. Every headline PR
+ * figure carries this beside it, so the number a reviewer can verify is the
+ * one the site states, rather than a gap they have to explain to themselves.
+ * These merges are not all open source either; say "merged PRs", never
+ * "open-source PRs", about the total.
+ */
+export function publicMergedLabel(): string {
+  return `(${githubClaimFloors.publicMergedPullRequests} public)`;
+}
 
 export const focusAreas = [
   "Agent systems",
@@ -1052,6 +1059,29 @@ export const stackInventory: readonly {
   },
 ];
 
+/**
+ * Statuses that mean the project was not shipped to users: a benchmark, a
+ * from-scratch learning build, a design. They still count as built.
+ */
+const NOT_SHIPPED = /^(Research|Architecture)\b/;
+
+/**
+ * The one place the site's project counts come from. "Built" is every case
+ * study; "shipped" excludes research and architecture work. Copy used to mix
+ * "17-plus shipped" with "eighteen systems shipped" on /projects, which a reviewer reads
+ * as an inflated number.
+ */
+export const systemCounts = {
+  built: projects.length,
+  shipped: projects.filter((project) => !NOT_SHIPPED.test(project.status)).length,
+} as const;
+
+export const metrics = [
+  { value: String(systemCounts.built), label: "Systems Built" },
+  { value: githubClaimFloorsLabel(), label: "Merged PRs" },
+  { value: "4×", label: "Hack Finals" },
+] as const;
+
 /* ---------------------------------------------------------------- Education */
 
 export const education = {
@@ -1280,7 +1310,7 @@ export const services = [
     iconClass: "text-on-tertiary-container",
     deliverable:
       "Database, API, interface and deployment in one build, with backup model providers so one provider's outage never takes your product offline.",
-    proof: "17+ systems shipped, including a multi-tenant CRM where a test fails the build if any query could read another customer's data.",
+    proof: `${systemCounts.shipped} systems shipped to users, including a multi-tenant CRM where a test fails the build if any query could read another customer's data.`,
     stack: ["Next.js", "FastAPI", "PostgreSQL", "Multi-provider fallback"],
     pill: "Full Stack",
     cta: "Discuss a build",
@@ -1380,7 +1410,7 @@ export const clientFaqs = [
   {
     question: "You're still a student. Why hire you?",
     answer:
-      `I'm in the final year of a CS degree, with two internships, 17+ shipped systems and ${githubClaimFloorsLabel()} merged open-source pull requests behind me. Every project on this site links to its code and its tests, so you can check the work before paying for any of it. You also talk directly to the person writing the code.`,
+      `I'm in the final year of a CS degree, with two internships, ${systemCounts.shipped} shipped systems and ${githubClaimFloorsLabel()} merged pull requests in repositories I don't own behind me. Every project on this site links to its code and its tests, so you can check the work before paying for any of it. You also talk directly to the person writing the code.`,
   },
   {
     question: "Who owns the code?",
@@ -1422,8 +1452,8 @@ export const engagements = [
     body: "Final-year B.Tech student at Indus University, interning on production AI/ML work at Ideaboat. Open to AI engineering and full-stack roles on teams that measure what they ship.",
     proof: [
       "2 internships shipping production AI/ML features",
-      "17+ systems built and deployed",
-      `${githubClaimFloorsLabel()} PRs merged across ${githubClaimFloors.externalRepos} external repositories`,
+      `${systemCounts.built} systems built, ${systemCounts.shipped} shipped to users`,
+      `${githubClaimFloorsLabel()} PRs merged across ${githubClaimFloors.externalRepos} external repositories ${publicMergedLabel()}`,
     ],
     action: "Send an opening",
     href: "/contact#inquiryForm",
@@ -1449,7 +1479,7 @@ export const engagements = [
     title: "Contributions and maintainership",
     body: "Merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.",
     proof: [
-      `${githubClaimFloorsLabel()} merged PRs, ${githubClaimFloors.resolvedIssues} issues resolved, ${githubClaimFloors.externalRepos}+ repositories`,
+      `${githubClaimFloorsLabel()} merged PRs ${publicMergedLabel()}, ${githubClaimFloors.resolvedIssues} issues resolved, ${githubClaimFloors.externalRepos}+ repositories`,
       "CI, security and agent-tooling contributions",
       "Onboarding docs written for coding agents",
     ],
@@ -1643,7 +1673,7 @@ export const hiringFaqs = [
   {
     question: "Who is Kunj Shah?",
     answer:
-      `Kunj Shah is an AI engineer and agent builder based in Ahmedabad, India. He ships production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps, with 17+ delivered projects and ${githubClaimFloorsLabel()} merged open-source pull requests.`,
+      `Kunj Shah is an AI engineer and agent builder based in Ahmedabad, India. He ships production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI apps, with ${systemCounts.shipped} shipped projects and ${githubClaimFloorsLabel()} merged pull requests in repositories he doesn't own ${publicMergedLabel()}.`,
   },
   {
     question: "Is Kunj Shah available for freelance AI work?",

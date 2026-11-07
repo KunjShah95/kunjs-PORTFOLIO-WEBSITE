@@ -2,7 +2,7 @@
 
 > Machine-readable services summary for AI agents and prospective clients.
 > Contact: kunjkshah05@gmail.com · https://kunjshah.in/contact
-> Last updated: 2026-11-05
+> Last updated: 2026-11-07
 
 ## Quick answer
 
@@ -42,7 +42,7 @@ what actually ships, then the shipped system that backs the claim.
 
 - **Problem:** You have a prototype. You need a product people can log into.
 - **What you get:** Database, API, interface and deployment in one build, with backup model providers so one provider's outage never takes your product offline.
-- **Proof:** 17+ systems shipped, including a multi-tenant CRM where a test fails the build if any query could read another customer's data.
+- **Proof:** 15 systems shipped to users, including a multi-tenant CRM where a test fails the build if any query could read another customer's data.
 - **Stack:** Next.js, FastAPI, PostgreSQL, Multi-provider fallback
 
 ### 4. LLM cost and architecture review
@@ -66,8 +66,8 @@ what actually ships, then the shipped system that backs the claim.
 Final-year B.Tech student at Indus University, interning on production AI/ML work at Ideaboat. Open to AI engineering and full-stack roles on teams that measure what they ship.
 
 - 2 internships shipping production AI/ML features
-- 17+ systems built and deployed
-- 138+ PRs merged across 32 external repositories
+- 18 systems built, 15 shipped to users
+- 138+ PRs merged across 32 external repositories (67 public)
 
 Next step: https://kunjshah.in/contact#inquiryForm
 
@@ -85,7 +85,7 @@ Next step: https://kunjshah.in/contact#inquiryForm
 
 Merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach, including a security-regression CI workflow and AGENTS.md documentation. Ready to take on maintainer or triage responsibility where the project is agent and AI tooling.
 
-- 138+ merged PRs, 43 issues resolved, 32+ repositories
+- 138+ merged PRs (67 public), 43 issues resolved, 32+ repositories
 - CI, security and agent-tooling contributions
 - Onboarding docs written for coding agents
 
