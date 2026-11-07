@@ -212,6 +212,19 @@ export type Project = {
   /** Path prefix for a ~30s muted demo recording (.mp4/.webm/.jpg poster). */
   video?: string;
   github?: string;
+  /**
+   * Deep-dive sections for flagship case studies: how the system is wired,
+   * what it was measured on, the results table, and how to rerun it. Every
+   * value is taken from the project's own repository (README, docs/, results/)
+   * so a reviewer can check it against the source.
+   */
+  deepDive?: {
+    /** Ordered stages, rendered as a flow diagram. */
+    architecture?: { title: string; detail: string }[];
+    setup?: { label: string; value: string }[];
+    results?: { caption: string; columns: string[]; rows: string[][]; note?: string }[];
+    reproduce?: { commands: string[]; note?: string; source: string };
+  };
 };
 
 export const projectCategories = [
@@ -259,6 +272,61 @@ export const projects: readonly Project[] = [
       "The agents under test are deterministic scripts, not LLMs, so the numbers in results/ validate the harness (capture, oracle, classifier, fixtures, replay) and say nothing about LLM agent behaviour. The published run uses one seed per fault, so the confidence intervals are wide and the figures are a harness check rather than a benchmark. Fixtures reproduce failures in an application you control; arbitrary third-party production sessions cannot be reproduced exactly. Installers are not code-signed, and redaction targets harness secrets rather than customer PII, so real customer data should not be recorded.",
     demo: "https://walkcast.kunjshah.in",
     github: "https://github.com/KunjShah95/walkcast",
+    deepDive: {
+      architecture: [
+        { title: "MiniCRM app", detail: "Boots per run with a seeded fault, exposing its real state: the leads and a ledger of every write." },
+        { title: "BrowserTools", detail: "The agent's only way into the browser. Each call records URL, fingerprints and network before and after." },
+        { title: "Recorder", detail: "Stamps every step on one clock into trace.jsonl." },
+        { title: "Oracle", detail: "Reads the app's final state, never the agent's claim: did the task pass, and was the claim honest?" },
+        { title: "Classifier", detail: "Maps trace, oracle and ledger to a cause from a fixed vocabulary, citing the steps. No rule fires: unexplained." },
+        { title: "Fixture and replay", detail: "Freezes task, fault, seed, timings and recorded model calls, then replays any agent version as a CI gate." },
+      ],
+      setup: [
+        { label: "Faults", value: "stale-owners, gateway-timeout, silent-owner-drop, session-expiry, ui-drift, plus a clean control" },
+        { label: "Agents", value: "v0 naive baseline, v1 fixed, v2 = v1 with read-back removed (a deliberate regression)" },
+        { label: "Run shape", value: "1 seed per fault, 1 trial per replay; 23 agent runs" },
+        { label: "Run time", value: "median 4.2 s, p95 9.0 s per run" },
+        { label: "Stack", value: "Node.js 22, TypeScript, Playwright 1.56, Stagehand 4.2, PostgreSQL queue with SKIP LOCKED leases" },
+      ],
+      results: [
+        {
+          caption: "Regression comparison: replaying each failure fixture against three agent versions",
+          columns: ["Fixture (cause)", "v0 naive", "v1 fixed", "v2 regression"],
+          rows: [
+            ["stale-owners (stale-observation)", "fail", "pass", "pass"],
+            ["gateway-timeout (unsafe-retry)", "fail", "pass", "fail"],
+            ["silent-owner-drop (app-dropped-field)", "fail", "pass", "pass"],
+            ["session-expiry (auth-lost)", "fail", "pass", "pass"],
+            ["ui-drift (locator-not-found)", "fail", "pass", "pass"],
+          ],
+          note: "v2 removed the read-back after a 504, and the gateway-timeout fixture caught it: an unsafe retry that wrote the lead twice. Causes were reproduced 5/5 (95% CI 57–100%); 3 of 4 baseline success claims were false (75%, CI 30–95%); no false positives on clean runs.",
+        },
+        {
+          caption: "First live-LLM run (Claude Sonnet agent via OpenRouter, 626 model calls)",
+          columns: ["Measure", "Result"],
+          rows: [
+            ["False success among success claims", "1 of 4 (25%, 95% CI 5–70%)"],
+            ["Handled correctly", "stale-owners, gateway-timeout"],
+            ["Failed", "silent-owner-drop (claimed success), session-expiry (auth-lost)"],
+            ["Excluded", "ui-drift: the browser's CDP connection dropped mid-run, an infrastructure failure"],
+          ],
+          note: "One seed per scenario, so every rate is a first look rather than a benchmark. The runner now records a lost browser as agent-error instead of saving it as a fixture.",
+        },
+      ],
+      reproduce: {
+        commands: [
+          "npm ci",
+          "npx playwright install chromium",
+          "node --import tsx apps/desktop/cli.ts list",
+          "node --import tsx apps/desktop/cli.ts run --fault stale-owners --agent v0 --screenshots",
+          "node --import tsx apps/desktop/cli.ts compare fixtures --agents v0,v1,v2 --trials 3",
+          "node --import tsx apps/desktop/cli.ts experiment --seeds 5 --trials 3",
+          "npm test",
+        ],
+        note: "Scripted agents need no API key and cost nothing; replays use recorded model calls. The published run used one seed; --seeds 5 narrows the intervals.",
+        source: "https://github.com/KunjShah95/walkcast/blob/main/results/summary.md",
+      },
+    },
   },
   {
     slug: "onramp",
@@ -307,12 +375,76 @@ export const projects: readonly Project[] = [
     summary: "Reproducible serving-backend comparison with latency, throughput, memory, and quality metrics.",
     stack: ["Python", "vLLM", "llama.cpp", "CUDA", "WSL2"],
     metrics: [
-      { value: "4", label: "Workloads" },
-      { value: "n=3", label: "Replicates" },
-      { value: "TTFT", label: "Latency" },
+      { value: "4.1×", label: "vLLM Throughput At 32 Req", accent: true },
+      { value: "39%", label: "Lower TPOT, llama.cpp Solo" },
+      { value: "n=3", label: "Replicates Per Cell" },
     ],
-    body: "Backends run as separate server processes under deterministic prompt generation, with client-side timing on a monotonic clock, warmup passes discarded, and unavailable cells recorded as skipped with a reason.",
+    body: "Backends run as separate server processes under deterministic prompt generation, with client-side timing on a monotonic clock, warmup passes discarded, and unavailable cells recorded as skipped with a reason. Workloads go through /v1/completions rather than chat, because chat templates (and Qwen3's variable-length thinking block) would silently change token counts across the matrix. Throughput is total tokens over group wall time, not the sum of per-request times, which would credit concurrent runs with throughput the server never delivered.",
+    challenges:
+      "Measurement bugs that look like results. The client's HTTP pool defaulted to 10 connections, so at 32 concurrent requests client-side queuing landed inside the TTFT number and an idle server read as seconds slow; it was caught against a mock endpoint with known injected latency. Two benchmark servers on one GPU contaminate each other invisibly, so the runner holds a lockfile. And the planned like-for-like cell, vLLM serving the same GGUF weights as llama.cpp, became impossible when vLLM 0.31 removed GGUF support; it is recorded as skipped with that reason.",
+    evaluation:
+      "The measurement core is checked before any backend is: `selftest` runs it against a mock endpoint with known injected latencies. Each cell runs three replicates after a discarded warmup sweep, results are appended to results/raw/runs.jsonl, and every table and figure is re-derived from that file, so a suspect number is fixed in the aggregation without rerunning inference. Goodput counts only requests meeting both TTFT ≤ 1 s and TPOT ≤ 100 ms.",
+    limitations:
+      "One 8 GiB laptop GPU and one model (Qwen3-0.6B base) in the published comparison. No configuration serves identical weights on both backends (llama.cpp reads GGUF, vLLM safetensors + FP8), so part of every delta belongs to the quantizer, not the engine. At n=3 the ratios between backends are robust but absolute TTFT is a range: llama.cpp's single-request TTFT has a standard deviation larger than its mean. The crossover between 1 and 32 concurrent requests is not measured yet.",
+    lessons:
+      "Tokens per second hides the failure that matters. At 32 concurrent requests llama.cpp Q8_0 still posts 661 tok/s, but only a quarter of that comes from requests meeting the latency objective, while every vLLM request met it. Goodput is the number I now report first.",
     github: "https://github.com/KunjShah95/benchmax",
+    deepDive: {
+      architecture: [
+        { title: "Workloads", detail: "Deterministic prompts in four shapes: one short request, one 2k-token prefill, 8 and 32 concurrent." },
+        { title: "Backend server", detail: "vLLM or llama.cpp started as its own process, so scheduling and batching stay inside what is measured." },
+        { title: "Client timing", detail: "Monotonic clock at chunk arrival: TTFT, inter-token latency, TPOT, throughput over group wall time." },
+        { title: "Samplers", detail: "GPU and host memory sampled at 2 Hz for peak VRAM and RSS." },
+        { title: "runs.jsonl", detail: "Append-only raw records with environment and versions; the single source of truth." },
+        { title: "Report", detail: "Tables and figures re-derived from the raw file, with mean ± SD over replicates." },
+      ],
+      setup: [
+        { label: "GPU", value: "NVIDIA GeForce RTX 4060 Laptop, 8 GiB (8188 MiB), driver 610.62, compute 8.9" },
+        { label: "CPU", value: "Intel Core i7-14650HX, 20 logical cores" },
+        { label: "Host", value: "Windows 11, benchmark inside WSL2 (both backends in the same environment)" },
+        { label: "Model", value: "Qwen3-0.6B (base)" },
+        { label: "Backends", value: "vLLM 0.31.0; llama.cpp built with GGML_CUDA=ON, CUDA arch 89" },
+        { label: "Schemes", value: "llama.cpp Q4_K_M and Q8_0 (GGUF); vLLM FP8 W8A8" },
+        { label: "Replicates", value: "n = 3 per cell, one warmup sweep discarded" },
+      ],
+      results: [
+        {
+          caption: "Single request (w1_single_short, 128 output tokens), mean ± SD",
+          columns: ["Backend", "Scheme", "TTFT (ms)", "TPOT (ms)", "Output tok/s"],
+          rows: [
+            ["llama.cpp", "Q4_K_M", "69.2 ± 99.4", "4.02 ± 0.14", "223.8 ± 31.5"],
+            ["llama.cpp", "Q8_0", "71.1 ± 104.1", "4.38 ± 0.06", "206.8 ± 29.4"],
+            ["vLLM", "FP8 W8A8", "26.6 ± 4.6", "6.60 ± 0.28", "147.9 ± 6.0"],
+          ],
+          note: "One user: llama.cpp's leaner decode loop gives 39% lower TPOT (Q4_K_M) and 51% higher single-stream throughput.",
+        },
+        {
+          caption: "32 concurrent requests (w4_concurrent_32), mean ± SD",
+          columns: ["Backend", "Scheme", "TTFT (ms)", "TPOT (ms)", "Output tok/s", "Goodput tok/s"],
+          rows: [
+            ["llama.cpp", "Q4_K_M", "3089.4 ± 89.6", "11.40 ± 1.16", "591.2 ± 22.7", "147.8"],
+            ["llama.cpp", "Q8_0", "2657.2 ± 90.7", "10.29 ± 0.25", "660.8 ± 19.4", "165.2"],
+            ["vLLM", "FP8 W8A8", "161.1 ± 108.6", "10.51 ± 0.17", "2704.6 ± 206.9", "2704.6"],
+          ],
+          note: "Under load, continuous batching wins: 4.1× llama.cpp Q8_0's throughput, about 16× lower mean TTFT, and every request inside the latency objective.",
+        },
+      ],
+      reproduce: {
+        commands: [
+          "bash scripts/stage1_bootstrap.sh",
+          "bash scripts/stage2b3_cuda_from_redist.sh",
+          "bash scripts/stage2a_install_vllm.sh",
+          "bash scripts/stage2c_build_llamacpp.sh",
+          "bash scripts/stage3_bench_venv.sh",
+          "python -m benchmax.cli selftest",
+          "python -m benchmax.cli preflight",
+          "python -m benchmax.cli run",
+          "python -m benchmax.cli report --session 20261015T030427Z",
+        ],
+        note: "Runs inside WSL2 on a CUDA GPU. selftest validates the timing core against a mock endpoint first; report re-derives every table from results/raw/runs.jsonl.",
+        source: "https://github.com/KunjShah95/benchmax/blob/main/docs/reproducible-run-plan.md",
+      },
+    },
   },
   {
     slug: "archmind-ai",

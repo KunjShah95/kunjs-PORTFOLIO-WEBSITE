@@ -308,3 +308,18 @@ test("merges into private repos are never called open source", () => {
     }
   }
 });
+
+test("case-study deep dives are well-formed", () => {
+  for (const project of projects) {
+    const deep = project.deepDive;
+    if (!deep) continue;
+    for (const table of deep.results ?? []) {
+      for (const row of table.rows) {
+        assert.equal(row.length, table.columns.length, `${project.slug}: a row in "${table.caption}" has ${row.length} cells for ${table.columns.length} columns`);
+      }
+    }
+    if (deep.reproduce) {
+      assert.ok(project.github && deep.reproduce.source.startsWith(project.github), `${project.slug}: reproduce source should point into its own repo`);
+    }
+  }
+});

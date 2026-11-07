@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/shell/page-shell";
 import { DemoVideo } from "@/components/projects/demo-video";
+import { DeepDive } from "@/components/projects/deep-dive";
 import { Icon } from "@/components/icon";
 import { Reveal } from "@/components/primitives/Reveal";
 import { CopyEmailRow } from "@/components/ui/copy-email";
@@ -231,6 +232,8 @@ export default async function ProjectCaseStudyPage(
             </p>
           </PageSection>
         ))}
+
+        {project.deepDive && <DeepDive data={project.deepDive} github={project.github} />}
 
         <PageSection meta={`${project.stack.length} components`} title="Stack">
           <div className="flex flex-wrap gap-1.5">

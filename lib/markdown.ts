@@ -63,6 +63,19 @@ function projectSection(p: Project, level = "##"): string {
     if (p.evaluation) parts.push(`## Evaluation\n\n${p.evaluation}`);
     if (p.limitations) parts.push(`## Limitations\n\n${p.limitations}`);
     if (p.lessons) parts.push(`## Lessons\n\n${p.lessons}`);
+    const deep = p.deepDive;
+    if (deep?.architecture) {
+      parts.push(`## Architecture\n\n${deep.architecture.map((st, i) => `${i + 1}. **${st.title}.** ${st.detail}`).join("\n")}`);
+    }
+    if (deep?.setup) parts.push(`## Test setup\n\n${list(deep.setup.map((r) => `${r.label}: ${r.value}`))}`);
+    for (const table of deep?.results ?? []) {
+      const head = `| ${table.columns.join(" | ")} |\n|${table.columns.map(() => "---").join("|")}|`;
+      const rows = table.rows.map((row) => `| ${row.join(" | ")} |`).join("\n");
+      parts.push(`## Results: ${table.caption}\n\n${head}\n${rows}${table.note ? `\n\n${table.note}` : ""}`);
+    }
+    if (deep?.reproduce) {
+      parts.push(`## Reproduce it\n\n\`\`\`sh\n${p.github ? `git clone ${p.github}\n` : ""}${deep.reproduce.commands.join("\n")}\n\`\`\`${deep.reproduce.note ? `\n\n${deep.reproduce.note}` : ""}\n\nSource: ${deep.reproduce.source}`);
+    }
   }
   const links = [p.demo && `Live demo: ${p.demo}`, p.github && `Source: ${p.github}`].filter(Boolean);
   if (links.length) parts.push(links.join("\n"));
