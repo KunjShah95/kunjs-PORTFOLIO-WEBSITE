@@ -19,10 +19,13 @@ import { QuickAnswer } from "@/components/quick-answer";
 import { ArrowAffordance } from "@/components/ui/primitives";
 import {
   clientFaqs,
+  engagements,
   githubClaimFloorsLabel,
   indexItems,
   mergedContributions,
   metrics,
+  publicMergedLabel,
+  systemCounts,
   pilotSteps,
   pricingIncludes,
   pricingTiers,
@@ -31,6 +34,7 @@ import {
   site,
 } from "@/lib/site-data";
 import { essayDateLabel, essaysByDate } from "@/lib/essays";
+import { servicePages } from "@/lib/service-pages";
 import { getOpenSourceActivity, timeAgo } from "@/lib/github";
 import { getContributions } from "@/lib/contributions";
 import { JsonLd, profilePageJsonLd } from "@/components/seo/json-ld";
@@ -45,7 +49,7 @@ export const metadata: Metadata = {
     path: "",
     title: "AI Engineer & Agent Builder in Ahmedabad",
     description:
-      `Kunj Shah, AI engineer in Ahmedabad, India. Production AI agents, RAG pipelines and edge computer vision. 17+ shipped systems, ${githubClaimFloorsLabel()} merged open-source PRs.`,
+      `Kunj Shah, AI engineer in Ahmedabad, India. Production AI agents, RAG pipelines and edge computer vision. ${systemCounts.shipped} shipped systems, ${githubClaimFloorsLabel()} merged PRs ${publicMergedLabel()}.`,
     keywords: [
       "AI engineer Ahmedabad",
       "AI engineer India",
@@ -76,6 +80,10 @@ export default async function HomePage() {
   const mergedCount = activity
     ? String(activity.mergedPullRequests)
     : metrics[1].value;
+  // Beside every headline PR figure: the subset a visitor can open on GitHub.
+  const publicNote = activity
+    ? `(${activity.publicPullRequests} public)`
+    : publicMergedLabel();
 
   const [lead, ...rest] = featured.map(
     (slug) => projects.find((p) => p.slug === slug)!,
@@ -167,15 +175,36 @@ export default async function HomePage() {
                       size={16}
                     />
                   </Link>
-                  <Link
-                    className={`${buttonStyles.secondary} h-12 px-6`}
-                    data-track="Explore Work Clicked"
+                  {/* Recruiters get their own first-screen action: the resume
+                      used to sit in a link row at the very bottom, so a
+                      hiring manager had to read the whole freelance pitch to
+                      find it. The reel is the next section down anyway. */}
+                  <a
+                    className={`${buttonStyles.secondary} group h-12 px-6`}
+                    data-track="Resume Clicked"
                     data-track-from="hero"
-                    href="#reel"
+                    href="/kunjshah_cv.pdf"
+                    rel="noopener"
+                    target="_blank"
                   >
-                    Watch the reel
-                  </Link>
+                    <Icon name="download" size={16} />
+                    View resume
+                  </a>
                 </div>
+                <p className="flex items-start gap-2 font-body-sm text-body-sm text-text-secondary">
+                  <span aria-hidden="true" className="mt-[0.5em] h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
+                  <span>
+                    Open to full-time AI roles, remote or relocating.{" "}
+                    <Link
+                      className="link-dots font-medium text-text-primary"
+                      data-track="Hiring Path Clicked"
+                      data-track-from="hero"
+                      href="#paths"
+                    >
+                      Hiring? Start here
+                    </Link>
+                  </span>
+                </p>
                 <ul className="flex flex-wrap gap-x-5 gap-y-2 font-body-sm text-body-sm text-text-muted">
                   {["Free 15-minute intro call", "Fixed price, in writing", "You own the code"].map(
                     (line) => (
@@ -199,8 +228,8 @@ export default async function HomePage() {
         <section aria-label="Track record">
           <dl className="grid grid-cols-2 md:grid-cols-4 border-y border-border-hairline">
             {[
-              { value: metrics[0].value, label: "systems shipped", href: "/projects" },
-              { value: mergedCount, label: "open-source PRs merged", href: "/open-source" },
+              { value: String(systemCounts.built), label: `systems built, ${systemCounts.shipped} shipped`, href: "/projects" },
+              { value: mergedCount, label: `PRs merged ${publicNote}`, href: "/open-source" },
               { value: "2", label: "AI/ML internships", href: "/experience" },
               { value: "4", label: "hackathon finals", href: "/hackathons" },
             ].map((item, i) => (
@@ -241,6 +270,75 @@ export default async function HomePage() {
         </section>
 
         {/* -------------------------------------------------------- services */}
+        {/* ------------------------------------------------------------ paths */}
+        {/* Three audiences land here, and each needs a different next step: a
+            hiring manager wants the resume and the evidence, a founder wants a
+            scoped pilot, a maintainer wants the pull requests. One card each,
+            straight after the numbers, so nobody has to read the others' pitch. */}
+        <section aria-labelledby="paths-title" className="flex flex-col gap-10 scroll-mt-24" id="paths">
+          <SectionHead eyebrow="Pick your path" id="paths-title" title="Hiring, building, or reviewing?">
+            Three reasons people end up here. Each has its own next step.
+          </SectionHead>
+          <ul className="grid gap-4 lg:grid-cols-3">
+            {engagements.map((path) => {
+              const hiring = path.audience === "Hiring managers";
+              return (
+                <li
+                  className={cn(
+                    "flex flex-col gap-5 rounded-3xl border p-6 md:p-8",
+                    hiring
+                      ? "border-text-primary bg-surface-card"
+                      : "border-border-hairline bg-surface-card",
+                  )}
+                  key={path.audience}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-surface-container text-text-secondary">
+                      <Icon name={path.icon} size={20} />
+                    </span>
+                    <span className="eyebrow text-text-muted">{path.audience}</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-headline-md text-headline-md text-text-primary">{path.title}</h3>
+                    <p className="font-body-md text-body-md text-text-secondary">{path.body}</p>
+                  </div>
+                  <ul className="flex flex-col gap-2 border-t border-border-hairline pt-4">
+                    {path.proof.map((line) => (
+                      <li className="flex items-start gap-2 font-body-sm text-body-sm text-text-secondary" key={line}>
+                        <Check />
+                        {line}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto flex flex-wrap items-center gap-3 pt-1">
+                    {hiring && (
+                      <a
+                        className={`${buttonStyles.primary} group`}
+                        data-track="Resume Clicked"
+                        data-track-from="paths-hiring"
+                        href="/kunjshah_cv.pdf"
+                        rel="noopener"
+                        target="_blank"
+                      >
+                        <Icon name="download" size={15} />
+                        View resume
+                      </a>
+                    )}
+                    <Link
+                      className={hiring ? buttonStyles.secondary : `${buttonStyles.primary} group`}
+                      data-track={hiring ? "Contact CTA Clicked" : path.href === "/open-source" ? "Open Source Path Clicked" : "Contact CTA Clicked"}
+                      data-track-from={`paths-${path.icon}`}
+                      href={path.href}
+                    >
+                      {path.actionLabel}
+                    </Link>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
         <section aria-labelledby="services-title" className="flex flex-col gap-10 scroll-mt-24" id="services">
           <SectionHead
             eyebrow="Services"
@@ -292,6 +390,17 @@ export default async function HomePage() {
                     </span>
                     {service.proof}
                   </p>
+                  {servicePageFor(service.pill) && (
+                    <Link
+                      className="w-fit inline-flex items-center gap-1 font-body-sm text-body-sm font-medium text-text-primary link-dots"
+                      data-track="Service Page Clicked"
+                      data-track-from="home-services"
+                      href={servicePageFor(service.pill)!}
+                    >
+                      How I build {service.pill === "RAG" ? "RAG search" : "agents"}
+                      <Icon name="arrow_forward" size={14} />
+                    </Link>
+                  )}
                 </div>
                 {i === 0 && <AgentTrace className="mt-8 lg:mt-0" />}
               </Reveal>
@@ -551,8 +660,8 @@ export default async function HomePage() {
               </>
             }
           >
-            {mergedCount} pull requests merged into projects I don&apos;t own,
-            each one reviewed by that project&apos;s maintainers.
+            {mergedCount} pull requests merged into projects I don&apos;t own{" "}
+            {publicNote}, each one reviewed by that project&apos;s maintainers.
           </SectionHead>
 
           <div className="grid gap-3 md:grid-cols-2">
@@ -812,6 +921,11 @@ function SectionHead({
       {aside && <div className="pt-1">{aside}</div>}
     </div>
   );
+}
+
+/** The dedicated page for a service, when it has one. */
+function servicePageFor(pill: string): string | undefined {
+  return servicePages.find((page) => page.pill === pill)?.path;
 }
 
 function Check() {

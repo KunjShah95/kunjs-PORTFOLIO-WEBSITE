@@ -10,7 +10,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Tag } from "@/components/ui/primitives";
 import { cn } from "@/lib/cn";
 import { EASE_OUT } from "@/lib/motion";
-import { projectCategories, projects } from "@/lib/site-data";
+import { projectCategories, projects, systemCounts } from "@/lib/site-data";
 
 /** Map a project's category onto a filter bucket. */
 function buckets(project: (typeof projects)[number]): string[] {
@@ -287,7 +287,7 @@ export function ProjectsBrowser() {
 export function ShippedStatus() {
   return (
     <span className="font-body-sm text-body-sm text-text-muted">
-      {projects.length} systems shipped
+      {systemCounts.built} systems built · {systemCounts.shipped} shipped
     </span>
   );
 }
