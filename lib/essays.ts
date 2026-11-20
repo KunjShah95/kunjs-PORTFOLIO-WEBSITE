@@ -2,7 +2,7 @@ import archive from "@/content/essays.json";
 import localArchive from "@/content/essays-local.json";
 import paaArchive from "@/content/essay-paa.json";
 import { ORIGIN } from "@/lib/routes";
-import { nodesToText, parseArticleHtml } from "@/lib/article-html";
+import { nodesToText, parseArticleHtml, safeUrl } from "@/lib/article-html";
 
 /* ==========================================================================
    The essay archive.
@@ -78,7 +78,12 @@ const localEssays: Essay[] = (localArchive.essays as LocalEssay[]).map((essay) =
   };
 });
 
-const essays = [...(archive.essays as Essay[]), ...localEssays];
+// Cover images go through the same URL repair as body images, so og:image,
+// JSON-LD and the hero all point at the final CDN URL, not a redirect hop.
+const essays = [...(archive.essays as Essay[]), ...localEssays].map((essay) => ({
+  ...essay,
+  image: essay.image ? safeUrl(essay.image) : essay.image,
+}));
 
 /** Newest first. */
 export const essaysByDate: readonly Essay[] = [...essays].sort((a, b) => b.date.localeCompare(a.date));

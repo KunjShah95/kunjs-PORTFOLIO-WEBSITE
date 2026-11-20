@@ -161,3 +161,38 @@ test("a blockquote is marked as one", () => {
   const md = nodesToMarkdown(parseArticleHtml("<blockquote><p>quoted</p></blockquote>"));
   assert.match(md, /^> /m);
 });
+
+/* ------------------------------------------------------------ link healing */
+
+test("dead mirrored links are unlinked and moved ones repointed", () => {
+  assert.equal(safeUrl("http://localhost:8501/"), null);
+  assert.equal(safeUrl("https://kunjshah01.github.io/RL-A2A.github.io/"), null);
+  assert.equal(
+    safeUrl("https://github.com/KunjShah01/RL-A2A.github.io"),
+    "https://github.com/KunjShah01/RL-A2A",
+  );
+  assert.equal(
+    safeUrl("https://lattice.kkshah2005.workers.dev/"),
+    "https://lattice.kunjshah.in",
+  );
+});
+
+test("legacy Medium CDN image URLs skip the redirect hop", () => {
+  assert.equal(
+    safeUrl("https://cdn-images-1.medium.com/max/1024/1*abc.png"),
+    "https://cdn-images-1.medium.com/v2/resize:fit:1024/1*abc.png",
+  );
+  assert.equal(
+    safeUrl("https://cdn-images-1.medium.com/proxy/0*abc.jpg"),
+    "https://cdn-images-1.medium.com/v2/0*abc.jpg",
+  );
+  assert.equal(safeUrl("https://example.com/x"), "https://example.com/x");
+});
+
+test("redirecting publication and docs links are pointed at their final URL", () => {
+  assert.equal(safeUrl("https://pub.towardsai.net/"), "https://towardsai.com/");
+  assert.equal(
+    safeUrl("https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run"),
+    "https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run?hl=en",
+  );
+});

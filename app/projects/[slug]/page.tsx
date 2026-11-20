@@ -42,10 +42,20 @@ export async function generateMetadata(
     ? project.title
     : `${project.title}: ${project.category} case study`;
 
+  // Descriptions under ~110 characters get flagged as thin and are often
+  // replaced by the engine. Pad them with the stack, which is factual.
+  const stack = project.stack.slice(0, 3);
+  const stackList =
+    stack.length > 1 ? `${stack.slice(0, -1).join(", ")} and ${stack[stack.length - 1]}` : stack[0];
+  const description =
+    project.description.length < 110 && stackList
+      ? `${project.description} Built with ${stackList}.`
+      : project.description;
+
   return pageMeta({
     path: `/projects/${project.slug}`,
     title: metaTitle,
-    description: project.description,
+    description,
     keywords: [project.title, project.category, ...project.stack],
     ogTitle: `${project.title}: case study by ${site.name}`,
     ogDescription: project.summary,

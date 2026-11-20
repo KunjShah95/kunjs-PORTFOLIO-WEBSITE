@@ -50,6 +50,20 @@ export const metadata: Metadata = {
   description:
     "Kunj Shah is an AI engineer in Ahmedabad, India building production AI systems: autonomous agents, RAG pipelines, edge computer vision, and full-stack AI applications.",
   applicationName: `${site.name} | Portfolio`,
+  // Search Console / Bing Webmaster ownership. Set the env vars in Vercel and
+  // the tags appear; unset, nothing is emitted.
+  ...(process.env.GOOGLE_SITE_VERIFICATION || process.env.BING_SITE_VERIFICATION
+    ? {
+        verification: {
+          ...(process.env.GOOGLE_SITE_VERIFICATION
+            ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+            : {}),
+          ...(process.env.BING_SITE_VERIFICATION
+            ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } }
+            : {}),
+        },
+      }
+    : {}),
   authors: [{ name: site.name, url: `${ORIGIN}/` }],
   creator: site.name,
   publisher: site.name,

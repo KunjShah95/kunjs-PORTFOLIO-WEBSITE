@@ -46,6 +46,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /** Extra profiles beyond the primary GitHub. */
+/** Search page rather than /pulls, which bounces logged-out visitors to a login. */
+const MERGED_PRS_URL = `https://github.com/search?q=${encodeURIComponent("is:pr is:merged author:KunjShah95")}&type=pullrequests`;
+
 const profiles = [
   { icon: "terminal", label: "GitHub", href: site.links.github },
   { icon: "terminal", label: "GitHub (alt)", href: site.links.githubAlt },
@@ -263,7 +266,7 @@ export default async function OpenSourcePage() {
             </ol>
             <a
               className="group inline-flex items-center gap-1.5 w-fit -my-3 py-3 font-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors"
-              href={`https://github.com/pulls?q=${encodeURIComponent("is:pr is:merged author:KunjShah95")}`}
+              href={MERGED_PRS_URL}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -284,7 +287,7 @@ export default async function OpenSourcePage() {
               action={
                 <a
                   className="inline-flex items-center gap-1.5 h-10 px-4 rounded-full border border-border-hairline bg-surface-card font-body-sm text-body-sm font-medium text-text-primary hover:border-text-muted transition-colors"
-                  href={`https://github.com/pulls?q=${encodeURIComponent("is:pr is:merged author:KunjShah95")}`}
+                  href={MERGED_PRS_URL}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
@@ -435,7 +438,7 @@ export default async function OpenSourcePage() {
         >
           <a
             className={buttonStyles.primary}
-            href={`${site.links.github}/issues`}
+            href={`${site.links.github}/lattice/issues`}
             rel="noopener noreferrer"
             target="_blank"
           >
