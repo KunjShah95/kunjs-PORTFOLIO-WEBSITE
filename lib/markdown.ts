@@ -1,4 +1,5 @@
 import { citationFormats, canonicalUrls } from "@/lib/cite";
+import { commercialPages, type CommercialPage } from "@/lib/commercial-pages";
 import { legalDocuments, type LegalDocument } from "@/lib/legal";
 import { ORIGIN, PUBLIC_ROUTES } from "@/lib/routes";
 import { resolveServicePage, servicePages, type ServicePage } from "@/lib/service-pages";
@@ -137,6 +138,46 @@ function servicePage(entry: ServicePage): Doc {
   };
 }
 
+/** The commercial-intent pages, rendered from the same copy as the HTML. */
+function commercialPage(entry: CommercialPage): Doc {
+  const sections = entry.sections
+    .map((section) => {
+      if (section.kind === "paragraphs") {
+        return `## ${section.title}\n\n${section.paragraphs.join("\n\n")}`;
+      }
+      if (section.kind === "bullets") {
+        return `## ${section.title}\n\n${list(section.items)}`;
+      }
+      if (section.kind === "steps") {
+        return `## ${section.title}\n\n${section.items.map((item, i) => `${i + 1}. ${item}`).join("\n")}`;
+      }
+      if (section.kind === "projects") {
+        const rows = section.slugs
+          .map((slug) => {
+            const p = projectBySlug(slug);
+            return p ? `[${p.title}](${ORIGIN}/projects/${slug}): ${p.summary}` : "";
+          })
+          .filter(Boolean);
+        return `## ${section.title}\n\n${list(rows)}`;
+      }
+      const head = `| ${section.columns.join(" | ")} |\n|${section.columns.map(() => "---").join("|")}|`;
+      const rows = section.rows.map((row) => `| ${row.join(" | ")} |`).join("\n");
+      return `## ${section.title}\n\n${head}\n${rows}`;
+    })
+    .join("\n\n");
+
+  return {
+    title: entry.metaTitle,
+    body: [
+      entry.lead,
+      `## Quick answer\n\n${entry.quickAnswer}`,
+      sections,
+      ...entry.faqs.map((faq) => `## ${faq.question}\n\n${faq.answer}`),
+      `Start a project: ${ORIGIN}/contact · Pricing: ${ORIGIN}/pricing.md · Proof: ${ORIGIN}/proof-of-work`,
+    ].join("\n\n"),
+  };
+}
+
 const pages: Record<string, () => Doc> = {
   "": () => ({
     title: `${site.name} | ${site.role}`,
@@ -206,6 +247,7 @@ const pages: Record<string, () => Doc> = {
     )}\n\n## Channels\n\n${list(directChannels.map((c) => `${c.label}: ${c.href}`))}\n\nPricing: ${ORIGIN}/pricing.md · Services: ${ORIGIN}/services.md`,
   }),
   "/ai-developer-ahmedabad": () => localPage(),
+  ...Object.fromEntries(commercialPages.map((entry) => [entry.path, () => commercialPage(entry)])),
   ...Object.fromEntries(servicePages.map((entry) => [entry.path, () => servicePage(entry)])),
   "/cite": () => ({
     title: `How to cite ${site.name}`,

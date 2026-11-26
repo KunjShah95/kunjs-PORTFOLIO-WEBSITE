@@ -115,6 +115,34 @@ export default function AiDeveloperAhmedabadPage() {
           </Link>
         </PageIntro>
 
+        {/* --------------------------- buying a project, not browsing a candidate */}
+        <section
+          aria-label="Hiring paths"
+          className="flex flex-col gap-4 rounded-2xl border border-border-hairline bg-surface-card p-5 md:flex-row md:items-center md:justify-between md:p-6"
+        >
+          <div className="flex flex-col gap-1">
+            <h2 className="font-headline-md text-headline-md text-text-primary">
+              Hiring for a project, not a role?
+            </h2>
+            <p className="font-body-sm text-body-sm text-text-secondary max-w-[60ch]">
+              The local page covers availability in Ahmedabad. For a scoped build, see what gets
+              delivered to a founder, how the price compares with an agency, and the shipped work
+              you can check first.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link className={buttonStyles.primary} href="/hire-ai-agent-developer">
+              Hire an AI agent developer
+            </Link>
+            <Link className={buttonStyles.secondary} href="/ai-automation-consultant-ahmedabad">
+              Automation consulting
+            </Link>
+            <Link className={buttonStyles.secondary} href="/proof-of-work">
+              Proof of work
+            </Link>
+          </div>
+        </section>
+
         {/* ------------------------------------------------- what gets built */}
         <PageSection
           meta="Five kinds of project, each with the evidence behind it."

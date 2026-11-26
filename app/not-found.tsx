@@ -5,7 +5,12 @@ import { Icon } from "@/components/icon";
 import { buttonStyles } from "@/components/ui/blocks";
 import { indexItems } from "@/lib/site-data";
 
-export const metadata: Metadata = { title: "Page not found | Kunj Shah" };
+export const metadata: Metadata = {
+  // Absolute: the root template would otherwise append the brand twice.
+  title: { absolute: "Page not found | Kunj Shah" },
+  description:
+    "The page you followed is gone or moved. The site index, projects, and writing archive are one click away.",
+};
 
 /** 404: says what happened, then offers the whole site index as a way out. */
 export default function NotFound() {

@@ -5,7 +5,8 @@ import { site } from "@/lib/site-data";
 const BRAND_SUFFIX = ` | ${site.name}`;
 /** Search results truncate near 60 characters; Ahrefs and Google both flag past it. */
 export const TITLE_MAX = 60;
-export const DESCRIPTION_MAX = 158;
+/** Ahrefs flags descriptions past ~158 chars; 155 leaves a safe margin. */
+export const DESCRIPTION_MAX = 155;
 
 /**
  * Fit a page title into the 60-character budget the SERP gives it.

@@ -3,14 +3,15 @@ import Link from "next/link";
 import { PageShell } from "@/components/shell/page-shell";
 import { Icon } from "@/components/icon";
 import { ContactBody } from "@/components/contact/contact-body";
-import { CopyEmailButton } from "@/components/ui/copy-email";
-import { StatusDot } from "@/components/ui/primitives";
+import { DirectLines } from "@/components/contact/direct-lines";
 import { PageIntro, PageSection } from "@/components/ui/page-intro";
+import { buttonStyles } from "@/components/ui/blocks";
 import { Reveal } from "@/components/primitives/Reveal";
 import { pageMeta } from "@/lib/seo";
 import { JsonLd, pageBreadcrumb } from "@/components/seo/json-ld";
 import { legalDocuments } from "@/lib/legal";
-import { clientFaqs, directChannels, hiringFaqs, site } from "@/lib/site-data";
+import { clientFaqs, directChannels, hiringFaqs } from "@/lib/site-data";
+import { bookingEnabled, bookingNote, bookingUrl } from "@/lib/booking";
 
 export const metadata: Metadata = pageMeta({
   path: "/contact",
@@ -42,23 +43,41 @@ export default function ContactPage() {
           title="Tell me what you're building."
         />
 
-        {/* --------------------------------------------- the direct line */}
-        {/* One row: status, the address, the copy button. The form below is
-            the main path; this is for people who would rather email. */}
-        <Reveal
-          className="mx-auto w-full max-w-3xl flex flex-col gap-4 rounded-2xl border border-border-hairline bg-surface-card p-5 md:p-6 sm:flex-row sm:items-center sm:justify-between"
-          delay={0.2}
-        >
-          <div className="flex min-w-0 flex-col gap-1.5">
-            <span className="inline-flex items-center gap-2 font-body-sm text-body-sm text-text-secondary">
-              <StatusDot className="bg-accent-emerald" ping />
-              Booking new projects &middot; {site.location} ({site.timezone}), working remotely
-            </span>
-            <span className="font-mono text-[clamp(1rem,0.9rem+0.6vw,1.375rem)] font-medium text-text-primary select-all truncate">
-              {site.email}
-            </span>
-          </div>
-          <CopyEmailButton />
+        {/* ------------------------------------------------- the fastest path */}
+        {/* Rendered only when a scheduler is configured, so the page never
+            shows a booking button that goes nowhere. The form below stays the
+            second door: some people want to write before they talk. */}
+        {bookingEnabled && bookingUrl && (
+          <Reveal
+            className="mx-auto w-full max-w-3xl flex flex-col gap-4 rounded-2xl border border-border-hairline bg-surface-card p-5 md:p-6 sm:flex-row sm:items-center sm:justify-between"
+            delay={0.15}
+          >
+            <div className="flex min-w-0 flex-col gap-1.5">
+              <span className="eyebrow text-text-muted">Fastest path</span>
+              <span className="font-body-lg text-body-lg font-medium text-text-primary">
+                Pick a 15-minute slot now.
+              </span>
+              <span className="font-body-sm text-body-sm text-text-secondary">{bookingNote}</span>
+            </div>
+            <a
+              className={`${buttonStyles.primary} h-12 shrink-0`}
+              data-track="Booking CTA Clicked"
+              data-track-from="contact"
+              href={bookingUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Icon name="calendar_today" size={16} />
+              Book the call
+            </a>
+          </Reveal>
+        )}
+
+        {/* ----------------------------------------------- the direct lines */}
+        {/* Email, call and WhatsApp, whichever the visitor prefers. The form
+            below stays for anyone who would rather write first. */}
+        <Reveal className="mx-auto w-full max-w-3xl" delay={0.2}>
+          <DirectLines />
         </Reveal>
         </div>
 

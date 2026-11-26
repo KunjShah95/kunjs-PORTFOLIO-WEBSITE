@@ -17,6 +17,7 @@ import {
   type Essay,
 } from "@/lib/essays";
 import { pageMeta } from "@/lib/seo";
+import { EmailCapture } from "@/components/writing/email-capture";
 
 export const metadata: Metadata = pageMeta({
   path: "/writing",
@@ -173,6 +174,8 @@ export default function WritingPage() {
             </Reveal>
           </div>
         )}
+
+        <EmailCapture />
       </div>
     </PageShell>
   );

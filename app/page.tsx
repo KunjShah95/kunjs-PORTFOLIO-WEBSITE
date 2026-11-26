@@ -19,6 +19,7 @@ import { QuickAnswer } from "@/components/quick-answer";
 import { ArrowAffordance } from "@/components/ui/primitives";
 import {
   clientFaqs,
+  clientProof,
   engagements,
   githubClaimFloorsLabel,
   indexItems,
@@ -32,7 +33,14 @@ import {
   projects,
   services,
   site,
+  verification,
 } from "@/lib/site-data";
+import {
+  bookingEnabled,
+  bookingHref,
+  bookingLabel,
+} from "@/lib/booking";
+import { hasPhone, whatsappHref } from "@/lib/contact-links";
 import { essayDateLabel, essaysByDate } from "@/lib/essays";
 import { servicePages } from "@/lib/service-pages";
 import { getOpenSourceActivity, timeAgo } from "@/lib/github";
@@ -164,14 +172,14 @@ export default async function HomePage() {
                 <div className="flex flex-wrap items-center gap-3">
                   <Link
                     className={`${buttonStyles.primary} group h-12 px-6`}
-                    data-track="Contact CTA Clicked"
+                    data-track={bookingEnabled ? "Booking CTA Clicked" : "Contact CTA Clicked"}
                     data-track-from="hero"
-                    href="/contact#inquiryForm"
+                    href={bookingHref}
                   >
-                    Start a project
+                    {bookingLabel}
                     <Icon
                       className="transition-transform duration-300 group-hover:translate-x-0.5"
-                      name="arrow_forward"
+                      name={bookingEnabled ? "calendar_today" : "arrow_forward"}
                       size={16}
                     />
                   </Link>
@@ -559,6 +567,116 @@ export default async function HomePage() {
           </ol>
         </section>
 
+        {/* ---------------------------------------------------- before you pay */}
+        {/* The testimonial substitute. Nobody can show a logo wall for private
+            client work, so this section sells the proof that does exist: work
+            a buyer can open, run and check before paying. Each card admits
+            where its evidence stops, which is what makes the set credible. */}
+        <section aria-labelledby="check-title" className="flex flex-col gap-10 scroll-mt-24" id="check">
+          <SectionHead
+            eyebrow="Before you pay"
+            id="check-title"
+            title={
+              <>
+                Check the work{" "}
+                <span className="display-accent">before you pay for any of it.</span>
+              </>
+            }
+          >
+            {clientProof.length > 0
+              ? "A client says it better than I would. Below their words, the claims you can check yourself: source, tests and review history."
+              : "No client logos here: most of that work is private. What is public is the work itself, and every claim below links to the thing that could disprove it."}
+          </SectionHead>
+
+          {/* A named client who agreed to be quoted outranks any number of
+              self-reported dashboards, so it leads the section. Every card
+              carries a link to the shipped work, because a quote nobody can
+              trace is just another claim. */}
+          {clientProof.length > 0 && (
+            <div className={cn("grid gap-3", clientProof.length > 1 && "md:grid-cols-2")}>
+              {clientProof.map((proof) => (
+                <Reveal
+                  as="figure"
+                  className="flex flex-col gap-5 rounded-3xl border border-border-hairline bg-surface-card p-6 md:p-10"
+                  key={proof.name}
+                >
+                  <blockquote className="font-body-lg text-body-lg leading-relaxed text-text-primary">
+                    &ldquo;{proof.quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-auto flex flex-wrap items-end justify-between gap-3 border-t border-border-hairline pt-4">
+                    <span className="flex flex-col gap-0.5">
+                      <span className="font-body-md text-body-md font-medium text-text-primary">
+                        {proof.name}
+                      </span>
+                      <span className="font-body-sm text-body-sm text-text-muted">{proof.role}</span>
+                    </span>
+                    {proof.href && (
+                      <a
+                        className={buttonStyles.link}
+                        data-track="Client Work Clicked"
+                        data-track-from={proof.name}
+                        href={proof.href}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        See the site
+                        <Icon name="arrow_outward" size={14} />
+                      </a>
+                    )}
+                  </figcaption>
+                </Reveal>
+              ))}
+            </div>
+          )}
+
+          <div className="grid gap-3 md:grid-cols-3">
+            {verification.map((item, i) => (
+              <Reveal
+                as="div"
+                className="flex flex-col gap-4 rounded-2xl border border-border-hairline bg-surface-card p-6 md:p-7"
+                delay={i * 0.06}
+                key={item.claim}
+              >
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-surface-container text-text-secondary">
+                  <Icon name={item.icon} size={20} />
+                </span>
+                <h3 className="text-[1.25rem] leading-tight font-semibold tracking-[-0.02em] text-text-primary">
+                  {item.claim}
+                </h3>
+                <p className="font-body-md text-body-md text-text-secondary">{item.detail}</p>
+                <Link
+                  className={cn(buttonStyles.link, "mt-auto")}
+                  data-track="Verification Link Clicked"
+                  data-track-from={item.claim}
+                  href={item.href}
+                >
+                  {item.linkLabel}
+                  <Icon name="arrow_forward" size={14} />
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="flex flex-col gap-4 rounded-2xl border border-border-hairline bg-surface-card px-6 py-5 md:flex-row md:items-center md:justify-between">
+            <p className="font-body-md text-body-md text-text-secondary max-w-[62ch]">
+              <span className="font-medium text-text-primary">
+                Want to talk to someone I&apos;ve worked with?
+              </span>{" "}
+              {clientProof.length > 0
+                ? "Want to hear it from a client directly? Ask on the intro call and I'll connect you."
+                : "Ask on the intro call and I'll connect you with a past collaborator, with their permission."}
+            </p>
+            <Link
+              className={cn(buttonStyles.secondary, "shrink-0")}
+              data-track="Reference CTA Clicked"
+              data-track-from="home-check"
+              href={bookingHref}
+            >
+              {bookingEnabled ? "Book the call" : "Ask for a reference"}
+            </Link>
+          </div>
+        </section>
+
         {/* ---------------------------------------------------------- pricing */}
         <section aria-labelledby="pricing-title" className="flex flex-col gap-10 scroll-mt-24" id="pricing">
           <SectionHead
@@ -571,8 +689,9 @@ export default async function HomePage() {
               </>
             }
           >
-            Starting ranges for a first project, in INR. You get an exact,
-            fixed quote in writing after the intro call.
+            Starting ranges for a first project, quoted and invoiced in INR.
+            You get an exact, fixed quote in writing after the intro call, and
+            paying from abroad is a Wise transfer into the INR invoice.
           </SectionHead>
 
           <QuickAnswer
@@ -618,9 +737,9 @@ export default async function HomePage() {
                   )}
                   data-track="Pricing CTA Clicked"
                   data-track-from={tier.name}
-                  href="/contact#inquiryForm"
+                  href={bookingHref}
                 >
-                  Get a fixed quote
+                  {bookingEnabled ? "Book the intro call" : "Get a fixed quote"}
                 </Link>
               </div>
             ))}
@@ -637,9 +756,14 @@ export default async function HomePage() {
                 </li>
               ))}
             </ul>
-            <p className="font-body-sm text-body-sm text-text-muted">
-              Reviews and debugging ₹1,500/hour &middot; Retainers ₹30,000–75,000/month
-            </p>
+            <div className="flex flex-col gap-1 md:items-end">
+              <p className="font-body-sm text-body-sm text-text-muted">
+                Reviews and debugging ₹1,500/hour &middot; Retainers ₹30,000–75,000/month
+              </p>
+              <p className="font-body-sm text-body-sm text-text-muted">
+                Every amount in INR &middot; UPI, bank transfer or Wise
+              </p>
+            </div>
           </div>
         </section>
 
@@ -852,18 +976,36 @@ export default async function HomePage() {
                 <span className="display-accent text-signal-ink">actually works.</span>
               </h2>
               <p className="font-body-lg text-body-lg text-text-secondary max-w-[52ch]">
-                Send two or three sentences about it. I reply within one working
-                day, and the first 15-minute call is free.
+                {bookingEnabled
+                  ? "Pick a 15-minute slot and tell me what you're building. No form first, and no charge for the call."
+                  : "Send two or three sentences about it. I reply within one working day, and the first 15-minute call is free."}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <Link
-                  className={`${buttonStyles.primary} h-12 px-6`}
-                  data-track="Contact CTA Clicked"
+                  className={`${buttonStyles.primary} h-12 px-6 group`}
+                  data-track={bookingEnabled ? "Booking CTA Clicked" : "Contact CTA Clicked"}
                   data-track-from="home-cta"
-                  href="/contact#inquiryForm"
+                  href={bookingHref}
                 >
-                  Start a project
+                  {bookingLabel}
+                  <Icon
+                    className="transition-transform duration-300 group-hover:translate-x-0.5"
+                    name={bookingEnabled ? "calendar_today" : "arrow_forward"}
+                    size={16}
+                  />
                 </Link>
+                {hasPhone && whatsappHref && (
+                  <a
+                    className={`${buttonStyles.secondary} h-12 px-6`}
+                    data-track="WhatsApp Clicked"
+                    data-track-from="home-cta"
+                    href={whatsappHref}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    WhatsApp
+                  </a>
+                )}
                 <CopyEmailRow className="w-full sm:w-auto" />
               </div>
               <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-body-sm text-body-sm text-text-muted">

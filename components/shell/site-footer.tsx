@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Signature } from "@/components/shell/signature";
 import { LocalClock } from "@/components/ui/local-clock";
 import { legalDocuments } from "@/lib/legal";
+import { hasPhone, telHref, whatsappHref } from "@/lib/contact-links";
 import { indexItems, site } from "@/lib/site-data";
 
 /**
@@ -25,6 +26,12 @@ const social: readonly { label: string; href: string; me?: boolean }[] = [
   { label: "Lattice", href: site.links.lattice },
   { label: "Resume", href: "/kunjshah_cv.pdf" },
   { label: "Email", href: `mailto:${site.email}` },
+  ...(hasPhone
+    ? [
+        { label: "Call", href: telHref! },
+        { label: "WhatsApp", href: whatsappHref! },
+      ]
+    : []),
 ];
 
 /**

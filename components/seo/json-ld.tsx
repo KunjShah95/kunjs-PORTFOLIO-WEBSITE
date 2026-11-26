@@ -68,6 +68,7 @@ export function PersonSiteJsonLd() {
             url: `${ORIGIN}/`,
             mainEntityOfPage: { "@type": "WebPage", "@id": `${ORIGIN}/` },
             email: `mailto:${site.email}`,
+            ...(site.phone.trim() ? { telephone: `+${site.phone.trim()}` } : {}),
             image: `${ORIGIN}/profile.png`,
             jobTitle: site.role,
             description:
@@ -147,11 +148,12 @@ export function PersonSiteJsonLd() {
             ],
             priceRange: "₹₹",
             currenciesAccepted: "INR",
-            paymentAccepted: "Bank Transfer, UPI",
+            paymentAccepted: "Bank Transfer, UPI, Wise",
             contactPoint: {
               "@type": "ContactPoint",
               contactType: "sales",
               email: site.email,
+              ...(site.phone.trim() ? { telephone: `+${site.phone.trim()}` } : {}),
               url: `${ORIGIN}/contact`,
               availableLanguage: ["English", "Gujarati", "Hindi"],
               areaServed: "Worldwide",

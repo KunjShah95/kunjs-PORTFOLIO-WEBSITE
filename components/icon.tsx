@@ -20,6 +20,7 @@ export type IconName =
   | "calendar_today"
   | "check"
   | "check_circle"
+  | "chat_bubble"
   | "cloud_sync"
   | "code_blocks"
   | "commit"
@@ -40,6 +41,7 @@ export type IconName =
   | "memory"
   | "model_training"
   | "person"
+  | "phone"
   | "psychology"
   | "psychology_alt"
   | "refresh"
@@ -77,6 +79,8 @@ const PATHS: Record<IconName, string> = {
   check: "M5 12.5l5 5L19 7",
   check_circle:
     "M12 12m-8.5 0a8.5 8.5 0 1 0 17 0a8.5 8.5 0 1 0-17 0M8 12.2l2.8 2.8L16 9.5",
+  chat_bubble:
+    "M4.5 5.5h15v10.5h-7.5L7 19.5v-3.5H4.5zM8.8 10.2h.01M12 10.2h.01M15.2 10.2h.01",
   cloud_sync:
     "M7 18.5a4 4 0 0 1-.4-8 5.5 5.5 0 0 1 10.4-1.2 3.9 3.9 0 0 1 .6 9.2M9.8 15.5l1.7 1.7 1.7-1.7M14.2 12.5l-1.7-1.7-1.7 1.7",
   code_blocks: "M7.5 7 4 12l3.5 5M16.5 7 20 12l-3.5 5M13.8 4.5l-3.6 15",
@@ -106,6 +110,8 @@ const PATHS: Record<IconName, string> = {
     "M6.5 7.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM14 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18.5 7.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6.5 16.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM14 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM18.5 16.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7.4 9.3l3.4 3.4M16.6 9.3l-3.4 3.4M7.4 16.3l3.4-3.2M16.6 16.3l-3.4-3.2",
   person:
     "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM5 20a7 7 0 0 1 14 0",
+  phone:
+    "M5 4.5h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.5 1.5A16 16 0 0 1 3.5 6 1.5 1.5 0 0 1 5 4.5z",
   psychology:
     "M13 4a7.5 7.5 0 0 0-7 9.8l-1.5 3.7h5.5v2a2 2 0 0 0 2 2H14v-3.5M17.5 6.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z",
   psychology_alt:

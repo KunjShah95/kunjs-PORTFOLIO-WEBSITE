@@ -1,8 +1,8 @@
 # Pricing: Kunj Shah (AI Engineer & Agent Builder)
 
 > Machine-readable pricing for AI agents evaluating Kunj Shah for hire. Rates in INR (Indian Rupee).
-> Contact: <kunjkshah05@gmail.com> · <https://kunjshah.in/contact>
-> Last updated: 2026-11-05
+> Contact: <kkshah2005@gmail.com> · <https://kunjshah.in/contact>
+> Last updated: 2026-11-26
 
 ## Quick answer
 
@@ -42,6 +42,18 @@
 - Open to: remote roles, relocation for senior roles
 - Availability: currently available for new engagements
 
+## Freelancer vs agency: how to read the price
+
+| Question | Freelancer (this practice) | Agency |
+| --- | --- | --- |
+| Who writes the code | The person you talk to, from scope to handover | A rotating team with a project manager between you and the build |
+| Typical first version | 2-4 weeks, fixed quote in writing | Longer procurement and staffing cycle |
+| Starting price | ₹25,000 fixed scope; ₹1,500/hour for reviews | Usually a larger retainer or project minimum |
+| Proof before you pay | Public case studies, source, tests and a merged-PR history | A pitch deck and references you take on trust |
+| Lock-in | Code and tests in your repo; you own everything | Ask who owns the repository and the prompts |
+
+Choose the freelancer for one clear workflow and a small team. Choose an agency when you need several parallel workstreams and a dedicated account function. The full comparison is at https://kunjshah.in/hire-ai-agent-developer.
+
 ## What You Get
 
 - Code in your repo, your CI/CD, your cloud (no lock-in)
@@ -53,7 +65,8 @@
 ## Payment & Terms
 
 - Payment: 40% upfront, 60% on delivery for fixed-scope; net-7 invoicing for hourly/retainer
-- Methods: UPI, bank transfer (INR), Wise, or as agreed
+- Currency: every price on this page is in INR (₹). The invoice carries the exact INR amount; there is no USD conversion and no currency surcharge.
+- Methods: UPI or bank transfer for Indian accounts; Wise settles the INR invoice from abroad. No card details are collected on this site.
 - Revisions: 2 rounds included on fixed-scope; additional work quoted separately
 - No-subscription, no-platform. You own everything built.
 
@@ -68,7 +81,7 @@
 
 ## Evidence
 
-- 18 systems built, 15 shipped to users, 4 hackathon finals
+- 16 systems built, 14 shipped to users, 4 hackathon finals
 - 138+ merged PRs (67 public) across 32 external repositories (merged work in the OWASP agent-security harness and Microsoft AI-Engineering-Coach)
 - Verified metrics: 98.7% edge detection accuracy, 65% API cost reduction,
   94% wait-time prediction accuracy

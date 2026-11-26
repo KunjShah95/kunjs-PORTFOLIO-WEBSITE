@@ -29,8 +29,6 @@ const tours = {
     ['hold',3000],['scroll',3200,12000],['hold',1500],['top',3200],['click','nav >> text=Playground'],['hold',1500],['playground'],['hold',4000],['scroll',500,2500],['hold',1500]]},
   'archmind-ai': { url:'https://archmind-ai-topaz.vercel.app/', steps:[
     ['hold',3000],['move',900,500],['scroll',2200,8000],['hold',1500],['scroll',2000,7000],['hold',1500],['scroll',1400,5000],['hold',2500]]},
-  'archmind-research-agent': { url:'https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/', frame:true, steps:[
-    ['hold',2500],['research'],['hold',3000]]},
   estate360: { url:'https://agentic-crm-henna.vercel.app/', steps:[
     ['consent'],['hold',3500],['move',700,380],['scroll',2000,9000],['hold',1800],['scroll',2000,8000],['hold',1500],['top',4000],['hold',2000]]},
   lattice: { url:'https://lattice.kunjshah.in', steps:[

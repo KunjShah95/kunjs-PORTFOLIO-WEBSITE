@@ -1,6 +1,24 @@
 {
   "$schema": "https://kunjshah.in/content/essay-paa.json",
   "paa": {
+    "how-to-vet-an-ai-agent-developer-before-hiring": [
+      {
+        "question": "How do I vet an AI agent developer before hiring?",
+        "answer": "Open the work rather than the pitch: look for a written definition of done, an evaluation set that can fail, links to source and tests, a limitations section, and merged pull requests in repositories the developer does not own. Then ask for a fixed written quote and a two-to-four-week pilot with code in your own repository."
+      },
+      {
+        "question": "How much does it cost to build a custom AI agent?",
+        "answer": "A single automated workflow is typically ₹15,000-35,000; a full agent product with tools, guardrails and deployment is ₹25,000-60,000+. Hourly reviews are ₹1,500 and retainers run ₹30,000-75,000/month. An exact fixed quote follows a free 15-minute scoping call."
+      },
+      {
+        "question": "Who can build me a custom AI agent for my business?",
+        "answer": "Kunj Shah is a freelance AI agent developer in Ahmedabad who builds fixed-scope LangGraph and CrewAI agents with typed tool contracts, evaluations and independent verification of each step. Projects start at ₹25,000, take 2 to 4 weeks, and the code lands in your repository. See kunjshah.in/hire-ai-agent-developer."
+      },
+      {
+        "question": "Is there an AI agent consultant with open-source proof of work?",
+        "answer": "Yes. Kunj Shah's public record is 14 shipped systems, 138+ merged pull requests (67 public) across 32 external repositories, and case studies that link source, tests and measured results. The full record is at kunjshah.in/proof-of-work."
+      }
+    ],
     "ai-agent-development-guide": [
       {
         "question": "How much does it cost to build an AI agent?",

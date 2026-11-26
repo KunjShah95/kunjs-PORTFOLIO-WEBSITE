@@ -8,8 +8,10 @@
     "start": "next start",
     "lint": "eslint app components lib tests",
     "typecheck": "tsc --noEmit",
+    "verify:email": "tsx scripts/verify-email.ts",
     "test": "tsx --test tests/*.test.ts",
     "indexnow": "node scripts/submit-indexnow.mjs",
+    "postdeploy": "tsx scripts/post-deploy-indexnow.ts",
     "gen:services": "node --experimental-strip-types scripts/gen-services-md.ts",
     "sync:essays": "node --experimental-strip-types scripts/sync-essays.ts",
     "sync:github": "node --experimental-strip-types scripts/sync-github-claims.ts"

@@ -186,7 +186,10 @@ export default function RootLayout({
           title="LLM site context (llms.txt)"
           type="text/markdown"
         />
+        <link href={`${ORIGIN}/llms-full.txt`} rel="alternate" title="Full LLM context (llms-full.txt)" type="text/plain" />
         <link href={`${ORIGIN}/ai.txt`} rel="alternate" title="AI crawler policy (ai.txt)" type="text/markdown" />
+        <link href={`${ORIGIN}/pricing.md`} rel="alternate" title="Machine-readable pricing" type="text/markdown" />
+        <link href={`${ORIGIN}/services.md`} rel="alternate" title="Machine-readable services" type="text/markdown" />
         <link href={`${ORIGIN}/api/portfolio.json`} rel="alternate" title="Portfolio JSON" type="application/json" />
       </head>
       <body className="bg-surface text-text-primary font-body-md text-body-md antialiased overflow-x-clip">

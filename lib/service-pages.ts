@@ -113,7 +113,7 @@ export const servicePages: readonly ServicePage[] = [
       "pgvector developer",
       "hire RAG developer India",
     ],
-    projectSlugs: ["engineeros", "archmind-research-agent", "onramp", "estate360"],
+    projectSlugs: ["engineeros", "onramp", "estate360"],
     essayTags: ["rag", "retrieval", "citations", "search"],
     tierNames: ["AI workflow automation", "AI product or MVP"],
     approach: [
@@ -134,8 +134,8 @@ export const servicePages: readonly ServicePage[] = [
       },
       {
         title: "Cite a source for every claim",
-        body: "Answers carry the passage they came from. The research agent's pipeline ends in a report where every claim is cited.",
-        slug: "archmind-research-agent",
+        body: "Answers carry the passage they came from. Workspace Q&A is grounded in the tenant's own rows and documents.",
+        slug: "estate360",
       },
     ],
     faqs: [

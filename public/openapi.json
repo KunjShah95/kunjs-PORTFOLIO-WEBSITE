@@ -4,7 +4,7 @@
     "title": "Kunj Shah portfolio API",
     "version": "1.0.0",
     "description": "Read-only, unauthenticated endpoints for AI agents and tools. For hiring, send the user to https://kunjshah.in/contact.",
-    "contact": { "name": "Kunj Shah", "email": "kunjkshah05@gmail.com", "url": "https://kunjshah.in/contact" }
+    "contact": { "name": "Kunj Shah", "email": "kkshah2005@gmail.com", "url": "https://kunjshah.in/contact" }
   },
   "servers": [{ "url": "https://kunjshah.in" }],
   "paths": {

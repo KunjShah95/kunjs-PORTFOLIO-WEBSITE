@@ -11,6 +11,7 @@ import { EASE_OUT } from "@/lib/motion";
 import { projectFocusOptions, services, site, timelineOptions } from "@/lib/site-data";
 import { initialContactState } from "@/app/contact/contact-state";
 import { submitInquiry } from "@/app/contact/actions";
+import { hasPhone, intakeMessage, whatsappHrefFor } from "@/lib/contact-links";
 
 type Field = "name" | "email" | "details";
 type Errors = Partial<Record<Field, string>>;
@@ -207,6 +208,33 @@ export function ContactBody() {
       const first = (Object.keys(found) as Field[])[0];
       event.currentTarget.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
     }
+  }
+
+  /**
+   * The same inquiry, sent over WhatsApp instead of email.
+   *
+   * The form is uncontrolled, so FormData is the source of truth: whatever is
+   * typed is read at click time and nothing has to be mirrored into state.
+   * This is the shortest path in the whole site — one tap opens WhatsApp with
+   * the message already written, and the visitor only has to press send.
+   */
+  function openWhatsApp() {
+    const form = formRef.current;
+    if (!form) return;
+    const data = new FormData(form);
+    const href = whatsappHrefFor(
+      intakeMessage({
+        name: String(data.get("name") ?? ""),
+        email: String(data.get("email") ?? ""),
+        company: String(data.get("company") ?? ""),
+        focus: String(data.get("focus") ?? ""),
+        timeline: String(data.get("timeline") ?? ""),
+        details: String(data.get("details") ?? ""),
+      }),
+    );
+    if (!href) return;
+    track("Inquiry Sent on WhatsApp", { focus, timeline });
+    window.open(href, "_blank", "noopener,noreferrer");
   }
 
   function reset() {
@@ -449,7 +477,7 @@ export function ContactBody() {
 
                 <fieldset className="flex flex-col gap-2">
                   <legend className="font-body-sm text-body-sm font-medium text-text-primary mb-2">
-                    What do you need?
+                    What do you need? <span className="font-normal text-text-muted">(a default is picked, change it if it is wrong)</span>
                   </legend>
                   <div className="grid grid-cols-2 gap-2">
                     {projectFocusOptions.map((option) => {
@@ -483,7 +511,7 @@ export function ContactBody() {
                 </fieldset>
 
                 <fieldset className="flex flex-col gap-2">
-                  <legend className="font-body-sm text-body-sm font-medium text-text-primary mb-2">Timeline</legend>
+                  <legend className="font-body-sm text-body-sm font-medium text-text-primary mb-2">Timeline <span className="font-normal text-text-muted">(approximate is fine)</span></legend>
                   <div className="grid grid-cols-[repeat(auto-fit,minmax(8.5rem,1fr))] gap-2">
                     {timelineOptions.map((option) => {
                       const active = timeline === option;
@@ -575,9 +603,23 @@ export function ContactBody() {
                       </>
                     )}
                   </button>
+                  {/* The same message, one tap from WhatsApp. Rendered only
+                      when a number is published, so the button can never
+                      open an empty chat picker. */}
+                  {hasPhone && (
+                    <button
+                      className="w-full h-11 px-5 rounded-full border border-border-hairline bg-surface-subtle text-text-primary font-body-sm text-body-sm font-medium flex items-center justify-center gap-2 hover:border-text-muted hover:bg-surface-card active:scale-[0.99] transition-all"
+                      onClick={openWhatsApp}
+                      type="button"
+                    >
+                      <Icon name="chat_bubble" size={15} />
+                      Send these details on WhatsApp
+                    </button>
+                  )}
                   <p className="text-center font-body-sm text-body-sm text-text-muted" id="inquiry-effect">
-                    Sends one email to Kunj. Nothing is published or charged. Replies within a
-                    day; your details are only used to reply.
+                    {hasPhone
+                      ? "One email to Kunj, or the same details straight to WhatsApp. Nothing is published or charged; your details are only used to reply."
+                      : "Sends one email to Kunj. Nothing is published or charged. Replies within a day; your details are only used to reply."}
                   </p>
                 </div>
               </MotionForm>

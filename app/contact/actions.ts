@@ -169,10 +169,41 @@ type Inquiry = {
   details: string;
 };
 
+/**
+ * The message body, used both for delivery and for the failure log.
+ *
+ * One formatter, so what a refused message prints in the logs is exactly what
+ * the email would have said. A lead that fails to send must still be
+ * recoverable, because the visitor has no way to know it did not arrive.
+ */
+function formatInquiry(inquiry: Inquiry): string {
+  return [
+    `Name:     ${inquiry.name}`,
+    `Email:    ${inquiry.email}`,
+    `Company:  ${inquiry.company || "Not provided"}`,
+    `Focus:    ${inquiry.focus || "Not specified"}`,
+    `Timeline: ${inquiry.timeline || "Not specified"}`,
+    "",
+    "---",
+    inquiry.details,
+  ].join("\n");
+}
+
+/**
+ * Warned once per process, not per submission.
+ *
+ * This is the quiet failure that makes a working form look broken: delivery
+ * goes to CONTACT_TO while the page tells people to write to site.email. The
+ * owner checks the advertised inbox, finds nothing, and concludes the form is
+ * dead. One line in the logs is enough to point at the cause.
+ */
+let warnedAddressMismatch = false;
+
 async function sendEmail(inquiry: Inquiry): Promise<{ ok: true } | { ok: false; error: string }> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("[contact] RESEND_API_KEY is not set — message not delivered");
+    console.error(`[contact] Undelivered inquiry\n${formatInquiry(inquiry)}`);
     return {
       ok: false,
       error: "Email delivery isn't configured yet. Please email me directly.",
@@ -189,6 +220,16 @@ async function sendEmail(inquiry: Inquiry): Promise<{ ok: true } | { ok: false; 
    */
   const to = process.env.CONTACT_TO ?? site.email;
 
+  if (!warnedAddressMismatch && to.toLowerCase() !== site.email.toLowerCase()) {
+    warnedAddressMismatch = true;
+    console.warn(
+      `[contact] delivery address ${to} differs from the published address ` +
+      `${site.email}. Submissions will never appear in the inbox the site ` +
+      `advertises. Set CONTACT_TO=${site.email} (or change site.email to the ` +
+      `address that actually receives) to make them the same.`,
+    );
+  }
+
   try {
     const res = await fetch(
       process.env.CONTACT_RESEND_URL ?? "https://api.resend.com/emails",
@@ -203,16 +244,7 @@ async function sendEmail(inquiry: Inquiry): Promise<{ ok: true } | { ok: false; 
           to: [to],
           reply_to: inquiry.email,
           subject: `Portfolio inquiry: ${inquiry.name}${inquiry.company ? ` (${inquiry.company})` : ""}`,
-          text: [
-            `Name:     ${inquiry.name}`,
-            `Email:    ${inquiry.email}`,
-            `Company:  ${inquiry.company || "Not provided"}`,
-            `Focus:    ${inquiry.focus || "Not specified"}`,
-            `Timeline: ${inquiry.timeline || "Not specified"}`,
-            "",
-            "---",
-            inquiry.details,
-          ].join("\n"),
+          text: formatInquiry(inquiry),
         }),
       },
     );
@@ -220,11 +252,28 @@ async function sendEmail(inquiry: Inquiry): Promise<{ ok: true } | { ok: false; 
     if (!res.ok) {
       const detail = await res.text().catch(() => "");
       console.error(`[contact] resend failed: ${res.status} ${detail.slice(0, 400)}`);
+      // A refusal means the message exists nowhere else. Log it in full so the
+      // lead can be recovered from the function logs instead of lost.
+      console.error(`[contact] Undelivered inquiry\n${formatInquiry(inquiry)}`);
+      if (res.status === 403) {
+        console.error(
+          "[contact] 403 from Resend usually means the sandbox sender " +
+          "(onboarding@resend.dev) is sending to an address that is not the " +
+          "Resend account owner. Set CONTACT_TO to the account address, or " +
+          "verify the sending domain and set CONTACT_FROM.",
+        );
+      }
       return { ok: false, error: "The message didn't go through. Please email me directly." };
     }
+
+    // The message id is the only proof of handoff: it is what the Resend
+    // dashboard indexes, so a report of "no email arrived" is checkable.
+    const receipt = (await res.json().catch(() => ({}))) as { id?: string };
+    console.log(`[contact] delivered id=${receipt.id ?? "unknown"} to=${to}`);
     return { ok: true };
   } catch (error) {
     console.error("[contact] resend error", error);
+    console.error(`[contact] Undelivered inquiry\n${formatInquiry(inquiry)}`);
     return { ok: false, error: "The message didn't go through. Please email me directly." };
   }
 }

@@ -117,6 +117,21 @@ export default async function ProjectCaseStudyPage(
       {/* Marks this case study as the demo's watch page, so Google indexes the
           recording here rather than flagging it as a preview elsewhere. */}
       {video && <JsonLd data={videoObjectJsonLd(video)} />}
+      {/* Ahrefs classifies these pages as product pages. Describe the shipped
+          system as a product without inventing a price or a review. */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "@id": `${url}#product`,
+          url,
+          name: project.title,
+          description: project.description,
+          category: project.category,
+          brand: { "@type": "Brand", name: site.name },
+          ...(project.github ? { sameAs: project.github } : {}),
+        }}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",

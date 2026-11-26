@@ -26,7 +26,13 @@ export function QuickAnswer({
           <span key={entry.href} className="inline-flex items-center gap-2">
             {index > 0 && <span aria-hidden="true" className="text-border-dotted">·</span>}
             {entry.href.startsWith("/") ? (
-              <Link className="link-dots hover:text-text-primary" href={entry.href}>
+              <Link
+                className="link-dots hover:text-text-primary"
+                href={entry.href}
+                // Machine mirrors are served noindex; a crawler that follows
+                // them as pages reports them as broken or non-indexable links.
+                rel={/\.(md|txt|json)$/.test(entry.href) || entry.href.startsWith("/api/") ? "nofollow" : undefined}
+              >
                 {entry.label}
               </Link>
             ) : (

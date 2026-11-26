@@ -12,7 +12,21 @@ export const site = {
   role: "AI Engineer & Agent Builder",
   tagline: "aka AI Engineer",
   age: 22,
-  email: "kunjkshah05@gmail.com",
+  /**
+   * The one inbox the contact form delivers to and the one the site
+   * advertises. They must match, or a working form looks broken: submissions
+   * land where nobody is looking. See CONTACT_TO in .env.example.
+   */
+  email: "kkshah2005@gmail.com",
+  /**
+   * Direct phone line, digits only with the country code (what `tel:` and
+   * wa.me need). Every call and WhatsApp surface is derived from this one
+   * value, and all of them hide themselves while it is blank, so the site
+   * can never ship a dead tel: link.
+   */
+  phone: "919106878258",
+  /** How the number reads on the page. */
+  phoneDisplay: "+91 91068 78258",
   location: "Ahmedabad, India",
   locationLong: "Ahmedabad, Gujarat, India",
   timezone: "UTC +5:30",
@@ -78,6 +92,18 @@ export const indexItems = [
     label: "Projects",
     icon: "code_blocks",
     description: "Shipped systems with real metrics and live demos.",
+  },
+  {
+    href: "/proof-of-work",
+    label: "Proof of work",
+    icon: "commit",
+    description: "14 shipped systems and 138+ merged PRs, with the links.",
+  },
+  {
+    href: "/hire-ai-agent-developer",
+    label: "Hire me",
+    icon: "terminal",
+    description: "Fixed-scope agent builds, priced and handed over in your repo.",
   },
   {
     href: "/open-source",
@@ -635,7 +661,7 @@ export const projects: readonly Project[] = [
       { value: "99.7%", label: "Uptime" },
     ],
     body: "Five adaptive difficulty levels with a multi-provider fallback chain across Gemini, GPT, and Claude, so a provider outage degrades quality rather than taking the product down.",
-    demo: "https://intelligent-learning-assistant.vercel.app",
+    demo: "https://intelligent-learning-assistant.vercel.app/",
     github: "https://github.com/KunjShah95/intelligent-learning-assistant",
   },
   {
@@ -656,27 +682,8 @@ export const projects: readonly Project[] = [
       { value: "24h", label: "Window" },
     ],
     body: "Real-time ingestion into Firestore with time-series forecasting and heatmap rendering. A hybrid statistical + ML approach beats pure ML once the data gets noisy.",
-    demo: "https://ps-1-eight.vercel.app",
+    demo: "https://ps-1-eight.vercel.app/",
     github: "https://github.com/KunjShah95/Smart-flow-ai",
-  },
-  {
-    slug: "resumemaster-ai",
-    title: "ResumeMasterAI 2026",
-    category: "AI Career",
-    status: "Architecture",
-    icon: "architecture",
-    description:
-      "Career platform built on a model-routing gateway: a complexity classifier sends cheap work to small models and saves large ones for real reasoning.",
-    summary:
-      "Smart routing gateway that cut LLM spend 65% by matching model size to task complexity.",
-    stack: ["Python", "LangGraph", "ChromaDB", "Streamlit"],
-    metrics: [
-      { value: "65%", label: "Cost Reduction", accent: true },
-      { value: "3×", label: "Precision" },
-      { value: "<200ms", label: "Overhead" },
-    ],
-    body: "A complexity classifier routes each request to the cheapest model that can handle it, with checkpointing and human-in-the-loop review. Precise routing plus bounded agent steps keeps the token bill predictable instead of open-ended.",
-    github: "https://github.com/KunjShah01/job-snipper",
   },
   {
     slug: "sentinel-cli",
@@ -718,28 +725,6 @@ export const projects: readonly Project[] = [
     lessons:
       "INT8 quantization-aware training ran 2× faster than the FP16 baseline and kept the accuracy.",
     github: "https://github.com/KunjShah95/ai-railway",
-  },
-  {
-    slug: "archmind-research-agent",
-    video: "/videos/archmind-research-agent",
-    title: "ArchMind Research Agent",
-    category: "Agentic AI",
-    status: "Live",
-    icon: "auto_stories",
-    description:
-      "Autonomous research agent that plans a query, searches and scrapes the web, normalizes sources, and writes a cited report with verifiable provenance.",
-    summary: "Planner → search → extract → grounded writer, producing cited research reports.",
-    stack: ["Python", "LangGraph", "Streamlit", "RAG", "Web Scraping"],
-    metrics: [
-      { value: "4", label: "Pipeline Stages" },
-      { value: "100%", label: "Cited Claims" },
-      { value: "Live", label: "Status" },
-    ],
-    body: "A planner breaks the request into searches, an extractor normalizes noisy pages, and a grounded writer only states what retrieval supports, with a source on every statement.",
-    challenges:
-      "Noisy web extraction and topic drift on broad queries, both addressed by constraining the writer to retrieved evidence.",
-    demo: "https://internship-assessment-er3kjmh8nw5vvj8wgwxlmc.streamlit.app/",
-    github: "https://github.com/KunjShah01/INTERNSHIP-ASSESSMENT",
   },
   {
     slug: "gap-miner",
@@ -1566,6 +1551,80 @@ export const clientFaqs = [
   },
 ] as const;
 
+/* ------------------------------------------- What a buyer can check */
+
+/**
+ * The honest stand-in for a testimonial wall.
+ *
+ * Most client work here is private: there is no logo to display and no quote
+ * to publish. What is public is the work itself — source, tests, review
+ * history. So this section sells the one kind of proof that does exist, work
+ * anyone can open and disprove.
+ *
+ * Each row names the claim, says where it can be checked, and says where the
+ * evidence stops. That last part is deliberate: a claim that states its edge
+ * is worth more to a buyer than one that does not.
+ */
+export const verification = [
+  {
+    icon: "terminal",
+    claim: "The systems run",
+    detail:
+      "Every case study links to the repository, the tests that gate it, and a limitations section naming what still breaks.",
+    href: "/projects",
+    linkLabel: "Open the case studies",
+  },
+  {
+    icon: "commit",
+    claim: "The merges are real",
+    detail:
+      "Pull requests merged into repositories I don't own, each reviewed by that project's maintainers. The public subset is listed one link per merge.",
+    href: "/open-source",
+    linkLabel: "See the merge history",
+  },
+  {
+    icon: "speed",
+    claim: "The numbers have a method",
+    detail:
+      "Each headline metric is paired with how it was measured, what it excludes, and the measurement bugs found along the way.",
+    href: "/writing",
+    linkLabel: "Read how it was measured",
+  },
+] as const satisfies readonly {
+  icon: IconName;
+  claim: string;
+  detail: string;
+  href: string;
+  linkLabel: string;
+}[];
+
+/**
+ * Named client outcomes, once a client has agreed to be named.
+ *
+ * An invented testimonial is worse than none, and an anonymised one nobody can
+ * check is not proof either. Every entry here carries the client's own words,
+ * the work it refers to, and a link so a reader can judge it themselves.
+ */
+export type ClientProof = {
+  quote: string;
+  /** The client or business, named as they agreed to be named. */
+  name: string;
+  /** What the work was, in the client's terms. */
+  role: string;
+  /** The shipped work, when it is public. */
+  href?: string;
+};
+
+export const clientProof: readonly ClientProof[] = [
+  {
+    quote:
+      "Had a wonderful experience working with you on our jewellery website! The website has turned out beautifully, with an elegant, premium and professional look that perfectly reflects our brand. Your creativity, attention to detail, patience and dedication throughout the process are truly appreciated. You understood our vision and brought it to life exactly the way we wanted. Thank you for your excellent work and support. Highly recommended!",
+    name: "Swarnika Jewellery",
+    role: "Jewellery brand · brand site",
+    href: "https://swarnika-jewellery-phi.vercel.app",
+  },
+];
+
 /* ------------------------------------------------- Ways to work together */
 
 /**
@@ -1630,9 +1689,9 @@ export const achievements = [
     detail: "Railway Inspection: 4.2× faster than manual, <100ms end-to-end",
   },
   {
-    value: "65%",
-    label: "LLM Cost Cut",
-    detail: "ResumeMasterAI: smart routing between small and large models",
+    value: "15%",
+    label: "Token Reduction",
+    detail: "MinBPE: fewer tokens on technical corpora than the stock vocabulary",
   },
   {
     value: "94%",
@@ -1698,16 +1757,16 @@ export const principles = [
     body: "Model output is unpredictable. Before any tool does something with side effects, the output goes through several passes of Pydantic schema validation and moves through a fixed state machine.",
     ships: [
       {
-        claim: "Multi-pass structured JSON extraction with Pydantic validation",
-        project: "archmind-research-agent",
+        claim: "A 20-query retrieval eval with 14 deliberate distractors, enforced in CI",
+        project: "engineeros",
       },
       {
-        claim: "Bounded tool recursion and recoverable checkpointed agent runs",
-        project: "resumemaster-ai",
+        claim: "Graph-diff of a PR against its base: broken edges and new cycles fail the loop",
+        project: "onramp",
       },
       {
-        claim: "Grounded writers that only claim what retrieval supports",
-        project: "archmind-research-agent",
+        claim: "An oracle that reads the application's state instead of trusting the agent's claim",
+        project: "walkcast",
       },
     ],
   },
@@ -1726,8 +1785,8 @@ export const principles = [
         project: "onramp",
       },
       {
-        claim: "Complexity-based routing that cut API spend by 65%",
-        project: "resumemaster-ai",
+        claim: "A from-scratch BPE vocabulary that cuts token count on technical text by 15%",
+        project: "minbpe-tokenizer",
       },
     ],
   },
@@ -1810,7 +1869,7 @@ export const hiringFaqs = [
   {
     question: "Is Kunj Shah available for freelance AI work?",
     answer:
-      "Yes. Kunj is open to fixed-scope builds, hourly consulting, monthly retainers, and full-time AI/ML roles. Rates and engagement models are published in INR at kunjshah.in/pricing.md; email kunjkshah05@gmail.com or use the contact form.",
+      "Yes. Kunj is open to fixed-scope builds, hourly consulting, monthly retainers, and full-time AI/ML roles. Rates and engagement models are published in INR at kunjshah.in/pricing.md; email kkshah2005@gmail.com or use the contact form.",
   },
   {
     question: "What does Kunj Shah build?",

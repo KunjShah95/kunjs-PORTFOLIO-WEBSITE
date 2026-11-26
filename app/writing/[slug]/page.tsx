@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/shell/page-shell";
 import { ArticleBody } from "@/components/writing/article-body";
+import { EmailCapture } from "@/components/writing/email-capture";
 import { Icon } from "@/components/icon";
 import { FadeImage } from "@/components/primitives/FadeImage";
 import { Reveal } from "@/components/primitives/Reveal";
@@ -361,6 +362,8 @@ export default async function EssayPage(props: PageProps<"/writing/[slug]">) {
             </ul>
           </section>
         )}
+
+        <EmailCapture />
 
         <CtaBand
           body="If one of these problems is the one you are trying to solve, say which and I will answer on that directly."

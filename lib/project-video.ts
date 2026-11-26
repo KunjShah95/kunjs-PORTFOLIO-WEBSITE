@@ -15,7 +15,6 @@ import type { Project } from "@/lib/site-data";
  */
 const RECORDINGS: Record<string, { seconds: number; uploaded: string }> = {
   "/videos/archmind-ai": { seconds: 30, uploaded: "2026-09-28T07:10:00+05:30" },
-  "/videos/archmind-research-agent": { seconds: 29, uploaded: "2026-10-10T22:59:50+05:30" },
   "/videos/engineeros": { seconds: 30, uploaded: "2026-09-28T07:10:00+05:30" },
   "/videos/estate360": { seconds: 30, uploaded: "2026-10-10T22:59:50+05:30" },
   "/videos/lattice": { seconds: 30, uploaded: "2026-10-10T22:59:50+05:30" },
