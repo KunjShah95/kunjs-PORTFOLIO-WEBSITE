@@ -24,10 +24,16 @@ async function waitForDeploy(expected: string[]): Promise<void> {
         headers: { "Cache-Control": "no-cache" },
       });
       if (res.ok) {
+        // The sitemap writes the root as https://kunjshah.in with no slash,
+        // while indexNowUrlList() uses the canonical trailing slash. Compare
+        // after stripping trailing slashes so the two agree.
+        const normalize = (url: string) => url.replace(/\/+$/, "");
         const live = new Set(
-          [...(await res.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim()),
+          [...(await res.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) =>
+            normalize(m[1].trim()),
+          ),
         );
-        const missing = expected.filter((url) => !live.has(url));
+        const missing = expected.filter((url) => !live.has(normalize(url)));
         if (missing.length === 0) {
           console.log(`Live sitemap matches ${expected.length} expected URLs.`);
           return;
@@ -51,16 +57,23 @@ async function waitForDeploy(expected: string[]): Promise<void> {
   process.exit(1);
 }
 
-const expected = indexNowUrlList();
-console.log(`Waiting for ${expected.length} URLs to go live at ${ORIGIN}...`);
-await waitForDeploy(expected);
+async function main(): Promise<void> {
+  const expected = indexNowUrlList();
+  console.log(`Waiting for ${expected.length} URLs to go live at ${ORIGIN}...`);
+  await waitForDeploy(expected);
 
-const results = await submitIndexNowAll(expected);
-for (const result of results) {
-  console.log(`${result.endpoint} → ${result.status} ${result.ok ? "ok" : "FAILED"}`);
+  const results = await submitIndexNowAll(expected);
+  for (const result of results) {
+    console.log(`${result.endpoint} → ${result.status} ${result.ok ? "ok" : "FAILED"}`);
+  }
+  if (!results.some((result) => result.ok)) {
+    console.error(`IndexNow submissions all failed. Check ${indexNowKeyLocation()}.`);
+    process.exit(1);
+  }
+  console.log(`Submitted ${expected.length} URLs to IndexNow and Bing.`);
 }
-if (!results.some((result) => result.ok)) {
-  console.error(`IndexNow submissions all failed. Check ${indexNowKeyLocation()}.`);
+
+main().catch((error) => {
+  console.error(error);
   process.exit(1);
-}
-console.log(`Submitted ${expected.length} URLs to IndexNow and Bing.`);
+});
